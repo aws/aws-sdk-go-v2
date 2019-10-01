@@ -14,7 +14,6 @@ var _ = awsutil.Prettify
 
 // For List operations, an optional specification to return a subset of objects,
 // such as resolver endpoints or resolver rules.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/Filter
 type Filter struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +51,6 @@ func (s *Filter) Validate() error {
 
 // In an CreateResolverEndpoint request, a subnet and IP address that you want
 // to use for DNS queries.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/IpAddressRequest
 type IpAddressRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -92,7 +90,6 @@ func (s *IpAddressRequest) Validate() error {
 
 // In the response to a GetResolverEndpoint request, information about the IP
 // addresses that the resolver endpoint uses for DNS queries.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/IpAddressResponse
 type IpAddressResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -127,7 +124,6 @@ func (s IpAddressResponse) String() string {
 
 // In an UpdateResolverEndpoint request, information about an IP address to
 // update.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/IpAddressUpdate
 type IpAddressUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -170,7 +166,6 @@ func (s *IpAddressUpdate) Validate() error {
 // In the response to a CreateResolverEndpoint, DeleteResolverEndpoint, GetResolverEndpoint,
 // ListResolverEndpoints, or UpdateResolverEndpoint request, a complex type
 // that contains settings for an existing inbound or outbound resolver endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ResolverEndpoint
 type ResolverEndpoint struct {
 	_ struct{} `type:"structure"`
 
@@ -232,7 +227,6 @@ func (s ResolverEndpoint) String() string {
 // rule, which specifies how to route DNS queries out of the VPC. The ResolverRule
 // parameter appears in the response to a CreateResolverRule, DeleteResolverRule,
 // GetResolverRule, ListResolverRules, or UpdateResolverRule request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ResolverRule
 type ResolverRule struct {
 	_ struct{} `type:"structure"`
 
@@ -290,7 +284,6 @@ func (s ResolverRule) String() string {
 // In the response to an AssociateResolverRule, DisassociateResolverRule, or
 // ListResolverRuleAssociations request, information about an association between
 // a resolver rule and a VPC.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ResolverRuleAssociation
 type ResolverRuleAssociation struct {
 	_ struct{} `type:"structure"`
 
@@ -324,7 +317,6 @@ func (s ResolverRuleAssociation) String() string {
 
 // In an UpdateResolverRule request, information about the changes that you
 // want to make.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ResolverRuleConfig
 type ResolverRuleConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -371,7 +363,6 @@ func (s *ResolverRuleConfig) Validate() error {
 
 // One tag that you want to add to the specified resource. A tag consists of
 // a Key (a name for the tag) and a Value.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -392,7 +383,6 @@ func (s Tag) String() string {
 
 // In a CreateResolverRule request, an array of the IPs that you want to forward
 // DNS queries to.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/TargetAddress
 type TargetAddress struct {
 	_ struct{} `type:"structure"`
 

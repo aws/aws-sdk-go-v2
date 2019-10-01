@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a StartPipelineExecution action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StartPipelineExecutionInput
 type StartPipelineExecutionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -49,7 +48,6 @@ func (s *StartPipelineExecutionInput) Validate() error {
 }
 
 // Represents the output of a StartPipelineExecution action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StartPipelineExecutionOutput
 type StartPipelineExecutionOutput struct {
 	_ struct{} `type:"structure"`
 

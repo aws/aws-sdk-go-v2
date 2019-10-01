@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for CreateCustomerGateway.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCustomerGatewayRequest
 type CreateCustomerGatewayInput struct {
 	_ struct{} `type:"structure"`
 
@@ -63,7 +62,6 @@ func (s *CreateCustomerGatewayInput) Validate() error {
 }
 
 // Contains the output of CreateCustomerGateway.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCustomerGatewayResult
 type CreateCustomerGatewayOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -85,7 +83,7 @@ const opCreateCustomerGateway = "CreateCustomerGateway"
 // gateway is the appliance at your end of the VPN connection. (The device on
 // the AWS side of the VPN connection is the virtual private gateway.) You must
 // provide the Internet-routable IP address of the customer gateway's external
-// interface. The IP address must be static and may be behind a device performing
+// interface. The IP address must be static and can be behind a device performing
 // network address translation (NAT).
 //
 // For devices that use Border Gateway Protocol (BGP), you can also provide

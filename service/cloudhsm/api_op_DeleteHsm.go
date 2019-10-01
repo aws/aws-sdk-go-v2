@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the inputs for the DeleteHsm operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteHsmRequest
 type DeleteHsmInput struct {
 	_ struct{} `locationName:"DeleteHsmRequest" type:"structure"`
 
@@ -40,7 +39,6 @@ func (s *DeleteHsmInput) Validate() error {
 }
 
 // Contains the output of the DeleteHsm operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteHsmResponse
 type DeleteHsmOutput struct {
 	_ struct{} `type:"structure"`
 

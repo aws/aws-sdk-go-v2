@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ApplyPendingMaintenanceActionMessage
 type ApplyPendingMaintenanceActionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -67,7 +66,6 @@ func (s *ApplyPendingMaintenanceActionInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ApplyPendingMaintenanceActionResponse
 type ApplyPendingMaintenanceActionOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -14,7 +14,6 @@ import (
 // you can filter the response by category by specifying it in your request
 // body. You can also optionally specify the maximum number, up to twenty, of
 // job templates to be returned.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListJobTemplatesRequest
 type ListJobTemplatesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -98,7 +97,6 @@ func (s ListJobTemplatesInput) MarshalFields(e protocol.FieldEncoder) error {
 // Successful list job templates requests return a JSON array of job templates.
 // If you don't specify how they are ordered, you will receive them in alphabetical
 // order by name.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListJobTemplatesResponse
 type ListJobTemplatesOutput struct {
 	_ struct{} `type:"structure"`
 

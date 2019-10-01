@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input for ListTagsForStream.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListTagsForStreamInput
 type ListTagsForStreamInput struct {
 	_ struct{} `type:"structure"`
 
@@ -58,7 +57,6 @@ func (s *ListTagsForStreamInput) Validate() error {
 }
 
 // Represents the output for ListTagsForStream.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListTagsForStreamOutput
 type ListTagsForStreamOutput struct {
 	_ struct{} `type:"structure"`
 

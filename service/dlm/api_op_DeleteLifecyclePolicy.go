@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/DeleteLifecyclePolicyRequest
 type DeleteLifecyclePolicyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +51,6 @@ func (s DeleteLifecyclePolicyInput) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/DeleteLifecyclePolicyResponse
 type DeleteLifecyclePolicyOutput struct {
 	_ struct{} `type:"structure"`
 }

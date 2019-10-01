@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/PutLexiconInput
 type PutLexiconInput struct {
 	_ struct{} `type:"structure"`
 
@@ -24,7 +23,7 @@ type PutLexiconInput struct {
 	// long.
 	//
 	// Name is a required field
-	Name *string `location:"uri" locationName:"LexiconName" type:"string" required:"true"`
+	Name *string `location:"uri" locationName:"LexiconName" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -69,7 +68,6 @@ func (s PutLexiconInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/PutLexiconOutput
 type PutLexiconOutput struct {
 	_ struct{} `type:"structure"`
 }

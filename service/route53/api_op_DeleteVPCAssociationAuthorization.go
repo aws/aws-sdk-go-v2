@@ -13,7 +13,6 @@ import (
 // A complex type that contains information about the request to remove authorization
 // to associate a VPC that was created by one AWS account with a hosted zone
 // that was created with a different AWS account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteVPCAssociationAuthorizationRequest
 type DeleteVPCAssociationAuthorizationInput struct {
 	_ struct{} `locationName:"DeleteVPCAssociationAuthorizationRequest" type:"structure" xmlURI:"https://route53.amazonaws.com/doc/2013-04-01/"`
 
@@ -82,7 +81,6 @@ func (s DeleteVPCAssociationAuthorizationInput) MarshalFields(e protocol.FieldEn
 }
 
 // Empty response for the request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteVPCAssociationAuthorizationResponse
 type DeleteVPCAssociationAuthorizationOutput struct {
 	_ struct{} `type:"structure"`
 }

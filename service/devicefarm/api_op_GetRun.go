@@ -10,7 +10,6 @@ import (
 )
 
 // Represents a request to the get run operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRunRequest
 type GetRunInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *GetRunInput) Validate() error {
 }
 
 // Represents the result of a get run request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRunResult
 type GetRunOutput struct {
 	_ struct{} `type:"structure"`
 

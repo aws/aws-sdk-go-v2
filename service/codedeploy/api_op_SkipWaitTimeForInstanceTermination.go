@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/SkipWaitTimeForInstanceTerminationInput
 type SkipWaitTimeForInstanceTerminationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -25,7 +24,6 @@ func (s SkipWaitTimeForInstanceTerminationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/SkipWaitTimeForInstanceTerminationOutput
 type SkipWaitTimeForInstanceTerminationOutput struct {
 	_ struct{} `type:"structure"`
 }

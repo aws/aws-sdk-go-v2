@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/TagResourceInput
 type TagResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -25,7 +24,7 @@ type TagResourceInput struct {
 	// your own metadata to the resources you create.
 	//
 	// Tags is a required field
-	Tags map[string]string `type:"map" required:"true"`
+	Tags map[string]string `type:"map" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -76,7 +75,6 @@ func (s TagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/TagResourceOutput
 type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
 }

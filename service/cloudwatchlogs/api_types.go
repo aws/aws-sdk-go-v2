@@ -11,7 +11,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Represents a cross-account destination that receives subscription log events.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/Destination
 type Destination struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s Destination) String() string {
 }
 
 // Represents an export task.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ExportTask
 type ExportTask struct {
 	_ struct{} `type:"structure"`
 
@@ -83,7 +81,6 @@ func (s ExportTask) String() string {
 }
 
 // Represents the status of an export task.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ExportTaskExecutionInfo
 type ExportTaskExecutionInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -102,7 +99,6 @@ func (s ExportTaskExecutionInfo) String() string {
 }
 
 // Represents the status of an export task.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ExportTaskStatus
 type ExportTaskStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -119,7 +115,6 @@ func (s ExportTaskStatus) String() string {
 }
 
 // Represents a matched event.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/FilteredLogEvent
 type FilteredLogEvent struct {
 	_ struct{} `type:"structure"`
 
@@ -148,7 +143,6 @@ func (s FilteredLogEvent) String() string {
 
 // Represents a log event, which is a record of activity that was recorded by
 // the application or resource being monitored.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/InputLogEvent
 type InputLogEvent struct {
 	_ struct{} `type:"structure"`
 
@@ -191,7 +185,6 @@ func (s *InputLogEvent) Validate() error {
 }
 
 // Represents a log group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LogGroup
 type LogGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -227,7 +220,6 @@ func (s LogGroup) String() string {
 
 // The fields contained in log events found by a GetLogGroupFields operation,
 // along with the percentage of queried log events in which each field appears.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LogGroupField
 type LogGroupField struct {
 	_ struct{} `type:"structure"`
 
@@ -245,7 +237,6 @@ func (s LogGroupField) String() string {
 
 // Represents a log stream, which is a sequence of log events from a single
 // emitter of logs.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LogStream
 type LogStream struct {
 	_ struct{} `type:"structure"`
 
@@ -293,7 +284,6 @@ func (s LogStream) String() string {
 // Metric filters express how CloudWatch Logs would extract metric observations
 // from ingested log events and transform them into metric data in a CloudWatch
 // metric.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/MetricFilter
 type MetricFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -323,7 +313,6 @@ func (s MetricFilter) String() string {
 }
 
 // Represents a matched event.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/MetricFilterMatchRecord
 type MetricFilterMatchRecord struct {
 	_ struct{} `type:"structure"`
 
@@ -344,7 +333,6 @@ func (s MetricFilterMatchRecord) String() string {
 
 // Indicates how to transform ingested log events to metric data in a CloudWatch
 // metric.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/MetricTransformation
 type MetricTransformation struct {
 	_ struct{} `type:"structure"`
 
@@ -397,7 +385,6 @@ func (s *MetricTransformation) Validate() error {
 }
 
 // Represents a log event.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/OutputLogEvent
 type OutputLogEvent struct {
 	_ struct{} `type:"structure"`
 
@@ -419,7 +406,6 @@ func (s OutputLogEvent) String() string {
 }
 
 // Reserved.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/QueryCompileError
 type QueryCompileError struct {
 	_ struct{} `type:"structure"`
 
@@ -436,7 +422,6 @@ func (s QueryCompileError) String() string {
 }
 
 // Reserved.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/QueryCompileErrorLocation
 type QueryCompileErrorLocation struct {
 	_ struct{} `type:"structure"`
 
@@ -454,7 +439,6 @@ func (s QueryCompileErrorLocation) String() string {
 
 // Information about one CloudWatch Logs Insights query that matches the request
 // in a DescribeQueries operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/QueryInfo
 type QueryInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -483,7 +467,6 @@ func (s QueryInfo) String() string {
 // Contains the number of log events scanned by the query, the number of log
 // events that matched the query criteria, and the total number of bytes in
 // the log events that were scanned.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/QueryStatistics
 type QueryStatistics struct {
 	_ struct{} `type:"structure"`
 
@@ -503,7 +486,6 @@ func (s QueryStatistics) String() string {
 }
 
 // Represents the rejected events.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/RejectedLogEventsInfo
 type RejectedLogEventsInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -524,7 +506,6 @@ func (s RejectedLogEventsInfo) String() string {
 
 // A policy enabling one or more entities to put logs to a log group in this
 // account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ResourcePolicy
 type ResourcePolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -546,7 +527,6 @@ func (s ResourcePolicy) String() string {
 
 // Contains one field from one log event returned by a CloudWatch Logs Insights
 // query, along with the value of that field.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ResultField
 type ResultField struct {
 	_ struct{} `type:"structure"`
 
@@ -563,7 +543,6 @@ func (s ResultField) String() string {
 }
 
 // Represents the search status of a log stream.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/SearchedLogStream
 type SearchedLogStream struct {
 	_ struct{} `type:"structure"`
 
@@ -580,7 +559,6 @@ func (s SearchedLogStream) String() string {
 }
 
 // Represents a subscription filter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/SubscriptionFilter
 type SubscriptionFilter struct {
 	_ struct{} `type:"structure"`
 

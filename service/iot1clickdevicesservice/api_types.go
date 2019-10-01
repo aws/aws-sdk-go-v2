@@ -11,7 +11,6 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/Attributes
 type Attributes struct {
 	_ struct{} `type:"structure"`
 }
@@ -26,7 +25,6 @@ func (s Attributes) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/Device
 type Device struct {
 	_ struct{} `type:"structure"`
 
@@ -68,7 +66,6 @@ func (s Device) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/DeviceDescription
 type DeviceDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -159,7 +156,6 @@ func (s DeviceDescription) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/DeviceEvent
 type DeviceEvent struct {
 	_ struct{} `type:"structure"`
 
@@ -192,7 +188,6 @@ func (s DeviceEvent) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/DeviceMethod
 type DeviceMethod struct {
 	_ struct{} `type:"structure"`
 

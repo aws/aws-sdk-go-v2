@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input for a request action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/RequestUploadCredentialsInput
 type RequestUploadCredentialsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s *RequestUploadCredentialsInput) Validate() error {
 }
 
 // Represents the returned data in response to a request action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/RequestUploadCredentialsOutput
 type RequestUploadCredentialsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +48,7 @@ type RequestUploadCredentialsOutput struct {
 	// AWS credentials required when uploading a game build to the storage location.
 	// These credentials have a limited lifespan and are valid only for the build
 	// they were issued for.
-	UploadCredentials *AwsCredentials `type:"structure"`
+	UploadCredentials *AwsCredentials `type:"structure" sensitive:"true"`
 }
 
 // String returns the string representation

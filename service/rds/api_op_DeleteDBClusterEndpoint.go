@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterEndpointMessage
 type DeleteDBClusterEndpointInput struct {
 	_ struct{} `type:"structure"`
 
@@ -53,11 +52,10 @@ func (s *DeleteDBClusterEndpointInput) Validate() error {
 //
 // For the data structure that represents Amazon RDS DB instance endpoints,
 // see Endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterEndpoint
 type DeleteDBClusterEndpointOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The type associated with a custom endpoint. One of: READER, ANY.
+	// The type associated with a custom endpoint. One of: READER, WRITER, ANY.
 	CustomEndpointType *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) for the endpoint.

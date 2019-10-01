@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Contains information about an AWS account that is a member of an organization.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Account
 type Account struct {
 	_ struct{} `type:"structure"`
 
@@ -28,7 +27,7 @@ type Account struct {
 	//
 	// The regex pattern (http://wikipedia.org/wiki/regex) for this parameter is
 	// a string of characters that represents a standard Internet email address.
-	Email *string `min:"6" type:"string"`
+	Email *string `min:"6" type:"string" sensitive:"true"`
 
 	// The unique identifier (ID) of the account.
 	//
@@ -47,7 +46,7 @@ type Account struct {
 	// The regex pattern (http://wikipedia.org/wiki/regex) that is used to validate
 	// this parameter is a string of any of the characters in the ASCII character
 	// range.
-	Name *string `min:"1" type:"string"`
+	Name *string `min:"1" type:"string" sensitive:"true"`
 
 	// The status of the account in the organization.
 	Status AccountStatus `type:"string" enum:"true"`
@@ -59,7 +58,6 @@ func (s Account) String() string {
 }
 
 // Contains a list of child entities, either OUs or accounts.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Child
 type Child struct {
 	_ struct{} `type:"structure"`
 
@@ -87,7 +85,6 @@ func (s Child) String() string {
 
 // Contains the status about a CreateAccount or CreateGovCloudAccount request
 // to create an AWS account or an AWS GovCloud (US) account in an organization.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccountStatus
 type CreateAccountStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -99,7 +96,7 @@ type CreateAccountStatus struct {
 	AccountId *string `type:"string"`
 
 	// The account name given to the account when it was created.
-	AccountName *string `min:"1" type:"string"`
+	AccountName *string `min:"1" type:"string" sensitive:"true"`
 
 	// The date and time that the account was created and the request completed.
 	CompletedTimestamp *time.Time `type:"timestamp"`
@@ -148,7 +145,6 @@ func (s CreateAccountStatus) String() string {
 
 // A structure that contains details of a service principal that is enabled
 // to integrate with AWS Organizations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnabledServicePrincipal
 type EnabledServicePrincipal struct {
 	_ struct{} `type:"structure"`
 
@@ -174,7 +170,6 @@ func (s EnabledServicePrincipal) String() string {
 //
 // Note: Handshakes that are CANCELED, ACCEPTED, or DECLINED show up in lists
 // for only 30 days after entering that state After that they are deleted.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Handshake
 type Handshake struct {
 	_ struct{} `type:"structure"`
 
@@ -257,7 +252,6 @@ func (s Handshake) String() string {
 }
 
 // Specifies the criteria that are used to select the handshakes for the operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/HandshakeFilter
 type HandshakeFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -282,7 +276,6 @@ func (s HandshakeFilter) String() string {
 }
 
 // Identifies a participant in a handshake.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/HandshakeParty
 type HandshakeParty struct {
 	_ struct{} `type:"structure"`
 
@@ -292,7 +285,7 @@ type HandshakeParty struct {
 	// requires "h-" followed by from 8 to 32 lower-case letters or digits.
 	//
 	// Id is a required field
-	Id *string `min:"1" type:"string" required:"true"`
+	Id *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The type of party.
 	//
@@ -326,7 +319,6 @@ func (s *HandshakeParty) Validate() error {
 }
 
 // Contains additional data that is needed to process a handshake.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/HandshakeResource
 type HandshakeResource struct {
 	_ struct{} `type:"structure"`
 
@@ -355,7 +347,7 @@ type HandshakeResource struct {
 
 	// The information that is passed to the other party in the handshake. The format
 	// of the value string must match the requirements of the specified type.
-	Value *string `type:"string"`
+	Value *string `type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -367,7 +359,6 @@ func (s HandshakeResource) String() string {
 // accounts that are centrally managed together using consolidated billing,
 // organized hierarchically with organizational units (OUs), and controlled
 // with policies .
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Organization
 type Organization struct {
 	_ struct{} `type:"structure"`
 
@@ -412,7 +403,7 @@ type Organization struct {
 
 	// The email address that is associated with the AWS account that is designated
 	// as the master account for the organization.
-	MasterAccountEmail *string `min:"6" type:"string"`
+	MasterAccountEmail *string `min:"6" type:"string" sensitive:"true"`
 
 	// The unique identifier (ID) of the master account of an organization.
 	//
@@ -429,7 +420,6 @@ func (s Organization) String() string {
 // Contains details about an organizational unit (OU). An OU is a container
 // of AWS accounts within a root of an organization. Policies that are attached
 // to an OU apply to all accounts contained in that OU and in any child OUs.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/OrganizationalUnit
 type OrganizationalUnit struct {
 	_ struct{} `type:"structure"`
 
@@ -463,7 +453,6 @@ func (s OrganizationalUnit) String() string {
 
 // Contains information about either a root or an organizational unit (OU) that
 // can contain OUs or accounts in an organization.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Parent
 type Parent struct {
 	_ struct{} `type:"structure"`
 
@@ -493,7 +482,6 @@ func (s Parent) String() string {
 // Contains rules to be applied to the affected accounts. Policies can be attached
 // directly to accounts, or to roots and OUs to affect all accounts in those
 // hierarchies.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Policy
 type Policy struct {
 	_ struct{} `type:"structure"`
 
@@ -511,7 +499,6 @@ func (s Policy) String() string {
 
 // Contains information about a policy, but does not include the content. To
 // see the content of a policy, see DescribePolicy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/PolicySummary
 type PolicySummary struct {
 	_ struct{} `type:"structure"`
 
@@ -554,7 +541,6 @@ func (s PolicySummary) String() string {
 
 // Contains information about a root, OU, or account that a policy is attached
 // to.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/PolicyTargetSummary
 type PolicyTargetSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -599,7 +585,6 @@ func (s PolicyTargetSummary) String() string {
 
 // Contains information about a policy type and its status in the associated
 // root.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/PolicyTypeSummary
 type PolicyTypeSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -622,7 +607,6 @@ func (s PolicyTypeSummary) String() string {
 // Every root contains every AWS account in the organization. Each root enables
 // the accounts to be organized in a different way and to have different policy
 // types enabled for use in that root.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Root
 type Root struct {
 	_ struct{} `type:"structure"`
 
@@ -663,7 +647,6 @@ func (s Root) String() string {
 
 // A custom key-value pair associated with a resource such as an account within
 // your organization.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 

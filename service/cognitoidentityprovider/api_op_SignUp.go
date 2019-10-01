@@ -11,7 +11,6 @@ import (
 )
 
 // Represents the request to register a user.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SignUpRequest
 type SignUpInput struct {
 	_ struct{} `type:"structure"`
 
@@ -22,16 +21,16 @@ type SignUpInput struct {
 	// The ID of the client associated with the user pool.
 	//
 	// ClientId is a required field
-	ClientId *string `min:"1" type:"string" required:"true"`
+	ClientId *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The password of the user you wish to register.
 	//
 	// Password is a required field
-	Password *string `min:"6" type:"string" required:"true"`
+	Password *string `min:"6" type:"string" required:"true" sensitive:"true"`
 
 	// A keyed-hash message authentication code (HMAC) calculated using the secret
 	// key of a user pool client and username plus the client ID in the message.
-	SecretHash *string `min:"1" type:"string"`
+	SecretHash *string `min:"1" type:"string" sensitive:"true"`
 
 	// An array of name-value pairs representing user attributes.
 	//
@@ -47,7 +46,7 @@ type SignUpInput struct {
 	// The user name of the user you wish to register.
 	//
 	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true"`
+	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The validation data in the request to register a user.
 	ValidationData []AttributeType `type:"list"`
@@ -107,7 +106,6 @@ func (s *SignUpInput) Validate() error {
 }
 
 // The response from the server for a registration request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SignUpResponse
 type SignUpOutput struct {
 	_ struct{} `type:"structure"`
 

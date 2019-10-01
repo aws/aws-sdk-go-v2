@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetTypedLinkFacetInformationRequest
 type GetTypedLinkFacetInformationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -68,7 +67,6 @@ func (s GetTypedLinkFacetInformationInput) MarshalFields(e protocol.FieldEncoder
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetTypedLinkFacetInformationResponse
 type GetTypedLinkFacetInformationOutput struct {
 	_ struct{} `type:"structure"`
 

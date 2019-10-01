@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RejectPortfolioShareInput
 type RejectPortfolioShareInput struct {
 	_ struct{} `type:"structure"`
 
@@ -64,7 +63,6 @@ func (s *RejectPortfolioShareInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RejectPortfolioShareOutput
 type RejectPortfolioShareOutput struct {
 	_ struct{} `type:"structure"`
 }

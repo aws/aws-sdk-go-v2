@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannelRequest
 type CreateChannelInput struct {
 	_ struct{} `type:"structure"`
 
@@ -173,7 +172,6 @@ func (s CreateChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannelResponse
 type CreateChannelOutput struct {
 	_ struct{} `type:"structure"`
 

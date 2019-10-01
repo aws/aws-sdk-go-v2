@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterMessage
 type CreateDBClusterInput struct {
 	_ struct{} `type:"structure"`
 
@@ -125,7 +124,7 @@ type CreateDBClusterInput struct {
 	Engine *string `type:"string" required:"true"`
 
 	// The DB engine mode of the DB cluster, either provisioned, serverless, parallelquery,
-	// or global.
+	// global, or multimaster.
 	EngineMode *string `type:"string"`
 
 	// The version number of the database engine to use.
@@ -323,7 +322,6 @@ func (s *CreateDBClusterInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterResult
 type CreateDBClusterOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -14,7 +14,6 @@ import (
 //    * UpdateBandwidthRateLimitInput$AverageDownloadRateLimitInBitsPerSec
 //
 //    * UpdateBandwidthRateLimitInput$AverageUploadRateLimitInBitsPerSec
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateBandwidthRateLimitInput
 type UpdateBandwidthRateLimitInput struct {
 	_ struct{} `type:"structure"`
 
@@ -25,7 +24,7 @@ type UpdateBandwidthRateLimitInput struct {
 	AverageUploadRateLimitInBitsPerSec *int64 `min:"51200" type:"long"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	//
 	// GatewayARN is a required field
 	GatewayARN *string `min:"50" type:"string" required:"true"`
@@ -61,12 +60,11 @@ func (s *UpdateBandwidthRateLimitInput) Validate() error {
 
 // A JSON object containing the of the gateway whose throttle information was
 // updated.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateBandwidthRateLimitOutput
 type UpdateBandwidthRateLimitOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string `min:"50" type:"string"`
 }
 

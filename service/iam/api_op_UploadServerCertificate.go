@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadServerCertificateRequest
 type UploadServerCertificateInput struct {
 	_ struct{} `type:"structure"`
 
@@ -79,7 +78,7 @@ type UploadServerCertificateInput struct {
 	//    return (\u000D)
 	//
 	// PrivateKey is a required field
-	PrivateKey *string `min:"1" type:"string" required:"true"`
+	PrivateKey *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The name for the server certificate. Do not include the path in this value.
 	// The name of the certificate cannot contain any spaces.
@@ -135,7 +134,6 @@ func (s *UploadServerCertificateInput) Validate() error {
 }
 
 // Contains the response to a successful UploadServerCertificate request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadServerCertificateResponse
 type UploadServerCertificateOutput struct {
 	_ struct{} `type:"structure"`
 

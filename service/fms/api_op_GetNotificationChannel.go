@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetNotificationChannelRequest
 type GetNotificationChannelInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -19,7 +18,6 @@ func (s GetNotificationChannelInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetNotificationChannelResponse
 type GetNotificationChannelOutput struct {
 	_ struct{} `type:"structure"`
 

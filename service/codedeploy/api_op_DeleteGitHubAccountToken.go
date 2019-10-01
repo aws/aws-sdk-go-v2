@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a DeleteGitHubAccount operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteGitHubAccountTokenInput
 type DeleteGitHubAccountTokenInput struct {
 	_ struct{} `type:"structure"`
 
@@ -24,7 +23,6 @@ func (s DeleteGitHubAccountTokenInput) String() string {
 }
 
 // Represents the output of a DeleteGitHubAccountToken operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteGitHubAccountTokenOutput
 type DeleteGitHubAccountTokenOutput struct {
 	_ struct{} `type:"structure"`
 

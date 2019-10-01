@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListFunctionDefinitionVersionsRequest
 type ListFunctionDefinitionVersionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -66,7 +65,6 @@ func (s ListFunctionDefinitionVersionsInput) MarshalFields(e protocol.FieldEncod
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListFunctionDefinitionVersionsResponse
 type ListFunctionDefinitionVersionsOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSubnetGroupMessage
 type ModifyClusterSubnetGroupInput struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +50,6 @@ func (s *ModifyClusterSubnetGroupInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSubnetGroupResult
 type ModifyClusterSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
 

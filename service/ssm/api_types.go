@@ -16,7 +16,6 @@ var _ = awsutil.Prettify
 // An activation registers one or more on-premises servers or virtual machines
 // (VMs) with AWS so that you can configure those servers or VMs using Run Command.
 // A server or VM that has been registered with AWS is called a managed instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Activation
 type Activation struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s Activation) String() string {
 }
 
 // Describes an association of a Systems Manager document and an instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Association
 type Association struct {
 	_ struct{} `type:"structure"`
 
@@ -101,7 +99,6 @@ func (s Association) String() string {
 }
 
 // Describes the parameters for a document.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationDescription
 type AssociationDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -193,7 +190,6 @@ func (s AssociationDescription) String() string {
 }
 
 // Includes information about the specified association.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationExecution
 type AssociationExecution struct {
 	_ struct{} `type:"structure"`
 
@@ -229,7 +225,6 @@ func (s AssociationExecution) String() string {
 }
 
 // Filters used in the request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationExecutionFilter
 type AssociationExecutionFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -278,7 +273,6 @@ func (s *AssociationExecutionFilter) Validate() error {
 }
 
 // Includes information about the specified association execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationExecutionTarget
 type AssociationExecutionTarget struct {
 	_ struct{} `type:"structure"`
 
@@ -316,7 +310,6 @@ func (s AssociationExecutionTarget) String() string {
 }
 
 // Filters for the association execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationExecutionTargetsFilter
 type AssociationExecutionTargetsFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -357,7 +350,6 @@ func (s *AssociationExecutionTargetsFilter) Validate() error {
 }
 
 // Describes a filter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationFilter
 type AssociationFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -398,7 +390,6 @@ func (s *AssociationFilter) Validate() error {
 }
 
 // Information about the association.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationOverview
 type AssociationOverview struct {
 	_ struct{} `type:"structure"`
 
@@ -420,7 +411,6 @@ func (s AssociationOverview) String() string {
 }
 
 // Describes an association status.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationStatus
 type AssociationStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -473,7 +463,6 @@ func (s *AssociationStatus) Validate() error {
 }
 
 // Information about the association version.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationVersionInfo
 type AssociationVersionInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -548,7 +537,6 @@ func (s AssociationVersionInfo) String() string {
 }
 
 // A structure that includes attributes that describe a document attachment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AttachmentContent
 type AttachmentContent struct {
 	_ struct{} `type:"structure"`
 
@@ -574,7 +562,6 @@ func (s AttachmentContent) String() string {
 }
 
 // An attribute of an attachment, such as the attachment name.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AttachmentInformation
 type AttachmentInformation struct {
 	_ struct{} `type:"structure"`
 
@@ -588,7 +575,6 @@ func (s AttachmentInformation) String() string {
 }
 
 // A key and value pair that identifies the location of an attachment to a document.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AttachmentsSource
 type AttachmentsSource struct {
 	_ struct{} `type:"structure"`
 
@@ -621,7 +607,6 @@ func (s *AttachmentsSource) Validate() error {
 
 // Detailed information about the current state of an individual Automation
 // execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AutomationExecution
 type AutomationExecution struct {
 	_ struct{} `type:"structure"`
 
@@ -715,7 +700,6 @@ func (s AutomationExecution) String() string {
 
 // A filter used to match specific automation executions. This is used to limit
 // the scope of Automation execution information returned.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AutomationExecutionFilter
 type AutomationExecutionFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -759,7 +743,6 @@ func (s *AutomationExecutionFilter) Validate() error {
 }
 
 // Details about a specific Automation execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AutomationExecutionMetadata
 type AutomationExecutionMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -842,7 +825,6 @@ func (s AutomationExecutionMetadata) String() string {
 }
 
 // Configuration options for sending command output to CloudWatch Logs.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CloudWatchOutputConfig
 type CloudWatchOutputConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -874,7 +856,6 @@ func (s *CloudWatchOutputConfig) Validate() error {
 }
 
 // Describes a command request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Command
 type Command struct {
 	_ struct{} `type:"structure"`
 
@@ -1011,7 +992,6 @@ func (s Command) String() string {
 }
 
 // Describes a command filter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CommandFilter
 type CommandFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -1077,7 +1057,6 @@ func (s *CommandFilter) Validate() error {
 // For example, if a user runs SendCommand against three instances, then a command
 // invocation is created for each requested instance ID. A command invocation
 // returns status and detail information about a command you ran.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CommandInvocation
 type CommandInvocation struct {
 	_ struct{} `type:"structure"`
 
@@ -1189,7 +1168,6 @@ func (s CommandInvocation) String() string {
 }
 
 // Describes plugin details.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CommandPlugin
 type CommandPlugin struct {
 	_ struct{} `type:"structure"`
 
@@ -1312,7 +1290,6 @@ func (s CommandPlugin) String() string {
 // A summary of the call execution that includes an execution ID, the type of
 // execution (for example, Command), and the date/time of the execution using
 // a datetime object that is saved in the following format: yyyy-MM-dd'T'HH:mm:ss'Z'.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ComplianceExecutionSummary
 type ComplianceExecutionSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1352,7 +1329,6 @@ func (s *ComplianceExecutionSummary) Validate() error {
 // Information about the compliance as defined by the resource type. For example,
 // for a patch resource type, Items includes information about the PatchSeverity,
 // Classification, etc.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ComplianceItem
 type ComplianceItem struct {
 	_ struct{} `type:"structure"`
 
@@ -1397,7 +1373,6 @@ func (s ComplianceItem) String() string {
 }
 
 // Information about a compliance item.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ComplianceItemEntry
 type ComplianceItemEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -1450,7 +1425,6 @@ func (s *ComplianceItemEntry) Validate() error {
 }
 
 // One or more filters. Use a filter to return a more specific list of results.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ComplianceStringFilter
 type ComplianceStringFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -1487,7 +1461,6 @@ func (s *ComplianceStringFilter) Validate() error {
 }
 
 // A summary of compliance information by compliance type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ComplianceSummaryItem
 type ComplianceSummaryItem struct {
 	_ struct{} `type:"structure"`
 
@@ -1509,7 +1482,6 @@ func (s ComplianceSummaryItem) String() string {
 
 // A summary of resources that are compliant. The summary is organized according
 // to the resource count for each compliance type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CompliantSummary
 type CompliantSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1526,7 +1498,6 @@ func (s CompliantSummary) String() string {
 }
 
 // Describes the association of a Systems Manager SSM document and an instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationBatchRequestEntry
 type CreateAssociationBatchRequestEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -1651,7 +1622,6 @@ func (s *CreateAssociationBatchRequestEntry) Validate() error {
 }
 
 // Filter for the DescribeActivation API.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeActivationsFilter
 type DescribeActivationsFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -1668,7 +1638,6 @@ func (s DescribeActivationsFilter) String() string {
 }
 
 // A default version of a document.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentDefaultVersionDescription
 type DocumentDefaultVersionDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -1688,7 +1657,6 @@ func (s DocumentDefaultVersionDescription) String() string {
 }
 
 // Describes a Systems Manager document.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentDescription
 type DocumentDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -1773,7 +1741,6 @@ func (s DocumentDescription) String() string {
 }
 
 // Describes a filter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentFilter
 type DocumentFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -1814,7 +1781,6 @@ func (s *DocumentFilter) Validate() error {
 }
 
 // Describes the name of a Systems Manager document.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentIdentifier
 type DocumentIdentifier struct {
 	_ struct{} `type:"structure"`
 
@@ -1884,7 +1850,6 @@ func (s DocumentIdentifier) String() string {
 // to call the list-documents command:
 //
 // aws ssm list-documents --filters Key=tag:region,Values=east,west Key=Owner,Values=Self
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentKeyValuesFilter
 type DocumentKeyValuesFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -1915,7 +1880,6 @@ func (s *DocumentKeyValuesFilter) Validate() error {
 
 // Parameters specified in a System Manager document that run on the server
 // when the command is run.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentParameter
 type DocumentParameter struct {
 	_ struct{} `type:"structure"`
 
@@ -1940,7 +1904,6 @@ func (s DocumentParameter) String() string {
 }
 
 // Version information about the document.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentVersionInfo
 type DocumentVersionInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -1985,7 +1948,6 @@ func (s DocumentVersionInfo) String() string {
 // state includes information about whether the patch is currently approved,
 // due to be approved by a rule, explicitly approved, or explicitly rejected
 // and the date the patch was or will be approved.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/EffectivePatch
 type EffectivePatch struct {
 	_ struct{} `type:"structure"`
 
@@ -2006,7 +1968,6 @@ func (s EffectivePatch) String() string {
 }
 
 // Describes a failed association.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/FailedCreateAssociation
 type FailedCreateAssociation struct {
 	_ struct{} `type:"structure"`
 
@@ -2026,7 +1987,6 @@ func (s FailedCreateAssociation) String() string {
 }
 
 // Information about an Automation failure.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/FailureDetails
 type FailureDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -2048,7 +2008,6 @@ func (s FailureDetails) String() string {
 }
 
 // Status information about the aggregated associations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstanceAggregatedAssociationOverview
 type InstanceAggregatedAssociationOverview struct {
 	_ struct{} `type:"structure"`
 
@@ -2065,7 +2024,6 @@ func (s InstanceAggregatedAssociationOverview) String() string {
 }
 
 // One or more association documents on the instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstanceAssociation
 type InstanceAssociation struct {
 	_ struct{} `type:"structure"`
 
@@ -2088,7 +2046,6 @@ func (s InstanceAssociation) String() string {
 }
 
 // An Amazon S3 bucket where you want to store the results of this request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstanceAssociationOutputLocation
 type InstanceAssociationOutputLocation struct {
 	_ struct{} `type:"structure"`
 
@@ -2117,7 +2074,6 @@ func (s *InstanceAssociationOutputLocation) Validate() error {
 }
 
 // The URL of Amazon S3 bucket where you want to store the results of this request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstanceAssociationOutputUrl
 type InstanceAssociationOutputUrl struct {
 	_ struct{} `type:"structure"`
 
@@ -2131,7 +2087,6 @@ func (s InstanceAssociationOutputUrl) String() string {
 }
 
 // Status information about the instance association.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstanceAssociationStatusInfo
 type InstanceAssociationStatusInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -2179,7 +2134,6 @@ func (s InstanceAssociationStatusInfo) String() string {
 }
 
 // Describes a filter for a specific list of instances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstanceInformation
 type InstanceInformation struct {
 	_ struct{} `type:"structure"`
 
@@ -2257,7 +2211,6 @@ func (s InstanceInformation) String() string {
 // Use this action instead of the DescribeInstanceInformationRequest$InstanceInformationFilterList
 // method. The InstanceInformationFilterList method is a legacy method and does
 // not support tags.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstanceInformationFilter
 type InstanceInformationFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -2298,7 +2251,6 @@ func (s *InstanceInformationFilter) Validate() error {
 }
 
 // The filters to describe or get information about your managed instances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstanceInformationStringFilter
 type InstanceInformationStringFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -2349,7 +2301,6 @@ func (s *InstanceInformationStringFilter) Validate() error {
 // information about the number of installed, missing, not applicable, and failed
 // patches along with metadata about the operation when this information was
 // gathered for the instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstancePatchState
 type InstancePatchState struct {
 	_ struct{} `type:"structure"`
 
@@ -2421,7 +2372,7 @@ type InstancePatchState struct {
 
 	// Placeholder information. This field will always be empty in the current release
 	// of the service.
-	OwnerInformation *string `min:"1" type:"string"`
+	OwnerInformation *string `min:"1" type:"string" sensitive:"true"`
 
 	// The name of the patch group the managed instance belongs to.
 	//
@@ -2444,7 +2395,6 @@ func (s InstancePatchState) String() string {
 
 // Defines a filter used in DescribeInstancePatchStatesForPatchGroup used to
 // scope down the information returned by the API.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstancePatchStateFilter
 type InstancePatchStateFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -2499,7 +2449,6 @@ func (s *InstancePatchStateFilter) Validate() error {
 }
 
 // Specifies the inventory type and attribute for the aggregation execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryAggregator
 type InventoryAggregator struct {
 	_ struct{} `type:"structure"`
 
@@ -2554,7 +2503,6 @@ func (s *InventoryAggregator) Validate() error {
 }
 
 // Status information returned by the DeleteInventory action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryDeletionStatusItem
 type InventoryDeletionStatusItem struct {
 	_ struct{} `type:"structure"`
 
@@ -2588,7 +2536,6 @@ func (s InventoryDeletionStatusItem) String() string {
 }
 
 // Information about the delete operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryDeletionSummary
 type InventoryDeletionSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -2610,7 +2557,6 @@ func (s InventoryDeletionSummary) String() string {
 
 // Either a count, remaining count, or a version number in a delete inventory
 // summary.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryDeletionSummaryItem
 type InventoryDeletionSummaryItem struct {
 	_ struct{} `type:"structure"`
 
@@ -2630,7 +2576,6 @@ func (s InventoryDeletionSummaryItem) String() string {
 }
 
 // One or more filters. Use a filter to return a more specific list of results.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryFilter
 type InventoryFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -2682,7 +2627,6 @@ func (s *InventoryFilter) Validate() error {
 // A user-defined set of one or more filters on which to aggregate inventory
 // data. Groups return a count of resources that match and don't match the specified
 // criteria.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryGroup
 type InventoryGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -2737,7 +2681,6 @@ func (s *InventoryGroup) Validate() error {
 
 // Information collected from managed instances based on your inventory policy
 // document
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryItem
 type InventoryItem struct {
 	_ struct{} `type:"structure"`
 
@@ -2806,7 +2749,6 @@ func (s *InventoryItem) Validate() error {
 
 // Attributes are the entries within the inventory item content. It contains
 // name and value.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryItemAttribute
 type InventoryItemAttribute struct {
 	_ struct{} `type:"structure"`
 
@@ -2828,7 +2770,6 @@ func (s InventoryItemAttribute) String() string {
 
 // The inventory item schema definition. Users can use this to compose inventory
 // query filters.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryItemSchema
 type InventoryItemSchema struct {
 	_ struct{} `type:"structure"`
 
@@ -2860,7 +2801,6 @@ func (s InventoryItemSchema) String() string {
 }
 
 // Inventory query results.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryResultEntity
 type InventoryResultEntity struct {
 	_ struct{} `type:"structure"`
 
@@ -2879,7 +2819,6 @@ func (s InventoryResultEntity) String() string {
 }
 
 // The inventory result item.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryResultItem
 type InventoryResultItem struct {
 	_ struct{} `type:"structure"`
 
@@ -2920,7 +2859,6 @@ func (s InventoryResultItem) String() string {
 // instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters
 // structure. For information about how Systems Manager handles these options
 // for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/LoggingInfo
 type LoggingInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -2968,7 +2906,6 @@ func (s *LoggingInfo) Validate() error {
 }
 
 // The parameters for an AUTOMATION task type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowAutomationParameters
 type MaintenanceWindowAutomationParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -3014,7 +2951,6 @@ func (s *MaintenanceWindowAutomationParameters) Validate() error {
 }
 
 // Describes the information about an execution of a maintenance window.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowExecution
 type MaintenanceWindowExecution struct {
 	_ struct{} `type:"structure"`
 
@@ -3044,7 +2980,6 @@ func (s MaintenanceWindowExecution) String() string {
 
 // Information about a task execution performed as part of a maintenance window
 // execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowExecutionTaskIdentity
 type MaintenanceWindowExecutionTaskIdentity struct {
 	_ struct{} `type:"structure"`
 
@@ -3081,7 +3016,6 @@ func (s MaintenanceWindowExecutionTaskIdentity) String() string {
 
 // Describes the information about a task invocation for a particular target
 // as part of a task execution performed as part of a maintenance window execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowExecutionTaskInvocationIdentity
 type MaintenanceWindowExecutionTaskInvocationIdentity struct {
 	_ struct{} `type:"structure"`
 
@@ -3098,10 +3032,10 @@ type MaintenanceWindowExecutionTaskInvocationIdentity struct {
 	// User-provided value that was specified when the target was registered with
 	// the maintenance window. This was also included in any CloudWatch events raised
 	// during the task invocation.
-	OwnerInformation *string `min:"1" type:"string"`
+	OwnerInformation *string `min:"1" type:"string" sensitive:"true"`
 
 	// The parameters that were provided for the invocation when it was run.
-	Parameters *string `type:"string"`
+	Parameters *string `type:"string" sensitive:"true"`
 
 	// The time the invocation started.
 	StartTime *time.Time `type:"timestamp"`
@@ -3133,7 +3067,6 @@ func (s MaintenanceWindowExecutionTaskInvocationIdentity) String() string {
 }
 
 // Filter used in the request. Supported filter keys are Name and Enabled.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowFilter
 type MaintenanceWindowFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -3163,7 +3096,6 @@ func (s *MaintenanceWindowFilter) Validate() error {
 }
 
 // Information about the maintenance window.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowIdentity
 type MaintenanceWindowIdentity struct {
 	_ struct{} `type:"structure"`
 
@@ -3172,7 +3104,7 @@ type MaintenanceWindowIdentity struct {
 	Cutoff *int64 `type:"integer"`
 
 	// A description of the maintenance window.
-	Description *string `min:"1" type:"string"`
+	Description *string `min:"1" type:"string" sensitive:"true"`
 
 	// The duration of the maintenance window in hours.
 	Duration *int64 `min:"1" type:"integer"`
@@ -3212,7 +3144,6 @@ func (s MaintenanceWindowIdentity) String() string {
 }
 
 // The maintenance window to which the specified target belongs.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowIdentityForTarget
 type MaintenanceWindowIdentityForTarget struct {
 	_ struct{} `type:"structure"`
 
@@ -3245,7 +3176,6 @@ func (s MaintenanceWindowIdentityForTarget) String() string {
 //
 // For Lambda tasks, Systems Manager ignores any values specified for TaskParameters
 // and LoggingInfo.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowLambdaParameters
 type MaintenanceWindowLambdaParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -3257,7 +3187,7 @@ type MaintenanceWindowLambdaParameters struct {
 	// JSON to provide to your Lambda function as input.
 	//
 	// Payload is automatically base64 encoded/decoded by the SDK.
-	Payload []byte `type:"blob"`
+	Payload []byte `type:"blob" sensitive:"true"`
 
 	// (Optional) Specify a Lambda function version or alias name. If you specify
 	// a function version, the action uses the qualified function ARN to invoke
@@ -3304,7 +3234,6 @@ func (s *MaintenanceWindowLambdaParameters) Validate() error {
 //
 // For Run Command tasks, Systems Manager uses specified values for TaskParameters
 // and LoggingInfo only if no values are specified for TaskInvocationParameters.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowRunCommandParameters
 type MaintenanceWindowRunCommandParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -3378,12 +3307,11 @@ func (s *MaintenanceWindowRunCommandParameters) Validate() error {
 //
 // For Step Functions tasks, Systems Manager ignores any values specified for
 // TaskParameters and LoggingInfo.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowStepFunctionsParameters
 type MaintenanceWindowStepFunctionsParameters struct {
 	_ struct{} `type:"structure"`
 
 	// The inputs for the STEP_FUNCTIONS task.
-	Input *string `type:"string"`
+	Input *string `type:"string" sensitive:"true"`
 
 	// The name of the STEP_FUNCTIONS task.
 	Name *string `min:"1" type:"string"`
@@ -3408,19 +3336,18 @@ func (s *MaintenanceWindowStepFunctionsParameters) Validate() error {
 }
 
 // The target registered with the maintenance window.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowTarget
 type MaintenanceWindowTarget struct {
 	_ struct{} `type:"structure"`
 
 	// A description for the target.
-	Description *string `min:"1" type:"string"`
+	Description *string `min:"1" type:"string" sensitive:"true"`
 
 	// The name for the maintenance window target.
 	Name *string `min:"3" type:"string"`
 
 	// A user-provided value that will be included in any CloudWatch events that
 	// are raised while running tasks for these targets in this maintenance window.
-	OwnerInformation *string `min:"1" type:"string"`
+	OwnerInformation *string `min:"1" type:"string" sensitive:"true"`
 
 	// The type of target that is being registered with the maintenance window.
 	ResourceType MaintenanceWindowResourceType `type:"string" enum:"true"`
@@ -3449,12 +3376,11 @@ func (s MaintenanceWindowTarget) String() string {
 }
 
 // Information about a task defined for a maintenance window.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowTask
 type MaintenanceWindowTask struct {
 	_ struct{} `type:"structure"`
 
 	// A description of the task.
-	Description *string `min:"1" type:"string"`
+	Description *string `min:"1" type:"string" sensitive:"true"`
 
 	// Information about an Amazon S3 bucket to write task-level logs to.
 	//
@@ -3498,7 +3424,7 @@ type MaintenanceWindowTask struct {
 	// when it runs, instead use the Parameters option in the TaskInvocationParameters
 	// structure. For information about how Systems Manager handles these options
 	// for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
-	TaskParameters map[string]MaintenanceWindowTaskParameterValueExpression `type:"map"`
+	TaskParameters map[string]MaintenanceWindowTaskParameterValueExpression `type:"map" sensitive:"true"`
 
 	// The type of task. The type can be one of the following: RUN_COMMAND, AUTOMATION,
 	// LAMBDA, or STEP_FUNCTIONS.
@@ -3517,7 +3443,6 @@ func (s MaintenanceWindowTask) String() string {
 }
 
 // The parameters for task execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowTaskInvocationParameters
 type MaintenanceWindowTaskInvocationParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -3570,13 +3495,12 @@ func (s *MaintenanceWindowTaskInvocationParameters) Validate() error {
 }
 
 // Defines the values for a task parameter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowTaskParameterValueExpression
 type MaintenanceWindowTaskParameterValueExpression struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" sensitive:"true"`
 
 	// This field contains an array of 0 or more strings, each 1 to 255 characters
 	// in length.
-	Values []string `type:"list"`
+	Values []string `type:"list" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -3586,7 +3510,6 @@ func (s MaintenanceWindowTaskParameterValueExpression) String() string {
 
 // A summary of resources that are not compliant. The summary is organized according
 // to resource type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/NonCompliantSummary
 type NonCompliantSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -3603,7 +3526,6 @@ func (s NonCompliantSummary) String() string {
 }
 
 // Configurations for sending notifications.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/NotificationConfig
 type NotificationConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -3632,7 +3554,6 @@ func (s NotificationConfig) String() string {
 
 // One or more aggregators for viewing counts of OpsItems using different dimensions
 // such as Source, CreatedTime, or Source and CreatedTime, to name a few.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsAggregator
 type OpsAggregator struct {
 	_ struct{} `type:"structure"`
 
@@ -3697,7 +3618,6 @@ func (s *OpsAggregator) Validate() error {
 }
 
 // The result of the query.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsEntity
 type OpsEntity struct {
 	_ struct{} `type:"structure"`
 
@@ -3714,7 +3634,6 @@ func (s OpsEntity) String() string {
 }
 
 // The OpsItem summaries result item.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsEntityItem
 type OpsEntityItem struct {
 	_ struct{} `type:"structure"`
 
@@ -3728,7 +3647,6 @@ func (s OpsEntityItem) String() string {
 }
 
 // A filter for viewing OpsItem summaries.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsFilter
 type OpsFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -3780,7 +3698,6 @@ func (s *OpsFilter) Validate() error {
 // their AWS resources. For more information, see AWS Systems Manager OpsCenter
 // (http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html)
 // in the AWS Systems Manager User Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItem
 type OpsItem struct {
 	_ struct{} `type:"structure"`
 
@@ -3862,7 +3779,6 @@ func (s OpsItem) String() string {
 
 // An object that defines the value of the key and its type in the OperationalData
 // map.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemDataValue
 type OpsItemDataValue struct {
 	_ struct{} `type:"structure"`
 
@@ -3879,7 +3795,6 @@ func (s OpsItemDataValue) String() string {
 }
 
 // Describes an OpsItem filter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemFilter
 type OpsItemFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -3925,7 +3840,6 @@ func (s *OpsItemFilter) Validate() error {
 }
 
 // A notification about the OpsItem.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemNotification
 type OpsItemNotification struct {
 	_ struct{} `type:"structure"`
 
@@ -3940,7 +3854,6 @@ func (s OpsItemNotification) String() string {
 }
 
 // A count of OpsItems.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemSummary
 type OpsItemSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -3984,7 +3897,6 @@ func (s OpsItemSummary) String() string {
 
 // Information about the source where the association execution details are
 // stored.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OutputSource
 type OutputSource struct {
 	_ struct{} `type:"structure"`
 
@@ -4002,7 +3914,6 @@ func (s OutputSource) String() string {
 }
 
 // An Amazon EC2 Systems Manager parameter in Parameter Store.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Parameter
 type Parameter struct {
 	_ struct{} `type:"structure"`
 
@@ -4045,7 +3956,6 @@ func (s Parameter) String() string {
 }
 
 // Information about parameter usage.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterHistory
 type ParameterHistory struct {
 	_ struct{} `type:"structure"`
 
@@ -4097,7 +4007,6 @@ func (s ParameterHistory) String() string {
 }
 
 // One or more policies assigned to a parameter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterInlinePolicy
 type ParameterInlinePolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -4122,7 +4031,6 @@ func (s ParameterInlinePolicy) String() string {
 
 // Metadata includes information like the ARN of the last user and the date/time
 // the parameter was last used.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterMetadata
 type ParameterMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -4170,7 +4078,6 @@ func (s ParameterMetadata) String() string {
 // The Name and Tier filter keys can't be used with the GetParametersByPath
 // API action. Also, the Label filter key can't be used with the DescribeParameters
 // API action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterStringFilter
 type ParameterStringFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -4216,7 +4123,6 @@ func (s *ParameterStringFilter) Validate() error {
 }
 
 // This data type is deprecated. Instead, use ParameterStringFilter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParametersFilter
 type ParametersFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -4257,7 +4163,6 @@ func (s *ParametersFilter) Validate() error {
 }
 
 // Represents metadata about a patch.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Patch
 type Patch struct {
 	_ struct{} `type:"structure"`
 
@@ -4308,7 +4213,6 @@ func (s Patch) String() string {
 }
 
 // Defines the basic information about a patch baseline.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchBaselineIdentity
 type PatchBaselineIdentity struct {
 	_ struct{} `type:"structure"`
 
@@ -4338,7 +4242,6 @@ func (s PatchBaselineIdentity) String() string {
 
 // Information about the state of a patch on a particular instance as it relates
 // to the patch baseline used to patch the instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchComplianceData
 type PatchComplianceData struct {
 	_ struct{} `type:"structure"`
 
@@ -4397,7 +4300,6 @@ func (s PatchComplianceData) String() string {
 // You can view lists of valid values for the patch properties by running the
 // DescribePatchProperties command. For information about which patch properties
 // can be used with each major operating system, see DescribePatchProperties.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchFilter
 type PatchFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -4444,7 +4346,6 @@ func (s *PatchFilter) Validate() error {
 }
 
 // A set of patch filters, typically used for approval rules.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchFilterGroup
 type PatchFilterGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -4482,7 +4383,6 @@ func (s *PatchFilterGroup) Validate() error {
 
 // The mapping between a patch group and the patch baseline the patch group
 // is registered with.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchGroupPatchBaselineMapping
 type PatchGroupPatchBaselineMapping struct {
 	_ struct{} `type:"structure"`
 
@@ -4499,7 +4399,6 @@ func (s PatchGroupPatchBaselineMapping) String() string {
 }
 
 // Defines a filter used in Patch Manager APIs.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchOrchestratorFilter
 type PatchOrchestratorFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -4529,7 +4428,6 @@ func (s *PatchOrchestratorFilter) Validate() error {
 }
 
 // Defines an approval rule for a patch baseline.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchRule
 type PatchRule struct {
 	_ struct{} `type:"structure"`
 
@@ -4585,7 +4483,6 @@ func (s *PatchRule) Validate() error {
 }
 
 // A set of rules defining the approval rules for a patch baseline.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchRuleGroup
 type PatchRuleGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -4623,7 +4520,6 @@ func (s *PatchRuleGroup) Validate() error {
 
 // Information about the patches to use to update the instances, including target
 // operating systems and source repository. Applies to Linux instances only.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchSource
 type PatchSource struct {
 	_ struct{} `type:"structure"`
 
@@ -4638,7 +4534,7 @@ type PatchSource struct {
 	// debuglevel=2
 	//
 	// Configuration is a required field
-	Configuration *string `min:"1" type:"string" required:"true"`
+	Configuration *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The name specified to identify the patch source.
 	//
@@ -4687,7 +4583,6 @@ func (s *PatchSource) Validate() error {
 }
 
 // Information about the approval status of a patch.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchStatus
 type PatchStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -4709,7 +4604,6 @@ func (s PatchStatus) String() string {
 
 // An aggregate of step execution statuses displayed in the AWS Console for
 // a multi-Region and multi-account Automation execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ProgressCounters
 type ProgressCounters struct {
 	_ struct{} `type:"structure"`
 
@@ -4742,7 +4636,6 @@ func (s ProgressCounters) String() string {
 // An OpsItems that shares something in common with the current OpsItem. For
 // example, related OpsItems can include OpsItems with similar error messages,
 // impacted resources, or statuses for the impacted resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RelatedOpsItem
 type RelatedOpsItem struct {
 	_ struct{} `type:"structure"`
 
@@ -4772,7 +4665,6 @@ func (s *RelatedOpsItem) Validate() error {
 }
 
 // Information about targets that resolved during the Automation execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResolvedTargets
 type ResolvedTargets struct {
 	_ struct{} `type:"structure"`
 
@@ -4790,7 +4682,6 @@ func (s ResolvedTargets) String() string {
 }
 
 // Compliance summary information for a specific resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourceComplianceSummaryItem
 type ResourceComplianceSummaryItem struct {
 	_ struct{} `type:"structure"`
 
@@ -4827,7 +4718,6 @@ func (s ResourceComplianceSummaryItem) String() string {
 
 // Information about a Resource Data Sync configuration, including its current
 // status and last successful sync.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourceDataSyncItem
 type ResourceDataSyncItem struct {
 	_ struct{} `type:"structure"`
 
@@ -4859,7 +4749,6 @@ func (s ResourceDataSyncItem) String() string {
 }
 
 // Information about the target Amazon S3 bucket for the Resource Data Sync.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourceDataSyncS3Destination
 type ResourceDataSyncS3Destination struct {
 	_ struct{} `type:"structure"`
 
@@ -4925,7 +4814,6 @@ func (s *ResourceDataSyncS3Destination) Validate() error {
 }
 
 // The inventory item result attribute.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResultAttribute
 type ResultAttribute struct {
 	_ struct{} `type:"structure"`
 
@@ -4959,7 +4847,6 @@ func (s *ResultAttribute) Validate() error {
 }
 
 // An Amazon S3 bucket where you want to store the results of this request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/S3OutputLocation
 type S3OutputLocation struct {
 	_ struct{} `type:"structure"`
 
@@ -4998,7 +4885,6 @@ func (s *S3OutputLocation) Validate() error {
 
 // A URL for the Amazon S3 bucket where you want to store the results of this
 // request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/S3OutputUrl
 type S3OutputUrl struct {
 	_ struct{} `type:"structure"`
 
@@ -5013,7 +4899,6 @@ func (s S3OutputUrl) String() string {
 }
 
 // Information about a scheduled execution for a maintenance window.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ScheduledWindowExecution
 type ScheduledWindowExecution struct {
 	_ struct{} `type:"structure"`
 
@@ -5048,7 +4933,6 @@ func (s ScheduledWindowExecution) String() string {
 // permission for the setting. Use the UpdateServiceSetting API action to change
 // the default setting. Or, use the ResetServiceSetting to change the value
 // back to the original value defined by the AWS service team.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ServiceSetting
 type ServiceSetting struct {
 	_ struct{} `type:"structure"`
 
@@ -5088,7 +4972,6 @@ func (s ServiceSetting) String() string {
 }
 
 // Information about a Session Manager connection to an instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Session
 type Session struct {
 	_ struct{} `type:"structure"`
 
@@ -5127,7 +5010,6 @@ func (s Session) String() string {
 }
 
 // Describes a filter for Session Manager information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SessionFilter
 type SessionFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -5185,7 +5067,6 @@ func (s *SessionFilter) Validate() error {
 }
 
 // Reserved for future use.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SessionManagerOutputUrl
 type SessionManagerOutputUrl struct {
 	_ struct{} `type:"structure"`
 
@@ -5203,7 +5084,6 @@ func (s SessionManagerOutputUrl) String() string {
 
 // The number of managed instances found for each patch severity level defined
 // in the request filter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SeveritySummary
 type SeveritySummary struct {
 	_ struct{} `type:"structure"`
 
@@ -5244,7 +5124,6 @@ func (s SeveritySummary) String() string {
 }
 
 // Detailed information about an the execution state of an Automation step.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StepExecution
 type StepExecution struct {
 	_ struct{} `type:"structure"`
 
@@ -5334,7 +5213,6 @@ func (s StepExecution) String() string {
 
 // A filter to limit the amount of step execution information returned by the
 // call.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StepExecutionFilter
 type StepExecutionFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -5380,7 +5258,6 @@ func (s *StepExecutionFilter) Validate() error {
 // your resources in different ways, for example, by purpose, owner, or environment.
 // In Systems Manager, you can apply tags to documents, managed instances, maintenance
 // windows, Parameter Store parameters, and patch baselines.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -5455,7 +5332,6 @@ func (s *Tag) Validate() error {
 // parameters, see Using Targets and Rate Controls to Send Commands to a Fleet
 // (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting)
 // in the AWS Systems Manager User Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Target
 type Target struct {
 	_ struct{} `type:"structure"`
 
@@ -5489,7 +5365,6 @@ func (s *Target) Validate() error {
 
 // The combination of AWS Regions and accounts targeted by the current Automation
 // execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/TargetLocation
 type TargetLocation struct {
 	_ struct{} `type:"structure"`
 

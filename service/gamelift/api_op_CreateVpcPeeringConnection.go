@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input for a request action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateVpcPeeringConnectionInput
 type CreateVpcPeeringConnectionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -70,7 +69,6 @@ func (s *CreateVpcPeeringConnectionInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateVpcPeeringConnectionOutput
 type CreateVpcPeeringConnectionOutput struct {
 	_ struct{} `type:"structure"`
 }

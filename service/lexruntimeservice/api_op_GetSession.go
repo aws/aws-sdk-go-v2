@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/GetSessionRequest
 type GetSessionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -86,7 +85,6 @@ func (s GetSessionInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/GetSessionResponse
 type GetSessionOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -102,7 +100,7 @@ type GetSessionOutput struct {
 	// Map of key/value pairs representing the session-specific context information.
 	// It contains application information passed between Amazon Lex and a client
 	// application.
-	SessionAttributes map[string]string `locationName:"sessionAttributes" type:"map"`
+	SessionAttributes map[string]string `locationName:"sessionAttributes" type:"map" sensitive:"true"`
 
 	// A unique identifier for the session.
 	SessionId *string `locationName:"sessionId" type:"string"`

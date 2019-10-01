@@ -11,7 +11,6 @@ import (
 )
 
 // Represents the input of a test repository triggers operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/TestRepositoryTriggersInput
 type TestRepositoryTriggersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -60,7 +59,6 @@ func (s *TestRepositoryTriggersInput) Validate() error {
 }
 
 // Represents the output of a test repository triggers operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/TestRepositoryTriggersOutput
 type TestRepositoryTriggersOutput struct {
 	_ struct{} `type:"structure"`
 

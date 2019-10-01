@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListAccountsRequest
 type ListAccountsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -24,7 +23,7 @@ type ListAccountsInput struct {
 	NextToken *string `location:"querystring" locationName:"next-token" type:"string"`
 
 	// User email address with which to filter results.
-	UserEmail *string `location:"querystring" locationName:"user-email" type:"string"`
+	UserEmail *string `location:"querystring" locationName:"user-email" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -79,7 +78,6 @@ func (s ListAccountsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListAccountsResponse
 type ListAccountsOutput struct {
 	_ struct{} `type:"structure"`
 

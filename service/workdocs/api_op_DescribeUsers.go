@@ -10,13 +10,12 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeUsersRequest
 type DescribeUsersInput struct {
 	_ struct{} `type:"structure"`
 
 	// Amazon WorkDocs authentication token. Do not set this field when using administrative
 	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string"`
+	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// A comma-separated list of values. Specify "STORAGE_METADATA" to include the
 	// user storage quota and utilization information.
@@ -39,7 +38,7 @@ type DescribeUsersInput struct {
 	OrganizationId *string `location:"querystring" locationName:"organizationId" min:"1" type:"string"`
 
 	// A query to filter users by user name.
-	Query *string `location:"querystring" locationName:"query" min:"1" type:"string"`
+	Query *string `location:"querystring" locationName:"query" min:"1" type:"string" sensitive:"true"`
 
 	// The sorting criteria.
 	Sort UserSortType `location:"querystring" locationName:"sort" type:"string" enum:"true"`
@@ -151,7 +150,6 @@ func (s DescribeUsersInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeUsersResponse
 type DescribeUsersOutput struct {
 	_ struct{} `type:"structure"`
 

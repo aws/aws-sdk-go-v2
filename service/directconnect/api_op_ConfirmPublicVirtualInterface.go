@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPublicVirtualInterfaceRequest
 type ConfirmPublicVirtualInterfaceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -38,7 +37,6 @@ func (s *ConfirmPublicVirtualInterfaceInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPublicVirtualInterfaceResponse
 type ConfirmPublicVirtualInterfaceOutput struct {
 	_ struct{} `type:"structure"`
 

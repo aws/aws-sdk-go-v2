@@ -10,7 +10,6 @@ import (
 )
 
 // AttachVolumeInput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AttachVolumeInput
 type AttachVolumeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -89,7 +88,6 @@ func (s *AttachVolumeInput) Validate() error {
 }
 
 // AttachVolumeOutput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AttachVolumeOutput
 type AttachVolumeOutput struct {
 	_ struct{} `type:"structure"`
 

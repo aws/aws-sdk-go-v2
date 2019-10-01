@@ -11,18 +11,17 @@ import (
 )
 
 // The TransferDomain request includes the following elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/TransferDomainRequest
 type TransferDomainInput struct {
 	_ struct{} `type:"structure"`
 
 	// Provides detailed contact information.
 	//
 	// AdminContact is a required field
-	AdminContact *ContactDetail `type:"structure" required:"true"`
+	AdminContact *ContactDetail `type:"structure" required:"true" sensitive:"true"`
 
 	// The authorization code for the domain. You get this value from the current
 	// registrar.
-	AuthCode *string `type:"string"`
+	AuthCode *string `type:"string" sensitive:"true"`
 
 	// Indicates whether the domain will be automatically renewed (true) or not
 	// (false). Autorenewal only takes effect after the account is charged.
@@ -85,12 +84,12 @@ type TransferDomainInput struct {
 	// Provides detailed contact information.
 	//
 	// RegistrantContact is a required field
-	RegistrantContact *ContactDetail `type:"structure" required:"true"`
+	RegistrantContact *ContactDetail `type:"structure" required:"true" sensitive:"true"`
 
 	// Provides detailed contact information.
 	//
 	// TechContact is a required field
-	TechContact *ContactDetail `type:"structure" required:"true"`
+	TechContact *ContactDetail `type:"structure" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -154,7 +153,6 @@ func (s *TransferDomainInput) Validate() error {
 }
 
 // The TranserDomain response includes the following element.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/TransferDomainResponse
 type TransferDomainOutput struct {
 	_ struct{} `type:"structure"`
 

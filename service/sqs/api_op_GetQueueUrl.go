@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/GetQueueUrlRequest
 type GetQueueUrlInput struct {
 	_ struct{} `type:"structure"`
 
@@ -46,7 +45,6 @@ func (s *GetQueueUrlInput) Validate() error {
 
 // For more information, see Interpreting Responses (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-api-responses.html)
 // in the Amazon Simple Queue Service Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/GetQueueUrlResult
 type GetQueueUrlOutput struct {
 	_ struct{} `type:"structure"`
 

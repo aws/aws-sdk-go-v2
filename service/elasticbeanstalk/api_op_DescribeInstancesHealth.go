@@ -11,7 +11,6 @@ import (
 )
 
 // Parameters for a call to DescribeInstancesHealth.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeInstancesHealthRequest
 type DescribeInstancesHealthInput struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +51,6 @@ func (s *DescribeInstancesHealthInput) Validate() error {
 
 // Detailed health information about the Amazon EC2 instances in an AWS Elastic
 // Beanstalk environment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeInstancesHealthResult
 type DescribeInstancesHealthOutput struct {
 	_ struct{} `type:"structure"`
 

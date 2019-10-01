@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Defines an action to be initiated by a trigger.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Action
 type Action struct {
 	_ struct{} `type:"structure"`
 
@@ -85,7 +84,6 @@ func (s *Action) Validate() error {
 }
 
 // Records an error that occurred when attempting to stop a specified job run.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchStopJobRunError
 type BatchStopJobRunError struct {
 	_ struct{} `type:"structure"`
 
@@ -105,7 +103,6 @@ func (s BatchStopJobRunError) String() string {
 }
 
 // Records a successful request to stop a specified JobRun.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchStopJobRunSuccessfulSubmission
 type BatchStopJobRunSuccessfulSubmission struct {
 	_ struct{} `type:"structure"`
 
@@ -122,7 +119,6 @@ func (s BatchStopJobRunSuccessfulSubmission) String() string {
 }
 
 // Specifies a table definition in the AWS Glue Data Catalog.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CatalogEntry
 type CatalogEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -167,7 +163,6 @@ func (s *CatalogEntry) Validate() error {
 }
 
 // A structure containing migration status information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CatalogImportStatus
 type CatalogImportStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -187,7 +182,6 @@ func (s CatalogImportStatus) String() string {
 }
 
 // Specifies an AWS Glue Data Catalog target.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CatalogTarget
 type CatalogTarget struct {
 	_ struct{} `type:"structure"`
 
@@ -240,7 +234,6 @@ func (s *CatalogTarget) Validate() error {
 // appropriate schemas to use for them. A classifier can be a grok classifier,
 // an XML classifier, a JSON classifier, or a custom CSV classifier, as specified
 // in one of the fields in the Classifier object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Classifier
 type Classifier struct {
 	_ struct{} `type:"structure"`
 
@@ -263,7 +256,6 @@ func (s Classifier) String() string {
 }
 
 // Specifies how Amazon CloudWatch data should be encrypted.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CloudWatchEncryption
 type CloudWatchEncryption struct {
 	_ struct{} `type:"structure"`
 
@@ -280,7 +272,6 @@ func (s CloudWatchEncryption) String() string {
 }
 
 // Represents a directional edge in a directed acyclic graph (DAG).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CodeGenEdge
 type CodeGenEdge struct {
 	_ struct{} `type:"structure"`
 
@@ -328,7 +319,6 @@ func (s *CodeGenEdge) Validate() error {
 }
 
 // Represents a node in a directed acyclic graph (DAG)
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CodeGenNode
 type CodeGenNode struct {
 	_ struct{} `type:"structure"`
 
@@ -389,7 +379,6 @@ func (s *CodeGenNode) Validate() error {
 }
 
 // An argument or property of a node.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CodeGenNodeArg
 type CodeGenNodeArg struct {
 	_ struct{} `type:"structure"`
 
@@ -431,7 +420,6 @@ func (s *CodeGenNodeArg) Validate() error {
 }
 
 // A column in a Table.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Column
 type Column struct {
 	_ struct{} `type:"structure"`
 
@@ -473,7 +461,6 @@ func (s *Column) Validate() error {
 }
 
 // Defines a condition under which a trigger fires.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Condition
 type Condition struct {
 	_ struct{} `type:"structure"`
 
@@ -521,7 +508,6 @@ func (s *Condition) Validate() error {
 //
 // For more information, see Confusion matrix (https://en.wikipedia.org/wiki/Confusion_matrix)
 // in Wikipedia.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConfusionMatrix
 type ConfusionMatrix struct {
 	_ struct{} `type:"structure"`
 
@@ -548,7 +534,6 @@ func (s ConfusionMatrix) String() string {
 }
 
 // Defines a connection to a data source.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Connection
 type Connection struct {
 	_ struct{} `type:"structure"`
 
@@ -622,7 +607,6 @@ func (s Connection) String() string {
 }
 
 // A structure that is used to specify a connection to create or update.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConnectionInput
 type ConnectionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -700,7 +684,6 @@ func (s *ConnectionInput) Validate() error {
 // restrict access on the password key according to your security requirements.
 // For example, you might want only administrators to have decrypt permission
 // on the password key.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConnectionPasswordEncryption
 type ConnectionPasswordEncryption struct {
 	_ struct{} `type:"structure"`
 
@@ -745,7 +728,6 @@ func (s *ConnectionPasswordEncryption) Validate() error {
 }
 
 // Specifies the connections used by a job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConnectionsList
 type ConnectionsList struct {
 	_ struct{} `type:"structure"`
 
@@ -759,7 +741,6 @@ func (s ConnectionsList) String() string {
 }
 
 // The details of a crawl in the workflow.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Crawl
 type Crawl struct {
 	_ struct{} `type:"structure"`
 
@@ -790,7 +771,6 @@ func (s Crawl) String() string {
 // Specifies a crawler program that examines a data source and uses classifiers
 // to try to determine its schema. If successful, the crawler records metadata
 // concerning the data source in the AWS Glue Data Catalog.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Crawler
 type Crawler struct {
 	_ struct{} `type:"structure"`
 
@@ -858,7 +838,6 @@ func (s Crawler) String() string {
 }
 
 // Metrics for a specified crawler.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CrawlerMetrics
 type CrawlerMetrics struct {
 	_ struct{} `type:"structure"`
 
@@ -894,7 +873,6 @@ func (s CrawlerMetrics) String() string {
 }
 
 // The details of a Crawler node present in the workflow.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CrawlerNodeDetails
 type CrawlerNodeDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -908,7 +886,6 @@ func (s CrawlerNodeDetails) String() string {
 }
 
 // Specifies data stores to crawl.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CrawlerTargets
 type CrawlerTargets struct {
 	_ struct{} `type:"structure"`
 
@@ -948,7 +925,6 @@ func (s *CrawlerTargets) Validate() error {
 }
 
 // Specifies a custom CSV classifier for CreateClassifier to create.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCsvClassifierRequest
 type CreateCsvClassifierRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -1007,7 +983,6 @@ func (s *CreateCsvClassifierRequest) Validate() error {
 }
 
 // Specifies a grok classifier for CreateClassifier to create.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateGrokClassifierRequest
 type CreateGrokClassifierRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -1065,7 +1040,6 @@ func (s *CreateGrokClassifierRequest) Validate() error {
 }
 
 // Specifies a JSON classifier for CreateClassifier to create.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateJsonClassifierRequest
 type CreateJsonClassifierRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -1109,7 +1083,6 @@ func (s *CreateJsonClassifierRequest) Validate() error {
 }
 
 // Specifies an XML classifier for CreateClassifier to create.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateXMLClassifierRequest
 type CreateXMLClassifierRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -1158,7 +1131,6 @@ func (s *CreateXMLClassifierRequest) Validate() error {
 }
 
 // A classifier for custom CSV content.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CsvClassifier
 type CsvClassifier struct {
 	_ struct{} `type:"structure"`
 
@@ -1203,7 +1175,6 @@ func (s CsvClassifier) String() string {
 }
 
 // Contains configuration information for maintaining Data Catalog security.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataCatalogEncryptionSettings
 type DataCatalogEncryptionSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -1243,7 +1214,6 @@ func (s *DataCatalogEncryptionSettings) Validate() error {
 }
 
 // The AWS Lake Formation principal.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataLakePrincipal
 type DataLakePrincipal struct {
 	_ struct{} `type:"structure"`
 
@@ -1271,7 +1241,6 @@ func (s *DataLakePrincipal) Validate() error {
 
 // The Database object represents a logical grouping of tables that might reside
 // in a Hive metastore or an RDBMS.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Database
 type Database struct {
 	_ struct{} `type:"structure"`
 
@@ -1303,7 +1272,6 @@ func (s Database) String() string {
 }
 
 // The structure used to create or update a database.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DatabaseInput
 type DatabaseInput struct {
 	_ struct{} `type:"structure"`
 
@@ -1362,7 +1330,6 @@ func (s *DatabaseInput) Validate() error {
 
 // A development endpoint where a developer can remotely debug extract, transform,
 // and load (ETL) scripts.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DevEndpoint
 type DevEndpoint struct {
 	_ struct{} `type:"structure"`
 
@@ -1488,7 +1455,6 @@ func (s DevEndpoint) String() string {
 }
 
 // Custom libraries to be loaded into a development endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DevEndpointCustomLibraries
 type DevEndpointCustomLibraries struct {
 	_ struct{} `type:"structure"`
 
@@ -1514,7 +1480,6 @@ func (s DevEndpointCustomLibraries) String() string {
 }
 
 // Specifies an Amazon DynamoDB table to crawl.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DynamoDBTarget
 type DynamoDBTarget struct {
 	_ struct{} `type:"structure"`
 
@@ -1529,7 +1494,6 @@ func (s DynamoDBTarget) String() string {
 
 // An edge represents a directed connection between two AWS Glue components
 // which are part of the workflow the edge belongs to.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Edge
 type Edge struct {
 	_ struct{} `type:"structure"`
 
@@ -1546,7 +1510,6 @@ func (s Edge) String() string {
 }
 
 // Specifies the encryption-at-rest configuration for the Data Catalog.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/EncryptionAtRest
 type EncryptionAtRest struct {
 	_ struct{} `type:"structure"`
 
@@ -1581,7 +1544,6 @@ func (s *EncryptionAtRest) Validate() error {
 }
 
 // Specifies an encryption configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/EncryptionConfiguration
 type EncryptionConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1602,7 +1564,6 @@ func (s EncryptionConfiguration) String() string {
 }
 
 // Contains details about an error.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ErrorDetail
 type ErrorDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -1620,7 +1581,6 @@ func (s ErrorDetail) String() string {
 
 // Evaluation metrics provide an estimate of the quality of your machine learning
 // transform.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/EvaluationMetrics
 type EvaluationMetrics struct {
 	_ struct{} `type:"structure"`
 
@@ -1639,7 +1599,6 @@ func (s EvaluationMetrics) String() string {
 }
 
 // An execution property of a job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ExecutionProperty
 type ExecutionProperty struct {
 	_ struct{} `type:"structure"`
 
@@ -1655,7 +1614,6 @@ func (s ExecutionProperty) String() string {
 }
 
 // Specifies configuration properties for an exporting labels task run.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ExportLabelsTaskRunProperties
 type ExportLabelsTaskRunProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -1673,7 +1631,6 @@ func (s ExportLabelsTaskRunProperties) String() string {
 // machine learning transform is measured by getting your transform to predict
 // some matches and comparing the results to known matches from the same dataset.
 // The quality metrics are based on a subset of your data, so they are not precise.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/FindMatchesMetrics
 type FindMatchesMetrics struct {
 	_ struct{} `type:"structure"`
 
@@ -1723,7 +1680,6 @@ func (s FindMatchesMetrics) String() string {
 }
 
 // The parameters to configure the find matches transform.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/FindMatchesParameters
 type FindMatchesParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -1790,7 +1746,6 @@ func (s *FindMatchesParameters) Validate() error {
 }
 
 // Specifies configuration properties for a Find Matches task run.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/FindMatchesTaskRunProperties
 type FindMatchesTaskRunProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -1811,7 +1766,6 @@ func (s FindMatchesTaskRunProperties) String() string {
 
 // Filters the connection definitions that are returned by the GetConnections
 // API operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetConnectionsFilter
 type GetConnectionsFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -1831,7 +1785,6 @@ func (s GetConnectionsFilter) String() string {
 
 // The database and table in the AWS Glue Data Catalog that is used for input
 // or output data.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GlueTable
 type GlueTable struct {
 	_ struct{} `type:"structure"`
 
@@ -1888,7 +1841,6 @@ func (s *GlueTable) Validate() error {
 }
 
 // A classifier that uses grok patterns.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GrokClassifier
 type GrokClassifier struct {
 	_ struct{} `type:"structure"`
 
@@ -1929,7 +1881,6 @@ func (s GrokClassifier) String() string {
 }
 
 // Specifies configuration properties for an importing labels task run.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ImportLabelsTaskRunProperties
 type ImportLabelsTaskRunProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -1947,7 +1898,6 @@ func (s ImportLabelsTaskRunProperties) String() string {
 }
 
 // Specifies a JDBC data store to crawl.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JdbcTarget
 type JdbcTarget struct {
 	_ struct{} `type:"structure"`
 
@@ -1968,7 +1918,6 @@ func (s JdbcTarget) String() string {
 }
 
 // Specifies a job definition.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Job
 type Job struct {
 	_ struct{} `type:"structure"`
 
@@ -2096,7 +2045,6 @@ func (s Job) String() string {
 }
 
 // Defines a point that a job can resume processing.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobBookmarkEntry
 type JobBookmarkEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -2128,7 +2076,6 @@ func (s JobBookmarkEntry) String() string {
 }
 
 // Specifies how job bookmark data should be encrypted.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobBookmarksEncryption
 type JobBookmarksEncryption struct {
 	_ struct{} `type:"structure"`
 
@@ -2145,7 +2092,6 @@ func (s JobBookmarksEncryption) String() string {
 }
 
 // Specifies code executed when a job is run.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobCommand
 type JobCommand struct {
 	_ struct{} `type:"structure"`
 
@@ -2168,7 +2114,6 @@ func (s JobCommand) String() string {
 }
 
 // The details of a Job node present in the workflow.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobNodeDetails
 type JobNodeDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -2182,7 +2127,6 @@ func (s JobNodeDetails) String() string {
 }
 
 // Contains information about a job run.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobRun
 type JobRun struct {
 	_ struct{} `type:"structure"`
 
@@ -2324,7 +2268,6 @@ func (s JobRun) String() string {
 
 // Specifies information used to update an existing job definition. The previous
 // job definition is completely overwritten by this information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobUpdate
 type JobUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -2465,7 +2408,6 @@ func (s *JobUpdate) Validate() error {
 }
 
 // A classifier for JSON content.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JsonClassifier
 type JsonClassifier struct {
 	_ struct{} `type:"structure"`
 
@@ -2497,7 +2439,6 @@ func (s JsonClassifier) String() string {
 }
 
 // Specifies configuration properties for a labeling set generation task run.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/LabelingSetGenerationTaskRunProperties
 type LabelingSetGenerationTaskRunProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -2512,7 +2453,6 @@ func (s LabelingSetGenerationTaskRunProperties) String() string {
 }
 
 // Status and error information about the most recent crawl.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/LastCrawlInfo
 type LastCrawlInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -2541,7 +2481,6 @@ func (s LastCrawlInfo) String() string {
 }
 
 // The location of resources.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Location
 type Location struct {
 	_ struct{} `type:"structure"`
 
@@ -2592,7 +2531,6 @@ func (s *Location) Validate() error {
 }
 
 // A structure for a machine learning transform.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/MLTransform
 type MLTransform struct {
 	_ struct{} `type:"structure"`
 
@@ -2687,7 +2625,6 @@ func (s MLTransform) String() string {
 }
 
 // Defines a mapping.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/MappingEntry
 type MappingEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -2717,7 +2654,6 @@ func (s MappingEntry) String() string {
 
 // A node represents an AWS Glue component like Trigger, Job etc. which is part
 // of a workflow.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Node
 type Node struct {
 	_ struct{} `type:"structure"`
 
@@ -2746,7 +2682,6 @@ func (s Node) String() string {
 }
 
 // Specifies configuration properties of a notification.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/NotificationProperty
 type NotificationProperty struct {
 	_ struct{} `type:"structure"`
 
@@ -2774,7 +2709,6 @@ func (s *NotificationProperty) Validate() error {
 }
 
 // Specifies the sort order of a sorted column.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Order
 type Order struct {
 	_ struct{} `type:"structure"`
 
@@ -2817,7 +2751,6 @@ func (s *Order) Validate() error {
 }
 
 // Represents a slice of table data.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Partition
 type Partition struct {
 	_ struct{} `type:"structure"`
 
@@ -2852,7 +2785,6 @@ func (s Partition) String() string {
 }
 
 // Contains information about a partition error.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PartitionError
 type PartitionError struct {
 	_ struct{} `type:"structure"`
 
@@ -2869,7 +2801,6 @@ func (s PartitionError) String() string {
 }
 
 // The structure used to create and update a partition.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PartitionInput
 type PartitionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -2911,7 +2842,6 @@ func (s *PartitionInput) Validate() error {
 }
 
 // Contains a list of values defining partitions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PartitionValueList
 type PartitionValueList struct {
 	_ struct{} `type:"structure"`
 
@@ -2941,7 +2871,6 @@ func (s *PartitionValueList) Validate() error {
 }
 
 // Specifies the physical requirements for a connection.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PhysicalConnectionRequirements
 type PhysicalConnectionRequirements struct {
 	_ struct{} `type:"structure"`
 
@@ -2980,7 +2909,6 @@ func (s *PhysicalConnectionRequirements) Validate() error {
 
 // A job run that was used in the predicate of a conditional trigger that triggered
 // this job run.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Predecessor
 type Predecessor struct {
 	_ struct{} `type:"structure"`
 
@@ -2997,7 +2925,6 @@ func (s Predecessor) String() string {
 }
 
 // Defines the predicate of the trigger, which determines when it fires.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Predicate
 type Predicate struct {
 	_ struct{} `type:"structure"`
 
@@ -3032,7 +2959,6 @@ func (s *Predicate) Validate() error {
 }
 
 // Permissions granted to a principal.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PrincipalPermissions
 type PrincipalPermissions struct {
 	_ struct{} `type:"structure"`
 
@@ -3064,7 +2990,6 @@ func (s *PrincipalPermissions) Validate() error {
 }
 
 // Defines a property predicate.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PropertyPredicate
 type PropertyPredicate struct {
 	_ struct{} `type:"structure"`
 
@@ -3084,7 +3009,6 @@ func (s PropertyPredicate) String() string {
 }
 
 // The URIs for function resources.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ResourceUri
 type ResourceUri struct {
 	_ struct{} `type:"structure"`
 
@@ -3114,7 +3038,6 @@ func (s *ResourceUri) Validate() error {
 }
 
 // Specifies how Amazon Simple Storage Service (Amazon S3) data should be encrypted.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3Encryption
 type S3Encryption struct {
 	_ struct{} `type:"structure"`
 
@@ -3131,7 +3054,6 @@ func (s S3Encryption) String() string {
 }
 
 // Specifies a data store in Amazon Simple Storage Service (Amazon S3).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3Target
 type S3Target struct {
 	_ struct{} `type:"structure"`
 
@@ -3149,7 +3071,6 @@ func (s S3Target) String() string {
 }
 
 // A scheduling object using a cron statement to schedule an event.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Schedule
 type Schedule struct {
 	_ struct{} `type:"structure"`
 
@@ -3169,7 +3090,6 @@ func (s Schedule) String() string {
 }
 
 // A policy that specifies update and deletion behaviors for the crawler.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SchemaChangePolicy
 type SchemaChangePolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -3188,7 +3108,6 @@ func (s SchemaChangePolicy) String() string {
 // A key-value pair representing a column and data type that this transform
 // can run against. The Schema parameter of the MLTransform may contain up to
 // 100 of these structures.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SchemaColumn
 type SchemaColumn struct {
 	_ struct{} `type:"structure"`
 
@@ -3218,7 +3137,6 @@ func (s *SchemaColumn) Validate() error {
 }
 
 // Specifies a security configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SecurityConfiguration
 type SecurityConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -3239,7 +3157,6 @@ func (s SecurityConfiguration) String() string {
 
 // Defines a non-overlapping region of a table's partitions, allowing multiple
 // requests to be executed in parallel.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Segment
 type Segment struct {
 	_ struct{} `type:"structure"`
 
@@ -3283,7 +3200,6 @@ func (s *Segment) Validate() error {
 
 // Information about a serialization/deserialization program (SerDe) that serves
 // as an extractor and loader.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SerDeInfo
 type SerDeInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -3320,7 +3236,6 @@ func (s *SerDeInfo) Validate() error {
 
 // Specifies skewed values in a table. Skewed values are those that occur with
 // very high frequency.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SkewedInfo
 type SkewedInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -3339,7 +3254,6 @@ func (s SkewedInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SortCriterion
 type SortCriterion struct {
 	_ struct{} `type:"structure"`
 
@@ -3354,7 +3268,6 @@ func (s SortCriterion) String() string {
 }
 
 // Describes the physical storage of table data.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StorageDescriptor
 type StorageDescriptor struct {
 	_ struct{} `type:"structure"`
 
@@ -3435,7 +3348,6 @@ func (s *StorageDescriptor) Validate() error {
 }
 
 // Represents a collection of related data organized in columns and rows.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Table
 type Table struct {
 	_ struct{} `type:"structure"`
 
@@ -3509,7 +3421,6 @@ func (s Table) String() string {
 }
 
 // An error record for table operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TableError
 type TableError struct {
 	_ struct{} `type:"structure"`
 
@@ -3526,7 +3437,6 @@ func (s TableError) String() string {
 }
 
 // A structure used to define a table.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TableInput
 type TableInput struct {
 	_ struct{} `type:"structure"`
 
@@ -3616,7 +3526,6 @@ func (s *TableInput) Validate() error {
 }
 
 // Specifies a version of a table.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TableVersion
 type TableVersion struct {
 	_ struct{} `type:"structure"`
 
@@ -3634,7 +3543,6 @@ func (s TableVersion) String() string {
 }
 
 // An error record for table-version operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TableVersionError
 type TableVersionError struct {
 	_ struct{} `type:"structure"`
 
@@ -3655,7 +3563,6 @@ func (s TableVersionError) String() string {
 }
 
 // The sampling parameters that are associated with the machine learning transform.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TaskRun
 type TaskRun struct {
 	_ struct{} `type:"structure"`
 
@@ -3698,7 +3605,6 @@ func (s TaskRun) String() string {
 
 // The criteria that are used to filter the task runs for the machine learning
 // transform.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TaskRunFilterCriteria
 type TaskRunFilterCriteria struct {
 	_ struct{} `type:"structure"`
 
@@ -3721,7 +3627,6 @@ func (s TaskRunFilterCriteria) String() string {
 }
 
 // The configuration properties for the task run.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TaskRunProperties
 type TaskRunProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -3748,7 +3653,6 @@ func (s TaskRunProperties) String() string {
 
 // The sorting criteria that are used to sort the list of task runs for the
 // machine learning transform.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TaskRunSortCriteria
 type TaskRunSortCriteria struct {
 	_ struct{} `type:"structure"`
 
@@ -3787,7 +3691,6 @@ func (s *TaskRunSortCriteria) Validate() error {
 }
 
 // The criteria used to filter the machine learning transforms.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TransformFilterCriteria
 type TransformFilterCriteria struct {
 	_ struct{} `type:"structure"`
 
@@ -3849,7 +3752,6 @@ func (s *TransformFilterCriteria) Validate() error {
 
 // The algorithm-specific parameters that are associated with the machine learning
 // transform.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TransformParameters
 type TransformParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -3889,7 +3791,6 @@ func (s *TransformParameters) Validate() error {
 }
 
 // The sorting criteria that are associated with the machine learning transform.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TransformSortCriteria
 type TransformSortCriteria struct {
 	_ struct{} `type:"structure"`
 
@@ -3928,7 +3829,6 @@ func (s *TransformSortCriteria) Validate() error {
 }
 
 // Information about a specific trigger.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Trigger
 type Trigger struct {
 	_ struct{} `type:"structure"`
 
@@ -3969,7 +3869,6 @@ func (s Trigger) String() string {
 }
 
 // The details of a Trigger node present in the workflow.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TriggerNodeDetails
 type TriggerNodeDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -3984,7 +3883,6 @@ func (s TriggerNodeDetails) String() string {
 
 // A structure used to provide information used to update a trigger. This object
 // updates the previous trigger definition by overwriting it completely.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TriggerUpdate
 type TriggerUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -4038,7 +3936,6 @@ func (s *TriggerUpdate) Validate() error {
 }
 
 // Specifies a custom CSV classifier to be updated.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCsvClassifierRequest
 type UpdateCsvClassifierRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -4097,7 +3994,6 @@ func (s *UpdateCsvClassifierRequest) Validate() error {
 }
 
 // Specifies a grok classifier to update when passed to UpdateClassifier.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateGrokClassifierRequest
 type UpdateGrokClassifierRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -4143,7 +4039,6 @@ func (s *UpdateGrokClassifierRequest) Validate() error {
 }
 
 // Specifies a JSON classifier to be updated.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateJsonClassifierRequest
 type UpdateJsonClassifierRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -4181,7 +4076,6 @@ func (s *UpdateJsonClassifierRequest) Validate() error {
 }
 
 // Specifies an XML classifier to be updated.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateXMLClassifierRequest
 type UpdateXMLClassifierRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -4224,7 +4118,6 @@ func (s *UpdateXMLClassifierRequest) Validate() error {
 }
 
 // Represents the equivalent of a Hive user-defined function (UDF) definition.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UserDefinedFunction
 type UserDefinedFunction struct {
 	_ struct{} `type:"structure"`
 
@@ -4253,7 +4146,6 @@ func (s UserDefinedFunction) String() string {
 }
 
 // A structure used to create or update a user-defined function.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UserDefinedFunctionInput
 type UserDefinedFunctionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4306,7 +4198,6 @@ func (s *UserDefinedFunctionInput) Validate() error {
 
 // A workflow represents a flow in which AWS Glue components should be executed
 // to complete a logical task.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Workflow
 type Workflow struct {
 	_ struct{} `type:"structure"`
 
@@ -4341,7 +4232,6 @@ func (s Workflow) String() string {
 // A workflow graph represents the complete workflow containing all the AWS
 // Glue components present in the workflow and all the directed connections
 // between them.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/WorkflowGraph
 type WorkflowGraph struct {
 	_ struct{} `type:"structure"`
 
@@ -4360,7 +4250,6 @@ func (s WorkflowGraph) String() string {
 }
 
 // A workflow run is an execution of a workflow providing all the runtime information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/WorkflowRun
 type WorkflowRun struct {
 	_ struct{} `type:"structure"`
 
@@ -4396,7 +4285,6 @@ func (s WorkflowRun) String() string {
 }
 
 // Workflow run statistics provides statistics about the workflow run.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/WorkflowRunStatistics
 type WorkflowRunStatistics struct {
 	_ struct{} `type:"structure"`
 
@@ -4425,7 +4313,6 @@ func (s WorkflowRunStatistics) String() string {
 }
 
 // A classifier for XML content.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/XMLClassifier
 type XMLClassifier struct {
 	_ struct{} `type:"structure"`
 

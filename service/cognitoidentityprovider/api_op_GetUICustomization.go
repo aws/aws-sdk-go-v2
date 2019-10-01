@@ -9,12 +9,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUICustomizationRequest
 type GetUICustomizationInput struct {
 	_ struct{} `type:"structure"`
 
 	// The client ID for the client app.
-	ClientId *string `min:"1" type:"string"`
+	ClientId *string `min:"1" type:"string" sensitive:"true"`
 
 	// The user pool ID for the user pool.
 	//
@@ -47,7 +46,6 @@ func (s *GetUICustomizationInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUICustomizationResponse
 type GetUICustomizationOutput struct {
 	_ struct{} `type:"structure"`
 

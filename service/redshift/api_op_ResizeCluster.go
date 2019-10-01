@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeClusterMessage
 type ResizeClusterInput struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s *ResizeClusterInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeClusterResult
 type ResizeClusterOutput struct {
 	_ struct{} `type:"structure"`
 

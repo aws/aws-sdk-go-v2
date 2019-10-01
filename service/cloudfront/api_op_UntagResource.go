@@ -12,7 +12,6 @@ import (
 )
 
 // The request to remove tags from a CloudFront resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UntagResourceRequest
 type UntagResourceInput struct {
 	_ struct{} `type:"structure" payload:"TagKeys"`
 
@@ -68,7 +67,6 @@ func (s UntagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UntagResourceOutput
 type UntagResourceOutput struct {
 	_ struct{} `type:"structure"`
 }

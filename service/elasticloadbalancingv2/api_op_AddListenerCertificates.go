@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AddListenerCertificatesInput
 type AddListenerCertificatesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -48,7 +47,6 @@ func (s *AddListenerCertificatesInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AddListenerCertificatesOutput
 type AddListenerCertificatesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -67,7 +65,7 @@ const opAddListenerCertificates = "AddListenerCertificates"
 // Elastic Load Balancing.
 //
 // Adds the specified SSL server certificate to the certificate list for the
-// specified HTTPS listener.
+// specified HTTPS or TLS listener.
 //
 // If the certificate in already in the certificate list, the call is successful
 // but the certificate is not added again.

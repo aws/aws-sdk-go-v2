@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the inputs for the DisableRadius operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableRadiusRequest
 type DisableRadiusInput struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s *DisableRadiusInput) Validate() error {
 }
 
 // Contains the results of the DisableRadius operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableRadiusResult
 type DisableRadiusOutput struct {
 	_ struct{} `type:"structure"`
 }

@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DescribeApplicationSnapshotRequest
 type DescribeApplicationSnapshotInput struct {
 	_ struct{} `type:"structure"`
 
@@ -53,7 +52,6 @@ func (s *DescribeApplicationSnapshotInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DescribeApplicationSnapshotResponse
 type DescribeApplicationSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 

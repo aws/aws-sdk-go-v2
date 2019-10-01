@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListBonusPaymentsRequest
 type ListBonusPaymentsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s *ListBonusPaymentsInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListBonusPaymentsResponse
 type ListBonusPaymentsOutput struct {
 	_ struct{} `type:"structure"`
 

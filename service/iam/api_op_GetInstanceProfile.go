@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetInstanceProfileRequest
 type GetInstanceProfileInput struct {
 	_ struct{} `type:"structure"`
 
@@ -46,7 +45,6 @@ func (s *GetInstanceProfileInput) Validate() error {
 }
 
 // Contains the response to a successful GetInstanceProfile request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetInstanceProfileResponse
 type GetInstanceProfileOutput struct {
 	_ struct{} `type:"structure"`
 

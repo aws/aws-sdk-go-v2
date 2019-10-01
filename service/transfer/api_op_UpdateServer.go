@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateServerRequest
 type UpdateServerInput struct {
 	_ struct{} `type:"structure"`
 
@@ -32,7 +31,7 @@ type UpdateServerInput struct {
 	//
 	// For more information, see "https://docs.aws.amazon.com/transfer/latest/userguide/configuring-servers.html#change-host-key"
 	// in the AWS SFTP User Guide.
-	HostKey *string `type:"string"`
+	HostKey *string `type:"string" sensitive:"true"`
 
 	// This response parameter is an array containing all of the information required
 	// to call a customer's authentication API method.
@@ -69,7 +68,6 @@ func (s *UpdateServerInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateServerResponse
 type UpdateServerOutput struct {
 	_ struct{} `type:"structure"`
 

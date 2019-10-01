@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupVersionRequest
 type GetGroupVersionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -64,7 +63,6 @@ func (s GetGroupVersionInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a group version.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupVersionResponse
 type GetGroupVersionOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -11,7 +11,6 @@ import (
 )
 
 // Contains the inputs for the CreateComputer operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateComputerRequest
 type CreateComputerInput struct {
 	_ struct{} `type:"structure"`
 
@@ -37,7 +36,7 @@ type CreateComputerInput struct {
 	// should generate a random, strong password to use for this parameter.
 	//
 	// Password is a required field
-	Password *string `min:"8" type:"string" required:"true"`
+	Password *string `min:"8" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -84,7 +83,6 @@ func (s *CreateComputerInput) Validate() error {
 }
 
 // Contains the results for the CreateComputer operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateComputerResult
 type CreateComputerOutput struct {
 	_ struct{} `type:"structure"`
 

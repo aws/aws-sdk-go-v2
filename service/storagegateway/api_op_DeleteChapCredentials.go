@@ -14,7 +14,6 @@ import (
 //    * DeleteChapCredentialsInput$InitiatorName
 //
 //    * DeleteChapCredentialsInput$TargetARN
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteChapCredentialsInput
 type DeleteChapCredentialsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -60,7 +59,6 @@ func (s *DeleteChapCredentialsInput) Validate() error {
 }
 
 // A JSON object containing the following fields:
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteChapCredentialsOutput
 type DeleteChapCredentialsOutput struct {
 	_ struct{} `type:"structure"`
 

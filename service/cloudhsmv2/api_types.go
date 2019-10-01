@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Contains information about a backup of an AWS CloudHSM cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/Backup
 type Backup struct {
 	_ struct{} `type:"structure"`
 
@@ -49,7 +48,6 @@ func (s Backup) String() string {
 }
 
 // Contains one or more certificates or a certificate signing request (CSR).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/Certificates
 type Certificates struct {
 	_ struct{} `type:"structure"`
 
@@ -77,7 +75,6 @@ func (s Certificates) String() string {
 }
 
 // Contains information about an AWS CloudHSM cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/Cluster
 type Cluster struct {
 	_ struct{} `type:"structure"`
 
@@ -128,7 +125,6 @@ func (s Cluster) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DestinationBackup
 type DestinationBackup struct {
 	_ struct{} `type:"structure"`
 
@@ -148,7 +144,6 @@ func (s DestinationBackup) String() string {
 
 // Contains information about a hardware security module (HSM) in an AWS CloudHSM
 // cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/Hsm
 type Hsm struct {
 	_ struct{} `type:"structure"`
 
@@ -185,7 +180,6 @@ func (s Hsm) String() string {
 }
 
 // Contains a tag. A tag is a key-value pair.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for DescribePipelines.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DescribePipelinesInput
 type DescribePipelinesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -41,7 +40,6 @@ func (s *DescribePipelinesInput) Validate() error {
 }
 
 // Contains the output of DescribePipelines.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DescribePipelinesOutput
 type DescribePipelinesOutput struct {
 	_ struct{} `type:"structure"`
 

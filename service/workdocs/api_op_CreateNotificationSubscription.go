@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateNotificationSubscriptionRequest
 type CreateNotificationSubscriptionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -103,7 +102,6 @@ func (s CreateNotificationSubscriptionInput) MarshalFields(e protocol.FieldEncod
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateNotificationSubscriptionResponse
 type CreateNotificationSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
 

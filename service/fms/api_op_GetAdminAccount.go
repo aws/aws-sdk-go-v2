@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetAdminAccountRequest
 type GetAdminAccountInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -19,7 +18,6 @@ func (s GetAdminAccountInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetAdminAccountResponse
 type GetAdminAccountOutput struct {
 	_ struct{} `type:"structure"`
 

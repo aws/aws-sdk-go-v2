@@ -11,7 +11,6 @@ import (
 )
 
 // Request structure to request all available bundles.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ListBundlesRequest
 type ListBundlesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -49,7 +48,6 @@ func (s ListBundlesInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Result structure contains a list of all available bundles with details.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ListBundlesResult
 type ListBundlesOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedUserPoliciesRequest
 type ListAttachedUserPoliciesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -83,7 +82,6 @@ func (s *ListAttachedUserPoliciesInput) Validate() error {
 }
 
 // Contains the response to a successful ListAttachedUserPolicies request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedUserPoliciesResponse
 type ListAttachedUserPoliciesOutput struct {
 	_ struct{} `type:"structure"`
 

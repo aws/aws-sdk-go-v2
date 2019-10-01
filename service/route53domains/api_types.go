@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Information for one billing record.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/BillingRecord
 type BillingRecord struct {
 	_ struct{} `type:"structure"`
 
@@ -46,9 +45,8 @@ func (s BillingRecord) String() string {
 }
 
 // ContactDetail includes the following elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ContactDetail
 type ContactDetail struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" sensitive:"true"`
 
 	// First line of the contact's address.
 	AddressLine1 *string `type:"string"`
@@ -126,7 +124,6 @@ func (s *ContactDetail) Validate() error {
 }
 
 // Information about one suggested domain name.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DomainSuggestion
 type DomainSuggestion struct {
 	_ struct{} `type:"structure"`
 
@@ -188,7 +185,6 @@ func (s DomainSuggestion) String() string {
 }
 
 // Summary information about one domain.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DomainSummary
 type DomainSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -215,7 +211,6 @@ func (s DomainSummary) String() string {
 
 // A complex type that contains information about whether the specified domain
 // can be transferred to Amazon Route 53.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DomainTransferability
 type DomainTransferability struct {
 	_ struct{} `type:"structure"`
 
@@ -245,7 +240,6 @@ func (s DomainTransferability) String() string {
 }
 
 // ExtraParam includes the following elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ExtraParam
 type ExtraParam struct {
 	_ struct{} `type:"structure"`
 
@@ -310,7 +304,6 @@ func (s *ExtraParam) Validate() error {
 }
 
 // Nameserver includes the following elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/Nameserver
 type Nameserver struct {
 	_ struct{} `type:"structure"`
 
@@ -350,7 +343,6 @@ func (s *Nameserver) Validate() error {
 }
 
 // OperationSummary includes the following elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/OperationSummary
 type OperationSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -381,7 +373,6 @@ func (s OperationSummary) String() string {
 }
 
 // Each tag includes the following elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 

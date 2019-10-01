@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DescribeDBParametersMessage
 type DescribeDBParametersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -74,7 +73,6 @@ func (s *DescribeDBParametersInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBParameterGroupDetails
 type DescribeDBParametersOutput struct {
 	_ struct{} `type:"structure"`
 

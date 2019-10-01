@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRolesMessage
 type ModifyClusterIamRolesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -48,7 +47,6 @@ func (s *ModifyClusterIamRolesInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRolesResult
 type ModifyClusterIamRolesOutput struct {
 	_ struct{} `type:"structure"`
 

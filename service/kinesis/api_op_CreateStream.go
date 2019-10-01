@@ -12,7 +12,6 @@ import (
 )
 
 // Represents the input for CreateStream.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/CreateStreamInput
 type CreateStreamInput struct {
 	_ struct{} `type:"structure"`
 
@@ -64,7 +63,6 @@ func (s *CreateStreamInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/CreateStreamOutput
 type CreateStreamOutput struct {
 	_ struct{} `type:"structure"`
 }

@@ -16,7 +16,6 @@ var _ = awsutil.Prettify
 // Describes scaling activity, which is a long-running process that represents
 // a change to your Auto Scaling group, such as changing its size or replacing
 // an instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/Activity
 type Activity struct {
 	_ struct{} `type:"structure"`
 
@@ -67,7 +66,6 @@ func (s Activity) String() string {
 }
 
 // Describes a policy adjustment type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AdjustmentType
 type AdjustmentType struct {
 	_ struct{} `type:"structure"`
 
@@ -82,7 +80,6 @@ func (s AdjustmentType) String() string {
 }
 
 // Describes an alarm.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/Alarm
 type Alarm struct {
 	_ struct{} `type:"structure"`
 
@@ -99,7 +96,6 @@ func (s Alarm) String() string {
 }
 
 // Describes an Auto Scaling group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AutoScalingGroup
 type AutoScalingGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -208,7 +204,6 @@ func (s AutoScalingGroup) String() string {
 }
 
 // Describes an EC2 instance associated with an Auto Scaling group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AutoScalingInstanceDetails
 type AutoScalingInstanceDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -260,7 +255,6 @@ func (s AutoScalingInstanceDetails) String() string {
 }
 
 // Describes a block device mapping.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/BlockDeviceMapping
 type BlockDeviceMapping struct {
 	_ struct{} `type:"structure"`
 
@@ -332,7 +326,6 @@ func (s *BlockDeviceMapping) Validate() error {
 //    when capacity increases.
 //
 // For more information about CloudWatch, see Amazon CloudWatch Concepts (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CustomizedMetricSpecification
 type CustomizedMetricSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -395,7 +388,6 @@ func (s *CustomizedMetricSpecification) Validate() error {
 }
 
 // Describes an Amazon EBS volume. Used in combination with BlockDeviceMapping.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/Ebs
 type Ebs struct {
 	_ struct{} `type:"structure"`
 
@@ -493,7 +485,6 @@ func (s *Ebs) Validate() error {
 }
 
 // Describes an enabled metric.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/EnabledMetric
 type EnabledMetric struct {
 	_ struct{} `type:"structure"`
 
@@ -526,7 +517,6 @@ func (s EnabledMetric) String() string {
 }
 
 // Describes a scheduled action that could not be created, updated, or deleted.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/FailedScheduledUpdateGroupActionRequest
 type FailedScheduledUpdateGroupActionRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -548,7 +538,6 @@ func (s FailedScheduledUpdateGroupActionRequest) String() string {
 }
 
 // Describes a filter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/Filter
 type Filter struct {
 	_ struct{} `type:"structure"`
 
@@ -566,7 +555,6 @@ func (s Filter) String() string {
 }
 
 // Describes an EC2 instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/Instance
 type Instance struct {
 	_ struct{} `type:"structure"`
 
@@ -613,7 +601,6 @@ func (s Instance) String() string {
 }
 
 // Describes whether detailed monitoring is enabled for the Auto Scaling instances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InstanceMonitoring
 type InstanceMonitoring struct {
 	_ struct{} `type:"structure"`
 
@@ -632,7 +619,6 @@ func (s InstanceMonitoring) String() string {
 // and Spot Instances, the maximum price to pay for Spot Instances, and how
 // the Auto Scaling group allocates instance types to fulfill On-Demand and
 // Spot capacity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InstancesDistribution
 type InstancesDistribution struct {
 	_ struct{} `type:"structure"`
 
@@ -700,7 +686,6 @@ func (s InstancesDistribution) String() string {
 }
 
 // Describes a launch configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchConfiguration
 type LaunchConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -840,7 +825,6 @@ func (s LaunchConfiguration) String() string {
 // The overrides are used to override the instance type specified by the launch
 // template with multiple instance types that can be used to launch On-Demand
 // Instances and Spot Instances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchTemplate
 type LaunchTemplate struct {
 	_ struct{} `type:"structure"`
 
@@ -882,7 +866,6 @@ func (s *LaunchTemplate) Validate() error {
 }
 
 // Describes an override for a launch template.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchTemplateOverrides
 type LaunchTemplateOverrides struct {
 	_ struct{} `type:"structure"`
 
@@ -918,7 +901,6 @@ func (s *LaunchTemplateOverrides) Validate() error {
 // Auto Scaling group. For more information, see Creating a Launch Template
 // for an Auto Scaling Group (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html)
 // in the Amazon EC2 Auto Scaling User Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchTemplateSpecification
 type LaunchTemplateSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -965,7 +947,6 @@ func (s *LaunchTemplateSpecification) Validate() error {
 // Describes a lifecycle hook, which tells Amazon EC2 Auto Scaling that you
 // want to perform an action whenever it launches instances or terminates instances.
 // Used in response to DescribeLifecycleHooks.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LifecycleHook
 type LifecycleHook struct {
 	_ struct{} `type:"structure"`
 
@@ -1050,7 +1031,6 @@ func (s LifecycleHook) String() string {
 // You can modify an existing lifecycle hook or create new lifecycle hooks using
 // PutLifecycleHook. If you are no longer using a lifecycle hook, you can delete
 // it using DeleteLifecycleHook.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LifecycleHookSpecification
 type LifecycleHookSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -1141,7 +1121,6 @@ func (s *LifecycleHookSpecification) Validate() error {
 // after at least one instance in the group passes the health check. If EC2
 // health checks are enabled instead, the load balancer remains in the Added
 // state.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LoadBalancerState
 type LoadBalancerState struct {
 	_ struct{} `type:"structure"`
 
@@ -1180,7 +1159,6 @@ func (s LoadBalancerState) String() string {
 // are enabled, the state transitions to InService after at least one Auto Scaling
 // instance passes the health check. If EC2 health checks are enabled instead,
 // the target group remains in the Added state.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LoadBalancerTargetGroupState
 type LoadBalancerTargetGroupState struct {
 	_ struct{} `type:"structure"`
 
@@ -1212,7 +1190,6 @@ func (s LoadBalancerTargetGroupState) String() string {
 }
 
 // Describes a metric.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/MetricCollectionType
 type MetricCollectionType struct {
 	_ struct{} `type:"structure"`
 
@@ -1242,7 +1219,6 @@ func (s MetricCollectionType) String() string {
 }
 
 // Describes the dimension of a metric.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/MetricDimension
 type MetricDimension struct {
 	_ struct{} `type:"structure"`
 
@@ -1281,7 +1257,6 @@ func (s *MetricDimension) Validate() error {
 }
 
 // Describes a granularity of a metric.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/MetricGranularityType
 type MetricGranularityType struct {
 	_ struct{} `type:"structure"`
 
@@ -1305,7 +1280,6 @@ func (s MetricGranularityType) String() string {
 // you can create it for an existing group by updating the group to specify
 // MixedInstancesPolicy as the top-level parameter instead of a launch configuration
 // or template. For more information, see CreateAutoScalingGroup and UpdateAutoScalingGroup.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/MixedInstancesPolicy
 type MixedInstancesPolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -1342,7 +1316,6 @@ func (s *MixedInstancesPolicy) Validate() error {
 }
 
 // Describes a notification.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/NotificationConfiguration
 type NotificationConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1374,7 +1347,6 @@ func (s NotificationConfiguration) String() string {
 
 // Represents a predefined metric for a target tracking scaling policy to use
 // with Amazon EC2 Auto Scaling.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PredefinedMetricSpecification
 type PredefinedMetricSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -1435,7 +1407,6 @@ func (s *PredefinedMetricSpecification) Validate() error {
 //
 // For more information, see Scaling Processes (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html#process-types)
 // in the Amazon EC2 Auto Scaling User Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ProcessType
 type ProcessType struct {
 	_ struct{} `type:"structure"`
 
@@ -1467,7 +1438,6 @@ func (s ProcessType) String() string {
 }
 
 // Describes a scaling policy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ScalingPolicy
 type ScalingPolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -1530,7 +1500,6 @@ func (s ScalingPolicy) String() string {
 }
 
 // Describes a scheduled scaling action. Used in response to DescribeScheduledActions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ScheduledUpdateGroupAction
 type ScheduledUpdateGroupAction struct {
 	_ struct{} `type:"structure"`
 
@@ -1579,7 +1548,6 @@ func (s ScheduledUpdateGroupAction) String() string {
 //
 // When updating a scheduled scaling action, all optional parameters are left
 // unchanged if not specified.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ScheduledUpdateGroupActionRequest
 type ScheduledUpdateGroupActionRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -1675,7 +1643,6 @@ func (s *ScheduledUpdateGroupActionRequest) Validate() error {
 //    with a null upper bound.
 //
 //    * The upper and lower bound can't be null in the same step adjustment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/StepAdjustment
 type StepAdjustment struct {
 	_ struct{} `type:"structure"`
 
@@ -1725,7 +1692,6 @@ func (s *StepAdjustment) Validate() error {
 
 // Describes an automatic scaling process that has been suspended. For more
 // information, see ProcessType.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SuspendedProcess
 type SuspendedProcess struct {
 	_ struct{} `type:"structure"`
 
@@ -1742,7 +1708,6 @@ func (s SuspendedProcess) String() string {
 }
 
 // Describes a tag for an Auto Scaling group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -1788,7 +1753,6 @@ func (s *Tag) Validate() error {
 }
 
 // Describes a tag for an Auto Scaling group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/TagDescription
 type TagDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -1816,7 +1780,6 @@ func (s TagDescription) String() string {
 
 // Represents a target tracking scaling policy configuration to use with Amazon
 // EC2 Auto Scaling.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/TargetTrackingConfiguration
 type TargetTrackingConfiguration struct {
 	_ struct{} `type:"structure"`
 

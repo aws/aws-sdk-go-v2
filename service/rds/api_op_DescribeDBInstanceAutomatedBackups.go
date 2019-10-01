@@ -11,7 +11,6 @@ import (
 )
 
 // Parameter input for DescribeDBInstanceAutomatedBackups.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstanceAutomatedBackupsMessage
 type DescribeDBInstanceAutomatedBackupsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -79,7 +78,6 @@ func (s *DescribeDBInstanceAutomatedBackupsInput) Validate() error {
 
 // Contains the result of a successful invocation of the DescribeDBInstanceAutomatedBackups
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceAutomatedBackupMessage
 type DescribeDBInstanceAutomatedBackupsOutput struct {
 	_ struct{} `type:"structure"`
 

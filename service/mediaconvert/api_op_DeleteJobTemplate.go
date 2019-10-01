@@ -11,7 +11,6 @@ import (
 )
 
 // Delete a job template by sending a request with the job template name
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DeleteJobTemplateRequest
 type DeleteJobTemplateInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s DeleteJobTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
 
 // Delete job template requests will return an OK message or error message with
 // an empty body.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DeleteJobTemplateResponse
 type DeleteJobTemplateOutput struct {
 	_ struct{} `type:"structure"`
 }

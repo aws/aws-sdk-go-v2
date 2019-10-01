@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccessKeyLastUsedRequest
 type GetAccessKeyLastUsedInput struct {
 	_ struct{} `type:"structure"`
 
@@ -48,7 +47,6 @@ func (s *GetAccessKeyLastUsedInput) Validate() error {
 // Contains the response to a successful GetAccessKeyLastUsed request. It is
 // also returned as a member of the AccessKeyMetaData structure returned by
 // the ListAccessKeys action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccessKeyLastUsedResponse
 type GetAccessKeyLastUsedOutput struct {
 	_ struct{} `type:"structure"`
 

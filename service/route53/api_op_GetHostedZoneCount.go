@@ -12,7 +12,6 @@ import (
 
 // A request to retrieve a count of all the hosted zones that are associated
 // with the current AWS account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZoneCountRequest
 type GetHostedZoneCountInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -29,7 +28,6 @@ func (s GetHostedZoneCountInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains the response to a GetHostedZoneCount request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZoneCountResponse
 type GetHostedZoneCountOutput struct {
 	_ struct{} `type:"structure"`
 

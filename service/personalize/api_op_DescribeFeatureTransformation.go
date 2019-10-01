@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeFeatureTransformationRequest
 type DescribeFeatureTransformationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -38,7 +37,6 @@ func (s *DescribeFeatureTransformationInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeFeatureTransformationResponse
 type DescribeFeatureTransformationOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 )
 
 // Represents a request to update the tracking options for a configuration set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateConfigurationSetTrackingOptionsRequest
 type UpdateConfigurationSetTrackingOptionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s *UpdateConfigurationSetTrackingOptionsInput) Validate() error {
 }
 
 // An empty element returned on a successful request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateConfigurationSetTrackingOptionsResponse
 type UpdateConfigurationSetTrackingOptionsOutput struct {
 	_ struct{} `type:"structure"`
 }

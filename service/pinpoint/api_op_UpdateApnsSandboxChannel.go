@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsSandboxChannelRequest
 type UpdateApnsSandboxChannelInput struct {
 	_ struct{} `type:"structure" payload:"APNSSandboxChannelRequest"`
 
@@ -66,7 +65,6 @@ func (s UpdateApnsSandboxChannelInput) MarshalFields(e protocol.FieldEncoder) er
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsSandboxChannelResponse
 type UpdateApnsSandboxChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSSandboxChannelResponse"`
 

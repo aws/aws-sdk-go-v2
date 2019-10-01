@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // A Channel resource configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/Channel
 type Channel struct {
 	_ struct{} `type:"structure"`
 
@@ -81,7 +80,6 @@ func (s Channel) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A Common Media Application Format (CMAF) encryption configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/CmafEncryption
 type CmafEncryption struct {
 	_ struct{} `type:"structure"`
 
@@ -137,7 +135,6 @@ func (s CmafEncryption) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A Common Media Application Format (CMAF) packaging configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/CmafPackage
 type CmafPackage struct {
 	_ struct{} `type:"structure"`
 
@@ -206,7 +203,6 @@ func (s CmafPackage) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A Common Media Application Format (CMAF) packaging configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/CmafPackageCreateOrUpdateParameters
 type CmafPackageCreateOrUpdateParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -297,7 +293,6 @@ func (s CmafPackageCreateOrUpdateParameters) MarshalFields(e protocol.FieldEncod
 }
 
 // A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/DashEncryption
 type DashEncryption struct {
 	_ struct{} `type:"structure"`
 
@@ -353,7 +348,6 @@ func (s DashEncryption) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/DashPackage
 type DashPackage struct {
 	_ struct{} `type:"structure"`
 
@@ -540,7 +534,6 @@ func (s DashPackage) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An HTTP Live Streaming (HLS) encryption configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/HlsEncryption
 type HlsEncryption struct {
 	_ struct{} `type:"structure"`
 
@@ -624,7 +617,6 @@ func (s HlsEncryption) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An HTTP Live Streaming (HLS) ingest resource configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/HlsIngest
 type HlsIngest struct {
 	_ struct{} `type:"structure"`
 
@@ -655,7 +647,6 @@ func (s HlsIngest) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A HTTP Live Streaming (HLS) manifest configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/HlsManifest
 type HlsManifest struct {
 	_ struct{} `type:"structure"`
 
@@ -760,7 +751,6 @@ func (s HlsManifest) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A HTTP Live Streaming (HLS) manifest configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/HlsManifestCreateOrUpdateParameters
 type HlsManifestCreateOrUpdateParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -905,7 +895,6 @@ func (s HlsManifestCreateOrUpdateParameters) MarshalFields(e protocol.FieldEncod
 }
 
 // An HTTP Live Streaming (HLS) packaging configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/HlsPackage
 type HlsPackage struct {
 	_ struct{} `type:"structure"`
 
@@ -1066,7 +1055,6 @@ func (s HlsPackage) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An endpoint for ingesting source content for a Channel.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/IngestEndpoint
 type IngestEndpoint struct {
 	_ struct{} `type:"structure"`
 
@@ -1118,7 +1106,6 @@ func (s IngestEndpoint) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A Microsoft Smooth Streaming (MSS) encryption configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/MssEncryption
 type MssEncryption struct {
 	_ struct{} `type:"structure"`
 
@@ -1165,7 +1152,6 @@ func (s MssEncryption) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A Microsoft Smooth Streaming (MSS) packaging configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/MssPackage
 type MssPackage struct {
 	_ struct{} `type:"structure"`
 
@@ -1232,7 +1218,6 @@ func (s MssPackage) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An OriginEndpoint resource configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/OriginEndpoint
 type OriginEndpoint struct {
 	_ struct{} `type:"structure"`
 
@@ -1389,7 +1374,6 @@ func (s OriginEndpoint) MarshalFields(e protocol.FieldEncoder) error {
 
 // A configuration for accessing an external Secure Packager and Encoder Key
 // Exchange (SPEKE) service that will provide encryption keys.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/SpekeKeyProvider
 type SpekeKeyProvider struct {
 	_ struct{} `type:"structure"`
 
@@ -1493,7 +1477,6 @@ func (s SpekeKeyProvider) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A StreamSelection configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/StreamSelection
 type StreamSelection struct {
 	_ struct{} `type:"structure"`
 

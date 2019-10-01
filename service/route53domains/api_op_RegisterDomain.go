@@ -10,14 +10,13 @@ import (
 )
 
 // The RegisterDomain request includes the following elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RegisterDomainRequest
 type RegisterDomainInput struct {
 	_ struct{} `type:"structure"`
 
 	// Provides detailed contact information.
 	//
 	// AdminContact is a required field
-	AdminContact *ContactDetail `type:"structure" required:"true"`
+	AdminContact *ContactDetail `type:"structure" required:"true" sensitive:"true"`
 
 	// Indicates whether the domain will be automatically renewed (true) or not
 	// (false). Autorenewal only takes effect after the account is charged.
@@ -79,12 +78,12 @@ type RegisterDomainInput struct {
 	// Provides detailed contact information.
 	//
 	// RegistrantContact is a required field
-	RegistrantContact *ContactDetail `type:"structure" required:"true"`
+	RegistrantContact *ContactDetail `type:"structure" required:"true" sensitive:"true"`
 
 	// Provides detailed contact information.
 	//
 	// TechContact is a required field
-	TechContact *ContactDetail `type:"structure" required:"true"`
+	TechContact *ContactDetail `type:"structure" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -141,7 +140,6 @@ func (s *RegisterDomainInput) Validate() error {
 }
 
 // The RegisterDomain response includes the following element.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RegisterDomainResponse
 type RegisterDomainOutput struct {
 	_ struct{} `type:"structure"`
 

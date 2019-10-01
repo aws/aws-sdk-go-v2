@@ -10,14 +10,13 @@ import (
 )
 
 // Represents the request to list the devices.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListDevicesRequest
 type ListDevicesInput struct {
 	_ struct{} `type:"structure"`
 
 	// The access tokens for the request to list devices.
 	//
 	// AccessToken is a required field
-	AccessToken *string `type:"string" required:"true"`
+	AccessToken *string `type:"string" required:"true" sensitive:"true"`
 
 	// The limit of the device request.
 	Limit *int64 `type:"integer"`
@@ -49,7 +48,6 @@ func (s *ListDevicesInput) Validate() error {
 }
 
 // Represents the response to list devices.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListDevicesResponse
 type ListDevicesOutput struct {
 	_ struct{} `type:"structure"`
 

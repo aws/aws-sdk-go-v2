@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DiscoverInstancesRequest
 type DiscoverInstancesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -65,7 +64,6 @@ func (s *DiscoverInstancesInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DiscoverInstancesResponse
 type DiscoverInstancesOutput struct {
 	_ struct{} `type:"structure"`
 

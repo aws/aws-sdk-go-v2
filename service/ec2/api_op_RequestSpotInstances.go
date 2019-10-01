@@ -11,7 +11,6 @@ import (
 )
 
 // Contains the parameters for RequestSpotInstances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotInstancesRequest
 type RequestSpotInstancesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -122,7 +121,6 @@ func (s *RequestSpotInstancesInput) Validate() error {
 }
 
 // Contains the output of RequestSpotInstances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotInstancesResult
 type RequestSpotInstancesOutput struct {
 	_ struct{} `type:"structure"`
 

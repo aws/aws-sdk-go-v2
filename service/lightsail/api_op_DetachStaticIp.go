@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DetachStaticIpRequest
 type DetachStaticIpInput struct {
 	_ struct{} `type:"structure"`
 
@@ -38,7 +37,6 @@ func (s *DetachStaticIpInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DetachStaticIpResult
 type DetachStaticIpOutput struct {
 	_ struct{} `type:"structure"`
 

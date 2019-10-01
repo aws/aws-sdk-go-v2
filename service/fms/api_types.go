@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Details of the resource that is not protected by the policy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ComplianceViolator
 type ComplianceViolator struct {
 	_ struct{} `type:"structure"`
 
@@ -38,7 +37,6 @@ func (s ComplianceViolator) String() string {
 // Describes the compliance status for the account. An account is considered
 // non-compliant if it includes resources that are not protected by the specified
 // policy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/EvaluationResult
 type EvaluationResult struct {
 	_ struct{} `type:"structure"`
 
@@ -60,7 +58,6 @@ func (s EvaluationResult) String() string {
 }
 
 // An AWS Firewall Manager policy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/Policy
 type Policy struct {
 	_ struct{} `type:"structure"`
 
@@ -190,7 +187,6 @@ func (s *Policy) Validate() error {
 // Describes the non-compliant resources in a member account for a specific
 // AWS Firewall Manager policy. A maximum of 100 entries are displayed. If more
 // than 100 resources are non-compliant, EvaluationLimitExceeded is set to True.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PolicyComplianceDetail
 type PolicyComplianceDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -229,7 +225,6 @@ func (s PolicyComplianceDetail) String() string {
 // Indicates whether the account is compliant with the specified policy. An
 // account is considered non-compliant if it includes resources that are not
 // protected by the policy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PolicyComplianceStatus
 type PolicyComplianceStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -264,7 +259,6 @@ func (s PolicyComplianceStatus) String() string {
 }
 
 // Details of the AWS Firewall Manager policy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PolicySummary
 type PolicySummary struct {
 	_ struct{} `type:"structure"`
 
@@ -304,7 +298,6 @@ func (s PolicySummary) String() string {
 // with an "OR." That is, if you add more than one tag, if any of the tags matches,
 // the resource is considered a match for the include or exclude. Working with
 // Tag Editor (https://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/tag-editor.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ResourceTag
 type ResourceTag struct {
 	_ struct{} `type:"structure"`
 
@@ -340,7 +333,6 @@ func (s *ResourceTag) Validate() error {
 }
 
 // Details about the security service that is being used to protect the resources.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/SecurityServicePolicyData
 type SecurityServicePolicyData struct {
 	_ struct{} `type:"structure"`
 

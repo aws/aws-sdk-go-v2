@@ -11,7 +11,6 @@ import (
 )
 
 // Represents the request to get the specified user as an administrator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminGetUserRequest
 type AdminGetUserInput struct {
 	_ struct{} `type:"structure"`
 
@@ -24,7 +23,7 @@ type AdminGetUserInput struct {
 	// The user name of the user you wish to retrieve.
 	//
 	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true"`
+	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -58,7 +57,6 @@ func (s *AdminGetUserInput) Validate() error {
 
 // Represents the response from the server from the request to get the specified
 // user as an administrator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminGetUserResponse
 type AdminGetUserOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -106,7 +104,7 @@ type AdminGetUserOutput struct {
 	// The user name of the user about whom you are receiving information.
 	//
 	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true"`
+	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation

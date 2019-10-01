@@ -12,7 +12,6 @@ import (
 
 // A request to obtain information about the event destinations for a configuration
 // set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetConfigurationSetEventDestinationsRequest
 type GetConfigurationSetEventDestinationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s GetConfigurationSetEventDestinationsInput) MarshalFields(e protocol.Fiel
 }
 
 // Information about an event destination for a configuration set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetConfigurationSetEventDestinationsResponse
 type GetConfigurationSetEventDestinationsOutput struct {
 	_ struct{} `type:"structure"`
 

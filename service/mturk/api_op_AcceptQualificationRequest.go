@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/AcceptQualificationRequestRequest
 type AcceptQualificationRequestInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *AcceptQualificationRequestInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/AcceptQualificationRequestResponse
 type AcceptQualificationRequestOutput struct {
 	_ struct{} `type:"structure"`
 }

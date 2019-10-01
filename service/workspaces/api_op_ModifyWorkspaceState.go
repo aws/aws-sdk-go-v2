@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspaceStateRequest
 type ModifyWorkspaceStateInput struct {
 	_ struct{} `type:"structure"`
 
@@ -46,7 +45,6 @@ func (s *ModifyWorkspaceStateInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspaceStateResult
 type ModifyWorkspaceStateOutput struct {
 	_ struct{} `type:"structure"`
 }

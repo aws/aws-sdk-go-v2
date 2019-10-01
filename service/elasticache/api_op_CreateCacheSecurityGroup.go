@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a CreateCacheSecurityGroup operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheSecurityGroupMessage
 type CreateCacheSecurityGroupInput struct {
 	_ struct{} `type:"structure"`
 
@@ -54,7 +53,6 @@ func (s *CreateCacheSecurityGroupInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheSecurityGroupResult
 type CreateCacheSecurityGroupOutput struct {
 	_ struct{} `type:"structure"`
 

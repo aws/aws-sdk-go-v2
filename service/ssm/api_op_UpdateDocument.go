@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateDocumentRequest
 type UpdateDocumentInput struct {
 	_ struct{} `type:"structure"`
 
@@ -27,7 +26,7 @@ type UpdateDocumentInput struct {
 	// supports JSON and YAML documents. JSON is the default format.
 	DocumentFormat DocumentFormat `type:"string" enum:"true"`
 
-	// The version of the document that you want to update.
+	// (Required) The version of the document that you want to update.
 	DocumentVersion *string `type:"string"`
 
 	// The name of the document that you want to update.
@@ -77,7 +76,6 @@ func (s *UpdateDocumentInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateDocumentResult
 type UpdateDocumentOutput struct {
 	_ struct{} `type:"structure"`
 

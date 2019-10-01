@@ -16,7 +16,6 @@ import (
 // For more information, see Restricting Access to Amazon S3 Content by Using
 // an Origin Access Identity (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateCloudFrontOriginAccessIdentityRequest
 type CreateCloudFrontOriginAccessIdentityInput struct {
 	_ struct{} `type:"structure" payload:"CloudFrontOriginAccessIdentityConfig"`
 
@@ -63,7 +62,6 @@ func (s CreateCloudFrontOriginAccessIdentityInput) MarshalFields(e protocol.Fiel
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateCloudFrontOriginAccessIdentityResult
 type CreateCloudFrontOriginAccessIdentityOutput struct {
 	_ struct{} `type:"structure" payload:"CloudFrontOriginAccessIdentity"`
 

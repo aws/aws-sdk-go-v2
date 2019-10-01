@@ -11,7 +11,6 @@ import (
 )
 
 // Contains the parameters for AddTags.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/AddTagsInput
 type AddTagsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -60,7 +59,6 @@ func (s *AddTagsInput) Validate() error {
 }
 
 // Contains the output of AddTags.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/AddTagsOutput
 type AddTagsOutput struct {
 	_ struct{} `type:"structure"`
 }

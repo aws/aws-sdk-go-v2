@@ -11,7 +11,6 @@ import (
 )
 
 // Represents the request to set user settings as an administrator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminSetUserSettingsRequest
 type AdminSetUserSettingsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -29,7 +28,7 @@ type AdminSetUserSettingsInput struct {
 	// The user name of the user for whom you wish to set user settings.
 	//
 	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true"`
+	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -73,7 +72,6 @@ func (s *AdminSetUserSettingsInput) Validate() error {
 }
 
 // Represents the response from the server to set user settings as an administrator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminSetUserSettingsResponse
 type AdminSetUserSettingsOutput struct {
 	_ struct{} `type:"structure"`
 }

@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input for a request action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteMatchmakingRuleSetInput
 type DeleteMatchmakingRuleSetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -41,7 +40,6 @@ func (s *DeleteMatchmakingRuleSetInput) Validate() error {
 }
 
 // Represents the returned data in response to a request action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteMatchmakingRuleSetOutput
 type DeleteMatchmakingRuleSetOutput struct {
 	_ struct{} `type:"structure"`
 }

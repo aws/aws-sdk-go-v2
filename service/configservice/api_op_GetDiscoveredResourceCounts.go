@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetDiscoveredResourceCountsRequest
 type GetDiscoveredResourceCountsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s GetDiscoveredResourceCountsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetDiscoveredResourceCountsResponse
 type GetDiscoveredResourceCountsOutput struct {
 	_ struct{} `type:"structure"`
 

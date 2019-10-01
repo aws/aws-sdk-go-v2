@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ReceiveMessageRequest
 type ReceiveMessageInput struct {
 	_ struct{} `type:"structure"`
 
@@ -24,6 +23,8 @@ type ReceiveMessageInput struct {
 	//
 	//    * ApproximateReceiveCount - Returns the number of times a message has
 	//    been received from the queue but not deleted.
+	//
+	//    * AWSTraceHeader - Returns the AWS X-Ray trace header string.
 	//
 	//    * SenderId For an IAM user, returns the IAM user ID, for example ABCDEFGHI1JKLMNOPQ23R.
 	//    For an IAM role, returns the IAM role ID, for example ABCDE1F2GH3I4JK5LMNOP:i-a123b456.
@@ -158,7 +159,6 @@ func (s *ReceiveMessageInput) Validate() error {
 }
 
 // A list of received messages.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ReceiveMessageResult
 type ReceiveMessageOutput struct {
 	_ struct{} `type:"structure"`
 

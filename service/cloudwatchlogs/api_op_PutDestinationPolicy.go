@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDestinationPolicyRequest
 type PutDestinationPolicyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s *PutDestinationPolicyInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDestinationPolicyOutput
 type PutDestinationPolicyOutput struct {
 	_ struct{} `type:"structure"`
 }

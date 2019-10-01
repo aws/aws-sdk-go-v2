@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ExportCertificateRequest
 type ExportCertificateInput struct {
 	_ struct{} `type:"structure"`
 
@@ -30,7 +29,7 @@ type ExportCertificateInput struct {
 	// Passphrase is automatically base64 encoded/decoded by the SDK.
 	//
 	// Passphrase is a required field
-	Passphrase []byte `min:"4" type:"blob" required:"true"`
+	Passphrase []byte `min:"4" type:"blob" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -62,7 +61,6 @@ func (s *ExportCertificateInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ExportCertificateResponse
 type ExportCertificateOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -75,7 +73,7 @@ type ExportCertificateOutput struct {
 
 	// The encrypted private key associated with the public key in the certificate.
 	// The key is output in PKCS #8 format and is base64 PEM-encoded.
-	PrivateKey *string `min:"1" type:"string"`
+	PrivateKey *string `min:"1" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation

@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a BatchGetDeploymentGroups operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentGroupsInput
 type BatchGetDeploymentGroupsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -53,7 +52,6 @@ func (s *BatchGetDeploymentGroupsInput) Validate() error {
 }
 
 // Represents the output of a BatchGetDeploymentGroups operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentGroupsOutput
 type BatchGetDeploymentGroupsOutput struct {
 	_ struct{} `type:"structure"`
 

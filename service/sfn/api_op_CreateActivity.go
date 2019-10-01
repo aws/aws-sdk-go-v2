@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateActivityInput
 type CreateActivityInput struct {
 	_ struct{} `type:"structure"`
 
@@ -22,7 +21,7 @@ type CreateActivityInput struct {
 	//
 	// A name must not contain:
 	//
-	//    * whitespace
+	//    * white space
 	//
 	//    * brackets < > { } [ ]
 	//
@@ -36,6 +35,14 @@ type CreateActivityInput struct {
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 
 	// The list of tags to add to a resource.
+	//
+	// An array of key-value pairs. For more information, see Using Cost Allocation
+	// Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
+	// in the AWS Billing and Cost Management User Guide, and Controlling Access
+	// Using IAM Tags (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html).
+	//
+	// Tags may only contain Unicode letters, digits, white space, or these symbols:
+	// _ . : / = + - @.
 	Tags []Tag `locationName:"tags" type:"list"`
 }
 
@@ -68,7 +75,6 @@ func (s *CreateActivityInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateActivityOutput
 type CreateActivityOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -102,6 +108,13 @@ const opCreateActivity = "CreateActivity"
 //
 // This operation is eventually consistent. The results are best effort and
 // may not reflect very recent updates and changes.
+//
+// CreateActivity is an idempotent API. Subsequent requests won’t create a
+// duplicate resource if it was already created. CreateActivity's idempotency
+// check is based on the activity name. If a following request has different
+// tags values, Step Functions will ignore these differences and treat it as
+// an idempotent request of the previous. In this case, tags will not be updated,
+// even if they are different.
 //
 //    // Example sending a request using CreateActivityRequest.
 //    req := client.CreateActivityRequest(params)

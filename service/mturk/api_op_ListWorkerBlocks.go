@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListWorkerBlocksRequest
 type ListWorkerBlocksInput struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s *ListWorkerBlocksInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListWorkerBlocksResponse
 type ListWorkerBlocksOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeServiceUpdatesMessage
 type DescribeServiceUpdatesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -33,7 +32,6 @@ func (s DescribeServiceUpdatesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ServiceUpdatesMessage
 type DescribeServiceUpdatesOutput struct {
 	_ struct{} `type:"structure"`
 

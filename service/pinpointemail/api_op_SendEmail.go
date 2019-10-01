@@ -12,7 +12,6 @@ import (
 )
 
 // A request to send an email message.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/SendEmailRequest
 type SendEmailInput struct {
 	_ struct{} `type:"structure"`
 
@@ -146,7 +145,6 @@ func (s SendEmailInput) MarshalFields(e protocol.FieldEncoder) error {
 
 // A unique message ID that you receive when Amazon Pinpoint accepts an email
 // for sending.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/SendEmailResponse
 type SendEmailOutput struct {
 	_ struct{} `type:"structure"`
 

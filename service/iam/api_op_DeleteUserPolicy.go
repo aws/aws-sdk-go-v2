@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteUserPolicyRequest
 type DeleteUserPolicyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -64,7 +63,6 @@ func (s *DeleteUserPolicyInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteUserPolicyOutput
 type DeleteUserPolicyOutput struct {
 	_ struct{} `type:"structure"`
 }

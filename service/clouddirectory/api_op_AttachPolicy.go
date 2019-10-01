@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttachPolicyRequest
 type AttachPolicyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -83,7 +82,6 @@ func (s AttachPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttachPolicyResponse
 type AttachPolicyOutput struct {
 	_ struct{} `type:"structure"`
 }

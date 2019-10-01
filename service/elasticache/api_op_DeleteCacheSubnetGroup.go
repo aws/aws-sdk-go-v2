@@ -12,7 +12,6 @@ import (
 )
 
 // Represents the input of a DeleteCacheSubnetGroup operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheSubnetGroupMessage
 type DeleteCacheSubnetGroupInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *DeleteCacheSubnetGroupInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheSubnetGroupOutput
 type DeleteCacheSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
 }

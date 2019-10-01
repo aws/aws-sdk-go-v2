@@ -11,7 +11,6 @@ import (
 )
 
 // Represents the input of a Query operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/QueryInput
 type QueryInput struct {
 	_ struct{} `type:"structure"`
 
@@ -348,7 +347,6 @@ func (s *QueryInput) Validate() error {
 }
 
 // Represents the output of a Query operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/QueryOutput
 type QueryOutput struct {
 	_ struct{} `type:"structure"`
 

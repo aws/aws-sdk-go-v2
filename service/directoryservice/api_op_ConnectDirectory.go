@@ -11,7 +11,6 @@ import (
 )
 
 // Contains the inputs for the ConnectDirectory operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ConnectDirectoryRequest
 type ConnectDirectoryInput struct {
 	_ struct{} `type:"structure"`
 
@@ -32,7 +31,7 @@ type ConnectDirectoryInput struct {
 	// The password for the on-premises user account.
 	//
 	// Password is a required field
-	Password *string `min:"1" type:"string" required:"true"`
+	Password *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The NetBIOS name of the on-premises directory, such as CORP.
 	ShortName *string `type:"string"`
@@ -92,7 +91,6 @@ func (s *ConnectDirectoryInput) Validate() error {
 }
 
 // Contains the results of the ConnectDirectory operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ConnectDirectoryResult
 type ConnectDirectoryOutput struct {
 	_ struct{} `type:"structure"`
 

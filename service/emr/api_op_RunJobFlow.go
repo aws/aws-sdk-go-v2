@@ -11,7 +11,6 @@ import (
 )
 
 // Input to the RunJobFlow operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RunJobFlowInput
 type RunJobFlowInput struct {
 	_ struct{} `type:"structure"`
 
@@ -228,7 +227,6 @@ func (s *RunJobFlowInput) Validate() error {
 }
 
 // The result of the RunJobFlow operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RunJobFlowOutput
 type RunJobFlowOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateLoginProfileRequest
 type CreateLoginProfileInput struct {
 	_ struct{} `type:"structure"`
 
@@ -25,7 +24,7 @@ type CreateLoginProfileInput struct {
 	// because they have special meaning within that tool.
 	//
 	// Password is a required field
-	Password *string `min:"1" type:"string" required:"true"`
+	Password *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// Specifies whether the user is required to set a new password on next sign-in.
 	PasswordResetRequired *bool `type:"boolean"`
@@ -71,7 +70,6 @@ func (s *CreateLoginProfileInput) Validate() error {
 }
 
 // Contains the response to a successful CreateLoginProfile request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateLoginProfileResponse
 type CreateLoginProfileOutput struct {
 	_ struct{} `type:"structure"`
 

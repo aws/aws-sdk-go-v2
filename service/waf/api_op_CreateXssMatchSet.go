@@ -10,7 +10,6 @@ import (
 )
 
 // A request to create an XssMatchSet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateXssMatchSetRequest
 type CreateXssMatchSetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s *CreateXssMatchSetInput) Validate() error {
 }
 
 // The response to a CreateXssMatchSet request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateXssMatchSetResponse
 type CreateXssMatchSetOutput struct {
 	_ struct{} `type:"structure"`
 

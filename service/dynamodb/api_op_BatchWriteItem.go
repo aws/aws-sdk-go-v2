@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a BatchWriteItem operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchWriteItemInput
 type BatchWriteItemInput struct {
 	_ struct{} `type:"structure"`
 
@@ -85,7 +84,6 @@ func (s *BatchWriteItemInput) Validate() error {
 }
 
 // Represents the output of a BatchWriteItem operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchWriteItemOutput
 type BatchWriteItemOutput struct {
 	_ struct{} `type:"structure"`
 

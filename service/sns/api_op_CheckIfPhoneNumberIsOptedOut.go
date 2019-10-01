@@ -10,7 +10,6 @@ import (
 )
 
 // The input for the CheckIfPhoneNumberIsOptedOut action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CheckIfPhoneNumberIsOptedOutInput
 type CheckIfPhoneNumberIsOptedOutInput struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s *CheckIfPhoneNumberIsOptedOutInput) Validate() error {
 }
 
 // The response from the CheckIfPhoneNumberIsOptedOut action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CheckIfPhoneNumberIsOptedOutResponse
 type CheckIfPhoneNumberIsOptedOutOutput struct {
 	_ struct{} `type:"structure"`
 

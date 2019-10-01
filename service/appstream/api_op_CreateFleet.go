@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleetRequest
 type CreateFleetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -53,6 +52,12 @@ type CreateFleetInput struct {
 	// one to two minutes. You are charged for instance streaming when users are
 	// connected and a small hourly fee for instances that are not streaming apps.
 	FleetType FleetType `type:"string" enum:"true"`
+
+	// The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To
+	// assume a role, a fleet instance calls the AWS Security Token Service (STS)
+	// AssumeRole API operation and passes the ARN of the role to use. The operation
+	// creates a new session with temporary credentials.
+	IamRoleArn *string `type:"string"`
 
 	// The amount of time that users can be idle (inactive) before they are disconnected
 	// from their streaming session and the DisconnectTimeoutInSeconds time interval
@@ -204,7 +209,6 @@ func (s *CreateFleetInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleetResult
 type CreateFleetOutput struct {
 	_ struct{} `type:"structure"`
 

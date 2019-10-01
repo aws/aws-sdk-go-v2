@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListDevelopmentSchemaArnsRequest
 type ListDevelopmentSchemaArnsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -58,7 +57,6 @@ func (s ListDevelopmentSchemaArnsInput) MarshalFields(e protocol.FieldEncoder) e
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListDevelopmentSchemaArnsResponse
 type ListDevelopmentSchemaArnsOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DisassociateQualificationFromWorkerRequest
 type DisassociateQualificationFromWorkerInput struct {
 	_ struct{} `type:"structure"`
 
@@ -57,7 +56,6 @@ func (s *DisassociateQualificationFromWorkerInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DisassociateQualificationFromWorkerResponse
 type DisassociateQualificationFromWorkerOutput struct {
 	_ struct{} `type:"structure"`
 }

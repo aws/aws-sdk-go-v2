@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/TerminateSessionRequest
 type TerminateSessionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -41,7 +40,6 @@ func (s *TerminateSessionInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/TerminateSessionResponse
 type TerminateSessionOutput struct {
 	_ struct{} `type:"structure"`
 

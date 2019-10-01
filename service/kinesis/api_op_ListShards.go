@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListShardsInput
 type ListShardsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -95,7 +94,6 @@ func (s *ListShardsInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListShardsOutput
 type ListShardsOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the request to get user attribute verification.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserAttributeVerificationCodeRequest
 type GetUserAttributeVerificationCodeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -18,7 +17,7 @@ type GetUserAttributeVerificationCodeInput struct {
 	// verification code.
 	//
 	// AccessToken is a required field
-	AccessToken *string `type:"string" required:"true"`
+	AccessToken *string `type:"string" required:"true" sensitive:"true"`
 
 	// The attribute name returned by the server response to get the user attribute
 	// verification code.
@@ -55,7 +54,6 @@ func (s *GetUserAttributeVerificationCodeInput) Validate() error {
 
 // The verification code response returned by the server response to get the
 // user attribute verification code.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserAttributeVerificationCodeResponse
 type GetUserAttributeVerificationCodeOutput struct {
 	_ struct{} `type:"structure"`
 

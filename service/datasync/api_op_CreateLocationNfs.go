@@ -11,7 +11,6 @@ import (
 )
 
 // CreateLocationNfsRequest
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationNfsRequest
 type CreateLocationNfsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -103,7 +102,6 @@ func (s *CreateLocationNfsInput) Validate() error {
 }
 
 // CreateLocationNfsResponse
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationNfsResponse
 type CreateLocationNfsOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 )
 
 // Input for GetPlatformApplicationAttributes action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetPlatformApplicationAttributesInput
 type GetPlatformApplicationAttributesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s *GetPlatformApplicationAttributesInput) Validate() error {
 }
 
 // Response for GetPlatformApplicationAttributes action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetPlatformApplicationAttributesResponse
 type GetPlatformApplicationAttributesOutput struct {
 	_ struct{} `type:"structure"`
 

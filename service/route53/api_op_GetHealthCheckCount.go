@@ -12,7 +12,6 @@ import (
 
 // A request for the number of health checks that are associated with the current
 // AWS account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckCountRequest
 type GetHealthCheckCountInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -29,7 +28,6 @@ func (s GetHealthCheckCountInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains the response to a GetHealthCheckCount request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckCountResponse
 type GetHealthCheckCountOutput struct {
 	_ struct{} `type:"structure"`
 

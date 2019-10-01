@@ -10,7 +10,6 @@ import (
 )
 
 // The input argument to the CancelSteps operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CancelStepsInput
 type CancelStepsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -29,7 +28,6 @@ func (s CancelStepsInput) String() string {
 }
 
 // The output for the CancelSteps operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CancelStepsOutput
 type CancelStepsOutput struct {
 	_ struct{} `type:"structure"`
 

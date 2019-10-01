@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RebuildEnvironmentMessage
 type RebuildEnvironmentInput struct {
 	_ struct{} `type:"structure"`
 
@@ -48,7 +47,6 @@ func (s *RebuildEnvironmentInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RebuildEnvironmentOutput
 type RebuildEnvironmentOutput struct {
 	_ struct{} `type:"structure"`
 }

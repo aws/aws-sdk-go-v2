@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CancelJobRequest
 type CancelJobInput struct {
 	_ struct{} `type:"structure"`
 
@@ -42,7 +41,6 @@ func (s *CancelJobInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CancelJobResult
 type CancelJobOutput struct {
 	_ struct{} `type:"structure"`
 }

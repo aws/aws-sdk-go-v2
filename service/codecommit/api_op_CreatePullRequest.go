@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreatePullRequestInput
 type CreatePullRequestInput struct {
 	_ struct{} `type:"structure"`
 
@@ -71,7 +70,6 @@ func (s *CreatePullRequestInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreatePullRequestOutput
 type CreatePullRequestOutput struct {
 	_ struct{} `type:"structure"`
 

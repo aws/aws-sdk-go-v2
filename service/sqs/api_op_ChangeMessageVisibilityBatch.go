@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ChangeMessageVisibilityBatchRequest
 type ChangeMessageVisibilityBatchInput struct {
 	_ struct{} `type:"structure"`
 
@@ -61,7 +60,6 @@ func (s *ChangeMessageVisibilityBatchInput) Validate() error {
 // For each message in the batch, the response contains a ChangeMessageVisibilityBatchResultEntry
 // tag if the message succeeds or a BatchResultErrorEntry tag if the message
 // fails.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ChangeMessageVisibilityBatchResult
 type ChangeMessageVisibilityBatchOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -11,7 +11,6 @@ import (
 )
 
 // Represents the input to DescribeEventCategories.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeEventCategoriesMessage
 type DescribeEventCategoriesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -47,7 +46,6 @@ func (s *DescribeEventCategoriesInput) Validate() error {
 }
 
 // Represents the output of DescribeEventCategories.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/EventCategoriesMessage
 type DescribeEventCategoriesOutput struct {
 	_ struct{} `type:"structure"`
 

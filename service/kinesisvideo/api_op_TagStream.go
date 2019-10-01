@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/TagStreamInput
 type TagStreamInput struct {
 	_ struct{} `type:"structure"`
 
@@ -87,7 +86,6 @@ func (s TagStreamInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/TagStreamOutput
 type TagStreamOutput struct {
 	_ struct{} `type:"structure"`
 }

@@ -10,7 +10,6 @@ import (
 )
 
 // The input for the DeleteChangeSet action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteChangeSetInput
 type DeleteChangeSetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +50,6 @@ func (s *DeleteChangeSetInput) Validate() error {
 }
 
 // The output for the DeleteChangeSet action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteChangeSetOutput
 type DeleteChangeSetOutput struct {
 	_ struct{} `type:"structure"`
 }

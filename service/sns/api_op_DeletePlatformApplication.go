@@ -12,7 +12,6 @@ import (
 )
 
 // Input for DeletePlatformApplication action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeletePlatformApplicationInput
 type DeletePlatformApplicationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -41,7 +40,6 @@ func (s *DeletePlatformApplicationInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeletePlatformApplicationOutput
 type DeletePlatformApplicationOutput struct {
 	_ struct{} `type:"structure"`
 }

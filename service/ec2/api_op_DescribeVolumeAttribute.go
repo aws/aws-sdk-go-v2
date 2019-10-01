@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for DescribeVolumeAttribute.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumeAttributeRequest
 type DescribeVolumeAttributeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -54,7 +53,6 @@ func (s *DescribeVolumeAttributeInput) Validate() error {
 }
 
 // Contains the output of DescribeVolumeAttribute.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumeAttributeResult
 type DescribeVolumeAttributeOutput struct {
 	_ struct{} `type:"structure"`
 

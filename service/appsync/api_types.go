@@ -12,7 +12,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Describes an additional authentication provider.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/AdditionalAuthenticationProvider
 type AdditionalAuthenticationProvider struct {
 	_ struct{} `type:"structure"`
 
@@ -112,7 +111,6 @@ func (s AdditionalAuthenticationProvider) MarshalFields(e protocol.FieldEncoder)
 //    * DeleteApiKey deletes the item from the table.
 //
 //    * Expiration is stored in Amazon DynamoDB as seconds.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ApiKey
 type ApiKey struct {
 	_ struct{} `type:"structure"`
 
@@ -156,7 +154,6 @@ func (s ApiKey) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The authorization config in case the HTTP endpoint requires authorization.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/AuthorizationConfig
 type AuthorizationConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -207,7 +204,6 @@ func (s AuthorizationConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The AWS IAM configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/AwsIamConfig
 type AwsIamConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -241,7 +237,6 @@ func (s AwsIamConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes an Amazon Cognito user pool configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CognitoUserPoolConfig
 type CognitoUserPoolConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -307,7 +302,6 @@ func (s CognitoUserPoolConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes a data source.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DataSource
 type DataSource struct {
 	_ struct{} `type:"structure"`
 
@@ -430,7 +424,6 @@ func (s DataSource) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes an Amazon DynamoDB data source configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DynamodbDataSourceConfig
 type DynamodbDataSourceConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -495,7 +488,6 @@ func (s DynamodbDataSourceConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes an Elasticsearch data source configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ElasticsearchDataSourceConfig
 type ElasticsearchDataSourceConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -552,7 +544,6 @@ func (s ElasticsearchDataSourceConfig) MarshalFields(e protocol.FieldEncoder) er
 
 // A function is a reusable entity. Multiple functions can be used to compose
 // the resolver logic.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/FunctionConfiguration
 type FunctionConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -642,7 +633,6 @@ func (s FunctionConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes a GraphQL API.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GraphqlApi
 type GraphqlApi struct {
 	_ struct{} `type:"structure"`
 
@@ -766,7 +756,6 @@ func (s GraphqlApi) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes an HTTP data source configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/HttpDataSourceConfig
 type HttpDataSourceConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -818,7 +807,6 @@ func (s HttpDataSourceConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes an AWS Lambda data source configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/LambdaDataSourceConfig
 type LambdaDataSourceConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -859,7 +847,6 @@ func (s LambdaDataSourceConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The CloudWatch Logs configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/LogConfig
 type LogConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -935,7 +922,6 @@ func (s LogConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes an OpenID Connect configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/OpenIDConnectConfig
 type OpenIDConnectConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1007,7 +993,6 @@ func (s OpenIDConnectConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The pipeline configuration for a resolver of kind PIPELINE.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/PipelineConfig
 type PipelineConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1038,7 +1023,6 @@ func (s PipelineConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The Amazon RDS HTTP endpoint configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/RdsHttpEndpointConfig
 type RdsHttpEndpointConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1099,7 +1083,6 @@ func (s RdsHttpEndpointConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes a relational database data source configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/RelationalDatabaseDataSourceConfig
 type RelationalDatabaseDataSourceConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1136,7 +1119,6 @@ func (s RelationalDatabaseDataSourceConfig) MarshalFields(e protocol.FieldEncode
 }
 
 // Describes a resolver.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/Resolver
 type Resolver struct {
 	_ struct{} `type:"structure"`
 
@@ -1232,7 +1214,6 @@ func (s Resolver) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes a type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/Type
 type Type struct {
 	_ struct{} `type:"structure"`
 
@@ -1293,7 +1274,6 @@ func (s Type) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes an Amazon Cognito user pool configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UserPoolConfig
 type UserPoolConfig struct {
 	_ struct{} `type:"structure"`
 

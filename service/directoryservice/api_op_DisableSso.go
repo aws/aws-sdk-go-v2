@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the inputs for the DisableSso operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableSsoRequest
 type DisableSsoInput struct {
 	_ struct{} `type:"structure"`
 
@@ -22,7 +21,7 @@ type DisableSsoInput struct {
 	// The password of an alternate account to use to disable single-sign on. This
 	// is only used for AD Connector directories. For more information, see the
 	// UserName parameter.
-	Password *string `min:"1" type:"string"`
+	Password *string `min:"1" type:"string" sensitive:"true"`
 
 	// The username of an alternate account to use to disable single-sign on. This
 	// is only used for AD Connector directories. This account must have privileges
@@ -62,7 +61,6 @@ func (s *DisableSsoInput) Validate() error {
 }
 
 // Contains the results of the DisableSso operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableSsoResult
 type DisableSsoOutput struct {
 	_ struct{} `type:"structure"`
 }

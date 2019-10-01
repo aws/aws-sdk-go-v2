@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListRobotApplicationsRequest
 type ListRobotApplicationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -109,7 +108,6 @@ func (s ListRobotApplicationsInput) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListRobotApplicationsResponse
 type ListRobotApplicationsOutput struct {
 	_ struct{} `type:"structure"`
 

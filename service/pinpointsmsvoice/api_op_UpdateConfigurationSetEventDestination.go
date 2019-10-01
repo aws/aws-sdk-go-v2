@@ -11,7 +11,6 @@ import (
 )
 
 // An object that defines a request to update an existing event destination.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/UpdateConfigurationSetEventDestinationRequest
 type UpdateConfigurationSetEventDestinationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -74,7 +73,6 @@ func (s UpdateConfigurationSetEventDestinationInput) MarshalFields(e protocol.Fi
 }
 
 // An empty object that indicates that the event destination was updated successfully.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/UpdateConfigurationSetEventDestinationResponse
 type UpdateConfigurationSetEventDestinationOutput struct {
 	_ struct{} `type:"structure"`
 }

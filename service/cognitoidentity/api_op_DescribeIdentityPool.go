@@ -10,7 +10,6 @@ import (
 )
 
 // Input to the DescribeIdentityPool action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/DescribeIdentityPoolInput
 type DescribeIdentityPoolInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *DescribeIdentityPoolInput) Validate() error {
 }
 
 // An object representing an Amazon Cognito identity pool.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/IdentityPool
 type DescribeIdentityPoolOutput struct {
 	_ struct{} `type:"structure"`
 

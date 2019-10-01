@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PutNotificationChannelRequest
 type PutNotificationChannelInput struct {
 	_ struct{} `type:"structure"`
 
@@ -57,7 +56,6 @@ func (s *PutNotificationChannelInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PutNotificationChannelOutput
 type PutNotificationChannelOutput struct {
 	_ struct{} `type:"structure"`
 }

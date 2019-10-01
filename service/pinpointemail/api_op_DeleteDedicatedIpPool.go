@@ -11,7 +11,6 @@ import (
 )
 
 // A request to delete a dedicated IP pool.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/DeleteDedicatedIpPoolRequest
 type DeleteDedicatedIpPoolInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s DeleteDedicatedIpPoolInput) MarshalFields(e protocol.FieldEncoder) error
 
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/DeleteDedicatedIpPoolResponse
 type DeleteDedicatedIpPoolOutput struct {
 	_ struct{} `type:"structure"`
 }

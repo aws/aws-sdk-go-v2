@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for RequestSpotFleet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotFleetRequest
 type RequestSpotFleetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +50,6 @@ func (s *RequestSpotFleetInput) Validate() error {
 }
 
 // Contains the output of RequestSpotFleet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotFleetResponse
 type RequestSpotFleetOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Represents a named directory attribute.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/Attribute
 type Attribute struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *Attribute) Validate() error {
 }
 
 // Contains information about a computer account in a directory.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/Computer
 type Computer struct {
 	_ struct{} `type:"structure"`
 
@@ -66,7 +64,6 @@ func (s Computer) String() string {
 // Points to a remote domain with which you are setting up a trust relationship.
 // Conditional forwarders are required in order to set up a trust relationship
 // with another domain.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ConditionalForwarder
 type ConditionalForwarder struct {
 	_ struct{} `type:"structure"`
 
@@ -92,7 +89,6 @@ func (s ConditionalForwarder) String() string {
 
 // Contains information for the ConnectDirectory operation when an AD Connector
 // directory is being created.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryConnectSettings
 type DirectoryConnectSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -160,7 +156,6 @@ func (s *DirectoryConnectSettings) Validate() error {
 }
 
 // Contains information about an AD Connector directory.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryConnectSettingsDescription
 type DirectoryConnectSettingsDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -189,7 +184,6 @@ func (s DirectoryConnectSettingsDescription) String() string {
 }
 
 // Contains information about an AWS Directory Service directory.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryDescription
 type DirectoryDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -251,7 +245,7 @@ type DirectoryDescription struct {
 	// A directory share request that is sent by the directory owner to the directory
 	// consumer. The request includes a typed message to help the directory consumer
 	// administrator determine whether to approve or reject the share invitation.
-	ShareNotes *string `type:"string"`
+	ShareNotes *string `type:"string" sensitive:"true"`
 
 	// Current directory status of the shared AWS Managed Microsoft AD directory.
 	ShareStatus ShareStatus `type:"string" enum:"true"`
@@ -290,7 +284,6 @@ func (s DirectoryDescription) String() string {
 }
 
 // Contains directory limit information for a region.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryLimits
 type DirectoryLimits struct {
 	_ struct{} `type:"structure"`
 
@@ -329,7 +322,6 @@ func (s DirectoryLimits) String() string {
 }
 
 // Contains VPC information for the CreateDirectory or CreateMicrosoftAD operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryVpcSettings
 type DirectoryVpcSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -370,7 +362,6 @@ func (s *DirectoryVpcSettings) Validate() error {
 }
 
 // Contains information about the directory.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryVpcSettingsDescription
 type DirectoryVpcSettingsDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -393,7 +384,6 @@ func (s DirectoryVpcSettingsDescription) String() string {
 }
 
 // Contains information about the domain controllers for a specified directory.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DomainController
 type DomainController struct {
 	_ struct{} `type:"structure"`
 
@@ -434,7 +424,6 @@ func (s DomainController) String() string {
 }
 
 // Information about SNS topic and AWS Directory Service directory associations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EventTopic
 type EventTopic struct {
 	_ struct{} `type:"structure"`
 
@@ -462,7 +451,6 @@ func (s EventTopic) String() string {
 
 // IP address block. This is often the address block of the DNS server used
 // for your on-premises domain.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/IpRoute
 type IpRoute struct {
 	_ struct{} `type:"structure"`
 
@@ -481,7 +469,6 @@ func (s IpRoute) String() string {
 }
 
 // Information about one or more IP address blocks.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/IpRouteInfo
 type IpRouteInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -511,7 +498,6 @@ func (s IpRouteInfo) String() string {
 
 // Represents a log subscription, which tracks real-time data from a chosen
 // log group to a specified destination.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/LogSubscription
 type LogSubscription struct {
 	_ struct{} `type:"structure"`
 
@@ -533,7 +519,6 @@ func (s LogSubscription) String() string {
 
 // Describes the directory owner account details that have been shared to the
 // directory consumer account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/OwnerDirectoryDescription
 type OwnerDirectoryDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -564,7 +549,6 @@ func (s OwnerDirectoryDescription) String() string {
 
 // Contains information about a Remote Authentication Dial In User Service (RADIUS)
 // server.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RadiusSettings
 type RadiusSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -591,7 +575,7 @@ type RadiusSettings struct {
 	RadiusTimeout *int64 `min:"1" type:"integer"`
 
 	// Required for enabling RADIUS on the directory.
-	SharedSecret *string `min:"8" type:"string"`
+	SharedSecret *string `min:"8" type:"string" sensitive:"true"`
 
 	// Not currently used.
 	UseSameUsername *bool `type:"boolean"`
@@ -625,7 +609,6 @@ func (s *RadiusSettings) Validate() error {
 }
 
 // Information about a schema extension.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/SchemaExtensionInfo
 type SchemaExtensionInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -658,7 +641,6 @@ func (s SchemaExtensionInfo) String() string {
 }
 
 // Identifier that contains details about the directory consumer account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ShareTarget
 type ShareTarget struct {
 	_ struct{} `type:"structure"`
 
@@ -700,7 +682,6 @@ func (s *ShareTarget) Validate() error {
 
 // Details about the shared directory in the directory owner account for which
 // the share request in the directory consumer account has been accepted.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/SharedDirectory
 type SharedDirectory struct {
 	_ struct{} `type:"structure"`
 
@@ -725,7 +706,7 @@ type SharedDirectory struct {
 	// A directory share request that is sent by the directory owner to the directory
 	// consumer. The request includes a typed message to help the directory consumer
 	// administrator determine whether to approve or reject the share invitation.
-	ShareNotes *string `type:"string"`
+	ShareNotes *string `type:"string" sensitive:"true"`
 
 	// Current directory status of the shared AWS Managed Microsoft AD directory.
 	ShareStatus ShareStatus `type:"string" enum:"true"`
@@ -745,7 +726,6 @@ func (s SharedDirectory) String() string {
 }
 
 // Describes a directory snapshot.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/Snapshot
 type Snapshot struct {
 	_ struct{} `type:"structure"`
 
@@ -774,7 +754,6 @@ func (s Snapshot) String() string {
 }
 
 // Contains manual snapshot limit information for a directory.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/SnapshotLimits
 type SnapshotLimits struct {
 	_ struct{} `type:"structure"`
 
@@ -794,7 +773,6 @@ func (s SnapshotLimits) String() string {
 }
 
 // Metadata assigned to a directory consisting of a key-value pair.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -841,7 +819,6 @@ func (s *Tag) Validate() error {
 
 // Describes a trust relationship between an AWS Managed Microsoft AD directory
 // and an external domain.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/Trust
 type Trust struct {
 	_ struct{} `type:"structure"`
 
@@ -887,7 +864,6 @@ func (s Trust) String() string {
 
 // Identifier that contains details about the directory consumer account with
 // whom the directory is being unshared.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UnshareTarget
 type UnshareTarget struct {
 	_ struct{} `type:"structure"`
 

@@ -12,7 +12,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostContentRequest
 type PostContentInput struct {
 	_ struct{} `type:"structure" payload:"InputStream"`
 
@@ -69,6 +68,11 @@ type PostContentInput struct {
 	// You can stream audio data to Amazon Lex or you can create a local buffer
 	// that captures all of the audio data before sending. In general, you get better
 	// performance if you stream audio data rather than buffering the data locally.
+	//
+	// To use an non-seekable io.Reader for this request wrap the io.Reader with
+	// "aws.ReadSeekCloser". The SDK will not retry request errors for non-seekable
+	// readers. This will allow the SDK to send the reader's payload as chunked
+	// transfer encoding.
 	//
 	// InputStream is a required field
 	InputStream io.ReadSeeker `locationName:"inputStream" type:"blob" required:"true"`
@@ -216,7 +220,6 @@ func (s PostContentInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostContentResponse
 type PostContentOutput struct {
 	_ struct{} `type:"structure" payload:"AudioStream"`
 
@@ -297,7 +300,7 @@ type PostContentOutput struct {
 	//
 	// If the Lambda function returns a message, Amazon Lex passes it to the client
 	// in its response.
-	Message *string `location:"header" locationName:"x-amz-lex-message" min:"1" type:"string"`
+	Message *string `location:"header" locationName:"x-amz-lex-message" min:"1" type:"string" sensitive:"true"`
 
 	// The format of the response message. One of the following values:
 	//

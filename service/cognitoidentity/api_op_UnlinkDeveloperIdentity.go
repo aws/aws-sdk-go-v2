@@ -12,7 +12,6 @@ import (
 )
 
 // Input to the UnlinkDeveloperIdentity action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/UnlinkDeveloperIdentityInput
 type UnlinkDeveloperIdentityInput struct {
 	_ struct{} `type:"structure"`
 
@@ -80,7 +79,6 @@ func (s *UnlinkDeveloperIdentityInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/UnlinkDeveloperIdentityOutput
 type UnlinkDeveloperIdentityOutput struct {
 	_ struct{} `type:"structure"`
 }

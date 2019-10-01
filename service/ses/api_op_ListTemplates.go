@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListTemplatesRequest
 type ListTemplatesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -29,7 +28,6 @@ func (s ListTemplatesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListTemplatesResponse
 type ListTemplatesOutput struct {
 	_ struct{} `type:"structure"`
 

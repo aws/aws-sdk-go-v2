@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroupsForUserRequest
 type ListGroupsForUserInput struct {
 	_ struct{} `type:"structure"`
 
@@ -69,7 +68,6 @@ func (s *ListGroupsForUserInput) Validate() error {
 }
 
 // Contains the response to a successful ListGroupsForUser request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroupsForUserResponse
 type ListGroupsForUserOutput struct {
 	_ struct{} `type:"structure"`
 

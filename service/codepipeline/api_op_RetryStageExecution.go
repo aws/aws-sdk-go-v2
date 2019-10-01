@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a RetryStageExecution action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RetryStageExecutionInput
 type RetryStageExecutionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -74,7 +73,6 @@ func (s *RetryStageExecutionInput) Validate() error {
 }
 
 // Represents the output of a RetryStageExecution action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RetryStageExecutionOutput
 type RetryStageExecutionOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iot-jobs-data-2017-09-29/GetPendingJobExecutionsRequest
 type GetPendingJobExecutionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s GetPendingJobExecutionsInput) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iot-jobs-data-2017-09-29/GetPendingJobExecutionsResponse
 type GetPendingJobExecutionsOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the inputs for the DescribeHapg action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeHapgRequest
 type DescribeHapgInput struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s *DescribeHapgInput) Validate() error {
 }
 
 // Contains the output of the DescribeHapg action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeHapgResponse
 type DescribeHapgOutput struct {
 	_ struct{} `type:"structure"`
 

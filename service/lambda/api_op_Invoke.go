@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvocationRequest
 type InvokeInput struct {
 	_ struct{} `type:"structure" payload:"Payload"`
 
@@ -53,7 +52,7 @@ type InvokeInput struct {
 	LogType LogType `location:"header" locationName:"X-Amz-Log-Type" type:"string" enum:"true"`
 
 	// The JSON that you want to provide to your Lambda function as input.
-	Payload []byte `type:"blob"`
+	Payload []byte `type:"blob" sensitive:"true"`
 
 	// Specify a version or alias to invoke a published version of the function.
 	Qualifier *string `location:"querystring" locationName:"Qualifier" min:"1" type:"string"`
@@ -126,7 +125,6 @@ func (s InvokeInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvocationResponse
 type InvokeOutput struct {
 	_ struct{} `type:"structure" payload:"Payload"`
 
@@ -148,7 +146,7 @@ type InvokeOutput struct {
 	LogResult *string `location:"header" locationName:"X-Amz-Log-Result" type:"string"`
 
 	// The response from the function, or an error object.
-	Payload []byte `type:"blob"`
+	Payload []byte `type:"blob" sensitive:"true"`
 
 	// The HTTP status code is in the 200 range for a successful request. For the
 	// RequestResponse invocation type, this status code is 200. For the Event invocation

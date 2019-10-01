@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListServiceQuotaIncreaseRequestsInTemplateRequest
 type ListServiceQuotaIncreaseRequestsInTemplateInput struct {
 	_ struct{} `type:"structure"`
 
@@ -60,7 +59,6 @@ func (s *ListServiceQuotaIncreaseRequestsInTemplateInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListServiceQuotaIncreaseRequestsInTemplateResponse
 type ListServiceQuotaIncreaseRequestsInTemplateOutput struct {
 	_ struct{} `type:"structure"`
 

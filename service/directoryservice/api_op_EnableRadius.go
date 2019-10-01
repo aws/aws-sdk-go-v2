@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the inputs for the EnableRadius operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableRadiusRequest
 type EnableRadiusInput struct {
 	_ struct{} `type:"structure"`
 
@@ -54,7 +53,6 @@ func (s *EnableRadiusInput) Validate() error {
 }
 
 // Contains the results of the EnableRadius operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableRadiusResult
 type EnableRadiusOutput struct {
 	_ struct{} `type:"structure"`
 }

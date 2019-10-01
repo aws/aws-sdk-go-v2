@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/StartBackupJobInput
 type StartBackupJobInput struct {
 	_ struct{} `type:"structure"`
 
@@ -54,7 +53,7 @@ type StartBackupJobInput struct {
 
 	// To help organize your resources, you can assign your own metadata to the
 	// resources that you create. Each tag is a key-value pair.
-	RecoveryPointTags map[string]string `type:"map"`
+	RecoveryPointTags map[string]string `type:"map" sensitive:"true"`
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format
 	// of the ARN depends on the resource type.
@@ -154,7 +153,6 @@ func (s StartBackupJobInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/StartBackupJobOutput
 type StartBackupJobOutput struct {
 	_ struct{} `type:"structure"`
 

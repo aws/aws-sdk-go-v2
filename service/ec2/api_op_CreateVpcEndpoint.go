@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for CreateVpcEndpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointRequest
 type CreateVpcEndpointInput struct {
 	_ struct{} `type:"structure"`
 
@@ -96,7 +95,6 @@ func (s *CreateVpcEndpointInput) Validate() error {
 }
 
 // Contains the output of CreateVpcEndpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointResult
 type CreateVpcEndpointOutput struct {
 	_ struct{} `type:"structure"`
 

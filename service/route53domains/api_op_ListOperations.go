@@ -11,7 +11,6 @@ import (
 )
 
 // The ListOperations request includes the following elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListOperationsRequest
 type ListOperationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s ListOperationsInput) String() string {
 }
 
 // The ListOperations response includes the following elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListOperationsResponse
 type ListOperationsOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ResendValidationEmailRequest
 type ResendValidationEmailInput struct {
 	_ struct{} `type:"structure"`
 
@@ -89,7 +88,6 @@ func (s *ResendValidationEmailInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ResendValidationEmailOutput
 type ResendValidationEmailOutput struct {
 	_ struct{} `type:"structure"`
 }

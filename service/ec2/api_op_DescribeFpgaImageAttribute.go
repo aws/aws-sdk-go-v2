@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFpgaImageAttributeRequest
 type DescribeFpgaImageAttributeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +51,6 @@ func (s *DescribeFpgaImageAttributeInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFpgaImageAttributeResult
 type DescribeFpgaImageAttributeOutput struct {
 	_ struct{} `type:"structure"`
 

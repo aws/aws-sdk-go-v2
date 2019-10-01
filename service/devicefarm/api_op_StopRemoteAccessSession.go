@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the request to stop the remote access session.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRemoteAccessSessionRequest
 type StopRemoteAccessSessionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -44,7 +43,6 @@ func (s *StopRemoteAccessSessionInput) Validate() error {
 
 // Represents the response from the server that describes the remote access
 // session when AWS Device Farm stops the session.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRemoteAccessSessionResult
 type StopRemoteAccessSessionOutput struct {
 	_ struct{} `type:"structure"`
 

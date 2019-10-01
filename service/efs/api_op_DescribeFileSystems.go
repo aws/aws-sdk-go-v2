@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeFileSystemsRequest
 type DescribeFileSystemsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -86,7 +85,6 @@ func (s DescribeFileSystemsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeFileSystemsResponse
 type DescribeFileSystemsOutput struct {
 	_ struct{} `type:"structure"`
 

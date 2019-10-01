@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DescribeProjectRequest
 type DescribeProjectInput struct {
 	_ struct{} `type:"structure"`
 
@@ -42,7 +41,6 @@ func (s *DescribeProjectInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DescribeProjectResult
 type DescribeProjectOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -57,13 +55,13 @@ type DescribeProjectOutput struct {
 	CreatedTimeStamp *time.Time `locationName:"createdTimeStamp" type:"timestamp"`
 
 	// The description of the project, if any.
-	Description *string `locationName:"description" type:"string"`
+	Description *string `locationName:"description" type:"string" sensitive:"true"`
 
 	// The ID of the project.
 	Id *string `locationName:"id" min:"2" type:"string"`
 
 	// The display name for the project.
-	Name *string `locationName:"name" min:"1" type:"string"`
+	Name *string `locationName:"name" min:"1" type:"string" sensitive:"true"`
 
 	// The ID for the AWS CodeStar project template used to create the project.
 	ProjectTemplateId *string `locationName:"projectTemplateId" min:"1" type:"string"`

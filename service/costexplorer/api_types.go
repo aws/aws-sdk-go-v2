@@ -11,7 +11,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // The amount of instance usage that a reservation covered.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/Coverage
 type Coverage struct {
 	_ struct{} `type:"structure"`
 
@@ -32,7 +31,6 @@ func (s Coverage) String() string {
 }
 
 // Reservation coverage for a specified period, in hours.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CoverageByTime
 type CoverageByTime struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +50,6 @@ func (s CoverageByTime) String() string {
 }
 
 // How much it cost to run an instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CoverageCost
 type CoverageCost struct {
 	_ struct{} `type:"structure"`
 
@@ -66,7 +63,6 @@ func (s CoverageCost) String() string {
 }
 
 // How long a running instance either used a reservation or was On-Demand.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CoverageHours
 type CoverageHours struct {
 	_ struct{} `type:"structure"`
 
@@ -99,7 +95,6 @@ func (s CoverageHours) String() string {
 //
 // For more information, see Modifying Reserved Instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html)
 // in the Amazon Elastic Compute Cloud User Guide for Linux Instances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CoverageNormalizedUnits
 type CoverageNormalizedUnits struct {
 	_ struct{} `type:"structure"`
 
@@ -124,7 +119,6 @@ func (s CoverageNormalizedUnits) String() string {
 }
 
 // Context about the current instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CurrentInstance
 type CurrentInstance struct {
 	_ struct{} `type:"structure"`
 
@@ -163,7 +157,6 @@ func (s CurrentInstance) String() string {
 }
 
 // The time period that you want the usage and costs for.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DateInterval
 type DateInterval struct {
 	_ struct{} `type:"structure"`
 
@@ -207,7 +200,6 @@ func (s *DateInterval) Validate() error {
 
 // The metadata that you can use to filter and group your results. You can use
 // GetDimensionValues to find specific values.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DimensionValues
 type DimensionValues struct {
 	_ struct{} `type:"structure"`
 
@@ -231,7 +223,6 @@ func (s DimensionValues) String() string {
 
 // The metadata of a specific type that you can use to filter and group your
 // results. You can use GetDimensionValues to find specific values.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DimensionValuesWithAttributes
 type DimensionValuesWithAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -248,7 +239,6 @@ func (s DimensionValuesWithAttributes) String() string {
 }
 
 // Details about the Amazon EC2 instances that AWS recommends that you purchase.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/EC2InstanceDetails
 type EC2InstanceDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -284,7 +274,6 @@ func (s EC2InstanceDetails) String() string {
 }
 
 // Details on the Amazon EC2 Resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/EC2ResourceDetails
 type EC2ResourceDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -323,7 +312,6 @@ func (s EC2ResourceDetails) String() string {
 }
 
 // Utilization metrics of the instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/EC2ResourceUtilization
 type EC2ResourceUtilization struct {
 	_ struct{} `type:"structure"`
 
@@ -345,7 +333,6 @@ func (s EC2ResourceUtilization) String() string {
 
 // The Amazon EC2 hardware specifications that you want AWS to provide recommendations
 // for.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/EC2Specification
 type EC2Specification struct {
 	_ struct{} `type:"structure"`
 
@@ -359,7 +346,6 @@ func (s EC2Specification) String() string {
 }
 
 // Details about the Amazon ES instances that AWS recommends that you purchase.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ESInstanceDetails
 type ESInstanceDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -386,7 +372,6 @@ func (s ESInstanceDetails) String() string {
 
 // Details about the Amazon ElastiCache instances that AWS recommends that you
 // purchase.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ElastiCacheInstanceDetails
 type ElastiCacheInstanceDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -442,7 +427,6 @@ func (s ElastiCacheInstanceDetails) String() string {
 // supported. OR is not supported between different dimensions, or dimensions
 // and tags. NOT operators aren't supported. Dimentions are also limited to
 // LINKED_ACCOUNT, REGION, or RIGHTSIZING_TYPE.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/Expression
 type Expression struct {
 	_ struct{} `type:"structure"`
 
@@ -468,7 +452,6 @@ func (s Expression) String() string {
 }
 
 // The forecast created for your query.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ForecastResult
 type ForecastResult struct {
 	_ struct{} `type:"structure"`
 
@@ -491,7 +474,6 @@ func (s ForecastResult) String() string {
 }
 
 // One level of grouped data in the results.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/Group
 type Group struct {
 	_ struct{} `type:"structure"`
 
@@ -509,7 +491,6 @@ func (s Group) String() string {
 
 // Represents a group when you specify a group by criteria or in the response
 // to a query with a specific grouping.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GroupDefinition
 type GroupDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -526,7 +507,6 @@ func (s GroupDefinition) String() string {
 }
 
 // Details about the instances that AWS recommends that you purchase.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/InstanceDetails
 type InstanceDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -552,7 +532,6 @@ func (s InstanceDetails) String() string {
 }
 
 // The aggregated value for a metric.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/MetricValue
 type MetricValue struct {
 	_ struct{} `type:"structure"`
 
@@ -569,7 +548,6 @@ func (s MetricValue) String() string {
 }
 
 // Details on the modification recommendation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ModifyRecommendationDetail
 type ModifyRecommendationDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -584,7 +562,6 @@ func (s ModifyRecommendationDetail) String() string {
 }
 
 // Details about the Amazon RDS instances that AWS recommends that you purchase.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/RDSInstanceDetails
 type RDSInstanceDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -624,7 +601,6 @@ func (s RDSInstanceDetails) String() string {
 
 // Details about the Amazon Redshift instances that AWS recommends that you
 // purchase.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/RedshiftInstanceDetails
 type RedshiftInstanceDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -650,7 +626,6 @@ func (s RedshiftInstanceDetails) String() string {
 }
 
 // The aggregated numbers for your reservation usage.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ReservationAggregates
 type ReservationAggregates struct {
 	_ struct{} `type:"structure"`
 
@@ -712,7 +687,6 @@ func (s ReservationAggregates) String() string {
 }
 
 // A group of reservations that share a set of attributes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ReservationCoverageGroup
 type ReservationCoverageGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -729,7 +703,6 @@ func (s ReservationCoverageGroup) String() string {
 }
 
 // A specific reservation that AWS recommends for purchase.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ReservationPurchaseRecommendation
 type ReservationPurchaseRecommendation struct {
 	_ struct{} `type:"structure"`
 
@@ -763,7 +736,6 @@ func (s ReservationPurchaseRecommendation) String() string {
 }
 
 // Details about your recommended reservation purchase.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ReservationPurchaseRecommendationDetail
 type ReservationPurchaseRecommendationDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -846,7 +818,6 @@ func (s ReservationPurchaseRecommendationDetail) String() string {
 
 // Information about this specific recommendation, such as the time stamp for
 // when AWS made a specific recommendation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ReservationPurchaseRecommendationMetadata
 type ReservationPurchaseRecommendationMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -865,7 +836,6 @@ func (s ReservationPurchaseRecommendationMetadata) String() string {
 // A summary about this recommendation, such as the currency code, the amount
 // that AWS estimates that you could save, and the total amount of reservation
 // to purchase.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ReservationPurchaseRecommendationSummary
 type ReservationPurchaseRecommendationSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -887,7 +857,6 @@ func (s ReservationPurchaseRecommendationSummary) String() string {
 }
 
 // A group of reservations that share a set of attributes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ReservationUtilizationGroup
 type ReservationUtilizationGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -910,7 +879,6 @@ func (s ReservationUtilizationGroup) String() string {
 }
 
 // Details on the resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ResourceDetails
 type ResourceDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -924,7 +892,6 @@ func (s ResourceDetails) String() string {
 }
 
 // Resource utilization of current resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ResourceUtilization
 type ResourceUtilization struct {
 	_ struct{} `type:"structure"`
 
@@ -938,7 +905,6 @@ func (s ResourceUtilization) String() string {
 }
 
 // The result that is associated with a time period.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ResultByTime
 type ResultByTime struct {
 	_ struct{} `type:"structure"`
 
@@ -961,7 +927,6 @@ func (s ResultByTime) String() string {
 }
 
 // Recommendations to rightsize resources.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/RightsizingRecommendation
 type RightsizingRecommendation struct {
 	_ struct{} `type:"structure"`
 
@@ -987,7 +952,6 @@ func (s RightsizingRecommendation) String() string {
 }
 
 // Metadata for this recommendation set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/RightsizingRecommendationMetadata
 type RightsizingRecommendationMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -1008,7 +972,6 @@ func (s RightsizingRecommendationMetadata) String() string {
 }
 
 // Summary of rightsizing recommendations
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/RightsizingRecommendationSummary
 type RightsizingRecommendationSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1032,7 +995,6 @@ func (s RightsizingRecommendationSummary) String() string {
 }
 
 // Hardware specifications for the service that you want recommendations for.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ServiceSpecification
 type ServiceSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -1047,7 +1009,6 @@ func (s ServiceSpecification) String() string {
 }
 
 // The values that are available for a tag.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/TagValues
 type TagValues struct {
 	_ struct{} `type:"structure"`
 
@@ -1064,7 +1025,6 @@ func (s TagValues) String() string {
 }
 
 // Details on recommended instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/TargetInstance
 type TargetInstance struct {
 	_ struct{} `type:"structure"`
 
@@ -1095,7 +1055,6 @@ func (s TargetInstance) String() string {
 }
 
 // Details on termination recommendation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/TerminateRecommendationDetail
 type TerminateRecommendationDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -1113,7 +1072,6 @@ func (s TerminateRecommendationDetail) String() string {
 }
 
 // The amount of utilization, in hours.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/UtilizationByTime
 type UtilizationByTime struct {
 	_ struct{} `type:"structure"`
 

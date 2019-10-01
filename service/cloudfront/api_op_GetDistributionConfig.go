@@ -11,7 +11,6 @@ import (
 )
 
 // The request to get a distribution configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetDistributionConfigRequest
 type GetDistributionConfigInput struct {
 	_ struct{} `type:"structure"`
 
@@ -54,7 +53,6 @@ func (s GetDistributionConfigInput) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetDistributionConfigResult
 type GetDistributionConfigOutput struct {
 	_ struct{} `type:"structure" payload:"DistributionConfig"`
 

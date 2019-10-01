@@ -26,7 +26,6 @@ var _ = awsutil.Prettify
 //    * DeleteAlias
 //
 //    * ResolveAlias
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/Alias
 type Alias struct {
 	_ struct{} `type:"structure"`
 
@@ -64,7 +63,6 @@ func (s Alias) String() string {
 // specify an attribute value using any of the valid data types: string, number,
 // string array, or data map. Each AttributeValue object can use only one of
 // the available properties.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/AttributeValue
 type AttributeValue struct {
 	_ struct{} `type:"structure"`
 
@@ -105,9 +103,8 @@ func (s *AttributeValue) Validate() error {
 // Temporary access credentials used for uploading game build files to Amazon
 // GameLift. They are valid for a limited time. If they expire before you upload
 // your game build, get a new set by calling RequestUploadCredentials.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/AwsCredentials
 type AwsCredentials struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" sensitive:"true"`
 
 	// Temporary key allowing access to the Amazon GameLift S3 account.
 	AccessKeyId *string `min:"1" type:"string"`
@@ -138,7 +135,6 @@ func (s AwsCredentials) String() string {
 //    * UpdateBuild
 //
 //    * DeleteBuild
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/Build
 type Build struct {
 	_ struct{} `type:"structure"`
 
@@ -187,9 +183,33 @@ func (s Build) String() string {
 	return awsutil.Prettify(s)
 }
 
+type CertificateConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// CertificateType is a required field
+	CertificateType CertificateType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s CertificateConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CertificateConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CertificateConfiguration"}
+	if len(s.CertificateType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("CertificateType"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Player information for use when creating player sessions using a game session
 // placement request with StartGameSessionPlacement.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DesiredPlayerSession
 type DesiredPlayerSession struct {
 	_ struct{} `type:"structure"`
 
@@ -242,7 +262,6 @@ func (s *DesiredPlayerSession) Validate() error {
 //    UpdateRuntimeConfiguration
 //
 //    * Manage fleet actions: StartFleetActions StopFleetActions
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/EC2InstanceCounts
 type EC2InstanceCounts struct {
 	_ struct{} `type:"structure"`
 
@@ -277,7 +296,6 @@ func (s EC2InstanceCounts) String() string {
 
 // Maximum number of instances allowed based on the Amazon Elastic Compute Cloud
 // (Amazon EC2) instance type. Instance limits can be retrieved by calling DescribeEC2InstanceLimits.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/EC2InstanceLimit
 type EC2InstanceLimit struct {
 	_ struct{} `type:"structure"`
 
@@ -304,7 +322,6 @@ func (s EC2InstanceLimit) String() string {
 // Log entry describing an event that involves Amazon GameLift resources (such
 // as a fleet). In addition to tracking activity, event codes and messages can
 // provide additional information for troubleshooting and debugging problems.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/Event
 type Event struct {
 	_ struct{} `type:"structure"`
 
@@ -444,12 +461,13 @@ func (s Event) String() string {
 //    UpdateRuntimeConfiguration
 //
 //    * Manage fleet actions: StartFleetActions StopFleetActions
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/FleetAttributes
 type FleetAttributes struct {
 	_ struct{} `type:"structure"`
 
 	// Unique identifier for a build.
 	BuildId *string `type:"string"`
+
+	CertificateConfiguration *CertificateConfiguration `type:"structure"`
 
 	// Time stamp indicating when this data object was created. Format is a number
 	// expressed in Unix time as milliseconds (for example "1469498468.057").
@@ -589,7 +607,6 @@ func (s FleetAttributes) String() string {
 //    UpdateRuntimeConfiguration
 //
 //    * Manage fleet actions: StartFleetActions StopFleetActions
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/FleetCapacity
 type FleetCapacity struct {
 	_ struct{} `type:"structure"`
 
@@ -629,7 +646,6 @@ func (s FleetCapacity) String() string {
 //    UpdateRuntimeConfiguration
 //
 //    * Manage fleet actions: StartFleetActions StopFleetActions
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/FleetUtilization
 type FleetUtilization struct {
 	_ struct{} `type:"structure"`
 
@@ -665,7 +681,6 @@ func (s FleetUtilization) String() string {
 // when initiating a new game session; the server process uses the properties
 // as appropriate. For more information, see the Amazon GameLift Developer Guide
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#gamelift-sdk-client-api-create).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameProperty
 type GameProperty struct {
 	_ struct{} `type:"structure"`
 
@@ -726,7 +741,6 @@ func (s *GameProperty) Validate() error {
 //
 //    * Game session placements StartGameSessionPlacement DescribeGameSessionPlacement
 //    StopGameSessionPlacement
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameSession
 type GameSession struct {
 	_ struct{} `type:"structure"`
 
@@ -741,6 +755,8 @@ type GameSession struct {
 
 	// Number of players currently in the game session.
 	CurrentPlayerSessionCount *int64 `type:"integer"`
+
+	DnsName *string `type:"string"`
 
 	// Unique identifier for a fleet that the game session is running on.
 	FleetId *string `type:"string"`
@@ -814,9 +830,10 @@ func (s GameSession) String() string {
 // the game session endpoint and player sessions for each player in the original
 // matchmaking request, is added to the MatchmakingTicket, which can be retrieved
 // by calling DescribeMatchmaking.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameSessionConnectionInfo
 type GameSessionConnectionInfo struct {
 	_ struct{} `type:"structure"`
+
+	DnsName *string `type:"string"`
 
 	// Amazon Resource Name (ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
 	// that is assigned to a game session and uniquely identifies it.
@@ -841,7 +858,6 @@ func (s GameSessionConnectionInfo) String() string {
 }
 
 // A game session's properties plus the protection policy currently in force.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameSessionDetail
 type GameSessionDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -874,9 +890,10 @@ func (s GameSessionDetail) String() string {
 //    * DescribeGameSessionPlacement
 //
 //    * StopGameSessionPlacement
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameSessionPlacement
 type GameSessionPlacement struct {
 	_ struct{} `type:"structure"`
+
+	DnsName *string `type:"string"`
 
 	// Time stamp indicating when this request was completed, canceled, or timed
 	// out.
@@ -1000,7 +1017,6 @@ func (s GameSessionPlacement) String() string {
 //    * UpdateGameSessionQueue
 //
 //    * DeleteGameSessionQueue
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameSessionQueue
 type GameSessionQueue struct {
 	_ struct{} `type:"structure"`
 
@@ -1050,7 +1066,6 @@ func (s GameSessionQueue) String() string {
 //    * UpdateGameSessionQueue
 //
 //    * DeleteGameSessionQueue
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameSessionQueueDestination
 type GameSessionQueueDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -1080,13 +1095,14 @@ func (s *GameSessionQueueDestination) Validate() error {
 
 // Properties that describe an instance of a virtual computing resource that
 // hosts one or more game servers. A fleet may contain zero or more instances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/Instance
 type Instance struct {
 	_ struct{} `type:"structure"`
 
 	// Time stamp indicating when this data object was created. Format is a number
 	// expressed in Unix time as milliseconds (for example "1469498468.057").
 	CreationTime *time.Time `type:"timestamp"`
+
+	DnsName *string `type:"string"`
 
 	// Unique identifier for a fleet that the instance is in.
 	FleetId *string `type:"string"`
@@ -1126,12 +1142,11 @@ func (s Instance) String() string {
 
 // Information required to remotely connect to a fleet instance. Access is requested
 // by calling GetInstanceAccess.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/InstanceAccess
 type InstanceAccess struct {
 	_ struct{} `type:"structure"`
 
 	// Credentials required to access the instance.
-	Credentials *InstanceCredentials `type:"structure"`
+	Credentials *InstanceCredentials `type:"structure" sensitive:"true"`
 
 	// Unique identifier for a fleet containing the instance being accessed.
 	FleetId *string `type:"string"`
@@ -1154,9 +1169,8 @@ func (s InstanceAccess) String() string {
 // Set of credentials required to remotely access a fleet instance. Access credentials
 // are requested by calling GetInstanceAccess and returned in an InstanceAccess
 // object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/InstanceCredentials
 type InstanceCredentials struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" sensitive:"true"`
 
 	// Secret string. For Windows instances, the secret is a password for use with
 	// Windows Remote Desktop. For Linux instances, it is a private key (which must
@@ -1179,7 +1193,6 @@ func (s InstanceCredentials) String() string {
 // server, the ranges reflect the server's game session assignments. For Realtime
 // Servers fleets, Amazon GameLift automatically opens two port ranges, one
 // for TCP messaging and one for UDP for use by the Realtime servers.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/IpPermission
 type IpPermission struct {
 	_ struct{} `type:"structure"`
 
@@ -1249,7 +1262,6 @@ func (s *IpPermission) Validate() error {
 //
 // When players connect to the match's game session, they must include both
 // player ID and player session ID in order to claim their assigned player slot.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/MatchedPlayerSession
 type MatchedPlayerSession struct {
 	_ struct{} `type:"structure"`
 
@@ -1267,7 +1279,6 @@ func (s MatchedPlayerSession) String() string {
 
 // Guidelines for use with FlexMatch to match players into games. All matchmaking
 // requests must specify a matchmaking configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/MatchmakingConfiguration
 type MatchmakingConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1380,7 +1391,6 @@ func (s MatchmakingConfiguration) String() string {
 //    instead of making them wait indefinitely for the best possible match.
 //    For example, you might use an expansion to increase the maximum skill
 //    variance between players after 30 seconds.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/MatchmakingRuleSet
 type MatchmakingRuleSet struct {
 	_ struct{} `type:"structure"`
 
@@ -1407,7 +1417,6 @@ func (s MatchmakingRuleSet) String() string {
 // is uniquely identified by a ticket ID, supplied by the requester, when creating
 // a matchmaking request with StartMatchmaking. Tickets can be retrieved by
 // calling DescribeMatchmaking with the ticket ID.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/MatchmakingTicket
 type MatchmakingTicket struct {
 	_ struct{} `type:"structure"`
 
@@ -1502,7 +1511,6 @@ func (s MatchmakingTicket) String() string {
 //
 //    * Game session placements StartGameSessionPlacement DescribeGameSessionPlacement
 //    StopGameSessionPlacement
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/PlacedPlayerSession
 type PlacedPlayerSession struct {
 	_ struct{} `type:"structure"`
 
@@ -1521,7 +1529,6 @@ func (s PlacedPlayerSession) String() string {
 // Represents a player in matchmaking. When starting a matchmaking request,
 // a player has a player ID, attributes, and may have latency data. Team information
 // is added after a match has been successfully completed.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/Player
 type Player struct {
 	_ struct{} `type:"structure"`
 
@@ -1584,7 +1591,6 @@ func (s *Player) Validate() error {
 // region. The relative difference between a player's latency values for multiple
 // regions are used to determine which fleets are best suited to place a new
 // game session for the player.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/PlayerLatency
 type PlayerLatency struct {
 	_ struct{} `type:"structure"`
 
@@ -1633,7 +1639,6 @@ func (s *PlayerLatency) Validate() error {
 //    * UpdateGameSessionQueue
 //
 //    * DeleteGameSessionQueue
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/PlayerLatencyPolicy
 type PlayerLatencyPolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -1672,13 +1677,14 @@ func (s PlayerLatencyPolicy) String() string {
 //
 //    * Game session placements StartGameSessionPlacement DescribeGameSessionPlacement
 //    StopGameSessionPlacement
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/PlayerSession
 type PlayerSession struct {
 	_ struct{} `type:"structure"`
 
 	// Time stamp indicating when this data object was created. Format is a number
 	// expressed in Unix time as milliseconds (for example "1469498468.057").
 	CreationTime *time.Time `type:"timestamp"`
+
+	DnsName *string `type:"string"`
 
 	// Unique identifier for a fleet that the player's game session is running on.
 	FleetId *string `type:"string"`
@@ -1742,7 +1748,6 @@ func (s PlayerSession) String() string {
 // minutes, on receiving a CreateGameSession request, Amazon GameLift checks
 // that the player (identified by CreatorId) has created fewer than 10 game
 // sessions in the past 60 minutes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ResourceCreationLimitPolicy
 type ResourceCreationLimitPolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -1772,7 +1777,6 @@ func (s ResourceCreationLimitPolicy) String() string {
 //    * DeleteAlias
 //
 //    * ResolveAlias
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/RoutingStrategy
 type RoutingStrategy struct {
 	_ struct{} `type:"structure"`
 
@@ -1829,7 +1833,6 @@ func (s RoutingStrategy) String() string {
 //    UpdateRuntimeConfiguration
 //
 //    * Manage fleet actions: StartFleetActions StopFleetActions
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/RuntimeConfiguration
 type RuntimeConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1882,7 +1885,6 @@ func (s *RuntimeConfiguration) Validate() error {
 // Location in Amazon Simple Storage Service (Amazon S3) where build or script
 // files are stored for access by Amazon GameLift. This location is specified
 // in CreateBuild, CreateScript, and UpdateScript requests.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/S3Location
 type S3Location struct {
 	_ struct{} `type:"structure"`
 
@@ -1943,7 +1945,6 @@ func (s *S3Location) Validate() error {
 //    (auto-scaling) DeleteScalingPolicy (auto-scaling)
 //
 //    * Manage fleet actions: StartFleetActions StopFleetActions
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ScalingPolicy
 type ScalingPolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -2070,7 +2071,6 @@ func (s ScalingPolicy) String() string {
 //    * UpdateScript
 //
 //    * DeleteScript
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/Script
 type Script struct {
 	_ struct{} `type:"structure"`
 
@@ -2111,7 +2111,6 @@ func (s Script) String() string {
 // parameters, and the number of server processes with this configuration to
 // maintain concurrently on the instance. Server process configurations make
 // up a fleet's RuntimeConfiguration .
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ServerProcess
 type ServerProcess struct {
 	_ struct{} `type:"structure"`
 
@@ -2186,7 +2185,6 @@ func (s *ServerProcess) Validate() error {
 //    (auto-scaling) DeleteScalingPolicy (auto-scaling)
 //
 //    * Manage fleet actions: StartFleetActions StopFleetActions
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/TargetConfiguration
 type TargetConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -2235,7 +2233,6 @@ func (s *TargetConfiguration) Validate() error {
 //    * DescribeVpcPeeringConnections
 //
 //    * DeleteVpcPeeringConnection
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/VpcPeeringAuthorization
 type VpcPeeringAuthorization struct {
 	_ struct{} `type:"structure"`
 
@@ -2282,7 +2279,6 @@ func (s VpcPeeringAuthorization) String() string {
 //    * DescribeVpcPeeringConnections
 //
 //    * DeleteVpcPeeringConnection
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/VpcPeeringConnection
 type VpcPeeringConnection struct {
 	_ struct{} `type:"structure"`
 
@@ -2326,7 +2322,6 @@ func (s VpcPeeringConnection) String() string {
 // with a VpcPeeringConnection object. Status codes and messages are provided
 // from EC2 (see VpcPeeringConnectionStateReason (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_VpcPeeringConnectionStateReason.html)).
 // Connection status information is also communicated as a fleet Event.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/VpcPeeringConnectionStatus
 type VpcPeeringConnectionStatus struct {
 	_ struct{} `type:"structure"`
 

@@ -13,15 +13,14 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Contains details about an activity that failed during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityFailedEventDetails
 type ActivityFailedEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// A more detailed explanation of the cause of the failure.
-	Cause *string `locationName:"cause" type:"string"`
+	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
 
 	// The error code of the failure.
-	Error *string `locationName:"error" type:"string"`
+	Error *string `locationName:"error" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -30,7 +29,6 @@ func (s ActivityFailedEventDetails) String() string {
 }
 
 // Contains details about an activity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityListItem
 type ActivityListItem struct {
 	_ struct{} `type:"structure"`
 
@@ -48,7 +46,7 @@ type ActivityListItem struct {
 	//
 	// A name must not contain:
 	//
-	//    * whitespace
+	//    * white space
 	//
 	//    * brackets < > { } [ ]
 	//
@@ -69,15 +67,14 @@ func (s ActivityListItem) String() string {
 
 // Contains details about an activity schedule failure that occurred during
 // an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityScheduleFailedEventDetails
 type ActivityScheduleFailedEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// A more detailed explanation of the cause of the failure.
-	Cause *string `locationName:"cause" type:"string"`
+	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
 
 	// The error code of the failure.
-	Error *string `locationName:"error" type:"string"`
+	Error *string `locationName:"error" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -86,7 +83,6 @@ func (s ActivityScheduleFailedEventDetails) String() string {
 }
 
 // Contains details about an activity scheduled during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityScheduledEventDetails
 type ActivityScheduledEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -94,7 +90,7 @@ type ActivityScheduledEventDetails struct {
 	HeartbeatInSeconds *int64 `locationName:"heartbeatInSeconds" type:"long"`
 
 	// The JSON data input to the activity task.
-	Input *string `locationName:"input" type:"string"`
+	Input *string `locationName:"input" type:"string" sensitive:"true"`
 
 	// The Amazon Resource Name (ARN) of the scheduled activity.
 	//
@@ -111,7 +107,6 @@ func (s ActivityScheduledEventDetails) String() string {
 }
 
 // Contains details about the start of an activity during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityStartedEventDetails
 type ActivityStartedEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -127,12 +122,11 @@ func (s ActivityStartedEventDetails) String() string {
 
 // Contains details about an activity that successfully terminated during an
 // execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivitySucceededEventDetails
 type ActivitySucceededEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// The JSON data output by the activity task.
-	Output *string `locationName:"output" type:"string"`
+	Output *string `locationName:"output" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -141,15 +135,14 @@ func (s ActivitySucceededEventDetails) String() string {
 }
 
 // Contains details about an activity timeout that occurred during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityTimedOutEventDetails
 type ActivityTimedOutEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// A more detailed explanation of the cause of the timeout.
-	Cause *string `locationName:"cause" type:"string"`
+	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
 
 	// The error code of the failure.
-	Error *string `locationName:"error" type:"string"`
+	Error *string `locationName:"error" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -158,15 +151,14 @@ func (s ActivityTimedOutEventDetails) String() string {
 }
 
 // Contains details about an abort of an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionAbortedEventDetails
 type ExecutionAbortedEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// A more detailed explanation of the cause of the failure.
-	Cause *string `locationName:"cause" type:"string"`
+	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
 
 	// The error code of the failure.
-	Error *string `locationName:"error" type:"string"`
+	Error *string `locationName:"error" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -175,15 +167,14 @@ func (s ExecutionAbortedEventDetails) String() string {
 }
 
 // Contains details about an execution failure event.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionFailedEventDetails
 type ExecutionFailedEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// A more detailed explanation of the cause of the failure.
-	Cause *string `locationName:"cause" type:"string"`
+	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
 
 	// The error code of the failure.
-	Error *string `locationName:"error" type:"string"`
+	Error *string `locationName:"error" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -192,7 +183,6 @@ func (s ExecutionFailedEventDetails) String() string {
 }
 
 // Contains details about an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionListItem
 type ExecutionListItem struct {
 	_ struct{} `type:"structure"`
 
@@ -205,7 +195,7 @@ type ExecutionListItem struct {
 	//
 	// A name must not contain:
 	//
-	//    * whitespace
+	//    * white space
 	//
 	//    * brackets < > { } [ ]
 	//
@@ -243,12 +233,11 @@ func (s ExecutionListItem) String() string {
 }
 
 // Contains details about the start of the execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionStartedEventDetails
 type ExecutionStartedEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// The JSON data input to the execution.
-	Input *string `locationName:"input" type:"string"`
+	Input *string `locationName:"input" type:"string" sensitive:"true"`
 
 	// The Amazon Resource Name (ARN) of the IAM role used for executing AWS Lambda
 	// tasks.
@@ -261,12 +250,11 @@ func (s ExecutionStartedEventDetails) String() string {
 }
 
 // Contains details about the successful termination of the execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionSucceededEventDetails
 type ExecutionSucceededEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// The JSON data output by the execution.
-	Output *string `locationName:"output" type:"string"`
+	Output *string `locationName:"output" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -275,15 +263,14 @@ func (s ExecutionSucceededEventDetails) String() string {
 }
 
 // Contains details about the execution timeout that occurred during the execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionTimedOutEventDetails
 type ExecutionTimedOutEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// A more detailed explanation of the cause of the timeout.
-	Cause *string `locationName:"cause" type:"string"`
+	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
 
 	// The error code of the failure.
-	Error *string `locationName:"error" type:"string"`
+	Error *string `locationName:"error" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -292,7 +279,6 @@ func (s ExecutionTimedOutEventDetails) String() string {
 }
 
 // Contains details about the events of an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/HistoryEvent
 type HistoryEvent struct {
 	_ struct{} `type:"structure"`
 
@@ -356,6 +342,21 @@ type HistoryEvent struct {
 	// execution.
 	LambdaFunctionTimedOutEventDetails *LambdaFunctionTimedOutEventDetails `locationName:"lambdaFunctionTimedOutEventDetails" type:"structure"`
 
+	// Contains details about an iteration of a Map state that was aborted.
+	MapIterationAbortedEventDetails *MapIterationEventDetails `locationName:"mapIterationAbortedEventDetails" type:"structure"`
+
+	// Contains details about an iteration of a Map state that failed.
+	MapIterationFailedEventDetails *MapIterationEventDetails `locationName:"mapIterationFailedEventDetails" type:"structure"`
+
+	// Contains details about an iteration of a Map state that was started.
+	MapIterationStartedEventDetails *MapIterationEventDetails `locationName:"mapIterationStartedEventDetails" type:"structure"`
+
+	// Contains details about an iteration of a Map state that succeeded.
+	MapIterationSucceededEventDetails *MapIterationEventDetails `locationName:"mapIterationSucceededEventDetails" type:"structure"`
+
+	// Contains details about Map state that was started.
+	MapStateStartedEventDetails *MapStateStartedEventDetails `locationName:"mapStateStartedEventDetails" type:"structure"`
+
 	// The id of the previous event.
 	PreviousEventId *int64 `locationName:"previousEventId" type:"long"`
 
@@ -406,15 +407,14 @@ func (s HistoryEvent) String() string {
 }
 
 // Contains details about a lambda function that failed during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LambdaFunctionFailedEventDetails
 type LambdaFunctionFailedEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// A more detailed explanation of the cause of the failure.
-	Cause *string `locationName:"cause" type:"string"`
+	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
 
 	// The error code of the failure.
-	Error *string `locationName:"error" type:"string"`
+	Error *string `locationName:"error" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -424,15 +424,14 @@ func (s LambdaFunctionFailedEventDetails) String() string {
 
 // Contains details about a failed lambda function schedule event that occurred
 // during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LambdaFunctionScheduleFailedEventDetails
 type LambdaFunctionScheduleFailedEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// A more detailed explanation of the cause of the failure.
-	Cause *string `locationName:"cause" type:"string"`
+	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
 
 	// The error code of the failure.
-	Error *string `locationName:"error" type:"string"`
+	Error *string `locationName:"error" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -441,12 +440,11 @@ func (s LambdaFunctionScheduleFailedEventDetails) String() string {
 }
 
 // Contains details about a lambda function scheduled during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LambdaFunctionScheduledEventDetails
 type LambdaFunctionScheduledEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// The JSON data input to the lambda function.
-	Input *string `locationName:"input" type:"string"`
+	Input *string `locationName:"input" type:"string" sensitive:"true"`
 
 	// The Amazon Resource Name (ARN) of the scheduled lambda function.
 	//
@@ -463,15 +461,14 @@ func (s LambdaFunctionScheduledEventDetails) String() string {
 }
 
 // Contains details about a lambda function that failed to start during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LambdaFunctionStartFailedEventDetails
 type LambdaFunctionStartFailedEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// A more detailed explanation of the cause of the failure.
-	Cause *string `locationName:"cause" type:"string"`
+	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
 
 	// The error code of the failure.
-	Error *string `locationName:"error" type:"string"`
+	Error *string `locationName:"error" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -481,12 +478,11 @@ func (s LambdaFunctionStartFailedEventDetails) String() string {
 
 // Contains details about a lambda function that successfully terminated during
 // an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LambdaFunctionSucceededEventDetails
 type LambdaFunctionSucceededEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// The JSON data output by the lambda function.
-	Output *string `locationName:"output" type:"string"`
+	Output *string `locationName:"output" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -496,15 +492,14 @@ func (s LambdaFunctionSucceededEventDetails) String() string {
 
 // Contains details about a lambda function timeout that occurred during an
 // execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LambdaFunctionTimedOutEventDetails
 type LambdaFunctionTimedOutEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// A more detailed explanation of the cause of the timeout.
-	Cause *string `locationName:"cause" type:"string"`
+	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
 
 	// The error code of the failure.
-	Error *string `locationName:"error" type:"string"`
+	Error *string `locationName:"error" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -512,13 +507,41 @@ func (s LambdaFunctionTimedOutEventDetails) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Contains details about an iteration of a Map state.
+type MapIterationEventDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The index of the array belonging to the Map state iteration.
+	Index *int64 `locationName:"index" type:"integer"`
+
+	// The name of the iteration’s parent Map state.
+	Name *string `locationName:"name" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s MapIterationEventDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Details about a Map state that was started.
+type MapStateStartedEventDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The size of the array for Map state iterations.
+	Length *int64 `locationName:"length" type:"integer"`
+}
+
+// String returns the string representation
+func (s MapStateStartedEventDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Contains details about a state entered during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StateEnteredEventDetails
 type StateEnteredEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// The string that contains the JSON input data for the state.
-	Input *string `locationName:"input" type:"string"`
+	Input *string `locationName:"input" type:"string" sensitive:"true"`
 
 	// The name of the state.
 	//
@@ -532,7 +555,6 @@ func (s StateEnteredEventDetails) String() string {
 }
 
 // Contains details about an exit from a state during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StateExitedEventDetails
 type StateExitedEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -540,7 +562,7 @@ type StateExitedEventDetails struct {
 	//
 	// A name must not contain:
 	//
-	//    * whitespace
+	//    * white space
 	//
 	//    * brackets < > { } [ ]
 	//
@@ -554,7 +576,7 @@ type StateExitedEventDetails struct {
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 
 	// The JSON output data of the state.
-	Output *string `locationName:"output" type:"string"`
+	Output *string `locationName:"output" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -563,7 +585,6 @@ func (s StateExitedEventDetails) String() string {
 }
 
 // Contains details about the state machine.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StateMachineListItem
 type StateMachineListItem struct {
 	_ struct{} `type:"structure"`
 
@@ -576,7 +597,7 @@ type StateMachineListItem struct {
 	//
 	// A name must not contain:
 	//
-	//    * whitespace
+	//    * white space
 	//
 	//    * brackets < > { } [ ]
 	//
@@ -602,7 +623,14 @@ func (s StateMachineListItem) String() string {
 
 // Tags are key-value pairs that can be associated with Step Functions state
 // machines and activities.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/Tag
+//
+// An array of key-value pairs. For more information, see Using Cost Allocation
+// Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
+// in the AWS Billing and Cost Management User Guide, and Controlling Access
+// Using IAM Tags (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html).
+//
+// Tags may only contain Unicode letters, digits, white space, or these symbols:
+// _ . : / = + - @.
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -632,15 +660,14 @@ func (s *Tag) Validate() error {
 }
 
 // Contains details about a task failure event.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskFailedEventDetails
 type TaskFailedEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// A more detailed explanation of the cause of the failure.
-	Cause *string `locationName:"cause" type:"string"`
+	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
 
 	// The error code of the failure.
-	Error *string `locationName:"error" type:"string"`
+	Error *string `locationName:"error" type:"string" sensitive:"true"`
 
 	// The service name of the resource in a task state.
 	//
@@ -659,14 +686,13 @@ func (s TaskFailedEventDetails) String() string {
 }
 
 // Contains details about a task scheduled during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskScheduledEventDetails
 type TaskScheduledEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// The JSON data passed to the resource referenced in a task state.
 	//
 	// Parameters is a required field
-	Parameters *string `locationName:"parameters" type:"string" required:"true"`
+	Parameters *string `locationName:"parameters" type:"string" required:"true" sensitive:"true"`
 
 	// The region of the scheduled task
 	//
@@ -693,15 +719,14 @@ func (s TaskScheduledEventDetails) String() string {
 }
 
 // Contains details about a task that failed to start during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskStartFailedEventDetails
 type TaskStartFailedEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// A more detailed explanation of the cause of the failure.
-	Cause *string `locationName:"cause" type:"string"`
+	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
 
 	// The error code of the failure.
-	Error *string `locationName:"error" type:"string"`
+	Error *string `locationName:"error" type:"string" sensitive:"true"`
 
 	// The service name of the resource in a task state.
 	//
@@ -720,7 +745,6 @@ func (s TaskStartFailedEventDetails) String() string {
 }
 
 // Contains details about the start of a task during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskStartedEventDetails
 type TaskStartedEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -741,15 +765,14 @@ func (s TaskStartedEventDetails) String() string {
 }
 
 // Contains details about a task that failed to submit during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskSubmitFailedEventDetails
 type TaskSubmitFailedEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// A more detailed explanation of the cause of the failure.
-	Cause *string `locationName:"cause" type:"string"`
+	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
 
 	// The error code of the failure.
-	Error *string `locationName:"error" type:"string"`
+	Error *string `locationName:"error" type:"string" sensitive:"true"`
 
 	// The service name of the resource in a task state.
 	//
@@ -768,12 +791,11 @@ func (s TaskSubmitFailedEventDetails) String() string {
 }
 
 // Contains details about a task submitted to a resource .
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskSubmittedEventDetails
 type TaskSubmittedEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// The response from a resource when a task has started.
-	Output *string `locationName:"output" type:"string"`
+	Output *string `locationName:"output" type:"string" sensitive:"true"`
 
 	// The service name of the resource in a task state.
 	//
@@ -792,13 +814,12 @@ func (s TaskSubmittedEventDetails) String() string {
 }
 
 // Contains details about the successful completion of a task state.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskSucceededEventDetails
 type TaskSucceededEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// The full JSON response from a resource when a task has succeeded. This response
 	// becomes the output of the related task.
-	Output *string `locationName:"output" type:"string"`
+	Output *string `locationName:"output" type:"string" sensitive:"true"`
 
 	// The service name of the resource in a task state.
 	//
@@ -817,15 +838,14 @@ func (s TaskSucceededEventDetails) String() string {
 }
 
 // Contains details about a resource timeout that occurred during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskTimedOutEventDetails
 type TaskTimedOutEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// A more detailed explanation of the cause of the failure.
-	Cause *string `locationName:"cause" type:"string"`
+	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
 
 	// The error code of the failure.
-	Error *string `locationName:"error" type:"string"`
+	Error *string `locationName:"error" type:"string" sensitive:"true"`
 
 	// The service name of the resource in a task state.
 	//

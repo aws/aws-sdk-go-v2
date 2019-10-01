@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetCurrentUserRequest
 type GetCurrentUserInput struct {
 	_ struct{} `type:"structure"`
 
@@ -18,7 +17,7 @@ type GetCurrentUserInput struct {
 	// API actions, as in accessing the API using AWS credentials.
 	//
 	// AuthenticationToken is a required field
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" required:"true"`
+	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -56,7 +55,6 @@ func (s GetCurrentUserInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetCurrentUserResponse
 type GetCurrentUserOutput struct {
 	_ struct{} `type:"structure"`
 

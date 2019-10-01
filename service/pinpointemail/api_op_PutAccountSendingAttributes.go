@@ -11,7 +11,6 @@ import (
 )
 
 // A request to change the ability of your account to send email.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutAccountSendingAttributesRequest
 type PutAccountSendingAttributesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s PutAccountSendingAttributesInput) MarshalFields(e protocol.FieldEncoder)
 
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutAccountSendingAttributesResponse
 type PutAccountSendingAttributesOutput struct {
 	_ struct{} `type:"structure"`
 }

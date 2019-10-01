@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeSecurityConfigurationInput
 type DescribeSecurityConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -39,7 +38,6 @@ func (s *DescribeSecurityConfigurationInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeSecurityConfigurationOutput
 type DescribeSecurityConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 

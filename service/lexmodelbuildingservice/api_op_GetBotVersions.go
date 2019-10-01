@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotVersionsRequest
 type GetBotVersionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -80,7 +79,6 @@ func (s GetBotVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotVersionsResponse
 type GetBotVersionsOutput struct {
 	_ struct{} `type:"structure"`
 

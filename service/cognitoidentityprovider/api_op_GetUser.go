@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the request to get information about the user.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserRequest
 type GetUserInput struct {
 	_ struct{} `type:"structure"`
 
@@ -18,7 +17,7 @@ type GetUserInput struct {
 	// the user.
 	//
 	// AccessToken is a required field
-	AccessToken *string `type:"string" required:"true"`
+	AccessToken *string `type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -42,7 +41,6 @@ func (s *GetUserInput) Validate() error {
 
 // Represents the response from the server from the request to get information
 // about the user.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserResponse
 type GetUserOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -66,7 +64,7 @@ type GetUserOutput struct {
 	// The user name of the user you wish to retrieve from the get user request.
 	//
 	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true"`
+	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation

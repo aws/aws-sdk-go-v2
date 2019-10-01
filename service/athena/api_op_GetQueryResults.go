@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryResultsInput
 type GetQueryResultsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +50,6 @@ func (s *GetQueryResultsInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryResultsOutput
 type GetQueryResultsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -75,10 +73,21 @@ const opGetQueryResults = "GetQueryResults"
 // GetQueryResultsRequest returns a request value for making API operation for
 // Amazon Athena.
 //
-// Returns the results of a single query execution specified by QueryExecutionId
-// if you have access to the workgroup in which the query ran. This request
-// does not execute the query but returns results. Use StartQueryExecution to
-// run a query.
+// Streams the results of a single query execution specified by QueryExecutionId
+// from the Athena query results location in Amazon S3. For more information,
+// see Query Results (https://docs.aws.amazon.com/athena/latest/ug/querying.html)
+// in the Amazon Athena User Guide. This request does not execute the query
+// but returns results. Use StartQueryExecution to run a query.
+//
+// To stream query results successfully, the IAM principal with permission to
+// call GetQueryResults also must have permissions to the Amazon S3 GetObject
+// action for the Athena query results location.
+//
+// IAM principals with permission to the Amazon S3 GetObject action for the
+// query results location are able to retrieve query results from Amazon S3
+// even if permission to the GetQueryResults action is denied. To restrict user
+// or role access, ensure that Amazon S3 permissions to the Athena query location
+// are denied.
 //
 //    // Example sending a request using GetQueryResultsRequest.
 //    req := client.GetQueryResultsRequest(params)

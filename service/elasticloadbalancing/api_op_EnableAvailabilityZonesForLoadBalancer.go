@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for EnableAvailabilityZonesForLoadBalancer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AddAvailabilityZonesInput
 type EnableAvailabilityZonesForLoadBalancerInput struct {
 	_ struct{} `type:"structure"`
 
@@ -49,7 +48,6 @@ func (s *EnableAvailabilityZonesForLoadBalancerInput) Validate() error {
 }
 
 // Contains the output of EnableAvailabilityZonesForLoadBalancer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AddAvailabilityZonesOutput
 type EnableAvailabilityZonesForLoadBalancerOutput struct {
 	_ struct{} `type:"structure"`
 

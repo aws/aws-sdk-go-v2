@@ -10,7 +10,6 @@ import (
 )
 
 // Input to the GetCredentialsForIdentity action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetCredentialsForIdentityInput
 type GetCredentialsForIdentityInput struct {
 	_ struct{} `type:"structure"`
 
@@ -64,7 +63,6 @@ func (s *GetCredentialsForIdentityInput) Validate() error {
 }
 
 // Returned in response to a successful GetCredentialsForIdentity operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetCredentialsForIdentityResponse
 type GetCredentialsForIdentityOutput struct {
 	_ struct{} `type:"structure"`
 

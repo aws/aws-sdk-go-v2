@@ -10,20 +10,41 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AcceptInvitationRequest
 type AcceptInvitationInput struct {
 	_ struct{} `type:"structure"`
 
 	// The ID of the invitation sent from the Security Hub master account.
-	InvitationId *string `type:"string"`
+	//
+	// InvitationId is a required field
+	InvitationId *string `type:"string" required:"true"`
 
 	// The account ID of the Security Hub master account that sent the invitation.
-	MasterId *string `type:"string"`
+	//
+	// MasterId is a required field
+	MasterId *string `type:"string" required:"true"`
 }
 
 // String returns the string representation
 func (s AcceptInvitationInput) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AcceptInvitationInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AcceptInvitationInput"}
+
+	if s.InvitationId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InvitationId"))
+	}
+
+	if s.MasterId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MasterId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -45,7 +66,6 @@ func (s AcceptInvitationInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AcceptInvitationResponse
 type AcceptInvitationOutput struct {
 	_ struct{} `type:"structure"`
 }

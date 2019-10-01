@@ -11,7 +11,6 @@ import (
 
 // Deletes the local side of an existing trust relationship between the AWS
 // Managed Microsoft AD directory and the external domain.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteTrustRequest
 type DeleteTrustInput struct {
 	_ struct{} `type:"structure"`
 
@@ -44,7 +43,6 @@ func (s *DeleteTrustInput) Validate() error {
 }
 
 // The result of a DeleteTrust request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteTrustResult
 type DeleteTrustOutput struct {
 	_ struct{} `type:"structure"`
 

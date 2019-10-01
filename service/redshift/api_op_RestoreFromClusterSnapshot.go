@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshotMessage
 type RestoreFromClusterSnapshotInput struct {
 	_ struct{} `type:"structure"`
 
@@ -226,7 +225,6 @@ func (s *RestoreFromClusterSnapshotInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshotResult
 type RestoreFromClusterSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 

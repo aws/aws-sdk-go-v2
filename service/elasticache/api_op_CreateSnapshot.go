@@ -10,13 +10,15 @@ import (
 )
 
 // Represents the input of a CreateSnapshot operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateSnapshotMessage
 type CreateSnapshotInput struct {
 	_ struct{} `type:"structure"`
 
 	// The identifier of an existing cluster. The snapshot is created from this
 	// cluster.
 	CacheClusterId *string `type:"string"`
+
+	// The ID of the KMS key used to encrypt the snapshot.
+	KmsKeyId *string `type:"string"`
 
 	// The identifier of an existing replication group. The snapshot is created
 	// from this replication group.
@@ -47,7 +49,6 @@ func (s *CreateSnapshotInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateSnapshotResult
 type CreateSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 

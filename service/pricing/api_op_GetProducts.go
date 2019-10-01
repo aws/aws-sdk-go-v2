@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/GetProductsRequest
 type GetProductsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s *GetProductsInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/GetProductsResponse
 type GetProductsOutput struct {
 	_ struct{} `type:"structure"`
 

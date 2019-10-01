@@ -13,7 +13,6 @@ import (
 
 // Represents a request to delete an email address from the list of email addresses
 // you have attempted to verify under your AWS account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteVerifiedEmailAddressRequest
 type DeleteVerifiedEmailAddressInput struct {
 	_ struct{} `type:"structure"`
 
@@ -42,7 +41,6 @@ func (s *DeleteVerifiedEmailAddressInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteVerifiedEmailAddressOutput
 type DeleteVerifiedEmailAddressOutput struct {
 	_ struct{} `type:"structure"`
 }

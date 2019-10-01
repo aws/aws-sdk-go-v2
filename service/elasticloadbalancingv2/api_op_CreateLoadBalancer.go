@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateLoadBalancerInput
 type CreateLoadBalancerInput struct {
 	_ struct{} `type:"structure"`
 
@@ -53,7 +52,8 @@ type CreateLoadBalancerInput struct {
 	// Zones. You cannot specify Elastic IP addresses for your subnets.
 	//
 	// [Network Load Balancers] You can specify subnets from one or more Availability
-	// Zones. You can specify one Elastic IP address per subnet.
+	// Zones. You can specify one Elastic IP address per subnet if you need static
+	// IP addresses for your load balancer.
 	SubnetMappings []SubnetMapping `type:"list"`
 
 	// The IDs of the public subnets. You can specify only one subnet per Availability
@@ -102,7 +102,6 @@ func (s *CreateLoadBalancerInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateLoadBalancerOutput
 type CreateLoadBalancerOutput struct {
 	_ struct{} `type:"structure"`
 

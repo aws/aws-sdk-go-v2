@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeResourcePoliciesRequest
 type DescribeResourcePoliciesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *DescribeResourcePoliciesInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeResourcePoliciesResponse
 type DescribeResourcePoliciesOutput struct {
 	_ struct{} `type:"structure"`
 

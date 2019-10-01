@@ -10,7 +10,6 @@ import (
 )
 
 // This input identifies a cluster and a list of tags to remove.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveTagsInput
 type RemoveTagsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +49,6 @@ func (s *RemoveTagsInput) Validate() error {
 }
 
 // This output indicates the result of removing tags from a resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveTagsOutput
 type RemoveTagsOutput struct {
 	_ struct{} `type:"structure"`
 }

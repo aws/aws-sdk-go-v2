@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateContactWithAddressBookRequest
 type AssociateContactWithAddressBookInput struct {
 	_ struct{} `type:"structure"`
 
@@ -47,7 +46,6 @@ func (s *AssociateContactWithAddressBookInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateContactWithAddressBookResponse
 type AssociateContactWithAddressBookOutput struct {
 	_ struct{} `type:"structure"`
 }

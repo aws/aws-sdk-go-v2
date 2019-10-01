@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySubnetAttributeRequest
 type ModifySubnetAttributeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -54,7 +53,6 @@ func (s *ModifySubnetAttributeInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySubnetAttributeOutput
 type ModifySubnetAttributeOutput struct {
 	_ struct{} `type:"structure"`
 }

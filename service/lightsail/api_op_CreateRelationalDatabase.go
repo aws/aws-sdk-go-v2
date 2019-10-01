@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateRelationalDatabaseRequest
 type CreateRelationalDatabaseInput struct {
 	_ struct{} `type:"structure"`
 
@@ -37,7 +36,7 @@ type CreateRelationalDatabaseInput struct {
 	// any printable ASCII character except "/", """, or "@".
 	//
 	// Constraints: Must contain 8 to 41 characters.
-	MasterUserPassword *string `locationName:"masterUserPassword" type:"string"`
+	MasterUserPassword *string `locationName:"masterUserPassword" type:"string" sensitive:"true"`
 
 	// The master user name for your new database.
 	//
@@ -171,7 +170,6 @@ func (s *CreateRelationalDatabaseInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateRelationalDatabaseResult
 type CreateRelationalDatabaseOutput struct {
 	_ struct{} `type:"structure"`
 

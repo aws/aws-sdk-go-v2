@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListNamedQueriesInput
 type ListNamedQueriesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -42,7 +41,6 @@ func (s *ListNamedQueriesInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListNamedQueriesOutput
 type ListNamedQueriesOutput struct {
 	_ struct{} `type:"structure"`
 

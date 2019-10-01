@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessageBatchRequest
 type DeleteMessageBatchInput struct {
 	_ struct{} `type:"structure"`
 
@@ -60,7 +59,6 @@ func (s *DeleteMessageBatchInput) Validate() error {
 // For each message in the batch, the response contains a DeleteMessageBatchResultEntry
 // tag if the message is deleted or a BatchResultErrorEntry tag if the message
 // can't be deleted.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessageBatchResult
 type DeleteMessageBatchOutput struct {
 	_ struct{} `type:"structure"`
 

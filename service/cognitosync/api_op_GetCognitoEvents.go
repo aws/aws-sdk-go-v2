@@ -11,7 +11,6 @@ import (
 )
 
 // A request for a list of the configured Cognito Events
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetCognitoEventsRequest
 type GetCognitoEventsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -57,7 +56,6 @@ func (s GetCognitoEventsInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The response from the GetCognitoEvents request
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetCognitoEventsResponse
 type GetCognitoEventsOutput struct {
 	_ struct{} `type:"structure"`
 

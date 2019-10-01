@@ -14,7 +14,6 @@ import (
 //    * ListGatewaysInput$Limit
 //
 //    * ListGatewaysInput$Marker
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListGatewaysInput
 type ListGatewaysInput struct {
 	_ struct{} `type:"structure"`
 
@@ -48,7 +47,6 @@ func (s *ListGatewaysInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListGatewaysOutput
 type ListGatewaysOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -71,8 +69,8 @@ const opListGateways = "ListGateways"
 // ListGatewaysRequest returns a request value for making API operation for
 // AWS Storage Gateway.
 //
-// Lists gateways owned by an AWS account in a region specified in the request.
-// The returned list is ordered by gateway Amazon Resource Name (ARN).
+// Lists gateways owned by an AWS account in an AWS Region specified in the
+// request. The returned list is ordered by gateway Amazon Resource Name (ARN).
 //
 // By default, the operation returns a maximum of 100 gateways. This operation
 // supports pagination that allows you to optionally reduce the number of gateways

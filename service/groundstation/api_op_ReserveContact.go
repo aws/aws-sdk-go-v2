@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ReserveContactRequest
 type ReserveContactInput struct {
 	_ struct{} `type:"structure"`
 
@@ -119,7 +118,6 @@ func (s ReserveContactInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ContactIdResponse
 type ReserveContactOutput struct {
 	_ struct{} `type:"structure"`
 

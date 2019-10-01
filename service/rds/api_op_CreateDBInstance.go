@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceMessage
 type CreateDBInstanceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -232,8 +231,8 @@ type CreateDBInstanceInput struct {
 	DBName *string `type:"string"`
 
 	// The name of the DB parameter group to associate with this DB instance. If
-	// this argument is omitted, the default DBParameterGroup for the specified
-	// engine is used.
+	// you do not specify a value for DBParameterGroupName, then the default DBParameterGroup
+	// for the specified DB engine is used.
 	//
 	// Constraints:
 	//
@@ -767,7 +766,6 @@ func (s *CreateDBInstanceInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceResult
 type CreateDBInstanceOutput struct {
 	_ struct{} `type:"structure"`
 

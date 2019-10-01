@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ShareDirectoryRequest
 type ShareDirectoryInput struct {
 	_ struct{} `type:"structure"`
 
@@ -29,7 +28,7 @@ type ShareDirectoryInput struct {
 	// A directory share request that is sent by the directory owner to the directory
 	// consumer. The request includes a typed message to help the directory consumer
 	// administrator determine whether to approve or reject the share invitation.
-	ShareNotes *string `type:"string"`
+	ShareNotes *string `type:"string" sensitive:"true"`
 
 	// Identifier for the directory consumer account with whom the directory is
 	// to be shared.
@@ -69,7 +68,6 @@ func (s *ShareDirectoryInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ShareDirectoryResult
 type ShareDirectoryOutput struct {
 	_ struct{} `type:"structure"`
 

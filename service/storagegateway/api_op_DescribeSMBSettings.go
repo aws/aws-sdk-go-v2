@@ -9,12 +9,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBSettingsInput
 type DescribeSMBSettingsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	//
 	// GatewayARN is a required field
 	GatewayARN *string `min:"50" type:"string" required:"true"`
@@ -42,7 +41,6 @@ func (s *DescribeSMBSettingsInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBSettingsOutput
 type DescribeSMBSettingsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +48,7 @@ type DescribeSMBSettingsOutput struct {
 	DomainName *string `min:"1" type:"string"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string `min:"50" type:"string"`
 
 	// This value is true if a password for the guest user “smbguest” is set,

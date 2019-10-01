@@ -12,7 +12,6 @@ import (
 // Represents a request to begin email address verification with Amazon SES.
 // For information about email address verification, see the Amazon SES Developer
 // Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/VerifyEmailIdentityRequest
 type VerifyEmailIdentityInput struct {
 	_ struct{} `type:"structure"`
 
@@ -42,7 +41,6 @@ func (s *VerifyEmailIdentityInput) Validate() error {
 }
 
 // An empty element returned on a successful request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/VerifyEmailIdentityResponse
 type VerifyEmailIdentityOutput struct {
 	_ struct{} `type:"structure"`
 }

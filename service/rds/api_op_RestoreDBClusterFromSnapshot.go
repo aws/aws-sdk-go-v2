@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshotMessage
 type RestoreDBClusterFromSnapshotInput struct {
 	_ struct{} `type:"structure"`
 
@@ -101,8 +100,8 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// Engine is a required field
 	Engine *string `type:"string" required:"true"`
 
-	// The DB engine mode of the DB cluster, either provisioned, serverless, or
-	// parallelquery.
+	// The DB engine mode of the DB cluster, either provisioned, serverless, parallelquery,
+	// global, or multimaster.
 	EngineMode *string `type:"string"`
 
 	// The version of the database engine to use for the new DB cluster.
@@ -211,7 +210,6 @@ func (s *RestoreDBClusterFromSnapshotInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshotResult
 type RestoreDBClusterFromSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 

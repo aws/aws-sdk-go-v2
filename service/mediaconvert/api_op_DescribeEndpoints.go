@@ -12,7 +12,6 @@ import (
 
 // Send an request with an empty body to the regional API endpoint to get your
 // account API endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DescribeEndpointsRequest
 type DescribeEndpointsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -62,7 +61,6 @@ func (s DescribeEndpointsInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Successful describe endpoints requests will return your account API endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DescribeEndpointsResponse
 type DescribeEndpointsOutput struct {
 	_ struct{} `type:"structure"`
 

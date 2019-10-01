@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/DecodeAuthorizationMessageRequest
 type DecodeAuthorizationMessageInput struct {
 	_ struct{} `type:"structure"`
 
@@ -44,7 +43,6 @@ func (s *DecodeAuthorizationMessageInput) Validate() error {
 // A document that contains additional information about the authorization status
 // of a request from an encoded message that is returned in response to an AWS
 // request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/DecodeAuthorizationMessageResponse
 type DecodeAuthorizationMessageOutput struct {
 	_ struct{} `type:"structure"`
 

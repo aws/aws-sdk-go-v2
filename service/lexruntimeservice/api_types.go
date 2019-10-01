@@ -13,7 +13,6 @@ var _ = awsutil.Prettify
 
 // Represents an option to be shown on the client platform (Facebook, Slack,
 // etc.)
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/Button
 type Button struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s Button) MarshalFields(e protocol.FieldEncoder) error {
 // the user and provides information about the context in which the action takes
 // place. Use the DialogAction data type to set the interaction to a specific
 // state, or to return the interaction to a previous state.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/DialogAction
 type DialogAction struct {
 	_ struct{} `type:"structure"`
 
@@ -77,7 +75,7 @@ type DialogAction struct {
 
 	// The message that should be shown to the user. If you don't specify a message,
 	// Amazon Lex will use the message configured for the intent.
-	Message *string `locationName:"message" min:"1" type:"string"`
+	Message *string `locationName:"message" min:"1" type:"string" sensitive:"true"`
 
 	//    * PlainText - The message contains plain UTF-8 text.
 	//
@@ -93,7 +91,7 @@ type DialogAction struct {
 	SlotToElicit *string `locationName:"slotToElicit" type:"string"`
 
 	// Map of the slots that have been gathered and their values.
-	Slots map[string]string `locationName:"slots" type:"map"`
+	Slots map[string]string `locationName:"slots" type:"map" sensitive:"true"`
 
 	// The next action that the bot should take in its interaction with the user.
 	// The possible values are:
@@ -193,7 +191,6 @@ func (s DialogAction) MarshalFields(e protocol.FieldEncoder) error {
 
 // Represents an option rendered to the user when a prompt is shown. It could
 // be an image, a button, a link, or text.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/GenericAttachment
 type GenericAttachment struct {
 	_ struct{} `type:"structure"`
 
@@ -262,7 +259,6 @@ func (s GenericAttachment) MarshalFields(e protocol.FieldEncoder) error {
 // Provides information about the state of an intent. You can use this information
 // to get the current state of an intent so that you can process the intent,
 // or so that you can return the intent to its previous state.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/IntentSummary
 type IntentSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -319,7 +315,7 @@ type IntentSummary struct {
 	SlotToElicit *string `locationName:"slotToElicit" type:"string"`
 
 	// Map of the slots that have been gathered and their values.
-	Slots map[string]string `locationName:"slots" type:"map"`
+	Slots map[string]string `locationName:"slots" type:"map" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -378,7 +374,6 @@ func (s IntentSummary) MarshalFields(e protocol.FieldEncoder) error {
 // the session attributes and slot values that are available, and then returns
 // it. The response card can also come from a Lambda function ( dialogCodeHook
 // and fulfillmentActivity on an intent).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/ResponseCard
 type ResponseCard struct {
 	_ struct{} `type:"structure"`
 

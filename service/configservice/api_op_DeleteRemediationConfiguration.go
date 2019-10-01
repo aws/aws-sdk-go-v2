@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteRemediationConfigurationRequest
 type DeleteRemediationConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -45,7 +44,6 @@ func (s *DeleteRemediationConfigurationInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteRemediationConfigurationResponse
 type DeleteRemediationConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 }

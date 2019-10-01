@@ -10,19 +10,18 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowTargetRequest
 type UpdateMaintenanceWindowTargetInput struct {
 	_ struct{} `type:"structure"`
 
 	// An optional description for the update.
-	Description *string `min:"1" type:"string"`
+	Description *string `min:"1" type:"string" sensitive:"true"`
 
 	// A name for the update.
 	Name *string `min:"3" type:"string"`
 
 	// User-provided value that will be included in any CloudWatch events raised
 	// while running tasks for these targets in this maintenance window.
-	OwnerInformation *string `min:"1" type:"string"`
+	OwnerInformation *string `min:"1" type:"string" sensitive:"true"`
 
 	// If True, then all fields that are required by the RegisterTargetWithMaintenanceWindow
 	// action are also required for this API request. Optional fields that are not
@@ -88,18 +87,17 @@ func (s *UpdateMaintenanceWindowTargetInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowTargetResult
 type UpdateMaintenanceWindowTargetOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The updated description.
-	Description *string `min:"1" type:"string"`
+	Description *string `min:"1" type:"string" sensitive:"true"`
 
 	// The updated name.
 	Name *string `min:"3" type:"string"`
 
 	// The updated owner.
-	OwnerInformation *string `min:"1" type:"string"`
+	OwnerInformation *string `min:"1" type:"string" sensitive:"true"`
 
 	// The updated targets.
 	Targets []Target `type:"list"`

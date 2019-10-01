@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRuleRequest
 type UpdateRuleInput struct {
 	_ struct{} `type:"structure"`
 
@@ -78,7 +77,6 @@ func (s *UpdateRuleInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRuleResponse
 type UpdateRuleOutput struct {
 	_ struct{} `type:"structure"`
 

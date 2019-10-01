@@ -11,7 +11,6 @@ import (
 )
 
 // The input for CreateStack action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackInput
 type CreateStackInput struct {
 	_ struct{} `type:"structure"`
 
@@ -250,7 +249,6 @@ func (s *CreateStackInput) Validate() error {
 }
 
 // The output for a CreateStack action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackOutput
 type CreateStackOutput struct {
 	_ struct{} `type:"structure"`
 

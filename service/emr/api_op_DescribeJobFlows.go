@@ -11,7 +11,6 @@ import (
 )
 
 // The input for the DescribeJobFlows operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeJobFlowsInput
 type DescribeJobFlowsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -34,7 +33,6 @@ func (s DescribeJobFlowsInput) String() string {
 }
 
 // The output for the DescribeJobFlows operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeJobFlowsOutput
 type DescribeJobFlowsOutput struct {
 	_ struct{} `type:"structure"`
 

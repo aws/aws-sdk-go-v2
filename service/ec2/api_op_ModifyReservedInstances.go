@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for ModifyReservedInstances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyReservedInstancesRequest
 type ModifyReservedInstancesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -53,7 +52,6 @@ func (s *ModifyReservedInstancesInput) Validate() error {
 }
 
 // Contains the output of ModifyReservedInstances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyReservedInstancesResult
 type ModifyReservedInstancesOutput struct {
 	_ struct{} `type:"structure"`
 

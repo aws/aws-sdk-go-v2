@@ -12,7 +12,6 @@ import (
 )
 
 // Represents the input to RemoveTagsFromResource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RemoveTagsFromResourceMessage
 type RemoveTagsFromResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +50,6 @@ func (s *RemoveTagsFromResourceInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RemoveTagsFromResourceOutput
 type RemoveTagsFromResourceOutput struct {
 	_ struct{} `type:"structure"`
 }

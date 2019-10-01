@@ -13,7 +13,6 @@ import (
 // Modify a preset by sending a request with the preset name and any of the
 // following that you wish to change: description, category, and transcoding
 // settings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UpdatePresetRequest
 type UpdatePresetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -88,7 +87,6 @@ func (s UpdatePresetInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Successful update preset requests will return the new preset JSON.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UpdatePresetResponse
 type UpdatePresetOutput struct {
 	_ struct{} `type:"structure"`
 

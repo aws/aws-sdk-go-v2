@@ -11,7 +11,6 @@ import (
 
 // A JSON object containing the Amazon Resource Name (ARN) of the iSCSI volume
 // target.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeChapCredentialsInput
 type DescribeChapCredentialsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -45,7 +44,6 @@ func (s *DescribeChapCredentialsInput) Validate() error {
 }
 
 // A JSON object containing a .
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeChapCredentialsOutput
 type DescribeChapCredentialsOutput struct {
 	_ struct{} `type:"structure"`
 

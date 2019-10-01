@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DeregisterInstanceRequest
 type DeregisterInstanceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -47,7 +46,6 @@ func (s *DeregisterInstanceInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DeregisterInstanceResponse
 type DeregisterInstanceOutput struct {
 	_ struct{} `type:"structure"`
 

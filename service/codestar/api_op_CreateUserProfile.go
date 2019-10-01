@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CreateUserProfileRequest
 type CreateUserProfileInput struct {
 	_ struct{} `type:"structure"`
 
@@ -18,13 +17,13 @@ type CreateUserProfileInput struct {
 	// CodeStar.
 	//
 	// DisplayName is a required field
-	DisplayName *string `locationName:"displayName" min:"1" type:"string" required:"true"`
+	DisplayName *string `locationName:"displayName" min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The email address that will be displayed as part of the user's profile in
 	// AWS CodeStar.
 	//
 	// EmailAddress is a required field
-	EmailAddress *string `locationName:"emailAddress" min:"3" type:"string" required:"true"`
+	EmailAddress *string `locationName:"emailAddress" min:"3" type:"string" required:"true" sensitive:"true"`
 
 	// The SSH public key associated with the user in AWS CodeStar. If a project
 	// owner allows the user remote access to project resources, this public key
@@ -73,7 +72,6 @@ func (s *CreateUserProfileInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CreateUserProfileResult
 type CreateUserProfileOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -81,11 +79,11 @@ type CreateUserProfileOutput struct {
 	CreatedTimestamp *time.Time `locationName:"createdTimestamp" type:"timestamp"`
 
 	// The name that is displayed as the friendly name for the user in AWS CodeStar.
-	DisplayName *string `locationName:"displayName" min:"1" type:"string"`
+	DisplayName *string `locationName:"displayName" min:"1" type:"string" sensitive:"true"`
 
 	// The email address that is displayed as part of the user's profile in AWS
 	// CodeStar.
-	EmailAddress *string `locationName:"emailAddress" min:"3" type:"string"`
+	EmailAddress *string `locationName:"emailAddress" min:"3" type:"string" sensitive:"true"`
 
 	// The date the user profile was last modified, in timestamp format.
 	LastModifiedTimestamp *time.Time `locationName:"lastModifiedTimestamp" type:"timestamp"`

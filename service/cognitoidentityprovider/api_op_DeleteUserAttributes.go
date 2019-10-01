@@ -10,14 +10,13 @@ import (
 )
 
 // Represents the request to delete user attributes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserAttributesRequest
 type DeleteUserAttributesInput struct {
 	_ struct{} `type:"structure"`
 
 	// The access token used in the request to delete user attributes.
 	//
 	// AccessToken is a required field
-	AccessToken *string `type:"string" required:"true"`
+	AccessToken *string `type:"string" required:"true" sensitive:"true"`
 
 	// An array of strings representing the user attribute names you wish to delete.
 	//
@@ -52,7 +51,6 @@ func (s *DeleteUserAttributesInput) Validate() error {
 }
 
 // Represents the response from the server to delete user attributes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserAttributesResponse
 type DeleteUserAttributesOutput struct {
 	_ struct{} `type:"structure"`
 }

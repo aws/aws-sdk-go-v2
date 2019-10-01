@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteEventSubscriptionMessage
 type DeleteEventSubscriptionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s *DeleteEventSubscriptionInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteEventSubscriptionOutput
 type DeleteEventSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
 }

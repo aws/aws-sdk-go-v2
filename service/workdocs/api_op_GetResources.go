@@ -10,13 +10,12 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetResourcesRequest
 type GetResourcesInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon WorkDocs authentication token. Do not set this field when using
 	// administrative API actions, as in accessing the API operation using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string"`
+	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The collection type.
 	CollectionType ResourceCollectionType `location:"querystring" locationName:"collectionType" type:"string" enum:"true"`
@@ -97,7 +96,6 @@ func (s GetResourcesInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetResourcesResponse
 type GetResourcesOutput struct {
 	_ struct{} `type:"structure"`
 

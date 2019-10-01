@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteAggregationAuthorizationRequest
 type DeleteAggregationAuthorizationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +51,6 @@ func (s *DeleteAggregationAuthorizationInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteAggregationAuthorizationOutput
 type DeleteAggregationAuthorizationOutput struct {
 	_ struct{} `type:"structure"`
 }

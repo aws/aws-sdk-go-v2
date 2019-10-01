@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a ListActionTypes action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListActionTypesInput
 type ListActionTypesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -41,7 +40,6 @@ func (s *ListActionTypesInput) Validate() error {
 }
 
 // Represents the output of a ListActionTypes action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListActionTypesOutput
 type ListActionTypesOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateRelationalDatabaseRequest
 type UpdateRelationalDatabaseInput struct {
 	_ struct{} `type:"structure"`
 
@@ -39,7 +38,7 @@ type UpdateRelationalDatabaseInput struct {
 	// any printable ASCII character except "/", """, or "@".
 	//
 	// Constraints: Must contain 8 to 41 characters.
-	MasterUserPassword *string `locationName:"masterUserPassword" type:"string"`
+	MasterUserPassword *string `locationName:"masterUserPassword" type:"string" sensitive:"true"`
 
 	// The daily time range during which automated backups are created for your
 	// database if automated backups are enabled.
@@ -111,7 +110,6 @@ func (s *UpdateRelationalDatabaseInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateRelationalDatabaseResult
 type UpdateRelationalDatabaseOutput struct {
 	_ struct{} `type:"structure"`
 

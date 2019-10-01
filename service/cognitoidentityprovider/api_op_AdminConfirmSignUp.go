@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the request to confirm user registration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminConfirmSignUpRequest
 type AdminConfirmSignUpInput struct {
 	_ struct{} `type:"structure"`
 
@@ -22,7 +21,7 @@ type AdminConfirmSignUpInput struct {
 	// The user name for which you want to confirm user registration.
 	//
 	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true"`
+	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -55,7 +54,6 @@ func (s *AdminConfirmSignUpInput) Validate() error {
 }
 
 // Represents the response from the server for the request to confirm registration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminConfirmSignUpResponse
 type AdminConfirmSignUpOutput struct {
 	_ struct{} `type:"structure"`
 }

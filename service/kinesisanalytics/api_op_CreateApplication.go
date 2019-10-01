@@ -11,7 +11,6 @@ import (
 )
 
 // TBD
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/CreateApplicationRequest
 type CreateApplicationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -85,8 +84,7 @@ type CreateApplicationInput struct {
 	// A list of one or more tags to assign to the application. A tag is a key-value
 	// pair that identifies an application. Note that the maximum number of application
 	// tags includes system tags. The maximum number of user-defined application
-	// tags is 50. For more information, see Using Cost Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
-	// in the AWS Billing and Cost Management Guide.
+	// tags is 50. For more information, see Using Tagging (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-tagging.html).
 	Tags []Tag `min:"1" type:"list"`
 }
 
@@ -144,7 +142,6 @@ func (s *CreateApplicationInput) Validate() error {
 }
 
 // TBD
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/CreateApplicationResponse
 type CreateApplicationOutput struct {
 	_ struct{} `type:"structure"`
 

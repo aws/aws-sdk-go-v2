@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListLayersRequest
 type ListLayersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -67,7 +66,6 @@ func (s ListLayersInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListLayersResponse
 type ListLayersOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -129,6 +127,12 @@ func (c *Client) ListLayersRequest(input *ListLayersInput) ListLayersRequest {
 		Name:       opListLayers,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2018-10-31/layers",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"NextMarker"},
+			LimitToken:      "MaxItems",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -161,6 +165,53 @@ func (r ListLayersRequest) Send(ctx context.Context) (*ListLayersResponse, error
 	}
 
 	return resp, nil
+}
+
+// NewListLayersRequestPaginator returns a paginator for ListLayers.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListLayersRequest(input)
+//   p := lambda.NewListLayersRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListLayersPaginator(req ListLayersRequest) ListLayersPaginator {
+	return ListLayersPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListLayersInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListLayersPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListLayersPaginator struct {
+	aws.Pager
+}
+
+func (p *ListLayersPaginator) CurrentPage() *ListLayersOutput {
+	return p.Pager.CurrentPage().(*ListLayersOutput)
 }
 
 // ListLayersResponse is the response type for the

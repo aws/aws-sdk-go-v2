@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CreateAcceleratorRequest
 type CreateAcceleratorInput struct {
 	_ struct{} `type:"structure"`
 
@@ -60,7 +59,6 @@ func (s *CreateAcceleratorInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CreateAcceleratorResponse
 type CreateAcceleratorOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -83,6 +81,8 @@ const opCreateAccelerator = "CreateAccelerator"
 // process inbound connections and direct traffic to one or more endpoint groups,
 // each of which includes endpoints, such as Network Load Balancers. To see
 // an AWS CLI example of creating an accelerator, scroll down to Example.
+//
+// You must specify the US-West-2 (Oregon) Region to create or update accelerators.
 //
 //    // Example sending a request using CreateAcceleratorRequest.
 //    req := client.CreateAcceleratorRequest(params)

@@ -12,7 +12,6 @@ import (
 
 // A complex type that contains information about the request to create a public
 // or private hosted zone.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateHostedZoneRequest
 type CreateHostedZoneInput struct {
 	_ struct{} `locationName:"CreateHostedZoneRequest" type:"structure" xmlURI:"https://route53.amazonaws.com/doc/2013-04-01/"`
 
@@ -135,7 +134,6 @@ func (s CreateHostedZoneInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type containing the response information for the hosted zone.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateHostedZoneResponse
 type CreateHostedZoneOutput struct {
 	_ struct{} `type:"structure"`
 

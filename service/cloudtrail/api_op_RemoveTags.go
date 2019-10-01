@@ -11,7 +11,6 @@ import (
 )
 
 // Specifies the tags to remove from a trail.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/RemoveTagsRequest
 type RemoveTagsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s *RemoveTagsInput) Validate() error {
 
 // Returns the objects or data listed below if successful. Otherwise, returns
 // an error.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/RemoveTagsResponse
 type RemoveTagsOutput struct {
 	_ struct{} `type:"structure"`
 }

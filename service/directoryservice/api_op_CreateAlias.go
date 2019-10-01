@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the inputs for the CreateAlias operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateAliasRequest
 type CreateAliasInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s *CreateAliasInput) Validate() error {
 }
 
 // Contains the results of the CreateAlias operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateAliasResult
 type CreateAliasOutput struct {
 	_ struct{} `type:"structure"`
 

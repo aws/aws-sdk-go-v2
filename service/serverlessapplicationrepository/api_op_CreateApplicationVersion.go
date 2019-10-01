@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateApplicationVersionRequest
 type CreateApplicationVersionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -95,7 +94,6 @@ func (s CreateApplicationVersionInput) MarshalFields(e protocol.FieldEncoder) er
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateApplicationVersionResponse
 type CreateApplicationVersionOutput struct {
 	_ struct{} `type:"structure"`
 

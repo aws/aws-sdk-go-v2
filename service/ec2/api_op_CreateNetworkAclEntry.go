@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkAclEntryRequest
 type CreateNetworkAclEntryInput struct {
 	_ struct{} `type:"structure"`
 
@@ -106,7 +105,6 @@ func (s *CreateNetworkAclEntryInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkAclEntryOutput
 type CreateNetworkAclEntryOutput struct {
 	_ struct{} `type:"structure"`
 }

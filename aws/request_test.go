@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -82,12 +83,14 @@ func TestRequestRecoverRetry5xx(t *testing.T) {
 	reqNum := 0
 	reqs := []http.Response{
 		{StatusCode: 500, Body: body(`{"__type":"UnknownError","message":"An error occurred."}`)},
-		{StatusCode: 501, Body: body(`{"__type":"UnknownError","message":"An error occurred."}`)},
+		{StatusCode: 502, Body: body(`{"__type":"UnknownError","message":"An error occurred."}`)},
 		{StatusCode: 200, Body: body(`{"data":"valid"}`)},
 	}
 
 	cfg := unit.Config()
-	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 10}
+	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 10
+	})
 
 	s := awstesting.NewClient(cfg)
 	s.Handlers.Validate.Clear()
@@ -126,7 +129,9 @@ func TestRequestRecoverRetry4xxRetryable(t *testing.T) {
 	}
 
 	cfg := unit.Config()
-	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 10}
+	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 10
+	})
 
 	s := awstesting.NewClient(cfg)
 	s.Handlers.Validate.Clear()
@@ -154,7 +159,9 @@ func TestRequestRecoverRetry4xxRetryable(t *testing.T) {
 // test that retries don't occur for 4xx status codes with a response type that can't be retried
 func TestRequest4xxUnretryable(t *testing.T) {
 	cfg := unit.Config()
-	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 10}
+	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 1
+	})
 
 	s := awstesting.NewClient(cfg)
 
@@ -163,7 +170,10 @@ func TestRequest4xxUnretryable(t *testing.T) {
 	s.Handlers.UnmarshalError.PushBack(unmarshalError)
 	s.Handlers.Send.Clear() // mock sending
 	s.Handlers.Send.PushBack(func(r *aws.Request) {
-		r.HTTPResponse = &http.Response{StatusCode: 401, Body: body(`{"__type":"SignatureDoesNotMatch","message":"Signature does not match."}`)}
+		r.HTTPResponse = &http.Response{
+			StatusCode: 401,
+			Body:       body(`{"__type":"SignatureDoesNotMatch","message":"Signature does not match."}`),
+		}
 	})
 	out := &testData{}
 	r := s.NewRequest(&aws.Operation{Name: "Operation"}, nil, out)
@@ -193,7 +203,7 @@ func TestRequestExhaustRetries(t *testing.T) {
 	orig := sdk.SleepWithContext
 	defer func() { sdk.SleepWithContext = orig }()
 
-	delays := []time.Duration{}
+	var delays []time.Duration
 	sdk.SleepWithContext = func(ctx context.Context, dur time.Duration) error {
 		delays = append(delays, dur)
 		return nil
@@ -236,7 +246,7 @@ func TestRequestExhaustRetries(t *testing.T) {
 		t.Errorf("expect %d retry count, got %d", e, a)
 	}
 
-	expectDelays := []struct{ min, max time.Duration }{{30, 59}, {60, 118}, {120, 236}}
+	expectDelays := []struct{ min, max time.Duration }{{30, 60}, {60, 120}, {120, 240}}
 	for i, v := range delays {
 		min := expectDelays[i].min * time.Millisecond
 		max := expectDelays[i].max * time.Millisecond
@@ -266,7 +276,9 @@ func TestRequest_RecoverExpiredCreds(t *testing.T) {
 	}
 
 	cfg := unit.Config()
-	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 10}
+	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 10
+	})
 
 	credsInvalidated := false
 	credsProvider := func() aws.CredentialsProvider {
@@ -394,7 +406,7 @@ func TestRequestThrottleRetries(t *testing.T) {
 	orig := sdk.SleepWithContext
 	defer func() { sdk.SleepWithContext = orig }()
 
-	delays := []time.Duration{}
+	var delays []time.Duration
 	sdk.SleepWithContext = func(ctx context.Context, dur time.Duration) error {
 		delays = append(delays, dur)
 		return nil
@@ -437,7 +449,7 @@ func TestRequestThrottleRetries(t *testing.T) {
 		t.Errorf("expect %d retry count, got %d", e, a)
 	}
 
-	expectDelays := []struct{ min, max time.Duration }{{500, 999}, {1000, 1998}, {2000, 3996}}
+	expectDelays := []struct{ min, max time.Duration }{{500, 1000}, {1000, 2000}, {2000, 4000}}
 	for i, v := range delays {
 		min := expectDelays[i].min * time.Millisecond
 		max := expectDelays[i].max * time.Millisecond
@@ -460,7 +472,9 @@ func TestRequestRecoverTimeoutWithNilBody(t *testing.T) {
 	}
 
 	cfg := unit.Config()
-	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 10}
+	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 10
+	})
 
 	s := awstesting.NewClient(cfg)
 
@@ -507,7 +521,9 @@ func TestRequestRecoverTimeoutWithNilResponse(t *testing.T) {
 	}
 
 	cfg := unit.Config()
-	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 10}
+	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 10
+	})
 
 	s := awstesting.NewClient(cfg)
 
@@ -572,7 +588,7 @@ func TestRequest_NoBody(t *testing.T) {
 
 			cfg := unit.Config()
 			cfg.Region = "mock-region"
-			cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
+			cfg.Retryer = aws.NoOpRetryer{}
 			cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
 
 			s := awstesting.NewClient(cfg)
@@ -632,7 +648,7 @@ func TestIsSerializationErrorRetryable(t *testing.T) {
 			Error: c.err,
 		}
 		if r.IsErrorRetryable() != c.expected {
-			t.Errorf("Case %d: expected %v, but received %v", i+1, c.expected, !c.expected)
+			t.Errorf("Case %d: expected %v, but received %v", i, c.expected, !c.expected)
 		}
 	}
 }
@@ -744,13 +760,17 @@ func TestSerializationErrConnectionReset(t *testing.T) {
 		TargetPrefix:  "Foo",
 	}
 	cfg := unit.Config()
-	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 5}
+	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 5
+	})
 
 	req := aws.New(
 		cfg,
 		meta,
 		handlers,
-		aws.DefaultRetryer{NumMaxRetries: 5},
+		aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+			d.NumMaxRetries = 5
+		}),
 		op,
 		&struct{}{},
 		&struct{}{},
@@ -824,7 +844,6 @@ func TestEnforceShouldRetryCheck(t *testing.T) {
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
 	cfg.Retryer = retryer
 	cfg.HTTPClient = client
-	cfg.EnforceShouldRetryCheck = true
 
 	s := awstesting.NewClient(cfg)
 
@@ -866,11 +885,11 @@ func TestIsNoBodyReader(t *testing.T) {
 		{ioutil.NopCloser(bytes.NewReader([]byte("abc"))), false},
 		{ioutil.NopCloser(bytes.NewReader(nil)), false},
 		{nil, false},
-		{aws.NoBody, true},
+		{http.NoBody, true},
 	}
 
 	for i, c := range cases {
-		if e, a := c.expect, aws.NoBody == c.reader; e != a {
+		if e, a := c.expect, http.NoBody == c.reader; e != a {
 			t.Errorf("%d, expect %t match, but was %t", i, e, a)
 		}
 	}
@@ -895,7 +914,9 @@ func TestRequest_TemporaryRetry(t *testing.T) {
 	defer server.Close()
 
 	cfg := unit.Config()
-	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 1}
+	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 1
+	})
 	cfg.HTTPClient = &http.Client{
 		Timeout: 100 * time.Millisecond,
 	}
@@ -939,4 +960,194 @@ func TestRequest_TemporaryRetry(t *testing.T) {
 	if !terr.Temporary() {
 		t.Errorf("expect temporary error, was not")
 	}
+}
+
+func TestSanitizeHostForHeader(t *testing.T) {
+	cases := []struct {
+		url                 string
+		expectedRequestHost string
+	}{
+		{"https://estest.us-east-1.es.amazonaws.com:443", "estest.us-east-1.es.amazonaws.com"},
+		{"https://estest.us-east-1.es.amazonaws.com", "estest.us-east-1.es.amazonaws.com"},
+		{"https://localhost:9200", "localhost:9200"},
+		{"http://localhost:80", "localhost"},
+		{"http://localhost:8080", "localhost:8080"},
+	}
+
+	for _, c := range cases {
+		r, _ := http.NewRequest("GET", c.url, nil)
+		aws.SanitizeHostForHeader(r)
+
+		if h := r.Host; h != c.expectedRequestHost {
+			t.Errorf("expect %v host, got %q", c.expectedRequestHost, h)
+		}
+	}
+}
+
+func TestRequestBodySeekFails(t *testing.T) {
+	s := awstesting.NewClient(unit.Config())
+	s.Handlers.Validate.Clear()
+	s.Handlers.Build.Clear()
+
+	out := &testData{}
+	r := s.NewRequest(&aws.Operation{Name: "Operation"}, nil, out)
+	r.SetReaderBody(&stubSeekFail{
+		Err: fmt.Errorf("failed to seek reader"),
+	})
+	err := r.Send()
+	if err == nil {
+		t.Fatal("expect error, but got none")
+	}
+
+	aerr := err.(awserr.Error)
+	if e, a := aws.ErrCodeSerialization, aerr.Code(); e != a {
+		t.Errorf("expect %v error code, got %v", e, a)
+	}
+
+}
+
+func Test501NotRetrying(t *testing.T) {
+	reqNum := 0
+	reqs := []http.Response{
+		{StatusCode: 500, Body: body(`{"__type":"UnknownError","message":"An error occurred."}`)},
+		{StatusCode: 501, Body: body(`{"__type":"NotImplemented","message":"An error occurred."}`)},
+		{StatusCode: 200, Body: body(`{"data":"valid"}`)},
+	}
+
+	cfg := unit.Config()
+	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 10
+	})
+	s := awstesting.NewClient(cfg)
+	s.Handlers.Validate.Clear()
+	s.Handlers.Unmarshal.PushBack(unmarshal)
+	s.Handlers.UnmarshalError.PushBack(unmarshalError)
+	s.Handlers.Send.Clear() // mock sending
+	s.Handlers.Send.PushBack(func(r *aws.Request) {
+		r.HTTPResponse = &reqs[reqNum]
+		reqNum++
+	})
+	out := &testData{}
+	r := s.NewRequest(&aws.Operation{Name: "Operation"}, nil, out)
+	err := r.Send()
+	if err == nil {
+		t.Fatal("expect error, but got none")
+	}
+
+	aerr := err.(awserr.Error)
+	if e, a := "NotImplemented", aerr.Code(); e != a {
+		t.Errorf("expected error code %q, but received %q", e, a)
+	}
+	if e, a := 1, int(r.RetryCount); e != a {
+		t.Errorf("expect %d retry count, got %d", e, a)
+	}
+}
+
+func TestRequestInvalidEndpoint(t *testing.T) {
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("http://localhost:90 ")
+
+	r := aws.New(
+		cfg,
+		aws.Metadata{},
+		cfg.Handlers,
+		aws.NewDefaultRetryer(),
+		&aws.Operation{},
+		nil,
+		nil,
+	)
+
+	if r.Error == nil {
+		t.Errorf("expect error, got none")
+	}
+}
+
+func TestResetBody_WithEmptyBody(t *testing.T) {
+	r := aws.Request{
+		HTTPRequest: &http.Request{},
+	}
+
+	reader := strings.NewReader("")
+	r.Body = reader
+
+	r.ResetBody()
+
+	if a, e := r.HTTPRequest.Body, http.NoBody; a != e {
+		t.Errorf("expected request body to be set to reader, got %#v",
+			r.HTTPRequest.Body)
+	}
+}
+
+func TestRequest_FollowPUTRedirects(t *testing.T) {
+	const bodySize = 1024
+
+	redirectHit := 0
+	endpointHit := 0
+
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case "/redirect-me":
+			u := *r.URL
+			u.Path = "/endpoint"
+			w.Header().Set("Location", u.String())
+			w.WriteHeader(307)
+			redirectHit++
+		case "/endpoint":
+			b := bytes.Buffer{}
+			io.Copy(&b, r.Body)
+			r.Body.Close()
+			if e, a := bodySize, b.Len(); e != a {
+				t.Fatalf("expect %d body size, got %d", e, a)
+			}
+			endpointHit++
+		default:
+			t.Fatalf("unexpected endpoint used, %q", r.URL.String())
+		}
+	}))
+	defer server.Close()
+
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
+
+	svc := awstesting.NewClient(cfg)
+
+	req := svc.NewRequest(&aws.Operation{
+		Name:       "Operation",
+		HTTPMethod: "PUT",
+		HTTPPath:   "/redirect-me",
+	}, &struct{}{}, &struct{}{})
+	req.SetReaderBody(bytes.NewReader(make([]byte, bodySize)))
+
+	err := req.Send()
+	if err != nil {
+		t.Errorf("expect no error, got %v", err)
+	}
+	if e, a := 1, redirectHit; e != a {
+		t.Errorf("expect %d redirect hits, got %d", e, a)
+	}
+	if e, a := 1, endpointHit; e != a {
+		t.Errorf("expect %d endpoint hits, got %d", e, a)
+	}
+}
+
+type timeoutErr struct {
+	error
+}
+
+var errTimeout = awserr.New("foo", "bar", &timeoutErr{
+	errors.New("net/http: request canceled"),
+})
+
+type stubSeekFail struct {
+	Err error
+}
+
+func (f *stubSeekFail) Read(b []byte) (int, error) {
+	return len(b), nil
+}
+func (f *stubSeekFail) ReadAt(b []byte, offset int64) (int, error) {
+	return len(b), nil
+}
+func (f *stubSeekFail) Seek(offset int64, mode int) (int64, error) {
+	return 0, f.Err
 }

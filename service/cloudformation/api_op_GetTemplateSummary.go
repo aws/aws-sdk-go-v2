@@ -10,7 +10,6 @@ import (
 )
 
 // The input for the GetTemplateSummary action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplateSummaryInput
 type GetTemplateSummaryInput struct {
 	_ struct{} `type:"structure"`
 
@@ -73,7 +72,6 @@ func (s *GetTemplateSummaryInput) Validate() error {
 }
 
 // The output for the GetTemplateSummary action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplateSummaryOutput
 type GetTemplateSummaryOutput struct {
 	_ struct{} `type:"structure"`
 

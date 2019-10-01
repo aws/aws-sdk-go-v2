@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/RefreshTrustedAdvisorCheckRequest
 type RefreshTrustedAdvisorCheckInput struct {
 	_ struct{} `type:"structure"`
 
@@ -41,7 +40,6 @@ func (s *RefreshTrustedAdvisorCheckInput) Validate() error {
 }
 
 // The current refresh status of a Trusted Advisor check.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/RefreshTrustedAdvisorCheckResponse
 type RefreshTrustedAdvisorCheckOutput struct {
 	_ struct{} `type:"structure"`
 

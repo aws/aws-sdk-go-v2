@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRecoveryPointsByBackupVaultInput
 type ListRecoveryPointsByBackupVaultInput struct {
 	_ struct{} `type:"structure"`
 
@@ -128,7 +127,6 @@ func (s ListRecoveryPointsByBackupVaultInput) MarshalFields(e protocol.FieldEnco
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRecoveryPointsByBackupVaultOutput
 type ListRecoveryPointsByBackupVaultOutput struct {
 	_ struct{} `type:"structure"`
 

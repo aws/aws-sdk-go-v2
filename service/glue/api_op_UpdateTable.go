@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTableRequest
 type UpdateTableInput struct {
 	_ struct{} `type:"structure"`
 
@@ -68,7 +67,6 @@ func (s *UpdateTableInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTableResponse
 type UpdateTableOutput struct {
 	_ struct{} `type:"structure"`
 }

@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewaymanagementapi-2018-11-29/PostToConnectionRequest
 type PostToConnectionInput struct {
 	_ struct{} `type:"structure" payload:"Data"`
 
@@ -65,7 +64,6 @@ func (s PostToConnectionInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewaymanagementapi-2018-11-29/PostToConnectionOutput
 type PostToConnectionOutput struct {
 	_ struct{} `type:"structure"`
 }

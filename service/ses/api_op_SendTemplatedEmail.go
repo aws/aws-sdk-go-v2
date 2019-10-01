@@ -12,7 +12,6 @@ import (
 
 // Represents a request to send a templated email using Amazon SES. For more
 // information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendTemplatedEmailRequest
 type SendTemplatedEmailInput struct {
 	_ struct{} `type:"structure"`
 
@@ -147,7 +146,6 @@ func (s *SendTemplatedEmailInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendTemplatedEmailResponse
 type SendTemplatedEmailOutput struct {
 	_ struct{} `type:"structure"`
 

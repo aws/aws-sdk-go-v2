@@ -83,6 +83,8 @@ type ClientAPI interface {
 
 	DeleteRemediationConfigurationRequest(*configservice.DeleteRemediationConfigurationInput) configservice.DeleteRemediationConfigurationRequest
 
+	DeleteRemediationExceptionsRequest(*configservice.DeleteRemediationExceptionsInput) configservice.DeleteRemediationExceptionsRequest
+
 	DeleteRetentionConfigurationRequest(*configservice.DeleteRetentionConfigurationInput) configservice.DeleteRetentionConfigurationRequest
 
 	DeliverConfigSnapshotRequest(*configservice.DeliverConfigSnapshotInput) configservice.DeliverConfigSnapshotRequest
@@ -118,6 +120,8 @@ type ClientAPI interface {
 	DescribePendingAggregationRequestsRequest(*configservice.DescribePendingAggregationRequestsInput) configservice.DescribePendingAggregationRequestsRequest
 
 	DescribeRemediationConfigurationsRequest(*configservice.DescribeRemediationConfigurationsInput) configservice.DescribeRemediationConfigurationsRequest
+
+	DescribeRemediationExceptionsRequest(*configservice.DescribeRemediationExceptionsInput) configservice.DescribeRemediationExceptionsRequest
 
 	DescribeRemediationExecutionStatusRequest(*configservice.DescribeRemediationExecutionStatusInput) configservice.DescribeRemediationExecutionStatusRequest
 
@@ -166,6 +170,8 @@ type ClientAPI interface {
 	PutOrganizationConfigRuleRequest(*configservice.PutOrganizationConfigRuleInput) configservice.PutOrganizationConfigRuleRequest
 
 	PutRemediationConfigurationsRequest(*configservice.PutRemediationConfigurationsInput) configservice.PutRemediationConfigurationsRequest
+
+	PutRemediationExceptionsRequest(*configservice.PutRemediationExceptionsInput) configservice.PutRemediationExceptionsRequest
 
 	PutRetentionConfigurationRequest(*configservice.PutRetentionConfigurationInput) configservice.PutRetentionConfigurationRequest
 

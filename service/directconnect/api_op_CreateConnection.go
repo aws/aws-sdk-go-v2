@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateConnectionRequest
 type CreateConnectionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -75,7 +74,6 @@ func (s *CreateConnectionInput) Validate() error {
 }
 
 // Information about an AWS Direct Connect connection.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Connection
 type CreateConnectionOutput struct {
 	_ struct{} `type:"structure"`
 

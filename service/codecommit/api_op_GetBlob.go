@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a get blob operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetBlobInput
 type GetBlobInput struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +51,6 @@ func (s *GetBlobInput) Validate() error {
 }
 
 // Represents the output of a get blob operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetBlobOutput
 type GetBlobOutput struct {
 	_ struct{} `type:"structure"`
 

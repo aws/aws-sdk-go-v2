@@ -12,7 +12,6 @@ import (
 )
 
 // Represents the input of a DeleteCacheSecurityGroup operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheSecurityGroupMessage
 type DeleteCacheSecurityGroupInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *DeleteCacheSecurityGroupInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheSecurityGroupOutput
 type DeleteCacheSecurityGroupOutput struct {
 	_ struct{} `type:"structure"`
 }

@@ -22,21 +22,16 @@ type Metadata struct {
 // A Client implements the base client request and response handling
 // used by all service clients.
 type Client struct {
-	Metadata Metadata
-
-	Config Config
-
+	Metadata         Metadata
+	Config           Config
 	Region           string
 	Credentials      CredentialsProvider
 	EndpointResolver EndpointResolver
 	Handlers         Handlers
 	Retryer          Retryer
-
-	// TODO replace with value not pointer
-	LogLevel LogLevel
-	Logger   Logger
-
-	HTTPClient HTTPClient
+	LogLevel         LogLevel
+	Logger           Logger
+	HTTPClient       HTTPClient
 }
 
 // NewClient will return a pointer to a new initialized service client.
@@ -63,13 +58,10 @@ func NewClient(cfg Config, metadata Metadata) *Client {
 
 	retryer := cfg.Retryer
 	if retryer == nil {
-		// TODO need better way of specifing default num retries
-		retryer = DefaultRetryer{NumMaxRetries: 3}
+		retryer = NewDefaultRetryer()
 	}
 	svc.Retryer = retryer
-
 	svc.AddDebugHandlers()
-
 	return svc
 }
 

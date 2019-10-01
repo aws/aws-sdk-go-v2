@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsVoipSandboxChannelRequest
 type GetApnsVoipSandboxChannelInput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +49,6 @@ func (s GetApnsVoipSandboxChannelInput) MarshalFields(e protocol.FieldEncoder) e
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsVoipSandboxChannelResponse
 type GetApnsVoipSandboxChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSVoipSandboxChannelResponse"`
 

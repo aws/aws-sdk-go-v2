@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeHsmConfigurationsMessage
 type DescribeHsmConfigurationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -58,7 +57,6 @@ func (s DescribeHsmConfigurationsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/HsmConfigurationMessage
 type DescribeHsmConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
 

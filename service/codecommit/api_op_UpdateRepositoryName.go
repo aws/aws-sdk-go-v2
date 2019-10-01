@@ -12,7 +12,6 @@ import (
 )
 
 // Represents the input of an update repository description operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateRepositoryNameInput
 type UpdateRepositoryNameInput struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s *UpdateRepositoryNameInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateRepositoryNameOutput
 type UpdateRepositoryNameOutput struct {
 	_ struct{} `type:"structure"`
 }

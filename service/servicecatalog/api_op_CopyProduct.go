@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CopyProductInput
 type CopyProductInput struct {
 	_ struct{} `type:"structure"`
 
@@ -81,7 +80,6 @@ func (s *CopyProductInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CopyProductOutput
 type CopyProductOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // An object representing a container instance or task attachment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Attachment
 type Attachment struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s Attachment) String() string {
 }
 
 // An object representing a change in state for a task attachment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/AttachmentStateChange
 type AttachmentStateChange struct {
 	_ struct{} `type:"structure"`
 
@@ -82,7 +80,6 @@ func (s *AttachmentStateChange) Validate() error {
 // enable you to extend the Amazon ECS data model by adding custom metadata
 // to your resources. For more information, see Attributes (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes)
 // in the Amazon Elastic Container Service Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Attribute
 type Attribute struct {
 	_ struct{} `type:"structure"`
 
@@ -127,7 +124,6 @@ func (s *Attribute) Validate() error {
 }
 
 // An object representing the networking details for a task or service.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/AwsVpcConfiguration
 type AwsVpcConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -174,7 +170,6 @@ func (s *AwsVpcConfiguration) Validate() error {
 // task requests. Each account receives a default cluster the first time you
 // use the Amazon ECS service, but you may also create other clusters. Clusters
 // may contain more than one instance type simultaneously.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Cluster
 type Cluster struct {
 	_ struct{} `type:"structure"`
 
@@ -266,7 +261,6 @@ func (s Cluster) String() string {
 
 // The settings to use when creating a cluster. This parameter is used to enable
 // CloudWatch Container Insights for a cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ClusterSetting
 type ClusterSetting struct {
 	_ struct{} `type:"structure"`
 
@@ -287,7 +281,6 @@ func (s ClusterSetting) String() string {
 }
 
 // A Docker container that is part of a task.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Container
 type Container struct {
 	_ struct{} `type:"structure"`
 
@@ -301,6 +294,9 @@ type Container struct {
 
 	// The exit code returned from the container.
 	ExitCode *int64 `locationName:"exitCode" type:"integer"`
+
+	// The FireLens configuration for the container.
+	FirelensConfiguration *FirelensConfiguration `locationName:"firelensConfiguration" type:"structure"`
 
 	// The IDs of each GPU assigned to the container.
 	GpuIds []string `locationName:"gpuIds" type:"list"`
@@ -332,6 +328,9 @@ type Container struct {
 	// details about a running or stopped container.
 	Reason *string `locationName:"reason" type:"string"`
 
+	// The ID of the Docker container.
+	RuntimeId *string `locationName:"runtimeId" type:"string"`
+
 	// The ARN of the task.
 	TaskArn *string `locationName:"taskArn" type:"string"`
 }
@@ -343,7 +342,6 @@ func (s Container) String() string {
 
 // Container definitions are used in task definitions to describe the different
 // containers that are launched as part of a task.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerDefinition
 type ContainerDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -531,6 +529,10 @@ type ContainerDefinition struct {
 	// the awsvpc network mode.
 	ExtraHosts []HostEntry `locationName:"extraHosts" type:"list"`
 
+	// The FireLens configuration for the container. This is used to specify and
+	// configure a log router for container logs.
+	FirelensConfiguration *FirelensConfiguration `locationName:"firelensConfiguration" type:"structure"`
+
 	// The health check command and associated configuration parameters for the
 	// container. This parameter maps to HealthCheck in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
 	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
@@ -647,15 +649,14 @@ type ContainerDefinition struct {
 	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
 	// and the --memory option to docker run (https://docs.docker.com/engine/reference/run/).
 	//
-	// If your containers are part of a task using the Fargate launch type, this
-	// field is optional.
+	// If using the Fargate launch type, this parameter is optional.
 	//
-	// For containers that are part of a task using the EC2 launch type, you must
-	// specify a non-zero integer for one or both of memory or memoryReservation
-	// in container definitions. If you specify both, memory must be greater than
-	// memoryReservation. If you specify memoryReservation, then that value is subtracted
-	// from the available memory resources for the container instance on which the
-	// container is placed. Otherwise, the value of memory is used.
+	// If using the EC2 launch type, you must specify either a task-level memory
+	// value or a container-level memory value. If you specify both a container-level
+	// memory and memoryReservation value, memory must be greater than memoryReservation.
+	// If you specify memoryReservation, then that value is subtracted from the
+	// available memory resources for the container instance on which the container
+	// is placed. Otherwise, the value of memory is used.
 	//
 	// The Docker daemon reserves a minimum of 4 MiB of memory for a container,
 	// so you should not specify fewer than 4 MiB of memory for your containers.
@@ -671,11 +672,12 @@ type ContainerDefinition struct {
 	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
 	// and the --memory-reservation option to docker run (https://docs.docker.com/engine/reference/run/).
 	//
-	// You must specify a non-zero integer for one or both of memory or memoryReservation
-	// in container definitions. If you specify both, memory must be greater than
-	// memoryReservation. If you specify memoryReservation, then that value is subtracted
-	// from the available memory resources for the container instance on which the
-	// container is placed. Otherwise, the value of memory is used.
+	// If a task-level memory value is not specified, you must specify a non-zero
+	// integer for one or both of memory or memoryReservation in a container definition.
+	// If you specify both, memory must be greater than memoryReservation. If you
+	// specify memoryReservation, then that value is subtracted from the available
+	// memory resources for the container instance on which the container is placed.
+	// Otherwise, the value of memory is used.
 	//
 	// For example, if your container normally uses 128 MiB of memory, but occasionally
 	// bursts to 256 MiB of memory for short periods of time, you can set a memoryReservation
@@ -770,12 +772,13 @@ type ContainerDefinition struct {
 	// in the Amazon Elastic Container Service Developer Guide.
 	Secrets []Secret `locationName:"secrets" type:"list"`
 
-	// Time duration to wait before giving up on resolving dependencies for a container.
-	// For example, you specify two containers in a task definition with containerA
-	// having a dependency on containerB reaching a COMPLETE, SUCCESS, or HEALTHY
-	// status. If a startTimeout value is specified for containerB and it does not
-	// reach the desired status within that time then containerA will give up and
-	// not start. This results in the task transitioning to a STOPPED state.
+	// Time duration (in seconds) to wait before giving up on resolving dependencies
+	// for a container. For example, you specify two containers in a task definition
+	// with containerA having a dependency on containerB reaching a COMPLETE, SUCCESS,
+	// or HEALTHY status. If a startTimeout value is specified for containerB and
+	// it does not reach the desired status within that time then containerA will
+	// give up and not start. This results in the task transitioning to a STOPPED
+	// state.
 	//
 	// For tasks using the EC2 launch type, the container instances require at least
 	// version 1.26.0 of the container agent to enable a container start timeout
@@ -795,11 +798,11 @@ type ContainerDefinition struct {
 	// 1.3.0 or later.
 	StartTimeout *int64 `locationName:"startTimeout" type:"integer"`
 
-	// Time duration to wait before the container is forcefully killed if it doesn't
-	// exit normally on its own. For tasks using the Fargate launch type, the max
-	// stopTimeout value is 2 minutes. This parameter is available for tasks using
-	// the Fargate launch type in the Ohio (us-east-2) region only and the task
-	// or service requires platform version 1.3.0 or later.
+	// Time duration (in seconds) to wait before the container is forcefully killed
+	// if it doesn't exit normally on its own. For tasks using the Fargate launch
+	// type, the max stopTimeout value is 2 minutes. This parameter is available
+	// for tasks using the Fargate launch type in the Ohio (us-east-2) region only
+	// and the task or service requires platform version 1.3.0 or later.
 	//
 	// For tasks using the EC2 launch type, the stop timeout value for the container
 	// takes precedence over the ECS_CONTAINER_STOP_TIMEOUT container agent configuration
@@ -901,6 +904,11 @@ func (s *ContainerDefinition) Validate() error {
 			}
 		}
 	}
+	if s.FirelensConfiguration != nil {
+		if err := s.FirelensConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("FirelensConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.HealthCheck != nil {
 		if err := s.HealthCheck.Validate(); err != nil {
 			invalidParams.AddNested("HealthCheck", err.(aws.ErrInvalidParams))
@@ -968,7 +976,6 @@ func (s *ContainerDefinition) Validate() error {
 //
 // If you are using tasks that use the Fargate launch type, container dependency
 // parameters are not supported.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerDependency
 type ContainerDependency struct {
 	_ struct{} `type:"structure"`
 
@@ -1024,7 +1031,6 @@ func (s *ContainerDependency) Validate() error {
 
 // An EC2 instance that is running the Amazon ECS agent and has been registered
 // with a cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerInstance
 type ContainerInstance struct {
 	_ struct{} `type:"structure"`
 
@@ -1154,7 +1160,6 @@ func (s ContainerInstance) String() string {
 // can be passed in. An example of an empty container override would be {"containerOverrides":
 // [ ] }. If a non-empty container override is specified, the name parameter
 // must be included.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerOverride
 type ContainerOverride struct {
 	_ struct{} `type:"structure"`
 
@@ -1217,7 +1222,6 @@ func (s *ContainerOverride) Validate() error {
 }
 
 // An object representing a change in state for a container.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerStateChange
 type ContainerStateChange struct {
 	_ struct{} `type:"structure"`
 
@@ -1234,6 +1238,9 @@ type ContainerStateChange struct {
 	// The reason for the state change.
 	Reason *string `locationName:"reason" type:"string"`
 
+	// The ID of the Docker container.
+	RuntimeId *string `locationName:"runtimeId" type:"string"`
+
 	// The status of the container.
 	Status *string `locationName:"status" type:"string"`
 }
@@ -1245,7 +1252,6 @@ func (s ContainerStateChange) String() string {
 
 // The details of an Amazon ECS service deployment. This is used only when a
 // service uses the ECS deployment controller type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Deployment
 type Deployment struct {
 	_ struct{} `type:"structure"`
 
@@ -1312,7 +1318,6 @@ func (s Deployment) String() string {
 
 // Optional deployment parameters that control how many tasks run during a deployment
 // and the ordering of stopping and starting tasks.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentConfiguration
 type DeploymentConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1370,7 +1375,6 @@ func (s DeploymentConfiguration) String() string {
 // The deployment controller to use for the service. For more information, see
 // Amazon ECS Deployment Types (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
 // in the Amazon Elastic Container Service Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentController
 type DeploymentController struct {
 	_ struct{} `type:"structure"`
 
@@ -1421,7 +1425,6 @@ func (s *DeploymentController) Validate() error {
 }
 
 // An object representing a container instance host device.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Device
 type Device struct {
 	_ struct{} `type:"structure"`
 
@@ -1461,7 +1464,6 @@ func (s *Device) Validate() error {
 // are only supported when you are using the EC2 launch type. Windows containers
 // only support the use of the local driver. To use bind mounts, specify a host
 // instead.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DockerVolumeConfiguration
 type DockerVolumeConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1507,7 +1509,6 @@ func (s DockerVolumeConfiguration) String() string {
 }
 
 // A failed resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Failure
 type Failure struct {
 	_ struct{} `type:"structure"`
 
@@ -1521,6 +1522,41 @@ type Failure struct {
 // String returns the string representation
 func (s Failure) String() string {
 	return awsutil.Prettify(s)
+}
+
+// The FireLens configuration for the container. This is used to specify and
+// configure a log router for container logs.
+type FirelensConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The options to use when configuring the log router. This field is optional
+	// and can be used to add additional metadata, such as the task, task definition,
+	// cluster, and container instance details to the log event. If specified, the
+	// syntax to use is "options":{"enable-ecs-log-metadata":"true|false"}.
+	Options map[string]string `locationName:"options" type:"map"`
+
+	// The log router to use. The valid values are fluentd or fluentbit.
+	//
+	// Type is a required field
+	Type FirelensConfigurationType `locationName:"type" type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s FirelensConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *FirelensConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "FirelensConfiguration"}
+	if len(s.Type) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // An object representing a container health check. Health check parameters
@@ -1540,7 +1576,6 @@ func (s Failure) String() string {
 //
 //    * Container health checks are not supported for tasks that are part of
 //    a service that is configured to use a Classic Load Balancer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/HealthCheck
 type HealthCheck struct {
 	_ struct{} `type:"structure"`
 
@@ -1604,7 +1639,6 @@ func (s *HealthCheck) Validate() error {
 
 // Hostnames and IP address entries that are added to the /etc/hosts file of
 // a container via the extraHosts parameter of its ContainerDefinition.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/HostEntry
 type HostEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -1643,7 +1677,6 @@ func (s *HostEntry) Validate() error {
 }
 
 // Details on a container instance bind mount host volume.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/HostVolumeProperties
 type HostVolumeProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -1666,6 +1699,68 @@ func (s HostVolumeProperties) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Details on a Elastic Inference accelerator. For more information, see Working
+// with Amazon Elastic Inference on Amazon ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-eia.html)
+// in the Amazon Elastic Container Service Developer Guide.
+type InferenceAccelerator struct {
+	_ struct{} `type:"structure"`
+
+	// The Elastic Inference accelerator device name. The deviceName must also be
+	// referenced in a container definition as a ResourceRequirement.
+	//
+	// DeviceName is a required field
+	DeviceName *string `locationName:"deviceName" type:"string" required:"true"`
+
+	// The Elastic Inference accelerator type to use.
+	//
+	// DeviceType is a required field
+	DeviceType *string `locationName:"deviceType" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s InferenceAccelerator) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *InferenceAccelerator) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "InferenceAccelerator"}
+
+	if s.DeviceName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DeviceName"))
+	}
+
+	if s.DeviceType == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DeviceType"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Details on an Elastic Inference accelerator task override. This parameter
+// is used to override the Elastic Inference accelerator specified in the task
+// definition. For more information, see Working with Amazon Elastic Inference
+// on Amazon ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-eia.html)
+// in the Amazon Elastic Container Service Developer Guide.
+type InferenceAcceleratorOverride struct {
+	_ struct{} `type:"structure"`
+
+	// The Elastic Inference accelerator device name to override for the task. This
+	// parameter must match a deviceName specified in the task definition.
+	DeviceName *string `locationName:"deviceName" type:"string"`
+
+	// The Elastic Inference accelerator type to use.
+	DeviceType *string `locationName:"deviceType" type:"string"`
+}
+
+// String returns the string representation
+func (s InferenceAcceleratorOverride) String() string {
+	return awsutil.Prettify(s)
+}
+
 // The Linux capabilities for the container that are added to or dropped from
 // the default configuration provided by Docker. For more information on the
 // default capabilities and the non-default available capabilities, see Runtime
@@ -1673,7 +1768,6 @@ func (s HostVolumeProperties) String() string {
 // in the Docker run reference. For more detailed information on these Linux
 // capabilities, see the capabilities(7) (http://man7.org/linux/man-pages/man7/capabilities.7.html)
 // Linux manual page.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/KernelCapabilities
 type KernelCapabilities struct {
 	_ struct{} `type:"structure"`
 
@@ -1719,7 +1813,6 @@ func (s KernelCapabilities) String() string {
 }
 
 // A key-value pair object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/KeyValuePair
 type KeyValuePair struct {
 	_ struct{} `type:"structure"`
 
@@ -1738,7 +1831,6 @@ func (s KeyValuePair) String() string {
 }
 
 // Linux-specific options that are applied to the container, such as Linux KernelCapabilities.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/LinuxParameters
 type LinuxParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -1837,27 +1929,8 @@ func (s *LinuxParameters) Validate() error {
 	return nil
 }
 
-// Details on a load balancer to be used with a service or task set.
-//
-// If the service is using the ECS deployment controller, you are limited to
-// one load balancer or target group.
-//
-// If the service is using the CODE_DEPLOY deployment controller, the service
-// is required to use either an Application Load Balancer or Network Load Balancer.
-// When you are creating an AWS CodeDeploy deployment group, you specify two
-// target groups (referred to as a targetGroupPair). Each target group binds
-// to a separate task set in the deployment. The load balancer can also have
-// up to two listeners, a required listener for production traffic and an optional
-// listener that allows you to test new revisions of the service before routing
-// production traffic to it.
-//
-// Services with tasks that use the awsvpc network mode (for example, those
-// with the Fargate launch type) only support Application Load Balancers and
-// Network Load Balancers. Classic Load Balancers are not supported. Also, when
-// you create any target groups for these services, you must choose ip as the
-// target type, not instance. Tasks that use the awsvpc network mode are associated
-// with an elastic network interface, not an Amazon EC2 instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/LoadBalancer
+// Details on the load balancer or load balancers to use with a service or task
+// set.
 type LoadBalancer struct {
 	_ struct{} `type:"structure"`
 
@@ -1866,34 +1939,42 @@ type LoadBalancer struct {
 	ContainerName *string `locationName:"containerName" type:"string"`
 
 	// The port on the container to associate with the load balancer. This port
-	// must correspond to a containerPort in the service's task definition. Your
-	// container instances must allow ingress traffic on the hostPort of the port
-	// mapping.
+	// must correspond to a containerPort in the task definition the tasks in the
+	// service are using. For tasks that use the EC2 launch type, the container
+	// instance they are launched on must allow ingress traffic on the hostPort
+	// of the port mapping.
 	ContainerPort *int64 `locationName:"containerPort" type:"integer"`
 
 	// The name of the load balancer to associate with the Amazon ECS service or
 	// task set.
 	//
-	// A load balancer name is only specified when using a classic load balancer.
-	// If you are using an application load balancer or a network load balancer
+	// A load balancer name is only specified when using a Classic Load Balancer.
+	// If you are using an Application Load Balancer or a Network Load Balancer
 	// this should be omitted.
 	LoadBalancerName *string `locationName:"loadBalancerName" type:"string"`
 
 	// The full Amazon Resource Name (ARN) of the Elastic Load Balancing target
 	// group or groups associated with a service or task set.
 	//
-	// A target group ARN is only specified when using an application load balancer
-	// or a network load balancer. If you are using a classic load balancer this
-	// should be omitted.
+	// A target group ARN is only specified when using an Application Load Balancer
+	// or Network Load Balancer. If you are using a Classic Load Balancer this should
+	// be omitted.
 	//
-	// For services using the ECS deployment controller, you are limited to one
-	// target group. For services using the CODE_DEPLOY deployment controller, you
-	// are required to define two target groups for the load balancer.
+	// For services using the ECS deployment controller, you can specify one or
+	// multiple target groups. For more information, see Registering Multiple Target
+	// Groups with a Service (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/register-multiple-targetgroups.html)
+	// in the Amazon Elastic Container Service Developer Guide.
+	//
+	// For services using the CODE_DEPLOY deployment controller, you are required
+	// to define two target groups for the load balancer. For more information,
+	// see Blue/Green Deployment with CodeDeploy (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-bluegreen.html)
+	// in the Amazon Elastic Container Service Developer Guide.
 	//
 	// If your service's task definition uses the awsvpc network mode (which is
 	// required for the Fargate launch type), you must choose ip as the target type,
-	// not instance, because tasks that use the awsvpc network mode are associated
-	// with an elastic network interface, not an Amazon EC2 instance.
+	// not instance, when creating your target groups because tasks that use the
+	// awsvpc network mode are associated with an elastic network interface, not
+	// an Amazon EC2 instance.
 	TargetGroupArn *string `locationName:"targetGroupArn" type:"string"`
 }
 
@@ -1903,7 +1984,6 @@ func (s LoadBalancer) String() string {
 }
 
 // Log configuration options to send to a custom log driver for the container.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/LogConfiguration
 type LogConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1915,7 +1995,7 @@ type LogConfiguration struct {
 	// and splunk.
 	//
 	// For tasks using the EC2 launch type, the supported log drivers are awslogs,
-	// fluentd, gelf, json-file, journald, logentries, syslog, splunk, and syslog.
+	// fluentd, gelf, json-file, journald, logentries, syslog, and splunk.
 	//
 	// For more information about using the awslogs log driver, see Using the awslogs
 	// Log Driver (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html)
@@ -1973,7 +2053,6 @@ func (s *LogConfiguration) Validate() error {
 }
 
 // Details on a volume mount point that is used in a container definition.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/MountPoint
 type MountPoint struct {
 	_ struct{} `type:"structure"`
 
@@ -1999,7 +2078,6 @@ func (s MountPoint) String() string {
 // instance. After a task reaches the RUNNING status, manual and automatic host
 // and container port assignments are visible in the networkBindings section
 // of DescribeTasks API responses.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/NetworkBinding
 type NetworkBinding struct {
 	_ struct{} `type:"structure"`
 
@@ -2022,7 +2100,6 @@ func (s NetworkBinding) String() string {
 }
 
 // An object representing the network configuration for a task or service.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/NetworkConfiguration
 type NetworkConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -2054,7 +2131,6 @@ func (s *NetworkConfiguration) Validate() error {
 
 // An object representing the elastic network interface for tasks that use the
 // awsvpc network mode.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/NetworkInterface
 type NetworkInterface struct {
 	_ struct{} `type:"structure"`
 
@@ -2076,7 +2152,9 @@ func (s NetworkInterface) String() string {
 // An object representing a constraint on task placement. For more information,
 // see Task Placement Constraints (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html)
 // in the Amazon Elastic Container Service Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PlacementConstraint
+//
+// If you are using the Fargate launch type, task placement constraints are
+// not supported.
 type PlacementConstraint struct {
 	_ struct{} `type:"structure"`
 
@@ -2088,8 +2166,7 @@ type PlacementConstraint struct {
 
 	// The type of constraint. Use distinctInstance to ensure that each task in
 	// a particular group is running on a different container instance. Use memberOf
-	// to restrict the selection to a group of valid candidates. The value distinctInstance
-	// is not supported in task definitions.
+	// to restrict the selection to a group of valid candidates.
 	Type PlacementConstraintType `locationName:"type" type:"string" enum:"true"`
 }
 
@@ -2101,7 +2178,6 @@ func (s PlacementConstraint) String() string {
 // The task placement strategy for a task or service. For more information,
 // see Task Placement Strategies (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html)
 // in the Amazon Elastic Container Service Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PlacementStrategy
 type PlacementStrategy struct {
 	_ struct{} `type:"structure"`
 
@@ -2130,7 +2206,6 @@ func (s PlacementStrategy) String() string {
 
 // The devices that are available on the container instance. The only supported
 // device type is a GPU.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PlatformDevice
 type PlatformDevice struct {
 	_ struct{} `type:"structure"`
 
@@ -2181,7 +2256,6 @@ func (s *PlatformDevice) Validate() error {
 // After a task reaches the RUNNING status, manual and automatic host and container
 // port assignments are visible in the networkBindings section of DescribeTasks
 // API responses.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PortMapping
 type PortMapping struct {
 	_ struct{} `type:"structure"`
 
@@ -2254,7 +2328,6 @@ func (s PortMapping) String() string {
 //
 // For tasks using the Fargate launch type, the task or service requires platform
 // version 1.3.0 or later.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ProxyConfiguration
 type ProxyConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -2318,7 +2391,6 @@ func (s *ProxyConfiguration) Validate() error {
 }
 
 // The repository credentials for private registry authentication.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RepositoryCredentials
 type RepositoryCredentials struct {
 	_ struct{} `type:"structure"`
 
@@ -2354,7 +2426,6 @@ func (s *RepositoryCredentials) Validate() error {
 }
 
 // Describes the resources available for a container instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Resource
 type Resource struct {
 	_ struct{} `type:"structure"`
 
@@ -2386,24 +2457,29 @@ func (s Resource) String() string {
 	return awsutil.Prettify(s)
 }
 
-// The type and amount of a resource to assign to a container. The only supported
-// resource is a GPU. For more information, see Working with GPUs on Amazon
-// ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html)
+// The type and amount of a resource to assign to a container. The supported
+// resource types are GPUs and Elastic Inference accelerators. For more information,
+// see Working with GPUs on Amazon ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html)
+// or Working with Amazon Elastic Inference on Amazon ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-eia.html)
 // in the Amazon Elastic Container Service Developer Guide
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ResourceRequirement
 type ResourceRequirement struct {
 	_ struct{} `type:"structure"`
 
-	// The type of resource to assign to a container. The only supported value is
-	// GPU.
+	// The type of resource to assign to a container. The supported values are GPU
+	// or InferenceAccelerator.
 	//
 	// Type is a required field
 	Type ResourceType `locationName:"type" type:"string" required:"true" enum:"true"`
 
-	// The number of physical GPUs the Amazon ECS container agent will reserve for
-	// the container. The number of GPUs reserved for all containers in a task should
-	// not exceed the number of available GPUs on the container instance the task
-	// is launched on.
+	// The value for the specified resource type.
+	//
+	// If the GPU type is used, the value is the number of physical GPUs the Amazon
+	// ECS container agent will reserve for the container. The number of GPUs reserved
+	// for all containers in a task should not exceed the number of available GPUs
+	// on the container instance the task is launched on.
+	//
+	// If the InferenceAccelerator type is used, the value should match the deviceName
+	// for an InferenceAccelerator specified in a task definition.
 	//
 	// Value is a required field
 	Value *string `locationName:"value" type:"string" required:"true"`
@@ -2433,7 +2509,6 @@ func (s *ResourceRequirement) Validate() error {
 
 // A floating-point percentage of the desired number of tasks to place and keep
 // running in the task set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Scale
 type Scale struct {
 	_ struct{} `type:"structure"`
 
@@ -2461,7 +2536,6 @@ func (s Scale) String() string {
 //
 // For more information, see Specifying Sensitive Data (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html)
 // in the Amazon Elastic Container Service Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Secret
 type Secret struct {
 	_ struct{} `type:"structure"`
 
@@ -2507,7 +2581,6 @@ func (s *Secret) Validate() error {
 }
 
 // Details on a service within a cluster
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Service
 type Service struct {
 	_ struct{} `type:"structure"`
 
@@ -2560,13 +2633,6 @@ type Service struct {
 	// A list of Elastic Load Balancing load balancer objects, containing the load
 	// balancer name, the container name (as it appears in a container definition),
 	// and the container port to access from the load balancer.
-	//
-	// Services with tasks that use the awsvpc network mode (for example, those
-	// with the Fargate launch type) only support Application Load Balancers and
-	// Network Load Balancers. Classic Load Balancers are not supported. Also, when
-	// you create any target groups for these services, you must choose ip as the
-	// target type, not instance. Tasks that use the awsvpc network mode are associated
-	// with an elastic network interface, not an Amazon EC2 instance.
 	LoadBalancers []LoadBalancer `locationName:"loadBalancers" type:"list"`
 
 	// The VPC subnet and security group configuration for tasks that receive their
@@ -2681,7 +2747,6 @@ func (s Service) String() string {
 }
 
 // Details on an event associated with a service.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceEvent
 type ServiceEvent struct {
 	_ struct{} `type:"structure"`
 
@@ -2701,7 +2766,6 @@ func (s ServiceEvent) String() string {
 }
 
 // Details of the service registry.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceRegistry
 type ServiceRegistry struct {
 	_ struct{} `type:"structure"`
 
@@ -2740,7 +2804,6 @@ func (s ServiceRegistry) String() string {
 }
 
 // The current account setting for a resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Setting
 type Setting struct {
 	_ struct{} `type:"structure"`
 
@@ -2777,7 +2840,6 @@ func (s Setting) String() string {
 //    * For tasks that use the host network mode, the systemControls parameter
 //    applies to the container instance's kernel parameter as well as that of
 //    all containers of any tasks running on that container instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SystemControl
 type SystemControl struct {
 	_ struct{} `type:"structure"`
 
@@ -2819,7 +2881,6 @@ func (s SystemControl) String() string {
 //    as a prefix for either keys or values as it is reserved for AWS use. You
 //    cannot edit or delete tag keys or values with this prefix. Tags with this
 //    prefix do not count against your tags per resource limit.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -2851,7 +2912,6 @@ func (s *Tag) Validate() error {
 }
 
 // Details on a task in a cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Task
 type Task struct {
 	_ struct{} `type:"structure"`
 
@@ -2929,6 +2989,9 @@ type Task struct {
 	// definition. Health check parameters that are specified in a container definition
 	// override any Docker health checks that exist in the container image.
 	HealthStatus HealthStatus `locationName:"healthStatus" type:"string" enum:"true"`
+
+	// The Elastic Inference accelerator associated with the task.
+	InferenceAccelerators []InferenceAccelerator `locationName:"inferenceAccelerators" type:"list"`
 
 	// The last known status of the task. For more information, see Task Lifecycle
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-lifecycle.html).
@@ -3060,7 +3123,6 @@ func (s Task) String() string {
 // which Docker images to use, the required resources, and other configurations
 // related to launching the task definition through an Amazon ECS service or
 // task.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskDefinition
 type TaskDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -3139,10 +3201,15 @@ type TaskDefinition struct {
 	// Fargate launch type.
 	IpcMode IpcMode `locationName:"ipcMode" type:"string" enum:"true"`
 
-	// The amount (in MiB) of memory used by the task. If using the EC2 launch type,
-	// this field is optional and any value can be used. If using the Fargate launch
-	// type, this field is required and you must use one of the following values,
-	// which determines your range of valid values for the cpu parameter:
+	// The amount (in MiB) of memory used by the task.
+	//
+	// If using the EC2 launch type, this field is optional and any value can be
+	// used. If a task-level memory value is specified then the container-level
+	// memory value is optional.
+	//
+	// If using the Fargate launch type, this field is required and you must use
+	// one of the following values, which determines your range of valid values
+	// for the cpu parameter:
 	//
 	//    * 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available cpu values: 256 (.25
 	//    vCPU)
@@ -3281,13 +3348,11 @@ func (s TaskDefinition) String() string {
 }
 
 // An object representing a constraint on task placement in the task definition.
+// For more information, see Task Placement Constraints (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html)
+// in the Amazon Elastic Container Service Developer Guide.
 //
 // If you are using the Fargate launch type, task placement constraints are
 // not supported.
-//
-// For more information, see Task Placement Constraints (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html)
-// in the Amazon Elastic Container Service Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskDefinitionPlacementConstraint
 type TaskDefinitionPlacementConstraint struct {
 	_ struct{} `type:"structure"`
 
@@ -3296,9 +3361,8 @@ type TaskDefinitionPlacementConstraint struct {
 	// in the Amazon Elastic Container Service Developer Guide.
 	Expression *string `locationName:"expression" type:"string"`
 
-	// The type of constraint. The DistinctInstance constraint ensures that each
-	// task in a particular group is running on a different container instance.
-	// The MemberOf constraint restricts selection to be from a group of valid candidates.
+	// The type of constraint. The MemberOf constraint restricts selection to be
+	// from a group of valid candidates.
 	Type TaskDefinitionPlacementConstraintType `locationName:"type" type:"string" enum:"true"`
 }
 
@@ -3308,7 +3372,6 @@ func (s TaskDefinitionPlacementConstraint) String() string {
 }
 
 // The overrides associated with a task.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskOverride
 type TaskOverride struct {
 	_ struct{} `type:"structure"`
 
@@ -3318,6 +3381,9 @@ type TaskOverride struct {
 	// The Amazon Resource Name (ARN) of the task execution role that the Amazon
 	// ECS container agent and the Docker daemon can assume.
 	ExecutionRoleArn *string `locationName:"executionRoleArn" type:"string"`
+
+	// The Elastic Inference accelerator override for the task.
+	InferenceAcceleratorOverrides []InferenceAcceleratorOverride `locationName:"inferenceAcceleratorOverrides" type:"list"`
 
 	// The Amazon Resource Name (ARN) of the IAM role that containers in this task
 	// can assume. All containers in this task are granted the permissions that
@@ -3351,7 +3417,6 @@ func (s *TaskOverride) Validate() error {
 // an EXTERNAL deployment. An Amazon ECS task set includes details such as the
 // desired number of tasks, how many tasks are running, and whether the task
 // set serves production traffic.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskSet
 type TaskSet struct {
 	_ struct{} `type:"structure"`
 
@@ -3477,7 +3542,6 @@ func (s TaskSet) String() string {
 }
 
 // The container path, mount options, and size of the tmpfs mount.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Tmpfs
 type Tmpfs struct {
 	_ struct{} `type:"structure"`
 
@@ -3526,7 +3590,6 @@ func (s *Tmpfs) Validate() error {
 }
 
 // The ulimit settings to pass to the container.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Ulimit
 type Ulimit struct {
 	_ struct{} `type:"structure"`
 
@@ -3574,7 +3637,6 @@ func (s *Ulimit) Validate() error {
 
 // The Docker and Amazon ECS container agent version information about a container
 // instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/VersionInfo
 type VersionInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -3598,7 +3660,6 @@ func (s VersionInfo) String() string {
 // specify a DockerVolumeConfiguration. For tasks that use a bind mount host
 // volume, specify a host and optional sourcePath. For more information, see
 // Using Data Volumes in Tasks (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Volume
 type Volume struct {
 	_ struct{} `type:"structure"`
 
@@ -3634,7 +3695,6 @@ func (s Volume) String() string {
 }
 
 // Details on a data volume from another container in the same task definition.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/VolumeFrom
 type VolumeFrom struct {
 	_ struct{} `type:"structure"`
 

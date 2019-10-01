@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetReservedNodeExchangeOfferingsInputMessage
 type GetReservedNodeExchangeOfferingsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -45,7 +44,6 @@ func (s *GetReservedNodeExchangeOfferingsInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetReservedNodeExchangeOfferingsOutputMessage
 type GetReservedNodeExchangeOfferingsOutput struct {
 	_ struct{} `type:"structure"`
 

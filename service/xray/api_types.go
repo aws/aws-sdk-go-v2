@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // An alias for an edge.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/Alias
 type Alias struct {
 	_ struct{} `type:"structure"`
 
@@ -64,7 +63,6 @@ func (s Alias) MarshalFields(e protocol.FieldEncoder) error {
 
 // Value of a segment annotation. Has one of three value types: Number, Boolean
 // or String.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/AnnotationValue
 type AnnotationValue struct {
 	_ struct{} `type:"structure"`
 
@@ -107,7 +105,6 @@ func (s AnnotationValue) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A list of availability zones corresponding to the segments in a trace.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/AvailabilityZoneDetail
 type AvailabilityZoneDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -131,7 +128,6 @@ func (s AvailabilityZoneDetail) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/BackendConnectionErrors
 type BackendConnectionErrors struct {
 	_ struct{} `type:"structure"`
 
@@ -195,7 +191,6 @@ func (s BackendConnectionErrors) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a connection between two services.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/Edge
 type Edge struct {
 	_ struct{} `type:"structure"`
 
@@ -279,7 +274,6 @@ func (s Edge) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Response statistics for an edge.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/EdgeStatistics
 type EdgeStatistics struct {
 	_ struct{} `type:"structure"`
 
@@ -340,7 +334,6 @@ func (s EdgeStatistics) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A configuration document that specifies encryption configuration settings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/EncryptionConfig
 type EncryptionConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -385,7 +378,6 @@ func (s EncryptionConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The root cause of a trace summary error.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ErrorRootCause
 type ErrorRootCause struct {
 	_ struct{} `type:"structure"`
 
@@ -418,7 +410,6 @@ func (s ErrorRootCause) MarshalFields(e protocol.FieldEncoder) error {
 
 // A collection of segments and corresponding subsegments associated to a trace
 // summary error.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ErrorRootCauseEntity
 type ErrorRootCauseEntity struct {
 	_ struct{} `type:"structure"`
 
@@ -467,7 +458,6 @@ func (s ErrorRootCauseEntity) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A collection of fields identifying the services in a trace summary error.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ErrorRootCauseService
 type ErrorRootCauseService struct {
 	_ struct{} `type:"structure"`
 
@@ -549,7 +539,6 @@ func (s ErrorRootCauseService) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about requests that failed with a 4xx Client Error status code.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ErrorStatistics
 type ErrorStatistics struct {
 	_ struct{} `type:"structure"`
 
@@ -593,7 +582,6 @@ func (s ErrorStatistics) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The root cause information for a trace summary fault.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/FaultRootCause
 type FaultRootCause struct {
 	_ struct{} `type:"structure"`
 
@@ -626,7 +614,6 @@ func (s FaultRootCause) MarshalFields(e protocol.FieldEncoder) error {
 
 // A collection of segments and corresponding subsegments associated to a trace
 // summary fault error.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/FaultRootCauseEntity
 type FaultRootCauseEntity struct {
 	_ struct{} `type:"structure"`
 
@@ -675,7 +662,6 @@ func (s FaultRootCauseEntity) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A collection of fields identifying the services in a trace summary fault.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/FaultRootCauseService
 type FaultRootCauseService struct {
 	_ struct{} `type:"structure"`
 
@@ -757,7 +743,6 @@ func (s FaultRootCauseService) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about requests that failed with a 5xx Server Error status code.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/FaultStatistics
 type FaultStatistics struct {
 	_ struct{} `type:"structure"`
 
@@ -792,7 +777,6 @@ func (s FaultStatistics) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Details and metadata for a group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/Group
 type Group struct {
 	_ struct{} `type:"structure"`
 
@@ -835,7 +819,6 @@ func (s Group) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Details for a group without metadata.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GroupSummary
 type GroupSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -879,7 +862,6 @@ func (s GroupSummary) MarshalFields(e protocol.FieldEncoder) error {
 
 // An entry in a histogram for a statistic. A histogram maps the range of observed
 // values on the X axis, and the prevalence of each value on the Y axis.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/HistogramEntry
 type HistogramEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -913,7 +895,6 @@ func (s HistogramEntry) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about an HTTP request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/Http
 type Http struct {
 	_ struct{} `type:"structure"`
 
@@ -974,7 +955,6 @@ func (s Http) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A list of EC2 instance IDs corresponding to the segments in a trace.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/InstanceIdDetail
 type InstanceIdDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -999,7 +979,6 @@ func (s InstanceIdDetail) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A list of resources ARNs corresponding to the segments in a trace.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ResourceARNDetail
 type ResourceARNDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -1024,7 +1003,6 @@ func (s ResourceARNDetail) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The root cause information for a response time warning.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ResponseTimeRootCause
 type ResponseTimeRootCause struct {
 	_ struct{} `type:"structure"`
 
@@ -1057,7 +1035,6 @@ func (s ResponseTimeRootCause) MarshalFields(e protocol.FieldEncoder) error {
 
 // A collection of segments and corresponding subsegments associated to a response
 // time warning.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ResponseTimeRootCauseEntity
 type ResponseTimeRootCauseEntity struct {
 	_ struct{} `type:"structure"`
 
@@ -1100,7 +1077,6 @@ func (s ResponseTimeRootCauseEntity) MarshalFields(e protocol.FieldEncoder) erro
 }
 
 // A collection of fields identifying the service in a response time warning.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ResponseTimeRootCauseService
 type ResponseTimeRootCauseService struct {
 	_ struct{} `type:"structure"`
 
@@ -1182,7 +1158,6 @@ func (s ResponseTimeRootCauseService) MarshalFields(e protocol.FieldEncoder) err
 }
 
 // The exception associated with a root cause.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/RootCauseException
 type RootCauseException struct {
 	_ struct{} `type:"structure"`
 
@@ -1218,7 +1193,6 @@ func (s RootCauseException) MarshalFields(e protocol.FieldEncoder) error {
 // A sampling rule that services use to decide whether to instrument a request.
 // Rule fields can match properties of the service, or properties of a request.
 // The service can ignore rules that don't match its properties.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/SamplingRule
 type SamplingRule struct {
 	_ struct{} `type:"structure"`
 
@@ -1441,7 +1415,6 @@ func (s SamplingRule) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A SamplingRule and its metadata.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/SamplingRuleRecord
 type SamplingRuleRecord struct {
 	_ struct{} `type:"structure"`
 
@@ -1486,7 +1459,6 @@ func (s SamplingRuleRecord) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A document specifying changes to a sampling rule's configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/SamplingRuleUpdate
 type SamplingRuleUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -1635,7 +1607,6 @@ func (s SamplingRuleUpdate) MarshalFields(e protocol.FieldEncoder) error {
 
 // Aggregated request sampling data for a sampling rule across all services
 // for a 10 second window.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/SamplingStatisticSummary
 type SamplingStatisticSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1699,7 +1670,6 @@ func (s SamplingStatisticSummary) MarshalFields(e protocol.FieldEncoder) error {
 // Request sampling results for a single rule from a service. Results are for
 // the last 10 seconds unless the service has been assigned a longer reporting
 // interval after a previous call to GetSamplingTargets.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/SamplingStatisticsDocument
 type SamplingStatisticsDocument struct {
 	_ struct{} `type:"structure"`
 
@@ -1816,7 +1786,6 @@ func (s SamplingStatisticsDocument) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // The name and value of a sampling rule to apply to a trace summary.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/SamplingStrategy
 type SamplingStrategy struct {
 	_ struct{} `type:"structure"`
 
@@ -1852,7 +1821,6 @@ func (s SamplingStrategy) MarshalFields(e protocol.FieldEncoder) error {
 // Temporary changes to a sampling rule configuration. To meet the global sampling
 // target for a rule, X-Ray calculates a new reservoir for each service based
 // on the recent sampling results of all services that called GetSamplingTargets.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/SamplingTargetDocument
 type SamplingTargetDocument struct {
 	_ struct{} `type:"structure"`
 
@@ -1922,7 +1890,6 @@ func (s SamplingTargetDocument) MarshalFields(e protocol.FieldEncoder) error {
 //
 // For the full segment document schema, see AWS X-Ray Segment Documents (https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html)
 // in the AWS X-Ray Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/Segment
 type Segment struct {
 	_ struct{} `type:"structure"`
 
@@ -1958,7 +1925,6 @@ func (s Segment) MarshalFields(e protocol.FieldEncoder) error {
 // Information about an application that processed requests, users that made
 // requests, or downstream services, resources and applications that an application
 // used.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/Service
 type Service struct {
 	_ struct{} `type:"structure"`
 
@@ -2128,7 +2094,6 @@ func (s Service) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ServiceId
 type ServiceId struct {
 	_ struct{} `type:"structure"`
 
@@ -2182,7 +2147,6 @@ func (s ServiceId) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Response statistics for a service.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ServiceStatistics
 type ServiceStatistics struct {
 	_ struct{} `type:"structure"`
 
@@ -2242,7 +2206,6 @@ func (s ServiceStatistics) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/TelemetryRecord
 type TelemetryRecord struct {
 	_ struct{} `type:"structure"`
 
@@ -2322,7 +2285,6 @@ func (s TelemetryRecord) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A list of TimeSeriesStatistic structures.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/TimeSeriesServiceStatistics
 type TimeSeriesServiceStatistics struct {
 	_ struct{} `type:"structure"`
 
@@ -2381,7 +2343,6 @@ func (s TimeSeriesServiceStatistics) MarshalFields(e protocol.FieldEncoder) erro
 }
 
 // A collection of segment documents with matching trace IDs.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/Trace
 type Trace struct {
 	_ struct{} `type:"structure"`
 
@@ -2432,7 +2393,6 @@ func (s Trace) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Metadata generated from the segment documents in a trace.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/TraceSummary
 type TraceSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -2695,7 +2655,6 @@ func (s TraceSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a user recorded in segment documents.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/TraceUser
 type TraceUser struct {
 	_ struct{} `type:"structure"`
 
@@ -2736,7 +2695,6 @@ func (s TraceUser) MarshalFields(e protocol.FieldEncoder) error {
 
 // Sampling statistics from a call to GetSamplingTargets that X-Ray could not
 // process.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UnprocessedStatistics
 type UnprocessedStatistics struct {
 	_ struct{} `type:"structure"`
 
@@ -2779,7 +2737,6 @@ func (s UnprocessedStatistics) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a segment that failed processing.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UnprocessedTraceSegment
 type UnprocessedTraceSegment struct {
 	_ struct{} `type:"structure"`
 
@@ -2822,7 +2779,6 @@ func (s UnprocessedTraceSegment) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a segment annotation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ValueWithServiceIds
 type ValueWithServiceIds struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for DescribeInstanceHealth.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeEndPointStateInput
 type DescribeInstanceHealthInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *DescribeInstanceHealthInput) Validate() error {
 }
 
 // Contains the output for DescribeInstanceHealth.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeEndPointStateOutput
 type DescribeInstanceHealthOutput struct {
 	_ struct{} `type:"structure"`
 

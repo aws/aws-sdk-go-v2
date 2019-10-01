@@ -23,7 +23,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // AmazonApiGatewayManagementApi.
 //    func myFunc(svc apigatewaymanagementapiiface.ClientAPI) bool {
-//        // Make svc.PostToConnection request
+//        // Make svc.DeleteConnection request
 //    }
 //
 //    func main() {
@@ -43,7 +43,7 @@ import (
 //    type mockClientClient struct {
 //        apigatewaymanagementapiiface.ClientPI
 //    }
-//    func (m *mockClientClient) PostToConnection(input *apigatewaymanagementapi.PostToConnectionInput) (*apigatewaymanagementapi.PostToConnectionOutput, error) {
+//    func (m *mockClientClient) DeleteConnection(input *apigatewaymanagementapi.DeleteConnectionInput) (*apigatewaymanagementapi.DeleteConnectionOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,6 +61,10 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
+	DeleteConnectionRequest(*apigatewaymanagementapi.DeleteConnectionInput) apigatewaymanagementapi.DeleteConnectionRequest
+
+	GetConnectionRequest(*apigatewaymanagementapi.GetConnectionInput) apigatewaymanagementapi.GetConnectionRequest
+
 	PostToConnectionRequest(*apigatewaymanagementapi.PostToConnectionInput) apigatewaymanagementapi.PostToConnectionRequest
 }
 

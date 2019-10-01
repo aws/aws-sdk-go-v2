@@ -12,7 +12,6 @@ import (
 // Represents a request to enable or disable the Amazon SES custom MAIL FROM
 // domain setup for a verified identity. For information about using a custom
 // MAIL FROM domain, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityMailFromDomainRequest
 type SetIdentityMailFromDomainInput struct {
 	_ struct{} `type:"structure"`
 
@@ -62,7 +61,6 @@ func (s *SetIdentityMailFromDomainInput) Validate() error {
 }
 
 // An empty element returned on a successful request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityMailFromDomainResponse
 type SetIdentityMailFromDomainOutput struct {
 	_ struct{} `type:"structure"`
 }

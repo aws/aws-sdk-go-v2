@@ -17,7 +17,6 @@ var _ = awsutil.Prettify
 //
 // Multiple requests with the same UsageRecords as input will be deduplicated
 // to prevent double charges.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/UsageRecord
 type UsageRecord struct {
 	_ struct{} `type:"structure"`
 
@@ -82,7 +81,6 @@ func (s *UsageRecord) Validate() error {
 
 // A UsageRecordResult indicates the status of a given UsageRecord processed
 // by BatchMeterUsage.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/UsageRecordResult
 type UsageRecordResult struct {
 	_ struct{} `type:"structure"`
 

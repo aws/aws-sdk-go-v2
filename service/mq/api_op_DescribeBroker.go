@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerRequest
 type DescribeBrokerInput struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +50,6 @@ func (s DescribeBrokerInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerResponse
 type DescribeBrokerOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -95,6 +93,8 @@ type DescribeBrokerOutput struct {
 	MaintenanceWindowStartTime *WeeklyStartTime `locationName:"maintenanceWindowStartTime" type:"structure"`
 
 	PendingEngineVersion *string `locationName:"pendingEngineVersion" type:"string"`
+
+	PendingSecurityGroups []string `locationName:"pendingSecurityGroups" type:"list"`
 
 	PubliclyAccessible *bool `locationName:"publiclyAccessible" type:"boolean"`
 
@@ -216,6 +216,18 @@ func (s DescribeBrokerOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "pendingEngineVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PendingSecurityGroups != nil {
+		v := s.PendingSecurityGroups
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "pendingSecurityGroups", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	if s.PubliclyAccessible != nil {
 		v := *s.PubliclyAccessible

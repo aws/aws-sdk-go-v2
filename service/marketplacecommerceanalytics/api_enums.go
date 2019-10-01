@@ -16,6 +16,8 @@ const (
 	DataSetTypeDailyBusinessCanceledProductSubscribers      DataSetType = "daily_business_canceled_product_subscribers"
 	DataSetTypeMonthlyRevenueBillingAndRevenueData          DataSetType = "monthly_revenue_billing_and_revenue_data"
 	DataSetTypeMonthlyRevenueAnnualSubscriptions            DataSetType = "monthly_revenue_annual_subscriptions"
+	DataSetTypeMonthlyRevenueFieldDemonstrationUsage        DataSetType = "monthly_revenue_field_demonstration_usage"
+	DataSetTypeMonthlyRevenueFlexiblePaymentSchedule        DataSetType = "monthly_revenue_flexible_payment_schedule"
 	DataSetTypeDisbursedAmountByProduct                     DataSetType = "disbursed_amount_by_product"
 	DataSetTypeDisbursedAmountByProductWithUncollectedFunds DataSetType = "disbursed_amount_by_product_with_uncollected_funds"
 	DataSetTypeDisbursedAmountByInstanceHours               DataSetType = "disbursed_amount_by_instance_hours"

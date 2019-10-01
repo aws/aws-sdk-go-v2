@@ -10,7 +10,6 @@ import (
 )
 
 // RefreshCacheInput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RefreshCacheInput
 type RefreshCacheInput struct {
 	_ struct{} `type:"structure"`
 
@@ -61,7 +60,6 @@ func (s *RefreshCacheInput) Validate() error {
 }
 
 // RefreshCacheOutput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RefreshCacheOutput
 type RefreshCacheOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateTypeRequest
 type UpdateTypeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -90,7 +89,6 @@ func (s UpdateTypeInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateTypeResponse
 type UpdateTypeOutput struct {
 	_ struct{} `type:"structure"`
 

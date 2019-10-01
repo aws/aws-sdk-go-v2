@@ -11,7 +11,6 @@ import (
 )
 
 // The settings for the updated source of the flow.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowSourceRequest
 type UpdateFlowSourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -33,10 +32,11 @@ type UpdateFlowSourceInput struct {
 	// The port that the flow will be listening on for incoming content.
 	IngestPort *int64 `locationName:"ingestPort" type:"integer"`
 
-	// The smoothing max bitrate for RTP and RTP-FEC streams.
+	// The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
 	MaxBitrate *int64 `locationName:"maxBitrate" type:"integer"`
 
-	// The maximum latency in milliseconds for Zixi-based streams.
+	// The maximum latency in milliseconds. This parameter applies only to RIST-based
+	// and Zixi-based streams.
 	MaxLatency *int64 `locationName:"maxLatency" type:"integer"`
 
 	// The protocol that is used by the source.
@@ -153,7 +153,6 @@ func (s UpdateFlowSourceInput) MarshalFields(e protocol.FieldEncoder) error {
 
 // The result of a successful UpdateFlowSource request. The response includes
 // the ARN of the flow that was updated and the updated source configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowSourceResponse
 type UpdateFlowSourceOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateLoginProfileRequest
 type UpdateLoginProfileInput struct {
 	_ struct{} `type:"structure"`
 
@@ -32,7 +31,7 @@ type UpdateLoginProfileInput struct {
 	// However, the format can be further restricted by the account administrator
 	// by setting a password policy on the AWS account. For more information, see
 	// UpdateAccountPasswordPolicy.
-	Password *string `min:"1" type:"string"`
+	Password *string `min:"1" type:"string" sensitive:"true"`
 
 	// Allows this new password to be used only once by requiring the specified
 	// IAM user to set a new password on next sign-in.
@@ -73,7 +72,6 @@ func (s *UpdateLoginProfileInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateLoginProfileOutput
 type UpdateLoginProfileOutput struct {
 	_ struct{} `type:"structure"`
 }

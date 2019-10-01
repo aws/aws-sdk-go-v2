@@ -13,7 +13,6 @@ import (
 // will publish bounce, complaint, or delivery notifications for emails sent
 // with that identity as the Source. For information about Amazon SES notifications,
 // see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-sns.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityNotificationTopicRequest
 type SetIdentityNotificationTopicInput struct {
 	_ struct{} `type:"structure"`
 
@@ -64,7 +63,6 @@ func (s *SetIdentityNotificationTopicInput) Validate() error {
 }
 
 // An empty element returned on a successful request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityNotificationTopicResponse
 type SetIdentityNotificationTopicOutput struct {
 	_ struct{} `type:"structure"`
 }

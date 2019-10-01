@@ -10,7 +10,6 @@ import (
 )
 
 // Describes event topics.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeEventTopicsRequest
 type DescribeEventTopicsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -31,7 +30,6 @@ func (s DescribeEventTopicsInput) String() string {
 }
 
 // The result of a DescribeEventTopic request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeEventTopicsResult
 type DescribeEventTopicsOutput struct {
 	_ struct{} `type:"structure"`
 

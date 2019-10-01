@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachineInput
 type DescribeStateMachineInput struct {
 	_ struct{} `type:"structure"`
 
@@ -42,7 +41,6 @@ func (s *DescribeStateMachineInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachineOutput
 type DescribeStateMachineOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,13 +53,13 @@ type DescribeStateMachineOutput struct {
 	// Language (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
 	//
 	// Definition is a required field
-	Definition *string `locationName:"definition" min:"1" type:"string" required:"true"`
+	Definition *string `locationName:"definition" min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The name of the state machine.
 	//
 	// A name must not contain:
 	//
-	//    * whitespace
+	//    * white space
 	//
 	//    * brackets < > { } [ ]
 	//

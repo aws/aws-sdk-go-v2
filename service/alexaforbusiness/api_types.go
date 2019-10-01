@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // An address book with attributes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AddressBook
 type AddressBook struct {
 	_ struct{} `type:"structure"`
 
@@ -34,7 +33,6 @@ func (s AddressBook) String() string {
 }
 
 // Information related to an address book.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AddressBookData
 type AddressBookData struct {
 	_ struct{} `type:"structure"`
 
@@ -63,7 +61,6 @@ func (s AddressBookData) String() string {
 // in the announcement:
 //
 // ffmpeg -i <input-file> -ac 2 -codec:a libmp3lame -b:a 48k -ar 16000 <output-file.mp3>
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Audio
 type Audio struct {
 	_ struct{} `type:"structure"`
 
@@ -103,7 +100,6 @@ func (s *Audio) Validate() error {
 }
 
 // Usage report with specified parameters.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/BusinessReport
 type BusinessReport struct {
 	_ struct{} `type:"structure"`
 
@@ -129,7 +125,6 @@ func (s BusinessReport) String() string {
 }
 
 // The content range of the report.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/BusinessReportContentRange
 type BusinessReportContentRange struct {
 	_ struct{} `type:"structure"`
 
@@ -143,7 +138,6 @@ func (s BusinessReportContentRange) String() string {
 }
 
 // The recurrence of the reports.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/BusinessReportRecurrence
 type BusinessReportRecurrence struct {
 	_ struct{} `type:"structure"`
 
@@ -157,7 +151,6 @@ func (s BusinessReportRecurrence) String() string {
 }
 
 // The S3 location of the output reports.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/BusinessReportS3Location
 type BusinessReportS3Location struct {
 	_ struct{} `type:"structure"`
 
@@ -174,7 +167,6 @@ func (s BusinessReportS3Location) String() string {
 }
 
 // The schedule of the usage report.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/BusinessReportSchedule
 type BusinessReportSchedule struct {
 	_ struct{} `type:"structure"`
 
@@ -211,7 +203,6 @@ func (s BusinessReportSchedule) String() string {
 
 // The skill store category that is shown. Alexa skills are assigned a specific
 // skill category during creation, such as News, Social, and Sports.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Category
 type Category struct {
 	_ struct{} `type:"structure"`
 
@@ -229,7 +220,6 @@ func (s Category) String() string {
 
 // The default conference provider that is used if no other scheduled meetings
 // are detected.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ConferencePreference
 type ConferencePreference struct {
 	_ struct{} `type:"structure"`
 
@@ -246,7 +236,6 @@ func (s ConferencePreference) String() string {
 // as the voice interface and mediator that connects users to their preferred
 // conference provider. Examples of conference providers include Amazon Chime,
 // Zoom, Cisco, and Polycom.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ConferenceProvider
 type ConferenceProvider struct {
 	_ struct{} `type:"structure"`
 
@@ -275,7 +264,6 @@ func (s ConferenceProvider) String() string {
 }
 
 // A contact with attributes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Contact
 type Contact struct {
 	_ struct{} `type:"structure"`
 
@@ -295,7 +283,7 @@ type Contact struct {
 	// You can either specify PhoneNumber or PhoneNumbers. We recommend that you
 	// use PhoneNumbers, which lets you specify the phone number type and multiple
 	// numbers.
-	PhoneNumber *string `type:"string"`
+	PhoneNumber *string `type:"string" sensitive:"true"`
 
 	// The list of phone numbers for the contact.
 	PhoneNumbers []PhoneNumber `type:"list"`
@@ -310,7 +298,6 @@ func (s Contact) String() string {
 }
 
 // Information related to a contact.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ContactData
 type ContactData struct {
 	_ struct{} `type:"structure"`
 
@@ -329,7 +316,7 @@ type ContactData struct {
 	// The phone number of the contact. The phone number type defaults to WORK.
 	// You can specify PhoneNumber or PhoneNumbers. We recommend that you use PhoneNumbers,
 	// which lets you specify the phone number type and multiple numbers.
-	PhoneNumber *string `type:"string"`
+	PhoneNumber *string `type:"string" sensitive:"true"`
 
 	// The list of phone numbers for the contact.
 	PhoneNumbers []PhoneNumber `type:"list"`
@@ -345,7 +332,6 @@ func (s ContactData) String() string {
 
 // The content definition. This can contain only one text, SSML, or audio list
 // object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Content
 type Content struct {
 	_ struct{} `type:"structure"`
 
@@ -396,7 +382,6 @@ func (s *Content) Validate() error {
 }
 
 // The details about the developer that published the skill.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeveloperInfo
 type DeveloperInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -419,7 +404,6 @@ func (s DeveloperInfo) String() string {
 }
 
 // A device with attributes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Device
 type Device struct {
 	_ struct{} `type:"structure"`
 
@@ -461,7 +445,6 @@ func (s Device) String() string {
 }
 
 // Device attributes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeviceData
 type DeviceData struct {
 	_ struct{} `type:"structure"`
 
@@ -508,7 +491,6 @@ func (s DeviceData) String() string {
 }
 
 // The list of device events.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeviceEvent
 type DeviceEvent struct {
 	_ struct{} `type:"structure"`
 
@@ -528,7 +510,6 @@ func (s DeviceEvent) String() string {
 }
 
 // Detailed information about a device's network profile.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeviceNetworkProfileInfo
 type DeviceNetworkProfileInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -548,7 +529,6 @@ func (s DeviceNetworkProfileInfo) String() string {
 }
 
 // Details of a device’s status.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeviceStatusDetail
 type DeviceStatusDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -565,7 +545,6 @@ func (s DeviceStatusDetail) String() string {
 }
 
 // Detailed information about a device's status.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeviceStatusInfo
 type DeviceStatusInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -583,7 +562,6 @@ func (s DeviceStatusInfo) String() string {
 
 // A filter name and value pair that is used to return a more specific list
 // of results. Filters can be used to match a set of resources by various criteria.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Filter
 type Filter struct {
 	_ struct{} `type:"structure"`
 
@@ -625,7 +603,6 @@ func (s *Filter) Validate() error {
 }
 
 // The details of the gateway.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Gateway
 type Gateway struct {
 	_ struct{} `type:"structure"`
 
@@ -652,7 +629,6 @@ func (s Gateway) String() string {
 }
 
 // The details of the gateway group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GatewayGroup
 type GatewayGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -672,7 +648,6 @@ func (s GatewayGroup) String() string {
 }
 
 // The summary of a gateway group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GatewayGroupSummary
 type GatewayGroupSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -692,7 +667,6 @@ func (s GatewayGroupSummary) String() string {
 }
 
 // The summary of a gateway.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GatewaySummary
 type GatewaySummary struct {
 	_ struct{} `type:"structure"`
 
@@ -719,7 +693,6 @@ func (s GatewaySummary) String() string {
 }
 
 // The IP endpoint and protocol for calling.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/IPDialIn
 type IPDialIn struct {
 	_ struct{} `type:"structure"`
 
@@ -768,7 +741,6 @@ func (s *IPDialIn) Validate() error {
 //
 //    * If OPTIONAL, Alexa will ask if you have a meeting pin and if the customer
 //    responds with yes, it will ask for the meeting pin.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/MeetingSetting
 type MeetingSetting struct {
 	_ struct{} `type:"structure"`
 
@@ -797,7 +769,6 @@ func (s *MeetingSetting) Validate() error {
 }
 
 // The network profile associated with a device.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/NetworkProfile
 type NetworkProfile struct {
 	_ struct{} `type:"structure"`
 
@@ -806,7 +777,7 @@ type NetworkProfile struct {
 	CertificateAuthorityArn *string `type:"string"`
 
 	// The current password of the Wi-Fi network.
-	CurrentPassword *string `min:"5" type:"string"`
+	CurrentPassword *string `min:"5" type:"string" sensitive:"true"`
 
 	// Detailed information about a device's network profile.
 	Description *string `type:"string"`
@@ -824,7 +795,7 @@ type NetworkProfile struct {
 	// The next, or subsequent, password of the Wi-Fi network. This password is
 	// asynchronously transmitted to the device and is used when the password of
 	// the network changes to NextPassword.
-	NextPassword *string `type:"string"`
+	NextPassword *string `type:"string" sensitive:"true"`
 
 	// The security type of the Wi-Fi network. This can be WPA2_ENTERPRISE, WPA2_PSK,
 	// WPA_PSK, WEP, or OPEN.
@@ -844,7 +815,6 @@ func (s NetworkProfile) String() string {
 }
 
 // The data associated with a network profile.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/NetworkProfileData
 type NetworkProfileData struct {
 	_ struct{} `type:"structure"`
 
@@ -879,7 +849,6 @@ func (s NetworkProfileData) String() string {
 }
 
 // The information for public switched telephone network (PSTN) conferencing.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PSTNDialIn
 type PSTNDialIn struct {
 	_ struct{} `type:"structure"`
 
@@ -947,19 +916,18 @@ func (s *PSTNDialIn) Validate() error {
 
 // The phone number for the contact containing the raw number and phone number
 // type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PhoneNumber
 type PhoneNumber struct {
 	_ struct{} `type:"structure"`
 
 	// The raw value of the phone number.
 	//
 	// Number is a required field
-	Number *string `type:"string" required:"true"`
+	Number *string `type:"string" required:"true" sensitive:"true"`
 
 	// The type of the phone number.
 	//
 	// Type is a required field
-	Type PhoneNumberType `type:"string" required:"true" enum:"true"`
+	Type PhoneNumberType `type:"string" required:"true" enum:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -985,7 +953,6 @@ func (s *PhoneNumber) Validate() error {
 }
 
 // A room profile with attributes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Profile
 type Profile struct {
 	_ struct{} `type:"structure"`
 
@@ -1035,7 +1002,6 @@ func (s Profile) String() string {
 }
 
 // The data of a room profile.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ProfileData
 type ProfileData struct {
 	_ struct{} `type:"structure"`
 
@@ -1073,7 +1039,6 @@ func (s ProfileData) String() string {
 }
 
 // A room with attributes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Room
 type Room struct {
 	_ struct{} `type:"structure"`
 
@@ -1099,7 +1064,6 @@ func (s Room) String() string {
 }
 
 // The data of a room.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/RoomData
 type RoomData struct {
 	_ struct{} `type:"structure"`
 
@@ -1128,7 +1092,6 @@ func (s RoomData) String() string {
 }
 
 // A skill parameter associated with a room.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/RoomSkillParameter
 type RoomSkillParameter struct {
 	_ struct{} `type:"structure"`
 
@@ -1174,19 +1137,18 @@ func (s *RoomSkillParameter) Validate() error {
 }
 
 // The SIP address for the contact containing the URI and SIP address type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SipAddress
 type SipAddress struct {
 	_ struct{} `type:"structure"`
 
 	// The type of the SIP address.
 	//
 	// Type is a required field
-	Type SipType `type:"string" required:"true" enum:"true"`
+	Type SipType `type:"string" required:"true" enum:"true" sensitive:"true"`
 
 	// The URI for the SIP address.
 	//
 	// Uri is a required field
-	Uri *string `min:"1" type:"string" required:"true"`
+	Uri *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -1215,7 +1177,6 @@ func (s *SipAddress) Validate() error {
 }
 
 // Granular information about the skill.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SkillDetails
 type SkillDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -1257,7 +1218,6 @@ func (s SkillDetails) String() string {
 }
 
 // A skill group with attributes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SkillGroup
 type SkillGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -1277,7 +1237,6 @@ func (s SkillGroup) String() string {
 }
 
 // The attributes of a skill group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SkillGroupData
 type SkillGroupData struct {
 	_ struct{} `type:"structure"`
 
@@ -1297,7 +1256,6 @@ func (s SkillGroupData) String() string {
 }
 
 // The summary of skills.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SkillSummary
 type SkillSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1324,7 +1282,6 @@ func (s SkillSummary) String() string {
 }
 
 // The detailed information about an Alexa skill.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SkillsStoreSkill
 type SkillsStoreSkill struct {
 	_ struct{} `type:"structure"`
 
@@ -1357,7 +1314,6 @@ func (s SkillsStoreSkill) String() string {
 
 // A smart home appliance that can connect to a central system. Any domestic
 // device can be a smart appliance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SmartHomeAppliance
 type SmartHomeAppliance struct {
 	_ struct{} `type:"structure"`
 
@@ -1377,7 +1333,6 @@ func (s SmartHomeAppliance) String() string {
 }
 
 // An object representing a sort criteria.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Sort
 type Sort struct {
 	_ struct{} `type:"structure"`
 
@@ -1418,7 +1373,6 @@ func (s *Sort) Validate() error {
 }
 
 // The SSML message. For more information, see SSML Reference (https://developer.amazon.com/docs/custom-skills/speech-synthesis-markup-language-ssml-reference.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Ssml
 type Ssml struct {
 	_ struct{} `type:"structure"`
 
@@ -1457,7 +1411,6 @@ func (s *Ssml) Validate() error {
 }
 
 // A key-value pair that can be associated with a resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -1499,7 +1452,6 @@ func (s *Tag) Validate() error {
 }
 
 // The text message.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Text
 type Text struct {
 	_ struct{} `type:"structure"`
 
@@ -1537,7 +1489,6 @@ func (s *Text) Validate() error {
 }
 
 // Information related to a user.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UserData
 type UserData struct {
 	_ struct{} `type:"structure"`
 

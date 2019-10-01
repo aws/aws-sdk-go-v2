@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListConfigurationRevisionsRequest
 type ListConfigurationRevisionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -69,7 +68,6 @@ func (s ListConfigurationRevisionsInput) MarshalFields(e protocol.FieldEncoder) 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListConfigurationRevisionsResponse
 type ListConfigurationRevisionsOutput struct {
 	_ struct{} `type:"structure"`
 

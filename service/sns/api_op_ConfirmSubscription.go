@@ -10,7 +10,6 @@ import (
 )
 
 // Input for ConfirmSubscription action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ConfirmSubscriptionInput
 type ConfirmSubscriptionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s *ConfirmSubscriptionInput) Validate() error {
 }
 
 // Response for ConfirmSubscriptions action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ConfirmSubscriptionResponse
 type ConfirmSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
 

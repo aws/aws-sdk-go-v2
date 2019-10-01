@@ -12,14 +12,13 @@ import (
 )
 
 // Represents the request to delete a user pool client.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserPoolClientRequest
 type DeleteUserPoolClientInput struct {
 	_ struct{} `type:"structure"`
 
 	// The app client ID of the app associated with the user pool.
 	//
 	// ClientId is a required field
-	ClientId *string `min:"1" type:"string" required:"true"`
+	ClientId *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The user pool ID for the user pool where you want to delete the client.
 	//
@@ -56,7 +55,6 @@ func (s *DeleteUserPoolClientInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserPoolClientOutput
 type DeleteUserPoolClientOutput struct {
 	_ struct{} `type:"structure"`
 }

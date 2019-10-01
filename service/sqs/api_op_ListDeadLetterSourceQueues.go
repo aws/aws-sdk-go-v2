@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListDeadLetterSourceQueuesRequest
 type ListDeadLetterSourceQueuesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -41,7 +40,6 @@ func (s *ListDeadLetterSourceQueuesInput) Validate() error {
 }
 
 // A list of your dead letter source queues.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListDeadLetterSourceQueuesResult
 type ListDeadLetterSourceQueuesOutput struct {
 	_ struct{} `type:"structure"`
 

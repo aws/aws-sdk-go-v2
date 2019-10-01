@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DescribeUserProfileRequest
 type DescribeUserProfileInput struct {
 	_ struct{} `type:"structure"`
 
@@ -42,7 +41,6 @@ func (s *DescribeUserProfileInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DescribeUserProfileResult
 type DescribeUserProfileOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -61,10 +59,10 @@ type DescribeUserProfileOutput struct {
 	// displays a maximum of two characters, so a display name with more than one
 	// space (for example "Mary Jane Major") would generate an initial icon using
 	// the first character and the first character after the space ("MJ", not "MM").
-	DisplayName *string `locationName:"displayName" min:"1" type:"string"`
+	DisplayName *string `locationName:"displayName" min:"1" type:"string" sensitive:"true"`
 
 	// The email address for the user. Optional.
-	EmailAddress *string `locationName:"emailAddress" min:"3" type:"string"`
+	EmailAddress *string `locationName:"emailAddress" min:"3" type:"string" sensitive:"true"`
 
 	// The date and time when the user profile was last modified, in timestamp format.
 	//

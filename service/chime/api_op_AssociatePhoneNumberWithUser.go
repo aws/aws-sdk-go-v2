@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AssociatePhoneNumberWithUserRequest
 type AssociatePhoneNumberWithUserInput struct {
 	_ struct{} `type:"structure"`
 
@@ -22,7 +21,7 @@ type AssociatePhoneNumberWithUserInput struct {
 	// The phone number, in E.164 format.
 	//
 	// E164PhoneNumber is a required field
-	E164PhoneNumber *string `type:"string" required:"true"`
+	E164PhoneNumber *string `type:"string" required:"true" sensitive:"true"`
 
 	// The user ID.
 	//
@@ -82,7 +81,6 @@ func (s AssociatePhoneNumberWithUserInput) MarshalFields(e protocol.FieldEncoder
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AssociatePhoneNumberWithUserResponse
 type AssociatePhoneNumberWithUserOutput struct {
 	_ struct{} `type:"structure"`
 }

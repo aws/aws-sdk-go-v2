@@ -11,7 +11,6 @@ import (
 )
 
 // Input for Publish action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/PublishInput
 type PublishInput struct {
 	_ struct{} `type:"structure"`
 
@@ -144,7 +143,6 @@ func (s *PublishInput) Validate() error {
 }
 
 // Response for Publish action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/PublishResponse
 type PublishOutput struct {
 	_ struct{} `type:"structure"`
 

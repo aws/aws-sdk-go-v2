@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for CancelBundleTask.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelBundleTaskRequest
 type CancelBundleTaskInput struct {
 	_ struct{} `type:"structure"`
 
@@ -46,7 +45,6 @@ func (s *CancelBundleTaskInput) Validate() error {
 }
 
 // Contains the output of CancelBundleTask.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelBundleTaskResult
 type CancelBundleTaskOutput struct {
 	_ struct{} `type:"structure"`
 

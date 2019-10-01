@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input to CreateDBSubnetGroup.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBSubnetGroupMessage
 type CreateDBSubnetGroupInput struct {
 	_ struct{} `type:"structure"`
 
@@ -65,7 +64,6 @@ func (s *CreateDBSubnetGroupInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBSubnetGroupResult
 type CreateDBSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
 

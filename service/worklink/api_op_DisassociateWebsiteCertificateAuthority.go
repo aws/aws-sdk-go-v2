@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DisassociateWebsiteCertificateAuthorityRequest
 type DisassociateWebsiteCertificateAuthorityInput struct {
 	_ struct{} `type:"structure"`
 
@@ -73,7 +72,6 @@ func (s DisassociateWebsiteCertificateAuthorityInput) MarshalFields(e protocol.F
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DisassociateWebsiteCertificateAuthorityResponse
 type DisassociateWebsiteCertificateAuthorityOutput struct {
 	_ struct{} `type:"structure"`
 }

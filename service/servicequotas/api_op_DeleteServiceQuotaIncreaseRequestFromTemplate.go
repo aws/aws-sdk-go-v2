@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/DeleteServiceQuotaIncreaseRequestFromTemplateRequest
 type DeleteServiceQuotaIncreaseRequestFromTemplateInput struct {
 	_ struct{} `type:"structure"`
 
@@ -65,7 +64,6 @@ func (s *DeleteServiceQuotaIncreaseRequestFromTemplateInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/DeleteServiceQuotaIncreaseRequestFromTemplateResponse
 type DeleteServiceQuotaIncreaseRequestFromTemplateOutput struct {
 	_ struct{} `type:"structure"`
 }

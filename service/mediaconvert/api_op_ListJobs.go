@@ -14,7 +14,6 @@ import (
 // the response by queue and/or job status by specifying them in your request
 // body. You can also optionally specify the maximum number, up to twenty, of
 // jobs to be returned.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListJobsRequest
 type ListJobsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -93,7 +92,6 @@ func (s ListJobsInput) MarshalFields(e protocol.FieldEncoder) error {
 
 // Successful list jobs requests return a JSON array of jobs. If you don't specify
 // how they are ordered, you will receive the most recently created first.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListJobsResponse
 type ListJobsOutput struct {
 	_ struct{} `type:"structure"`
 

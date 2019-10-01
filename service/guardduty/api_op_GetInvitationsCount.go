@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetInvitationsCountRequest
 type GetInvitationsCountInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -27,7 +26,6 @@ func (s GetInvitationsCountInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetInvitationsCountResponse
 type GetInvitationsCountOutput struct {
 	_ struct{} `type:"structure"`
 

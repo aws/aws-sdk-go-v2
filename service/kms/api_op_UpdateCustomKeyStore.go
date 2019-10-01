@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdateCustomKeyStoreRequest
 type UpdateCustomKeyStoreInput struct {
 	_ struct{} `type:"structure"`
 
@@ -38,7 +37,7 @@ type UpdateCustomKeyStoreInput struct {
 	// This parameter tells AWS KMS the current password of the kmsuser crypto user
 	// (CU). It does not set or change the password of any users in the AWS CloudHSM
 	// cluster.
-	KeyStorePassword *string `min:"1" type:"string"`
+	KeyStorePassword *string `min:"1" type:"string" sensitive:"true"`
 
 	// Changes the friendly name of the custom key store to the value that you specify.
 	// The custom key store name must be unique in the AWS account.
@@ -76,7 +75,6 @@ func (s *UpdateCustomKeyStoreInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdateCustomKeyStoreResponse
 type UpdateCustomKeyStoreOutput struct {
 	_ struct{} `type:"structure"`
 }

@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input for a request action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteGameSessionQueueInput
 type DeleteGameSessionQueueInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *DeleteGameSessionQueueInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteGameSessionQueueOutput
 type DeleteGameSessionQueueOutput struct {
 	_ struct{} `type:"structure"`
 }

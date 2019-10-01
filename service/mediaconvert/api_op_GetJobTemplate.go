@@ -11,7 +11,6 @@ import (
 )
 
 // Query a job template by sending a request with the job template name.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetJobTemplateRequest
 type GetJobTemplateInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s GetJobTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
 
 // Successful get job template requests will return an OK message and the job
 // template JSON.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetJobTemplateResponse
 type GetJobTemplateOutput struct {
 	_ struct{} `type:"structure"`
 

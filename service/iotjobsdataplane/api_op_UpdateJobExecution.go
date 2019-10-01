@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iot-jobs-data-2017-09-29/UpdateJobExecutionRequest
 type UpdateJobExecutionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -165,7 +164,6 @@ func (s UpdateJobExecutionInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iot-jobs-data-2017-09-29/UpdateJobExecutionResponse
 type UpdateJobExecutionOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -14,19 +14,18 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // The credentials to use for federation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Credentials
 type Credentials struct {
 	_ struct{} `type:"structure"`
 
 	// An access token generated for a federated user to access Amazon Connect
-	AccessToken *string `type:"string"`
+	AccessToken *string `type:"string" sensitive:"true"`
 
 	// A token generated with an expiration time for the session a user is logged
 	// in to Amazon Connect
 	AccessTokenExpiration *time.Time `type:"timestamp"`
 
 	// Renews a token generated for a user to access the Amazon Connect instance.
-	RefreshToken *string `type:"string"`
+	RefreshToken *string `type:"string" sensitive:"true"`
 
 	// Renews the expiration timer for a generated token.
 	RefreshTokenExpiration *time.Time `type:"timestamp"`
@@ -69,7 +68,6 @@ func (s Credentials) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A CurrentMetric object that contains the Name and Unit for the metric.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CurrentMetric
 type CurrentMetric struct {
 	_ struct{} `type:"structure"`
 
@@ -103,7 +101,6 @@ func (s CurrentMetric) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A CurrentMetricData object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CurrentMetricData
 type CurrentMetricData struct {
 	_ struct{} `type:"structure"`
 
@@ -137,7 +134,6 @@ func (s CurrentMetricData) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A CurrentMetricResult object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CurrentMetricResult
 type CurrentMetricResult struct {
 	_ struct{} `type:"structure"`
 
@@ -177,7 +173,6 @@ func (s CurrentMetricResult) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A Dimensions object that includes the Channel and Queue for the metric.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Dimensions
 type Dimensions struct {
 	_ struct{} `type:"structure"`
 
@@ -211,7 +206,6 @@ func (s Dimensions) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The filter, either channel or queues, to apply to the metric results retrieved.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Filters
 type Filters struct {
 	_ struct{} `type:"structure"`
 
@@ -272,7 +266,6 @@ func (s Filters) MarshalFields(e protocol.FieldEncoder) error {
 
 // A HierarchyGroup object that contains information about a hierarchy group
 // in your Amazon Connect instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyGroup
 type HierarchyGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -335,7 +328,6 @@ func (s HierarchyGroup) MarshalFields(e protocol.FieldEncoder) error {
 
 // A HierarchyGroupSummary object that contains information about the hierarchy
 // group, including ARN, Id, and Name.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyGroupSummary
 type HierarchyGroupSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -379,7 +371,6 @@ func (s HierarchyGroupSummary) MarshalFields(e protocol.FieldEncoder) error {
 
 // A HierarchyLevel object that contains information about the levels in a hierarchy
 // group, including ARN, Id, and Name.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyLevel
 type HierarchyLevel struct {
 	_ struct{} `type:"structure"`
 
@@ -423,7 +414,6 @@ func (s HierarchyLevel) MarshalFields(e protocol.FieldEncoder) error {
 
 // A HierarchyPath object that contains information about the levels of the
 // hierarchy group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyPath
 type HierarchyPath struct {
 	_ struct{} `type:"structure"`
 
@@ -490,7 +480,6 @@ func (s HierarchyPath) MarshalFields(e protocol.FieldEncoder) error {
 
 // A HierarchyStructure object that contains information about the hierarchy
 // group structure.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyStructure
 type HierarchyStructure struct {
 	_ struct{} `type:"structure"`
 
@@ -557,7 +546,6 @@ func (s HierarchyStructure) MarshalFields(e protocol.FieldEncoder) error {
 
 // A HistoricalMetric object that contains the Name, Unit, Statistic, and Threshold
 // for the metric.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HistoricalMetric
 type HistoricalMetric struct {
 	_ struct{} `type:"structure"`
 
@@ -609,7 +597,6 @@ func (s HistoricalMetric) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A HistoricalMetricData object than contains a Metric and a Value.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HistoricalMetricData
 type HistoricalMetricData struct {
 	_ struct{} `type:"structure"`
 
@@ -643,7 +630,6 @@ func (s HistoricalMetricData) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The metrics data returned from a GetMetricData operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HistoricalMetricResult
 type HistoricalMetricResult struct {
 	_ struct{} `type:"structure"`
 
@@ -684,7 +670,6 @@ func (s HistoricalMetricResult) MarshalFields(e protocol.FieldEncoder) error {
 
 // A QueueReference object that contains the the QueueId and ARN for the queue
 // resource for which metrics are returned.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/QueueReference
 type QueueReference struct {
 	_ struct{} `type:"structure"`
 
@@ -719,7 +704,6 @@ func (s QueueReference) MarshalFields(e protocol.FieldEncoder) error {
 
 // A RoutingProfileSummary object that contains information about a routing
 // profile, including ARN, Id, and Name.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfileSummary
 type RoutingProfileSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -763,7 +747,6 @@ func (s RoutingProfileSummary) MarshalFields(e protocol.FieldEncoder) error {
 
 // A SecurityProfileSummary object that contains information about a security
 // profile, including ARN, Id, Name.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SecurityProfileSummary
 type SecurityProfileSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -807,7 +790,6 @@ func (s SecurityProfileSummary) MarshalFields(e protocol.FieldEncoder) error {
 
 // A Threshold object that includes a comparison and ThresholdValue to compare
 // to. Used with service level metrics.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Threshold
 type Threshold struct {
 	_ struct{} `type:"structure"`
 
@@ -844,7 +826,6 @@ func (s Threshold) MarshalFields(e protocol.FieldEncoder) error {
 
 // A User object that contains information about a user account in your Amazon
 // Connect instance, including configuration settings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/User
 type User struct {
 	_ struct{} `type:"structure"`
 
@@ -949,7 +930,6 @@ func (s User) MarshalFields(e protocol.FieldEncoder) error {
 
 // A UserIdentityInfo object that contains information about the user's identity,
 // including email address, first name, and last name.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserIdentityInfo
 type UserIdentityInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -1012,7 +992,6 @@ func (s UserIdentityInfo) MarshalFields(e protocol.FieldEncoder) error {
 
 // A UserPhoneConfig object that contains information about the user phone configuration
 // settings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserPhoneConfig
 type UserPhoneConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1080,7 +1059,6 @@ func (s UserPhoneConfig) MarshalFields(e protocol.FieldEncoder) error {
 
 // A UserSummary object that contains Information about a user, including ARN,
 // Id, and user name.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserSummary
 type UserSummary struct {
 	_ struct{} `type:"structure"`
 

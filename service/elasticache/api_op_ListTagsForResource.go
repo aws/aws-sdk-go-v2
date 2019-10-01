@@ -10,7 +10,6 @@ import (
 )
 
 // The input parameters for the ListTagsForResource operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ListTagsForResourceMessage
 type ListTagsForResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -46,7 +45,6 @@ func (s *ListTagsForResourceInput) Validate() error {
 
 // Represents the output from the AddTagsToResource, ListTagsForResource, and
 // RemoveTagsFromResource operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TagListMessage
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 

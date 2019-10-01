@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeRecoveryPointInput
 type DescribeRecoveryPointInput struct {
 	_ struct{} `type:"structure"`
 
@@ -72,7 +71,6 @@ func (s DescribeRecoveryPointInput) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeRecoveryPointOutput
 type DescribeRecoveryPointOutput struct {
 	_ struct{} `type:"structure"`
 

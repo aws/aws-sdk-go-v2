@@ -11,7 +11,6 @@ import (
 )
 
 // Request structure for the delete Domain Association request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteDomainAssociationRequest
 type DeleteDomainAssociationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -71,7 +70,6 @@ func (s DeleteDomainAssociationInput) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteDomainAssociationResult
 type DeleteDomainAssociationOutput struct {
 	_ struct{} `type:"structure"`
 

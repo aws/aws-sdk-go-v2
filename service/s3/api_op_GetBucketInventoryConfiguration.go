@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketInventoryConfigurationRequest
 type GetBucketInventoryConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -73,7 +72,6 @@ func (s GetBucketInventoryConfigurationInput) MarshalFields(e protocol.FieldEnco
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketInventoryConfigurationOutput
 type GetBucketInventoryConfigurationOutput struct {
 	_ struct{} `type:"structure" payload:"InventoryConfiguration"`
 

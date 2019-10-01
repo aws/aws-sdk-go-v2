@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerAgentRequest
 type UpdateContainerAgentInput struct {
 	_ struct{} `type:"structure"`
 
@@ -44,7 +43,6 @@ func (s *UpdateContainerAgentInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerAgentResponse
 type UpdateContainerAgentOutput struct {
 	_ struct{} `type:"structure"`
 

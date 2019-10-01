@@ -10,13 +10,12 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteLabelsRequest
 type DeleteLabelsInput struct {
 	_ struct{} `type:"structure"`
 
 	// Amazon WorkDocs authentication token. Do not set this field when using administrative
 	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string"`
+	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// Flag to request removal of all labels from the specified resource.
 	DeleteAll *bool `location:"querystring" locationName:"deleteAll" type:"boolean"`
@@ -92,7 +91,6 @@ func (s DeleteLabelsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteLabelsResponse
 type DeleteLabelsOutput struct {
 	_ struct{} `type:"structure"`
 }

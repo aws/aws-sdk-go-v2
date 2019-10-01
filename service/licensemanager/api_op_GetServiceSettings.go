@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/GetServiceSettingsRequest
 type GetServiceSettingsInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -19,7 +18,6 @@ func (s GetServiceSettingsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/GetServiceSettingsResponse
 type GetServiceSettingsOutput struct {
 	_ struct{} `type:"structure"`
 

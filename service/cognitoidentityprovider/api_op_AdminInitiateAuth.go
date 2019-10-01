@@ -10,7 +10,6 @@ import (
 )
 
 // Initiates the authorization request, as an administrator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminInitiateAuthRequest
 type AdminInitiateAuthInput struct {
 	_ struct{} `type:"structure"`
 
@@ -71,7 +70,7 @@ type AdminInitiateAuthInput struct {
 	// The app client ID.
 	//
 	// ClientId is a required field
-	ClientId *string `min:"1" type:"string" required:"true"`
+	ClientId *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// This is a random key-value pair map which can contain any key and will be
 	// passed to your PreAuthentication Lambda trigger as-is. It can be used to
@@ -127,7 +126,6 @@ func (s *AdminInitiateAuthInput) Validate() error {
 }
 
 // Initiates the authentication response, as an administrator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminInitiateAuthResponse
 type AdminInitiateAuthOutput struct {
 	_ struct{} `type:"structure"`
 

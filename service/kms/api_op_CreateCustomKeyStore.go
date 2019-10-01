@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateCustomKeyStoreRequest
 type CreateCustomKeyStoreInput struct {
 	_ struct{} `type:"structure"`
 
@@ -35,7 +34,7 @@ type CreateCustomKeyStoreInput struct {
 	// the password in the AWS CloudHSM cluster.
 	//
 	// KeyStorePassword is a required field
-	KeyStorePassword *string `min:"1" type:"string" required:"true"`
+	KeyStorePassword *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// Enter the content of the trust anchor certificate for the cluster. This is
 	// the content of the customerCA.crt file that you created when you initialized
@@ -88,7 +87,6 @@ func (s *CreateCustomKeyStoreInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateCustomKeyStoreResponse
 type CreateCustomKeyStoreOutput struct {
 	_ struct{} `type:"structure"`
 

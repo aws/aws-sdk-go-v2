@@ -10,7 +10,6 @@ import (
 )
 
 // DeleteLocation
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DeleteLocationRequest
 type DeleteLocationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -39,7 +38,6 @@ func (s *DeleteLocationInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DeleteLocationResponse
 type DeleteLocationOutput struct {
 	_ struct{} `type:"structure"`
 }

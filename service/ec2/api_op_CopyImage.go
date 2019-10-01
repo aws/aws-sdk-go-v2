@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for CopyImage.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopyImageRequest
 type CopyImageInput struct {
 	_ struct{} `type:"structure"`
 
@@ -106,7 +105,6 @@ func (s *CopyImageInput) Validate() error {
 }
 
 // Contains the output of CopyImage.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopyImageResult
 type CopyImageOutput struct {
 	_ struct{} `type:"structure"`
 

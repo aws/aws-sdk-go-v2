@@ -12,7 +12,6 @@ import (
 )
 
 // Swaps the CNAMEs of two environments.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/SwapEnvironmentCNAMEsMessage
 type SwapEnvironmentCNAMEsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -66,7 +65,6 @@ func (s *SwapEnvironmentCNAMEsInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/SwapEnvironmentCNAMEsOutput
 type SwapEnvironmentCNAMEsOutput struct {
 	_ struct{} `type:"structure"`
 }

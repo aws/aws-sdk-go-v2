@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateTagsRequest
 type CreateTagsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -65,7 +64,6 @@ func (s CreateTagsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateTagsOutput
 type CreateTagsOutput struct {
 	_ struct{} `type:"structure"`
 }

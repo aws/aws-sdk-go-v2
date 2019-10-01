@@ -11,7 +11,6 @@ import (
 )
 
 // DescribeTaskRequest
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeTaskRequest
 type DescribeTaskInput struct {
 	_ struct{} `type:"structure"`
 
@@ -41,7 +40,6 @@ func (s *DescribeTaskInput) Validate() error {
 }
 
 // DescribeTaskResponse
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeTaskResponse
 type DescribeTaskOutput struct {
 	_ struct{} `type:"structure"`
 

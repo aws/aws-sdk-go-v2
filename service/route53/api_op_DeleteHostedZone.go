@@ -11,7 +11,6 @@ import (
 )
 
 // A request to delete a hosted zone.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteHostedZoneRequest
 type DeleteHostedZoneInput struct {
 	_ struct{} `type:"structure"`
 
@@ -53,7 +52,6 @@ func (s DeleteHostedZoneInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains the response to a DeleteHostedZone request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteHostedZoneResponse
 type DeleteHostedZoneOutput struct {
 	_ struct{} `type:"structure"`
 

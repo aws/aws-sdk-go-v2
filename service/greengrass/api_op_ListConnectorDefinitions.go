@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListConnectorDefinitionsRequest
 type ListConnectorDefinitionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s ListConnectorDefinitionsInput) MarshalFields(e protocol.FieldEncoder) er
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListConnectorDefinitionsResponse
 type ListConnectorDefinitionsOutput struct {
 	_ struct{} `type:"structure"`
 

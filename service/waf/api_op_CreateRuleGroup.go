@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRuleGroupRequest
 type CreateRuleGroupInput struct {
 	_ struct{} `type:"structure"`
 
@@ -80,7 +79,6 @@ func (s *CreateRuleGroupInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRuleGroupResponse
 type CreateRuleGroupOutput struct {
 	_ struct{} `type:"structure"`
 

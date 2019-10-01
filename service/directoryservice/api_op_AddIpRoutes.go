@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AddIpRoutesRequest
 type AddIpRoutesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -96,7 +95,6 @@ func (s *AddIpRoutesInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AddIpRoutesResult
 type AddIpRoutesOutput struct {
 	_ struct{} `type:"structure"`
 }

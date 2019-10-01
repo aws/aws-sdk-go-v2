@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteClusterRequest
 type DeleteClusterInput struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +51,6 @@ func (s DeleteClusterInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteClusterResponse
 type DeleteClusterOutput struct {
 	_ struct{} `type:"structure"`
 

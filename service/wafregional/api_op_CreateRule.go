@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateRuleRequest
 type CreateRuleInput struct {
 	_ struct{} `type:"structure"`
 
@@ -81,7 +80,6 @@ func (s *CreateRuleInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateRuleResponse
 type CreateRuleOutput struct {
 	_ struct{} `type:"structure"`
 

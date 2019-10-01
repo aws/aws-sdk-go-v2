@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeletePlaybackConfigurationRequest
 type DeletePlaybackConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +49,6 @@ func (s DeletePlaybackConfigurationInput) MarshalFields(e protocol.FieldEncoder)
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeletePlaybackConfigurationResponse
 type DeletePlaybackConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 }

@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateCoreDefinitionRequest
 type UpdateCoreDefinitionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -58,7 +57,6 @@ func (s UpdateCoreDefinitionInput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateCoreDefinitionResponse
 type UpdateCoreDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 }

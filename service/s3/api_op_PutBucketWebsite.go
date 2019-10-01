@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketWebsiteRequest
 type PutBucketWebsiteInput struct {
 	_ struct{} `type:"structure" payload:"WebsiteConfiguration"`
 
@@ -77,7 +76,6 @@ func (s PutBucketWebsiteInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketWebsiteOutput
 type PutBucketWebsiteOutput struct {
 	_ struct{} `type:"structure"`
 }

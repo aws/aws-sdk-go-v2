@@ -12,7 +12,6 @@ import (
 )
 
 // Request to delete an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteApplicationMessage
 type DeleteApplicationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -48,7 +47,6 @@ func (s *DeleteApplicationInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteApplicationOutput
 type DeleteApplicationOutput struct {
 	_ struct{} `type:"structure"`
 }

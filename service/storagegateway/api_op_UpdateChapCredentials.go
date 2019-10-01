@@ -18,7 +18,6 @@ import (
 //    * UpdateChapCredentialsInput$SecretToAuthenticateTarget
 //
 //    * UpdateChapCredentialsInput$TargetARN
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateChapCredentialsInput
 type UpdateChapCredentialsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -33,7 +32,7 @@ type UpdateChapCredentialsInput struct {
 	// The secret key must be between 12 and 16 bytes when encoded in UTF-8.
 	//
 	// SecretToAuthenticateInitiator is a required field
-	SecretToAuthenticateInitiator *string `min:"1" type:"string" required:"true"`
+	SecretToAuthenticateInitiator *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The secret key that the target must provide to participate in mutual CHAP
 	// with the initiator (e.g. Windows client).
@@ -41,7 +40,7 @@ type UpdateChapCredentialsInput struct {
 	// Byte constraints: Minimum bytes of 12. Maximum bytes of 16.
 	//
 	// The secret key must be between 12 and 16 bytes when encoded in UTF-8.
-	SecretToAuthenticateTarget *string `min:"1" type:"string"`
+	SecretToAuthenticateTarget *string `min:"1" type:"string" sensitive:"true"`
 
 	// The Amazon Resource Name (ARN) of the iSCSI volume target. Use the DescribeStorediSCSIVolumes
 	// operation to return the TargetARN for specified VolumeARN.
@@ -90,7 +89,6 @@ func (s *UpdateChapCredentialsInput) Validate() error {
 }
 
 // A JSON object containing the following fields:
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateChapCredentialsOutput
 type UpdateChapCredentialsOutput struct {
 	_ struct{} `type:"structure"`
 

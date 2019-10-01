@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeConversionTasksRequest
 type DescribeConversionTasksInput struct {
 	_ struct{} `type:"structure"`
 
@@ -28,7 +27,6 @@ func (s DescribeConversionTasksInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeConversionTasksResult
 type DescribeConversionTasksOutput struct {
 	_ struct{} `type:"structure"`
 

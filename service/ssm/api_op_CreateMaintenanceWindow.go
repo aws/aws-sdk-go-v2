@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateMaintenanceWindowRequest
 type CreateMaintenanceWindowInput struct {
 	_ struct{} `type:"structure"`
 
@@ -36,7 +35,7 @@ type CreateMaintenanceWindowInput struct {
 
 	// An optional description for the maintenance window. We recommend specifying
 	// a description to help you organize your maintenance windows.
-	Description *string `min:"1" type:"string"`
+	Description *string `min:"1" type:"string" sensitive:"true"`
 
 	// The duration of the maintenance window in hours.
 	//
@@ -143,7 +142,6 @@ func (s *CreateMaintenanceWindowInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateMaintenanceWindowResult
 type CreateMaintenanceWindowOutput struct {
 	_ struct{} `type:"structure"`
 

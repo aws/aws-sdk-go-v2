@@ -12,7 +12,6 @@ import (
 )
 
 // Represents the input of a DeleteDeploymentConfig operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteDeploymentConfigInput
 type DeleteDeploymentConfigInput struct {
 	_ struct{} `type:"structure"`
 
@@ -45,7 +44,6 @@ func (s *DeleteDeploymentConfigInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteDeploymentConfigOutput
 type DeleteDeploymentConfigOutput struct {
 	_ struct{} `type:"structure"`
 }

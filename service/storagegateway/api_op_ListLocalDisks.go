@@ -10,12 +10,11 @@ import (
 )
 
 // A JSON object containing the of the gateway.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListLocalDisksInput
 type ListLocalDisksInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	//
 	// GatewayARN is a required field
 	GatewayARN *string `min:"50" type:"string" required:"true"`
@@ -43,7 +42,6 @@ func (s *ListLocalDisksInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListLocalDisksOutput
 type ListLocalDisksOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -53,7 +51,7 @@ type ListLocalDisksOutput struct {
 	Disks []Disk `type:"list"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string `min:"50" type:"string"`
 }
 

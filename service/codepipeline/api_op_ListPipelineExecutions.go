@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a ListPipelineExecutions action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListPipelineExecutionsInput
 type ListPipelineExecutionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s *ListPipelineExecutionsInput) Validate() error {
 }
 
 // Represents the output of a ListPipelineExecutions action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListPipelineExecutionsOutput
 type ListPipelineExecutionsOutput struct {
 	_ struct{} `type:"structure"`
 

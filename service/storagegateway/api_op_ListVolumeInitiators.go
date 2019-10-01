@@ -10,7 +10,6 @@ import (
 )
 
 // ListVolumeInitiatorsInput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumeInitiatorsInput
 type ListVolumeInitiatorsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -44,7 +43,6 @@ func (s *ListVolumeInitiatorsInput) Validate() error {
 }
 
 // ListVolumeInitiatorsOutput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumeInitiatorsOutput
 type ListVolumeInitiatorsOutput struct {
 	_ struct{} `type:"structure"`
 

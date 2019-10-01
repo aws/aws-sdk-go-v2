@@ -30,11 +30,11 @@ type ShapeRef struct {
 	Ignore           bool
 	XMLNamespace     XMLInfo
 	Payload          string
-	IdempotencyToken bool `json:"idempotencyToken"`
+	IdempotencyToken bool   `json:"idempotencyToken"`
 	TimestampFormat  string `json:"timestampFormat"`
-	JSONValue        bool `json:"jsonvalue"`
-	Deprecated       bool `json:"deprecated"`
-	HostLabel        bool `json:"hostLabel"`
+	JSONValue        bool   `json:"jsonvalue"`
+	Deprecated       bool   `json:"deprecated"`
+	HostLabel        bool   `json:"hostLabel"`
 
 	OrigShapeName string `json:"-"`
 
@@ -84,7 +84,7 @@ type Shape struct {
 	Streaming        bool
 	Location         string
 	LocationName     string
-	IdempotencyToken bool `json:"idempotencyToken"`
+	IdempotencyToken bool   `json:"idempotencyToken"`
 	TimestampFormat  string `json:"timestampFormat"`
 	XMLNamespace     XMLInfo
 	Min              float64 // optional Minimum length (string, list) or value (number)
@@ -116,6 +116,9 @@ type Shape struct {
 	// Flags that the shape cannot be rename. Prevents the shape from being
 	// renamed further by the Input/Output.
 	AliasedShapeName bool
+
+	// Sensitive types should not be logged by SDK type loggers.
+	Sensitive bool `json:"sensitive"`
 }
 
 // ErrorCodeName will return the error shape's name formated for
@@ -509,6 +512,10 @@ func (ref *ShapeRef) GoTags(toplevel bool, isRequired bool) string {
 		tags = append(tags, ShapeTag{"idempotencyToken", "true"})
 	}
 
+	if ref.Shape.Sensitive {
+		tags = append(tags, ShapeTag{"sensitive", "true"})
+	}
+
 	if ref.Ignore {
 		tags = append(tags, ShapeTag{"ignore", "true"})
 	}
@@ -622,25 +629,13 @@ var structShapeTmpl = func() *template.Template {
 
 const structShapeTmplDef = `
 {{ .Docstring }}
-{{ if ne $.OrigShapeName "" -}}
-	{{ $crosslinkURL := GetCrosslinkURL $.API.BaseCrosslinkURL $.API.Metadata.UID $.OrigShapeName -}}
-	{{ if ne $crosslinkURL "" -}}
-		// Please also see {{ $crosslinkURL }}
-	{{ end -}}
-{{ else -}}
-	{{ $crosslinkURL := GetCrosslinkURL $.API.BaseCrosslinkURL $.API.Metadata.UID $.ShapeName -}}
-	{{ if ne $crosslinkURL "" -}}
-		// Please also see {{ $crosslinkURL }}
-	{{ end -}}
-{{ end -}}
-{{ $context := . -}}
 type {{ .ShapeName }} struct {
 	_ struct{} {{ .GoTags true false }}
 
-	{{ range $_, $name := $context.MemberNames -}}
-		{{ $elem := index $context.MemberRefs $name -}}
-		{{ $isBlob := $context.WillRefBeBase64Encoded $name -}}
-		{{ $isRequired := $context.IsRequired $name -}}
+	{{ range $_, $name := $.MemberNames -}}
+		{{ $elem := index $.MemberRefs $name -}}
+		{{ $isBlob := $.WillRefBeBase64Encoded $name -}}
+		{{ $isRequired := $.IsRequired $name -}}
 		{{ $doc := $elem.Docstring -}}
 
 		{{ if $doc -}}
@@ -658,7 +653,7 @@ type {{ .ShapeName }} struct {
 			{{ end -}}
 			// {{ $name }} is a required field
 		{{ end -}}
-		{{ $name }} {{ $context.GoStructType $name $elem }} {{ $elem.GoTags false $isRequired }}
+		{{ $name }} {{ $.GoStructType $name $elem }} {{ $elem.GoTags false $isRequired }}
 
 	{{ end }}
 }
@@ -675,11 +670,11 @@ type {{ .ShapeName }} struct {
 
 {{ $builderShapeName := print .ShapeName -}}
 
-{{ range $_, $name := $context.MemberNames -}}
-	{{ $elem := index $context.MemberRefs $name -}}
+{{ range $_, $name := $.MemberNames -}}
+	{{ $elem := index $.MemberRefs $name -}}
 
 {{ if $elem.GenerateGetter -}}
-func (s *{{ $builderShapeName }}) get{{ $name }}() (v {{ $context.GoStructValueType $name $elem }}) {
+func (s *{{ $builderShapeName }}) get{{ $name }}() (v {{ $.GoStructValueType $name $elem }}) {
 	{{ if $elem.UseIndirection -}}
 		if s.{{ $name }} == nil {
 			return v
@@ -714,9 +709,8 @@ type {{ $.EnumType }} string
 
 // Enum values for {{ $.EnumType }}
 const (
-	{{ $context := . -}}
 	{{ range $index, $elem := .Enum -}}
-		{{ $name := index $context.EnumConsts $index -}}
+		{{ $name := index $.EnumConsts $index -}}
 		{{ $name }} {{ $.EnumType }} = "{{ $elem }}"
 	{{ end -}}
 )

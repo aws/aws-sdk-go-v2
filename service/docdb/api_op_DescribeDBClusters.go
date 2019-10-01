@@ -11,7 +11,6 @@ import (
 )
 
 // Represents the input to DescribeDBClusters.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBClustersMessage
 type DescribeDBClustersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -71,7 +70,6 @@ func (s *DescribeDBClustersInput) Validate() error {
 }
 
 // Represents the output of DescribeDBClusters.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBClusterMessage
 type DescribeDBClustersOutput struct {
 	_ struct{} `type:"structure"`
 

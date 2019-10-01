@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/AssociateServiceRoleToAccountRequest
 type AssociateServiceRoleToAccountInput struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +51,6 @@ func (s AssociateServiceRoleToAccountInput) MarshalFields(e protocol.FieldEncode
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/AssociateServiceRoleToAccountResponse
 type AssociateServiceRoleToAccountOutput struct {
 	_ struct{} `type:"structure"`
 

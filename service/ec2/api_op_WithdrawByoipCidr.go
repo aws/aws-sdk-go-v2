@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/WithdrawByoipCidrRequest
 type WithdrawByoipCidrInput struct {
 	_ struct{} `type:"structure"`
 
@@ -44,7 +43,6 @@ func (s *WithdrawByoipCidrInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/WithdrawByoipCidrResult
 type WithdrawByoipCidrOutput struct {
 	_ struct{} `type:"structure"`
 

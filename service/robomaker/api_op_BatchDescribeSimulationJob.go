@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/BatchDescribeSimulationJobRequest
 type BatchDescribeSimulationJobInput struct {
 	_ struct{} `type:"structure"`
 
@@ -61,7 +60,6 @@ func (s BatchDescribeSimulationJobInput) MarshalFields(e protocol.FieldEncoder) 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/BatchDescribeSimulationJobResponse
 type BatchDescribeSimulationJobOutput struct {
 	_ struct{} `type:"structure"`
 

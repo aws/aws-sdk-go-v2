@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StartExecutionInput
 type StartExecutionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -20,7 +19,7 @@ type StartExecutionInput struct {
 	//
 	// If you don't include any JSON input data, you still must include the two
 	// braces, for example: "input": "{}"
-	Input *string `locationName:"input" type:"string"`
+	Input *string `locationName:"input" type:"string" sensitive:"true"`
 
 	// The name of the execution. This name must be unique for your AWS account,
 	// region, and state machine for 90 days. For more information, see Limits Related
@@ -29,7 +28,7 @@ type StartExecutionInput struct {
 	//
 	// A name must not contain:
 	//
-	//    * whitespace
+	//    * white space
 	//
 	//    * brackets < > { } [ ]
 	//
@@ -71,7 +70,6 @@ func (s *StartExecutionInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StartExecutionOutput
 type StartExecutionOutput struct {
 	_ struct{} `type:"structure"`
 

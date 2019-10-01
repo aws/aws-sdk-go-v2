@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerRequest
 type UpdateBrokerInput struct {
 	_ struct{} `type:"structure"`
 
@@ -26,6 +25,8 @@ type UpdateBrokerInput struct {
 
 	// The list of information about logs to be enabled for the specified broker.
 	Logs *Logs `locationName:"logs" type:"structure"`
+
+	SecurityGroups []string `locationName:"securityGroups" type:"list"`
 }
 
 // String returns the string representation
@@ -75,6 +76,18 @@ func (s UpdateBrokerInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "logs", v, metadata)
 	}
+	if s.SecurityGroups != nil {
+		v := s.SecurityGroups
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "securityGroups", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
 	if s.BrokerId != nil {
 		v := *s.BrokerId
 
@@ -84,7 +97,6 @@ func (s UpdateBrokerInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerResponse
 type UpdateBrokerOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -99,6 +111,8 @@ type UpdateBrokerOutput struct {
 
 	// The list of information about logs to be enabled for the specified broker.
 	Logs *Logs `locationName:"logs" type:"structure"`
+
+	SecurityGroups []string `locationName:"securityGroups" type:"list"`
 }
 
 // String returns the string representation
@@ -137,6 +151,18 @@ func (s UpdateBrokerOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "logs", v, metadata)
+	}
+	if s.SecurityGroups != nil {
+		v := s.SecurityGroups
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "securityGroups", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	return nil
 }

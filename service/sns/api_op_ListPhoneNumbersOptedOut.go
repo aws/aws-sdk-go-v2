@@ -10,7 +10,6 @@ import (
 )
 
 // The input for the ListPhoneNumbersOptedOut action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListPhoneNumbersOptedOutInput
 type ListPhoneNumbersOptedOutInput struct {
 	_ struct{} `type:"structure"`
 
@@ -26,7 +25,6 @@ func (s ListPhoneNumbersOptedOutInput) String() string {
 }
 
 // The response from the ListPhoneNumbersOptedOut action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListPhoneNumbersOptedOutResponse
 type ListPhoneNumbersOptedOutOutput struct {
 	_ struct{} `type:"structure"`
 

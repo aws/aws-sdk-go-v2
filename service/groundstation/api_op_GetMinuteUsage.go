@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/GetMinuteUsageRequest
 type GetMinuteUsageInput struct {
 	_ struct{} `type:"structure"`
 
@@ -63,7 +62,6 @@ func (s GetMinuteUsageInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/GetMinuteUsageResponse
 type GetMinuteUsageOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminRemoveUserFromGroupRequest
 type AdminRemoveUserFromGroupInput struct {
 	_ struct{} `type:"structure"`
 
@@ -28,7 +27,7 @@ type AdminRemoveUserFromGroupInput struct {
 	// The username for the user.
 	//
 	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true"`
+	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -67,7 +66,6 @@ func (s *AdminRemoveUserFromGroupInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminRemoveUserFromGroupOutput
 type AdminRemoveUserFromGroupOutput struct {
 	_ struct{} `type:"structure"`
 }

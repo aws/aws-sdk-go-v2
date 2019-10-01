@@ -9,14 +9,13 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserMFAPreferenceRequest
 type SetUserMFAPreferenceInput struct {
 	_ struct{} `type:"structure"`
 
 	// The access token.
 	//
 	// AccessToken is a required field
-	AccessToken *string `type:"string" required:"true"`
+	AccessToken *string `type:"string" required:"true" sensitive:"true"`
 
 	// The SMS text message multi-factor authentication (MFA) settings.
 	SMSMfaSettings *SMSMfaSettingsType `type:"structure"`
@@ -44,7 +43,6 @@ func (s *SetUserMFAPreferenceInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserMFAPreferenceResponse
 type SetUserMFAPreferenceOutput struct {
 	_ struct{} `type:"structure"`
 }

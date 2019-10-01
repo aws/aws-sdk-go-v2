@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterTaskWithMaintenanceWindowRequest
 type RegisterTaskWithMaintenanceWindowInput struct {
 	_ struct{} `type:"structure"`
 
@@ -18,7 +17,7 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	ClientToken *string `min:"1" type:"string" idempotencyToken:"true"`
 
 	// An optional description for the task.
-	Description *string `min:"1" type:"string"`
+	Description *string `min:"1" type:"string" sensitive:"true"`
 
 	// A structure containing information about an Amazon S3 bucket to write instance-level
 	// logs to.
@@ -89,7 +88,7 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// when it runs, instead use the Parameters option in the TaskInvocationParameters
 	// structure. For information about how Systems Manager handles these options
 	// for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
-	TaskParameters map[string]MaintenanceWindowTaskParameterValueExpression `type:"map"`
+	TaskParameters map[string]MaintenanceWindowTaskParameterValueExpression `type:"map" sensitive:"true"`
 
 	// The type of task being registered.
 	//
@@ -178,7 +177,6 @@ func (s *RegisterTaskWithMaintenanceWindowInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterTaskWithMaintenanceWindowResult
 type RegisterTaskWithMaintenanceWindowOutput struct {
 	_ struct{} `type:"structure"`
 

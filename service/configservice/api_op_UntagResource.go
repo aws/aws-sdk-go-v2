@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/UntagResourceRequest
 type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -57,7 +56,6 @@ func (s *UntagResourceInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/UntagResourceOutput
 type UntagResourceOutput struct {
 	_ struct{} `type:"structure"`
 }

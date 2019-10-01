@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ListNodesInput
 type ListNodesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -104,7 +103,6 @@ func (s ListNodesInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ListNodesOutput
 type ListNodesOutput struct {
 	_ struct{} `type:"structure"`
 

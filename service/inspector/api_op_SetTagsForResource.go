@@ -12,7 +12,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/SetTagsForResourceRequest
 type SetTagsForResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s *SetTagsForResourceInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/SetTagsForResourceOutput
 type SetTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 }

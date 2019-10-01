@@ -10,7 +10,6 @@ import (
 )
 
 // Represents a request to the get device request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDeviceRequest
 type GetDeviceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *GetDeviceInput) Validate() error {
 }
 
 // Represents the result of a get device request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDeviceResult
 type GetDeviceOutput struct {
 	_ struct{} `type:"structure"`
 

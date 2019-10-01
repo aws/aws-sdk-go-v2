@@ -10,13 +10,12 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/UpdateStateMachineInput
 type UpdateStateMachineInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon States Language definition of the state machine. See Amazon States
 	// Language (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
-	Definition *string `locationName:"definition" min:"1" type:"string"`
+	Definition *string `locationName:"definition" min:"1" type:"string" sensitive:"true"`
 
 	// The Amazon Resource Name (ARN) of the IAM role of the state machine.
 	RoleArn *string `locationName:"roleArn" min:"1" type:"string"`
@@ -55,7 +54,6 @@ func (s *UpdateStateMachineInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/UpdateStateMachineOutput
 type UpdateStateMachineOutput struct {
 	_ struct{} `type:"structure"`
 

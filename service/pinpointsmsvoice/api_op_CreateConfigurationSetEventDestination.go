@@ -11,7 +11,6 @@ import (
 )
 
 // Create a new event destination in a configuration set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/CreateConfigurationSetEventDestinationRequest
 type CreateConfigurationSetEventDestinationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -70,7 +69,6 @@ func (s CreateConfigurationSetEventDestinationInput) MarshalFields(e protocol.Fi
 }
 
 // An empty object that indicates that the event destination was created successfully.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/CreateConfigurationSetEventDestinationResponse
 type CreateConfigurationSetEventDestinationOutput struct {
 	_ struct{} `type:"structure"`
 }

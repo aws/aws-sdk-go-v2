@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/CreateApiMappingRequest
 type CreateApiMappingInput struct {
 	_ struct{} `type:"structure"`
 
@@ -93,7 +92,6 @@ func (s CreateApiMappingInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/CreateApiMappingResponse
 type CreateApiMappingOutput struct {
 	_ struct{} `type:"structure"`
 

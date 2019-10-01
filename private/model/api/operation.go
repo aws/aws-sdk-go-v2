@@ -22,8 +22,8 @@ type Operation struct {
 	OutputRef           ShapeRef   `json:"output"`
 	ErrorRefs           []ShapeRef `json:"errors"`
 	Paginator           *Paginator
-	Deprecated          bool   `json:"deprecated"`
-	AuthType            string `json:"authtype"`
+	Deprecated          bool     `json:"deprecated"`
+	AuthType            AuthType `json:"authtype"`
 	imports             map[string]bool
 	CustomBuildHandlers []string       `json:"-"`
 	Endpoint            *EndpointTrait `json:"endpoint"`
@@ -54,14 +54,25 @@ func (o *Operation) HasOutput() bool {
 	return o.OutputRef.ShapeName != ""
 }
 
+// AuthType provides the enumeration of AuthType trait.
+type AuthType string
+
+// Enumeration values for AuthType trait
+const (
+	NoneAuthType           AuthType = "none"
+	V4UnsignedBodyAuthType AuthType = "v4-unsigned-body"
+)
+
 // GetSigner returns the signer to use for a request.
 func (o *Operation) GetSigner() string {
 	buf := bytes.NewBuffer(nil)
 
 	switch o.AuthType {
-	case "none":
+	case NoneAuthType:
+		o.API.AddSDKImport("aws")
+
 		buf.WriteString("req.Config.Credentials = aws.AnonymousCredentials")
-	case "v4-unsigned-body":
+	case V4UnsignedBodyAuthType:
 		o.API.AddSDKImport("aws/signer/v4")
 
 		buf.WriteString("req.Handlers.Sign.Remove(v4.SignRequestHandler)\n")

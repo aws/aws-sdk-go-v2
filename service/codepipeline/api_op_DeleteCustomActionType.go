@@ -13,7 +13,6 @@ import (
 
 // Represents the input of a DeleteCustomActionType operation. The custom action
 // will be marked as deleted.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DeleteCustomActionTypeInput
 type DeleteCustomActionTypeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -66,7 +65,6 @@ func (s *DeleteCustomActionTypeInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DeleteCustomActionTypeOutput
 type DeleteCustomActionTypeOutput struct {
 	_ struct{} `type:"structure"`
 }

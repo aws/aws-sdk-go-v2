@@ -11,7 +11,6 @@ import (
 )
 
 // Represents the input to DescribeDBSubnetGroups.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBSubnetGroupsMessage
 type DescribeDBSubnetGroupsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s *DescribeDBSubnetGroupsInput) Validate() error {
 }
 
 // Represents the output of DescribeDBSubnetGroups.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBSubnetGroupMessage
 type DescribeDBSubnetGroupsOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -23,7 +23,6 @@ var _ = awsutil.Prettify
 // of strings that indicates the software to use with the cluster and accepts
 // a user argument list. Amazon EMR accepts and forwards the argument list to
 // the corresponding installation script as bootstrap action argument.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Application
 type Application struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +49,6 @@ func (s Application) String() string {
 // in an Amazon EMR cluster. An automatic scaling policy defines how an instance
 // group dynamically adds and terminates EC2 instances in response to the value
 // of a CloudWatch metric. See PutAutoScalingPolicy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AutoScalingPolicy
 type AutoScalingPolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -106,7 +104,6 @@ func (s *AutoScalingPolicy) Validate() error {
 // in an Amazon EMR cluster. The automatic scaling policy defines how an instance
 // group dynamically adds and terminates EC2 instances in response to the value
 // of a CloudWatch metric. See PutAutoScalingPolicy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AutoScalingPolicyDescription
 type AutoScalingPolicyDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -128,7 +125,6 @@ func (s AutoScalingPolicyDescription) String() string {
 }
 
 // The reason for an AutoScalingPolicyStatus change.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AutoScalingPolicyStateChangeReason
 type AutoScalingPolicyStateChangeReason struct {
 	_ struct{} `type:"structure"`
 
@@ -149,7 +145,6 @@ func (s AutoScalingPolicyStateChangeReason) String() string {
 }
 
 // The status of an automatic scaling policy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AutoScalingPolicyStatus
 type AutoScalingPolicyStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -169,7 +164,6 @@ func (s AutoScalingPolicyStatus) String() string {
 // is set to true, Amazon EMR prevents cluster creation if one of the cluster's
 // security groups has a rule that allows inbound traffic from 0.0.0.0/0 or
 // ::/0 on a port, unless the port is specified as an exception using PermittedPublicSecurityGroupRuleRanges.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/BlockPublicAccessConfiguration
 type BlockPublicAccessConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -222,7 +216,6 @@ func (s *BlockPublicAccessConfiguration) Validate() error {
 // using the PutBlockPublicAccessConfiguration action as well as the date and
 // time that the configuration was created. Each time a configuration for block
 // public access is updated, Amazon EMR updates this metadata.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/BlockPublicAccessConfigurationMetadata
 type BlockPublicAccessConfigurationMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -243,7 +236,6 @@ func (s BlockPublicAccessConfigurationMetadata) String() string {
 }
 
 // Configuration of a bootstrap action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/BootstrapActionConfig
 type BootstrapActionConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -287,7 +279,6 @@ func (s *BootstrapActionConfig) Validate() error {
 }
 
 // Reports the configuration of a bootstrap action in a cluster (job flow).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/BootstrapActionDetail
 type BootstrapActionDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -302,7 +293,6 @@ func (s BootstrapActionDetail) String() string {
 
 // Specification of the status of a CancelSteps request. Available only in Amazon
 // EMR version 4.8.0 and later, excluding version 5.0.0.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CancelStepsInfo
 type CancelStepsInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -324,7 +314,6 @@ func (s CancelStepsInfo) String() string {
 // The definition of a CloudWatch metric alarm, which determines when an automatic
 // scaling activity is triggered. When the defined alarm conditions are satisfied,
 // scaling activity begins.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CloudWatchAlarmDefinition
 type CloudWatchAlarmDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -403,7 +392,6 @@ func (s *CloudWatchAlarmDefinition) Validate() error {
 }
 
 // The detailed description of the cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Cluster
 type Cluster struct {
 	_ struct{} `type:"structure"`
 
@@ -540,7 +528,6 @@ func (s Cluster) String() string {
 }
 
 // The reason that the cluster changed to its current state.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ClusterStateChangeReason
 type ClusterStateChangeReason struct {
 	_ struct{} `type:"structure"`
 
@@ -557,7 +544,6 @@ func (s ClusterStateChangeReason) String() string {
 }
 
 // The detailed status of the cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ClusterStatus
 type ClusterStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -578,7 +564,6 @@ func (s ClusterStatus) String() string {
 }
 
 // The summary description of the cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ClusterSummary
 type ClusterSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -606,7 +591,6 @@ func (s ClusterSummary) String() string {
 }
 
 // Represents the timeline of the cluster's lifecycle.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ClusterTimeline
 type ClusterTimeline struct {
 	_ struct{} `type:"structure"`
 
@@ -626,7 +610,6 @@ func (s ClusterTimeline) String() string {
 }
 
 // An entity describing an executable that runs on a cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Command
 type Command struct {
 	_ struct{} `type:"structure"`
 
@@ -654,7 +637,6 @@ func (s Command) String() string {
 // and optional nested configurations. A classification refers to an application-specific
 // configuration file. Properties are the settings you want to change in that
 // file. For more information, see Configuring Applications (https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Configuration
 type Configuration struct {
 	_ struct{} `type:"structure"`
 
@@ -675,7 +657,6 @@ func (s Configuration) String() string {
 
 // Configuration of requested EBS block device associated with the instance
 // group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/EbsBlockDevice
 type EbsBlockDevice struct {
 	_ struct{} `type:"structure"`
 
@@ -694,7 +675,6 @@ func (s EbsBlockDevice) String() string {
 
 // Configuration of requested EBS block device associated with the instance
 // group with count of volumes that will be associated to every instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/EbsBlockDeviceConfig
 type EbsBlockDeviceConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -734,7 +714,6 @@ func (s *EbsBlockDeviceConfig) Validate() error {
 }
 
 // The Amazon EBS configuration of a cluster instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/EbsConfiguration
 type EbsConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -768,7 +747,6 @@ func (s *EbsConfiguration) Validate() error {
 }
 
 // EBS block device that's attached to an EC2 instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/EbsVolume
 type EbsVolume struct {
 	_ struct{} `type:"structure"`
 
@@ -786,7 +764,6 @@ func (s EbsVolume) String() string {
 
 // Provides information about the EC2 instances in a cluster grouped by category.
 // For example, key name, subnet ID, IAM instance profile, and so on.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Ec2InstanceAttributes
 type Ec2InstanceAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -853,7 +830,6 @@ func (s Ec2InstanceAttributes) String() string {
 
 // The details of the step failure. The service attempts to detect the root
 // cause for many common failures.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/FailureDetails
 type FailureDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -880,7 +856,6 @@ func (s FailureDetails) String() string {
 // A job flow step consisting of a JAR file whose main function will be executed.
 // The main function submits a job for Hadoop to execute and waits for the job
 // to finish or fail.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/HadoopJarStepConfig
 type HadoopJarStepConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -924,7 +899,6 @@ func (s *HadoopJarStepConfig) Validate() error {
 // A cluster step consisting of a JAR file whose main function will be executed.
 // The main function submits a job for Hadoop to execute and waits for the job
 // to finish or fail.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/HadoopStepConfig
 type HadoopStepConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -950,7 +924,6 @@ func (s HadoopStepConfig) String() string {
 }
 
 // Represents an EC2 instance provisioned as part of cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Instance
 type Instance struct {
 	_ struct{} `type:"structure"`
 
@@ -1003,7 +976,6 @@ func (s Instance) String() string {
 //
 // The instance fleet configuration is available only in Amazon EMR versions
 // 4.8.0 and later, excluding 5.0.x versions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceFleet
 type InstanceFleet struct {
 	_ struct{} `type:"structure"`
 
@@ -1087,7 +1059,6 @@ func (s InstanceFleet) String() string {
 //
 // The instance fleet configuration is available only in Amazon EMR versions
 // 4.8.0 and later, excluding 5.0.x versions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceFleetConfig
 type InstanceFleetConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1177,7 +1148,6 @@ func (s *InstanceFleetConfig) Validate() error {
 //
 // The instance fleet configuration is available only in Amazon EMR versions
 // 4.8.0 and later, excluding 5.0.x versions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceFleetModifyConfig
 type InstanceFleetModifyConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1219,7 +1189,6 @@ func (s *InstanceFleetModifyConfig) Validate() error {
 //
 // The instance fleet configuration is available only in Amazon EMR versions
 // 4.8.0 and later, excluding 5.0.x versions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceFleetProvisioningSpecifications
 type InstanceFleetProvisioningSpecifications struct {
 	_ struct{} `type:"structure"`
 
@@ -1258,7 +1227,6 @@ func (s *InstanceFleetProvisioningSpecifications) Validate() error {
 //
 // The instance fleet configuration is available only in Amazon EMR versions
 // 4.8.0 and later, excluding 5.0.x versions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceFleetStateChangeReason
 type InstanceFleetStateChangeReason struct {
 	_ struct{} `type:"structure"`
 
@@ -1278,7 +1246,6 @@ func (s InstanceFleetStateChangeReason) String() string {
 //
 // The instance fleet configuration is available only in Amazon EMR versions
 // 4.8.0 and later, excluding 5.0.x versions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceFleetStatus
 type InstanceFleetStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -1323,7 +1290,6 @@ func (s InstanceFleetStatus) String() string {
 //
 // The instance fleet configuration is available only in Amazon EMR versions
 // 4.8.0 and later, excluding 5.0.x versions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceFleetTimeline
 type InstanceFleetTimeline struct {
 	_ struct{} `type:"structure"`
 
@@ -1344,7 +1310,6 @@ func (s InstanceFleetTimeline) String() string {
 
 // This entity represents an instance group, which is a group of instances that
 // have common purpose. For example, CORE instance group is used for HDFS.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceGroup
 type InstanceGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -1425,7 +1390,6 @@ func (s InstanceGroup) String() string {
 }
 
 // Configuration defining a new instance group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceGroupConfig
 type InstanceGroupConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1517,7 +1481,6 @@ func (s *InstanceGroupConfig) Validate() error {
 }
 
 // Detailed information about an instance group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceGroupDetail
 type InstanceGroupDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -1589,7 +1552,6 @@ func (s InstanceGroupDetail) String() string {
 }
 
 // Modify the size or configurations of an instance group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceGroupModifyConfig
 type InstanceGroupModifyConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1632,7 +1594,6 @@ func (s *InstanceGroupModifyConfig) Validate() error {
 }
 
 // The status change reason details for the instance group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceGroupStateChangeReason
 type InstanceGroupStateChangeReason struct {
 	_ struct{} `type:"structure"`
 
@@ -1649,7 +1610,6 @@ func (s InstanceGroupStateChangeReason) String() string {
 }
 
 // The details of the instance group status.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceGroupStatus
 type InstanceGroupStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -1669,7 +1629,6 @@ func (s InstanceGroupStatus) String() string {
 }
 
 // The timeline of the instance group lifecycle.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceGroupTimeline
 type InstanceGroupTimeline struct {
 	_ struct{} `type:"structure"`
 
@@ -1690,7 +1649,6 @@ func (s InstanceGroupTimeline) String() string {
 
 // Custom policy for requesting termination protection or termination of specific
 // instances when shrinking an instance group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceResizePolicy
 type InstanceResizePolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -1711,7 +1669,6 @@ func (s InstanceResizePolicy) String() string {
 }
 
 // The details of the status change reason for the instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceStateChangeReason
 type InstanceStateChangeReason struct {
 	_ struct{} `type:"structure"`
 
@@ -1728,7 +1685,6 @@ func (s InstanceStateChangeReason) String() string {
 }
 
 // The instance status details.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceStatus
 type InstanceStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -1748,7 +1704,6 @@ func (s InstanceStatus) String() string {
 }
 
 // The timeline of the instance lifecycle.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceTimeline
 type InstanceTimeline struct {
 	_ struct{} `type:"structure"`
 
@@ -1774,7 +1729,6 @@ func (s InstanceTimeline) String() string {
 //
 // The instance fleet configuration is available only in Amazon EMR versions
 // 4.8.0 and later, excluding 5.0.x versions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceTypeConfig
 type InstanceTypeConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1841,7 +1795,6 @@ func (s *InstanceTypeConfig) Validate() error {
 //
 // The instance fleet configuration is available only in Amazon EMR versions
 // 4.8.0 and later, excluding 5.0.x versions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceTypeSpecification
 type InstanceTypeSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -1882,7 +1835,6 @@ func (s InstanceTypeSpecification) String() string {
 }
 
 // A description of a cluster (job flow).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/JobFlowDetail
 type JobFlowDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -1969,7 +1921,6 @@ func (s JobFlowDetail) String() string {
 }
 
 // Describes the status of the cluster (job flow).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/JobFlowExecutionStatusDetail
 type JobFlowExecutionStatusDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -2007,7 +1958,6 @@ func (s JobFlowExecutionStatusDetail) String() string {
 // InstanceFleets, which is the recommended configuration. They cannot be used
 // together. You may also have MasterInstanceType, SlaveInstanceType, and InstanceCount
 // (all three must be present), but we don't recommend this configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/JobFlowInstancesConfig
 type JobFlowInstancesConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -2125,7 +2075,6 @@ func (s *JobFlowInstancesConfig) Validate() error {
 
 // Specify the type of Amazon EC2 instances that the cluster (job flow) runs
 // on.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/JobFlowInstancesDetail
 type JobFlowInstancesDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -2198,7 +2147,6 @@ func (s JobFlowInstancesDetail) String() string {
 // using a security configuration. For more information see Use Kerberos Authentication
 // (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html)
 // in the EMR Management Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/KerberosAttributes
 type KerberosAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -2252,7 +2200,6 @@ func (s *KerberosAttributes) Validate() error {
 }
 
 // A key value pair.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/KeyValue
 type KeyValue struct {
 	_ struct{} `type:"structure"`
 
@@ -2273,7 +2220,6 @@ func (s KeyValue) String() string {
 // Key is JobFlowID and Value is a variable representing the cluster ID, which
 // is ${emr.clusterId}. This enables the rule to bootstrap when the cluster
 // ID becomes available.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/MetricDimension
 type MetricDimension struct {
 	_ struct{} `type:"structure"`
 
@@ -2290,7 +2236,6 @@ func (s MetricDimension) String() string {
 }
 
 // The Amazon EC2 Availability Zone configuration of the cluster (job flow).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PlacementType
 type PlacementType struct {
 	_ struct{} `type:"structure"`
 
@@ -2317,7 +2262,6 @@ func (s PlacementType) String() string {
 // A list of port ranges that are permitted to allow inbound traffic from all
 // public IP addresses. To specify a single port, use the same value for MinRange
 // and MaxRange.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PortRange
 type PortRange struct {
 	_ struct{} `type:"structure"`
 
@@ -2351,7 +2295,6 @@ func (s *PortRange) Validate() error {
 
 // The type of adjustment the automatic scaling activity makes when triggered,
 // and the periodicity of the adjustment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ScalingAction
 type ScalingAction struct {
 	_ struct{} `type:"structure"`
 
@@ -2393,7 +2336,6 @@ func (s *ScalingAction) Validate() error {
 // The upper and lower EC2 instance limits for an automatic scaling policy.
 // Automatic scaling activities triggered by automatic scaling rules will not
 // cause an instance group to grow above or below these limits.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ScalingConstraints
 type ScalingConstraints struct {
 	_ struct{} `type:"structure"`
 
@@ -2439,7 +2381,6 @@ func (s *ScalingConstraints) Validate() error {
 // CloudWatch metric alarm that triggers activity, how EC2 instances are added
 // or removed, and the periodicity of adjustments. The automatic scaling policy
 // for an instance group can comprise one or more automatic scaling rules.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ScalingRule
 type ScalingRule struct {
 	_ struct{} `type:"structure"`
 
@@ -2502,7 +2443,6 @@ func (s *ScalingRule) Validate() error {
 }
 
 // The conditions that trigger an automatic scaling activity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ScalingTrigger
 type ScalingTrigger struct {
 	_ struct{} `type:"structure"`
 
@@ -2538,7 +2478,6 @@ func (s *ScalingTrigger) Validate() error {
 }
 
 // Configuration of the script to run during a bootstrap action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ScriptBootstrapActionConfig
 type ScriptBootstrapActionConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -2572,7 +2511,6 @@ func (s *ScriptBootstrapActionConfig) Validate() error {
 }
 
 // The creation date and time, and name, of a security configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SecurityConfigurationSummary
 type SecurityConfigurationSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -2590,7 +2528,6 @@ func (s SecurityConfigurationSummary) String() string {
 
 // Policy for customizing shrink operations. Allows configuration of decommissioning
 // timeout and targeted instance shrinking.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ShrinkPolicy
 type ShrinkPolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -2611,7 +2548,6 @@ func (s ShrinkPolicy) String() string {
 // An automatic scaling configuration, which describes how the policy adds or
 // removes instances, the cooldown period, and the number of EC2 instances that
 // will be added each time the CloudWatch metric alarm condition is satisfied.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SimpleScalingPolicyConfiguration
 type SimpleScalingPolicyConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -2669,7 +2605,6 @@ func (s *SimpleScalingPolicyConfiguration) Validate() error {
 //
 // The instance fleet configuration is available only in Amazon EMR versions
 // 4.8.0 and later, excluding 5.0.x versions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SpotProvisioningSpecification
 type SpotProvisioningSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -2725,7 +2660,6 @@ func (s *SpotProvisioningSpecification) Validate() error {
 }
 
 // This represents a step in a cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Step
 type Step struct {
 	_ struct{} `type:"structure"`
 
@@ -2753,7 +2687,6 @@ func (s Step) String() string {
 }
 
 // Specification of a cluster (job flow) step.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/StepConfig
 type StepConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -2802,7 +2735,6 @@ func (s *StepConfig) Validate() error {
 }
 
 // Combines the execution state and configuration of a step.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/StepDetail
 type StepDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -2823,7 +2755,6 @@ func (s StepDetail) String() string {
 }
 
 // The execution state of a step.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/StepExecutionStatusDetail
 type StepExecutionStatusDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -2853,7 +2784,6 @@ func (s StepExecutionStatusDetail) String() string {
 }
 
 // The details of the step state change reason.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/StepStateChangeReason
 type StepStateChangeReason struct {
 	_ struct{} `type:"structure"`
 
@@ -2871,7 +2801,6 @@ func (s StepStateChangeReason) String() string {
 }
 
 // The execution status details of the cluster step.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/StepStatus
 type StepStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -2895,7 +2824,6 @@ func (s StepStatus) String() string {
 }
 
 // The summary of the cluster step.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/StepSummary
 type StepSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -2923,7 +2851,6 @@ func (s StepSummary) String() string {
 }
 
 // The timeline of the cluster step lifecycle.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/StepTimeline
 type StepTimeline struct {
 	_ struct{} `type:"structure"`
 
@@ -2945,7 +2872,6 @@ func (s StepTimeline) String() string {
 // The list of supported product configurations which allow user-supplied arguments.
 // EMR accepts these arguments and forwards them to the corresponding installation
 // script as bootstrap action arguments.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SupportedProductConfig
 type SupportedProductConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -2965,7 +2891,6 @@ func (s SupportedProductConfig) String() string {
 // with an Amazon EMR resource. Tags make it easier to associate clusters in
 // various ways, such as grouping clusters to track your Amazon EMR resource
 // allocation costs. For more information, see Tag Clusters (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -2985,7 +2910,6 @@ func (s Tag) String() string {
 
 // EBS volume specifications such as volume type, IOPS, and size (GiB) that
 // will be requested for the EBS volume attached to an EC2 instance in the cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/VolumeSpecification
 type VolumeSpecification struct {
 	_ struct{} `type:"structure"`
 

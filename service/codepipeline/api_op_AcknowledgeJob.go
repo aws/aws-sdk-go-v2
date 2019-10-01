@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of an AcknowledgeJob action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/AcknowledgeJobInput
 type AcknowledgeJobInput struct {
 	_ struct{} `type:"structure"`
 
@@ -54,7 +53,6 @@ func (s *AcknowledgeJobInput) Validate() error {
 }
 
 // Represents the output of an AcknowledgeJob action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/AcknowledgeJobOutput
 type AcknowledgeJobOutput struct {
 	_ struct{} `type:"structure"`
 

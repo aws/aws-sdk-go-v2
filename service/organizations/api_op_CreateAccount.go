@@ -9,14 +9,13 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccountRequest
 type CreateAccountInput struct {
 	_ struct{} `type:"structure"`
 
 	// The friendly name of the member account.
 	//
 	// AccountName is a required field
-	AccountName *string `min:"1" type:"string" required:"true"`
+	AccountName *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The email address of the owner to assign to the new member account. This
 	// email address must not already be associated with another AWS account. You
@@ -25,7 +24,7 @@ type CreateAccountInput struct {
 	// invalid email address.
 	//
 	// Email is a required field
-	Email *string `min:"6" type:"string" required:"true"`
+	Email *string `min:"6" type:"string" required:"true" sensitive:"true"`
 
 	// If set to ALLOW, the new account enables IAM users to access account billing
 	// information if they have the required permissions. If set to DENY, only the
@@ -92,7 +91,6 @@ func (s *CreateAccountInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccountResponse
 type CreateAccountOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -135,7 +133,7 @@ const opCreateAccount = "CreateAccount"
 //
 // The user who calls the API to create an account must have the organizations:CreateAccount
 // permission. If you enabled all features in the organization, AWS Organizations
-// will create the required service-linked role named AWSServiceRoleForOrganizations.
+// creates the required service-linked role named AWSServiceRoleForOrganizations.
 // For more information, see AWS Organizations and Service-Linked Roles (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_integrate_services-using_slrs)
 // in the AWS Organizations User Guide.
 //

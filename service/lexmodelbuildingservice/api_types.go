@@ -15,7 +15,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Provides information about a bot alias.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/BotAliasMetadata
 type BotAliasMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -98,7 +97,6 @@ func (s BotAliasMetadata) MarshalFields(e protocol.FieldEncoder) error {
 
 // Represents an association between an Amazon Lex bot and an external messaging
 // platform.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/BotChannelAssociation
 type BotChannelAssociation struct {
 	_ struct{} `type:"structure"`
 
@@ -107,7 +105,7 @@ type BotChannelAssociation struct {
 	BotAlias *string `locationName:"botAlias" min:"1" type:"string"`
 
 	// Provides information necessary to communicate with the messaging platform.
-	BotConfiguration map[string]string `locationName:"botConfiguration" min:"1" type:"map"`
+	BotConfiguration map[string]string `locationName:"botConfiguration" min:"1" type:"map" sensitive:"true"`
 
 	// The name of the Amazon Lex bot to which this association is being made.
 	//
@@ -216,7 +214,6 @@ func (s BotChannelAssociation) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Provides information about a bot. .
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/BotMetadata
 type BotMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -289,7 +286,6 @@ func (s BotMetadata) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Provides metadata for a built-in intent.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/BuiltinIntentMetadata
 type BuiltinIntentMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -331,7 +327,6 @@ func (s BuiltinIntentMetadata) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Provides information about a slot used in a built-in intent.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/BuiltinIntentSlot
 type BuiltinIntentSlot struct {
 	_ struct{} `type:"structure"`
 
@@ -356,7 +351,6 @@ func (s BuiltinIntentSlot) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Provides information about a built in slot type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/BuiltinSlotTypeMetadata
 type BuiltinSlotTypeMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -399,7 +393,6 @@ func (s BuiltinSlotTypeMetadata) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies a Lambda function that verifies requests to a bot or fulfills the
 // user's request to a bot..
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CodeHook
 type CodeHook struct {
 	_ struct{} `type:"structure"`
 
@@ -473,7 +466,6 @@ func (s CodeHook) MarshalFields(e protocol.FieldEncoder) error {
 //    * thin
 //
 //    * stuffed
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/EnumerationValue
 type EnumerationValue struct {
 	_ struct{} `type:"structure"`
 
@@ -534,7 +526,6 @@ func (s EnumerationValue) MarshalFields(e protocol.FieldEncoder) error {
 // A prompt for additional activity after an intent is fulfilled. For example,
 // after the OrderPizza intent is fulfilled, you might prompt the user to find
 // out whether the user wants to order drinks.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/FollowUpPrompt
 type FollowUpPrompt struct {
 	_ struct{} `type:"structure"`
 
@@ -618,7 +609,6 @@ func (s FollowUpPrompt) MarshalFields(e protocol.FieldEncoder) error {
 //    must go back to the client application so that it can perform the operation
 //    and update the graphics. In this case, you want Amazon Lex to return the
 //    intent data to the client.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/FulfillmentActivity
 type FulfillmentActivity struct {
 	_ struct{} `type:"structure"`
 
@@ -673,7 +663,6 @@ func (s FulfillmentActivity) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Identifies the specific version of an intent.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/Intent
 type Intent struct {
 	_ struct{} `type:"structure"`
 
@@ -735,7 +724,6 @@ func (s Intent) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Provides information about an intent.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/IntentMetadata
 type IntentMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -799,7 +787,6 @@ func (s IntentMetadata) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The message object that provides the message text and its type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/Message
 type Message struct {
 	_ struct{} `type:"structure"`
 
@@ -874,7 +861,6 @@ func (s Message) MarshalFields(e protocol.FieldEncoder) error {
 // messages and specify the number of attempts to get information from the user.
 // If you provide more than one message, Amazon Lex chooses one of the messages
 // to use to prompt the user. For more information, see how-it-works.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/Prompt
 type Prompt struct {
 	_ struct{} `type:"structure"`
 
@@ -967,7 +953,6 @@ func (s Prompt) MarshalFields(e protocol.FieldEncoder) error {
 // Describes the resource that refers to the resource that you are attempting
 // to delete. This object is returned as part of the ResourceInUseException
 // exception.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/ResourceReference
 type ResourceReference struct {
 	_ struct{} `type:"structure"`
 
@@ -1003,7 +988,6 @@ func (s ResourceReference) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Identifies the version of a specific slot.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/Slot
 type Slot struct {
 	_ struct{} `type:"structure"`
 
@@ -1155,7 +1139,6 @@ func (s Slot) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Provides information about a slot type..
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/SlotTypeMetadata
 type SlotTypeMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -1220,7 +1203,6 @@ func (s SlotTypeMetadata) MarshalFields(e protocol.FieldEncoder) error {
 
 // A collection of messages that convey information to the user. At runtime,
 // Amazon Lex selects the message to convey.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/Statement
 type Statement struct {
 	_ struct{} `type:"structure"`
 
@@ -1292,7 +1274,6 @@ func (s Statement) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Provides information about a single utterance that was made to your bot.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/UtteranceData
 type UtteranceData struct {
 	_ struct{} `type:"structure"`
 
@@ -1357,7 +1338,6 @@ func (s UtteranceData) MarshalFields(e protocol.FieldEncoder) error {
 
 // Provides a list of utterances that have been made to a specific version of
 // your bot. The list contains a maximum of 100 utterances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/UtteranceList
 type UtteranceList struct {
 	_ struct{} `type:"structure"`
 

@@ -11,7 +11,6 @@ import (
 )
 
 // This action deletes a health check.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteHealthCheckRequest
 type DeleteHealthCheckInput struct {
 	_ struct{} `type:"structure"`
 
@@ -53,7 +52,6 @@ func (s DeleteHealthCheckInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An empty element.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteHealthCheckResponse
 type DeleteHealthCheckOutput struct {
 	_ struct{} `type:"structure"`
 }

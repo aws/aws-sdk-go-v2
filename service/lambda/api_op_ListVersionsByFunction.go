@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunctionRequest
 type ListVersionsByFunctionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -88,7 +87,6 @@ func (s ListVersionsByFunctionInput) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunctionResponse
 type ListVersionsByFunctionOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -148,6 +146,12 @@ func (c *Client) ListVersionsByFunctionRequest(input *ListVersionsByFunctionInpu
 		Name:       opListVersionsByFunction,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2015-03-31/functions/{FunctionName}/versions",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"NextMarker"},
+			LimitToken:      "MaxItems",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -180,6 +184,53 @@ func (r ListVersionsByFunctionRequest) Send(ctx context.Context) (*ListVersionsB
 	}
 
 	return resp, nil
+}
+
+// NewListVersionsByFunctionRequestPaginator returns a paginator for ListVersionsByFunction.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListVersionsByFunctionRequest(input)
+//   p := lambda.NewListVersionsByFunctionRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListVersionsByFunctionPaginator(req ListVersionsByFunctionRequest) ListVersionsByFunctionPaginator {
+	return ListVersionsByFunctionPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListVersionsByFunctionInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListVersionsByFunctionPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListVersionsByFunctionPaginator struct {
+	aws.Pager
+}
+
+func (p *ListVersionsByFunctionPaginator) CurrentPage() *ListVersionsByFunctionOutput {
+	return p.Pager.CurrentPage().(*ListVersionsByFunctionOutput)
 }
 
 // ListVersionsByFunctionResponse is the response type for the

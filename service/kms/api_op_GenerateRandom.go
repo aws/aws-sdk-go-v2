@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateRandomRequest
 type GenerateRandomInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *GenerateRandomInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateRandomResponse
 type GenerateRandomOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +49,7 @@ type GenerateRandomOutput struct {
 	// is Base64-encoded. Otherwise, it is not encoded.
 	//
 	// Plaintext is automatically base64 encoded/decoded by the SDK.
-	Plaintext []byte `min:"1" type:"blob"`
+	Plaintext []byte `min:"1" type:"blob" sensitive:"true"`
 }
 
 // String returns the string representation

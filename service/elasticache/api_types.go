@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Describes an Availability Zone in which the cluster is launched.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AvailabilityZone
 type AvailabilityZone struct {
 	_ struct{} `type:"structure"`
 
@@ -27,7 +26,6 @@ func (s AvailabilityZone) String() string {
 }
 
 // Contains all of the attributes of a specific cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheCluster
 type CacheCluster struct {
 	_ struct{} `type:"structure"`
 
@@ -212,7 +210,6 @@ func (s CacheCluster) String() string {
 }
 
 // Provides all of the details about a particular cache engine version.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheEngineVersion
 type CacheEngineVersion struct {
 	_ struct{} `type:"structure"`
 
@@ -278,7 +275,6 @@ func (s CacheEngineVersion) String() string {
 //
 //    * Redis configuration variables appendonly and appendfsync are not supported
 //    on Redis version 2.8.22 and later.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheNode
 type CacheNode struct {
 	_ struct{} `type:"structure"`
 
@@ -315,7 +311,6 @@ func (s CacheNode) String() string {
 // A parameter that has a different value for each cache node type it is applied
 // to. For example, in a Redis cluster, a cache.m1.large cache node type would
 // have a larger maxmemory value than a cache.m1.small type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheNodeTypeSpecificParameter
 type CacheNodeTypeSpecificParameter struct {
 	_ struct{} `type:"structure"`
 
@@ -358,7 +353,6 @@ func (s CacheNodeTypeSpecificParameter) String() string {
 }
 
 // A value that applies only to a certain cache node type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheNodeTypeSpecificValue
 type CacheNodeTypeSpecificValue struct {
 	_ struct{} `type:"structure"`
 
@@ -375,7 +369,6 @@ func (s CacheNodeTypeSpecificValue) String() string {
 }
 
 // Represents the output of a CreateCacheParameterGroup operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheParameterGroup
 type CacheParameterGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -399,7 +392,6 @@ func (s CacheParameterGroup) String() string {
 }
 
 // Status of the cache parameter group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheParameterGroupStatus
 type CacheParameterGroupStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -426,7 +418,6 @@ func (s CacheParameterGroupStatus) String() string {
 //    * CreateCacheSecurityGroup
 //
 //    * RevokeCacheSecurityGroupIngress
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheSecurityGroup
 type CacheSecurityGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -450,7 +441,6 @@ func (s CacheSecurityGroup) String() string {
 }
 
 // Represents a cluster's status within a particular cache security group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheSecurityGroupMembership
 type CacheSecurityGroupMembership struct {
 	_ struct{} `type:"structure"`
 
@@ -473,7 +463,6 @@ func (s CacheSecurityGroupMembership) String() string {
 //    * CreateCacheSubnetGroup
 //
 //    * ModifyCacheSubnetGroup
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheSubnetGroup
 type CacheSubnetGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -499,7 +488,6 @@ func (s CacheSubnetGroup) String() string {
 // Node group (shard) configuration options when adding or removing replicas.
 // Each node group (shard) configuration has the following members: NodeGroupId,
 // NewReplicaCount, and PreferredAvailabilityZones.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ConfigureShard
 type ConfigureShard struct {
 	_ struct{} `type:"structure"`
 
@@ -561,7 +549,6 @@ func (s *ConfigureShard) Validate() error {
 }
 
 // Provides ownership and status information for an Amazon EC2 security group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/EC2SecurityGroup
 type EC2SecurityGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -582,7 +569,6 @@ func (s EC2SecurityGroup) String() string {
 
 // Represents the information required for client programs to connect to a cache
 // node.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/Endpoint
 type Endpoint struct {
 	_ struct{} `type:"structure"`
 
@@ -599,7 +585,6 @@ func (s Endpoint) String() string {
 }
 
 // Represents the output of a DescribeEngineDefaultParameters operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/EngineDefaults
 type EngineDefaults struct {
 	_ struct{} `type:"structure"`
 
@@ -629,7 +614,6 @@ func (s EngineDefaults) String() string {
 // Represents a single occurrence of something interesting within the system.
 // Some examples of events are creating a cluster, adding or removing a cache
 // node, or rebooting a node.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/Event
 type Event struct {
 	_ struct{} `type:"structure"`
 
@@ -656,7 +640,6 @@ func (s Event) String() string {
 // Represents a collection of cache nodes in a replication group. One node in
 // the node group is the read/write primary node. All the other nodes are read-only
 // Replica nodes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/NodeGroup
 type NodeGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -692,7 +675,6 @@ func (s NodeGroup) String() string {
 // Node group (shard) configuration options. Each node group (shard) configuration
 // has the following: Slots, PrimaryAvailabilityZone, ReplicaAvailabilityZones,
 // ReplicaCount.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/NodeGroupConfiguration
 type NodeGroupConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -738,7 +720,6 @@ func (s *NodeGroupConfiguration) Validate() error {
 }
 
 // Represents a single node within a node group (shard).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/NodeGroupMember
 type NodeGroupMember struct {
 	_ struct{} `type:"structure"`
 
@@ -768,7 +749,6 @@ func (s NodeGroupMember) String() string {
 }
 
 // The status of the service update on the node group member
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/NodeGroupMemberUpdateStatus
 type NodeGroupMemberUpdateStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -807,7 +787,6 @@ func (s NodeGroupMemberUpdateStatus) String() string {
 }
 
 // The status of the service update on the node group
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/NodeGroupUpdateStatus
 type NodeGroupUpdateStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -824,7 +803,6 @@ func (s NodeGroupUpdateStatus) String() string {
 }
 
 // Represents an individual cache node in a snapshot of a cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/NodeSnapshot
 type NodeSnapshot struct {
 	_ struct{} `type:"structure"`
 
@@ -859,7 +837,6 @@ func (s NodeSnapshot) String() string {
 // Describes a notification topic and its status. Notification topics are used
 // for publishing ElastiCache events to subscribers using Amazon Simple Notification
 // Service (SNS).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/NotificationConfiguration
 type NotificationConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -877,7 +854,6 @@ func (s NotificationConfiguration) String() string {
 
 // Describes an individual setting that controls some aspect of ElastiCache
 // behavior.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/Parameter
 type Parameter struct {
 	_ struct{} `type:"structure"`
 
@@ -920,7 +896,6 @@ func (s Parameter) String() string {
 }
 
 // Describes a name-value pair that is used to update the value of a parameter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ParameterNameValue
 type ParameterNameValue struct {
 	_ struct{} `type:"structure"`
 
@@ -938,7 +913,6 @@ func (s ParameterNameValue) String() string {
 
 // A group of settings that are applied to the cluster in the future, or that
 // are currently being applied.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/PendingModifiedValues
 type PendingModifiedValues struct {
 	_ struct{} `type:"structure"`
 
@@ -965,7 +939,6 @@ func (s PendingModifiedValues) String() string {
 }
 
 // Update action that has been processed for the corresponding apply/stop request
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ProcessedUpdateAction
 type ProcessedUpdateAction struct {
 	_ struct{} `type:"structure"`
 
@@ -986,7 +959,6 @@ func (s ProcessedUpdateAction) String() string {
 
 // Contains the specific price and frequency of a recurring charges for a reserved
 // cache node, or for a reserved cache node offering.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RecurringCharge
 type RecurringCharge struct {
 	_ struct{} `type:"structure"`
 
@@ -1003,7 +975,6 @@ func (s RecurringCharge) String() string {
 }
 
 // Contains all of the attributes of a specific Redis replication group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroup
 type ReplicationGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -1054,6 +1025,9 @@ type ReplicationGroup struct {
 
 	// The user supplied description of the replication group.
 	Description *string `type:"string"`
+
+	// The ID of the KMS key used to encrypt the disk in the cluster.
+	KmsKeyId *string `type:"string"`
 
 	// The names of all the cache clusters that are part of this replication group.
 	MemberClusters []string `locationNameList:"ClusterId" type:"list"`
@@ -1118,7 +1092,6 @@ func (s ReplicationGroup) String() string {
 
 // The settings to be applied to the Redis replication group, either immediately
 // or during the next maintenance window.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroupPendingModifiedValues
 type ReplicationGroupPendingModifiedValues struct {
 	_ struct{} `type:"structure"`
 
@@ -1149,7 +1122,6 @@ func (s ReplicationGroupPendingModifiedValues) String() string {
 }
 
 // Represents the output of a PurchaseReservedCacheNodesOffering operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReservedCacheNode
 type ReservedCacheNode struct {
 	_ struct{} `type:"structure"`
 
@@ -1236,7 +1208,6 @@ func (s ReservedCacheNode) String() string {
 }
 
 // Describes all of the attributes of a reserved cache node offering.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReservedCacheNodesOffering
 type ReservedCacheNodesOffering struct {
 	_ struct{} `type:"structure"`
 
@@ -1307,7 +1278,6 @@ func (s ReservedCacheNodesOffering) String() string {
 
 // A list of PreferredAvailabilityZones objects that specifies the configuration
 // of a node group in the resharded cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReshardingConfiguration
 type ReshardingConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1338,7 +1308,6 @@ func (s *ReshardingConfiguration) Validate() error {
 }
 
 // The status of an online resharding operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReshardingStatus
 type ReshardingStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -1352,7 +1321,6 @@ func (s ReshardingStatus) String() string {
 }
 
 // Represents a single cache security group and its status.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/SecurityGroupMembership
 type SecurityGroupMembership struct {
 	_ struct{} `type:"structure"`
 
@@ -1371,7 +1339,6 @@ func (s SecurityGroupMembership) String() string {
 }
 
 // An update that you can apply to your Redis clusters.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ServiceUpdate
 type ServiceUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -1421,7 +1388,6 @@ func (s ServiceUpdate) String() string {
 }
 
 // Represents the progress of an online resharding operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/SlotMigration
 type SlotMigration struct {
 	_ struct{} `type:"structure"`
 
@@ -1436,7 +1402,6 @@ func (s SlotMigration) String() string {
 
 // Represents a copy of an entire Redis cluster as of the time when the snapshot
 // was taken.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/Snapshot
 type Snapshot struct {
 	_ struct{} `type:"structure"`
 
@@ -1511,6 +1476,9 @@ type Snapshot struct {
 
 	// The version of the cache engine version that is used by the source cluster.
 	EngineVersion *string `type:"string"`
+
+	// The ID of the KMS key used to encrypt the snapshot.
+	KmsKeyId *string `type:"string"`
 
 	// A list of the cache nodes in the source cluster.
 	NodeSnapshots []NodeSnapshot `locationNameList:"NodeSnapshot" type:"list"`
@@ -1606,7 +1574,6 @@ func (s Snapshot) String() string {
 // Represents the subnet associated with a cluster. This parameter refers to
 // subnets defined in Amazon Virtual Private Cloud (Amazon VPC) and used with
 // ElastiCache.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/Subnet
 type Subnet struct {
 	_ struct{} `type:"structure"`
 
@@ -1625,7 +1592,6 @@ func (s Subnet) String() string {
 // A cost allocation Tag that can be added to an ElastiCache cluster or replication
 // group. Tags are composed of a Key/Value pair. A tag with a null Value is
 // permitted.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -1643,7 +1609,6 @@ func (s Tag) String() string {
 
 // Filters update actions from the service updates that are in available status
 // during the time range.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TimeRangeFilter
 type TimeRangeFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -1661,7 +1626,6 @@ func (s TimeRangeFilter) String() string {
 
 // Update action that has failed to be processed for the corresponding apply/stop
 // request
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/UnprocessedUpdateAction
 type UnprocessedUpdateAction struct {
 	_ struct{} `type:"structure"`
 
@@ -1684,7 +1648,6 @@ func (s UnprocessedUpdateAction) String() string {
 }
 
 // The status of the service update for a specific replication group
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/UpdateAction
 type UpdateAction struct {
 	_ struct{} `type:"structure"`
 

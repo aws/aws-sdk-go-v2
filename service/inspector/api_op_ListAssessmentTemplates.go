@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentTemplatesRequest
 type ListAssessmentTemplatesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s *ListAssessmentTemplatesInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentTemplatesResponse
 type ListAssessmentTemplatesOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateServiceRequest
 type UpdateServiceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -38,10 +37,10 @@ type UpdateServiceInput struct {
 	// has first started. This is only valid if your service is configured to use
 	// a load balancer. If your service's tasks take a while to start and respond
 	// to Elastic Load Balancing health checks, you can specify a health check grace
-	// period of up to 1,800 seconds. During that time, the ECS service scheduler
-	// ignores the Elastic Load Balancing health check status. This grace period
-	// can prevent the ECS service scheduler from marking tasks as unhealthy and
-	// stopping them before they have time to come up.
+	// period of up to 2,147,483,647 seconds. During that time, the ECS service
+	// scheduler ignores the Elastic Load Balancing health check status. This grace
+	// period can prevent the ECS service scheduler from marking tasks as unhealthy
+	// and stopping them before they have time to come up.
 	HealthCheckGracePeriodSeconds *int64 `locationName:"healthCheckGracePeriodSeconds" type:"integer"`
 
 	// The network configuration for the service. This parameter is required for
@@ -100,7 +99,6 @@ func (s *UpdateServiceInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateServiceResponse
 type UpdateServiceOutput struct {
 	_ struct{} `type:"structure"`
 

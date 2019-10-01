@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UnarchiveFindingsRequest
 type UnarchiveFindingsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -77,7 +76,6 @@ func (s UnarchiveFindingsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UnarchiveFindingsResponse
 type UnarchiveFindingsOutput struct {
 	_ struct{} `type:"structure"`
 }

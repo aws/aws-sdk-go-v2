@@ -10,7 +10,6 @@ import (
 )
 
 // Returns information about the trail.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DescribeTrailsRequest
 type DescribeTrailsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +50,6 @@ func (s DescribeTrailsInput) String() string {
 
 // Returns the objects or data listed below if successful. Otherwise, returns
 // an error.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DescribeTrailsResponse
 type DescribeTrailsOutput struct {
 	_ struct{} `type:"structure"`
 

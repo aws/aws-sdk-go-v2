@@ -12,7 +12,6 @@ import (
 // Describes the trust relationships for a particular AWS Managed Microsoft
 // AD directory. If no input parameters are are provided, such as directory
 // ID or trust ID, this request describes all the trust relationships.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeTrustsRequest
 type DescribeTrustsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -41,7 +40,6 @@ func (s DescribeTrustsInput) String() string {
 }
 
 // The result of a DescribeTrust request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeTrustsResult
 type DescribeTrustsOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DisassociateServiceRoleFromAccountRequest
 type DisassociateServiceRoleFromAccountInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -27,7 +26,6 @@ func (s DisassociateServiceRoleFromAccountInput) MarshalFields(e protocol.FieldE
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DisassociateServiceRoleFromAccountResponse
 type DisassociateServiceRoleFromAccountOutput struct {
 	_ struct{} `type:"structure"`
 

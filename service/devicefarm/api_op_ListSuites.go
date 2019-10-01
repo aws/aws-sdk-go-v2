@@ -10,7 +10,6 @@ import (
 )
 
 // Represents a request to the list suites operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListSuitesRequest
 type ListSuitesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +49,6 @@ func (s *ListSuitesInput) Validate() error {
 }
 
 // Represents the result of a list suites request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListSuitesResult
 type ListSuitesOutput struct {
 	_ struct{} `type:"structure"`
 

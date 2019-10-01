@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterEndpointMessage
 type ModifyDBClusterEndpointInput struct {
 	_ struct{} `type:"structure"`
 
@@ -19,7 +18,7 @@ type ModifyDBClusterEndpointInput struct {
 	// DBClusterEndpointIdentifier is a required field
 	DBClusterEndpointIdentifier *string `type:"string" required:"true"`
 
-	// The type of the endpoint. One of: READER, ANY.
+	// The type of the endpoint. One of: READER, WRITER, ANY.
 	EndpointType *string `type:"string"`
 
 	// List of DB instance identifiers that aren't part of the custom endpoint group.
@@ -64,11 +63,10 @@ func (s *ModifyDBClusterEndpointInput) Validate() error {
 //
 // For the data structure that represents Amazon RDS DB instance endpoints,
 // see Endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterEndpoint
 type ModifyDBClusterEndpointOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The type associated with a custom endpoint. One of: READER, ANY.
+	// The type associated with a custom endpoint. One of: READER, WRITER, ANY.
 	CustomEndpointType *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) for the endpoint.

@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateDeploymentRequest
 type CreateDeploymentInput struct {
 	_ struct{} `type:"structure"`
 
@@ -78,7 +77,6 @@ func (s *CreateDeploymentInput) Validate() error {
 }
 
 // Contains the response to a CreateDeployment request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateDeploymentResult
 type CreateDeploymentOutput struct {
 	_ struct{} `type:"structure"`
 

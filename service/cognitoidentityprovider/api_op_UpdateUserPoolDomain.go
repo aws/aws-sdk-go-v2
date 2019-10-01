@@ -10,7 +10,6 @@ import (
 )
 
 // The UpdateUserPoolDomain request input.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolDomainRequest
 type UpdateUserPoolDomainInput struct {
 	_ struct{} `type:"structure"`
 
@@ -77,7 +76,6 @@ func (s *UpdateUserPoolDomainInput) Validate() error {
 }
 
 // The UpdateUserPoolDomain response output.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolDomainResponse
 type UpdateUserPoolDomainOutput struct {
 	_ struct{} `type:"structure"`
 

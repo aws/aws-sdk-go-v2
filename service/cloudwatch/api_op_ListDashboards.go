@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListDashboardsInput
 type ListDashboardsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -28,7 +27,6 @@ func (s ListDashboardsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListDashboardsOutput
 type ListDashboardsOutput struct {
 	_ struct{} `type:"structure"`
 

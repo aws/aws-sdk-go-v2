@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateVTLDeviceTypeInput
 type UpdateVTLDeviceTypeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s *UpdateVTLDeviceTypeInput) Validate() error {
 }
 
 // UpdateVTLDeviceTypeOutput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateVTLDeviceTypeOutput
 type UpdateVTLDeviceTypeOutput struct {
 	_ struct{} `type:"structure"`
 

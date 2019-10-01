@@ -10,14 +10,13 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DeleteLexiconInput
 type DeleteLexiconInput struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the lexicon to delete. Must be an existing lexicon in the region.
 	//
 	// Name is a required field
-	Name *string `location:"uri" locationName:"LexiconName" type:"string" required:"true"`
+	Name *string `location:"uri" locationName:"LexiconName" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -52,7 +51,6 @@ func (s DeleteLexiconInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DeleteLexiconOutput
 type DeleteLexiconOutput struct {
 	_ struct{} `type:"structure"`
 }

@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the result of a list devices request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDevicesRequest
 type ListDevicesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -77,7 +76,6 @@ func (s *ListDevicesInput) Validate() error {
 }
 
 // Represents the result of a list devices operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDevicesResult
 type ListDevicesOutput struct {
 	_ struct{} `type:"structure"`
 

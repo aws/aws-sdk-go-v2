@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartConfigRulesEvaluationRequest
 type StartConfigRulesEvaluationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -36,7 +35,6 @@ func (s *StartConfigRulesEvaluationInput) Validate() error {
 }
 
 // The output when you start the evaluation for the specified AWS Config rule.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartConfigRulesEvaluationResponse
 type StartConfigRulesEvaluationOutput struct {
 	_ struct{} `type:"structure"`
 }

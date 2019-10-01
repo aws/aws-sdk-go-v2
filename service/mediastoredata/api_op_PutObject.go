@@ -12,11 +12,15 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/PutObjectRequest
 type PutObjectInput struct {
 	_ struct{} `type:"structure" payload:"Body"`
 
 	// The bytes to be stored.
+	//
+	// To use an non-seekable io.Reader for this request wrap the io.Reader with
+	// "aws.ReadSeekCloser". The SDK will not retry request errors for non-seekable
+	// readers. This will allow the SDK to send the reader's payload as chunked
+	// transfer encoding.
 	//
 	// Body is a required field
 	Body io.ReadSeeker `type:"blob" required:"true"`
@@ -142,7 +146,6 @@ func (s PutObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/PutObjectResponse
 type PutObjectOutput struct {
 	_ struct{} `type:"structure"`
 

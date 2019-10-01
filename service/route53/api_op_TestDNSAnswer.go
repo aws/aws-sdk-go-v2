@@ -13,7 +13,6 @@ import (
 // Gets the value that Amazon Route 53 returns in response to a DNS request
 // for a specified record name and type. You can optionally specify the IP address
 // of a DNS resolver, an EDNS0 client subnet IP address, and a subnet mask.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TestDNSAnswerRequest
 type TestDNSAnswerInput struct {
 	_ struct{} `type:"structure"`
 
@@ -130,7 +129,6 @@ func (s TestDNSAnswerInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains the response to a TestDNSAnswer request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TestDNSAnswerResponse
 type TestDNSAnswerOutput struct {
 	_ struct{} `type:"structure"`
 

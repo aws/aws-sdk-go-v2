@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ImportCertificateRequest
 type ImportCertificateInput struct {
 	_ struct{} `type:"structure"`
 
@@ -35,7 +34,7 @@ type ImportCertificateInput struct {
 	// PrivateKey is automatically base64 encoded/decoded by the SDK.
 	//
 	// PrivateKey is a required field
-	PrivateKey []byte `min:"1" type:"blob" required:"true"`
+	PrivateKey []byte `min:"1" type:"blob" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -73,7 +72,6 @@ func (s *ImportCertificateInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ImportCertificateResponse
 type ImportCertificateOutput struct {
 	_ struct{} `type:"structure"`
 

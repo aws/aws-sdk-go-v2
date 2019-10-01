@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ResetUserPasswordRequest
 type ResetUserPasswordInput struct {
 	_ struct{} `type:"structure"`
 
@@ -22,7 +21,7 @@ type ResetUserPasswordInput struct {
 	// The new password that will be reset.
 	//
 	// NewPassword is a required field
-	NewPassword *string `min:"1" type:"string" required:"true"`
+	NewPassword *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The user name of the user whose password will be reset.
 	//
@@ -63,7 +62,6 @@ func (s *ResetUserPasswordInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ResetUserPasswordResult
 type ResetUserPasswordOutput struct {
 	_ struct{} `type:"structure"`
 }

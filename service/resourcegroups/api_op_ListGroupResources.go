@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroupResourcesInput
 type ListGroupResourcesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -107,7 +106,6 @@ func (s ListGroupResourcesInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroupResourcesOutput
 type ListGroupResourcesOutput struct {
 	_ struct{} `type:"structure"`
 

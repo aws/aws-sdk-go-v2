@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a ListOnPremisesInstances operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListOnPremisesInstancesInput
 type ListOnPremisesInstancesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -38,7 +37,6 @@ func (s ListOnPremisesInstancesInput) String() string {
 }
 
 // Represents the output of the list on-premises instances operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListOnPremisesInstancesOutput
 type ListOnPremisesInstancesOutput struct {
 	_ struct{} `type:"structure"`
 

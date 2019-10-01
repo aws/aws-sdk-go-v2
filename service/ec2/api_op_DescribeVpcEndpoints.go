@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for DescribeVpcEndpoints.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointsRequest
 type DescribeVpcEndpointsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -28,8 +27,8 @@ type DescribeVpcEndpointsInput struct {
 	//
 	//    * vpc-endpoint-id: The ID of the endpoint.
 	//
-	//    * vpc-endpoint-state: The state of the endpoint. (pending | available
-	//    | deleting | deleted)
+	//    * vpc-endpoint-state - The state of the endpoint (pendingAcceptance |
+	//    pending | available | deleting | deleted | rejected | failed).
 	//
 	//    * tag:<key> - The key/value combination of a tag assigned to the resource.
 	//    Use the tag key in the filter name and the tag value as the filter value.
@@ -63,7 +62,6 @@ func (s DescribeVpcEndpointsInput) String() string {
 }
 
 // Contains the output of DescribeVpcEndpoints.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointsResult
 type DescribeVpcEndpointsOutput struct {
 	_ struct{} `type:"structure"`
 

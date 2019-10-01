@@ -26,7 +26,6 @@ var _ = awsutil.Prettify
 //
 // For more information, see Serving Private Content through CloudFront (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ActiveTrustedSigners
 type ActiveTrustedSigners struct {
 	_ struct{} `type:"structure"`
 
@@ -91,7 +90,6 @@ func (s ActiveTrustedSigners) MarshalFields(e protocol.FieldEncoder) error {
 // For more information about ICP recordals, see Signup, Accounts, and Credentials
 // (https://docs.amazonaws.cn/en_us/aws/latest/userguide/accounts-and-credentials.html)
 // in Getting Started with AWS services in China.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/AliasICPRecordal
 type AliasICPRecordal struct {
 	_ struct{} `type:"structure"`
 
@@ -141,7 +139,6 @@ func (s AliasICPRecordal) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that contains information about CNAMEs (alternate domain names),
 // if any, for this distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Aliases
 type Aliases struct {
 	_ struct{} `type:"structure"`
 
@@ -213,7 +210,6 @@ func (s Aliases) MarshalFields(e protocol.FieldEncoder) error {
 // S3 bucket or to your custom origin so users can't perform operations that
 // you don't want them to. For example, you might not want users to have permissions
 // to delete objects from your origin.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/AllowedMethods
 type AllowedMethods struct {
 	_ struct{} `type:"structure"`
 
@@ -326,7 +322,6 @@ func (s AllowedMethods) MarshalFields(e protocol.FieldEncoder) error {
 //
 // For more information about cache behaviors, see Cache Behaviors (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCacheBehavior)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CacheBehavior
 type CacheBehavior struct {
 	_ struct{} `type:"structure"`
 
@@ -623,7 +618,6 @@ func (s CacheBehavior) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains zero or more CacheBehavior elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CacheBehaviors
 type CacheBehaviors struct {
 	_ struct{} `type:"structure"`
 
@@ -696,7 +690,6 @@ func (s CacheBehaviors) MarshalFields(e protocol.FieldEncoder) error {
 // If you pick the second choice for your Amazon S3 Origin, you may need to
 // forward Access-Control-Request-Method, Access-Control-Request-Headers, and
 // Origin headers for the responses to be cached correctly.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CachedMethods
 type CachedMethods struct {
 	_ struct{} `type:"structure"`
 
@@ -761,7 +754,6 @@ func (s CachedMethods) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // CloudFront origin access identity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CloudFrontOriginAccessIdentity
 type CloudFrontOriginAccessIdentity struct {
 	_ struct{} `type:"structure"`
 
@@ -811,7 +803,6 @@ func (s CloudFrontOriginAccessIdentity) MarshalFields(e protocol.FieldEncoder) e
 
 // Origin access identity configuration. Send a GET request to the /CloudFront
 // API version/CloudFront/identity ID/config resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CloudFrontOriginAccessIdentityConfig
 type CloudFrontOriginAccessIdentityConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -887,7 +878,6 @@ func (s CloudFrontOriginAccessIdentityConfig) MarshalFields(e protocol.FieldEnco
 // child elements. By default, your entire list of origin access identities
 // is returned in one single page. If the list is long, you can paginate it
 // using the MaxItems and Marker parameters.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CloudFrontOriginAccessIdentityList
 type CloudFrontOriginAccessIdentityList struct {
 	_ struct{} `type:"structure"`
 
@@ -982,7 +972,6 @@ func (s CloudFrontOriginAccessIdentityList) MarshalFields(e protocol.FieldEncode
 }
 
 // Summary of the information about a CloudFront origin access identity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CloudFrontOriginAccessIdentitySummary
 type CloudFrontOriginAccessIdentitySummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1034,7 +1023,6 @@ func (s CloudFrontOriginAccessIdentitySummary) MarshalFields(e protocol.FieldEnc
 }
 
 // A field-level encryption content type profile.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ContentTypeProfile
 type ContentTypeProfile struct {
 	_ struct{} `type:"structure"`
 
@@ -1098,7 +1086,6 @@ func (s ContentTypeProfile) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The configuration for a field-level encryption content type-profile mapping.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ContentTypeProfileConfig
 type ContentTypeProfileConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1157,7 +1144,6 @@ func (s ContentTypeProfileConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Field-level encryption content type-profile.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ContentTypeProfiles
 type ContentTypeProfiles struct {
 	_ struct{} `type:"structure"`
 
@@ -1223,7 +1209,6 @@ func (s ContentTypeProfiles) MarshalFields(e protocol.FieldEncoder) error {
 // to the origin and, if so, which ones. For more information about forwarding
 // cookies to the origin, see Caching Content Based on Request Headers (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CookieNames
 type CookieNames struct {
 	_ struct{} `type:"structure"`
 
@@ -1284,7 +1269,6 @@ func (s CookieNames) MarshalFields(e protocol.FieldEncoder) error {
 // to the origin and, if so, which ones. For more information about forwarding
 // cookies to the origin, see Caching Content Based on Cookies (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CookiePreference
 type CookiePreference struct {
 	_ struct{} `type:"structure"`
 
@@ -1364,7 +1348,6 @@ func (s CookiePreference) MarshalFields(e protocol.FieldEncoder) error {
 // For more information about custom error pages, see Customizing Error Responses
 // (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CustomErrorResponse
 type CustomErrorResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -1492,7 +1475,6 @@ func (s CustomErrorResponse) MarshalFields(e protocol.FieldEncoder) error {
 // For more information about custom error pages, see Customizing Error Responses
 // (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CustomErrorResponses
 type CustomErrorResponses struct {
 	_ struct{} `type:"structure"`
 
@@ -1558,7 +1540,6 @@ func (s CustomErrorResponses) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains the list of Custom Headers for each origin.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CustomHeaders
 type CustomHeaders struct {
 	_ struct{} `type:"structure"`
 
@@ -1623,7 +1604,6 @@ func (s CustomHeaders) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A custom origin or an Amazon S3 bucket configured as a website endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CustomOriginConfig
 type CustomOriginConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1740,7 +1720,6 @@ func (s CustomOriginConfig) MarshalFields(e protocol.FieldEncoder) error {
 // A complex type that describes the default cache behavior if you don't specify
 // a CacheBehavior element or if files don't match any of the values of PathPattern
 // in CacheBehavior elements. You must create exactly one default cache behavior.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DefaultCacheBehavior
 type DefaultCacheBehavior struct {
 	_ struct{} `type:"structure"`
 
@@ -2009,7 +1988,6 @@ func (s DefaultCacheBehavior) MarshalFields(e protocol.FieldEncoder) error {
 
 // A distribution tells CloudFront where you want content to be delivered from,
 // and the details about how to track and manage content delivery.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Distribution
 type Distribution struct {
 	_ struct{} `type:"structure"`
 
@@ -2147,7 +2125,6 @@ func (s Distribution) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A distribution configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DistributionConfig
 type DistributionConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -2182,7 +2159,7 @@ type DistributionConfig struct {
 	// the new comment.
 	//
 	// Comment is a required field
-	Comment *string `type:"string" required:"true"`
+	Comment *string `type:"string" required:"true" sensitive:"true"`
 
 	// A complex type that controls the following:
 	//
@@ -2518,7 +2495,6 @@ func (s DistributionConfig) MarshalFields(e protocol.FieldEncoder) error {
 
 // A distribution Configuration and a list of tags to be associated with the
 // distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DistributionConfigWithTags
 type DistributionConfigWithTags struct {
 	_ struct{} `type:"structure"`
 
@@ -2584,7 +2560,6 @@ func (s DistributionConfigWithTags) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // A distribution list.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DistributionList
 type DistributionList struct {
 	_ struct{} `type:"structure"`
 
@@ -2674,7 +2649,6 @@ func (s DistributionList) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A summary of the information about a CloudFront distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DistributionSummary
 type DistributionSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -2934,7 +2908,6 @@ func (s DistributionSummary) MarshalFields(e protocol.FieldEncoder) error {
 
 // Complex data type for field-level encryption profiles that includes all of
 // the encryption entities.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/EncryptionEntities
 type EncryptionEntities struct {
 	_ struct{} `type:"structure"`
 
@@ -3000,7 +2973,6 @@ func (s EncryptionEntities) MarshalFields(e protocol.FieldEncoder) error {
 
 // Complex data type for field-level encryption profiles that includes the encryption
 // key and field pattern specifications.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/EncryptionEntity
 type EncryptionEntity struct {
 	_ struct{} `type:"structure"`
 
@@ -3084,7 +3056,6 @@ func (s EncryptionEntity) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex data type that includes the profile configurations and other options
 // specified for field-level encryption.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryption
 type FieldLevelEncryption struct {
 	_ struct{} `type:"structure"`
 
@@ -3138,7 +3109,6 @@ func (s FieldLevelEncryption) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex data type that includes the profile configurations specified for
 // field-level encryption.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionConfig
 type FieldLevelEncryptionConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -3219,7 +3189,6 @@ func (s FieldLevelEncryptionConfig) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // List of field-level encrpytion configurations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionList
 type FieldLevelEncryptionList struct {
 	_ struct{} `type:"structure"`
 
@@ -3283,7 +3252,6 @@ func (s FieldLevelEncryptionList) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex data type for field-level encryption profiles.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionProfile
 type FieldLevelEncryptionProfile struct {
 	_ struct{} `type:"structure"`
 
@@ -3336,7 +3304,6 @@ func (s FieldLevelEncryptionProfile) MarshalFields(e protocol.FieldEncoder) erro
 }
 
 // A complex data type of profiles for the field-level encryption.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionProfileConfig
 type FieldLevelEncryptionProfileConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -3423,7 +3390,6 @@ func (s FieldLevelEncryptionProfileConfig) MarshalFields(e protocol.FieldEncoder
 }
 
 // List of field-level encryption profiles.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionProfileList
 type FieldLevelEncryptionProfileList struct {
 	_ struct{} `type:"structure"`
 
@@ -3488,7 +3454,6 @@ func (s FieldLevelEncryptionProfileList) MarshalFields(e protocol.FieldEncoder) 
 }
 
 // The field-level encryption profile summary.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionProfileSummary
 type FieldLevelEncryptionProfileSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -3560,7 +3525,6 @@ func (s FieldLevelEncryptionProfileSummary) MarshalFields(e protocol.FieldEncode
 }
 
 // A summary of a field-level encryption item.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionSummary
 type FieldLevelEncryptionSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -3627,7 +3591,6 @@ func (s FieldLevelEncryptionSummary) MarshalFields(e protocol.FieldEncoder) erro
 
 // A complex data type that includes the field patterns to match for field-level
 // encryption.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldPatterns
 type FieldPatterns struct {
 	_ struct{} `type:"structure"`
 
@@ -3683,7 +3646,6 @@ func (s FieldPatterns) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that specifies how CloudFront handles query strings and cookies.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ForwardedValues
 type ForwardedValues struct {
 	_ struct{} `type:"structure"`
 
@@ -3806,7 +3768,6 @@ func (s ForwardedValues) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that controls the countries in which your content is distributed.
 // CloudFront determines the location of your users using MaxMind GeoIP databases.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GeoRestriction
 type GeoRestriction struct {
 	_ struct{} `type:"structure"`
 
@@ -3911,7 +3872,6 @@ func (s GeoRestriction) MarshalFields(e protocol.FieldEncoder) error {
 // for each header value. For more information about caching based on header
 // values, see How CloudFront Forwards and Caches Headers (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Headers
 type Headers struct {
 	_ struct{} `type:"structure"`
 
@@ -3992,7 +3952,6 @@ func (s Headers) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An invalidation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Invalidation
 type Invalidation struct {
 	_ struct{} `type:"structure"`
 
@@ -4054,7 +4013,6 @@ func (s Invalidation) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An invalidation batch.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidationBatch
 type InvalidationBatch struct {
 	_ struct{} `type:"structure"`
 
@@ -4135,7 +4093,6 @@ func (s InvalidationBatch) MarshalFields(e protocol.FieldEncoder) error {
 // For more information about invalidation, see Invalidating Objects (Web Distributions
 // Only) (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidationList
 type InvalidationList struct {
 	_ struct{} `type:"structure"`
 
@@ -4225,7 +4182,6 @@ func (s InvalidationList) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A summary of an invalidation request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidationSummary
 type InvalidationSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -4278,7 +4234,6 @@ func (s InvalidationSummary) MarshalFields(e protocol.FieldEncoder) error {
 // associated with AwsAccountNumber.
 //
 // For more information, see ActiveTrustedSigners (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ActiveTrustedSigners.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/KeyPairIds
 type KeyPairIds struct {
 	_ struct{} `type:"structure"`
 
@@ -4325,7 +4280,6 @@ func (s KeyPairIds) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains a Lambda function association.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/LambdaFunctionAssociation
 type LambdaFunctionAssociation struct {
 	_ struct{} `type:"structure"`
 
@@ -4421,7 +4375,6 @@ func (s LambdaFunctionAssociation) MarshalFields(e protocol.FieldEncoder) error 
 //
 // If you don't want to invoke any Lambda functions for the requests that match
 // PathPattern, specify 0 for Quantity and omit Items.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/LambdaFunctionAssociations
 type LambdaFunctionAssociations struct {
 	_ struct{} `type:"structure"`
 
@@ -4485,7 +4438,6 @@ func (s LambdaFunctionAssociations) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // A complex type that controls whether access logs are written for the distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/LoggingConfig
 type LoggingConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -4591,7 +4543,6 @@ func (s LoggingConfig) MarshalFields(e protocol.FieldEncoder) error {
 // For the current limit on the number of origins or origin groups that you
 // can specify for a distribution, see Amazon CloudFront Limits (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_cloudfront)
 // in the AWS General Reference.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Origin
 type Origin struct {
 	_ struct{} `type:"structure"`
 
@@ -4758,7 +4709,6 @@ func (s Origin) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that contains HeaderName and HeaderValue elements, if any,
 // for this distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/OriginCustomHeader
 type OriginCustomHeader struct {
 	_ struct{} `type:"structure"`
 
@@ -4822,7 +4772,6 @@ func (s OriginCustomHeader) MarshalFields(e protocol.FieldEncoder) error {
 // a distribution, you can specifiy the origin group instead of a single origin,
 // and CloudFront will failover from the primary origin to the second origin
 // under the failover conditions that you've chosen.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/OriginGroup
 type OriginGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -4906,7 +4855,6 @@ func (s OriginGroup) MarshalFields(e protocol.FieldEncoder) error {
 // A complex data type that includes information about the failover criteria
 // for an origin group, including the status codes for which CloudFront will
 // failover from the primary origin to the second origin.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/OriginGroupFailoverCriteria
 type OriginGroupFailoverCriteria struct {
 	_ struct{} `type:"structure"`
 
@@ -4953,7 +4901,6 @@ func (s OriginGroupFailoverCriteria) MarshalFields(e protocol.FieldEncoder) erro
 }
 
 // An origin in an origin group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/OriginGroupMember
 type OriginGroupMember struct {
 	_ struct{} `type:"structure"`
 
@@ -4994,7 +4941,6 @@ func (s OriginGroupMember) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex data type for the origins included in an origin group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/OriginGroupMembers
 type OriginGroupMembers struct {
 	_ struct{} `type:"structure"`
 
@@ -5066,7 +5012,6 @@ func (s OriginGroupMembers) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex data type for the origin groups specified for a distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/OriginGroups
 type OriginGroups struct {
 	_ struct{} `type:"structure"`
 
@@ -5130,7 +5075,6 @@ func (s OriginGroups) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that contains information about the SSL/TLS protocols that
 // CloudFront can use when establishing an HTTPS connection with your origin.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/OriginSslProtocols
 type OriginSslProtocols struct {
 	_ struct{} `type:"structure"`
 
@@ -5194,7 +5138,6 @@ func (s OriginSslProtocols) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that contains information about origins and origin groups
 // for this distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Origins
 type Origins struct {
 	_ struct{} `type:"structure"`
 
@@ -5269,7 +5212,6 @@ func (s Origins) MarshalFields(e protocol.FieldEncoder) error {
 // to invalidate. For more information, see Specifying the Objects to Invalidate
 // (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html#invalidation-specifying-objects)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Paths
 type Paths struct {
 	_ struct{} `type:"structure"`
 
@@ -5327,7 +5269,6 @@ func (s Paths) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex data type of public keys you add to CloudFront to use with features
 // like field-level encryption.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/PublicKey
 type PublicKey struct {
 	_ struct{} `type:"structure"`
 
@@ -5379,7 +5320,6 @@ func (s PublicKey) MarshalFields(e protocol.FieldEncoder) error {
 
 // Information about a public key you add to CloudFront to use with features
 // like field-level encryption.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/PublicKeyConfig
 type PublicKeyConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -5462,7 +5402,6 @@ func (s PublicKeyConfig) MarshalFields(e protocol.FieldEncoder) error {
 
 // A list of public keys you've added to CloudFront to use with features like
 // field-level encryption.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/PublicKeyList
 type PublicKeyList struct {
 	_ struct{} `type:"structure"`
 
@@ -5528,7 +5467,6 @@ func (s PublicKeyList) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex data type for public key information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/PublicKeySummary
 type PublicKeySummary struct {
 	_ struct{} `type:"structure"`
 
@@ -5598,7 +5536,6 @@ func (s PublicKeySummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Query argument-profile mapping for field-level encryption.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/QueryArgProfile
 type QueryArgProfile struct {
 	_ struct{} `type:"structure"`
 
@@ -5654,7 +5591,6 @@ func (s QueryArgProfile) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Configuration for query argument-profile mapping for field-level encryption.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/QueryArgProfileConfig
 type QueryArgProfileConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -5711,7 +5647,6 @@ func (s QueryArgProfileConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Query argument-profile mapping for field-level encryption.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/QueryArgProfiles
 type QueryArgProfiles struct {
 	_ struct{} `type:"structure"`
 
@@ -5775,7 +5710,6 @@ func (s QueryArgProfiles) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that contains information about the query string parameters
 // that you want CloudFront to use for caching for a cache behavior.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/QueryStringCacheKeys
 type QueryStringCacheKeys struct {
 	_ struct{} `type:"structure"`
 
@@ -5834,7 +5768,6 @@ func (s QueryStringCacheKeys) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that identifies ways in which you want to restrict distribution
 // of your content.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Restrictions
 type Restrictions struct {
 	_ struct{} `type:"structure"`
 
@@ -5882,7 +5815,6 @@ func (s Restrictions) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that contains information about the Amazon S3 bucket from
 // which you want CloudFront to get your media files for distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/S3Origin
 type S3Origin struct {
 	_ struct{} `type:"structure"`
 
@@ -5955,7 +5887,6 @@ func (s S3Origin) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that contains information about the Amazon S3 origin. If the
 // origin is a custom origin, use the CustomOriginConfig element instead.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/S3OriginConfig
 type S3OriginConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -6019,7 +5950,6 @@ func (s S3OriginConfig) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that lists the AWS accounts that were included in the TrustedSigners
 // complex type, as well as their active CloudFront key pair IDs, if any.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Signer
 type Signer struct {
 	_ struct{} `type:"structure"`
 
@@ -6060,7 +5990,6 @@ func (s Signer) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex data type for the status codes that you specify that, when returned
 // by a primary origin, trigger CloudFront to failover to a second origin.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/StatusCodes
 type StatusCodes struct {
 	_ struct{} `type:"structure"`
 
@@ -6127,7 +6056,6 @@ func (s StatusCodes) MarshalFields(e protocol.FieldEncoder) error {
 // A streaming distribution tells CloudFront where you want RTMP content to
 // be delivered from, and the details about how to track and manage content
 // delivery.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/StreamingDistribution
 type StreamingDistribution struct {
 	_ struct{} `type:"structure"`
 
@@ -6233,7 +6161,6 @@ func (s StreamingDistribution) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The RTMP distribution's configuration information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/StreamingDistributionConfig
 type StreamingDistributionConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -6400,7 +6327,6 @@ func (s StreamingDistributionConfig) MarshalFields(e protocol.FieldEncoder) erro
 
 // A streaming distribution Configuration and a list of tags to be associated
 // with the streaming distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/StreamingDistributionConfigWithTags
 type StreamingDistributionConfigWithTags struct {
 	_ struct{} `type:"structure"`
 
@@ -6466,7 +6392,6 @@ func (s StreamingDistributionConfigWithTags) MarshalFields(e protocol.FieldEncod
 }
 
 // A streaming distribution list.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/StreamingDistributionList
 type StreamingDistributionList struct {
 	_ struct{} `type:"structure"`
 
@@ -6557,7 +6482,6 @@ func (s StreamingDistributionList) MarshalFields(e protocol.FieldEncoder) error 
 }
 
 // A summary of the information for a CloudFront streaming distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/StreamingDistributionSummary
 type StreamingDistributionSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -6715,7 +6639,6 @@ func (s StreamingDistributionSummary) MarshalFields(e protocol.FieldEncoder) err
 
 // A complex type that controls whether access logs are written for this streaming
 // distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/StreamingLoggingConfig
 type StreamingLoggingConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -6794,7 +6717,6 @@ func (s StreamingLoggingConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains Tag key and Tag value.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -6853,7 +6775,6 @@ func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains zero or more Tag elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TagKeys
 type TagKeys struct {
 	_ struct{} `type:"structure"`
 
@@ -6884,7 +6805,6 @@ func (s TagKeys) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains zero or more Tag elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Tags
 type Tags struct {
 	_ struct{} `type:"structure"`
 
@@ -6950,7 +6870,6 @@ func (s Tags) MarshalFields(e protocol.FieldEncoder) error {
 // For more information about updating the distribution configuration, see DistributionConfig
 // (https://docs.aws.amazon.com/cloudfront/latest/APIReference/DistributionConfig.html)
 // in the Amazon CloudFront API Reference.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TrustedSigners
 type TrustedSigners struct {
 	_ struct{} `type:"structure"`
 
@@ -7045,7 +6964,6 @@ func (s TrustedSigners) MarshalFields(e protocol.FieldEncoder) error {
 //
 // For more information, see Using Alternate Domain Names and HTTPS (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html#CNAMEsAndHTTPS)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ViewerCertificate
 type ViewerCertificate struct {
 	_ struct{} `type:"structure"`
 

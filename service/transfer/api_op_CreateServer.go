@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateServerRequest
 type CreateServerInput struct {
 	_ struct{} `type:"structure"`
 
@@ -33,7 +32,7 @@ type CreateServerInput struct {
 	//
 	// For more information, see "https://docs.aws.amazon.com/transfer/latest/userguide/change-host-key"
 	// in the AWS SFTP User Guide.
-	HostKey *string `type:"string"`
+	HostKey *string `type:"string" sensitive:"true"`
 
 	// This parameter is required when the IdentityProviderType is set to API_GATEWAY.
 	// Accepts an array containing all of the information required to call a customer-supplied
@@ -82,7 +81,6 @@ func (s *CreateServerInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateServerResponse
 type CreateServerOutput struct {
 	_ struct{} `type:"structure"`
 

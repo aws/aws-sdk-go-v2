@@ -10,12 +10,11 @@ import (
 )
 
 // A JSON object containing the of the gateway.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeMaintenanceStartTimeInput
 type DescribeMaintenanceStartTimeInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	//
 	// GatewayARN is a required field
 	GatewayARN *string `min:"50" type:"string" required:"true"`
@@ -54,7 +53,6 @@ func (s *DescribeMaintenanceStartTimeInput) Validate() error {
 //    * DescribeMaintenanceStartTimeOutput$MinuteOfHour
 //
 //    * DescribeMaintenanceStartTimeOutput$Timezone
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeMaintenanceStartTimeOutput
 type DescribeMaintenanceStartTimeOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -71,7 +69,7 @@ type DescribeMaintenanceStartTimeOutput struct {
 	DayOfWeek *int64 `type:"integer"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string `min:"50" type:"string"`
 
 	// The hour component of the maintenance start time represented as hh, where

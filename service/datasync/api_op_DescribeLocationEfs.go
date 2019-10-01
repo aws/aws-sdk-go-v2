@@ -11,7 +11,6 @@ import (
 )
 
 // DescribeLocationEfsRequest
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationEfsRequest
 type DescribeLocationEfsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -41,7 +40,6 @@ func (s *DescribeLocationEfsInput) Validate() error {
 }
 
 // DescribeLocationEfsResponse
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationEfsResponse
 type DescribeLocationEfsOutput struct {
 	_ struct{} `type:"structure"`
 

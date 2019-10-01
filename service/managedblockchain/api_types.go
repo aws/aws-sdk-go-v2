@@ -18,7 +18,6 @@ var _ = awsutil.Prettify
 // if a proposal is approved. Approval may be based on criteria such as the
 // percentage of YES votes and the duration of the proposal. The policy applies
 // to all proposals and is specified when the network is created.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ApprovalThresholdPolicy
 type ApprovalThresholdPolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -83,7 +82,6 @@ func (s ApprovalThresholdPolicy) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An invitation to an AWS account to create a member and join the network.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/Invitation
 type Invitation struct {
 	_ struct{} `type:"structure"`
 
@@ -164,7 +162,6 @@ func (s Invitation) MarshalFields(e protocol.FieldEncoder) error {
 
 // An action to invite a specific AWS account to create a member and join the
 // network. The InviteAction is carried out when a Proposal is APPROVED.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/InviteAction
 type InviteAction struct {
 	_ struct{} `type:"structure"`
 
@@ -205,7 +202,6 @@ func (s InviteAction) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Member configuration properties.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/Member
 type Member struct {
 	_ struct{} `type:"structure"`
 
@@ -303,7 +299,6 @@ func (s Member) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Configuration properties of the member.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/MemberConfiguration
 type MemberConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -377,7 +372,6 @@ func (s MemberConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 
 // Attributes of Hyperledger Fabric for a member in a Managed Blockchain network
 // using the Hyperledger Fabric framework.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/MemberFabricAttributes
 type MemberFabricAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -412,7 +406,6 @@ func (s MemberFabricAttributes) MarshalFields(e protocol.FieldEncoder) error {
 
 // Configuration properties for Hyperledger Fabric for a member in a Managed
 // Blockchain network using the Hyperledger Fabric framework.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/MemberFabricConfiguration
 type MemberFabricConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -423,7 +416,7 @@ type MemberFabricConfiguration struct {
 	// backward slash(\), @, or a space.
 	//
 	// AdminPassword is a required field
-	AdminPassword *string `min:"8" type:"string" required:"true"`
+	AdminPassword *string `min:"8" type:"string" required:"true" sensitive:"true"`
 
 	// The user name for the member's initial administrative user.
 	//
@@ -479,7 +472,6 @@ func (s MemberFabricConfiguration) MarshalFields(e protocol.FieldEncoder) error 
 
 // Attributes relevant to a member for the blockchain framework that the Managed
 // Blockchain network uses.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/MemberFrameworkAttributes
 type MemberFrameworkAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -506,7 +498,6 @@ func (s MemberFrameworkAttributes) MarshalFields(e protocol.FieldEncoder) error 
 
 // Configuration properties relevant to a member for the blockchain framework
 // that the Managed Blockchain network uses.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/MemberFrameworkConfiguration
 type MemberFrameworkConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -547,7 +538,6 @@ func (s MemberFrameworkConfiguration) MarshalFields(e protocol.FieldEncoder) err
 }
 
 // A summary of configuration properties for a member.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/MemberSummary
 type MemberSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -636,7 +626,6 @@ func (s MemberSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Network configuration properties.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/Network
 type Network struct {
 	_ struct{} `type:"structure"`
 
@@ -745,7 +734,6 @@ func (s Network) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Attributes of Hyperledger Fabric for a network.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NetworkFabricAttributes
 type NetworkFabricAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -780,7 +768,6 @@ func (s NetworkFabricAttributes) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Hyperledger Fabric configuration properties for the network.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NetworkFabricConfiguration
 type NetworkFabricConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -822,7 +809,6 @@ func (s NetworkFabricConfiguration) MarshalFields(e protocol.FieldEncoder) error
 
 // Attributes relevant to the network for the blockchain framework that the
 // network uses.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NetworkFrameworkAttributes
 type NetworkFrameworkAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -849,7 +835,6 @@ func (s NetworkFrameworkAttributes) MarshalFields(e protocol.FieldEncoder) error
 
 // Configuration properties relevant to the network for the blockchain framework
 // that the network uses.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NetworkFrameworkConfiguration
 type NetworkFrameworkConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -890,7 +875,6 @@ func (s NetworkFrameworkConfiguration) MarshalFields(e protocol.FieldEncoder) er
 }
 
 // A summary of network configuration properties.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NetworkSummary
 type NetworkSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -970,7 +954,6 @@ func (s NetworkSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Configuration properties of a peer node.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/Node
 type Node struct {
 	_ struct{} `type:"structure"`
 
@@ -1059,7 +1042,6 @@ func (s Node) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Configuration properties of a peer node.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NodeConfiguration
 type NodeConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1116,7 +1098,6 @@ func (s NodeConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 
 // Attributes of Hyperledger Fabric for a peer node on a Managed Blockchain
 // network that uses Hyperledger Fabric.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NodeFabricAttributes
 type NodeFabricAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -1152,7 +1133,6 @@ func (s NodeFabricAttributes) MarshalFields(e protocol.FieldEncoder) error {
 
 // Attributes relevant to a peer node on a Managed Blockchain network for the
 // blockchain framework that the network uses.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NodeFrameworkAttributes
 type NodeFrameworkAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -1178,7 +1158,6 @@ func (s NodeFrameworkAttributes) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A summary of configuration properties for a peer node.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NodeSummary
 type NodeSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1240,7 +1219,6 @@ func (s NodeSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Properties of a proposal on a Managed Blockchain network.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/Proposal
 type Proposal struct {
 	_ struct{} `type:"structure"`
 
@@ -1388,7 +1366,6 @@ func (s Proposal) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The actions to carry out if a proposal is APPROVED.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ProposalActions
 type ProposalActions struct {
 	_ struct{} `type:"structure"`
 
@@ -1461,7 +1438,6 @@ func (s ProposalActions) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Properties of a proposal.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ProposalSummary
 type ProposalSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1565,7 +1541,6 @@ func (s ProposalSummary) MarshalFields(e protocol.FieldEncoder) error {
 // An action to remove a member from a Managed Blockchain network as the result
 // of a removal proposal that is APPROVED. The member and all associated resources
 // are deleted from the network.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/RemoveAction
 type RemoveAction struct {
 	_ struct{} `type:"structure"`
 
@@ -1609,7 +1584,6 @@ func (s RemoveAction) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Properties of an individual vote that a member cast for a proposal.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/VoteSummary
 type VoteSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1652,7 +1626,6 @@ func (s VoteSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The voting rules for the network to decide if a proposal is accepted
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/VotingPolicy
 type VotingPolicy struct {
 	_ struct{} `type:"structure"`
 

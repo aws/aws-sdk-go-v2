@@ -10,24 +10,23 @@ import (
 )
 
 // Represents the request to change a user password.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ChangePasswordRequest
 type ChangePasswordInput struct {
 	_ struct{} `type:"structure"`
 
 	// The access token.
 	//
 	// AccessToken is a required field
-	AccessToken *string `type:"string" required:"true"`
+	AccessToken *string `type:"string" required:"true" sensitive:"true"`
 
 	// The old password.
 	//
 	// PreviousPassword is a required field
-	PreviousPassword *string `min:"6" type:"string" required:"true"`
+	PreviousPassword *string `min:"6" type:"string" required:"true" sensitive:"true"`
 
 	// The new password.
 	//
 	// ProposedPassword is a required field
-	ProposedPassword *string `min:"6" type:"string" required:"true"`
+	ProposedPassword *string `min:"6" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -64,7 +63,6 @@ func (s *ChangePasswordInput) Validate() error {
 }
 
 // The response from the server to the change password request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ChangePasswordResponse
 type ChangePasswordOutput struct {
 	_ struct{} `type:"structure"`
 }

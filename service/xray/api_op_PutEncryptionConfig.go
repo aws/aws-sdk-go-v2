@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutEncryptionConfigRequest
 type PutEncryptionConfigInput struct {
 	_ struct{} `type:"structure"`
 
@@ -74,7 +73,6 @@ func (s PutEncryptionConfigInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutEncryptionConfigResult
 type PutEncryptionConfigOutput struct {
 	_ struct{} `type:"structure"`
 

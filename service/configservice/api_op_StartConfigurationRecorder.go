@@ -12,7 +12,6 @@ import (
 )
 
 // The input for the StartConfigurationRecorder action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartConfigurationRecorderRequest
 type StartConfigurationRecorderInput struct {
 	_ struct{} `type:"structure"`
 
@@ -45,7 +44,6 @@ func (s *StartConfigurationRecorderInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartConfigurationRecorderOutput
 type StartConfigurationRecorderOutput struct {
 	_ struct{} `type:"structure"`
 }

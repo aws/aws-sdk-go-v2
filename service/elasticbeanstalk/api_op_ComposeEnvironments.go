@@ -10,7 +10,6 @@ import (
 )
 
 // Request to create or update a group of environments.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ComposeEnvironmentsMessage
 type ComposeEnvironmentsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -54,7 +53,6 @@ func (s *ComposeEnvironmentsInput) Validate() error {
 }
 
 // Result message containing a list of environment descriptions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentDescriptionsMessage
 type ComposeEnvironmentsOutput struct {
 	_ struct{} `type:"structure"`
 

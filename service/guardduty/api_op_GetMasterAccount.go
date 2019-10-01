@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMasterAccountRequest
 type GetMasterAccountInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s GetMasterAccountInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMasterAccountResponse
 type GetMasterAccountOutput struct {
 	_ struct{} `type:"structure"`
 

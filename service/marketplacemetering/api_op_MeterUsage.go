@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/MeterUsageRequest
 type MeterUsageInput struct {
 	_ struct{} `type:"structure"`
 
@@ -76,7 +75,6 @@ func (s *MeterUsageInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/MeterUsageResult
 type MeterUsageOutput struct {
 	_ struct{} `type:"structure"`
 

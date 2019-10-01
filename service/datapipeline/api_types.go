@@ -15,7 +15,6 @@ var _ = awsutil.Prettify
 // A key-value pair that describes a property of a pipeline object. The value
 // is specified as either a string value (StringValue) or a reference to another
 // object (RefValue) but not as both.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/Field
 type Field struct {
 	_ struct{} `type:"structure"`
 
@@ -62,7 +61,6 @@ func (s *Field) Validate() error {
 // in the Amazon Elastic Compute Cloud User Guide. Passing in this value proves
 // that your task runner is running on an EC2 instance, and ensures the proper
 // AWS Data Pipeline service charges are applied to your pipeline.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/InstanceIdentity
 type InstanceIdentity struct {
 	_ struct{} `type:"structure"`
 
@@ -83,7 +81,6 @@ func (s InstanceIdentity) String() string {
 
 // Contains a logical operation for comparing the value of a field with a specified
 // value.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/Operator
 type Operator struct {
 	_ struct{} `type:"structure"`
 
@@ -142,7 +139,6 @@ func (s Operator) String() string {
 }
 
 // The attributes allowed or specified with a parameter object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ParameterAttribute
 type ParameterAttribute struct {
 	_ struct{} `type:"structure"`
 
@@ -184,7 +180,6 @@ func (s *ParameterAttribute) Validate() error {
 }
 
 // Contains information about a parameter object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ParameterObject
 type ParameterObject struct {
 	_ struct{} `type:"structure"`
 
@@ -233,7 +228,6 @@ func (s *ParameterObject) Validate() error {
 }
 
 // A value or list of parameter values.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ParameterValue
 type ParameterValue struct {
 	_ struct{} `type:"structure"`
 
@@ -275,7 +269,6 @@ func (s *ParameterValue) Validate() error {
 }
 
 // Contains pipeline metadata.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/PipelineDescription
 type PipelineDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -312,7 +305,6 @@ func (s PipelineDescription) String() string {
 }
 
 // Contains the name and identifier of a pipeline.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/PipelineIdName
 type PipelineIdName struct {
 	_ struct{} `type:"structure"`
 
@@ -332,7 +324,6 @@ func (s PipelineIdName) String() string {
 // Contains information about a pipeline object. This can be a logical, physical,
 // or physical attempt pipeline object. The complete set of components of a
 // pipeline defines the pipeline.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/PipelineObject
 type PipelineObject struct {
 	_ struct{} `type:"structure"`
 
@@ -393,7 +384,6 @@ func (s *PipelineObject) Validate() error {
 }
 
 // Defines the query to run against an object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/Query
 type Query struct {
 	_ struct{} `type:"structure"`
 
@@ -409,7 +399,6 @@ func (s Query) String() string {
 
 // A comparision that is used to determine whether a query should return this
 // object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/Selector
 type Selector struct {
 	_ struct{} `type:"structure"`
 
@@ -434,7 +423,6 @@ func (s Selector) String() string {
 // pipeline. For more information, see Controlling User Access to Pipelines
 // (http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
 // in the AWS Data Pipeline Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -480,7 +468,6 @@ func (s *Tag) Validate() error {
 }
 
 // Contains information about a pipeline task that is assigned to a task runner.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/TaskObject
 type TaskObject struct {
 	_ struct{} `type:"structure"`
 
@@ -508,7 +495,6 @@ func (s TaskObject) String() string {
 // Defines a validation error. Validation errors prevent pipeline activation.
 // The set of validation errors that can be returned are defined by AWS Data
 // Pipeline.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ValidationError
 type ValidationError struct {
 	_ struct{} `type:"structure"`
 
@@ -527,7 +513,6 @@ func (s ValidationError) String() string {
 // Defines a validation warning. Validation warnings do not prevent pipeline
 // activation. The set of validation warnings that can be returned are defined
 // by AWS Data Pipeline.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ValidationWarning
 type ValidationWarning struct {
 	_ struct{} `type:"structure"`
 

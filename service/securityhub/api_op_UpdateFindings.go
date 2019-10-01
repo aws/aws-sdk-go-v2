@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateFindingsRequest
 type UpdateFindingsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -75,7 +74,6 @@ func (s UpdateFindingsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateFindingsResponse
 type UpdateFindingsOutput struct {
 	_ struct{} `type:"structure"`
 }

@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a PutItem operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PutItemInput
 type PutItemInput struct {
 	_ struct{} `type:"structure"`
 
@@ -189,7 +188,6 @@ func (s *PutItemInput) Validate() error {
 }
 
 // Represents the output of a PutItem operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PutItemOutput
 type PutItemOutput struct {
 	_ struct{} `type:"structure"`
 

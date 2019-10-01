@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for DescribeLoadBalancers.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeAccessPointsInput
 type DescribeLoadBalancersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -45,7 +44,6 @@ func (s *DescribeLoadBalancersInput) Validate() error {
 }
 
 // Contains the parameters for DescribeLoadBalancers.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeAccessPointsOutput
 type DescribeLoadBalancersOutput struct {
 	_ struct{} `type:"structure"`
 

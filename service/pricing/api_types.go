@@ -12,7 +12,6 @@ var _ = awsutil.Prettify
 
 // The values of a given attribute, such as Throughput Optimized HDD or Provisioned
 // IOPS for the Amazon EC2 volumeType attribute.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/AttributeValue
 type AttributeValue struct {
 	_ struct{} `type:"structure"`
 
@@ -26,7 +25,6 @@ func (s AttributeValue) String() string {
 }
 
 // The constraints that you want all returned products to match.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/Filter
 type Filter struct {
 	_ struct{} `type:"structure"`
 
@@ -89,7 +87,6 @@ func (s *Filter) Validate() error {
 
 // The metadata for a service, such as the service code and available attribute
 // names.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/Service
 type Service struct {
 	_ struct{} `type:"structure"`
 

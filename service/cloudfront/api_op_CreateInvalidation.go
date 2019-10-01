@@ -11,7 +11,6 @@ import (
 )
 
 // The request to create an invalidation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateInvalidationRequest
 type CreateInvalidationInput struct {
 	_ struct{} `type:"structure" payload:"InvalidationBatch"`
 
@@ -73,7 +72,6 @@ func (s CreateInvalidationInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateInvalidationResult
 type CreateInvalidationOutput struct {
 	_ struct{} `type:"structure" payload:"Invalidation"`
 

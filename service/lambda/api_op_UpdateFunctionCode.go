@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCodeRequest
 type UpdateFunctionCodeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -57,7 +56,7 @@ type UpdateFunctionCodeInput struct {
 	// clients handle the encoding for you.
 	//
 	// ZipFile is automatically base64 encoded/decoded by the SDK.
-	ZipFile []byte `type:"blob"`
+	ZipFile []byte `type:"blob" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -147,7 +146,6 @@ func (s UpdateFunctionCodeInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Details about a function's configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionConfiguration
 type UpdateFunctionCodeOutput struct {
 	_ struct{} `type:"structure"`
 

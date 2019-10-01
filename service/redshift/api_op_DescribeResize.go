@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeResizeMessage
 type DescribeResizeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *DescribeResizeInput) Validate() error {
 }
 
 // Describes the result of a cluster resize operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeProgressMessage
 type DescribeResizeOutput struct {
 	_ struct{} `type:"structure"`
 

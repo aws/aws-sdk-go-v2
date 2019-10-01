@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the request to create the user import job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserImportJobRequest
 type CreateUserImportJobInput struct {
 	_ struct{} `type:"structure"`
 
@@ -68,7 +67,6 @@ func (s *CreateUserImportJobInput) Validate() error {
 
 // Represents the response from the server to the request to create the user
 // import job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserImportJobResponse
 type CreateUserImportJobOutput struct {
 	_ struct{} `type:"structure"`
 

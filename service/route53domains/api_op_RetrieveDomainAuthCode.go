@@ -11,7 +11,6 @@ import (
 
 // A request for the authorization code for the specified domain. To transfer
 // a domain to another registrar, you provide this value to the new registrar.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RetrieveDomainAuthCodeRequest
 type RetrieveDomainAuthCodeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -41,14 +40,13 @@ func (s *RetrieveDomainAuthCodeInput) Validate() error {
 }
 
 // The RetrieveDomainAuthCode response includes the following element.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RetrieveDomainAuthCodeResponse
 type RetrieveDomainAuthCodeOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The authorization code for the domain.
 	//
 	// AuthCode is a required field
-	AuthCode *string `type:"string" required:"true"`
+	AuthCode *string `type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation

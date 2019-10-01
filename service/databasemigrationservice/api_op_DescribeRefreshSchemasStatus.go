@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeRefreshSchemasStatusMessage
 type DescribeRefreshSchemasStatusInput struct {
 	_ struct{} `type:"structure"`
 
@@ -38,7 +37,6 @@ func (s *DescribeRefreshSchemasStatusInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeRefreshSchemasStatusResponse
 type DescribeRefreshSchemasStatusOutput struct {
 	_ struct{} `type:"structure"`
 

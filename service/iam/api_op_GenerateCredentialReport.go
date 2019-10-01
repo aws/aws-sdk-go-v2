@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GenerateCredentialReportInput
 type GenerateCredentialReportInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -20,7 +19,6 @@ func (s GenerateCredentialReportInput) String() string {
 }
 
 // Contains the response to a successful GenerateCredentialReport request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GenerateCredentialReportResponse
 type GenerateCredentialReportOutput struct {
 	_ struct{} `type:"structure"`
 

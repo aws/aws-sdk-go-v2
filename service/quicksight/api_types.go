@@ -14,7 +14,6 @@ var _ = awsutil.Prettify
 // A group in Amazon QuickSight consists of a set of users. You can use groups
 // to make it easier to manage access and security. Currently, an Amazon QuickSight
 // subscription can't contain more than 500 Amazon QuickSight groups.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Group
 type Group struct {
 	_ struct{} `type:"structure"`
 
@@ -67,7 +66,6 @@ func (s Group) MarshalFields(e protocol.FieldEncoder) error {
 
 // A member of an Amazon QuickSight group. Currently, group members must be
 // users. Groups can't be members of another group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GroupMember
 type GroupMember struct {
 	_ struct{} `type:"structure"`
 
@@ -102,7 +100,6 @@ func (s GroupMember) MarshalFields(e protocol.FieldEncoder) error {
 
 // A registered user of Amazon QuickSight. Currently, an Amazon QuickSight subscription
 // can't contain more than 20 million users.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/User
 type User struct {
 	_ struct{} `type:"structure"`
 

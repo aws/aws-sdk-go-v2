@@ -10,17 +10,32 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteInvitationsRequest
 type DeleteInvitationsInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of the account IDs that sent the invitations to delete.
-	AccountIds []string `type:"list"`
+	//
+	// AccountIds is a required field
+	AccountIds []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
 func (s DeleteInvitationsInput) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteInvitationsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteInvitationsInput"}
+
+	if s.AccountIds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AccountIds"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -42,7 +57,6 @@ func (s DeleteInvitationsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteInvitationsResponse
 type DeleteInvitationsOutput struct {
 	_ struct{} `type:"structure"`
 

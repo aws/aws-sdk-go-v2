@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunInstancesRequest
 type RunInstancesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -294,7 +293,6 @@ func (s *RunInstancesInput) Validate() error {
 }
 
 // Describes a reservation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Reservation
 type RunInstancesOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -58,7 +58,9 @@ func TestPagination(t *testing.T) {
 		},
 	}
 
-	retryer := aws.DefaultRetryer{NumMaxRetries: 2}
+	retryer := aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 2
+	})
 	op := aws.Operation{
 		Name: "Operation",
 		Paginator: &aws.Paginator{
@@ -160,7 +162,9 @@ func TestPaginationTruncation(t *testing.T) {
 	}
 
 	reqNum := 0
-	retryer := aws.DefaultRetryer{NumMaxRetries: 2}
+	retryer := aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 2
+	})
 	ops := []aws.Operation{
 		{
 			Name: "Operation",
@@ -271,7 +275,9 @@ func BenchmarkPagination(b *testing.B) {
 		{aws.String("3"), aws.String("")},
 	}
 
-	retryer := aws.DefaultRetryer{NumMaxRetries: 2}
+	retryer := aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 2
+	})
 	op := aws.Operation{
 		Name: "Operation",
 		Paginator: &aws.Paginator{
@@ -339,7 +345,9 @@ func TestPaginationWithContextCancel(t *testing.T) {
 		},
 	}
 
-	retryer := aws.DefaultRetryer{NumMaxRetries: 2}
+	retryer := aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 2
+	})
 	op := aws.Operation{
 		Name: "Operation",
 		Paginator: &aws.Paginator{
@@ -350,7 +358,7 @@ func TestPaginationWithContextCancel(t *testing.T) {
 
 	for _, c := range cases {
 		input := c.input
-		inValues := []string{}
+		var inValues []string
 		p := aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				h := defaults.Handlers()
@@ -380,7 +388,7 @@ func TestPaginationWithContextCancel(t *testing.T) {
 		ctx, cancelFn := context.WithCancel(context.Background())
 		cancelFn()
 
-		results := []*string{}
+		var results []*string
 		for p.Next(ctx) {
 			page := p.CurrentPage()
 			output := page.(*mockOutput)

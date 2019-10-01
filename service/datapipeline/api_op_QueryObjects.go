@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for QueryObjects.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/QueryObjectsInput
 type QueryObjectsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -69,7 +68,6 @@ func (s *QueryObjectsInput) Validate() error {
 }
 
 // Contains the output of QueryObjects.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/QueryObjectsOutput
 type QueryObjectsOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListAcceptedPortfolioSharesInput
 type ListAcceptedPortfolioSharesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -45,7 +44,6 @@ func (s ListAcceptedPortfolioSharesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListAcceptedPortfolioSharesOutput
 type ListAcceptedPortfolioSharesOutput struct {
 	_ struct{} `type:"structure"`
 

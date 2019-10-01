@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetGroupsRequest
 type GetGroupsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -49,7 +48,6 @@ func (s GetGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetGroupsResult
 type GetGroupsOutput struct {
 	_ struct{} `type:"structure"`
 

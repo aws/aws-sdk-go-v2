@@ -11,7 +11,6 @@ import (
 )
 
 // A request to configure the custom MAIL FROM domain for a verified identity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutEmailIdentityMailFromAttributesRequest
 type PutEmailIdentityMailFromAttributesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -89,7 +88,6 @@ func (s PutEmailIdentityMailFromAttributesInput) MarshalFields(e protocol.FieldE
 
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutEmailIdentityMailFromAttributesResponse
 type PutEmailIdentityMailFromAttributesOutput struct {
 	_ struct{} `type:"structure"`
 }

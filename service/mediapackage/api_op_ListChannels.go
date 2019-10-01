@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/ListChannelsRequest
 type ListChannelsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s ListChannelsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/ListChannelsResponse
 type ListChannelsOutput struct {
 	_ struct{} `type:"structure"`
 

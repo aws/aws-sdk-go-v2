@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // The details of the bundle.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/BundleDetails
 type BundleDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -90,7 +89,6 @@ func (s BundleDetails) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Detailed information about an AWS Mobile Hub project.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ProjectDetails
 type ProjectDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -186,7 +184,6 @@ func (s ProjectDetails) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Summary information about an AWS Mobile Hub project.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ProjectSummary
 type ProjectSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -220,7 +217,6 @@ func (s ProjectSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about an instance of an AWS resource associated with a project.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/Resource
 type Resource struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/GetTagsRequest
 type GetTagsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +49,6 @@ func (s GetTagsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/GetTagsResponse
 type GetTagsOutput struct {
 	_ struct{} `type:"structure"`
 

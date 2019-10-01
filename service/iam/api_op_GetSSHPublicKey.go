@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSSHPublicKeyRequest
 type GetSSHPublicKeyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -72,7 +71,6 @@ func (s *GetSSHPublicKeyInput) Validate() error {
 }
 
 // Contains the response to a successful GetSSHPublicKey request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSSHPublicKeyResponse
 type GetSSHPublicKeyOutput struct {
 	_ struct{} `type:"structure"`
 

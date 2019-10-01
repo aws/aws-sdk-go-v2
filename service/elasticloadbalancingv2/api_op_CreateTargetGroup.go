@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateTargetGroupInput
 type CreateTargetGroupInput struct {
 	_ struct{} `type:"structure"`
 
@@ -105,7 +104,7 @@ type CreateTargetGroupInput struct {
 	UnhealthyThresholdCount *int64 `min:"2" type:"integer"`
 
 	// The identifier of the virtual private cloud (VPC). If the target is a Lambda
-	// function, this parameter does not apply.
+	// function, this parameter does not apply. Otherwise, this parameter is required.
 	VpcId *string `type:"string"`
 }
 
@@ -151,7 +150,6 @@ func (s *CreateTargetGroupInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateTargetGroupOutput
 type CreateTargetGroupOutput struct {
 	_ struct{} `type:"structure"`
 

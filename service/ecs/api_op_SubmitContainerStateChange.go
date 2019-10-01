@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitContainerStateChangeRequest
 type SubmitContainerStateChangeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -28,6 +27,9 @@ type SubmitContainerStateChangeInput struct {
 	// The reason for the state change request.
 	Reason *string `locationName:"reason" type:"string"`
 
+	// The ID of the Docker container.
+	RuntimeId *string `locationName:"runtimeId" type:"string"`
+
 	// The status of the state change request.
 	Status *string `locationName:"status" type:"string"`
 
@@ -41,7 +43,6 @@ func (s SubmitContainerStateChangeInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitContainerStateChangeResponse
 type SubmitContainerStateChangeOutput struct {
 	_ struct{} `type:"structure"`
 

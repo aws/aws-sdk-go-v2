@@ -10,7 +10,6 @@ import (
 )
 
 // Represents a request to the delete upload operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteUploadRequest
 type DeleteUploadInput struct {
 	_ struct{} `type:"structure"`
 
@@ -44,7 +43,6 @@ func (s *DeleteUploadInput) Validate() error {
 }
 
 // Represents the result of a delete upload request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteUploadResult
 type DeleteUploadOutput struct {
 	_ struct{} `type:"structure"`
 }

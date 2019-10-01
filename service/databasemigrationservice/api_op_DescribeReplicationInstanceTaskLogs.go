@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationInstanceTaskLogsMessage
 type DescribeReplicationInstanceTaskLogsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +51,6 @@ func (s *DescribeReplicationInstanceTaskLogsInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationInstanceTaskLogsResponse
 type DescribeReplicationInstanceTaskLogsOutput struct {
 	_ struct{} `type:"structure"`
 

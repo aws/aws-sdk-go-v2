@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3Message
 type RestoreDBInstanceFromS3Input struct {
 	_ struct{} `type:"structure"`
 
@@ -81,9 +80,10 @@ type RestoreDBInstanceFromS3Input struct {
 	// the naming rules specified in CreateDBInstance.
 	DBName *string `type:"string"`
 
-	// The name of the DB parameter group to associate with this DB instance. If
-	// this argument is omitted, the default parameter group for the specified engine
-	// is used.
+	// The name of the DB parameter group to associate with this DB instance.
+	//
+	// If you do not specify a value for DBParameterGroupName, then the default
+	// DBParameterGroup for the specified DB engine is used.
 	DBParameterGroupName *string `type:"string"`
 
 	// A list of DB security groups to associate with this DB instance.
@@ -369,7 +369,6 @@ func (s *RestoreDBInstanceFromS3Input) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3Result
 type RestoreDBInstanceFromS3Output struct {
 	_ struct{} `type:"structure"`
 

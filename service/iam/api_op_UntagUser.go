@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UntagUserRequest
 type UntagUserInput struct {
 	_ struct{} `type:"structure"`
 
@@ -57,7 +56,6 @@ func (s *UntagUserInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UntagUserOutput
 type UntagUserOutput struct {
 	_ struct{} `type:"structure"`
 }

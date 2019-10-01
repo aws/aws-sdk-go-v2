@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ChangePasswordRequest
 type ChangePasswordInput struct {
 	_ struct{} `type:"structure"`
 
@@ -28,12 +27,12 @@ type ChangePasswordInput struct {
 	// because they have special meaning within that tool.
 	//
 	// NewPassword is a required field
-	NewPassword *string `min:"1" type:"string" required:"true"`
+	NewPassword *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The IAM user's current password.
 	//
 	// OldPassword is a required field
-	OldPassword *string `min:"1" type:"string" required:"true"`
+	OldPassword *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -65,7 +64,6 @@ func (s *ChangePasswordInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ChangePasswordOutput
 type ChangePasswordOutput struct {
 	_ struct{} `type:"structure"`
 }

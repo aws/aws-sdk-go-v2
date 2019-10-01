@@ -11,7 +11,6 @@ import (
 )
 
 // Request structure for delete branch request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteBranchRequest
 type DeleteBranchInput struct {
 	_ struct{} `type:"structure"`
 
@@ -75,7 +74,6 @@ func (s DeleteBranchInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Result structure for delete branch request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteBranchResult
 type DeleteBranchOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -16,7 +16,6 @@ var _ = awsutil.Prettify
 // includes the following: the server Amazon Resource Name (ARN), the authentication
 // configuration and type, the logging role, the server ID and state, and assigned
 // tags or metadata.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedServer
 type DescribedServer struct {
 	_ struct{} `type:"structure"`
 
@@ -84,7 +83,6 @@ func (s DescribedServer) String() string {
 }
 
 // Returns properties of the user that you want to describe.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedUser
 type DescribedUser struct {
 	_ struct{} `type:"structure"`
 
@@ -131,7 +129,6 @@ func (s DescribedUser) String() string {
 
 // The configuration settings for the virtual private cloud (VPC) endpoint for
 // your SFTP server.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/EndpointDetails
 type EndpointDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -146,7 +143,6 @@ func (s EndpointDetails) String() string {
 
 // Returns information related to the type of user authentication that is in
 // use for a server's users. A server can have only one method of authentication.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/IdentityProviderDetails
 type IdentityProviderDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -165,7 +161,6 @@ func (s IdentityProviderDetails) String() string {
 }
 
 // Returns properties of the server that was specified.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListedServer
 type ListedServer struct {
 	_ struct{} `type:"structure"`
 
@@ -214,7 +209,6 @@ func (s ListedServer) String() string {
 }
 
 // Returns properties of the user that you specify.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListedUser
 type ListedUser struct {
 	_ struct{} `type:"structure"`
 
@@ -252,7 +246,6 @@ func (s ListedUser) String() string {
 // information returned includes the date the key was imported, the public key
 // contents, and the public key ID. A user can store more than one SSH public
 // key associated with their user name on a specific SFTP server.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/SshPublicKey
 type SshPublicKey struct {
 	_ struct{} `type:"structure"`
 
@@ -283,7 +276,6 @@ func (s SshPublicKey) String() string {
 // one value. For example, to group servers for accounting purposes, you might
 // create a tag called Group and assign the values Research and Accounting to
 // that group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 

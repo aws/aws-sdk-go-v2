@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseMasterUserPasswordRequest
 type GetRelationalDatabaseMasterUserPasswordInput struct {
 	_ struct{} `type:"structure"`
 
@@ -49,7 +48,6 @@ func (s *GetRelationalDatabaseMasterUserPasswordInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseMasterUserPasswordResult
 type GetRelationalDatabaseMasterUserPasswordOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -58,7 +56,7 @@ type GetRelationalDatabaseMasterUserPasswordOutput struct {
 	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The master user password for the password version specified.
-	MasterUserPassword *string `locationName:"masterUserPassword" type:"string"`
+	MasterUserPassword *string `locationName:"masterUserPassword" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation

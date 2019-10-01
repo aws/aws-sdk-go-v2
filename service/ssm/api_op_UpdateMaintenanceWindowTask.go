@@ -10,12 +10,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowTaskRequest
 type UpdateMaintenanceWindowTaskInput struct {
 	_ struct{} `type:"structure"`
 
 	// The new task description to specify.
-	Description *string `min:"1" type:"string"`
+	Description *string `min:"1" type:"string" sensitive:"true"`
 
 	// The new logging location in Amazon S3 to specify.
 	//
@@ -83,7 +82,7 @@ type UpdateMaintenanceWindowTaskInput struct {
 	// Key: string, between 1 and 255 characters
 	//
 	// Value: an array of strings, each string is between 1 and 255 characters
-	TaskParameters map[string]MaintenanceWindowTaskParameterValueExpression `type:"map"`
+	TaskParameters map[string]MaintenanceWindowTaskParameterValueExpression `type:"map" sensitive:"true"`
 
 	// The maintenance window ID that contains the task to modify.
 	//
@@ -157,12 +156,11 @@ func (s *UpdateMaintenanceWindowTaskInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowTaskResult
 type UpdateMaintenanceWindowTaskOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The updated task description.
-	Description *string `min:"1" type:"string"`
+	Description *string `min:"1" type:"string" sensitive:"true"`
 
 	// The updated logging information in Amazon S3.
 	//
@@ -203,7 +201,7 @@ type UpdateMaintenanceWindowTaskOutput struct {
 	// when it runs, instead use the Parameters option in the TaskInvocationParameters
 	// structure. For information about how Systems Manager handles these options
 	// for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
-	TaskParameters map[string]MaintenanceWindowTaskParameterValueExpression `type:"map"`
+	TaskParameters map[string]MaintenanceWindowTaskParameterValueExpression `type:"map" sensitive:"true"`
 
 	// The ID of the maintenance window that was updated.
 	WindowId *string `min:"20" type:"string"`

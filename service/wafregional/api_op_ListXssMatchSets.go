@@ -11,7 +11,6 @@ import (
 )
 
 // A request to list the XssMatchSet objects created by the current AWS account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListXssMatchSetsRequest
 type ListXssMatchSetsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -48,7 +47,6 @@ func (s *ListXssMatchSetsInput) Validate() error {
 }
 
 // The response to a ListXssMatchSets request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListXssMatchSetsResponse
 type ListXssMatchSetsOutput struct {
 	_ struct{} `type:"structure"`
 

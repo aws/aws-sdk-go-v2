@@ -10,7 +10,6 @@ import (
 )
 
 // Input for Subscribe action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SubscribeInput
 type SubscribeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -120,7 +119,6 @@ func (s *SubscribeInput) Validate() error {
 }
 
 // Response for Subscribe action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SubscribeResponse
 type SubscribeOutput struct {
 	_ struct{} `type:"structure"`
 

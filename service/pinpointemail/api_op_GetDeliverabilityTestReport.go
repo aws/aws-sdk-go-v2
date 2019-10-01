@@ -11,7 +11,6 @@ import (
 )
 
 // A request to retrieve the results of a predictive inbox placement test.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDeliverabilityTestReportRequest
 type GetDeliverabilityTestReportInput struct {
 	_ struct{} `type:"structure"`
 
@@ -54,7 +53,6 @@ func (s GetDeliverabilityTestReportInput) MarshalFields(e protocol.FieldEncoder)
 }
 
 // The results of the predictive inbox placement test.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDeliverabilityTestReportResponse
 type GetDeliverabilityTestReportOutput struct {
 	_ struct{} `type:"structure"`
 

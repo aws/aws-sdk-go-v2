@@ -23,7 +23,6 @@ var _ = awsutil.Prettify
 // such as GetDocumentAnalysis, the array is returned over one or more responses.
 //
 // For more information, see How Amazon Textract Works (https://docs.aws.amazon.com/textract/latest/dg/how-it-works.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/Block
 type Block struct {
 	_ struct{} `type:"structure"`
 
@@ -149,7 +148,6 @@ func (s Block) String() string {
 // as a ratio of the overall document page dimension. For example, if the document
 // page size is 700 x 200 pixels, and the bounding box width is 70 pixels, the
 // width returned is 0.1.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/BoundingBox
 type BoundingBox struct {
 	_ struct{} `type:"structure"`
 
@@ -195,7 +193,6 @@ func (s BoundingBox) String() string {
 //
 // For Amazon Textract to process an S3 object, the user must have permission
 // to access the S3 object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/Document
 type Document struct {
 	_ struct{} `type:"structure"`
 
@@ -242,7 +239,6 @@ func (s *Document) Validate() error {
 //
 // The input document can be an image file in JPG or PNG format. It can also
 // be a file in PDF format.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/DocumentLocation
 type DocumentLocation struct {
 	_ struct{} `type:"structure"`
 
@@ -271,7 +267,6 @@ func (s *DocumentLocation) Validate() error {
 }
 
 // Information about the input document.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/DocumentMetadata
 type DocumentMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -286,7 +281,6 @@ func (s DocumentMetadata) String() string {
 
 // Information about where a recognized text, key, value, table, or table cell
 // is located on a document page.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/Geometry
 type Geometry struct {
 	_ struct{} `type:"structure"`
 
@@ -306,7 +300,6 @@ func (s Geometry) String() string {
 // The Amazon Simple Notification Service (Amazon SNS) topic to which Amazon
 // Textract publishes the completion status of an asynchronous document operation,
 // such as StartDocumentTextDetection.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/NotificationChannel
 type NotificationChannel struct {
 	_ struct{} `type:"structure"`
 
@@ -359,7 +352,6 @@ func (s *NotificationChannel) Validate() error {
 // An array of Point objects, Polygon, is returned by DetectDocumentText. Polygon
 // represents a fine-grained polygon around detected text. For more information,
 // see Geometry in the Amazon Textract Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/Point
 type Point struct {
 	_ struct{} `type:"structure"`
 
@@ -381,7 +373,6 @@ func (s Point) String() string {
 //
 // The Type element provides the type of the relationship for all blocks in
 // the IDs array.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/Relationship
 type Relationship struct {
 	_ struct{} `type:"structure"`
 
@@ -406,7 +397,6 @@ func (s Relationship) String() string {
 //
 // For Amazon Textract to process a file in an S3 bucket, the user must have
 // permission to access the S3 bucket and file.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/S3Object
 type S3Object struct {
 	_ struct{} `type:"structure"`
 
@@ -447,7 +437,6 @@ func (s *S3Object) Validate() error {
 
 // A warning about an issue that occurred during asynchronous text analysis
 // (StartDocumentAnalysis) or asynchronous document-text detection (StartDocumentTextDetection).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/Warning
 type Warning struct {
 	_ struct{} `type:"structure"`
 

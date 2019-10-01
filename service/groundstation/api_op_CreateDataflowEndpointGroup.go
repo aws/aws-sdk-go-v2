@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/CreateDataflowEndpointGroupRequest
 type CreateDataflowEndpointGroupInput struct {
 	_ struct{} `type:"structure"`
 
@@ -78,7 +77,6 @@ func (s CreateDataflowEndpointGroupInput) MarshalFields(e protocol.FieldEncoder)
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/DataflowEndpointGroupIdResponse
 type CreateDataflowEndpointGroupOutput struct {
 	_ struct{} `type:"structure"`
 

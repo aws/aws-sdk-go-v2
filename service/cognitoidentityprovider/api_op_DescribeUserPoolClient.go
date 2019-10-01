@@ -10,14 +10,13 @@ import (
 )
 
 // Represents the request to describe a user pool client.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPoolClientRequest
 type DescribeUserPoolClientInput struct {
 	_ struct{} `type:"structure"`
 
 	// The app client ID of the app associated with the user pool.
 	//
 	// ClientId is a required field
-	ClientId *string `min:"1" type:"string" required:"true"`
+	ClientId *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The user pool ID for the user pool you want to describe.
 	//
@@ -56,7 +55,6 @@ func (s *DescribeUserPoolClientInput) Validate() error {
 
 // Represents the response from the server from a request to describe the user
 // pool client.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPoolClientResponse
 type DescribeUserPoolClientOutput struct {
 	_ struct{} `type:"structure"`
 

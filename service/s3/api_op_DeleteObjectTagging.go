@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjectTaggingRequest
 type DeleteObjectTaggingInput struct {
 	_ struct{} `type:"structure"`
 
@@ -81,7 +80,6 @@ func (s DeleteObjectTaggingInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjectTaggingOutput
 type DeleteObjectTaggingOutput struct {
 	_ struct{} `type:"structure"`
 

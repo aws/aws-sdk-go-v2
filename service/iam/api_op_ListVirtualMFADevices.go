@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListVirtualMFADevicesRequest
 type ListVirtualMFADevicesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -58,7 +57,6 @@ func (s *ListVirtualMFADevicesInput) Validate() error {
 }
 
 // Contains the response to a successful ListVirtualMFADevices request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListVirtualMFADevicesResponse
 type ListVirtualMFADevicesOutput struct {
 	_ struct{} `type:"structure"`
 

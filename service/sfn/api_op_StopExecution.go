@@ -10,15 +10,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StopExecutionInput
 type StopExecutionInput struct {
 	_ struct{} `type:"structure"`
 
 	// A more detailed explanation of the cause of the failure.
-	Cause *string `locationName:"cause" type:"string"`
+	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
 
 	// The error code of the failure.
-	Error *string `locationName:"error" type:"string"`
+	Error *string `locationName:"error" type:"string" sensitive:"true"`
 
 	// The Amazon Resource Name (ARN) of the execution to stop.
 	//
@@ -48,7 +47,6 @@ func (s *StopExecutionInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StopExecutionOutput
 type StopExecutionOutput struct {
 	_ struct{} `type:"structure"`
 

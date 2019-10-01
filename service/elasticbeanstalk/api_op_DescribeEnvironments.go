@@ -11,7 +11,6 @@ import (
 )
 
 // Request to describe one or more environments.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentsMessage
 type DescribeEnvironmentsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -83,7 +82,6 @@ func (s *DescribeEnvironmentsInput) Validate() error {
 }
 
 // Result message containing a list of environment descriptions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentDescriptionsMessage
 type DescribeEnvironmentsOutput struct {
 	_ struct{} `type:"structure"`
 

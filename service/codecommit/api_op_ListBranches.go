@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a list branches operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListBranchesInput
 type ListBranchesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -46,7 +45,6 @@ func (s *ListBranchesInput) Validate() error {
 }
 
 // Represents the output of a list branches operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListBranchesOutput
 type ListBranchesOutput struct {
 	_ struct{} `type:"structure"`
 

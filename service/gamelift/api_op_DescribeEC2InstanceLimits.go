@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input for a request action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeEC2InstanceLimitsInput
 type DescribeEC2InstanceLimitsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -29,7 +28,6 @@ func (s DescribeEC2InstanceLimitsInput) String() string {
 }
 
 // Represents the returned data in response to a request action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeEC2InstanceLimitsOutput
 type DescribeEC2InstanceLimitsOutput struct {
 	_ struct{} `type:"structure"`
 

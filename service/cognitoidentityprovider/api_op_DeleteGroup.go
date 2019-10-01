@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteGroupRequest
 type DeleteGroupInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s *DeleteGroupInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteGroupOutput
 type DeleteGroupOutput struct {
 	_ struct{} `type:"structure"`
 }

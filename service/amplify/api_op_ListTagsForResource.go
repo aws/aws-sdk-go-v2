@@ -11,7 +11,6 @@ import (
 )
 
 // Request structure used to list tags for resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListTagsForResourceRequest
 type ListTagsForResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -54,7 +53,6 @@ func (s ListTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Response for list tags.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListTagsForResourceResponse
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 

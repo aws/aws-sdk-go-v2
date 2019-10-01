@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeletePublicAccessBlockRequest
 type DeletePublicAccessBlockInput struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s DeletePublicAccessBlockInput) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeletePublicAccessBlockOutput
 type DeletePublicAccessBlockOutput struct {
 	_ struct{} `type:"structure"`
 }

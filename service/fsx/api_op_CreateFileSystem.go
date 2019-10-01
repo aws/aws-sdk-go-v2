@@ -11,7 +11,6 @@ import (
 )
 
 // The request object used to create a new Amazon FSx file system.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemRequest
 type CreateFileSystemInput struct {
 	_ struct{} `type:"structure"`
 
@@ -123,7 +122,6 @@ func (s *CreateFileSystemInput) Validate() error {
 }
 
 // The response object returned after the file system is created.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemResponse
 type CreateFileSystemOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 )
 
 // Request to update an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateApplicationMessage
 type UpdateApplicationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -49,7 +48,6 @@ func (s *UpdateApplicationInput) Validate() error {
 }
 
 // Result message containing a single description of an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationDescriptionMessage
 type UpdateApplicationOutput struct {
 	_ struct{} `type:"structure"`
 

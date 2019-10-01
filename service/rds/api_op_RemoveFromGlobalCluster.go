@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveFromGlobalClusterMessage
 type RemoveFromGlobalClusterInput struct {
 	_ struct{} `type:"structure"`
 
@@ -26,7 +25,6 @@ func (s RemoveFromGlobalClusterInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveFromGlobalClusterResult
 type RemoveFromGlobalClusterOutput struct {
 	_ struct{} `type:"structure"`
 

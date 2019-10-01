@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DeleteStreamInput
 type DeleteStreamInput struct {
 	_ struct{} `type:"structure"`
 
@@ -72,7 +71,6 @@ func (s DeleteStreamInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DeleteStreamOutput
 type DeleteStreamOutput struct {
 	_ struct{} `type:"structure"`
 }

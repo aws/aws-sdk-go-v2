@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Describes an iSCSI cached volume.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CachediSCSIVolume
 type CachediSCSIVolume struct {
 	_ struct{} `type:"structure"`
 
@@ -86,7 +85,6 @@ func (s CachediSCSIVolume) String() string {
 
 // Describes Challenge-Handshake Authentication Protocol (CHAP) information
 // that supports authentication between your gateway and iSCSI initiators.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ChapInfo
 type ChapInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -95,11 +93,11 @@ type ChapInfo struct {
 
 	// The secret key that the initiator (for example, the Windows client) must
 	// provide to participate in mutual CHAP with the target.
-	SecretToAuthenticateInitiator *string `min:"1" type:"string"`
+	SecretToAuthenticateInitiator *string `min:"1" type:"string" sensitive:"true"`
 
 	// The secret key that the target must provide to participate in mutual CHAP
 	// with the initiator (e.g. Windows client).
-	SecretToAuthenticateTarget *string `min:"1" type:"string"`
+	SecretToAuthenticateTarget *string `min:"1" type:"string" sensitive:"true"`
 
 	// The Amazon Resource Name (ARN) of the volume.
 	//
@@ -114,7 +112,6 @@ func (s ChapInfo) String() string {
 }
 
 // Lists iSCSI information about a VTL device.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeviceiSCSIAttributes
 type DeviceiSCSIAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -138,7 +135,6 @@ func (s DeviceiSCSIAttributes) String() string {
 }
 
 // Represents a gateway's local disk.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/Disk
 type Disk struct {
 	_ struct{} `type:"structure"`
 
@@ -177,7 +173,6 @@ func (s Disk) String() string {
 }
 
 // Describes a file share.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/FileShareInfo
 type FileShareInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -195,7 +190,7 @@ type FileShareInfo struct {
 	FileShareType FileShareType `type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string `min:"50" type:"string"`
 }
 
@@ -205,7 +200,6 @@ func (s FileShareInfo) String() string {
 }
 
 // Describes a gateway object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/GatewayInfo
 type GatewayInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -216,7 +210,7 @@ type GatewayInfo struct {
 	Ec2InstanceRegion *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string `min:"50" type:"string"`
 
 	// The unique identifier assigned to your gateway during activation. This ID
@@ -247,7 +241,6 @@ func (s GatewayInfo) String() string {
 // Storage Gateway, the S3 objects that represent files and folders are assigned
 // these default Unix permissions. This operation is only supported for file
 // gateways.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/NFSFileShareDefaults
 type NFSFileShareDefaults struct {
 	_ struct{} `type:"structure"`
 
@@ -293,7 +286,6 @@ func (s *NFSFileShareDefaults) Validate() error {
 // The Unix file permissions and ownership information assigned, by default,
 // to native S3 objects when file gateway discovers them in S3 buckets. This
 // operation is only supported in file gateways.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/NFSFileShareInfo
 type NFSFileShareInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -317,7 +309,7 @@ type NFSFileShareInfo struct {
 	FileShareStatus *string `min:"3" type:"string"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string `min:"50" type:"string"`
 
 	// A value that enables guessing of the MIME type for uploaded objects based
@@ -390,7 +382,6 @@ func (s NFSFileShareInfo) String() string {
 }
 
 // Describes a gateway's network interface.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/NetworkInterface
 type NetworkInterface struct {
 	_ struct{} `type:"structure"`
 
@@ -415,7 +406,6 @@ func (s NetworkInterface) String() string {
 // The Windows file permissions and ownership information assigned, by default,
 // to native S3 objects when file gateway discovers them in S3 buckets. This
 // operation is only supported for file gateways.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SMBFileShareInfo
 type SMBFileShareInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -445,7 +435,7 @@ type SMBFileShareInfo struct {
 	FileShareStatus *string `min:"3" type:"string"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string `min:"50" type:"string"`
 
 	// A value that enables guessing of the MIME type for uploaded objects based
@@ -521,7 +511,6 @@ func (s SMBFileShareInfo) String() string {
 // Provides additional information about an error that was returned by the service
 // as an or. See the errorCode and errorDetails members for more information
 // about the error.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/StorageGatewayError
 type StorageGatewayError struct {
 	_ struct{} `type:"structure"`
 
@@ -538,7 +527,6 @@ func (s StorageGatewayError) String() string {
 }
 
 // Describes an iSCSI stored volume.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/StorediSCSIVolume
 type StorediSCSIVolume struct {
 	_ struct{} `type:"structure"`
 
@@ -622,7 +610,6 @@ func (s StorediSCSIVolume) String() string {
 // A key-value pair that helps you manage, filter, and search for your resource.
 // Allowed characters: letters, white space, and numbers, representable in UTF-8,
 // and the following characters: + - = . _ : /
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -664,7 +651,6 @@ func (s *Tag) Validate() error {
 }
 
 // Describes a virtual tape object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/Tape
 type Tape struct {
 	_ struct{} `type:"structure"`
 
@@ -718,7 +704,6 @@ func (s Tape) String() string {
 }
 
 // Represents a virtual tape that is archived in the virtual tape shelf (VTS).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/TapeArchive
 type TapeArchive struct {
 	_ struct{} `type:"structure"`
 
@@ -771,12 +756,11 @@ func (s TapeArchive) String() string {
 }
 
 // Describes a virtual tape.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/TapeInfo
 type TapeInfo struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string `min:"50" type:"string"`
 
 	// The ID of the pool that you want to add your tape to for archiving. The tape
@@ -807,7 +791,6 @@ func (s TapeInfo) String() string {
 }
 
 // Describes a recovery point.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/TapeRecoveryPointInfo
 type TapeRecoveryPointInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -834,7 +817,6 @@ func (s TapeRecoveryPointInfo) String() string {
 }
 
 // Represents a device object associated with a tape gateway.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/VTLDevice
 type VTLDevice struct {
 	_ struct{} `type:"structure"`
 
@@ -861,12 +843,11 @@ func (s VTLDevice) String() string {
 }
 
 // Describes a storage volume object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/VolumeInfo
 type VolumeInfo struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string `min:"50" type:"string"`
 
 	// The unique identifier assigned to your gateway during activation. This ID
@@ -912,7 +893,6 @@ func (s VolumeInfo) String() string {
 }
 
 // Describes a storage volume recovery point object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/VolumeRecoveryPointInfo
 type VolumeRecoveryPointInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -938,7 +918,6 @@ func (s VolumeRecoveryPointInfo) String() string {
 }
 
 // Lists iSCSI information about a volume.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/VolumeiSCSIAttributes
 type VolumeiSCSIAttributes struct {
 	_ struct{} `type:"structure"`
 

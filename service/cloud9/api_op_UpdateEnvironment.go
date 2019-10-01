@@ -9,12 +9,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/UpdateEnvironmentRequest
 type UpdateEnvironmentInput struct {
 	_ struct{} `type:"structure"`
 
 	// Any new or replacement description for the environment.
-	Description *string `locationName:"description" type:"string"`
+	Description *string `locationName:"description" type:"string" sensitive:"true"`
 
 	// The ID of the environment to change settings.
 	//
@@ -47,7 +46,6 @@ func (s *UpdateEnvironmentInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/UpdateEnvironmentResult
 type UpdateEnvironmentOutput struct {
 	_ struct{} `type:"structure"`
 }

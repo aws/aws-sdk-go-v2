@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/CreateEnvironmentEC2Request
 type CreateEnvironmentEC2Input struct {
 	_ struct{} `type:"structure"`
 
@@ -25,7 +24,7 @@ type CreateEnvironmentEC2Input struct {
 	ClientRequestToken *string `locationName:"clientRequestToken" type:"string"`
 
 	// The description of the environment to create.
-	Description *string `locationName:"description" type:"string"`
+	Description *string `locationName:"description" type:"string" sensitive:"true"`
 
 	// The type of instance to connect to the environment (for example, t2.micro).
 	//
@@ -81,7 +80,6 @@ func (s *CreateEnvironmentEC2Input) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/CreateEnvironmentEC2Result
 type CreateEnvironmentEC2Output struct {
 	_ struct{} `type:"structure"`
 

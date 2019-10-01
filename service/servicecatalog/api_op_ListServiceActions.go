@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListServiceActionsInput
 type ListServiceActionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -35,7 +34,6 @@ func (s ListServiceActionsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListServiceActionsOutput
 type ListServiceActionsOutput struct {
 	_ struct{} `type:"structure"`
 

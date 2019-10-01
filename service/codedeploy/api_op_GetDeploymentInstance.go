@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a GetDeploymentInstance operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentInstanceInput
 type GetDeploymentInstanceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -49,7 +48,6 @@ func (s *GetDeploymentInstanceInput) Validate() error {
 }
 
 // Represents the output of a GetDeploymentInstance operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentInstanceOutput
 type GetDeploymentInstanceOutput struct {
 	_ struct{} `type:"structure"`
 

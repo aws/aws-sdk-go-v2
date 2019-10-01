@@ -14,7 +14,6 @@ var _ = awsutil.Prettify
 
 // The identifiers for the temporary security credentials that the operation
 // returns.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumedRoleUser
 type AssumedRoleUser struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s AssumedRoleUser) String() string {
 }
 
 // AWS credentials for API authentication.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/Credentials
 type Credentials struct {
 	_ struct{} `type:"structure"`
 
@@ -71,7 +69,6 @@ func (s Credentials) String() string {
 }
 
 // Identifiers for the federated user that is associated with the credentials.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/FederatedUser
 type FederatedUser struct {
 	_ struct{} `type:"structure"`
 
@@ -97,7 +94,6 @@ func (s FederatedUser) String() string {
 
 // A reference to the IAM managed policy that is passed as a session policy
 // for a role session or a federated user session.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/PolicyDescriptorType
 type PolicyDescriptorType struct {
 	_ struct{} `type:"structure"`
 

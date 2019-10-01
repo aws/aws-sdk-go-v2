@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetServiceRoleForAccountRequest
 type GetServiceRoleForAccountInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -27,7 +26,6 @@ func (s GetServiceRoleForAccountInput) MarshalFields(e protocol.FieldEncoder) er
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetServiceRoleForAccountResponse
 type GetServiceRoleForAccountOutput struct {
 	_ struct{} `type:"structure"`
 

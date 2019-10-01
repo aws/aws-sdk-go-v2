@@ -14,7 +14,6 @@ var _ = awsutil.Prettify
 // related to an entity, such as the dosage of a medication taken. It contains
 // information about the attribute such as id, begin and end offset within the
 // input text, and the segment of the input text.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/Attribute
 type Attribute struct {
 	_ struct{} `type:"structure"`
 
@@ -54,7 +53,6 @@ func (s Attribute) String() string {
 }
 
 // Provides information about an extracted medical entity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/Entity
 type Entity struct {
 	_ struct{} `type:"structure"`
 
@@ -96,7 +94,6 @@ func (s Entity) String() string {
 }
 
 // Provides contextual information about the extracted entity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/Trait
 type Trait struct {
 	_ struct{} `type:"structure"`
 
@@ -114,7 +111,6 @@ func (s Trait) String() string {
 }
 
 // An attribute that we extracted, but were unable to relate to an entity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/UnmappedAttribute
 type UnmappedAttribute struct {
 	_ struct{} `type:"structure"`
 

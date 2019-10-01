@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a DeleteReplicationGroup operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteReplicationGroupMessage
 type DeleteReplicationGroupInput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +49,6 @@ func (s *DeleteReplicationGroupInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteReplicationGroupResult
 type DeleteReplicationGroupOutput struct {
 	_ struct{} `type:"structure"`
 

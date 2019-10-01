@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectTaggingRequest
 type PutObjectTaggingInput struct {
 	_ struct{} `type:"structure" payload:"Tagging"`
 
@@ -98,7 +97,6 @@ func (s PutObjectTaggingInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectTaggingOutput
 type PutObjectTaggingOutput struct {
 	_ struct{} `type:"structure"`
 

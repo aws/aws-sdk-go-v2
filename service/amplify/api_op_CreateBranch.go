@@ -11,7 +11,6 @@ import (
 )
 
 // Request structure for a branch create request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateBranchRequest
 type CreateBranchInput struct {
 	_ struct{} `type:"structure"`
 
@@ -201,7 +200,6 @@ func (s CreateBranchInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Result structure for create branch request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateBranchResult
 type CreateBranchOutput struct {
 	_ struct{} `type:"structure"`
 

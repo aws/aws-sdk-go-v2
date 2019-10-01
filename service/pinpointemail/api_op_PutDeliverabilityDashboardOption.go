@@ -20,7 +20,6 @@ import (
 // charge, in addition to any other fees that you accrue by using Amazon Pinpoint.
 // For more information about the features and cost of a Deliverability dashboard
 // subscription, see Amazon Pinpoint Pricing (http://aws.amazon.com/pinpoint/pricing/).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutDeliverabilityDashboardOptionRequest
 type PutDeliverabilityDashboardOptionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -81,7 +80,6 @@ func (s PutDeliverabilityDashboardOptionInput) MarshalFields(e protocol.FieldEnc
 
 // A response that indicates whether the Deliverability dashboard is enabled
 // for your Amazon Pinpoint account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutDeliverabilityDashboardOptionResponse
 type PutDeliverabilityDashboardOptionOutput struct {
 	_ struct{} `type:"structure"`
 }

@@ -12,7 +12,6 @@ import (
 )
 
 // Adds outputs to an existing flow. You can create up to 20 outputs per flow.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddFlowOutputsRequest
 type AddFlowOutputsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -82,7 +81,6 @@ func (s AddFlowOutputsInput) MarshalFields(e protocol.FieldEncoder) error {
 
 // The result of a successful AddOutput request. The response includes the details
 // of the newly added outputs.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddFlowOutputsResponse
 type AddFlowOutputsOutput struct {
 	_ struct{} `type:"structure"`
 

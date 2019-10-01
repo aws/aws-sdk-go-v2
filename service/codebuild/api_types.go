@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Information about a build.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Build
 type Build struct {
 	_ struct{} `type:"structure"`
 
@@ -166,7 +165,6 @@ func (s Build) String() string {
 }
 
 // Information about build output artifacts.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BuildArtifacts
 type BuildArtifacts struct {
 	_ struct{} `type:"structure"`
 
@@ -210,7 +208,6 @@ func (s BuildArtifacts) String() string {
 }
 
 // Information about a build that could not be successfully deleted.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BuildNotDeleted
 type BuildNotDeleted struct {
 	_ struct{} `type:"structure"`
 
@@ -227,7 +224,6 @@ func (s BuildNotDeleted) String() string {
 }
 
 // Information about a stage for a build.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BuildPhase
 type BuildPhase struct {
 	_ struct{} `type:"structure"`
 
@@ -297,7 +293,6 @@ func (s BuildPhase) String() string {
 }
 
 // Information about Amazon CloudWatch Logs for a build project.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CloudWatchLogsConfig
 type CloudWatchLogsConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -339,7 +334,6 @@ func (s *CloudWatchLogsConfig) Validate() error {
 }
 
 // Information about a Docker image that is managed by AWS CodeBuild.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/EnvironmentImage
 type EnvironmentImage struct {
 	_ struct{} `type:"structure"`
 
@@ -360,7 +354,6 @@ func (s EnvironmentImage) String() string {
 
 // A set of Docker images that are related by programming language and are managed
 // by AWS CodeBuild.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/EnvironmentLanguage
 type EnvironmentLanguage struct {
 	_ struct{} `type:"structure"`
 
@@ -378,7 +371,6 @@ func (s EnvironmentLanguage) String() string {
 
 // A set of Docker images that are related by platform and are managed by AWS
 // CodeBuild.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/EnvironmentPlatform
 type EnvironmentPlatform struct {
 	_ struct{} `type:"structure"`
 
@@ -395,7 +387,6 @@ func (s EnvironmentPlatform) String() string {
 }
 
 // Information about an environment variable for a build project or a build.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/EnvironmentVariable
 type EnvironmentVariable struct {
 	_ struct{} `type:"structure"`
 
@@ -451,7 +442,6 @@ func (s *EnvironmentVariable) Validate() error {
 
 // Information about the Git submodules configuration for an AWS CodeBuild build
 // project.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/GitSubmodulesConfig
 type GitSubmodulesConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -482,7 +472,6 @@ func (s *GitSubmodulesConfig) Validate() error {
 
 // Information about logs for a build project. These can be logs in Amazon CloudWatch
 // Logs, built in a specified S3 bucket, or both.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/LogsConfig
 type LogsConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -521,7 +510,6 @@ func (s *LogsConfig) Validate() error {
 }
 
 // Information about build logs in Amazon CloudWatch Logs.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/LogsLocation
 type LogsLocation struct {
 	_ struct{} `type:"structure"`
 
@@ -550,7 +538,6 @@ func (s LogsLocation) String() string {
 }
 
 // Describes a network interface.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/NetworkInterface
 type NetworkInterface struct {
 	_ struct{} `type:"structure"`
 
@@ -568,7 +555,6 @@ func (s NetworkInterface) String() string {
 
 // Additional information about a build phase that has an error. You can use
 // this information for troubleshooting.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/PhaseContext
 type PhaseContext struct {
 	_ struct{} `type:"structure"`
 
@@ -586,7 +572,6 @@ func (s PhaseContext) String() string {
 }
 
 // Information about a build project.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Project
 type Project struct {
 	_ struct{} `type:"structure"`
 
@@ -706,7 +691,6 @@ func (s Project) String() string {
 }
 
 // Information about the build output artifacts for the build project.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectArtifacts
 type ProjectArtifacts struct {
 	_ struct{} `type:"structure"`
 
@@ -847,7 +831,6 @@ func (s *ProjectArtifacts) Validate() error {
 }
 
 // Information about the build badge for the build project.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectBadge
 type ProjectBadge struct {
 	_ struct{} `type:"structure"`
 
@@ -869,7 +852,6 @@ func (s ProjectBadge) String() string {
 }
 
 // Information about the cache for the build project.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectCache
 type ProjectCache struct {
 	_ struct{} `type:"structure"`
 
@@ -940,7 +922,6 @@ func (s *ProjectCache) Validate() error {
 }
 
 // Information about the build environment of the build project.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectEnvironment
 type ProjectEnvironment struct {
 	_ struct{} `type:"structure"`
 
@@ -1065,7 +1046,6 @@ func (s *ProjectEnvironment) Validate() error {
 }
 
 // Information about the build input source code for the build project.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectSource
 type ProjectSource struct {
 	_ struct{} `type:"structure"`
 
@@ -1193,7 +1173,6 @@ func (s *ProjectSource) Validate() error {
 }
 
 // A source identifier and its corresponding version.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectSourceVersion
 type ProjectSourceVersion struct {
 	_ struct{} `type:"structure"`
 
@@ -1261,7 +1240,6 @@ func (s *ProjectSourceVersion) Validate() error {
 //
 // For more information, see Private Registry with AWS Secrets Manager Sample
 // for AWS CodeBuild (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-private-registry.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/RegistryCredential
 type RegistryCredential struct {
 	_ struct{} `type:"structure"`
 
@@ -1307,7 +1285,6 @@ func (s *RegistryCredential) Validate() error {
 }
 
 // Information about S3 logs for a build project.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/S3LogsConfig
 type S3LogsConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1353,7 +1330,6 @@ func (s *S3LogsConfig) Validate() error {
 //
 // This information is for the AWS CodeBuild console's use only. Your code should
 // not get or set this information directly.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/SourceAuth
 type SourceAuth struct {
 	_ struct{} `type:"structure"`
 
@@ -1390,7 +1366,6 @@ func (s *SourceAuth) Validate() error {
 
 // Information about the credentials for a GitHub, GitHub Enterprise, or Bitbucket
 // repository.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/SourceCredentialsInfo
 type SourceCredentialsInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -1414,7 +1389,6 @@ func (s SourceCredentialsInfo) String() string {
 // A tag, consisting of a key and a value.
 //
 // This tag is available for use by AWS services that support tags in AWS CodeBuild.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -1447,7 +1421,6 @@ func (s *Tag) Validate() error {
 }
 
 // Information about the VPC configuration that AWS CodeBuild accesses.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/VpcConfig
 type VpcConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1481,7 +1454,6 @@ func (s *VpcConfig) Validate() error {
 
 // Information about a webhook that connects repository events to a build project
 // in AWS CodeBuild.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Webhook
 type Webhook struct {
 	_ struct{} `type:"structure"`
 
@@ -1523,7 +1495,6 @@ func (s Webhook) String() string {
 }
 
 // A filter used to determine which webhooks trigger a build.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/WebhookFilter
 type WebhookFilter struct {
 	_ struct{} `type:"structure"`
 

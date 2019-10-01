@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateInstanceProfileRequest
 type UpdateInstanceProfileInput struct {
 	_ struct{} `type:"structure"`
 
@@ -61,7 +60,6 @@ func (s *UpdateInstanceProfileInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateInstanceProfileResult
 type UpdateInstanceProfileOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input to FailoverDBCluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/FailoverDBClusterMessage
 type FailoverDBClusterInput struct {
 	_ struct{} `type:"structure"`
 
@@ -34,7 +33,6 @@ func (s FailoverDBClusterInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/FailoverDBClusterResult
 type FailoverDBClusterOutput struct {
 	_ struct{} `type:"structure"`
 

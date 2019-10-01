@@ -12,7 +12,6 @@ import (
 
 // Send your create job request with your job settings and IAM role. Optionally,
 // include user metadata and the ARN for the queue.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreateJobRequest
 type CreateJobInput struct {
 	_ struct{} `type:"structure"`
 
@@ -58,6 +57,12 @@ type CreateJobInput struct {
 	//
 	// Settings is a required field
 	Settings *JobSettings `locationName:"settings" type:"structure" required:"true"`
+
+	// Enable this setting when you run a test job to estimate how many reserved
+	// transcoding slots (RTS) you need. When this is enabled, MediaConvert runs
+	// your job from an on-demand queue with similar performance to what you will
+	// see with one RTS in a reserved queue. This setting is disabled by default.
+	SimulateReservedQueue SimulateReservedQueue `locationName:"simulateReservedQueue" type:"string" enum:"true"`
 
 	// Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch
 	// Events. Set the interval, in seconds, between status updates. MediaConvert
@@ -164,6 +169,12 @@ func (s CreateJobInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "settings", v, metadata)
 	}
+	if len(s.SimulateReservedQueue) > 0 {
+		v := s.SimulateReservedQueue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "simulateReservedQueue", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if len(s.StatusUpdateInterval) > 0 {
 		v := s.StatusUpdateInterval
 
@@ -186,7 +197,6 @@ func (s CreateJobInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Successful create job requests will return the job JSON.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreateJobResponse
 type CreateJobOutput struct {
 	_ struct{} `type:"structure"`
 

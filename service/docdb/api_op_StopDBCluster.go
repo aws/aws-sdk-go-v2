@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/StopDBClusterMessage
 type StopDBClusterInput struct {
 	_ struct{} `type:"structure"`
 
@@ -38,7 +37,6 @@ func (s *StopDBClusterInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/StopDBClusterResult
 type StopDBClusterOutput struct {
 	_ struct{} `type:"structure"`
 

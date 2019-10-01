@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisioningArtifactInput
 type UpdateProvisioningArtifactInput struct {
 	_ struct{} `type:"structure"`
 
@@ -82,7 +81,6 @@ func (s *UpdateProvisioningArtifactInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisioningArtifactOutput
 type UpdateProvisioningArtifactOutput struct {
 	_ struct{} `type:"structure"`
 

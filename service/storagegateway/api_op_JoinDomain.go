@@ -10,7 +10,6 @@ import (
 )
 
 // JoinDomainInput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/JoinDomainInput
 type JoinDomainInput struct {
 	_ struct{} `type:"structure"`
 
@@ -25,7 +24,7 @@ type JoinDomainInput struct {
 	DomainName *string `min:"1" type:"string" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	//
 	// GatewayARN is a required field
 	GatewayARN *string `min:"50" type:"string" required:"true"`
@@ -39,7 +38,7 @@ type JoinDomainInput struct {
 	// Active Directory domain.
 	//
 	// Password is a required field
-	Password *string `min:"1" type:"string" required:"true"`
+	Password *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// Sets the user name of user who has permission to add the gateway to the Active
 	// Directory domain.
@@ -95,7 +94,6 @@ func (s *JoinDomainInput) Validate() error {
 }
 
 // JoinDomainOutput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/JoinDomainOutput
 type JoinDomainOutput struct {
 	_ struct{} `type:"structure"`
 

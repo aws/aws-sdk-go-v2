@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutEventsConfigurationRequest
 type PutEventsConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -25,10 +24,10 @@ type PutEventsConfigurationInput struct {
 	BotId *string `location:"uri" locationName:"botId" type:"string" required:"true"`
 
 	// Lambda function ARN that allows the bot to receive outgoing events.
-	LambdaFunctionArn *string `type:"string"`
+	LambdaFunctionArn *string `type:"string" sensitive:"true"`
 
 	// HTTPS endpoint that allows the bot to receive outgoing events.
-	OutboundEventsHTTPSEndpoint *string `type:"string"`
+	OutboundEventsHTTPSEndpoint *string `type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -85,7 +84,6 @@ func (s PutEventsConfigurationInput) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutEventsConfigurationResponse
 type PutEventsConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 

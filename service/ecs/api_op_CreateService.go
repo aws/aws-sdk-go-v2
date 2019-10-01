@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateServiceRequest
 type CreateServiceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -32,6 +31,9 @@ type CreateServiceInput struct {
 
 	// The number of instantiations of the specified task definition to place and
 	// keep running on your cluster.
+	//
+	// This is required if schedulingStrategy is REPLICA or is not specified. If
+	// schedulingStrategy is DAEMON then this is not required.
 	DesiredCount *int64 `locationName:"desiredCount" type:"integer"`
 
 	// Specifies whether to enable Amazon ECS managed tags for the tasks within
@@ -56,10 +58,13 @@ type CreateServiceInput struct {
 	// in the Amazon Elastic Container Service Developer Guide.
 	LaunchType LaunchType `locationName:"launchType" type:"string" enum:"true"`
 
-	// A load balancer object representing the load balancer to use with your service.
+	// A load balancer object representing the load balancers to use with your service.
+	// For more information, see Service Load Balancing (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html)
+	// in the Amazon Elastic Container Service Developer Guide.
 	//
-	// If the service is using the ECS deployment controller, you are limited to
-	// one load balancer or target group.
+	// If the service is using the rolling update (ECS) deployment controller and
+	// using either an Application Load Balancer or Network Load Balancer, you can
+	// specify multiple target groups to attach to the service.
 	//
 	// If the service is using the CODE_DEPLOY deployment controller, the service
 	// is required to use either an Application Load Balancer or Network Load Balancer.
@@ -77,18 +82,18 @@ type CreateServiceInput struct {
 	// in the service definition are immutable. If you are using the CODE_DEPLOY
 	// deployment controller, these values can be changed when updating the service.
 	//
-	// For Classic Load Balancers, this object must contain the load balancer name,
-	// the container name (as it appears in a container definition), and the container
-	// port to access from the load balancer. When a task from this service is placed
-	// on a container instance, the container instance is registered with the load
-	// balancer specified here.
-	//
 	// For Application Load Balancers and Network Load Balancers, this object must
 	// contain the load balancer target group ARN, the container name (as it appears
 	// in a container definition), and the container port to access from the load
 	// balancer. When a task from this service is placed on a container instance,
 	// the container instance and port combination is registered as a target in
 	// the target group specified here.
+	//
+	// For Classic Load Balancers, this object must contain the load balancer name,
+	// the container name (as it appears in a container definition), and the container
+	// port to access from the load balancer. When a task from this service is placed
+	// on a container instance, the container instance is registered with the load
+	// balancer specified here.
 	//
 	// Services with tasks that use the awsvpc network mode (for example, those
 	// with the Fargate launch type) only support Application Load Balancers and
@@ -260,7 +265,6 @@ func (s *CreateServiceInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateServiceResponse
 type CreateServiceOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -287,13 +291,13 @@ const opCreateService = "CreateService"
 //
 // Runs and maintains a desired number of tasks from a specified task definition.
 // If the number of tasks running in a service drops below the desiredCount,
-// Amazon ECS spawns another copy of the task in the specified cluster. To update
+// Amazon ECS runs another copy of the task in the specified cluster. To update
 // an existing service, see UpdateService.
 //
 // In addition to maintaining the desired count of tasks in your service, you
-// can optionally run your service behind a load balancer. The load balancer
-// distributes traffic across the tasks that are associated with the service.
-// For more information, see Service Load Balancing (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html)
+// can optionally run your service behind one or more load balancers. The load
+// balancers distribute traffic across the tasks that are associated with the
+// service. For more information, see Service Load Balancing (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html)
 // in the Amazon Elastic Container Service Developer Guide.
 //
 // Tasks for services that do not use a load balancer are considered healthy

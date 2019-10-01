@@ -15,7 +15,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Specifies when to create snapshots of EBS volumes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/CreateRule
 type CreateRule struct {
 	_ struct{} `type:"structure"`
 
@@ -91,7 +90,6 @@ func (s CreateRule) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Detailed information about a lifecycle policy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/LifecyclePolicy
 type LifecyclePolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -173,7 +171,6 @@ func (s LifecyclePolicy) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Summary information about a lifecycle policy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/LifecyclePolicySummary
 type LifecyclePolicySummary struct {
 	_ struct{} `type:"structure"`
 
@@ -217,7 +214,6 @@ func (s LifecyclePolicySummary) MarshalFields(e protocol.FieldEncoder) error {
 
 // Optional parameters that can be added to the policy. The set of valid parameters
 // depends on the combination of policyType and resourceType values.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/Parameters
 type Parameters struct {
 	_ struct{} `type:"structure"`
 
@@ -244,7 +240,6 @@ func (s Parameters) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies the configuration of a lifecycle policy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/PolicyDetails
 type PolicyDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -357,7 +352,6 @@ func (s PolicyDetails) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies the number of snapshots to keep for each EBS volume.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/RetainRule
 type RetainRule struct {
 	_ struct{} `type:"structure"`
 
@@ -401,7 +395,6 @@ func (s RetainRule) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies a schedule.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/Schedule
 type Schedule struct {
 	_ struct{} `type:"structure"`
 
@@ -522,7 +515,6 @@ func (s Schedule) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies a tag for a resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 

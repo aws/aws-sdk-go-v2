@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetActiveNamesRequest
 type GetActiveNamesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -22,7 +21,6 @@ func (s GetActiveNamesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetActiveNamesResult
 type GetActiveNamesOutput struct {
 	_ struct{} `type:"structure"`
 

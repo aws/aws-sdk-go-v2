@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizeSecurityGroupEgressRequest
 type AuthorizeSecurityGroupEgressInput struct {
 	_ struct{} `type:"structure"`
 
@@ -71,7 +70,6 @@ func (s *AuthorizeSecurityGroupEgressInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizeSecurityGroupEgressOutput
 type AuthorizeSecurityGroupEgressOutput struct {
 	_ struct{} `type:"structure"`
 }

@@ -10,7 +10,6 @@ import (
 )
 
 // The input for the ListChangeSets action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListChangeSetsInput
 type ListChangeSetsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +50,6 @@ func (s *ListChangeSetsInput) Validate() error {
 }
 
 // The output for the ListChangeSets action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListChangeSetsOutput
 type ListChangeSetsOutput struct {
 	_ struct{} `type:"structure"`
 

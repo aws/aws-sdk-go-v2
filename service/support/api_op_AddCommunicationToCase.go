@@ -10,7 +10,6 @@ import (
 )
 
 // To be written.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AddCommunicationToCaseRequest
 type AddCommunicationToCaseInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s *AddCommunicationToCaseInput) Validate() error {
 }
 
 // The result of the AddCommunicationToCase operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AddCommunicationToCaseResponse
 type AddCommunicationToCaseOutput struct {
 	_ struct{} `type:"structure"`
 

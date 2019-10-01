@@ -17,7 +17,6 @@ import (
 // If successful, this operation returns an operation ID that you can use to
 // track the progress and completion of the action. If the request is not completed
 // successfully, the domain registrant will be notified by email.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainNameserversRequest
 type UpdateDomainNameserversInput struct {
 	_ struct{} `type:"structure"`
 
@@ -66,7 +65,6 @@ func (s *UpdateDomainNameserversInput) Validate() error {
 }
 
 // The UpdateDomainNameservers response includes the following element.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainNameserversResponse
 type UpdateDomainNameserversOutput struct {
 	_ struct{} `type:"structure"`
 

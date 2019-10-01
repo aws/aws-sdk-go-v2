@@ -10,7 +10,6 @@ import (
 )
 
 // A request to modify the delivery options for a configuration set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/PutConfigurationSetDeliveryOptionsRequest
 type PutConfigurationSetDeliveryOptionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -46,7 +45,6 @@ func (s *PutConfigurationSetDeliveryOptionsInput) Validate() error {
 
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/PutConfigurationSetDeliveryOptionsResponse
 type PutConfigurationSetDeliveryOptionsOutput struct {
 	_ struct{} `type:"structure"`
 }

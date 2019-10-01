@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserHierarchyRequest
 type UpdateUserHierarchyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -84,7 +83,6 @@ func (s UpdateUserHierarchyInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserHierarchyOutput
 type UpdateUserHierarchyOutput struct {
 	_ struct{} `type:"structure"`
 }

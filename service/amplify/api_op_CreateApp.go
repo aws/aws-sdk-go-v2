@@ -12,7 +12,6 @@ import (
 )
 
 // Request structure used to create Apps in Amplify.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateAppRequest
 type CreateAppInput struct {
 	_ struct{} `type:"structure"`
 
@@ -252,7 +251,6 @@ func (s CreateAppInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateAppResult
 type CreateAppOutput struct {
 	_ struct{} `type:"structure"`
 

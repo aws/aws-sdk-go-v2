@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for DescribeLoadBalancerPolicies.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancerPoliciesInput
 type DescribeLoadBalancerPoliciesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -27,7 +26,6 @@ func (s DescribeLoadBalancerPoliciesInput) String() string {
 }
 
 // Contains the output of DescribeLoadBalancerPolicies.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancerPoliciesOutput
 type DescribeLoadBalancerPoliciesOutput struct {
 	_ struct{} `type:"structure"`
 

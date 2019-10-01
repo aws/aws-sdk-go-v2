@@ -13,7 +13,6 @@ import (
 // set event destinations are associated with configuration sets, which enable
 // you to publish email sending events. For information about using configuration
 // sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteConfigurationSetEventDestinationRequest
 type DeleteConfigurationSetEventDestinationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +51,6 @@ func (s *DeleteConfigurationSetEventDestinationInput) Validate() error {
 }
 
 // An empty element returned on a successful request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteConfigurationSetEventDestinationResponse
 type DeleteConfigurationSetEventDestinationOutput struct {
 	_ struct{} `type:"structure"`
 }

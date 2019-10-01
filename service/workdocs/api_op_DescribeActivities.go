@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeActivitiesRequest
 type DescribeActivitiesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -21,7 +20,7 @@ type DescribeActivitiesInput struct {
 
 	// Amazon WorkDocs authentication token. Do not set this field when using administrative
 	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string"`
+	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The timestamp that determines the end time of the activities. The response
 	// includes the activities performed before the specified timestamp.
@@ -161,7 +160,6 @@ func (s DescribeActivitiesInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeActivitiesResponse
 type DescribeActivitiesOutput struct {
 	_ struct{} `type:"structure"`
 

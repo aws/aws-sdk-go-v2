@@ -10,7 +10,6 @@ import (
 )
 
 // The request body of the ResetServiceSetting API action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResetServiceSettingRequest
 type ResetServiceSettingInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *ResetServiceSettingInput) Validate() error {
 }
 
 // The result body of the ResetServiceSetting API action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResetServiceSettingResult
 type ResetServiceSettingOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/ListSigningProfilesRequest
 type ListSigningProfilesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -70,7 +69,6 @@ func (s ListSigningProfilesInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/ListSigningProfilesResponse
 type ListSigningProfilesOutput struct {
 	_ struct{} `type:"structure"`
 

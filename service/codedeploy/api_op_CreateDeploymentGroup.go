@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a CreateDeploymentGroup operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentGroupInput
 type CreateDeploymentGroupInput struct {
 	_ struct{} `type:"structure"`
 
@@ -140,7 +139,6 @@ func (s *CreateDeploymentGroupInput) Validate() error {
 }
 
 // Represents the output of a CreateDeploymentGroup operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentGroupOutput
 type CreateDeploymentGroupOutput struct {
 	_ struct{} `type:"structure"`
 

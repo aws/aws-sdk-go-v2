@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a get commit operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommitInput
 type GetCommitInput struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +51,6 @@ func (s *GetCommitInput) Validate() error {
 }
 
 // Represents the output of a get commit operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommitOutput
 type GetCommitOutput struct {
 	_ struct{} `type:"structure"`
 

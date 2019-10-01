@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchDescribeMergeConflictsInput
 type BatchDescribeMergeConflictsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -97,7 +96,6 @@ func (s *BatchDescribeMergeConflictsInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchDescribeMergeConflictsOutput
 type BatchDescribeMergeConflictsOutput struct {
 	_ struct{} `type:"structure"`
 

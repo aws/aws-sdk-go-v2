@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListRolesRequest
 type ListRolesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -68,7 +67,6 @@ func (s *ListRolesInput) Validate() error {
 }
 
 // Contains the response to a successful ListRoles request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListRolesResponse
 type ListRolesOutput struct {
 	_ struct{} `type:"structure"`
 

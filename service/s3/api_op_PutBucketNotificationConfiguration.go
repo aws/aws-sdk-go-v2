@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketNotificationConfigurationRequest
 type PutBucketNotificationConfigurationInput struct {
 	_ struct{} `type:"structure" payload:"NotificationConfiguration"`
 
@@ -78,7 +77,6 @@ func (s PutBucketNotificationConfigurationInput) MarshalFields(e protocol.FieldE
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketNotificationConfigurationOutput
 type PutBucketNotificationConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 }

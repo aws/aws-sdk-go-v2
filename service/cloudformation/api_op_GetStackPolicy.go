@@ -10,7 +10,6 @@ import (
 )
 
 // The input for the GetStackPolicy action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetStackPolicyInput
 type GetStackPolicyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -41,7 +40,6 @@ func (s *GetStackPolicyInput) Validate() error {
 }
 
 // The output for the GetStackPolicy action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetStackPolicyOutput
 type GetStackPolicyOutput struct {
 	_ struct{} `type:"structure"`
 

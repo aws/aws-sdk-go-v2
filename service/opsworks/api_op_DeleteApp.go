@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteAppRequest
 type DeleteAppInput struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s *DeleteAppInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteAppOutput
 type DeleteAppOutput struct {
 	_ struct{} `type:"structure"`
 }

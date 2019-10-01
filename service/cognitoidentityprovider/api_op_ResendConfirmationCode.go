@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the request to resend the confirmation code.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ResendConfirmationCodeRequest
 type ResendConfirmationCodeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -21,11 +20,11 @@ type ResendConfirmationCodeInput struct {
 	// The ID of the client associated with the user pool.
 	//
 	// ClientId is a required field
-	ClientId *string `min:"1" type:"string" required:"true"`
+	ClientId *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// A keyed-hash message authentication code (HMAC) calculated using the secret
 	// key of a user pool client and username plus the client ID in the message.
-	SecretHash *string `min:"1" type:"string"`
+	SecretHash *string `min:"1" type:"string" sensitive:"true"`
 
 	// Contextual data such as the user's device fingerprint, IP address, or location
 	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
@@ -35,7 +34,7 @@ type ResendConfirmationCodeInput struct {
 	// The user name of the user to whom you wish to resend a confirmation code.
 	//
 	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true"`
+	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -72,7 +71,6 @@ func (s *ResendConfirmationCodeInput) Validate() error {
 
 // The response from the server when the Amazon Cognito Your User Pools service
 // makes the request to resend a confirmation code.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ResendConfirmationCodeResponse
 type ResendConfirmationCodeOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListTagsRequest
 type ListTagsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +49,6 @@ func (s ListTagsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListTagsResponse
 type ListTagsOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -11,7 +11,6 @@ import (
 )
 
 // A request to delete a configuration set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/DeleteConfigurationSetRequest
 type DeleteConfigurationSetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s DeleteConfigurationSetInput) MarshalFields(e protocol.FieldEncoder) erro
 
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/DeleteConfigurationSetResponse
 type DeleteConfigurationSetOutput struct {
 	_ struct{} `type:"structure"`
 }

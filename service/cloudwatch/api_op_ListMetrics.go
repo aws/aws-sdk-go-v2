@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListMetricsInput
 type ListMetricsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s *ListMetricsInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListMetricsOutput
 type ListMetricsOutput struct {
 	_ struct{} `type:"structure"`
 

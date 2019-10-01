@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/UpdateDevicePolicyConfigurationRequest
 type UpdateDevicePolicyConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -68,7 +67,6 @@ func (s UpdateDevicePolicyConfigurationInput) MarshalFields(e protocol.FieldEnco
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/UpdateDevicePolicyConfigurationResponse
 type UpdateDevicePolicyConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 }

@@ -12,7 +12,6 @@ import (
 )
 
 // Contains the parameters for ModifySnapshotAttribute.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySnapshotAttributeRequest
 type ModifySnapshotAttributeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -63,7 +62,6 @@ func (s *ModifySnapshotAttributeInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySnapshotAttributeOutput
 type ModifySnapshotAttributeOutput struct {
 	_ struct{} `type:"structure"`
 }

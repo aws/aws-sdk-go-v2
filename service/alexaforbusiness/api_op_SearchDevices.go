@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchDevicesRequest
 type SearchDevicesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -71,7 +70,6 @@ func (s *SearchDevicesInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchDevicesResponse
 type SearchDevicesOutput struct {
 	_ struct{} `type:"structure"`
 

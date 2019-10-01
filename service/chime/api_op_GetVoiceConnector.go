@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorRequest
 type GetVoiceConnectorInput struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +51,6 @@ func (s GetVoiceConnectorInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorResponse
 type GetVoiceConnectorOutput struct {
 	_ struct{} `type:"structure"`
 

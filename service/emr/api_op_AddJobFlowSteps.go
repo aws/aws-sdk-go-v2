@@ -11,7 +11,6 @@ import (
 )
 
 // The input argument to the AddJobFlowSteps operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddJobFlowStepsInput
 type AddJobFlowStepsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -58,7 +57,6 @@ func (s *AddJobFlowStepsInput) Validate() error {
 }
 
 // The output for the AddJobFlowSteps operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddJobFlowStepsOutput
 type AddJobFlowStepsOutput struct {
 	_ struct{} `type:"structure"`
 

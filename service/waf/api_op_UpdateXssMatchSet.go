@@ -11,7 +11,6 @@ import (
 )
 
 // A request to update an XssMatchSet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateXssMatchSetRequest
 type UpdateXssMatchSetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -83,7 +82,6 @@ func (s *UpdateXssMatchSetInput) Validate() error {
 }
 
 // The response to an UpdateXssMatchSets request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateXssMatchSetResponse
 type UpdateXssMatchSetOutput struct {
 	_ struct{} `type:"structure"`
 

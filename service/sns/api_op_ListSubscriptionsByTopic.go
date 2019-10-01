@@ -10,7 +10,6 @@ import (
 )
 
 // Input for ListSubscriptionsByTopic action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListSubscriptionsByTopicInput
 type ListSubscriptionsByTopicInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *ListSubscriptionsByTopicInput) Validate() error {
 }
 
 // Response for ListSubscriptionsByTopic action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListSubscriptionsByTopicResponse
 type ListSubscriptionsByTopicOutput struct {
 	_ struct{} `type:"structure"`
 

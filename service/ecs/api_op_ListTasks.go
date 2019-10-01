@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTasksRequest
 type ListTasksInput struct {
 	_ struct{} `type:"structure"`
 
@@ -74,7 +73,6 @@ func (s ListTasksInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTasksResponse
 type ListTasksOutput struct {
 	_ struct{} `type:"structure"`
 

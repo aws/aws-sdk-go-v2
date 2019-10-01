@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/CreateMemberInput
 type CreateMemberInput struct {
 	_ struct{} `type:"structure"`
 
@@ -122,7 +121,6 @@ func (s CreateMemberInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/CreateMemberOutput
 type CreateMemberOutput struct {
 	_ struct{} `type:"structure"`
 

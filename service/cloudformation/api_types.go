@@ -26,7 +26,6 @@ var _ = awsutil.Prettify
 // result status for that account and region to FAILED.
 //
 // For more information, see Configuring a target account gate (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-account-gating.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/AccountGateResult
 type AccountGateResult struct {
 	_ struct{} `type:"structure"`
 
@@ -67,7 +66,6 @@ func (s AccountGateResult) String() string {
 // The AccountLimit data type. For more information about account limits, see
 // AWS CloudFormation Limits (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html)
 // in the AWS CloudFormation User Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/AccountLimit
 type AccountLimit struct {
 	_ struct{} `type:"structure"`
 
@@ -85,7 +83,6 @@ func (s AccountLimit) String() string {
 
 // The Change structure describes the changes AWS CloudFormation will perform
 // if you execute the change set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Change
 type Change struct {
 	_ struct{} `type:"structure"`
 
@@ -105,7 +102,6 @@ func (s Change) String() string {
 
 // The ChangeSetSummary structure describes a change set, its status, and the
 // stack with which it's associated.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ChangeSetSummary
 type ChangeSetSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -149,7 +145,6 @@ func (s ChangeSetSummary) String() string {
 }
 
 // The Export structure describes the exported output values for a stack.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Export
 type Export struct {
 	_ struct{} `type:"structure"`
 
@@ -172,7 +167,6 @@ func (s Export) String() string {
 }
 
 // The Output data type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Output
 type Output struct {
 	_ struct{} `type:"structure"`
 
@@ -195,7 +189,6 @@ func (s Output) String() string {
 }
 
 // The Parameter data type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Parameter
 type Parameter struct {
 	_ struct{} `type:"structure"`
 
@@ -226,7 +219,6 @@ func (s Parameter) String() string {
 // A set of criteria that AWS CloudFormation uses to validate parameter values.
 // Although other constraints might be defined in the stack template, AWS CloudFormation
 // returns only the AllowedValues property.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ParameterConstraints
 type ParameterConstraints struct {
 	_ struct{} `type:"structure"`
 
@@ -240,7 +232,6 @@ func (s ParameterConstraints) String() string {
 }
 
 // The ParameterDeclaration data type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ParameterDeclaration
 type ParameterDeclaration struct {
 	_ struct{} `type:"structure"`
 
@@ -274,7 +265,6 @@ func (s ParameterDeclaration) String() string {
 // a resource's logical and physical IDs are not enough to uniquely identify
 // that resource. Each context key-value pair specifies a resource that contains
 // the targeted resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/PhysicalResourceIdContextKeyValuePair
 type PhysicalResourceIdContextKeyValuePair struct {
 	_ struct{} `type:"structure"`
 
@@ -299,7 +289,6 @@ func (s PhysicalResourceIdContextKeyValuePair) String() string {
 // as template parameters. These will be present only for resources whose StackResourceDriftStatus
 // is MODIFIED. For more information, see Detecting Unregulated Configuration
 // Changes to Stacks and Resources (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/PropertyDifference
 type PropertyDifference struct {
 	_ struct{} `type:"structure"`
 
@@ -341,7 +330,6 @@ func (s PropertyDifference) String() string {
 
 // The ResourceChange structure describes the resource and the action that AWS
 // CloudFormation will perform on it if you execute this change set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceChange
 type ResourceChange struct {
 	_ struct{} `type:"structure"`
 
@@ -389,7 +377,6 @@ func (s ResourceChange) String() string {
 
 // For a resource with Modify as the action, the ResourceChange structure describes
 // the changes AWS CloudFormation will make to that resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceChangeDetail
 type ResourceChangeDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -454,7 +441,6 @@ func (s ResourceChangeDetail) String() string {
 
 // The field that AWS CloudFormation will change, such as the name of a resource's
 // property, and whether the resource will be recreated.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceTargetDefinition
 type ResourceTargetDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -488,7 +474,6 @@ func (s ResourceTargetDefinition) String() string {
 // that operation if the application breaches the threshold of any of the alarms
 // you've specified. For more information, see Monitor and Roll Back Stack Operations
 // (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-rollback-triggers.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration
 type RollbackConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -562,7 +547,6 @@ func (s *RollbackConfiguration) Validate() error {
 // of stacks. If any of the alarms you specify goes to ALARM state during the
 // stack operation or within the specified monitoring period afterwards, CloudFormation
 // rolls back the entire stack operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger
 type RollbackTrigger struct {
 	_ struct{} `type:"structure"`
 
@@ -606,7 +590,6 @@ func (s *RollbackTrigger) Validate() error {
 }
 
 // The Stack data type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Stack
 type Stack struct {
 	_ struct{} `type:"structure"`
 
@@ -718,7 +701,6 @@ func (s Stack) String() string {
 // or has drifted, from its expected configuration, as defined in the stack
 // template and any values specified as template parameters. A stack is considered
 // to have drifted if one or more of its resources have drifted.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackDriftInformation
 type StackDriftInformation struct {
 	_ struct{} `type:"structure"`
 
@@ -754,7 +736,6 @@ func (s StackDriftInformation) String() string {
 // or has drifted, from its expected configuration, as defined in the stack
 // template and any values specified as template parameters. A stack is considered
 // to have drifted if one or more of its resources have drifted.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackDriftInformationSummary
 type StackDriftInformationSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -787,7 +768,6 @@ func (s StackDriftInformationSummary) String() string {
 }
 
 // The StackEvent data type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackEvent
 type StackEvent struct {
 	_ struct{} `type:"structure"`
 
@@ -859,7 +839,6 @@ func (s StackEvent) String() string {
 // for some reason. A stack instance is associated with only one stack set.
 // Each stack instance contains the ID of its associated stack set, as well
 // as the ID of the actual stack and the stack status.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackInstance
 type StackInstance struct {
 	_ struct{} `type:"structure"`
 
@@ -908,7 +887,6 @@ func (s StackInstance) String() string {
 }
 
 // The structure that contains summary information about a stack instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackInstanceSummary
 type StackInstanceSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -952,7 +930,6 @@ func (s StackInstanceSummary) String() string {
 }
 
 // The StackResource data type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackResource
 type StackResource struct {
 	_ struct{} `type:"structure"`
 
@@ -1007,7 +984,6 @@ func (s StackResource) String() string {
 }
 
 // Contains detailed information about the specified stack resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackResourceDetail
 type StackResourceDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -1079,7 +1055,6 @@ func (s StackResourceDetail) String() string {
 // Use DetectStackResourceDrift to detect drift on individual resources, or
 // DetectStackDrift to detect drift on all resources in a given stack that support
 // drift detection.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackResourceDrift
 type StackResourceDrift struct {
 	_ struct{} `type:"structure"`
 
@@ -1157,7 +1132,6 @@ func (s StackResourceDrift) String() string {
 
 // Contains information about whether the resource's actual configuration differs,
 // or has drifted, from its expected configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackResourceDriftInformation
 type StackResourceDriftInformation struct {
 	_ struct{} `type:"structure"`
 
@@ -1190,7 +1164,6 @@ func (s StackResourceDriftInformation) String() string {
 
 // Summarizes information about whether the resource's actual configuration
 // differs, or has drifted, from its expected configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackResourceDriftInformationSummary
 type StackResourceDriftInformationSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1227,7 +1200,6 @@ func (s StackResourceDriftInformationSummary) String() string {
 }
 
 // Contains high-level information about the specified stack resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackResourceSummary
 type StackResourceSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1276,7 +1248,6 @@ func (s StackResourceSummary) String() string {
 // you to provision stacks into AWS accounts and across regions by using a single
 // CloudFormation template. In the stack set, you specify the template to use,
 // as well as any parameters and capabilities that the template requires.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSet
 type StackSet struct {
 	_ struct{} `type:"structure"`
 
@@ -1336,7 +1307,6 @@ func (s StackSet) String() string {
 }
 
 // The structure that contains information about a stack set operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetOperation
 type StackSetOperation struct {
 	_ struct{} `type:"structure"`
 
@@ -1419,7 +1389,6 @@ func (s StackSetOperation) String() string {
 //
 // For more information on maximum concurrent accounts and failure tolerance,
 // see Stack set operation options (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetOperationPreferences
 type StackSetOperationPreferences struct {
 	_ struct{} `type:"structure"`
 
@@ -1499,7 +1468,6 @@ func (s *StackSetOperationPreferences) Validate() error {
 
 // The structure that contains information about a specified operation's results
 // for a given account in a given region.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetOperationResultSummary
 type StackSetOperationResultSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1544,7 +1512,6 @@ func (s StackSetOperationResultSummary) String() string {
 }
 
 // The structures that contain summary information about the specified operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetOperationSummary
 type StackSetOperationSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1597,7 +1564,6 @@ func (s StackSetOperationSummary) String() string {
 
 // The structures that contain summary information about the specified stack
 // set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetSummary
 type StackSetSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1621,7 +1587,6 @@ func (s StackSetSummary) String() string {
 }
 
 // The StackSummary Data Type
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSummary
 type StackSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1685,7 +1650,6 @@ func (s StackSummary) String() string {
 
 // The Tag type enables you to specify a key-value pair that can be used to
 // store information about an AWS CloudFormation stack.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -1733,7 +1697,6 @@ func (s *Tag) Validate() error {
 }
 
 // The TemplateParameter data type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/TemplateParameter
 type TemplateParameter struct {
 	_ struct{} `type:"structure"`
 

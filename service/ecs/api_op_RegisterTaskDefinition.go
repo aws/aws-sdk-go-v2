@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterTaskDefinitionRequest
 type RegisterTaskDefinitionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -62,6 +61,9 @@ type RegisterTaskDefinitionInput struct {
 	//
 	// Family is a required field
 	Family *string `locationName:"family" type:"string" required:"true"`
+
+	// The Elastic Inference accelerators to use for the containers in the task.
+	InferenceAccelerators []InferenceAccelerator `locationName:"inferenceAccelerators" type:"list"`
 
 	// The IPC resource namespace to use for the containers in the task. The valid
 	// values are host, task, or none. If host is specified, then all containers
@@ -264,6 +266,13 @@ func (s *RegisterTaskDefinitionInput) Validate() error {
 			}
 		}
 	}
+	if s.InferenceAccelerators != nil {
+		for i, v := range s.InferenceAccelerators {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InferenceAccelerators", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 	if s.ProxyConfiguration != nil {
 		if err := s.ProxyConfiguration.Validate(); err != nil {
 			invalidParams.AddNested("ProxyConfiguration", err.(aws.ErrInvalidParams))
@@ -283,7 +292,6 @@ func (s *RegisterTaskDefinitionInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterTaskDefinitionResponse
 type RegisterTaskDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 

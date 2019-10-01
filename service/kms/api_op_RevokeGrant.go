@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/RevokeGrantRequest
 type RevokeGrantInput struct {
 	_ struct{} `type:"structure"`
 
@@ -66,7 +65,6 @@ func (s *RevokeGrantInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/RevokeGrantOutput
 type RevokeGrantOutput struct {
 	_ struct{} `type:"structure"`
 }

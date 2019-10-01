@@ -11,7 +11,6 @@ import (
 )
 
 // A request to create a SqlInjectionMatchSet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateSqlInjectionMatchSetRequest
 type CreateSqlInjectionMatchSetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -57,7 +56,6 @@ func (s *CreateSqlInjectionMatchSetInput) Validate() error {
 }
 
 // The response to a CreateSqlInjectionMatchSet request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateSqlInjectionMatchSetResponse
 type CreateSqlInjectionMatchSetOutput struct {
 	_ struct{} `type:"structure"`
 

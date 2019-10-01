@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-data-2018-10-23/BatchPutMessageRequest
 type BatchPutMessageInput struct {
 	_ struct{} `type:"structure"`
 
@@ -70,7 +69,6 @@ func (s BatchPutMessageInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-data-2018-10-23/BatchPutMessageResponse
 type BatchPutMessageOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -14,7 +14,6 @@ var _ = awsutil.Prettify
 
 // Gives a detailed description of the result of an action on each entry in
 // the request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/BatchResultErrorEntry
 type BatchResultErrorEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -53,7 +52,6 @@ func (s BatchResultErrorEntry) String() string {
 // &ChangeMessageVisibilityBatchRequestEntry.1.ReceiptHandle=your_receipt_handle
 //
 // &ChangeMessageVisibilityBatchRequestEntry.1.VisibilityTimeout=45
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ChangeMessageVisibilityBatchRequestEntry
 type ChangeMessageVisibilityBatchRequestEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -98,7 +96,6 @@ func (s *ChangeMessageVisibilityBatchRequestEntry) Validate() error {
 }
 
 // Encloses the Id of an entry in ChangeMessageVisibilityBatch.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ChangeMessageVisibilityBatchResultEntry
 type ChangeMessageVisibilityBatchResultEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -114,7 +111,6 @@ func (s ChangeMessageVisibilityBatchResultEntry) String() string {
 }
 
 // Encloses a receipt handle and an identifier for it.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessageBatchRequestEntry
 type DeleteMessageBatchRequestEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -156,7 +152,6 @@ func (s *DeleteMessageBatchRequestEntry) Validate() error {
 }
 
 // Encloses the Id of an entry in DeleteMessageBatch.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessageBatchResultEntry
 type DeleteMessageBatchResultEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -172,7 +167,6 @@ func (s DeleteMessageBatchResultEntry) String() string {
 }
 
 // An Amazon SQS message.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/Message
 type Message struct {
 	_ struct{} `type:"structure"`
 
@@ -237,7 +231,6 @@ func (s Message) String() string {
 // Name, type, value and the message body must not be empty or null. All parts
 // of the message attribute, including Name, Type, and Value, are part of the
 // message size restriction (256 KB or 262,144 bytes).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/MessageAttributeValue
 type MessageAttributeValue struct {
 	_ struct{} `type:"structure"`
 
@@ -287,8 +280,61 @@ func (s *MessageAttributeValue) Validate() error {
 	return nil
 }
 
+// The user-specified message system attribute value. For string data types,
+// the Value attribute has the same restrictions on the content as the message
+// body. For more information, see SendMessage.
+//
+// Name, type, value and the message body must not be empty or null.
+type MessageSystemAttributeValue struct {
+	_ struct{} `type:"structure"`
+
+	// Not implemented. Reserved for future use.
+	BinaryListValues [][]byte `locationName:"BinaryListValue" locationNameList:"BinaryListValue" type:"list" flattened:"true"`
+
+	// Binary type attributes can store any binary data, such as compressed data,
+	// encrypted data, or images.
+	//
+	// BinaryValue is automatically base64 encoded/decoded by the SDK.
+	BinaryValue []byte `type:"blob"`
+
+	// Amazon SQS supports the following logical data types: String, Number, and
+	// Binary. For the Number data type, you must use StringValue.
+	//
+	// You can also append custom labels. For more information, see Amazon SQS Message
+	// Attributes (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html)
+	// in the Amazon Simple Queue Service Developer Guide.
+	//
+	// DataType is a required field
+	DataType *string `type:"string" required:"true"`
+
+	// Not implemented. Reserved for future use.
+	StringListValues []string `locationName:"StringListValue" locationNameList:"StringListValue" type:"list" flattened:"true"`
+
+	// Strings are Unicode with UTF-8 binary encoding. For a list of code values,
+	// see ASCII Printable Characters (http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters).
+	StringValue *string `type:"string"`
+}
+
+// String returns the string representation
+func (s MessageSystemAttributeValue) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MessageSystemAttributeValue) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MessageSystemAttributeValue"}
+
+	if s.DataType == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DataType"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Contains the details of a single Amazon SQS message along with an Id.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessageBatchRequestEntry
 type SendMessageBatchRequestEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -392,6 +438,17 @@ type SendMessageBatchRequestEntry struct {
 	// MessageGroupId is required for FIFO queues. You can't use it for Standard
 	// queues.
 	MessageGroupId *string `type:"string"`
+
+	// The message system attribute to send Each message system attribute consists
+	// of a Name, Type, and Value.
+	//
+	//    * Currently, the only supported message system attribute is AWSTraceHeader.
+	//    Its type must be String and its value must be a correctly formatted AWS
+	//    X-Ray trace string.
+	//
+	//    * The size of a message system attribute doesn't count towards the total
+	//    size of a message.
+	MessageSystemAttributes map[string]MessageSystemAttributeValue `locationName:"MessageSystemAttribute" locationNameKey:"Name" locationNameValue:"Value" type:"map" flattened:"true"`
 }
 
 // String returns the string representation
@@ -417,6 +474,13 @@ func (s *SendMessageBatchRequestEntry) Validate() error {
 			}
 		}
 	}
+	if s.MessageSystemAttributes != nil {
+		for i, v := range s.MessageSystemAttributes {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MessageSystemAttributes", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -425,7 +489,6 @@ func (s *SendMessageBatchRequestEntry) Validate() error {
 }
 
 // Encloses a MessageId for a successfully-enqueued message in a SendMessageBatch.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessageBatchResultEntry
 type SendMessageBatchResultEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -447,6 +510,12 @@ type SendMessageBatchResultEntry struct {
 	//
 	// MD5OfMessageBody is a required field
 	MD5OfMessageBody *string `type:"string" required:"true"`
+
+	// An MD5 digest of the non-URL-encoded message system attribute string. You
+	// can use this attribute to verify that Amazon SQS received the message correctly.
+	// Amazon SQS URL-decodes the message before creating the MD5 digest. For information
+	// about MD5, see RFC1321 (https://www.ietf.org/rfc/rfc1321.txt).
+	MD5OfMessageSystemAttributes *string `type:"string"`
 
 	// An identifier for the message.
 	//

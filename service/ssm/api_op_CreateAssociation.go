@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationRequest
 type CreateAssociationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -29,6 +28,12 @@ type CreateAssociationInput struct {
 	DocumentVersion *string `type:"string"`
 
 	// The instance ID.
+	//
+	// InstanceId has been deprecated. To specify an instance ID for an association,
+	// use the Targets parameter. If you use the parameter InstanceId, you cannot
+	// use the parameters AssociationName, DocumentVersion, MaxErrors, MaxConcurrency,
+	// OutputLocation, or ScheduleExpression. To use these parameters, you must
+	// use the Targets parameter.
 	InstanceId *string `type:"string"`
 
 	// The maximum number of targets allowed to run the association at the same
@@ -88,7 +93,8 @@ type CreateAssociationInput struct {
 	// A cron expression when the association will be applied to the target(s).
 	ScheduleExpression *string `min:"1" type:"string"`
 
-	// The targets (either instances or tags) for the association.
+	// The targets (either instances or tags) for the association. You must specify
+	// a value for Targets if you don't specify a value for InstanceId.
 	Targets []Target `type:"list"`
 }
 
@@ -135,7 +141,6 @@ func (s *CreateAssociationInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationResult
 type CreateAssociationOutput struct {
 	_ struct{} `type:"structure"`
 

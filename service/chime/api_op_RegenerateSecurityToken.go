@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RegenerateSecurityTokenRequest
 type RegenerateSecurityTokenInput struct {
 	_ struct{} `type:"structure"`
 
@@ -67,7 +66,6 @@ func (s RegenerateSecurityTokenInput) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RegenerateSecurityTokenResponse
 type RegenerateSecurityTokenOutput struct {
 	_ struct{} `type:"structure"`
 

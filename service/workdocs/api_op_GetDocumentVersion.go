@@ -10,13 +10,12 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocumentVersionRequest
 type GetDocumentVersionInput struct {
 	_ struct{} `type:"structure"`
 
 	// Amazon WorkDocs authentication token. Do not set this field when using administrative
 	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string"`
+	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the document.
 	//
@@ -108,7 +107,6 @@ func (s GetDocumentVersionInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocumentVersionResponse
 type GetDocumentVersionOutput struct {
 	_ struct{} `type:"structure"`
 

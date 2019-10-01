@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListBotsRequest
 type ListBotsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -73,7 +72,6 @@ func (s ListBotsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListBotsResponse
 type ListBotsOutput struct {
 	_ struct{} `type:"structure"`
 

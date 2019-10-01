@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for CreateNetworkInterfacePermission.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkInterfacePermissionRequest
 type CreateNetworkInterfacePermissionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -60,7 +59,6 @@ func (s *CreateNetworkInterfacePermissionInput) Validate() error {
 }
 
 // Contains the output of CreateNetworkInterfacePermission.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkInterfacePermissionResult
 type CreateNetworkInterfacePermissionOutput struct {
 	_ struct{} `type:"structure"`
 

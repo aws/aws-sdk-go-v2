@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateExportTaskRequest
 type CreateExportTaskInput struct {
 	_ struct{} `type:"structure"`
 
@@ -93,7 +92,6 @@ func (s *CreateExportTaskInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateExportTaskResponse
 type CreateExportTaskOutput struct {
 	_ struct{} `type:"structure"`
 

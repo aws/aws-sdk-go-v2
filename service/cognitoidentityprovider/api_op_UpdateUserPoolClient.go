@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the request to update the user pool client.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolClientRequest
 type UpdateUserPoolClientInput struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +51,7 @@ type UpdateUserPoolClientInput struct {
 	// The ID of the client associated with the user pool.
 	//
 	// ClientId is a required field
-	ClientId *string `min:"1" type:"string" required:"true"`
+	ClientId *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The client name from the update user pool client request.
 	ClientName *string `min:"1" type:"string"`
@@ -144,7 +143,6 @@ func (s *UpdateUserPoolClientInput) Validate() error {
 
 // Represents the response from the server to the request to update the user
 // pool client.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolClientResponse
 type UpdateUserPoolClientOutput struct {
 	_ struct{} `type:"structure"`
 

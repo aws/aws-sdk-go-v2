@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/SelectResourceConfigRequest
 type SelectResourceConfigInput struct {
 	_ struct{} `type:"structure"`
 
@@ -48,7 +47,6 @@ func (s *SelectResourceConfigInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/SelectResourceConfigResponse
 type SelectResourceConfigOutput struct {
 	_ struct{} `type:"structure"`
 

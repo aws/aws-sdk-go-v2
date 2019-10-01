@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteOrganizationInput
 type DeleteOrganizationInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -21,7 +20,6 @@ func (s DeleteOrganizationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteOrganizationOutput
 type DeleteOrganizationOutput struct {
 	_ struct{} `type:"structure"`
 }

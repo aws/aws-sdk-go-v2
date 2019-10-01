@@ -10,7 +10,6 @@ import (
 )
 
 // The input parameters for the ListAllowedNodeTypeModifications operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ListAllowedNodeTypeModificationsMessage
 type ListAllowedNodeTypeModificationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -37,7 +36,6 @@ func (s ListAllowedNodeTypeModificationsInput) String() string {
 
 // Represents the allowed node types you can use to modify your cluster or replication
 // group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AllowedNodeTypeModificationsMessage
 type ListAllowedNodeTypeModificationsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -69,10 +67,10 @@ const opListAllowedNodeTypeModifications = "ListAllowedNodeTypeModifications"
 // Amazon ElastiCache.
 //
 // Lists all available node types that you can scale your Redis cluster's or
-// replication group's current node type up to.
+// replication group's current node type.
 //
 // When you use the ModifyCacheCluster or ModifyReplicationGroup operations
-// to scale up your cluster or replication group, the value of the CacheNodeType
+// to scale your cluster or replication group, the value of the CacheNodeType
 // parameter must be one of the node types returned by this operation.
 //
 //    // Example sending a request using ListAllowedNodeTypeModificationsRequest.

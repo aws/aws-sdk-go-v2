@@ -10,7 +10,6 @@ import (
 )
 
 // Represents a request to the create upload operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateUploadRequest
 type CreateUploadInput struct {
 	_ struct{} `type:"structure"`
 
@@ -146,7 +145,6 @@ func (s *CreateUploadInput) Validate() error {
 }
 
 // Represents the result of a create upload request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateUploadResult
 type CreateUploadOutput struct {
 	_ struct{} `type:"structure"`
 

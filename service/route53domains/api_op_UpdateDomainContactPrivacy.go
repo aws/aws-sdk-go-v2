@@ -10,7 +10,6 @@ import (
 )
 
 // The UpdateDomainContactPrivacy request includes the following elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainContactPrivacyRequest
 type UpdateDomainContactPrivacyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -62,7 +61,6 @@ func (s *UpdateDomainContactPrivacyInput) Validate() error {
 }
 
 // The UpdateDomainContactPrivacy response includes the following element.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainContactPrivacyResponse
 type UpdateDomainContactPrivacyOutput struct {
 	_ struct{} `type:"structure"`
 

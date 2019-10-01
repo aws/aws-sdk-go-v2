@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateNetworkProfileRequest
 type CreateNetworkProfileInput struct {
 	_ struct{} `type:"structure"`
 
@@ -23,7 +22,7 @@ type CreateNetworkProfileInput struct {
 	ClientRequestToken *string `min:"10" type:"string" required:"true" idempotencyToken:"true"`
 
 	// The current password of the Wi-Fi network.
-	CurrentPassword *string `min:"5" type:"string"`
+	CurrentPassword *string `min:"5" type:"string" sensitive:"true"`
 
 	// Detailed information about a device's network profile.
 	Description *string `type:"string"`
@@ -40,7 +39,7 @@ type CreateNetworkProfileInput struct {
 	// The next, or subsequent, password of the Wi-Fi network. This password is
 	// asynchronously transmitted to the device and is used when the password of
 	// the network changes to NextPassword.
-	NextPassword *string `type:"string"`
+	NextPassword *string `type:"string" sensitive:"true"`
 
 	// The security type of the Wi-Fi network. This can be WPA2_ENTERPRISE, WPA2_PSK,
 	// WPA_PSK, WEP, or OPEN.
@@ -103,7 +102,6 @@ func (s *CreateNetworkProfileInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateNetworkProfileResponse
 type CreateNetworkProfileOutput struct {
 	_ struct{} `type:"structure"`
 

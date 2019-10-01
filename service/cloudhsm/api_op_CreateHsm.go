@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the inputs for the CreateHsm operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateHsmRequest
 type CreateHsmInput struct {
 	_ struct{} `locationName:"CreateHsmRequest" type:"structure"`
 
@@ -88,7 +87,6 @@ func (s *CreateHsmInput) Validate() error {
 }
 
 // Contains the output of the CreateHsm operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateHsmResponse
 type CreateHsmOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -11,7 +11,6 @@ import (
 )
 
 // A request for usage information about the identity pool.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DescribeIdentityPoolUsageRequest
 type DescribeIdentityPoolUsageInput struct {
 	_ struct{} `type:"structure"`
 
@@ -58,7 +57,6 @@ func (s DescribeIdentityPoolUsageInput) MarshalFields(e protocol.FieldEncoder) e
 }
 
 // Response to a successful DescribeIdentityPoolUsage request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DescribeIdentityPoolUsageResponse
 type DescribeIdentityPoolUsageOutput struct {
 	_ struct{} `type:"structure"`
 

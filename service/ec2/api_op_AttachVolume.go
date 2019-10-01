@@ -11,7 +11,6 @@ import (
 )
 
 // Contains the parameters for AttachVolume.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachVolumeRequest
 type AttachVolumeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -66,7 +65,6 @@ func (s *AttachVolumeInput) Validate() error {
 }
 
 // Describes volume attachment details.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeAttachment
 type AttachVolumeOutput struct {
 	_ struct{} `type:"structure"`
 

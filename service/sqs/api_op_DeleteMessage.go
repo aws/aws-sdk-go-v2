@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessageRequest
 type DeleteMessageInput struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +50,6 @@ func (s *DeleteMessageInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessageOutput
 type DeleteMessageOutput struct {
 	_ struct{} `type:"structure"`
 }

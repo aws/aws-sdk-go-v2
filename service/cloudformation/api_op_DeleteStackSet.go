@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackSetInput
 type DeleteStackSetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -39,7 +38,6 @@ func (s *DeleteStackSetInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackSetOutput
 type DeleteStackSetOutput struct {
 	_ struct{} `type:"structure"`
 }

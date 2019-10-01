@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeActionTargetsRequest
 type DescribeActionTargetsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -73,7 +72,6 @@ func (s DescribeActionTargetsInput) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeActionTargetsResponse
 type DescribeActionTargetsOutput struct {
 	_ struct{} `type:"structure"`
 

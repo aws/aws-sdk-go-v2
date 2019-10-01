@@ -9,12 +9,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AssociateSoftwareTokenRequest
 type AssociateSoftwareTokenInput struct {
 	_ struct{} `type:"structure"`
 
 	// The access token.
-	AccessToken *string `type:"string"`
+	AccessToken *string `type:"string" sensitive:"true"`
 
 	// The session which should be passed both ways in challenge-response calls
 	// to the service. This allows authentication of the user as part of the MFA
@@ -40,13 +39,12 @@ func (s *AssociateSoftwareTokenInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AssociateSoftwareTokenResponse
 type AssociateSoftwareTokenOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A unique generated shared secret code that is used in the TOTP algorithm
 	// to generate a one time code.
-	SecretCode *string `min:"16" type:"string"`
+	SecretCode *string `min:"16" type:"string" sensitive:"true"`
 
 	// The session which should be passed both ways in challenge-response calls
 	// to the service. This allows authentication of the user as part of the MFA

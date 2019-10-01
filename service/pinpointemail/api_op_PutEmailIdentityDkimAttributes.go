@@ -12,7 +12,6 @@ import (
 
 // A request to enable or disable DKIM signing of email that you send from an
 // email identity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutEmailIdentityDkimAttributesRequest
 type PutEmailIdentityDkimAttributesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -69,7 +68,6 @@ func (s PutEmailIdentityDkimAttributesInput) MarshalFields(e protocol.FieldEncod
 
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutEmailIdentityDkimAttributesResponse
 type PutEmailIdentityDkimAttributesOutput struct {
 	_ struct{} `type:"structure"`
 }

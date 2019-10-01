@@ -11,7 +11,6 @@ import (
 )
 
 // CreateSMBFileShareInput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSMBFileShareInput
 type CreateSMBFileShareInput struct {
 	_ struct{} `type:"structure"`
 
@@ -175,7 +174,6 @@ func (s *CreateSMBFileShareInput) Validate() error {
 }
 
 // CreateSMBFileShareOutput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSMBFileShareOutput
 type CreateSMBFileShareOutput struct {
 	_ struct{} `type:"structure"`
 

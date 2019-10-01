@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input to ModifyDBClusterSnapshotAttribute.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBClusterSnapshotAttributeMessage
 type ModifyDBClusterSnapshotAttributeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -72,7 +71,6 @@ func (s *ModifyDBClusterSnapshotAttributeInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBClusterSnapshotAttributeResult
 type ModifyDBClusterSnapshotAttributeOutput struct {
 	_ struct{} `type:"structure"`
 

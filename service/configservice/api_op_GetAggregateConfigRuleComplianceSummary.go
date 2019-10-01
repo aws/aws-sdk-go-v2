@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateConfigRuleComplianceSummaryRequest
 type GetAggregateConfigRuleComplianceSummaryInput struct {
 	_ struct{} `type:"structure"`
 
@@ -61,7 +60,6 @@ func (s *GetAggregateConfigRuleComplianceSummaryInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateConfigRuleComplianceSummaryResponse
 type GetAggregateConfigRuleComplianceSummaryOutput struct {
 	_ struct{} `type:"structure"`
 

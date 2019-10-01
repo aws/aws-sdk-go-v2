@@ -11,7 +11,6 @@ import (
 )
 
 // Information about a group reset request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResetDeploymentsRequest
 type ResetDeploymentsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -68,7 +67,6 @@ func (s ResetDeploymentsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResetDeploymentsResponse
 type ResetDeploymentsOutput struct {
 	_ struct{} `type:"structure"`
 

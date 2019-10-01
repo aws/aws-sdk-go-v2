@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteQueueRequest
 type DeleteQueueInput struct {
 	_ struct{} `type:"structure"`
 
@@ -42,7 +41,6 @@ func (s *DeleteQueueInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteQueueOutput
 type DeleteQueueOutput struct {
 	_ struct{} `type:"structure"`
 }

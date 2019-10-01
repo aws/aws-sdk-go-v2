@@ -11,7 +11,6 @@ import (
 )
 
 // Represents the input of a BatchGetItem operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchGetItemInput
 type BatchGetItemInput struct {
 	_ struct{} `type:"structure"`
 
@@ -112,7 +111,6 @@ func (s *BatchGetItemInput) Validate() error {
 }
 
 // Represents the output of a BatchGetItem operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchGetItemOutput
 type BatchGetItemOutput struct {
 	_ struct{} `type:"structure"`
 

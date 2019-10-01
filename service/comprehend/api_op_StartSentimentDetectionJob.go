@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartSentimentDetectionJobRequest
 type StartSentimentDetectionJobInput struct {
 	_ struct{} `type:"structure"`
 
@@ -116,7 +115,6 @@ func (s *StartSentimentDetectionJobInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartSentimentDetectionJobResponse
 type StartSentimentDetectionJobOutput struct {
 	_ struct{} `type:"structure"`
 

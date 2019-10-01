@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateComputeEnvironmentRequest
 type UpdateComputeEnvironmentInput struct {
 	_ struct{} `type:"structure"`
 
@@ -94,7 +93,6 @@ func (s UpdateComputeEnvironmentInput) MarshalFields(e protocol.FieldEncoder) er
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateComputeEnvironmentResponse
 type UpdateComputeEnvironmentOutput struct {
 	_ struct{} `type:"structure"`
 

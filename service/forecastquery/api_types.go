@@ -11,7 +11,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // The forecast value for a specific date. Part of the Forecast object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecastquery-2018-06-26/DataPoint
 type DataPoint struct {
 	_ struct{} `type:"structure"`
 
@@ -29,7 +28,6 @@ func (s DataPoint) String() string {
 
 // Provides information about a forecast. Returned as part of the QueryForecast
 // response.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecastquery-2018-06-26/Forecast
 type Forecast struct {
 	_ struct{} `type:"structure"`
 

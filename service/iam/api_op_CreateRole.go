@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateRoleRequest
 type CreateRoleInput struct {
 	_ struct{} `type:"structure"`
 
@@ -34,8 +33,7 @@ type CreateRoleInput struct {
 	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
 	//    return (\u000D)
 	//
-	// Upon success, the response includes the same trust policy as a URL-encoded
-	// JSON string.
+	// Upon success, the response includes the same trust policy in JSON format.
 	//
 	// AssumeRolePolicyDocument is a required field
 	AssumeRolePolicyDocument *string `min:"1" type:"string" required:"true"`
@@ -143,7 +141,6 @@ func (s *CreateRoleInput) Validate() error {
 }
 
 // Contains the response to a successful CreateRole request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateRoleResponse
 type CreateRoleOutput struct {
 	_ struct{} `type:"structure"`
 

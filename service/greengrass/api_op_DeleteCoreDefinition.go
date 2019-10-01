@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteCoreDefinitionRequest
 type DeleteCoreDefinitionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +49,6 @@ func (s DeleteCoreDefinitionInput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteCoreDefinitionResponse
 type DeleteCoreDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 }

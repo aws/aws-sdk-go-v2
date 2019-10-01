@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminLinkProviderForUserRequest
 type AdminLinkProviderForUserInput struct {
 	_ struct{} `type:"structure"`
 
@@ -96,7 +95,6 @@ func (s *AdminLinkProviderForUserInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminLinkProviderForUserResponse
 type AdminLinkProviderForUserOutput struct {
 	_ struct{} `type:"structure"`
 }

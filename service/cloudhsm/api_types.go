@@ -12,7 +12,6 @@ var _ = awsutil.Prettify
 
 // A key-value pair that identifies or specifies metadata about an AWS CloudHSM
 // resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 

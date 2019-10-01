@@ -12,7 +12,6 @@ import (
 )
 
 // Represents the input of an UpdateApplication operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UpdateApplicationInput
 type UpdateApplicationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -44,7 +43,6 @@ func (s *UpdateApplicationInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UpdateApplicationOutput
 type UpdateApplicationOutput struct {
 	_ struct{} `type:"structure"`
 }

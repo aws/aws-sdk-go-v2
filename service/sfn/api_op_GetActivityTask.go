@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/GetActivityTaskInput
 type GetActivityTaskInput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,12 +49,11 @@ func (s *GetActivityTaskInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/GetActivityTaskOutput
 type GetActivityTaskOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The string that contains the JSON input data for the task.
-	Input *string `locationName:"input" type:"string"`
+	Input *string `locationName:"input" type:"string" sensitive:"true"`
 
 	// A token that identifies the scheduled task. This token must be copied and
 	// included in subsequent calls to SendTaskHeartbeat, SendTaskSuccess or SendTaskFailure

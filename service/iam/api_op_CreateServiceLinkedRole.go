@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceLinkedRoleRequest
 type CreateServiceLinkedRoleInput struct {
 	_ struct{} `type:"structure"`
 
@@ -67,7 +66,6 @@ func (s *CreateServiceLinkedRoleInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceLinkedRoleResponse
 type CreateServiceLinkedRoleOutput struct {
 	_ struct{} `type:"structure"`
 

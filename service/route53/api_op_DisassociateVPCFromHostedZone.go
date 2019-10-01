@@ -12,7 +12,6 @@ import (
 
 // A complex type that contains information about the VPC that you want to disassociate
 // from a specified private hosted zone.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DisassociateVPCFromHostedZoneRequest
 type DisassociateVPCFromHostedZoneInput struct {
 	_ struct{} `locationName:"DisassociateVPCFromHostedZoneRequest" type:"structure" xmlURI:"https://route53.amazonaws.com/doc/2013-04-01/"`
 
@@ -88,7 +87,6 @@ func (s DisassociateVPCFromHostedZoneInput) MarshalFields(e protocol.FieldEncode
 
 // A complex type that contains the response information for the disassociate
 // request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DisassociateVPCFromHostedZoneResponse
 type DisassociateVPCFromHostedZoneOutput struct {
 	_ struct{} `type:"structure"`
 

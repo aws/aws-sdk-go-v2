@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/SetRepositoryPolicyRequest
 type SetRepositoryPolicyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -61,7 +60,6 @@ func (s *SetRepositoryPolicyInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/SetRepositoryPolicyResponse
 type SetRepositoryPolicyOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetWebACLForResourceRequest
 type GetWebACLForResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -49,7 +48,6 @@ func (s *GetWebACLForResourceInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetWebACLForResourceResponse
 type GetWebACLForResourceOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnConnectionRequest
 type ModifyVpnConnectionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -53,7 +52,6 @@ func (s *ModifyVpnConnectionInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnConnectionResult
 type ModifyVpnConnectionOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -71,7 +69,7 @@ const opModifyVpnConnection = "ModifyVpnConnection"
 // ModifyVpnConnectionRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// Modifies the target gateway of a AWS Site-to-Site VPN connection. The following
+// Modifies the target gateway of an AWS Site-to-Site VPN connection. The following
 // migration options are available:
 //
 //    * An existing virtual private gateway to a new virtual private gateway

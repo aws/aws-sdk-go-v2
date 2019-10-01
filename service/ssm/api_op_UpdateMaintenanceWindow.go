@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowRequest
 type UpdateMaintenanceWindowInput struct {
 	_ struct{} `type:"structure"`
 
@@ -22,7 +21,7 @@ type UpdateMaintenanceWindowInput struct {
 	Cutoff *int64 `type:"integer"`
 
 	// An optional description for the update request.
-	Description *string `min:"1" type:"string"`
+	Description *string `min:"1" type:"string" sensitive:"true"`
 
 	// The duration of the maintenance window in hours.
 	Duration *int64 `min:"1" type:"integer"`
@@ -98,7 +97,6 @@ func (s *UpdateMaintenanceWindowInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowResult
 type UpdateMaintenanceWindowOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -111,7 +109,7 @@ type UpdateMaintenanceWindowOutput struct {
 	Cutoff *int64 `type:"integer"`
 
 	// An optional description of the update.
-	Description *string `min:"1" type:"string"`
+	Description *string `min:"1" type:"string" sensitive:"true"`
 
 	// The duration of the maintenance window in hours.
 	Duration *int64 `min:"1" type:"integer"`

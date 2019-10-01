@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateGroupRequest
 type UpdateGroupInput struct {
 	_ struct{} `type:"structure"`
 
@@ -67,7 +66,6 @@ func (s *UpdateGroupInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateGroupResponse
 type UpdateGroupOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/DeleteIntegrationResponseRequest
 type DeleteIntegrationResponseInput struct {
 	_ struct{} `type:"structure"`
 
@@ -77,7 +76,6 @@ func (s DeleteIntegrationResponseInput) MarshalFields(e protocol.FieldEncoder) e
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/DeleteIntegrationResponseOutput
 type DeleteIntegrationResponseOutput struct {
 	_ struct{} `type:"structure"`
 }

@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/UntagResourceRequest
 type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -53,7 +52,6 @@ func (s *UntagResourceInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/UntagResourceResponse
 type UntagResourceOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -68,7 +66,8 @@ const opUntagResource = "UntagResource"
 // UntagResourceRequest returns a request value for making API operation for
 // Amazon Kinesis Analytics.
 //
-// Removes one or more tags from a Kinesis Analytics application.
+// Removes one or more tags from a Kinesis Analytics application. For more information,
+// see Using Tagging (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-tagging.html).
 //
 //    // Example sending a request using UntagResourceRequest.
 //    req := client.UntagResourceRequest(params)

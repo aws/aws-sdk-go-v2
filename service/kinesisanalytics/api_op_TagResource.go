@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/TagResourceRequest
 type TagResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -61,7 +60,6 @@ func (s *TagResourceInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/TagResourceResponse
 type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -78,7 +76,8 @@ const opTagResource = "TagResource"
 //
 // Adds one or more key-value tags to a Kinesis Analytics application. Note
 // that the maximum number of application tags includes system tags. The maximum
-// number of user-defined application tags is 50.
+// number of user-defined application tags is 50. For more information, see
+// Using Tagging (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-tagging.html).
 //
 //    // Example sending a request using TagResourceRequest.
 //    req := client.TagResourceRequest(params)

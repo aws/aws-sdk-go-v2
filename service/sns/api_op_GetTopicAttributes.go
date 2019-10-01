@@ -10,7 +10,6 @@ import (
 )
 
 // Input for GetTopicAttributes action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetTopicAttributesInput
 type GetTopicAttributesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s *GetTopicAttributesInput) Validate() error {
 }
 
 // Response for GetTopicAttributes action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetTopicAttributesResponse
 type GetTopicAttributesOutput struct {
 	_ struct{} `type:"structure"`
 

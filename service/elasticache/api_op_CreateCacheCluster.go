@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a CreateCacheCluster operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheClusterMessage
 type CreateCacheClusterInput struct {
 	_ struct{} `type:"structure"`
 
@@ -46,7 +45,7 @@ type CreateCacheClusterInput struct {
 	//
 	// Constraints:
 	//
-	//    * A name must contain from 1 to 20 alphanumeric characters or hyphens.
+	//    * A name must contain from 1 to 50 alphanumeric characters or hyphens.
 	//
 	//    * The first character must be a letter.
 	//
@@ -282,7 +281,6 @@ func (s *CreateCacheClusterInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheClusterResult
 type CreateCacheClusterOutput struct {
 	_ struct{} `type:"structure"`
 

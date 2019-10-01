@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportSnapshotRequest
 type ImportSnapshotInput struct {
 	_ struct{} `type:"structure"`
 
@@ -77,7 +76,6 @@ func (s ImportSnapshotInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportSnapshotResult
 type ImportSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 

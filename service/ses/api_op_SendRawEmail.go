@@ -12,7 +12,6 @@ import (
 
 // Represents a request to send a single raw email using Amazon SES. For more
 // information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendRawEmailRequest
 type SendRawEmailInput struct {
 	_ struct{} `type:"structure"`
 
@@ -158,7 +157,6 @@ func (s *SendRawEmailInput) Validate() error {
 }
 
 // Represents a unique message ID.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendRawEmailResponse
 type SendRawEmailOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -236,14 +234,11 @@ const opSendRawEmail = "SendRawEmail"
 //    you can pass optional parameters SourceArn, FromArn, and/or ReturnPathArn
 //    to the API, or you can include the following X-headers in the header of
 //    your raw email: X-SES-SOURCE-ARN X-SES-FROM-ARN X-SES-RETURN-PATH-ARN
-//    Do not include these X-headers in the DKIM signature; Amazon SES will
-//    remove them before sending the email. For most common sending authorization
-//    scenarios, we recommend that you specify the SourceIdentityArn parameter
-//    and not the FromIdentityArn or ReturnPathIdentityArn parameters. If you
-//    only specify the SourceIdentityArn parameter, Amazon SES will set the
-//    From and Return Path addresses to the identity specified in SourceIdentityArn.
-//    For more information about sending authorization, see the Using Sending
-//    Authorization with Amazon SES (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
+//    Don't include these X-headers in the DKIM signature. Amazon SES removes
+//    these before it sends the email. If you only specify the SourceIdentityArn
+//    parameter, Amazon SES sets the From and Return-Path addresses to the same
+//    identity that you specified. For more information about sending authorization,
+//    see the Using Sending Authorization with Amazon SES (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
 //    in the Amazon SES Developer Guide.
 //
 //    * For every message that you send, the total number of recipients (including

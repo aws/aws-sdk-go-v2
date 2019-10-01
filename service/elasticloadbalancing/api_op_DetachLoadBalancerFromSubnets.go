@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for DetachLoadBalancerFromSubnets.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DetachLoadBalancerFromSubnetsInput
 type DetachLoadBalancerFromSubnetsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -49,7 +48,6 @@ func (s *DetachLoadBalancerFromSubnetsInput) Validate() error {
 }
 
 // Contains the output of DetachLoadBalancerFromSubnets.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DetachLoadBalancerFromSubnetsOutput
 type DetachLoadBalancerFromSubnetsOutput struct {
 	_ struct{} `type:"structure"`
 

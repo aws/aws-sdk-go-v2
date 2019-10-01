@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpointMessage
 type CreateEndpointInput struct {
 	_ struct{} `type:"structure"`
 
@@ -103,7 +102,7 @@ type CreateEndpointInput struct {
 	MongoDbSettings *MongoDbSettings `type:"structure"`
 
 	// The password to be used to log in to the endpoint database.
-	Password *string `type:"string"`
+	Password *string `type:"string" sensitive:"true"`
 
 	// The port used by the endpoint database.
 	Port *int64 `type:"integer"`
@@ -170,7 +169,6 @@ func (s *CreateEndpointInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpointResponse
 type CreateEndpointOutput struct {
 	_ struct{} `type:"structure"`
 

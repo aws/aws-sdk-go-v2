@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/AddPermissionInput
 type AddPermissionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -71,7 +70,6 @@ func (s *AddPermissionInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/AddPermissionOutput
 type AddPermissionOutput struct {
 	_ struct{} `type:"structure"`
 }

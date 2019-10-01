@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetServiceRequest
 type GetServiceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -38,7 +37,6 @@ func (s *GetServiceInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetServiceResponse
 type GetServiceOutput struct {
 	_ struct{} `type:"structure"`
 

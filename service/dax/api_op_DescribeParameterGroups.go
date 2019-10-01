@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeParameterGroupsRequest
 type DescribeParameterGroupsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -34,7 +33,6 @@ func (s DescribeParameterGroupsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeParameterGroupsResponse
 type DescribeParameterGroupsOutput struct {
 	_ struct{} `type:"structure"`
 

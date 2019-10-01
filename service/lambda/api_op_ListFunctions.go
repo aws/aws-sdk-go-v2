@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctionsRequest
 type ListFunctionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -80,7 +79,6 @@ func (s ListFunctionsInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A list of Lambda functions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctionsResponse
 type ListFunctionsOutput struct {
 	_ struct{} `type:"structure"`
 

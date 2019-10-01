@@ -11,7 +11,6 @@ import (
 )
 
 // A request to obtain more information about a dedicated IP address.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDedicatedIpRequest
 type GetDedicatedIpInput struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s GetDedicatedIpInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a dedicated IP address.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDedicatedIpResponse
 type GetDedicatedIpOutput struct {
 	_ struct{} `type:"structure"`
 

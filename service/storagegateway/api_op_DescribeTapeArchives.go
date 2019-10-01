@@ -10,7 +10,6 @@ import (
 )
 
 // DescribeTapeArchivesInput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapeArchivesInput
 type DescribeTapeArchivesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -49,7 +48,6 @@ func (s *DescribeTapeArchivesInput) Validate() error {
 }
 
 // DescribeTapeArchivesOutput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapeArchivesOutput
 type DescribeTapeArchivesOutput struct {
 	_ struct{} `type:"structure"`
 

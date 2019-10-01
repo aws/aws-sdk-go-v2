@@ -10,7 +10,6 @@ import (
 )
 
 // SetSMBGuestPasswordInput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SetSMBGuestPasswordInput
 type SetSMBGuestPasswordInput struct {
 	_ struct{} `type:"structure"`
 
@@ -23,7 +22,7 @@ type SetSMBGuestPasswordInput struct {
 	// The password that you want to set for your SMB Server.
 	//
 	// Password is a required field
-	Password *string `min:"6" type:"string" required:"true"`
+	Password *string `min:"6" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -55,12 +54,11 @@ func (s *SetSMBGuestPasswordInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SetSMBGuestPasswordOutput
 type SetSMBGuestPasswordOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string `min:"50" type:"string"`
 }
 

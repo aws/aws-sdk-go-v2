@@ -11,7 +11,6 @@ import (
 )
 
 // Creates an AWS Managed Microsoft AD directory.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateMicrosoftADRequest
 type CreateMicrosoftADInput struct {
 	_ struct{} `type:"structure"`
 
@@ -33,7 +32,7 @@ type CreateMicrosoftADInput struct {
 	// The password for the default administrative user named Admin.
 	//
 	// Password is a required field
-	Password *string `type:"string" required:"true"`
+	Password *string `type:"string" required:"true" sensitive:"true"`
 
 	// The NetBIOS name for your domain. A short identifier for your domain, such
 	// as CORP. If you don't specify a NetBIOS name, it will default to the first
@@ -89,7 +88,6 @@ func (s *CreateMicrosoftADInput) Validate() error {
 }
 
 // Result of a CreateMicrosoftAD request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateMicrosoftADResult
 type CreateMicrosoftADOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Information about an action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Action
 type Action struct {
 	_ struct{} `type:"structure"`
 
@@ -92,7 +91,6 @@ func (s *Action) Validate() error {
 
 // Request parameters to use when integrating with Amazon Cognito to authenticate
 // users.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AuthenticateCognitoActionConfig
 type AuthenticateCognitoActionConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -171,7 +169,6 @@ func (s *AuthenticateCognitoActionConfig) Validate() error {
 
 // Request parameters when using an identity provider (IdP) that is compliant
 // with OpenID Connect (OIDC) to authenticate users.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AuthenticateOidcActionConfig
 type AuthenticateOidcActionConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -279,14 +276,15 @@ func (s *AuthenticateOidcActionConfig) Validate() error {
 }
 
 // Information about an Availability Zone.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AvailabilityZone
 type AvailabilityZone struct {
 	_ struct{} `type:"structure"`
 
-	// [Network Load Balancers] The static IP address.
+	// [Network Load Balancers] If you need static IP addresses for your load balancer,
+	// you can specify one Elastic IP address per Availability Zone when you create
+	// the load balancer.
 	LoadBalancerAddresses []LoadBalancerAddress `type:"list"`
 
-	// The ID of the subnet.
+	// The ID of the subnet. You can specify one subnet per Availability Zone.
 	SubnetId *string `type:"string"`
 
 	// The name of the Availability Zone.
@@ -299,7 +297,6 @@ func (s AvailabilityZone) String() string {
 }
 
 // Information about an SSL server certificate.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Certificate
 type Certificate struct {
 	_ struct{} `type:"structure"`
 
@@ -319,7 +316,6 @@ func (s Certificate) String() string {
 }
 
 // Information about a cipher used in a policy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Cipher
 type Cipher struct {
 	_ struct{} `type:"structure"`
 
@@ -336,7 +332,6 @@ func (s Cipher) String() string {
 }
 
 // Information about an action that returns a custom HTTP response.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/FixedResponseActionConfig
 type FixedResponseActionConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -375,7 +370,6 @@ func (s *FixedResponseActionConfig) Validate() error {
 }
 
 // Information about a host header condition.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/HostHeaderConditionConfig
 type HostHeaderConditionConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -397,7 +391,6 @@ func (s HostHeaderConditionConfig) String() string {
 //
 // There is a set of standard HTTP header fields. You can also define custom
 // HTTP header fields.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/HttpHeaderConditionConfig
 type HttpHeaderConditionConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -433,7 +426,6 @@ func (s HttpHeaderConditionConfig) String() string {
 // HTTP defines a set of request methods, also referred to as HTTP verbs. For
 // more information, see the HTTP Method Registry (https://www.iana.org/assignments/http-methods/http-methods.xhtml).
 // You can also define custom HTTP methods.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/HttpRequestMethodConditionConfig
 type HttpRequestMethodConditionConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -455,7 +447,6 @@ func (s HttpRequestMethodConditionConfig) String() string {
 }
 
 // Information about an Elastic Load Balancing resource limit for your AWS account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Limit
 type Limit struct {
 	_ struct{} `type:"structure"`
 
@@ -490,7 +481,6 @@ func (s Limit) String() string {
 }
 
 // Information about a listener.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Listener
 type Listener struct {
 	_ struct{} `type:"structure"`
 
@@ -523,7 +513,6 @@ func (s Listener) String() string {
 }
 
 // Information about a load balancer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/LoadBalancer
 type LoadBalancer struct {
 	_ struct{} `type:"structure"`
 
@@ -580,7 +569,6 @@ func (s LoadBalancer) String() string {
 }
 
 // Information about a static IP address for a load balancer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/LoadBalancerAddress
 type LoadBalancerAddress struct {
 	_ struct{} `type:"structure"`
 
@@ -597,7 +585,6 @@ func (s LoadBalancerAddress) String() string {
 }
 
 // Information about a load balancer attribute.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/LoadBalancerAttribute
 type LoadBalancerAttribute struct {
 	_ struct{} `type:"structure"`
 
@@ -644,7 +631,6 @@ func (s LoadBalancerAttribute) String() string {
 }
 
 // Information about the state of the load balancer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/LoadBalancerState
 type LoadBalancerState struct {
 	_ struct{} `type:"structure"`
 
@@ -663,7 +649,6 @@ func (s LoadBalancerState) String() string {
 }
 
 // Information to use when checking for a successful response from a target.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Matcher
 type Matcher struct {
 	_ struct{} `type:"structure"`
 
@@ -699,7 +684,6 @@ func (s *Matcher) Validate() error {
 }
 
 // Information about a path pattern condition.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/PathPatternConditionConfig
 type PathPatternConditionConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -726,7 +710,6 @@ func (s PathPatternConditionConfig) String() string {
 // and is terminated by either a '#' character or the end of the URI. A typical
 // query string contains key/value pairs separated by '&' characters. The allowed
 // characters are specified by RFC 3986. Any character can be percentage encoded.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/QueryStringConditionConfig
 type QueryStringConditionConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -748,7 +731,6 @@ func (s QueryStringConditionConfig) String() string {
 }
 
 // Information about a key/value pair.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/QueryStringKeyValuePair
 type QueryStringKeyValuePair struct {
 	_ struct{} `type:"structure"`
 
@@ -785,7 +767,6 @@ func (s QueryStringKeyValuePair) String() string {
 //
 // For example, you can change the path to "/new/#{path}", the hostname to "example.#{host}",
 // or the query to "#{query}&value=xyz".
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RedirectActionConfig
 type RedirectActionConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -842,7 +823,6 @@ func (s *RedirectActionConfig) Validate() error {
 }
 
 // Information about a rule.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Rule
 type Rule struct {
 	_ struct{} `type:"structure"`
 
@@ -872,7 +852,6 @@ func (s Rule) String() string {
 }
 
 // Information about a condition for a rule.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RuleCondition
 type RuleCondition struct {
 	_ struct{} `type:"structure"`
 
@@ -947,7 +926,6 @@ func (s RuleCondition) String() string {
 }
 
 // Information about the priorities for the rules for a listener.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RulePriorityPair
 type RulePriorityPair struct {
 	_ struct{} `type:"structure"`
 
@@ -981,7 +959,6 @@ func (s *RulePriorityPair) Validate() error {
 // You can use this condition to route based on the IP address of the source
 // that connects to the load balancer. If a client is behind a proxy, this is
 // the IP address of the proxy not the IP address of the client.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SourceIpConditionConfig
 type SourceIpConditionConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1001,7 +978,6 @@ func (s SourceIpConditionConfig) String() string {
 }
 
 // Information about a policy used for SSL negotiation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SslPolicy
 type SslPolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -1021,7 +997,6 @@ func (s SslPolicy) String() string {
 }
 
 // Information about a subnet mapping.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SubnetMapping
 type SubnetMapping struct {
 	_ struct{} `type:"structure"`
 
@@ -1038,7 +1013,6 @@ func (s SubnetMapping) String() string {
 }
 
 // Information about a tag.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -1074,7 +1048,6 @@ func (s *Tag) Validate() error {
 }
 
 // The tags associated with a resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TagDescription
 type TagDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -1091,7 +1064,6 @@ func (s TagDescription) String() string {
 }
 
 // Information about a target.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TargetDescription
 type TargetDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -1148,7 +1120,6 @@ func (s *TargetDescription) Validate() error {
 }
 
 // Information about a target group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TargetGroup
 type TargetGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -1214,7 +1185,6 @@ func (s TargetGroup) String() string {
 }
 
 // Information about a target group attribute.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TargetGroupAttribute
 type TargetGroupAttribute struct {
 	_ struct{} `type:"structure"`
 
@@ -1275,7 +1245,6 @@ func (s TargetGroupAttribute) String() string {
 }
 
 // Information about the current health of a target.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TargetHealth
 type TargetHealth struct {
 	_ struct{} `type:"structure"`
 
@@ -1304,9 +1273,8 @@ type TargetHealth struct {
 	//
 	//    * Target.Timeout - The health check requests timed out.
 	//
-	//    * Target.FailedHealthChecks - The health checks failed because the connection
-	//    to the target timed out, the target response was malformed, or the target
-	//    failed the health check for an unknown reason.
+	//    * Target.FailedHealthChecks - The load balancer received an error while
+	//    establishing a connection to the target or the target response was malformed.
 	//
 	//    * Elb.InternalError - The health checks failed due to an internal error.
 	//
@@ -1347,7 +1315,6 @@ func (s TargetHealth) String() string {
 }
 
 // Information about the health of a target.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TargetHealthDescription
 type TargetHealthDescription struct {
 	_ struct{} `type:"structure"`
 

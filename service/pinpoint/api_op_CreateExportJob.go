@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateExportJobRequest
 type CreateExportJobInput struct {
 	_ struct{} `type:"structure" payload:"ExportJobRequest"`
 
@@ -71,7 +70,6 @@ func (s CreateExportJobInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateExportJobResponse
 type CreateExportJobOutput struct {
 	_ struct{} `type:"structure" payload:"ExportJobResponse"`
 

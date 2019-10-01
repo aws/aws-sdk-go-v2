@@ -11,7 +11,6 @@ import (
 
 // Represents a request to delete one of your Amazon SES identities (an email
 // address or domain).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteIdentityRequest
 type DeleteIdentityInput struct {
 	_ struct{} `type:"structure"`
 
@@ -41,7 +40,6 @@ func (s *DeleteIdentityInput) Validate() error {
 }
 
 // An empty element returned on a successful request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteIdentityResponse
 type DeleteIdentityOutput struct {
 	_ struct{} `type:"structure"`
 }

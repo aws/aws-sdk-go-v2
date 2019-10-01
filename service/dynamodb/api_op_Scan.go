@@ -11,7 +11,6 @@ import (
 )
 
 // Represents the input of a Scan operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ScanInput
 type ScanInput struct {
 	_ struct{} `type:"structure"`
 
@@ -294,7 +293,6 @@ func (s *ScanInput) Validate() error {
 }
 
 // Represents the output of a Scan operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ScanOutput
 type ScanOutput struct {
 	_ struct{} `type:"structure"`
 

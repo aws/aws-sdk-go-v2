@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CreateProjectRequest
 type CreateProjectInput struct {
 	_ struct{} `type:"structure"`
 
@@ -19,7 +18,7 @@ type CreateProjectInput struct {
 	ClientRequestToken *string `locationName:"clientRequestToken" min:"1" type:"string"`
 
 	// The description of the project, if any.
-	Description *string `locationName:"description" type:"string"`
+	Description *string `locationName:"description" type:"string" sensitive:"true"`
 
 	// The ID of the project to be created in AWS CodeStar.
 	//
@@ -29,7 +28,7 @@ type CreateProjectInput struct {
 	// The display name for the project to be created in AWS CodeStar.
 	//
 	// Name is a required field
-	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
+	Name *string `locationName:"name" min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// A list of the Code objects submitted with the project request. If this parameter
 	// is specified, the request must also include the toolchain parameter.
@@ -88,7 +87,6 @@ func (s *CreateProjectInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CreateProjectResult
 type CreateProjectOutput struct {
 	_ struct{} `type:"structure"`
 

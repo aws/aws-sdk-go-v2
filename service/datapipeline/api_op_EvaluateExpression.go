@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for EvaluateExpression.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/EvaluateExpressionInput
 type EvaluateExpressionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -64,7 +63,6 @@ func (s *EvaluateExpressionInput) Validate() error {
 }
 
 // Contains the output of EvaluateExpression.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/EvaluateExpressionOutput
 type EvaluateExpressionOutput struct {
 	_ struct{} `type:"structure"`
 

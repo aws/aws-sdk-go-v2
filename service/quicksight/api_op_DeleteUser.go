@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteUserRequest
 type DeleteUserInput struct {
 	_ struct{} `type:"structure"`
 
@@ -89,7 +88,6 @@ func (s DeleteUserInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteUserResponse
 type DeleteUserOutput struct {
 	_ struct{} `type:"structure"`
 

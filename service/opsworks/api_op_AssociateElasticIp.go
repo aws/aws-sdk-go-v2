@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AssociateElasticIpRequest
 type AssociateElasticIpInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *AssociateElasticIpInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AssociateElasticIpOutput
 type AssociateElasticIpOutput struct {
 	_ struct{} `type:"structure"`
 }

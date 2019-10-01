@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GetDashboardEmbedUrlRequest
 type GetDashboardEmbedUrlInput struct {
 	_ struct{} `type:"structure"`
 
@@ -137,7 +136,6 @@ func (s GetDashboardEmbedUrlInput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GetDashboardEmbedUrlResponse
 type GetDashboardEmbedUrlOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -145,7 +143,7 @@ type GetDashboardEmbedUrlOutput struct {
 	// This URL is valid for 5 minutes, and the resulting session is valid for 10
 	// hours. The API provides the URL with an auth_code that enables a single-signon
 	// session.
-	EmbedUrl *string `type:"string"`
+	EmbedUrl *string `type:"string" sensitive:"true"`
 
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`

@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the inputs for the EnableSso operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableSsoRequest
 type EnableSsoInput struct {
 	_ struct{} `type:"structure"`
 
@@ -22,7 +21,7 @@ type EnableSsoInput struct {
 	// The password of an alternate account to use to enable single-sign on. This
 	// is only used for AD Connector directories. For more information, see the
 	// UserName parameter.
-	Password *string `min:"1" type:"string"`
+	Password *string `min:"1" type:"string" sensitive:"true"`
 
 	// The username of an alternate account to use to enable single-sign on. This
 	// is only used for AD Connector directories. This account must have privileges
@@ -62,7 +61,6 @@ func (s *EnableSsoInput) Validate() error {
 }
 
 // Contains the results of the EnableSso operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableSsoResult
 type EnableSsoOutput struct {
 	_ struct{} `type:"structure"`
 }

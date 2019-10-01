@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetRiskConfigurationRequest
 type SetRiskConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -23,7 +22,7 @@ type SetRiskConfigurationInput struct {
 	// Otherwise, ClientId is mapped to the client. When the client ID is not null,
 	// the user pool configuration is overridden and the risk configuration for
 	// the client is used instead.
-	ClientId *string `min:"1" type:"string"`
+	ClientId *string `min:"1" type:"string" sensitive:"true"`
 
 	// The compromised credentials risk configuration.
 	CompromisedCredentialsRiskConfiguration *CompromisedCredentialsRiskConfigurationType `type:"structure"`
@@ -72,7 +71,6 @@ func (s *SetRiskConfigurationInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetRiskConfigurationResponse
 type SetRiskConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 

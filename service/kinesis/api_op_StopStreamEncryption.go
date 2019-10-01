@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StopStreamEncryptionInput
 type StopStreamEncryptionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -77,7 +76,6 @@ func (s *StopStreamEncryptionInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StopStreamEncryptionOutput
 type StopStreamEncryptionOutput struct {
 	_ struct{} `type:"structure"`
 }

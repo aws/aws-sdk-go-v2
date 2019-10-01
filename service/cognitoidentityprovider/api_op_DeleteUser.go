@@ -12,14 +12,13 @@ import (
 )
 
 // Represents the request to delete a user.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserRequest
 type DeleteUserInput struct {
 	_ struct{} `type:"structure"`
 
 	// The access token from a request to delete a user.
 	//
 	// AccessToken is a required field
-	AccessToken *string `type:"string" required:"true"`
+	AccessToken *string `type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -41,7 +40,6 @@ func (s *DeleteUserInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserOutput
 type DeleteUserOutput struct {
 	_ struct{} `type:"structure"`
 }

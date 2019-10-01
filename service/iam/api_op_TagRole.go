@@ -12,7 +12,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/TagRoleRequest
 type TagRoleInput struct {
 	_ struct{} `type:"structure"`
 
@@ -65,7 +64,6 @@ func (s *TagRoleInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/TagRoleOutput
 type TagRoleOutput struct {
 	_ struct{} `type:"structure"`
 }

@@ -10,7 +10,6 @@ import (
 )
 
 // AttachVolumeInput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DetachVolumeInput
 type DetachVolumeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -48,7 +47,6 @@ func (s *DetachVolumeInput) Validate() error {
 }
 
 // AttachVolumeOutput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DetachVolumeOutput
 type DetachVolumeOutput struct {
 	_ struct{} `type:"structure"`
 

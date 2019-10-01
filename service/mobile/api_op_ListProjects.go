@@ -11,7 +11,6 @@ import (
 )
 
 // Request structure used to request projects list in AWS Mobile Hub.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ListProjectsRequest
 type ListProjectsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -49,7 +48,6 @@ func (s ListProjectsInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Result structure used for requests to list projects in AWS Mobile Hub.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ListProjectsResult
 type ListProjectsOutput struct {
 	_ struct{} `type:"structure"`
 

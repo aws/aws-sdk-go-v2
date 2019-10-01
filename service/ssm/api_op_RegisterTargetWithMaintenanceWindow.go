@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterTargetWithMaintenanceWindowRequest
 type RegisterTargetWithMaintenanceWindowInput struct {
 	_ struct{} `type:"structure"`
 
@@ -18,14 +17,14 @@ type RegisterTargetWithMaintenanceWindowInput struct {
 	ClientToken *string `min:"1" type:"string" idempotencyToken:"true"`
 
 	// An optional description for the target.
-	Description *string `min:"1" type:"string"`
+	Description *string `min:"1" type:"string" sensitive:"true"`
 
 	// An optional name for the target.
 	Name *string `min:"3" type:"string"`
 
 	// User-provided value that will be included in any CloudWatch events raised
 	// while running tasks for these targets in this maintenance window.
-	OwnerInformation *string `min:"1" type:"string"`
+	OwnerInformation *string `min:"1" type:"string" sensitive:"true"`
 
 	// The type of target being registered with the maintenance window.
 	//
@@ -125,7 +124,6 @@ func (s *RegisterTargetWithMaintenanceWindowInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterTargetWithMaintenanceWindowResult
 type RegisterTargetWithMaintenanceWindowOutput struct {
 	_ struct{} `type:"structure"`
 

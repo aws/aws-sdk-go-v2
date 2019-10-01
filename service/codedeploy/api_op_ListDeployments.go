@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a ListDeployments operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentsInput
 type ListDeploymentsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -72,7 +71,6 @@ func (s *ListDeploymentsInput) Validate() error {
 }
 
 // Represents the output of a ListDeployments operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentsOutput
 type ListDeploymentsOutput struct {
 	_ struct{} `type:"structure"`
 

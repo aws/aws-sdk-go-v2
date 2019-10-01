@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEngineDefaultParametersMessage
 type DescribeEngineDefaultParametersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -63,7 +62,6 @@ func (s *DescribeEngineDefaultParametersInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEngineDefaultParametersResult
 type DescribeEngineDefaultParametersOutput struct {
 	_ struct{} `type:"structure"`
 

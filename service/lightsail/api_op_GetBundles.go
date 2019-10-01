@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBundlesRequest
 type GetBundlesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -27,7 +26,6 @@ func (s GetBundlesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBundlesResult
 type GetBundlesOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Information about an entity that is affected by a Health event.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/AffectedEntity
 type AffectedEntity struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s AffectedEntity) String() string {
 // set and to is not set: match items where the timestamp value is equal to
 // or after from. If from is not set and to is set: match items where the timestamp
 // value is equal to or before to.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DateTimeRange
 type DateTimeRange struct {
 	_ struct{} `type:"structure"`
 
@@ -73,7 +71,6 @@ func (s DateTimeRange) String() string {
 
 // The number of entities that are affected by one or more events. Returned
 // by the DescribeEntityAggregates operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EntityAggregate
 type EntityAggregate struct {
 	_ struct{} `type:"structure"`
 
@@ -91,7 +88,6 @@ func (s EntityAggregate) String() string {
 }
 
 // The values to use to filter results from the DescribeAffectedEntities operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EntityFilter
 type EntityFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -154,7 +150,6 @@ func (s *EntityFilter) Validate() error {
 // Summary information about an event, returned by the DescribeEvents operation.
 // The DescribeEventDetails operation also returns this information, as well
 // as the EventDescription and additional event metadata.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/Event
 type Event struct {
 	_ struct{} `type:"structure"`
 
@@ -200,7 +195,6 @@ func (s Event) String() string {
 
 // The number of events of each issue type. Returned by the DescribeEventAggregates
 // operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EventAggregate
 type EventAggregate struct {
 	_ struct{} `type:"structure"`
 
@@ -218,7 +212,6 @@ func (s EventAggregate) String() string {
 
 // The detailed description of the event. Included in the information returned
 // by the DescribeEventDetails operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EventDescription
 type EventDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -234,7 +227,6 @@ func (s EventDescription) String() string {
 // Detailed information about an event. A combination of an Event object, an
 // EventDescription object, and additional metadata about the event. Returned
 // by the DescribeEventDetails operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EventDetails
 type EventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -255,7 +247,6 @@ func (s EventDetails) String() string {
 
 // Error information returned when a DescribeEventDetails operation cannot find
 // a specified event.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EventDetailsErrorItem
 type EventDetailsErrorItem struct {
 	_ struct{} `type:"structure"`
 
@@ -277,7 +268,6 @@ func (s EventDetailsErrorItem) String() string {
 
 // The values to use to filter results from the DescribeEvents and DescribeEventAggregates
 // operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EventFilter
 type EventFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -374,7 +364,6 @@ func (s *EventFilter) Validate() error {
 // Metadata about a type of event that is reported by AWS Health. Data consists
 // of the category (for example, issue), the service (for example, EC2), and
 // the event type code (for example, AWS_EC2_SYSTEM_MAINTENANCE_EVENT).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EventType
 type EventType struct {
 	_ struct{} `type:"structure"`
 
@@ -395,7 +384,6 @@ func (s EventType) String() string {
 }
 
 // The values to use to filter results from the DescribeEventTypes operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EventTypeFilter
 type EventTypeFilter struct {
 	_ struct{} `type:"structure"`
 

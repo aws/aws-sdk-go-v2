@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganizationalUnitRequest
 type CreateOrganizationalUnitInput struct {
 	_ struct{} `type:"structure"`
 
@@ -24,13 +23,13 @@ type CreateOrganizationalUnitInput struct {
 	// The regex pattern (http://wikipedia.org/wiki/regex) for a parent ID string
 	// requires one of the following:
 	//
-	//    * Root: a string that begins with "r-" followed by from 4 to 32 lower-case
+	//    * Root - A string that begins with "r-" followed by from 4 to 32 lower-case
 	//    letters or digits.
 	//
-	//    * Organizational unit (OU): a string that begins with "ou-" followed by
-	//    from 4 to 32 lower-case letters or digits (the ID of the root that the
-	//    OU is in) followed by a second "-" dash and from 8 to 32 additional lower-case
-	//    letters or digits.
+	//    * Organizational unit (OU) - A string that begins with "ou-" followed
+	//    by from 4 to 32 lower-case letters or digits (the ID of the root that
+	//    the OU is in) followed by a second "-" dash and from 8 to 32 additional
+	//    lower-case letters or digits.
 	//
 	// ParentId is a required field
 	ParentId *string `type:"string" required:"true"`
@@ -62,7 +61,6 @@ func (s *CreateOrganizationalUnitInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganizationalUnitResponse
 type CreateOrganizationalUnitOutput struct {
 	_ struct{} `type:"structure"`
 

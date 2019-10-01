@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetFpgaImageAttributeRequest
 type ResetFpgaImageAttributeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -47,7 +46,6 @@ func (s *ResetFpgaImageAttributeInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetFpgaImageAttributeResult
 type ResetFpgaImageAttributeOutput struct {
 	_ struct{} `type:"structure"`
 

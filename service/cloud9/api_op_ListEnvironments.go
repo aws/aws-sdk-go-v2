@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/ListEnvironmentsRequest
 type ListEnvironmentsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -30,7 +29,6 @@ func (s ListEnvironmentsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/ListEnvironmentsResult
 type ListEnvironmentsOutput struct {
 	_ struct{} `type:"structure"`
 

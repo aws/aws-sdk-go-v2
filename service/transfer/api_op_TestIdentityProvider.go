@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/TestIdentityProviderRequest
 type TestIdentityProviderInput struct {
 	_ struct{} `type:"structure"`
 
@@ -25,7 +24,7 @@ type TestIdentityProviderInput struct {
 	UserName *string `type:"string" required:"true"`
 
 	// The password of the user account to be tested.
-	UserPassword *string `type:"string"`
+	UserPassword *string `type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -51,7 +50,6 @@ func (s *TestIdentityProviderInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/TestIdentityProviderResponse
 type TestIdentityProviderOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateBackupPlanInput
 type CreateBackupPlanInput struct {
 	_ struct{} `type:"structure"`
 
@@ -24,7 +23,7 @@ type CreateBackupPlanInput struct {
 	// To help organize your resources, you can assign your own metadata to the
 	// resources that you create. Each tag is a key-value pair. The specified tags
 	// are assigned to all backups created with this plan.
-	BackupPlanTags map[string]string `type:"map"`
+	BackupPlanTags map[string]string `type:"map" sensitive:"true"`
 
 	// Identifies the request and allows failed requests to be retried without the
 	// risk of executing the operation twice. If the request includes a CreatorRequestId
@@ -88,7 +87,6 @@ func (s CreateBackupPlanInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateBackupPlanOutput
 type CreateBackupPlanOutput struct {
 	_ struct{} `type:"structure"`
 

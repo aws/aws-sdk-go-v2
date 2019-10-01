@@ -12,22 +12,21 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
-// Describes a virtual private cloud (VPC) interface endpoint that lets you
-// create a private connection between the VPC that you specify and AppStream
-// 2.0. When you specify a VPC interface endpoint for a stack, users of the
-// stack can connect to AppStream 2.0 only through that endpoint. When you specify
-// a VPC interface endpoint for an image builder, administrators can connect
-// to the image builder only through that endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AccessEndpoint
+// Describes an interface VPC endpoint (interface endpoint) that lets you create
+// a private connection between the virtual private cloud (VPC) that you specify
+// and AppStream 2.0. When you specify an interface endpoint for a stack, users
+// of the stack can connect to AppStream 2.0 only through that endpoint. When
+// you specify an interface endpoint for an image builder, administrators can
+// connect to the image builder only through that endpoint.
 type AccessEndpoint struct {
 	_ struct{} `type:"structure"`
 
-	// The type of VPC interface endpoint.
+	// The type of interface endpoint.
 	//
 	// EndpointType is a required field
 	EndpointType AccessEndpointType `type:"string" required:"true" enum:"true"`
 
-	// The identifier (ID) of the VPC in which the endpoint is used.
+	// The identifier (ID) of the VPC in which the interface endpoint is used.
 	VpceId *string `min:"1" type:"string"`
 }
 
@@ -53,7 +52,6 @@ func (s *AccessEndpoint) Validate() error {
 }
 
 // Describes an application in the application catalog.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Application
 type Application struct {
 	_ struct{} `type:"structure"`
 
@@ -85,7 +83,6 @@ func (s Application) String() string {
 }
 
 // The persistent application settings for users of a stack.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ApplicationSettings
 type ApplicationSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -122,7 +119,6 @@ func (s *ApplicationSettings) Validate() error {
 }
 
 // Describes the persistent application settings for users of a stack.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ApplicationSettingsResponse
 type ApplicationSettingsResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -147,7 +143,6 @@ func (s ApplicationSettingsResponse) String() string {
 }
 
 // Describes the capacity for a fleet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ComputeCapacity
 type ComputeCapacity struct {
 	_ struct{} `type:"structure"`
 
@@ -177,7 +172,6 @@ func (s *ComputeCapacity) Validate() error {
 }
 
 // Describes the capacity status for a fleet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ComputeCapacityStatus
 type ComputeCapacityStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -203,7 +197,6 @@ func (s ComputeCapacityStatus) String() string {
 
 // Describes the configuration information required to join fleets and image
 // builders to Microsoft Active Directory domains.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DirectoryConfig
 type DirectoryConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -230,7 +223,6 @@ func (s DirectoryConfig) String() string {
 
 // Describes the configuration information required to join fleets and image
 // builders to Microsoft Active Directory domains.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DomainJoinInfo
 type DomainJoinInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -247,11 +239,10 @@ func (s DomainJoinInfo) String() string {
 }
 
 // Describes a fleet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Fleet
 type Fleet struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN for the fleet.
+	// The Amazon Resource Name (ARN) for the fleet.
 	//
 	// Arn is a required field
 	Arn *string `type:"string" required:"true"`
@@ -302,6 +293,12 @@ type Fleet struct {
 	// one to two minutes. You are charged for instance streaming when users are
 	// connected and a small hourly fee for instances that are not streaming apps.
 	FleetType FleetType `type:"string" enum:"true"`
+
+	// The ARN of the IAM role that is applied to the fleet. To assume a role, the
+	// fleet instance calls the AWS Security Token Service (STS) AssumeRole API
+	// operation and passes the ARN of the role to use. The operation creates a
+	// new session with temporary credentials.
+	IamRoleArn *string `type:"string"`
 
 	// The amount of time that users can be idle (inactive) before they are disconnected
 	// from their streaming session and the DisconnectTimeoutInSeconds time interval
@@ -367,7 +364,6 @@ func (s Fleet) String() string {
 }
 
 // Describes a fleet error.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/FleetError
 type FleetError struct {
 	_ struct{} `type:"structure"`
 
@@ -384,7 +380,6 @@ func (s FleetError) String() string {
 }
 
 // Describes an image.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Image
 type Image struct {
 	_ struct{} `type:"structure"`
 
@@ -450,7 +445,6 @@ func (s Image) String() string {
 }
 
 // Describes a virtual machine that is used to create an image.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImageBuilder
 type ImageBuilder struct {
 	_ struct{} `type:"structure"`
 
@@ -480,6 +474,12 @@ type ImageBuilder struct {
 
 	// Enables or disables default internet access for the image builder.
 	EnableDefaultInternetAccess *bool `type:"boolean"`
+
+	// The ARN of the IAM role that is applied to the image builder. To assume a
+	// role, the image builder calls the AWS Security Token Service (STS) AssumeRole
+	// API operation and passes the ARN of the role to use. The operation creates
+	// a new session with temporary credentials.
+	IamRoleArn *string `type:"string"`
 
 	// The ARN of the image from which this builder was created.
 	ImageArn *string `type:"string"`
@@ -517,7 +517,6 @@ func (s ImageBuilder) String() string {
 }
 
 // Describes the reason why the last image builder state change occurred.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImageBuilderStateChangeReason
 type ImageBuilderStateChangeReason struct {
 	_ struct{} `type:"structure"`
 
@@ -534,7 +533,6 @@ func (s ImageBuilderStateChangeReason) String() string {
 }
 
 // Describes the permissions for an image.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImagePermissions
 type ImagePermissions struct {
 	_ struct{} `type:"structure"`
 
@@ -551,7 +549,6 @@ func (s ImagePermissions) String() string {
 }
 
 // Describes the reason why the last image state change occurred.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImageStateChangeReason
 type ImageStateChangeReason struct {
 	_ struct{} `type:"structure"`
 
@@ -568,7 +565,6 @@ func (s ImageStateChangeReason) String() string {
 }
 
 // Describes the error that is returned when a usage report can't be generated.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/LastReportGenerationExecutionError
 type LastReportGenerationExecutionError struct {
 	_ struct{} `type:"structure"`
 
@@ -587,7 +583,6 @@ func (s LastReportGenerationExecutionError) String() string {
 }
 
 // Describes the network details of the fleet or image builder instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/NetworkAccessConfiguration
 type NetworkAccessConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -607,7 +602,6 @@ func (s NetworkAccessConfiguration) String() string {
 }
 
 // Describes a resource error.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ResourceError
 type ResourceError struct {
 	_ struct{} `type:"structure"`
 
@@ -628,7 +622,6 @@ func (s ResourceError) String() string {
 
 // Describes the credentials for the service account used by the fleet or image
 // builder to connect to the directory.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ServiceAccountCredentials
 type ServiceAccountCredentials struct {
 	_ struct{} `type:"structure"`
 
@@ -637,12 +630,12 @@ type ServiceAccountCredentials struct {
 	// password on descendant computer objects for the organizational units specified.
 	//
 	// AccountName is a required field
-	AccountName *string `min:"1" type:"string" required:"true"`
+	AccountName *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The password for the account.
 	//
 	// AccountPassword is a required field
-	AccountPassword *string `min:"1" type:"string" required:"true"`
+	AccountPassword *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -675,7 +668,6 @@ func (s *ServiceAccountCredentials) Validate() error {
 }
 
 // Describes a streaming session.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Session
 type Session struct {
 	_ struct{} `type:"structure"`
 
@@ -734,7 +726,6 @@ func (s Session) String() string {
 
 // Describes the permissions that are available to the specified AWS account
 // for a shared image.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/SharedImagePermissions
 type SharedImagePermissions struct {
 	_ struct{} `type:"structure"`
 
@@ -755,7 +746,6 @@ func (s SharedImagePermissions) String() string {
 }
 
 // Describes a stack.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Stack
 type Stack struct {
 	_ struct{} `type:"structure"`
 
@@ -807,7 +797,6 @@ func (s Stack) String() string {
 }
 
 // Describes a stack error.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StackError
 type StackError struct {
 	_ struct{} `type:"structure"`
 
@@ -824,7 +813,6 @@ func (s StackError) String() string {
 }
 
 // Describes a connector that enables persistent storage for users.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StorageConnector
 type StorageConnector struct {
 	_ struct{} `type:"structure"`
 
@@ -862,7 +850,6 @@ func (s *StorageConnector) Validate() error {
 }
 
 // Describes information about the usage report subscription.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UsageReportSubscription
 type UsageReportSubscription struct {
 	_ struct{} `type:"structure"`
 
@@ -892,7 +879,6 @@ func (s UsageReportSubscription) String() string {
 }
 
 // Describes a user in the user pool.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/User
 type User struct {
 	_ struct{} `type:"structure"`
 
@@ -911,10 +897,10 @@ type User struct {
 	Enabled *bool `type:"boolean"`
 
 	// The first name, or given name, of the user.
-	FirstName *string `type:"string"`
+	FirstName *string `type:"string" sensitive:"true"`
 
 	// The last name, or surname, of the user.
-	LastName *string `type:"string"`
+	LastName *string `type:"string" sensitive:"true"`
 
 	// The status of the user in the user pool. The status can be one of the following:
 	//
@@ -933,7 +919,7 @@ type User struct {
 	// The email address of the user.
 	//
 	// Users' email addresses are case-sensitive.
-	UserName *string `min:"1" type:"string"`
+	UserName *string `min:"1" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -943,7 +929,6 @@ func (s User) String() string {
 
 // Describes an action and whether the action is enabled or disabled for users
 // during their streaming sessions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UserSetting
 type UserSetting struct {
 	_ struct{} `type:"structure"`
 
@@ -980,7 +965,6 @@ func (s *UserSetting) Validate() error {
 }
 
 // Describes a user in the user pool and the associated stack.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UserStackAssociation
 type UserStackAssociation struct {
 	_ struct{} `type:"structure"`
 
@@ -1003,7 +987,7 @@ type UserStackAssociation struct {
 	// Users' email addresses are case-sensitive.
 	//
 	// UserName is a required field
-	UserName *string `min:"1" type:"string" required:"true"`
+	UserName *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -1040,7 +1024,6 @@ func (s *UserStackAssociation) Validate() error {
 
 // Describes the error that is returned when a user can’t be associated with
 // or disassociated from a stack.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UserStackAssociationError
 type UserStackAssociationError struct {
 	_ struct{} `type:"structure"`
 
@@ -1062,7 +1045,6 @@ func (s UserStackAssociationError) String() string {
 }
 
 // Describes VPC configuration information for fleets and image builders.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/VpcConfig
 type VpcConfig struct {
 	_ struct{} `type:"structure"`
 

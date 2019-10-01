@@ -10,7 +10,6 @@ import (
 )
 
 // Request to get a signing certificate from Cognito.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetSigningCertificateRequest
 type GetSigningCertificateInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *GetSigningCertificateInput) Validate() error {
 }
 
 // Response from Cognito for a signing certificate request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetSigningCertificateResponse
 type GetSigningCertificateOutput struct {
 	_ struct{} `type:"structure"`
 

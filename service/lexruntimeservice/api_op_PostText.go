@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostTextRequest
 type PostTextInput struct {
 	_ struct{} `type:"structure"`
 
@@ -27,7 +26,7 @@ type PostTextInput struct {
 	// The text that the user entered (Amazon Lex interprets this text).
 	//
 	// InputText is a required field
-	InputText *string `locationName:"inputText" min:"1" type:"string" required:"true"`
+	InputText *string `locationName:"inputText" min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// Request-specific information passed between Amazon Lex and a client application.
 	//
@@ -35,12 +34,12 @@ type PostTextInput struct {
 	// any request attributes with the prefix x-amz-lex:.
 	//
 	// For more information, see Setting Request Attributes (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs).
-	RequestAttributes map[string]string `locationName:"requestAttributes" type:"map"`
+	RequestAttributes map[string]string `locationName:"requestAttributes" type:"map" sensitive:"true"`
 
 	// Application-specific information passed between Amazon Lex and a client application.
 	//
 	// For more information, see Setting Session Attributes (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs).
-	SessionAttributes map[string]string `locationName:"sessionAttributes" type:"map"`
+	SessionAttributes map[string]string `locationName:"sessionAttributes" type:"map" sensitive:"true"`
 
 	// The ID of the client application user. Amazon Lex uses this to identify a
 	// user's conversation with your bot. At runtime, each request must contain
@@ -162,7 +161,6 @@ func (s PostTextInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostTextResponse
 type PostTextOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -223,7 +221,7 @@ type PostTextOutput struct {
 	//
 	// If the Lambda function returns a message, Amazon Lex passes it to the client
 	// in its response.
-	Message *string `locationName:"message" min:"1" type:"string"`
+	Message *string `locationName:"message" min:"1" type:"string" sensitive:"true"`
 
 	// The format of the response message. One of the following values:
 	//
@@ -245,7 +243,7 @@ type PostTextOutput struct {
 	ResponseCard *ResponseCard `locationName:"responseCard" type:"structure"`
 
 	// A map of key-value pairs representing the session-specific context information.
-	SessionAttributes map[string]string `locationName:"sessionAttributes" type:"map"`
+	SessionAttributes map[string]string `locationName:"sessionAttributes" type:"map" sensitive:"true"`
 
 	// If the dialogState value is ElicitSlot, returns the name of the slot for
 	// which Amazon Lex is eliciting a value.
@@ -261,7 +259,7 @@ type PostTextOutput struct {
 	// TOP_RESOLUTION Amazon Lex returns the first value in the resolution list
 	// or, if there is no resolution list, null. If you don't specify a valueSelectionStrategy,
 	// the default is ORIGINAL_VALUE.
-	Slots map[string]string `locationName:"slots" type:"map"`
+	Slots map[string]string `locationName:"slots" type:"map" sensitive:"true"`
 }
 
 // String returns the string representation

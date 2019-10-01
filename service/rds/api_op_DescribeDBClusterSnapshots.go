@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterSnapshotsMessage
 type DescribeDBClusterSnapshotsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -130,7 +129,6 @@ func (s *DescribeDBClusterSnapshotsInput) Validate() error {
 
 // Provides a list of DB cluster snapshots for the user as the result of a call
 // to the DescribeDBClusterSnapshots action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterSnapshotMessage
 type DescribeDBClusterSnapshotsOutput struct {
 	_ struct{} `type:"structure"`
 

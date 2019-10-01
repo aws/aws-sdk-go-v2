@@ -18,7 +18,6 @@ var _ = awsutil.Prettify
 // address you provide must be located within the serviceable area of your region.
 // Although no individual elements of the Address are required, if the address
 // is invalid or unsupported, then an exception is thrown.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/Address
 type Address struct {
 	_ struct{} `type:"structure"`
 
@@ -122,7 +121,6 @@ func (s *Address) Validate() error {
 }
 
 // Contains a cluster's state, a cluster's ID, and other important information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ClusterListEntry
 type ClusterListEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -147,7 +145,6 @@ func (s ClusterListEntry) String() string {
 }
 
 // Contains metadata about a specific cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ClusterMetadata
 type ClusterMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -224,7 +221,6 @@ func (s ClusterMetadata) String() string {
 // (AMI). For more information on compatible AMIs, see Using Amazon EC2 Compute
 // Instances (http://docs.aws.amazon.com/snowball/latest/developer-guide/using-ec2.html)
 // in the AWS Snowball Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CompatibleImage
 type CompatibleImage struct {
 	_ struct{} `type:"structure"`
 
@@ -243,7 +239,6 @@ func (s CompatibleImage) String() string {
 // Defines the real-time status of a Snowball's data transfer while the device
 // is at AWS. This data is only available while a job has a JobState value of
 // InProgress, for both import and export jobs.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DataTransfer
 type DataTransfer struct {
 	_ struct{} `type:"structure"`
 
@@ -273,7 +268,6 @@ func (s DataTransfer) String() string {
 // (AMI), including the Amazon EC2 AMI ID and the Snowball Edge AMI ID. Each
 // AMI has these two IDs to simplify identifying the AMI in both the AWS Cloud
 // and on the device.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/Ec2AmiResource
 type Ec2AmiResource struct {
 	_ struct{} `type:"structure"`
 
@@ -312,7 +306,6 @@ func (s *Ec2AmiResource) Validate() error {
 }
 
 // The container for the EventTriggerDefinition$EventResourceARN.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/EventTriggerDefinition
 type EventTriggerDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -328,7 +321,6 @@ func (s EventTriggerDefinition) String() string {
 
 // Each JobListEntry object contains a job's state, a job's ID, and a value
 // that indicates whether the job is a job part, in the case of an export job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/JobListEntry
 type JobListEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -385,7 +377,6 @@ func (s JobListEntry) String() string {
 // look at the two associated logs: a success log and a failure log. The logs
 // are saved in comma-separated value (CSV) format, and the name of each log
 // includes the ID of the job or job part that the log describes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/JobLogs
 type JobLogs struct {
 	_ struct{} `type:"structure"`
 
@@ -407,7 +398,6 @@ func (s JobLogs) String() string {
 // Contains information about a specific job including shipping information,
 // job status, and other important metadata. This information is returned as
 // a part of the response syntax of the DescribeJob action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/JobMetadata
 type JobMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -488,7 +478,6 @@ func (s JobMetadata) String() string {
 // Contains an array of AWS resource objects. Each object represents an Amazon
 // S3 bucket, an AWS Lambda function, or an Amazon Machine Image (AMI) based
 // on Amazon EC2 that is associated with a particular job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/JobResource
 type JobResource struct {
 	_ struct{} `type:"structure"`
 
@@ -535,7 +524,6 @@ func (s *JobResource) Validate() error {
 // KeyRange value. The length of the range is defined at job creation, and has
 // either an inclusive BeginMarker, an inclusive EndMarker, or both. Ranges
 // are UTF-8 binary sorted.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/KeyRange
 type KeyRange struct {
 	_ struct{} `type:"structure"`
 
@@ -570,7 +558,6 @@ func (s *KeyRange) Validate() error {
 }
 
 // Identifies
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/LambdaResource
 type LambdaResource struct {
 	_ struct{} `type:"structure"`
 
@@ -597,7 +584,6 @@ func (s LambdaResource) String() string {
 // to notify based on a specific set of job states using the JobStatesToNotify
 // array of strings, or you can specify that you want to have Amazon SNS notifications
 // sent out for all job states with NotifyAll set to true.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/Notification
 type Notification struct {
 	_ struct{} `type:"structure"`
 
@@ -627,7 +613,6 @@ func (s Notification) String() string {
 // can have an optional KeyRange value. The length of the range is defined at
 // job creation, and has either an inclusive BeginMarker, an inclusive EndMarker,
 // or both. Ranges are UTF-8 binary sorted.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/S3Resource
 type S3Resource struct {
 	_ struct{} `type:"structure"`
 
@@ -662,7 +647,6 @@ func (s *S3Resource) Validate() error {
 }
 
 // The Status and TrackingNumber information for an inbound or outbound shipment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/Shipment
 type Shipment struct {
 	_ struct{} `type:"structure"`
 
@@ -684,7 +668,6 @@ func (s Shipment) String() string {
 
 // A job's shipping information, including inbound and outbound tracking numbers
 // and shipping speed options.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ShippingDetails
 type ShippingDetails struct {
 	_ struct{} `type:"structure"`
 

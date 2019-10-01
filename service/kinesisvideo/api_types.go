@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // An object describing a Kinesis video stream.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/StreamInfo
 type StreamInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -116,7 +115,6 @@ func (s StreamInfo) MarshalFields(e protocol.FieldEncoder) error {
 // list streams (see the ListStreams API). A condition has a comparison operation
 // and a value. Currently, you can specify only the BEGINS_WITH operator, which
 // finds streams whose names start with a given prefix.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/StreamNameCondition
 type StreamNameCondition struct {
 	_ struct{} `type:"structure"`
 

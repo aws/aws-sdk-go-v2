@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeRdsDbInstancesRequest
 type DescribeRdsDbInstancesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *DescribeRdsDbInstancesInput) Validate() error {
 }
 
 // Contains the response to a DescribeRdsDbInstances request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeRdsDbInstancesResult
 type DescribeRdsDbInstancesOutput struct {
 	_ struct{} `type:"structure"`
 

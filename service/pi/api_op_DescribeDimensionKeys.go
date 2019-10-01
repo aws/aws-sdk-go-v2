@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/DescribeDimensionKeysRequest
 type DescribeDimensionKeysInput struct {
 	_ struct{} `type:"structure"`
 
@@ -159,7 +158,6 @@ func (s *DescribeDimensionKeysInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/DescribeDimensionKeysResponse
 type DescribeDimensionKeysOutput struct {
 	_ struct{} `type:"structure"`
 

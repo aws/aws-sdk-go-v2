@@ -14,7 +14,6 @@ var _ = awsutil.Prettify
 
 // Describes a quota for an AWS account, for example, the number of replication
 // instances allowed.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/AccountQuota
 type AccountQuota struct {
 	_ struct{} `type:"structure"`
 
@@ -33,7 +32,6 @@ func (s AccountQuota) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/AvailabilityZone
 type AvailabilityZone struct {
 	_ struct{} `type:"structure"`
 
@@ -48,7 +46,6 @@ func (s AvailabilityZone) String() string {
 
 // The SSL certificate that can be used to encrypt connections between the endpoints
 // and the replication instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Certificate
 type Certificate struct {
 	_ struct{} `type:"structure"`
 
@@ -92,7 +89,6 @@ func (s Certificate) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Connection
 type Connection struct {
 	_ struct{} `type:"structure"`
 
@@ -124,7 +120,6 @@ func (s Connection) String() string {
 }
 
 // The settings in JSON format for the DMS Transfer type source endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DmsTransferSettings
 type DmsTransferSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -140,7 +135,6 @@ func (s DmsTransferSettings) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DynamoDbSettings
 type DynamoDbSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -169,7 +163,6 @@ func (s *DynamoDbSettings) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ElasticsearchSettings
 type ElasticsearchSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -215,7 +208,6 @@ func (s *ElasticsearchSettings) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Endpoint
 type Endpoint struct {
 	_ struct{} `type:"structure"`
 
@@ -332,7 +324,6 @@ func (s Endpoint) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Event
 type Event struct {
 	_ struct{} `type:"structure"`
 
@@ -359,7 +350,6 @@ func (s Event) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/EventCategoryGroup
 type EventCategoryGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -378,7 +368,6 @@ func (s EventCategoryGroup) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/EventSubscription
 type EventSubscription struct {
 	_ struct{} `type:"structure"`
 
@@ -427,7 +416,6 @@ func (s EventSubscription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Filter
 type Filter struct {
 	_ struct{} `type:"structure"`
 
@@ -465,7 +453,6 @@ func (s *Filter) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/KinesisSettings
 type KinesisSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -486,7 +473,6 @@ func (s KinesisSettings) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MongoDbSettings
 type MongoDbSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -542,7 +528,7 @@ type MongoDbSettings struct {
 	NestingLevel NestingLevelValue `type:"string" enum:"true"`
 
 	// The password for the user account you use to access the MongoDB source endpoint.
-	Password *string `type:"string"`
+	Password *string `type:"string" sensitive:"true"`
 
 	// The port value for the MongoDB source endpoint.
 	Port *int64 `type:"integer"`
@@ -559,7 +545,6 @@ func (s MongoDbSettings) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/OrderableReplicationInstance
 type OrderableReplicationInstance struct {
 	_ struct{} `type:"structure"`
 
@@ -606,7 +591,6 @@ func (s OrderableReplicationInstance) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/PendingMaintenanceAction
 type PendingMaintenanceAction struct {
 	_ struct{} `type:"structure"`
 
@@ -644,7 +628,6 @@ func (s PendingMaintenanceAction) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RedshiftSettings
 type RedshiftSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -714,7 +697,7 @@ type RedshiftSettings struct {
 	MaxFileSize *int64 `type:"integer"`
 
 	// The password for the user named in the username property.
-	Password *string `type:"string"`
+	Password *string `type:"string" sensitive:"true"`
 
 	// The port number for Amazon Redshift. The default value is 5439.
 	Port *int64 `type:"integer"`
@@ -777,7 +760,6 @@ func (s RedshiftSettings) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RefreshSchemasStatus
 type RefreshSchemasStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -802,7 +784,6 @@ func (s RefreshSchemasStatus) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationInstance
 type ReplicationInstance struct {
 	_ struct{} `type:"structure"`
 
@@ -910,7 +891,6 @@ func (s ReplicationInstance) String() string {
 }
 
 // Contains metadata for a replication instance task log.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationInstanceTaskLog
 type ReplicationInstanceTaskLog struct {
 	_ struct{} `type:"structure"`
 
@@ -929,7 +909,6 @@ func (s ReplicationInstanceTaskLog) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationPendingModifiedValues
 type ReplicationPendingModifiedValues struct {
 	_ struct{} `type:"structure"`
 
@@ -957,7 +936,6 @@ func (s ReplicationPendingModifiedValues) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationSubnetGroup
 type ReplicationSubnetGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -982,7 +960,6 @@ func (s ReplicationSubnetGroup) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationTask
 type ReplicationTask struct {
 	_ struct{} `type:"structure"`
 
@@ -1071,7 +1048,6 @@ func (s ReplicationTask) String() string {
 }
 
 // The task assessment report in JSON format.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationTaskAssessmentResult
 type ReplicationTaskAssessmentResult struct {
 	_ struct{} `type:"structure"`
 
@@ -1103,7 +1079,6 @@ func (s ReplicationTaskAssessmentResult) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationTaskStats
 type ReplicationTaskStats struct {
 	_ struct{} `type:"structure"`
 
@@ -1131,7 +1106,6 @@ func (s ReplicationTaskStats) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ResourcePendingMaintenanceActions
 type ResourcePendingMaintenanceActions struct {
 	_ struct{} `type:"structure"`
 
@@ -1151,7 +1125,6 @@ func (s ResourcePendingMaintenanceActions) String() string {
 }
 
 // Settings for exporting data to Amazon S3.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/S3Settings
 type S3Settings struct {
 	_ struct{} `type:"structure"`
 
@@ -1332,7 +1305,6 @@ func (s S3Settings) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Subnet
 type Subnet struct {
 	_ struct{} `type:"structure"`
 
@@ -1351,7 +1323,6 @@ func (s Subnet) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/SupportedEndpointType
 type SupportedEndpointType struct {
 	_ struct{} `type:"structure"`
 
@@ -1376,7 +1347,6 @@ func (s SupportedEndpointType) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/TableStatistics
 type TableStatistics struct {
 	_ struct{} `type:"structure"`
 
@@ -1464,7 +1434,6 @@ func (s TableStatistics) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/TableToReload
 type TableToReload struct {
 	_ struct{} `type:"structure"`
 
@@ -1480,7 +1449,6 @@ func (s TableToReload) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -1502,7 +1470,6 @@ func (s Tag) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/VpcSecurityGroupMembership
 type VpcSecurityGroupMembership struct {
 	_ struct{} `type:"structure"`
 

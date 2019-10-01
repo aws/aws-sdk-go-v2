@@ -12,7 +12,6 @@ import (
 )
 
 // Represents the input for DecreaseStreamRetentionPeriod.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DecreaseStreamRetentionPeriodInput
 type DecreaseStreamRetentionPeriodInput struct {
 	_ struct{} `type:"structure"`
 
@@ -57,7 +56,6 @@ func (s *DecreaseStreamRetentionPeriodInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DecreaseStreamRetentionPeriodOutput
 type DecreaseStreamRetentionPeriodOutput struct {
 	_ struct{} `type:"structure"`
 }

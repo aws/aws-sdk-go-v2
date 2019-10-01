@@ -14,12 +14,11 @@ import (
 //    * ListVolumesInput$Limit
 //
 //    * ListVolumesInput$Marker
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumesInput
 type ListVolumesInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string `min:"50" type:"string"`
 
 	// Specifies that the list of volumes returned be limited to the specified number
@@ -61,12 +60,11 @@ func (s *ListVolumesInput) Validate() error {
 //    * ListVolumesOutput$Marker
 //
 //    * ListVolumesOutput$VolumeInfos
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumesOutput
 type ListVolumesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string `min:"50" type:"string"`
 
 	// Use the marker in your next request to continue pagination of iSCSI volumes.

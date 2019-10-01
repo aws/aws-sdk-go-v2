@@ -11,7 +11,6 @@ import (
 )
 
 // A complex type that contains change information for the resource record set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeResourceRecordSetsRequest
 type ChangeResourceRecordSetsInput struct {
 	_ struct{} `locationName:"ChangeResourceRecordSetsRequest" type:"structure" xmlURI:"https://route53.amazonaws.com/doc/2013-04-01/"`
 
@@ -77,7 +76,6 @@ func (s ChangeResourceRecordSetsInput) MarshalFields(e protocol.FieldEncoder) er
 }
 
 // A complex type containing the response for the request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeResourceRecordSetsResponse
 type ChangeResourceRecordSetsOutput struct {
 	_ struct{} `type:"structure"`
 

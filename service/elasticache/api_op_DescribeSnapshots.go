@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a DescribeSnapshotsMessage operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeSnapshotsMessage
 type DescribeSnapshotsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -57,7 +56,6 @@ func (s DescribeSnapshotsInput) String() string {
 }
 
 // Represents the output of a DescribeSnapshots operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeSnapshotsListMessage
 type DescribeSnapshotsOutput struct {
 	_ struct{} `type:"structure"`
 

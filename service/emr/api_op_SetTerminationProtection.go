@@ -12,7 +12,6 @@ import (
 )
 
 // The input argument to the TerminationProtection operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SetTerminationProtectionInput
 type SetTerminationProtectionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -53,7 +52,6 @@ func (s *SetTerminationProtectionInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SetTerminationProtectionOutput
 type SetTerminationProtectionOutput struct {
 	_ struct{} `type:"structure"`
 }

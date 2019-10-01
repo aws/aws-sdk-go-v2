@@ -10,14 +10,13 @@ import (
 )
 
 // Represents the request to update the device status.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateDeviceStatusRequest
 type UpdateDeviceStatusInput struct {
 	_ struct{} `type:"structure"`
 
 	// The access token.
 	//
 	// AccessToken is a required field
-	AccessToken *string `type:"string" required:"true"`
+	AccessToken *string `type:"string" required:"true" sensitive:"true"`
 
 	// The device key.
 	//
@@ -55,7 +54,6 @@ func (s *UpdateDeviceStatusInput) Validate() error {
 }
 
 // The response to the request to update the device status.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateDeviceStatusResponse
 type UpdateDeviceStatusOutput struct {
 	_ struct{} `type:"structure"`
 }

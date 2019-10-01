@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetMappingRequest
 type GetMappingInput struct {
 	_ struct{} `type:"structure"`
 
@@ -62,7 +61,6 @@ func (s *GetMappingInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetMappingResponse
 type GetMappingOutput struct {
 	_ struct{} `type:"structure"`
 

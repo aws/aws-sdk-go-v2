@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CompleteMultipartUploadRequest
 type CompleteMultipartUploadInput struct {
 	_ struct{} `type:"structure" payload:"MultipartUpload"`
 
@@ -105,7 +104,6 @@ func (s CompleteMultipartUploadInput) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CompleteMultipartUploadOutput
 type CompleteMultipartUploadOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -128,7 +126,7 @@ type CompleteMultipartUploadOutput struct {
 
 	// If present, specifies the ID of the AWS Key Management Service (KMS) master
 	// encryption key that was used for the object.
-	SSEKMSKeyId *string `location:"header" locationName:"x-amz-server-side-encryption-aws-kms-key-id" type:"string"`
+	SSEKMSKeyId *string `location:"header" locationName:"x-amz-server-side-encryption-aws-kms-key-id" type:"string" sensitive:"true"`
 
 	// The Server-side encryption algorithm used when storing this object in S3
 	// (e.g., AES256, aws:kms).

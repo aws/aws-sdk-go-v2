@@ -10,7 +10,6 @@ import (
 )
 
 // Input to the MergeDeveloperIdentities action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/MergeDeveloperIdentitiesInput
 type MergeDeveloperIdentitiesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -83,7 +82,6 @@ func (s *MergeDeveloperIdentitiesInput) Validate() error {
 }
 
 // Returned in response to a successful MergeDeveloperIdentities action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/MergeDeveloperIdentitiesResponse
 type MergeDeveloperIdentitiesOutput struct {
 	_ struct{} `type:"structure"`
 

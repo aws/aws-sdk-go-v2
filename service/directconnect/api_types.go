@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Information about the associated gateway.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociatedGateway
 type AssociatedGateway struct {
 	_ struct{} `type:"structure"`
 
@@ -38,7 +37,6 @@ func (s AssociatedGateway) String() string {
 }
 
 // Information about a BGP peer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/BGPPeer
 type BGPPeer struct {
 	_ struct{} `type:"structure"`
 
@@ -98,7 +96,6 @@ func (s BGPPeer) String() string {
 }
 
 // Information about an AWS Direct Connect connection.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Connection
 type Connection struct {
 	_ struct{} `type:"structure"`
 
@@ -182,7 +179,6 @@ func (s Connection) String() string {
 
 // Information about a Direct Connect gateway, which enables you to connect
 // virtual interfaces and virtual private gateway or transit gateways.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DirectConnectGateway
 type DirectConnectGateway struct {
 	_ struct{} `type:"structure"`
 
@@ -220,7 +216,6 @@ func (s DirectConnectGateway) String() string {
 
 // Information about an association between a Direct Connect gateway and a virtual
 // private gateway or transit gateway.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DirectConnectGatewayAssociation
 type DirectConnectGatewayAssociation struct {
 	_ struct{} `type:"structure"`
 
@@ -273,7 +268,6 @@ func (s DirectConnectGatewayAssociation) String() string {
 
 // Information about the proposal request to attach a virtual private gateway
 // to a Direct Connect gateway.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DirectConnectGatewayAssociationProposal
 type DirectConnectGatewayAssociationProposal struct {
 	_ struct{} `type:"structure"`
 
@@ -315,7 +309,6 @@ func (s DirectConnectGatewayAssociationProposal) String() string {
 
 // Information about an attachment between a Direct Connect gateway and a virtual
 // interface.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DirectConnectGatewayAttachment
 type DirectConnectGatewayAttachment struct {
 	_ struct{} `type:"structure"`
 
@@ -359,7 +352,6 @@ func (s DirectConnectGatewayAttachment) String() string {
 }
 
 // Information about an interconnect.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Interconnect
 type Interconnect struct {
 	_ struct{} `type:"structure"`
 
@@ -427,7 +419,6 @@ func (s Interconnect) String() string {
 }
 
 // Information about a link aggregation group (LAG).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Lag
 type Lag struct {
 	_ struct{} `type:"structure"`
 
@@ -507,7 +498,6 @@ func (s Lag) String() string {
 
 // Information about a Letter of Authorization - Connecting Facility Assignment
 // (LOA-CFA) for a connection.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Loa
 type Loa struct {
 	_ struct{} `type:"structure"`
 
@@ -527,7 +517,6 @@ func (s Loa) String() string {
 }
 
 // Information about an AWS Direct Connect location.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Location
 type Location struct {
 	_ struct{} `type:"structure"`
 
@@ -551,7 +540,6 @@ func (s Location) String() string {
 }
 
 // Information about a new BGP peer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewBGPPeer
 type NewBGPPeer struct {
 	_ struct{} `type:"structure"`
 
@@ -578,7 +566,6 @@ func (s NewBGPPeer) String() string {
 }
 
 // Information about a private virtual interface.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewPrivateVirtualInterface
 type NewPrivateVirtualInterface struct {
 	_ struct{} `type:"structure"`
 
@@ -662,7 +649,6 @@ func (s *NewPrivateVirtualInterface) Validate() error {
 }
 
 // Information about a private virtual interface to be provisioned on a connection.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewPrivateVirtualInterfaceAllocation
 type NewPrivateVirtualInterfaceAllocation struct {
 	_ struct{} `type:"structure"`
 
@@ -741,7 +727,6 @@ func (s *NewPrivateVirtualInterfaceAllocation) Validate() error {
 }
 
 // Information about a public virtual interface.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewPublicVirtualInterface
 type NewPublicVirtualInterface struct {
 	_ struct{} `type:"structure"`
 
@@ -819,7 +804,6 @@ func (s *NewPublicVirtualInterface) Validate() error {
 }
 
 // Information about a public virtual interface to be provisioned on a connection.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewPublicVirtualInterfaceAllocation
 type NewPublicVirtualInterfaceAllocation struct {
 	_ struct{} `type:"structure"`
 
@@ -898,7 +882,6 @@ func (s *NewPublicVirtualInterfaceAllocation) Validate() error {
 }
 
 // Information about the transit virtual interface.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewTransitVirtualInterface
 type NewTransitVirtualInterface struct {
 	_ struct{} `type:"structure"`
 
@@ -960,7 +943,6 @@ func (s *NewTransitVirtualInterface) Validate() error {
 }
 
 // Information about a transit virtual interface.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewTransitVirtualInterfaceAllocation
 type NewTransitVirtualInterfaceAllocation struct {
 	_ struct{} `type:"structure"`
 
@@ -1019,7 +1001,6 @@ func (s *NewTransitVirtualInterfaceAllocation) Validate() error {
 }
 
 // Information about a tag associated with an AWS Direct Connect resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ResourceTag
 type ResourceTag struct {
 	_ struct{} `type:"structure"`
 
@@ -1037,7 +1018,6 @@ func (s ResourceTag) String() string {
 
 // Information about a route filter prefix that a customer can advertise through
 // Border Gateway Protocol (BGP) over a public virtual interface.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/RouteFilterPrefix
 type RouteFilterPrefix struct {
 	_ struct{} `type:"structure"`
 
@@ -1052,7 +1032,6 @@ func (s RouteFilterPrefix) String() string {
 }
 
 // Information about a tag.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -1088,7 +1067,6 @@ func (s *Tag) Validate() error {
 }
 
 // Information about a virtual private gateway for a private virtual interface.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/VirtualGateway
 type VirtualGateway struct {
 	_ struct{} `type:"structure"`
 
@@ -1115,7 +1093,6 @@ func (s VirtualGateway) String() string {
 }
 
 // Information about a virtual interface.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/VirtualInterface
 type VirtualInterface struct {
 	_ struct{} `type:"structure"`
 

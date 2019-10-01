@@ -12,7 +12,6 @@ import (
 )
 
 // Represents a request to update an existing custom verification email template.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateCustomVerificationEmailTemplateRequest
 type UpdateCustomVerificationEmailTemplateInput struct {
 	_ struct{} `type:"structure"`
 
@@ -62,7 +61,6 @@ func (s *UpdateCustomVerificationEmailTemplateInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateCustomVerificationEmailTemplateOutput
 type UpdateCustomVerificationEmailTemplateOutput struct {
 	_ struct{} `type:"structure"`
 }

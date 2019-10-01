@@ -12,7 +12,6 @@ import (
 // Initiates the creation of a conditional forwarder for your AWS Directory
 // Service for Microsoft Active Directory. Conditional forwarders are required
 // in order to set up a trust relationship with another domain.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateConditionalForwarderRequest
 type CreateConditionalForwarderInput struct {
 	_ struct{} `type:"structure"`
 
@@ -62,7 +61,6 @@ func (s *CreateConditionalForwarderInput) Validate() error {
 }
 
 // The result of a CreateConditinalForwarder request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateConditionalForwarderResult
 type CreateConditionalForwarderOutput struct {
 	_ struct{} `type:"structure"`
 }

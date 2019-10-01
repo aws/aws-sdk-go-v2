@@ -12,7 +12,6 @@ import (
 
 // The request to list distributions that are associated with a specified AWS
 // WAF web ACL.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListDistributionsByWebACLIdRequest
 type ListDistributionsByWebACLIdInput struct {
 	_ struct{} `type:"structure"`
 
@@ -80,7 +79,6 @@ func (s ListDistributionsByWebACLIdInput) MarshalFields(e protocol.FieldEncoder)
 
 // The response to a request to list the distributions that are associated with
 // a specified AWS WAF web ACL.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListDistributionsByWebACLIdResult
 type ListDistributionsByWebACLIdOutput struct {
 	_ struct{} `type:"structure" payload:"DistributionList"`
 

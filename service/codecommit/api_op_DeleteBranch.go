@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a delete branch operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteBranchInput
 type DeleteBranchInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s *DeleteBranchInput) Validate() error {
 }
 
 // Represents the output of a delete branch operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteBranchOutput
 type DeleteBranchOutput struct {
 	_ struct{} `type:"structure"`
 

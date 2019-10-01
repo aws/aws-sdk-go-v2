@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMappingRequest
 type UpdateEventSourceMappingInput struct {
 	_ struct{} `type:"structure"`
 
@@ -42,6 +41,8 @@ type UpdateEventSourceMappingInput struct {
 	// The length constraint applies only to the full ARN. If you specify only the
 	// function name, it's limited to 64 characters in length.
 	FunctionName *string `min:"1" type:"string"`
+
+	MaximumBatchingWindowInSeconds *int64 `type:"integer"`
 
 	// The identifier of the event source mapping.
 	//
@@ -96,6 +97,12 @@ func (s UpdateEventSourceMappingInput) MarshalFields(e protocol.FieldEncoder) er
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "FunctionName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.MaximumBatchingWindowInSeconds != nil {
+		v := *s.MaximumBatchingWindowInSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaximumBatchingWindowInSeconds", protocol.Int64Value(v), metadata)
+	}
 	if s.UUID != nil {
 		v := *s.UUID
 
@@ -107,7 +114,6 @@ func (s UpdateEventSourceMappingInput) MarshalFields(e protocol.FieldEncoder) er
 
 // A mapping between an AWS resource and an AWS Lambda function. See CreateEventSourceMapping
 // for details.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EventSourceMappingConfiguration
 type UpdateEventSourceMappingOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -125,6 +131,8 @@ type UpdateEventSourceMappingOutput struct {
 
 	// The result of the last AWS Lambda invocation of your Lambda function.
 	LastProcessingResult *string `type:"string"`
+
+	MaximumBatchingWindowInSeconds *int64 `type:"integer"`
 
 	// The state of the event source mapping. It can be one of the following: Creating,
 	// Enabling, Enabled, Disabling, Disabled, Updating, or Deleting.
@@ -174,6 +182,12 @@ func (s UpdateEventSourceMappingOutput) MarshalFields(e protocol.FieldEncoder) e
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "LastProcessingResult", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MaximumBatchingWindowInSeconds != nil {
+		v := *s.MaximumBatchingWindowInSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaximumBatchingWindowInSeconds", protocol.Int64Value(v), metadata)
 	}
 	if s.State != nil {
 		v := *s.State

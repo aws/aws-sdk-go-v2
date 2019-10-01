@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a ListDeploymentConfigs operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentConfigsInput
 type ListDeploymentConfigsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -25,7 +24,6 @@ func (s ListDeploymentConfigsInput) String() string {
 }
 
 // Represents the output of a ListDeploymentConfigs operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentConfigsOutput
 type ListDeploymentConfigsOutput struct {
 	_ struct{} `type:"structure"`
 

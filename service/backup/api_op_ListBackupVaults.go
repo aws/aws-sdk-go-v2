@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupVaultsInput
 type ListBackupVaultsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -61,7 +60,6 @@ func (s ListBackupVaultsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupVaultsOutput
 type ListBackupVaultsOutput struct {
 	_ struct{} `type:"structure"`
 

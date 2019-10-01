@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteJobQueueRequest
 type DeleteJobQueueInput struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +51,6 @@ func (s DeleteJobQueueInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteJobQueueResponse
 type DeleteJobQueueOutput struct {
 	_ struct{} `type:"structure"`
 }

@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DeleteDatasetImportJobRequest
 type DeleteDatasetImportJobInput struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s *DeleteDatasetImportJobInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DeleteDatasetImportJobOutput
 type DeleteDatasetImportJobOutput struct {
 	_ struct{} `type:"structure"`
 }

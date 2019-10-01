@@ -10,7 +10,6 @@ import (
 )
 
 // Input to the ListIdentityPools action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/ListIdentityPoolsInput
 type ListIdentityPoolsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -49,7 +48,6 @@ func (s *ListIdentityPoolsInput) Validate() error {
 }
 
 // The result of a successful ListIdentityPools action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/ListIdentityPoolsResponse
 type ListIdentityPoolsOutput struct {
 	_ struct{} `type:"structure"`
 

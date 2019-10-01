@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeExecutionInput
 type DescribeExecutionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -42,7 +41,6 @@ func (s *DescribeExecutionInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeExecutionOutput
 type DescribeExecutionOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -54,13 +52,13 @@ type DescribeExecutionOutput struct {
 	// The string that contains the JSON input data of the execution.
 	//
 	// Input is a required field
-	Input *string `locationName:"input" type:"string" required:"true"`
+	Input *string `locationName:"input" type:"string" required:"true" sensitive:"true"`
 
 	// The name of the execution.
 	//
 	// A name must not contain:
 	//
-	//    * whitespace
+	//    * white space
 	//
 	//    * brackets < > { } [ ]
 	//
@@ -75,7 +73,7 @@ type DescribeExecutionOutput struct {
 	//
 	// This field is set only if the execution succeeds. If the execution fails,
 	// this field is null.
-	Output *string `locationName:"output" type:"string"`
+	Output *string `locationName:"output" type:"string" sensitive:"true"`
 
 	// The date the execution is started.
 	//

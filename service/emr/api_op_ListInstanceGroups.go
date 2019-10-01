@@ -10,7 +10,6 @@ import (
 )
 
 // This input determines which instance groups to retrieve.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstanceGroupsInput
 type ListInstanceGroupsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *ListInstanceGroupsInput) Validate() error {
 }
 
 // This input determines which instance groups to retrieve.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstanceGroupsOutput
 type ListInstanceGroupsOutput struct {
 	_ struct{} `type:"structure"`
 

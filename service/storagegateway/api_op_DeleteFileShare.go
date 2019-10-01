@@ -10,7 +10,6 @@ import (
 )
 
 // DeleteFileShareInput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteFileShareInput
 type DeleteFileShareInput struct {
 	_ struct{} `type:"structure"`
 
@@ -49,7 +48,6 @@ func (s *DeleteFileShareInput) Validate() error {
 }
 
 // DeleteFileShareOutput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteFileShareOutput
 type DeleteFileShareOutput struct {
 	_ struct{} `type:"structure"`
 

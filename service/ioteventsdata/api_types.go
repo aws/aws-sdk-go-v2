@@ -15,7 +15,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Contains information about the errors encountered.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-data-2018-10-23/BatchPutMessageErrorEntry
 type BatchPutMessageErrorEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s BatchPutMessageErrorEntry) MarshalFields(e protocol.FieldEncoder) error 
 }
 
 // Information about the error that occured when attempting to update a detector.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-data-2018-10-23/BatchUpdateDetectorErrorEntry
 type BatchUpdateDetectorErrorEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -103,7 +101,6 @@ func (s BatchUpdateDetectorErrorEntry) MarshalFields(e protocol.FieldEncoder) er
 }
 
 // Information about the detector (instance).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-data-2018-10-23/Detector
 type Detector struct {
 	_ struct{} `type:"structure"`
 
@@ -176,7 +173,6 @@ func (s Detector) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about the current state of the detector instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-data-2018-10-23/DetectorState
 type DetectorState struct {
 	_ struct{} `type:"structure"`
 
@@ -237,7 +233,6 @@ func (s DetectorState) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The new state, variable values, and timer settings of the detector (instance).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-data-2018-10-23/DetectorStateDefinition
 type DetectorStateDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -339,7 +334,6 @@ func (s DetectorStateDefinition) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about the detector state.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-data-2018-10-23/DetectorStateSummary
 type DetectorStateSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -364,7 +358,6 @@ func (s DetectorStateSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about the detector (instance).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-data-2018-10-23/DetectorSummary
 type DetectorSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -437,7 +430,6 @@ func (s DetectorSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a message.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-data-2018-10-23/Message
 type Message struct {
 	_ struct{} `type:"structure"`
 
@@ -518,7 +510,6 @@ func (s Message) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The current state of a timer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-data-2018-10-23/Timer
 type Timer struct {
 	_ struct{} `type:"structure"`
 
@@ -557,7 +548,6 @@ func (s Timer) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The new setting of a timer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-data-2018-10-23/TimerDefinition
 type TimerDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -616,7 +606,6 @@ func (s TimerDefinition) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information used to update the detector (instance).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-data-2018-10-23/UpdateDetectorRequest
 type UpdateDetectorRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -712,7 +701,6 @@ func (s UpdateDetectorRequest) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The current state of the variable.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-data-2018-10-23/Variable
 type Variable struct {
 	_ struct{} `type:"structure"`
 
@@ -750,7 +738,6 @@ func (s Variable) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The new value of the variable.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-data-2018-10-23/VariableDefinition
 type VariableDefinition struct {
 	_ struct{} `type:"structure"`
 

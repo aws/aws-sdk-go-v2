@@ -11,7 +11,6 @@ import (
 )
 
 // CreateAgentRequest
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateAgentRequest
 type CreateAgentInput struct {
 	_ struct{} `type:"structure"`
 
@@ -101,7 +100,6 @@ func (s *CreateAgentInput) Validate() error {
 }
 
 // CreateAgentResponse
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateAgentResponse
 type CreateAgentOutput struct {
 	_ struct{} `type:"structure"`
 

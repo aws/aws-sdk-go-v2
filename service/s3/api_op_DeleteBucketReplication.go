@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketReplicationRequest
 type DeleteBucketReplicationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -62,7 +61,6 @@ func (s DeleteBucketReplicationInput) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketReplicationOutput
 type DeleteBucketReplicationOutput struct {
 	_ struct{} `type:"structure"`
 }

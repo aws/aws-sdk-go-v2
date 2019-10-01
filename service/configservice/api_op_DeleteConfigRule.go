@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteConfigRuleRequest
 type DeleteConfigRuleInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *DeleteConfigRuleInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteConfigRuleOutput
 type DeleteConfigRuleOutput struct {
 	_ struct{} `type:"structure"`
 }

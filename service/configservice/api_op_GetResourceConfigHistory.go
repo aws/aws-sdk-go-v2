@@ -11,7 +11,6 @@ import (
 )
 
 // The input for the GetResourceConfigHistory action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetResourceConfigHistoryRequest
 type GetResourceConfigHistoryInput struct {
 	_ struct{} `type:"structure"`
 
@@ -74,7 +73,6 @@ func (s *GetResourceConfigHistoryInput) Validate() error {
 }
 
 // The output for the GetResourceConfigHistory action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetResourceConfigHistoryResponse
 type GetResourceConfigHistoryOutput struct {
 	_ struct{} `type:"structure"`
 

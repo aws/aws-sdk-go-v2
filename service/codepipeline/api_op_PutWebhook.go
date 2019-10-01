@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutWebhookInput
 type PutWebhookInput struct {
 	_ struct{} `type:"structure"`
 
@@ -58,7 +57,6 @@ func (s *PutWebhookInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutWebhookOutput
 type PutWebhookOutput struct {
 	_ struct{} `type:"structure"`
 

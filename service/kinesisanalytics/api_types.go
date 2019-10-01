@@ -21,7 +21,6 @@ var _ = awsutil.Prettify
 //
 // Provides a description of the application, including the application Amazon
 // Resource Name (ARN), status, latest version, and input and output configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ApplicationDetail
 type ApplicationDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -89,7 +88,6 @@ func (s ApplicationDetail) String() string {
 //
 // Provides application summary information, including the application Amazon
 // Resource Name (ARN), name, and status.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ApplicationSummary
 type ApplicationSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -115,7 +113,6 @@ func (s ApplicationSummary) String() string {
 }
 
 // Describes updates to apply to an existing Amazon Kinesis Analytics application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ApplicationUpdate
 type ApplicationUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -186,7 +183,6 @@ func (s *ApplicationUpdate) Validate() error {
 // "name1", "address1"
 //
 // "name2", "address2"
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/CSVMappingParameters
 type CSVMappingParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -233,7 +229,6 @@ func (s *CSVMappingParameters) Validate() error {
 
 // Provides a description of CloudWatch logging options, including the log stream
 // Amazon Resource Name (ARN) and the role ARN.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/CloudWatchLoggingOption
 type CloudWatchLoggingOption struct {
 	_ struct{} `type:"structure"`
 
@@ -280,7 +275,6 @@ func (s *CloudWatchLoggingOption) Validate() error {
 }
 
 // Description of the CloudWatch logging option.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/CloudWatchLoggingOptionDescription
 type CloudWatchLoggingOptionDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -306,7 +300,6 @@ func (s CloudWatchLoggingOptionDescription) String() string {
 }
 
 // Describes CloudWatch logging option updates.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/CloudWatchLoggingOptionUpdate
 type CloudWatchLoggingOptionUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -354,7 +347,6 @@ func (s *CloudWatchLoggingOptionUpdate) Validate() error {
 
 // Describes the data format when records are written to the destination. For
 // more information, see Configuring Application Output (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DestinationSchema
 type DestinationSchema struct {
 	_ struct{} `type:"structure"`
 
@@ -385,7 +377,6 @@ func (s *DestinationSchema) Validate() error {
 // When you configure the application input, you specify the streaming source,
 // the in-application stream name that is created, and the mapping between the
 // two. For more information, see Configuring Application Input (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/Input
 type Input struct {
 	_ struct{} `type:"structure"`
 
@@ -489,7 +480,6 @@ func (s *Input) Validate() error {
 // When you start your application, you provide this configuration, which identifies
 // the input source and the point in the input source at which you want the
 // application to start processing records.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputConfiguration
 type InputConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -534,7 +524,6 @@ func (s *InputConfiguration) Validate() error {
 
 // Describes the application input configuration. For more information, see
 // Configuring Application Input (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputDescription
 type InputDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -584,7 +573,6 @@ func (s InputDescription) String() string {
 // (https://docs.aws.amazon.com/lambda/) function that is used to preprocess
 // records in the stream, and the ARN of the IAM role that is used to access
 // the AWS Lambda function.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputLambdaProcessor
 type InputLambdaProcessor struct {
 	_ struct{} `type:"structure"`
 
@@ -637,7 +625,6 @@ func (s *InputLambdaProcessor) Validate() error {
 // (https://docs.aws.amazon.com/lambda/) function that is used to preprocess
 // records in the stream, and the ARN of the IAM role that is used to access
 // the AWS Lambda expression.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputLambdaProcessorDescription
 type InputLambdaProcessorDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -656,11 +643,10 @@ func (s InputLambdaProcessorDescription) String() string {
 
 // Represents an update to the InputLambdaProcessor (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessor.html)
 // that is used to preprocess the records in the stream.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputLambdaProcessorUpdate
 type InputLambdaProcessorUpdate struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the new AWS Lambda (https://docs.aws.amazon.com/ambda/)
+	// The Amazon Resource Name (ARN) of the new AWS Lambda (https://docs.aws.amazon.com/lambda/)
 	// function that is used to preprocess the records in the stream.
 	//
 	// To specify an earlier version of the Lambda function than the latest, include
@@ -696,7 +682,6 @@ func (s *InputLambdaProcessorUpdate) Validate() error {
 // Describes the number of in-application streams to create for a given streaming
 // source. For information about parallelism, see Configuring Application Input
 // (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputParallelism
 type InputParallelism struct {
 	_ struct{} `type:"structure"`
 
@@ -724,7 +709,6 @@ func (s *InputParallelism) Validate() error {
 }
 
 // Provides updates to the parallelism count.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputParallelismUpdate
 type InputParallelismUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -753,7 +737,6 @@ func (s *InputParallelismUpdate) Validate() error {
 // Provides a description of a processor that is used to preprocess the records
 // in the stream before being processed by your application code. Currently,
 // the only input processor available is AWS Lambda (https://docs.aws.amazon.com/lambda/).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputProcessingConfiguration
 type InputProcessingConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -791,7 +774,6 @@ func (s *InputProcessingConfiguration) Validate() error {
 
 // Provides configuration information about an input processor. Currently, the
 // only input processor available is AWS Lambda (https://docs.aws.amazon.com/lambda/).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputProcessingConfigurationDescription
 type InputProcessingConfigurationDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -806,7 +788,6 @@ func (s InputProcessingConfigurationDescription) String() string {
 }
 
 // Describes updates to an InputProcessingConfiguration (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputProcessingConfigurationUpdate
 type InputProcessingConfigurationUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -841,7 +822,6 @@ func (s *InputProcessingConfigurationUpdate) Validate() error {
 }
 
 // Describes updates for the application's input schema.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputSchemaUpdate
 type InputSchemaUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -889,7 +869,6 @@ func (s *InputSchemaUpdate) Validate() error {
 }
 
 // Describes the point at which the application reads from the streaming source.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputStartingPositionConfiguration
 type InputStartingPositionConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -914,7 +893,6 @@ func (s InputStartingPositionConfiguration) String() string {
 
 // Describes updates to a specific input configuration (identified by the InputId
 // of an application).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputUpdate
 type InputUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -1000,7 +978,6 @@ func (s *InputUpdate) Validate() error {
 
 // Provides additional mapping information when JSON is the record format on
 // the streaming source.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/JSONMappingParameters
 type JSONMappingParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -1035,7 +1012,6 @@ func (s *JSONMappingParameters) Validate() error {
 // Identifies an Amazon Kinesis Firehose delivery stream as the streaming source.
 // You provide the delivery stream's Amazon Resource Name (ARN) and an IAM role
 // ARN that enables Amazon Kinesis Analytics to access the stream on your behalf.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/KinesisFirehoseInput
 type KinesisFirehoseInput struct {
 	_ struct{} `type:"structure"`
 
@@ -1083,7 +1059,6 @@ func (s *KinesisFirehoseInput) Validate() error {
 
 // Describes the Amazon Kinesis Firehose delivery stream that is configured
 // as the streaming source in the application input configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/KinesisFirehoseInputDescription
 type KinesisFirehoseInputDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -1101,7 +1076,6 @@ func (s KinesisFirehoseInputDescription) String() string {
 
 // When updating application input configuration, provides information about
 // an Amazon Kinesis Firehose delivery stream as the streaming source.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/KinesisFirehoseInputUpdate
 type KinesisFirehoseInputUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -1140,7 +1114,6 @@ func (s *KinesisFirehoseInputUpdate) Validate() error {
 // delivery stream as the destination. You provide the stream Amazon Resource
 // Name (ARN) and an IAM role that enables Amazon Kinesis Analytics to write
 // to the stream on your behalf.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/KinesisFirehoseOutput
 type KinesisFirehoseOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -1188,7 +1161,6 @@ func (s *KinesisFirehoseOutput) Validate() error {
 
 // For an application output, describes the Amazon Kinesis Firehose delivery
 // stream configured as its destination.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/KinesisFirehoseOutputDescription
 type KinesisFirehoseOutputDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -1208,7 +1180,6 @@ func (s KinesisFirehoseOutputDescription) String() string {
 // When updating an output configuration using the UpdateApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_UpdateApplication.html)
 // operation, provides information about an Amazon Kinesis Firehose delivery
 // stream configured as the destination.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/KinesisFirehoseOutputUpdate
 type KinesisFirehoseOutputUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -1246,7 +1217,6 @@ func (s *KinesisFirehoseOutputUpdate) Validate() error {
 // Identifies an Amazon Kinesis stream as the streaming source. You provide
 // the stream's Amazon Resource Name (ARN) and an IAM role ARN that enables
 // Amazon Kinesis Analytics to access the stream on your behalf.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/KinesisStreamsInput
 type KinesisStreamsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -1294,7 +1264,6 @@ func (s *KinesisStreamsInput) Validate() error {
 
 // Describes the Amazon Kinesis stream that is configured as the streaming source
 // in the application input configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/KinesisStreamsInputDescription
 type KinesisStreamsInputDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -1313,7 +1282,6 @@ func (s KinesisStreamsInputDescription) String() string {
 
 // When updating application input configuration, provides information about
 // an Amazon Kinesis stream as the streaming source.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/KinesisStreamsInputUpdate
 type KinesisStreamsInputUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -1351,7 +1319,6 @@ func (s *KinesisStreamsInputUpdate) Validate() error {
 // as the destination. You provide the stream Amazon Resource Name (ARN) and
 // also an IAM role ARN that Amazon Kinesis Analytics can use to write to the
 // stream on your behalf.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/KinesisStreamsOutput
 type KinesisStreamsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -1399,7 +1366,6 @@ func (s *KinesisStreamsOutput) Validate() error {
 
 // For an application output, describes the Amazon Kinesis stream configured
 // as its destination.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/KinesisStreamsOutputDescription
 type KinesisStreamsOutputDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -1419,7 +1385,6 @@ func (s KinesisStreamsOutputDescription) String() string {
 // When updating an output configuration using the UpdateApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_UpdateApplication.html)
 // operation, provides information about an Amazon Kinesis stream configured
 // as the destination.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/KinesisStreamsOutputUpdate
 type KinesisStreamsOutputUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -1458,7 +1423,6 @@ func (s *KinesisStreamsOutputUpdate) Validate() error {
 // the destination. You provide the function Amazon Resource Name (ARN) and
 // also an IAM role ARN that Amazon Kinesis Analytics can use to write to the
 // function on your behalf.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/LambdaOutput
 type LambdaOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -1510,7 +1474,6 @@ func (s *LambdaOutput) Validate() error {
 
 // For an application output, describes the AWS Lambda function configured as
 // its destination.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/LambdaOutputDescription
 type LambdaOutputDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -1530,7 +1493,6 @@ func (s LambdaOutputDescription) String() string {
 // When updating an output configuration using the UpdateApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_UpdateApplication.html)
 // operation, provides information about an AWS Lambda function configured as
 // the destination.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/LambdaOutputUpdate
 type LambdaOutputUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -1572,7 +1534,6 @@ func (s *LambdaOutputUpdate) Validate() error {
 // application, provides additional mapping information specific to the record
 // format (such as JSON, CSV, or record fields delimited by some delimiter)
 // on the streaming source.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/MappingParameters
 type MappingParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -1617,7 +1578,6 @@ func (s *MappingParameters) Validate() error {
 //
 // For limits on how many destinations an application can write and other limitations,
 // see Limits (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/Output
 type Output struct {
 	_ struct{} `type:"structure"`
 
@@ -1691,7 +1651,6 @@ func (s *Output) Validate() error {
 // Describes the application output configuration, which includes the in-application
 // stream name and the destination where the stream data is written. The destination
 // can be an Amazon Kinesis stream or an Amazon Kinesis Firehose delivery stream.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/OutputDescription
 type OutputDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -1723,7 +1682,6 @@ func (s OutputDescription) String() string {
 }
 
 // Describes updates to the output configuration identified by the OutputId.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/OutputUpdate
 type OutputUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -1800,7 +1758,6 @@ func (s *OutputUpdate) Validate() error {
 // corresponding column in the in-application stream.
 //
 // Also used to describe the format of the reference data source.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/RecordColumn
 type RecordColumn struct {
 	_ struct{} `type:"structure"`
 
@@ -1849,7 +1806,6 @@ func (s *RecordColumn) Validate() error {
 
 // Describes the record format and relevant mapping information that should
 // be applied to schematize the records on the stream.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/RecordFormat
 type RecordFormat struct {
 	_ struct{} `type:"structure"`
 
@@ -1892,7 +1848,6 @@ func (s *RecordFormat) Validate() error {
 // bucket name and object key name), the resulting in-application table name
 // that is created, and the necessary schema to map the data elements in the
 // Amazon S3 object to the in-application table.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ReferenceDataSource
 type ReferenceDataSource struct {
 	_ struct{} `type:"structure"`
 
@@ -1952,7 +1907,6 @@ func (s *ReferenceDataSource) Validate() error {
 }
 
 // Describes the reference data source configured for an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ReferenceDataSourceDescription
 type ReferenceDataSourceDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -1993,7 +1947,6 @@ func (s ReferenceDataSourceDescription) String() string {
 // and object key name), the in-application table name that is created, and
 // updated mapping information that maps the data in the Amazon S3 object to
 // the in-application reference table that is created.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ReferenceDataSourceUpdate
 type ReferenceDataSourceUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -2056,7 +2009,6 @@ func (s *ReferenceDataSourceUpdate) Validate() error {
 // Resource Name (ARN) of the S3 bucket, the ARN of the IAM role that is used
 // to access the bucket, and the name of the Amazon S3 object that contains
 // the data.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/S3Configuration
 type S3Configuration struct {
 	_ struct{} `type:"structure"`
 
@@ -2119,7 +2071,6 @@ func (s *S3Configuration) Validate() error {
 // An Amazon Kinesis Analytics application loads reference data only once. If
 // the data changes, you call the UpdateApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_UpdateApplication.html)
 // operation to trigger reloading of data into your application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/S3ReferenceDataSource
 type S3ReferenceDataSource struct {
 	_ struct{} `type:"structure"`
 
@@ -2179,7 +2130,6 @@ func (s *S3ReferenceDataSource) Validate() error {
 }
 
 // Provides the bucket name and object key name that stores the reference data.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/S3ReferenceDataSourceDescription
 type S3ReferenceDataSourceDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -2209,7 +2159,6 @@ func (s S3ReferenceDataSourceDescription) String() string {
 // Describes the S3 bucket name, object key name, and IAM role that Amazon Kinesis
 // Analytics can assume to read the Amazon S3 object on your behalf and populate
 // the in-application reference table.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/S3ReferenceDataSourceUpdate
 type S3ReferenceDataSourceUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -2250,7 +2199,6 @@ func (s *S3ReferenceDataSourceUpdate) Validate() error {
 
 // Describes the format of the data in the streaming source, and how each data
 // element maps to corresponding columns created in the in-application stream.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/SourceSchema
 type SourceSchema struct {
 	_ struct{} `type:"structure"`
 
@@ -2311,10 +2259,7 @@ func (s *SourceSchema) Validate() error {
 // AWS resources. If you specify a tag that already exists, the tag value is
 // replaced with the value that you specify in the request. Note that the maximum
 // number of application tags includes system tags. The maximum number of user-defined
-// application tags is 50. For more information, see Using Cost Allocation Tags
-// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
-// in the AWS Billing and Cost Management Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/Tag
+// application tags is 50. For more information, see Using Tagging (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-tagging.html).
 type Tag struct {
 	_ struct{} `type:"structure"`
 

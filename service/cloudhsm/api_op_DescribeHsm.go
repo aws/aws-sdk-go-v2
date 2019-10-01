@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the inputs for the DescribeHsm operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeHsmRequest
 type DescribeHsmInput struct {
 	_ struct{} `type:"structure"`
 
@@ -29,7 +28,6 @@ func (s DescribeHsmInput) String() string {
 }
 
 // Contains the output of the DescribeHsm operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeHsmResponse
 type DescribeHsmOutput struct {
 	_ struct{} `type:"structure"`
 

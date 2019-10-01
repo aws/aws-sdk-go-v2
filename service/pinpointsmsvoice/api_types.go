@@ -13,7 +13,6 @@ var _ = awsutil.Prettify
 
 // An object that defines a message that contains text formatted using Amazon
 // Pinpoint Voice Instructions markup.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/CallInstructionsMessageType
 type CallInstructionsMessageType struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s CallInstructionsMessageType) MarshalFields(e protocol.FieldEncoder) erro
 
 // An object that contains information about an event destination that sends
 // data to Amazon CloudWatch Logs.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/CloudWatchLogsDestination
 type CloudWatchLogsDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -76,7 +74,6 @@ func (s CloudWatchLogsDestination) MarshalFields(e protocol.FieldEncoder) error 
 }
 
 // An object that defines an event destination.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/EventDestination
 type EventDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -158,7 +155,6 @@ func (s EventDestination) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object that defines a single event destination.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/EventDestinationDefinition
 type EventDestinationDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -232,7 +228,6 @@ func (s EventDestinationDefinition) MarshalFields(e protocol.FieldEncoder) error
 
 // An object that contains information about an event destination that sends
 // data to Amazon Kinesis Data Firehose.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/KinesisFirehoseDestination
 type KinesisFirehoseDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -268,7 +263,6 @@ func (s KinesisFirehoseDestination) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // An object that defines a message that contains unformatted text.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/PlainTextMessageType
 type PlainTextMessageType struct {
 	_ struct{} `type:"structure"`
 
@@ -313,7 +307,6 @@ func (s PlainTextMessageType) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object that defines a message that contains SSML-formatted text.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/SSMLMessageType
 type SSMLMessageType struct {
 	_ struct{} `type:"structure"`
 
@@ -359,7 +352,6 @@ func (s SSMLMessageType) MarshalFields(e protocol.FieldEncoder) error {
 
 // An object that contains information about an event destination that sends
 // data to Amazon SNS.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/SnsDestination
 type SnsDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -386,7 +378,6 @@ func (s SnsDestination) MarshalFields(e protocol.FieldEncoder) error {
 
 // An object that contains a voice message and information about the recipient
 // that you want to send it to.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/VoiceMessageContent
 type VoiceMessageContent struct {
 	_ struct{} `type:"structure"`
 

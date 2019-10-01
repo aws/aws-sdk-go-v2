@@ -12,7 +12,6 @@ import (
 
 // This input determines how the ListClusters action filters the list of clusters
 // that it returns.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListClustersInput
 type ListClustersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -36,7 +35,6 @@ func (s ListClustersInput) String() string {
 
 // This contains a ClusterSummaryList with the cluster details; for example,
 // the cluster IDs, names, and status.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListClustersOutput
 type ListClustersOutput struct {
 	_ struct{} `type:"structure"`
 

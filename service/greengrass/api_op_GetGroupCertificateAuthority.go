@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupCertificateAuthorityRequest
 type GetGroupCertificateAuthorityInput struct {
 	_ struct{} `type:"structure"`
 
@@ -64,7 +63,6 @@ func (s GetGroupCertificateAuthorityInput) MarshalFields(e protocol.FieldEncoder
 }
 
 // Information about a certificate authority for a group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupCertificateAuthorityResponse
 type GetGroupCertificateAuthorityOutput struct {
 	_ struct{} `type:"structure"`
 

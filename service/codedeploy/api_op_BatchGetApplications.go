@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a BatchGetApplications operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetApplicationsInput
 type BatchGetApplicationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -41,7 +40,6 @@ func (s *BatchGetApplicationsInput) Validate() error {
 }
 
 // Represents the output of a BatchGetApplications operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetApplicationsOutput
 type BatchGetApplicationsOutput struct {
 	_ struct{} `type:"structure"`
 

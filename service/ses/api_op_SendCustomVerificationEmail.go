@@ -10,7 +10,6 @@ import (
 )
 
 // Represents a request to send a custom verification email to a specified recipient.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendCustomVerificationEmailRequest
 type SendCustomVerificationEmailInput struct {
 	_ struct{} `type:"structure"`
 
@@ -53,7 +52,6 @@ func (s *SendCustomVerificationEmailInput) Validate() error {
 }
 
 // The response received when attempting to send the custom verification email.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendCustomVerificationEmailResponse
 type SendCustomVerificationEmailOutput struct {
 	_ struct{} `type:"structure"`
 

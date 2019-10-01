@@ -11,7 +11,6 @@ import (
 )
 
 // The GetDomainDetail request includes the following element.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetDomainDetailRequest
 type GetDomainDetailInput struct {
 	_ struct{} `type:"structure"`
 
@@ -41,7 +40,6 @@ func (s *GetDomainDetailInput) Validate() error {
 }
 
 // The GetDomainDetail response includes the following elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetDomainDetailResponse
 type GetDomainDetailOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +54,7 @@ type GetDomainDetailOutput struct {
 	// Provides details about the domain administrative contact.
 	//
 	// AdminContact is a required field
-	AdminContact *ContactDetail `type:"structure" required:"true"`
+	AdminContact *ContactDetail `type:"structure" required:"true" sensitive:"true"`
 
 	// Specifies whether contact information is concealed from WHOIS queries. If
 	// the value is true, WHOIS ("who is") queries return contact information either
@@ -92,7 +90,7 @@ type GetDomainDetailOutput struct {
 	// Provides details about the domain registrant.
 	//
 	// RegistrantContact is a required field
-	RegistrantContact *ContactDetail `type:"structure" required:"true"`
+	RegistrantContact *ContactDetail `type:"structure" required:"true" sensitive:"true"`
 
 	// Specifies whether contact information is concealed from WHOIS queries. If
 	// the value is true, WHOIS ("who is") queries return contact information either
@@ -137,7 +135,7 @@ type GetDomainDetailOutput struct {
 	// Provides details about the domain technical contact.
 	//
 	// TechContact is a required field
-	TechContact *ContactDetail `type:"structure" required:"true"`
+	TechContact *ContactDetail `type:"structure" required:"true" sensitive:"true"`
 
 	// Specifies whether contact information is concealed from WHOIS queries. If
 	// the value is true, WHOIS ("who is") queries return contact information either

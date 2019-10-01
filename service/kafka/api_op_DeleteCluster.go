@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DeleteClusterRequest
 type DeleteClusterInput struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s DeleteClusterInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Returns information about the deleted cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DeleteClusterResponse
 type DeleteClusterOutput struct {
 	_ struct{} `type:"structure"`
 

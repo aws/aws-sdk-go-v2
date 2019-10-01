@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a DeleteTable operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteTableInput
 type DeleteTableInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *DeleteTableInput) Validate() error {
 }
 
 // Represents the output of a DeleteTable operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteTableOutput
 type DeleteTableOutput struct {
 	_ struct{} `type:"structure"`
 

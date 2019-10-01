@@ -12,7 +12,6 @@ import (
 // Represents a request to update a receipt rule. You use receipt rules to receive
 // email with Amazon SES. For more information, see the Amazon SES Developer
 // Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateReceiptRuleRequest
 type UpdateReceiptRuleInput struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s *UpdateReceiptRuleInput) Validate() error {
 }
 
 // An empty element returned on a successful request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateReceiptRuleResponse
 type UpdateReceiptRuleOutput struct {
 	_ struct{} `type:"structure"`
 }

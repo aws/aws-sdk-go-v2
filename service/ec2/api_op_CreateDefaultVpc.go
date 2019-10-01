@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDefaultVpcRequest
 type CreateDefaultVpcInput struct {
 	_ struct{} `type:"structure"`
 
@@ -25,7 +24,6 @@ func (s CreateDefaultVpcInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDefaultVpcResult
 type CreateDefaultVpcOutput struct {
 	_ struct{} `type:"structure"`
 

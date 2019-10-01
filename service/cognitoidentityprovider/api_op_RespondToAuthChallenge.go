@@ -10,7 +10,6 @@ import (
 )
 
 // The request to respond to an authentication challenge.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RespondToAuthChallengeRequest
 type RespondToAuthChallengeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -42,7 +41,7 @@ type RespondToAuthChallengeInput struct {
 	// The app client ID.
 	//
 	// ClientId is a required field
-	ClientId *string `min:"1" type:"string" required:"true"`
+	ClientId *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The session which should be passed both ways in challenge-response calls
 	// to the service. If InitiateAuth or RespondToAuthChallenge API call determines
@@ -86,7 +85,6 @@ func (s *RespondToAuthChallengeInput) Validate() error {
 }
 
 // The response to respond to the authentication challenge.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RespondToAuthChallengeResponse
 type RespondToAuthChallengeOutput struct {
 	_ struct{} `type:"structure"`
 

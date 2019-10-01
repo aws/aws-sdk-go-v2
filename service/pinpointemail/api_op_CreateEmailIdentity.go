@@ -13,7 +13,6 @@ import (
 
 // A request to begin the verification process for an email identity (an email
 // address or domain).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateEmailIdentityRequest
 type CreateEmailIdentityInput struct {
 	_ struct{} `type:"structure"`
 
@@ -83,7 +82,6 @@ func (s CreateEmailIdentityInput) MarshalFields(e protocol.FieldEncoder) error {
 // you have to add these records to the DNS configuration for your domain.
 //
 // If the email identity is an email address, this object is empty.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateEmailIdentityResponse
 type CreateEmailIdentityOutput struct {
 	_ struct{} `type:"structure"`
 

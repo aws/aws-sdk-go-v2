@@ -11,7 +11,6 @@ import (
 )
 
 // The request to update a distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateDistributionRequest
 type UpdateDistributionInput struct {
 	_ struct{} `type:"structure" payload:"DistributionConfig"`
 
@@ -83,7 +82,6 @@ func (s UpdateDistributionInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateDistributionResult
 type UpdateDistributionOutput struct {
 	_ struct{} `type:"structure" payload:"Distribution"`
 

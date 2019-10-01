@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetSendQuotaInput
 type GetSendQuotaInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -21,7 +20,6 @@ func (s GetSendQuotaInput) String() string {
 
 // Represents your Amazon SES daily sending quota, maximum send rate, and the
 // number of emails you have sent in the last 24 hours.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetSendQuotaResponse
 type GetSendQuotaOutput struct {
 	_ struct{} `type:"structure"`
 

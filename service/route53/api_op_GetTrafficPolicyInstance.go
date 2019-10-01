@@ -11,7 +11,6 @@ import (
 )
 
 // Gets information about a specified traffic policy instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyInstanceRequest
 type GetTrafficPolicyInstanceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -57,7 +56,6 @@ func (s GetTrafficPolicyInstanceInput) MarshalFields(e protocol.FieldEncoder) er
 
 // A complex type that contains information about the resource record sets that
 // Amazon Route 53 created based on a specified traffic policy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyInstanceResponse
 type GetTrafficPolicyInstanceOutput struct {
 	_ struct{} `type:"structure"`
 

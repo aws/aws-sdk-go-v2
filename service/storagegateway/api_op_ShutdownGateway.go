@@ -10,12 +10,11 @@ import (
 )
 
 // A JSON object containing the of the gateway to shut down.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ShutdownGatewayInput
 type ShutdownGatewayInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	//
 	// GatewayARN is a required field
 	GatewayARN *string `min:"50" type:"string" required:"true"`
@@ -44,12 +43,11 @@ func (s *ShutdownGatewayInput) Validate() error {
 }
 
 // A JSON object containing the of the gateway that was shut down.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ShutdownGatewayOutput
 type ShutdownGatewayOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string `min:"50" type:"string"`
 }
 

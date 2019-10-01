@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSAMLProviderRequest
 type GetSAMLProviderInput struct {
 	_ struct{} `type:"structure"`
 
@@ -48,7 +47,6 @@ func (s *GetSAMLProviderInput) Validate() error {
 }
 
 // Contains the response to a successful GetSAMLProvider request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSAMLProviderResponse
 type GetSAMLProviderOutput struct {
 	_ struct{} `type:"structure"`
 

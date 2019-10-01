@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the request to confirm registration of a user.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ConfirmSignUpRequest
 type ConfirmSignUpInput struct {
 	_ struct{} `type:"structure"`
 
@@ -21,7 +20,7 @@ type ConfirmSignUpInput struct {
 	// The ID of the app client associated with the user pool.
 	//
 	// ClientId is a required field
-	ClientId *string `min:"1" type:"string" required:"true"`
+	ClientId *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The confirmation code sent by a user's request to confirm registration.
 	//
@@ -38,7 +37,7 @@ type ConfirmSignUpInput struct {
 
 	// A keyed-hash message authentication code (HMAC) calculated using the secret
 	// key of a user pool client and username plus the client ID in the message.
-	SecretHash *string `min:"1" type:"string"`
+	SecretHash *string `min:"1" type:"string" sensitive:"true"`
 
 	// Contextual data such as the user's device fingerprint, IP address, or location
 	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
@@ -48,7 +47,7 @@ type ConfirmSignUpInput struct {
 	// The user name of the user whose registration you wish to confirm.
 	//
 	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true"`
+	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -91,7 +90,6 @@ func (s *ConfirmSignUpInput) Validate() error {
 }
 
 // Represents the response from the server for the registration confirmation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ConfirmSignUpResponse
 type ConfirmSignUpOutput struct {
 	_ struct{} `type:"structure"`
 }

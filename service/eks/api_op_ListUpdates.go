@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListUpdatesRequest
 type ListUpdatesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -82,7 +81,6 @@ func (s ListUpdatesInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListUpdatesResponse
 type ListUpdatesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -145,6 +143,12 @@ func (c *Client) ListUpdatesRequest(input *ListUpdatesInput) ListUpdatesRequest 
 		Name:       opListUpdates,
 		HTTPMethod: "GET",
 		HTTPPath:   "/clusters/{name}/updates",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -177,6 +181,53 @@ func (r ListUpdatesRequest) Send(ctx context.Context) (*ListUpdatesResponse, err
 	}
 
 	return resp, nil
+}
+
+// NewListUpdatesRequestPaginator returns a paginator for ListUpdates.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListUpdatesRequest(input)
+//   p := eks.NewListUpdatesRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListUpdatesPaginator(req ListUpdatesRequest) ListUpdatesPaginator {
+	return ListUpdatesPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListUpdatesInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListUpdatesPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListUpdatesPaginator struct {
+	aws.Pager
+}
+
+func (p *ListUpdatesPaginator) CurrentPage() *ListUpdatesOutput {
+	return p.Pager.CurrentPage().(*ListUpdatesOutput)
 }
 
 // ListUpdatesResponse is the response type for the

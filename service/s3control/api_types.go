@@ -16,7 +16,6 @@ var _ = awsutil.Prettify
 
 // A container element for the job configuration and status information returned
 // by a Describe Job request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/JobDescriptor
 type JobDescriptor struct {
 	_ struct{} `type:"structure"`
 
@@ -205,7 +204,6 @@ func (s JobDescriptor) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // If this job failed, this element indicates why the job failed.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/JobFailure
 type JobFailure struct {
 	_ struct{} `type:"structure"`
 
@@ -240,7 +238,6 @@ func (s JobFailure) MarshalFields(e protocol.FieldEncoder) error {
 
 // Contains the configuration and status information for a single job retrieved
 // as part of a job list.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/JobListDescriptor
 type JobListDescriptor struct {
 	_ struct{} `type:"structure"`
 
@@ -334,7 +331,6 @@ func (s JobListDescriptor) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Contains the configuration information for a job's manifest.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/JobManifest
 type JobManifest struct {
 	_ struct{} `type:"structure"`
 
@@ -401,7 +397,6 @@ func (s JobManifest) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Contains the information required to locate a manifest object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/JobManifestLocation
 type JobManifestLocation struct {
 	_ struct{} `type:"structure"`
 
@@ -476,7 +471,6 @@ func (s JobManifestLocation) MarshalFields(e protocol.FieldEncoder) error {
 
 // Describes the format of a manifest. If the manifest is in CSV format, also
 // describes the columns contained within the manifest.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/JobManifestSpec
 type JobManifestSpec struct {
 	_ struct{} `type:"structure"`
 
@@ -535,7 +529,6 @@ func (s JobManifestSpec) MarshalFields(e protocol.FieldEncoder) error {
 // the manifest. For more information about the available operations, see Available
 // Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-operations.html)
 // in the Amazon Simple Storage Service Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/JobOperation
 type JobOperation struct {
 	_ struct{} `type:"structure"`
 
@@ -632,7 +625,6 @@ func (s JobOperation) MarshalFields(e protocol.FieldEncoder) error {
 
 // Describes the total number of tasks that the specified job has executed,
 // the number of tasks that succeeded, and the number of tasks that failed.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/JobProgressSummary
 type JobProgressSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -672,7 +664,6 @@ func (s JobProgressSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Contains the configuration parameters for a job-completion report.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/JobReport
 type JobReport struct {
 	_ struct{} `type:"structure"`
 
@@ -758,7 +749,6 @@ func (s JobReport) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Contains the configuration parameters for a Lambda Invoke operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/LambdaInvokeOperation
 type LambdaInvokeOperation struct {
 	_ struct{} `type:"structure"`
 
@@ -796,7 +786,6 @@ func (s LambdaInvokeOperation) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PublicAccessBlockConfiguration
 type PublicAccessBlockConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -843,7 +832,6 @@ func (s PublicAccessBlockConfiguration) MarshalFields(e protocol.FieldEncoder) e
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3AccessControlList
 type S3AccessControlList struct {
 	_ struct{} `type:"structure"`
 
@@ -907,7 +895,6 @@ func (s S3AccessControlList) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3AccessControlPolicy
 type S3AccessControlPolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -957,7 +944,6 @@ func (s S3AccessControlPolicy) MarshalFields(e protocol.FieldEncoder) error {
 // S3 batch operations passes each value through to the underlying PUT Copy
 // object API. For more information about the parameters for this operation,
 // see PUT Object - Copy (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3CopyObjectOperation
 type S3CopyObjectOperation struct {
 	_ struct{} `type:"structure"`
 
@@ -1156,7 +1142,6 @@ func (s S3CopyObjectOperation) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3Grant
 type S3Grant struct {
 	_ struct{} `type:"structure"`
 
@@ -1202,7 +1187,6 @@ func (s S3Grant) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3Grantee
 type S3Grantee struct {
 	_ struct{} `type:"structure"`
 
@@ -1261,7 +1245,6 @@ func (s S3Grantee) MarshalFields(e protocol.FieldEncoder) error {
 // Amazon S3 batch operations passes each value through to the underlying POST
 // Object restore API. For more information about the parameters for this operation,
 // see Restoring Archives (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html#RESTObjectPOSTrestore-restore-request).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3InitiateRestoreObjectOperation
 type S3InitiateRestoreObjectOperation struct {
 	_ struct{} `type:"structure"`
 
@@ -1292,7 +1275,6 @@ func (s S3InitiateRestoreObjectOperation) MarshalFields(e protocol.FieldEncoder)
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3ObjectMetadata
 type S3ObjectMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -1430,7 +1412,6 @@ func (s S3ObjectMetadata) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3ObjectOwner
 type S3ObjectOwner struct {
 	_ struct{} `type:"structure"`
 
@@ -1481,7 +1462,6 @@ func (s S3ObjectOwner) MarshalFields(e protocol.FieldEncoder) error {
 // S3 batch operations passes each value through to the underlying PUT Object
 // acl API. For more information about the parameters for this operation, see
 // PUT Object acl (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTacl.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3SetObjectAclOperation
 type S3SetObjectAclOperation struct {
 	_ struct{} `type:"structure"`
 
@@ -1523,7 +1503,6 @@ func (s S3SetObjectAclOperation) MarshalFields(e protocol.FieldEncoder) error {
 // Amazon S3 batch operations passes each value through to the underlying PUT
 // Object tagging API. For more information about the parameters for this operation,
 // see PUT Object tagging (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTtagging.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3SetObjectTaggingOperation
 type S3SetObjectTaggingOperation struct {
 	_ struct{} `type:"structure"`
 
@@ -1569,7 +1548,6 @@ func (s S3SetObjectTaggingOperation) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3Tag
 type S3Tag struct {
 	_ struct{} `type:"structure"`
 

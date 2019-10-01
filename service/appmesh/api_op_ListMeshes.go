@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListMeshesInput
 type ListMeshesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s ListMeshesInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListMeshesOutput
 type ListMeshesOutput struct {
 	_ struct{} `type:"structure"`
 

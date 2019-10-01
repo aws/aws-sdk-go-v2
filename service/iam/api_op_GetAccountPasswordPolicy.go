@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountPasswordPolicyInput
 type GetAccountPasswordPolicyInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -20,7 +19,6 @@ func (s GetAccountPasswordPolicyInput) String() string {
 }
 
 // Contains the response to a successful GetAccountPasswordPolicy request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountPasswordPolicyResponse
 type GetAccountPasswordPolicyOutput struct {
 	_ struct{} `type:"structure"`
 

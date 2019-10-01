@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ImportSourceCredentialsInput
 type ImportSourceCredentialsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -34,7 +33,7 @@ type ImportSourceCredentialsInput struct {
 	// this is the app password.
 	//
 	// Token is a required field
-	Token *string `locationName:"token" min:"1" type:"string" required:"true"`
+	Token *string `locationName:"token" min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The Bitbucket username when the authType is BASIC_AUTH. This parameter is
 	// not valid for other types of source providers or connections.
@@ -72,7 +71,6 @@ func (s *ImportSourceCredentialsInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ImportSourceCredentialsOutput
 type ImportSourceCredentialsOutput struct {
 	_ struct{} `type:"structure"`
 

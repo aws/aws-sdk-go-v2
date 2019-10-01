@@ -12,7 +12,6 @@ import (
 )
 
 // Contains the parameters for GetReservedInstanceExchangeQuote.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetReservedInstancesExchangeQuoteRequest
 type GetReservedInstancesExchangeQuoteInput struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s *GetReservedInstancesExchangeQuoteInput) Validate() error {
 }
 
 // Contains the output of GetReservedInstancesExchangeQuote.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetReservedInstancesExchangeQuoteResult
 type GetReservedInstancesExchangeQuoteOutput struct {
 	_ struct{} `type:"structure"`
 

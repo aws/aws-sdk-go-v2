@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/SynthesizeSpeechInput
 type SynthesizeSpeechInput struct {
 	_ struct{} `type:"structure"`
 
@@ -174,7 +173,6 @@ func (s SynthesizeSpeechInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/SynthesizeSpeechOutput
 type SynthesizeSpeechOutput struct {
 	_ struct{} `type:"structure" payload:"AudioStream"`
 

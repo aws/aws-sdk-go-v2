@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the inputs for the DescribeDirectories operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeDirectoriesRequest
 type DescribeDirectoriesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -36,7 +35,6 @@ func (s DescribeDirectoriesInput) String() string {
 }
 
 // Contains the results of the DescribeDirectories operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeDirectoriesResult
 type DescribeDirectoriesOutput struct {
 	_ struct{} `type:"structure"`
 

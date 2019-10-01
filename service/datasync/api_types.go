@@ -12,7 +12,6 @@ var _ = awsutil.Prettify
 
 // Represents a single entry in a list of agents. AgentListEntry returns an
 // array that contains a list of agents when the ListAgents operation is called.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/AgentListEntry
 type AgentListEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -35,7 +34,6 @@ func (s AgentListEntry) String() string {
 // file system. The subnet must have at least one mount target for that file
 // system. The security group that you provide needs to be able to communicate
 // with the security group on the mount target in the subnet specified.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/Ec2Config
 type Ec2Config struct {
 	_ struct{} `type:"structure"`
 
@@ -80,7 +78,6 @@ func (s *Ec2Config) Validate() error {
 
 // Specifies which files, folders and objects to include or exclude when transferring
 // files from source to destination.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/FilterRule
 type FilterRule struct {
 	_ struct{} `type:"structure"`
 
@@ -101,7 +98,6 @@ func (s FilterRule) String() string {
 // Represents a single entry in a list of locations. LocationListEntry returns
 // an array that contains a list of locations when the ListLocations operation
 // is called.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/LocationListEntry
 type LocationListEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -136,7 +132,6 @@ func (s LocationListEntry) String() string {
 
 // Represents the mount options that are available for DataSync to access an
 // NFS location.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/NfsMountOptions
 type NfsMountOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -154,7 +149,6 @@ func (s NfsMountOptions) String() string {
 
 // A list of Amazon Resource Names (ARNs) of agents to use for a Network File
 // System (NFS) location.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/OnPremConfig
 type OnPremConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -195,7 +189,6 @@ func (s *OnPremConfig) Validate() error {
 // an option in StartTaskExecution, the default value is used. You can override
 // the defaults options on each task execution by specifying an overriding Options
 // value to StartTaskExecution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/Options
 type Options struct {
 	_ struct{} `type:"structure"`
 
@@ -321,7 +314,6 @@ func (s *Options) Validate() error {
 
 // The VPC endpoint, subnet and security group that an agent uses to access
 // IP addresses in a VPC (Virtual Private Cloud).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/PrivateLinkConfig
 type PrivateLinkConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -356,7 +348,6 @@ func (s PrivateLinkConfig) String() string {
 //
 // For detailed information about using such a role, see Creating a Location
 // for Amazon S3 in the AWS DataSync User Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/S3Config
 type S3Config struct {
 	_ struct{} `type:"structure"`
 
@@ -388,7 +379,6 @@ func (s *S3Config) Validate() error {
 
 // Represents the mount options that are available for DataSync to access an
 // SMB location.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/SmbMountOptions
 type SmbMountOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -407,7 +397,6 @@ func (s SmbMountOptions) String() string {
 // Represents a single entry in a list of AWS resource tags. TagListEntry returns
 // an array that contains a list of tasks when the ListTagsForResource operation
 // is called.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/TagListEntry
 type TagListEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -448,7 +437,6 @@ func (s *TagListEntry) Validate() error {
 // Represents a single entry in a list of task executions. TaskExecutionListEntry
 // returns an array that contains a list of specific invocations of a task when
 // ListTaskExecutions operation is called.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/TaskExecutionListEntry
 type TaskExecutionListEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -467,7 +455,6 @@ func (s TaskExecutionListEntry) String() string {
 // Describes the detailed result of a TaskExecution operation. This result includes
 // the time in milliseconds spent in each phase, the status of the task execution,
 // and the errors encountered.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/TaskExecutionResultDetail
 type TaskExecutionResultDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -508,7 +495,6 @@ func (s TaskExecutionResultDetail) String() string {
 // that contains a list of tasks when the ListTasks operation is called. A task
 // includes the source and destination file systems to sync and the options
 // to use for the tasks.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/TaskListEntry
 type TaskListEntry struct {
 	_ struct{} `type:"structure"`
 

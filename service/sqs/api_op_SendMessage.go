@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessageRequest
 type SendMessageInput struct {
 	_ struct{} `type:"structure"`
 
@@ -114,6 +113,17 @@ type SendMessageInput struct {
 	// queues.
 	MessageGroupId *string `type:"string"`
 
+	// The message system attribute to send. Each message system attribute consists
+	// of a Name, Type, and Value.
+	//
+	//    * Currently, the only supported message system attribute is AWSTraceHeader.
+	//    Its type must be String and its value must be a correctly formatted AWS
+	//    X-Ray trace string.
+	//
+	//    * The size of a message system attribute doesn't count towards the total
+	//    size of a message.
+	MessageSystemAttributes map[string]MessageSystemAttributeValue `locationName:"MessageSystemAttribute" locationNameKey:"Name" locationNameValue:"Value" type:"map" flattened:"true"`
+
 	// The URL of the Amazon SQS queue to which a message is sent.
 	//
 	// Queue URLs and names are case-sensitive.
@@ -145,6 +155,13 @@ func (s *SendMessageInput) Validate() error {
 			}
 		}
 	}
+	if s.MessageSystemAttributes != nil {
+		for i, v := range s.MessageSystemAttributes {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MessageSystemAttributes", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -153,7 +170,6 @@ func (s *SendMessageInput) Validate() error {
 }
 
 // The MD5OfMessageBody and MessageId elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessageResult
 type SendMessageOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -168,6 +184,11 @@ type SendMessageOutput struct {
 	// Amazon SQS URL-decodes the message before creating the MD5 digest. For information
 	// about MD5, see RFC1321 (https://www.ietf.org/rfc/rfc1321.txt).
 	MD5OfMessageBody *string `type:"string"`
+
+	// An MD5 digest of the non-URL-encoded message system attribute string. You
+	// can use this attribute to verify that Amazon SQS received the message correctly.
+	// Amazon SQS URL-decodes the message before creating the MD5 digest.
+	MD5OfMessageSystemAttributes *string `type:"string"`
 
 	// An attribute containing the MessageId of the message sent to the queue. For
 	// more information, see Queue and Message Identifiers (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-message-identifiers.html)

@@ -11,7 +11,6 @@ import (
 )
 
 // Request structure for an Amplify App delete request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteAppRequest
 type DeleteAppInput struct {
 	_ struct{} `type:"structure"`
 
@@ -57,7 +56,6 @@ func (s DeleteAppInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Result structure for an Amplify App delete request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteAppResult
 type DeleteAppOutput struct {
 	_ struct{} `type:"structure"`
 

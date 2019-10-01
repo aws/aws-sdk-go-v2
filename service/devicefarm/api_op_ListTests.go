@@ -10,7 +10,6 @@ import (
 )
 
 // Represents a request to the list tests operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListTestsRequest
 type ListTestsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +49,6 @@ func (s *ListTestsInput) Validate() error {
 }
 
 // Represents the result of a list tests request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListTestsResult
 type ListTestsOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateGroupRequest
 type CreateGroupInput struct {
 	_ struct{} `type:"structure"`
 
@@ -67,7 +66,6 @@ func (s CreateGroupInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateGroupResponse
 type CreateGroupOutput struct {
 	_ struct{} `type:"structure"`
 

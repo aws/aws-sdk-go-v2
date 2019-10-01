@@ -11,7 +11,6 @@ import (
 
 // Represents a request to delete an email template. For more information, see
 // the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteTemplateRequest
 type DeleteTemplateInput struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s *DeleteTemplateInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteTemplateResponse
 type DeleteTemplateOutput struct {
 	_ struct{} `type:"structure"`
 }

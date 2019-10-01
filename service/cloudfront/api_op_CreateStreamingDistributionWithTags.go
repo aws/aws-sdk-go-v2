@@ -11,7 +11,6 @@ import (
 )
 
 // The request to create a new streaming distribution with tags.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateStreamingDistributionWithTagsRequest
 type CreateStreamingDistributionWithTagsInput struct {
 	_ struct{} `type:"structure" payload:"StreamingDistributionConfigWithTags"`
 
@@ -58,7 +57,6 @@ func (s CreateStreamingDistributionWithTagsInput) MarshalFields(e protocol.Field
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateStreamingDistributionWithTagsResult
 type CreateStreamingDistributionWithTagsOutput struct {
 	_ struct{} `type:"structure" payload:"StreamingDistribution"`
 

@@ -11,7 +11,6 @@ import (
 )
 
 // Represents the input of a CreateCustomActionType operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/CreateCustomActionTypeInput
 type CreateCustomActionTypeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -128,7 +127,6 @@ func (s *CreateCustomActionTypeInput) Validate() error {
 }
 
 // Represents the output of a CreateCustomActionType operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/CreateCustomActionTypeOutput
 type CreateCustomActionTypeOutput struct {
 	_ struct{} `type:"structure"`
 

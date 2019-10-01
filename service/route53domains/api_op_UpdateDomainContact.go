@@ -10,12 +10,11 @@ import (
 )
 
 // The UpdateDomainContact request includes the following elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainContactRequest
 type UpdateDomainContactInput struct {
 	_ struct{} `type:"structure"`
 
 	// Provides detailed contact information.
-	AdminContact *ContactDetail `type:"structure"`
+	AdminContact *ContactDetail `type:"structure" sensitive:"true"`
 
 	// The name of the domain that you want to update contact information for.
 	//
@@ -23,10 +22,10 @@ type UpdateDomainContactInput struct {
 	DomainName *string `type:"string" required:"true"`
 
 	// Provides detailed contact information.
-	RegistrantContact *ContactDetail `type:"structure"`
+	RegistrantContact *ContactDetail `type:"structure" sensitive:"true"`
 
 	// Provides detailed contact information.
-	TechContact *ContactDetail `type:"structure"`
+	TechContact *ContactDetail `type:"structure" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -64,7 +63,6 @@ func (s *UpdateDomainContactInput) Validate() error {
 }
 
 // The UpdateDomainContact response includes the following element.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainContactResponse
 type UpdateDomainContactOutput struct {
 	_ struct{} `type:"structure"`
 

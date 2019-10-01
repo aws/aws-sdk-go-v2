@@ -12,7 +12,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateSimulationJobRequest
 type CreateSimulationJobInput struct {
 	_ struct{} `type:"structure"`
 
@@ -251,7 +250,6 @@ func (s CreateSimulationJobInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateSimulationJobResponse
 type CreateSimulationJobOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -327,18 +325,6 @@ type CreateSimulationJobOutput struct {
 	// SimulationApplicationVersionMismatchedEtag
 	//
 	// Etag for SimulationApplication does not match value during version creation.
-	//
-	// WrongRegionS3Output
-	//
-	// S3 output bucket is in a different region than AWS RoboMaker.
-	//
-	// WrongRegionRobotApplication
-	//
-	// RobotApplication bucket is in a different region than AWS RoboMaker.
-	//
-	// WrongRegionSimulationApplication
-	//
-	// SimulationApplication bucket is in a different region than AWS RoboMaker.
 	FailureCode SimulationJobErrorCode `locationName:"failureCode" type:"string" enum:"true"`
 
 	// The IAM role that allows the simulation job to call the AWS APIs that are

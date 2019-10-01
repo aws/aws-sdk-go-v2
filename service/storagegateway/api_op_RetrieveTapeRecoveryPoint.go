@@ -10,12 +10,11 @@ import (
 )
 
 // RetrieveTapeRecoveryPointInput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RetrieveTapeRecoveryPointInput
 type RetrieveTapeRecoveryPointInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	//
 	// GatewayARN is a required field
 	GatewayARN *string `min:"50" type:"string" required:"true"`
@@ -57,7 +56,6 @@ func (s *RetrieveTapeRecoveryPointInput) Validate() error {
 }
 
 // RetrieveTapeRecoveryPointOutput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RetrieveTapeRecoveryPointOutput
 type RetrieveTapeRecoveryPointOutput struct {
 	_ struct{} `type:"structure"`
 

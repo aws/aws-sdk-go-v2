@@ -11,7 +11,6 @@ import (
 )
 
 // Request structure for the delete webhook request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteWebhookRequest
 type DeleteWebhookInput struct {
 	_ struct{} `type:"structure"`
 
@@ -54,7 +53,6 @@ func (s DeleteWebhookInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Result structure for the delete webhook request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteWebhookResult
 type DeleteWebhookOutput struct {
 	_ struct{} `type:"structure"`
 

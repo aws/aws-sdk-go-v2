@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GrantPermissionsRequest
 type GrantPermissionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -91,7 +90,6 @@ func (s *GrantPermissionsInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GrantPermissionsResponse
 type GrantPermissionsOutput struct {
 	_ struct{} `type:"structure"`
 }

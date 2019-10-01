@@ -10,14 +10,13 @@ import (
 )
 
 // The CheckDomainTransferability request contains the following elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/CheckDomainTransferabilityRequest
 type CheckDomainTransferabilityInput struct {
 	_ struct{} `type:"structure"`
 
 	// If the registrar for the top-level domain (TLD) requires an authorization
 	// code to transfer the domain, the code that you got from the current registrar
 	// for the domain.
-	AuthCode *string `type:"string"`
+	AuthCode *string `type:"string" sensitive:"true"`
 
 	// The name of the domain that you want to transfer to Amazon Route 53.
 	//
@@ -49,7 +48,6 @@ func (s *CheckDomainTransferabilityInput) Validate() error {
 }
 
 // The CheckDomainTransferability response includes the following elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/CheckDomainTransferabilityResponse
 type CheckDomainTransferabilityOutput struct {
 	_ struct{} `type:"structure"`
 

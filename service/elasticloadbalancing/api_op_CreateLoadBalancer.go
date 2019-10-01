@@ -11,7 +11,6 @@ import (
 )
 
 // Contains the parameters for CreateLoadBalancer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateAccessPointInput
 type CreateLoadBalancerInput struct {
 	_ struct{} `type:"structure"`
 
@@ -108,7 +107,6 @@ func (s *CreateLoadBalancerInput) Validate() error {
 }
 
 // Contains the output for CreateLoadBalancer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateAccessPointOutput
 type CreateLoadBalancerOutput struct {
 	_ struct{} `type:"structure"`
 

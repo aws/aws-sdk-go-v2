@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a GetPipeline action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipelineInput
 type GetPipelineInput struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +50,6 @@ func (s *GetPipelineInput) Validate() error {
 }
 
 // Represents the output of a GetPipeline action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipelineOutput
 type GetPipelineOutput struct {
 	_ struct{} `type:"structure"`
 

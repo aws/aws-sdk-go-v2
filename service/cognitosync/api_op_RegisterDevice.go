@@ -11,7 +11,6 @@ import (
 )
 
 // A request to RegisterDevice.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/RegisterDeviceRequest
 type RegisterDeviceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -106,7 +105,6 @@ func (s RegisterDeviceInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Response to a RegisterDevice request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/RegisterDeviceResponse
 type RegisterDeviceOutput struct {
 	_ struct{} `type:"structure"`
 

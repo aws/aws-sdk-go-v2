@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a ResetCacheParameterGroup operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ResetCacheParameterGroupMessage
 type ResetCacheParameterGroupInput struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s *ResetCacheParameterGroupInput) Validate() error {
 //    * ModifyCacheParameterGroup
 //
 //    * ResetCacheParameterGroup
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheParameterGroupNameMessage
 type ResetCacheParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
 

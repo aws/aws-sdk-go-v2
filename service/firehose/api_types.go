@@ -16,7 +16,6 @@ var _ = awsutil.Prettify
 // Describes hints for the buffering to perform before delivering data to the
 // destination. These options are treated as hints, and therefore Kinesis Data
 // Firehose might choose to use different values when it is optimal.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/BufferingHints
 type BufferingHints struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s *BufferingHints) Validate() error {
 }
 
 // Describes the Amazon CloudWatch logging options for your delivery stream.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/CloudWatchLoggingOptions
 type CloudWatchLoggingOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -77,7 +75,6 @@ func (s CloudWatchLoggingOptions) String() string {
 }
 
 // Describes a COPY command for Amazon Redshift.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/CopyCommand
 type CopyCommand struct {
 	_ struct{} `type:"structure"`
 
@@ -140,7 +137,6 @@ func (s *CopyCommand) Validate() error {
 // to the column information from the AWS Glue table, to deserialize your input
 // data from JSON and then serialize it to the Parquet or ORC format. For more
 // information, see Kinesis Data Firehose Record Format Conversion (https://docs.aws.amazon.com/firehose/latest/dev/record-format-conversion.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DataFormatConversionConfiguration
 type DataFormatConversionConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -181,7 +177,6 @@ func (s *DataFormatConversionConfiguration) Validate() error {
 }
 
 // Contains information about a delivery stream.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DeliveryStreamDescription
 type DeliveryStreamDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -249,7 +244,6 @@ func (s DeliveryStreamDescription) String() string {
 }
 
 // Indicates the server-side encryption (SSE) status for the delivery stream.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DeliveryStreamEncryptionConfiguration
 type DeliveryStreamEncryptionConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -268,7 +262,6 @@ func (s DeliveryStreamEncryptionConfiguration) String() string {
 // final format using the Serializer. Kinesis Data Firehose supports two types
 // of deserializers: the Apache Hive JSON SerDe (https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-JSON)
 // and the OpenX JSON SerDe (https://github.com/rcongiu/Hive-JSON-Serde).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/Deserializer
 type Deserializer struct {
 	_ struct{} `type:"structure"`
 
@@ -293,7 +286,6 @@ func (s Deserializer) String() string {
 }
 
 // Describes the destination for a delivery stream.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DestinationDescription
 type DestinationDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -325,7 +317,6 @@ func (s DestinationDescription) String() string {
 
 // Describes the buffering to perform before delivering data to the Amazon ES
 // destination.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ElasticsearchBufferingHints
 type ElasticsearchBufferingHints struct {
 	_ struct{} `type:"structure"`
 
@@ -364,7 +355,6 @@ func (s *ElasticsearchBufferingHints) Validate() error {
 }
 
 // Describes the configuration of a destination in Amazon ES.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ElasticsearchDestinationConfiguration
 type ElasticsearchDestinationConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -497,7 +487,6 @@ func (s *ElasticsearchDestinationConfiguration) Validate() error {
 }
 
 // The destination description in Amazon ES.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ElasticsearchDestinationDescription
 type ElasticsearchDestinationDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -543,7 +532,6 @@ func (s ElasticsearchDestinationDescription) String() string {
 }
 
 // Describes an update for a destination in Amazon ES.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ElasticsearchDestinationUpdate
 type ElasticsearchDestinationUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -636,7 +624,6 @@ func (s *ElasticsearchDestinationUpdate) Validate() error {
 
 // Configures retry behavior in case Kinesis Data Firehose is unable to deliver
 // documents to Amazon ES.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ElasticsearchRetryOptions
 type ElasticsearchRetryOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -654,7 +641,6 @@ func (s ElasticsearchRetryOptions) String() string {
 }
 
 // Describes the encryption for a destination in Amazon S3.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/EncryptionConfiguration
 type EncryptionConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -687,7 +673,6 @@ func (s *EncryptionConfiguration) Validate() error {
 }
 
 // Describes the configuration of a destination in Amazon S3.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ExtendedS3DestinationConfiguration
 type ExtendedS3DestinationConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -798,7 +783,6 @@ func (s *ExtendedS3DestinationConfiguration) Validate() error {
 }
 
 // Describes a destination in Amazon S3.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ExtendedS3DestinationDescription
 type ExtendedS3DestinationDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -866,7 +850,6 @@ func (s ExtendedS3DestinationDescription) String() string {
 }
 
 // Describes an update for a destination in Amazon S3.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ExtendedS3DestinationUpdate
 type ExtendedS3DestinationUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -969,7 +952,6 @@ func (s *ExtendedS3DestinationUpdate) Validate() error {
 // it to the Parquet or ORC format. This is one of two deserializers you can
 // choose, depending on which one offers the functionality you need. The other
 // option is the OpenX SerDe.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/HiveJsonSerDe
 type HiveJsonSerDe struct {
 	_ struct{} `type:"structure"`
 
@@ -990,7 +972,6 @@ func (s HiveJsonSerDe) String() string {
 
 // Specifies the deserializer you want to use to convert the format of the input
 // data.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/InputFormatConfiguration
 type InputFormatConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1006,7 +987,6 @@ func (s InputFormatConfiguration) String() string {
 }
 
 // Describes an encryption key for a destination in Amazon S3.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/KMSEncryptionConfig
 type KMSEncryptionConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1042,7 +1022,6 @@ func (s *KMSEncryptionConfig) Validate() error {
 
 // The stream and role Amazon Resource Names (ARNs) for a Kinesis data stream
 // used as the source for a delivery stream.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/KinesisStreamSourceConfiguration
 type KinesisStreamSourceConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1091,7 +1070,6 @@ func (s *KinesisStreamSourceConfiguration) Validate() error {
 
 // Details about a Kinesis data stream used as the source for a Kinesis Data
 // Firehose delivery stream.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/KinesisStreamSourceDescription
 type KinesisStreamSourceDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -1118,7 +1096,6 @@ func (s KinesisStreamSourceDescription) String() string {
 // to the Parquet or ORC format. This is one of two deserializers you can choose,
 // depending on which one offers the functionality you need. The other option
 // is the native Hive / HCatalog JsonSerDe.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/OpenXJsonSerDe
 type OpenXJsonSerDe struct {
 	_ struct{} `type:"structure"`
 
@@ -1149,7 +1126,6 @@ func (s OpenXJsonSerDe) String() string {
 
 // A serializer to use for converting data to the ORC format before storing
 // it in Amazon S3. For more information, see Apache ORC (https://orc.apache.org/docs/).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/OrcSerDe
 type OrcSerDe struct {
 	_ struct{} `type:"structure"`
 
@@ -1236,7 +1212,6 @@ func (s *OrcSerDe) Validate() error {
 
 // Specifies the serializer that you want Kinesis Data Firehose to use to convert
 // the format of your data before it writes it to Amazon S3.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/OutputFormatConfiguration
 type OutputFormatConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1267,7 +1242,6 @@ func (s *OutputFormatConfiguration) Validate() error {
 
 // A serializer to use for converting data to the Parquet format before storing
 // it in Amazon S3. For more information, see Apache Parquet (https://parquet.apache.org/documentation/latest/).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ParquetSerDe
 type ParquetSerDe struct {
 	_ struct{} `type:"structure"`
 
@@ -1321,7 +1295,6 @@ func (s *ParquetSerDe) Validate() error {
 }
 
 // Describes a data processing configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ProcessingConfiguration
 type ProcessingConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1355,7 +1328,6 @@ func (s *ProcessingConfiguration) Validate() error {
 }
 
 // Describes a data processor.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/Processor
 type Processor struct {
 	_ struct{} `type:"structure"`
 
@@ -1394,7 +1366,6 @@ func (s *Processor) Validate() error {
 }
 
 // Describes the processor parameter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ProcessorParameter
 type ProcessorParameter struct {
 	_ struct{} `type:"structure"`
 
@@ -1438,7 +1409,6 @@ func (s *ProcessorParameter) Validate() error {
 // If the record is successfully added to your delivery stream, it receives
 // a record ID. If the record fails to be added to your delivery stream, the
 // result includes an error code and an error message.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PutRecordBatchResponseEntry
 type PutRecordBatchResponseEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -1458,7 +1428,6 @@ func (s PutRecordBatchResponseEntry) String() string {
 }
 
 // The unit of data in a delivery stream.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/Record
 type Record struct {
 	_ struct{} `type:"structure"`
 
@@ -1491,7 +1460,6 @@ func (s *Record) Validate() error {
 }
 
 // Describes the configuration of a destination in Amazon Redshift.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/RedshiftDestinationConfiguration
 type RedshiftDestinationConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1511,7 +1479,7 @@ type RedshiftDestinationConfiguration struct {
 	// The user password.
 	//
 	// Password is a required field
-	Password *string `min:"6" type:"string" required:"true"`
+	Password *string `min:"6" type:"string" required:"true" sensitive:"true"`
 
 	// The data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration `type:"structure"`
@@ -1545,7 +1513,7 @@ type RedshiftDestinationConfiguration struct {
 	// The name of the user.
 	//
 	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true"`
+	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -1620,7 +1588,6 @@ func (s *RedshiftDestinationConfiguration) Validate() error {
 }
 
 // Describes a destination in Amazon Redshift.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/RedshiftDestinationDescription
 type RedshiftDestinationDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -1664,7 +1631,7 @@ type RedshiftDestinationDescription struct {
 	// The name of the user.
 	//
 	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true"`
+	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -1673,7 +1640,6 @@ func (s RedshiftDestinationDescription) String() string {
 }
 
 // Describes an update for a destination in Amazon Redshift.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/RedshiftDestinationUpdate
 type RedshiftDestinationUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -1687,7 +1653,7 @@ type RedshiftDestinationUpdate struct {
 	CopyCommand *CopyCommand `type:"structure"`
 
 	// The user password.
-	Password *string `min:"6" type:"string"`
+	Password *string `min:"6" type:"string" sensitive:"true"`
 
 	// The data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration `type:"structure"`
@@ -1714,7 +1680,7 @@ type RedshiftDestinationUpdate struct {
 	S3Update *S3DestinationUpdate `type:"structure"`
 
 	// The name of the user.
-	Username *string `min:"1" type:"string"`
+	Username *string `min:"1" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -1766,7 +1732,6 @@ func (s *RedshiftDestinationUpdate) Validate() error {
 
 // Configures retry behavior in case Kinesis Data Firehose is unable to deliver
 // documents to Amazon Redshift.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/RedshiftRetryOptions
 type RedshiftRetryOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -1784,7 +1749,6 @@ func (s RedshiftRetryOptions) String() string {
 }
 
 // Describes the configuration of a destination in Amazon S3.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/S3DestinationConfiguration
 type S3DestinationConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1872,7 +1836,6 @@ func (s *S3DestinationConfiguration) Validate() error {
 }
 
 // Describes a destination in Amazon S3.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/S3DestinationDescription
 type S3DestinationDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -1928,7 +1891,6 @@ func (s S3DestinationDescription) String() string {
 }
 
 // Describes an update for a destination in Amazon S3.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/S3DestinationUpdate
 type S3DestinationUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -2005,7 +1967,6 @@ func (s *S3DestinationUpdate) Validate() error {
 
 // Specifies the schema to which you want Kinesis Data Firehose to configure
 // your data before it writes it to Amazon S3.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SchemaConfiguration
 type SchemaConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -2045,7 +2006,6 @@ func (s SchemaConfiguration) String() string {
 // to the target format before writing it to Amazon S3. Kinesis Data Firehose
 // supports two types of serializers: the ORC SerDe (https://hive.apache.org/javadocs/r1.2.2/api/org/apache/hadoop/hive/ql/io/orc/OrcSerde.html)
 // and the Parquet SerDe (https://hive.apache.org/javadocs/r1.2.2/api/org/apache/hadoop/hive/ql/io/parquet/serde/ParquetHiveSerDe.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/Serializer
 type Serializer struct {
 	_ struct{} `type:"structure"`
 
@@ -2085,7 +2045,6 @@ func (s *Serializer) Validate() error {
 
 // Details about a Kinesis data stream used as the source for a Kinesis Data
 // Firehose delivery stream.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SourceDescription
 type SourceDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -2099,7 +2058,6 @@ func (s SourceDescription) String() string {
 }
 
 // Describes the configuration of a destination in Splunk.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SplunkDestinationConfiguration
 type SplunkDestinationConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -2193,7 +2151,6 @@ func (s *SplunkDestinationConfiguration) Validate() error {
 }
 
 // Describes a destination in Splunk.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SplunkDestinationDescription
 type SplunkDestinationDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -2240,7 +2197,6 @@ func (s SplunkDestinationDescription) String() string {
 }
 
 // Describes an update for a destination in Splunk.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SplunkDestinationUpdate
 type SplunkDestinationUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -2312,7 +2268,6 @@ func (s *SplunkDestinationUpdate) Validate() error {
 
 // Configures retry behavior in case Kinesis Data Firehose is unable to deliver
 // documents to Splunk, or if it doesn't receive an acknowledgment from Splunk.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SplunkRetryOptions
 type SplunkRetryOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -2330,7 +2285,6 @@ func (s SplunkRetryOptions) String() string {
 
 // Metadata that you can assign to a delivery stream, consisting of a key-value
 // pair.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 

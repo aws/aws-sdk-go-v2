@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeAccountLimitsInput
 type DescribeAccountLimitsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -39,7 +38,6 @@ func (s *DescribeAccountLimitsInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeAccountLimitsOutput
 type DescribeAccountLimitsOutput struct {
 	_ struct{} `type:"structure"`
 

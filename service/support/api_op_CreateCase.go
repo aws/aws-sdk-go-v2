@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/CreateCaseRequest
 type CreateCaseInput struct {
 	_ struct{} `type:"structure"`
 
@@ -82,7 +81,6 @@ func (s *CreateCaseInput) Validate() error {
 
 // The AWS Support case ID returned by a successful completion of the CreateCase
 // operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/CreateCaseResponse
 type CreateCaseOutput struct {
 	_ struct{} `type:"structure"`
 

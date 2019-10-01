@@ -10,7 +10,6 @@ import (
 )
 
 // The request body of the GetServiceSetting API action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetServiceSettingRequest
 type GetServiceSettingInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *GetServiceSettingInput) Validate() error {
 }
 
 // The query result body of the GetServiceSetting API action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetServiceSettingResult
 type GetServiceSettingOutput struct {
 	_ struct{} `type:"structure"`
 

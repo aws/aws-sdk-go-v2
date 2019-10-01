@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateAccountRequest
 type CreateAccountInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s CreateAccountInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateAccountResponse
 type CreateAccountOutput struct {
 	_ struct{} `type:"structure"`
 

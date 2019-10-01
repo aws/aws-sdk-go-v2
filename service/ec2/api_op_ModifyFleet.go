@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyFleetRequest
 type ModifyFleetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -63,7 +62,6 @@ func (s *ModifyFleetInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyFleetResult
 type ModifyFleetOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -93,8 +91,8 @@ const opModifyFleet = "ModifyFleet"
 // launches instances using the Spot Instance pool with the lowest price. If
 // the allocation strategy is diversified, the EC2 Fleet distributes the instances
 // across the Spot Instance pools. If the allocation strategy is capacityOptimized,
-// EC2 Fleet launches instances from Spot Instance pools that are optimally
-// chosen based on the available Spot Instance capacity.
+// EC2 Fleet launches instances from Spot Instance pools with optimal capacity
+// for the number of instances that are launching.
 //
 // To scale down your EC2 Fleet, decrease its target capacity. First, the EC2
 // Fleet cancels any open requests that exceed the new target capacity. You

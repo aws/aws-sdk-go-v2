@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RestoreDBClusterFromSnapshotMessage
 type RestoreDBClusterFromSnapshotInput struct {
 	_ struct{} `type:"structure"`
 
@@ -148,7 +147,6 @@ func (s *RestoreDBClusterFromSnapshotInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RestoreDBClusterFromSnapshotResult
 type RestoreDBClusterFromSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 

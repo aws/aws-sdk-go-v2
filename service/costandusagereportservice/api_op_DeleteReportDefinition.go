@@ -10,7 +10,6 @@ import (
 )
 
 // Deletes the specified report.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/DeleteReportDefinitionRequest
 type DeleteReportDefinitionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -25,7 +24,6 @@ func (s DeleteReportDefinitionInput) String() string {
 }
 
 // If the action is successful, the service sends back an HTTP 200 response.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/DeleteReportDefinitionResponse
 type DeleteReportDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 

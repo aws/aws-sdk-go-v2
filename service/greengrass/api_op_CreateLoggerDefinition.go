@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateLoggerDefinitionRequest
 type CreateLoggerDefinitionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -82,7 +81,6 @@ func (s CreateLoggerDefinitionInput) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateLoggerDefinitionResponse
 type CreateLoggerDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 

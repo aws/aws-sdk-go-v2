@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutAggregationAuthorizationRequest
 type PutAggregationAuthorizationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -24,6 +23,7 @@ type PutAggregationAuthorizationInput struct {
 	// AuthorizedAwsRegion is a required field
 	AuthorizedAwsRegion *string `min:"1" type:"string" required:"true"`
 
+	// An array of tag object.
 	Tags []Tag `type:"list"`
 }
 
@@ -60,7 +60,6 @@ func (s *PutAggregationAuthorizationInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutAggregationAuthorizationResponse
 type PutAggregationAuthorizationOutput struct {
 	_ struct{} `type:"structure"`
 

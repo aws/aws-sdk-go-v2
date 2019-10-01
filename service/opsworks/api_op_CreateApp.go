@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateAppRequest
 type CreateAppInput struct {
 	_ struct{} `type:"structure"`
 
@@ -113,7 +112,6 @@ func (s *CreateAppInput) Validate() error {
 }
 
 // Contains the response to a CreateApp request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateAppResult
 type CreateAppOutput struct {
 	_ struct{} `type:"structure"`
 

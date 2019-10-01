@@ -10,7 +10,6 @@ import (
 )
 
 // This input determines which instances to list.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstancesInput
 type ListInstancesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s *ListInstancesInput) Validate() error {
 }
 
 // This output contains the list of instances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstancesOutput
 type ListInstancesOutput struct {
 	_ struct{} `type:"structure"`
 

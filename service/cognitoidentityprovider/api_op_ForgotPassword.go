@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the request to reset a user's password.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ForgotPasswordRequest
 type ForgotPasswordInput struct {
 	_ struct{} `type:"structure"`
 
@@ -21,11 +20,11 @@ type ForgotPasswordInput struct {
 	// The ID of the client associated with the user pool.
 	//
 	// ClientId is a required field
-	ClientId *string `min:"1" type:"string" required:"true"`
+	ClientId *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// A keyed-hash message authentication code (HMAC) calculated using the secret
 	// key of a user pool client and username plus the client ID in the message.
-	SecretHash *string `min:"1" type:"string"`
+	SecretHash *string `min:"1" type:"string" sensitive:"true"`
 
 	// Contextual data such as the user's device fingerprint, IP address, or location
 	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
@@ -36,7 +35,7 @@ type ForgotPasswordInput struct {
 	// password.
 	//
 	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true"`
+	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -73,7 +72,6 @@ func (s *ForgotPasswordInput) Validate() error {
 
 // Respresents the response from the server regarding the request to reset a
 // password.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ForgotPasswordResponse
 type ForgotPasswordOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -9,17 +9,22 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutOrganizationConfigRuleRequest
 type PutOrganizationConfigRuleInput struct {
 	_ struct{} `type:"structure"`
 
+	// A comma-separated list of accounts that you want to exclude from an organization
+	// config rule.
 	ExcludedAccounts []string `type:"list"`
 
+	// The name that you assign to an organization config rule.
+	//
 	// OrganizationConfigRuleName is a required field
 	OrganizationConfigRuleName *string `min:"1" type:"string" required:"true"`
 
+	// An OrganizationCustomRuleMetadata object.
 	OrganizationCustomRuleMetadata *OrganizationCustomRuleMetadata `type:"structure"`
 
+	// An OrganizationManagedRuleMetadata object.
 	OrganizationManagedRuleMetadata *OrganizationManagedRuleMetadata `type:"structure"`
 }
 
@@ -55,10 +60,10 @@ func (s *PutOrganizationConfigRuleInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutOrganizationConfigRuleResponse
 type PutOrganizationConfigRuleOutput struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon Resource Name (ARN) of an organization config rule.
 	OrganizationConfigRuleArn *string `min:"1" type:"string"`
 }
 
@@ -71,6 +76,29 @@ const opPutOrganizationConfigRule = "PutOrganizationConfigRule"
 
 // PutOrganizationConfigRuleRequest returns a request value for making API operation for
 // AWS Config.
+//
+// Adds or updates organization config rule for your entire organization evaluating
+// whether your AWS resources comply with your desired configurations. Only
+// a master account can create or update an organization config rule.
+//
+// This API enables organization service access through the EnableAWSServiceAccess
+// action and creates a service linked role AWSServiceRoleForConfigMultiAccountSetup
+// in the master account of your organization. The service linked role is created
+// only when the role does not exist in the master account. AWS Config verifies
+// the existence of role with GetRole action.
+//
+// You can use this action to create both custom AWS Config rules and AWS managed
+// Config rules. If you are adding a new custom AWS Config rule, you must first
+// create AWS Lambda function in the master account that the rule invokes to
+// evaluate your resources. When you use the PutOrganizationConfigRule action
+// to add the rule to AWS Config, you must specify the Amazon Resource Name
+// (ARN) that AWS Lambda assigns to the function. If you are adding an AWS managed
+// Config rule, specify the rule's identifier for the RuleIdentifier key.
+//
+// The maximum number of organization config rules that AWS Config supports
+// is 150.
+//
+// Specify either OrganizationCustomRuleMetadata or OrganizationManagedRuleMetadata.
 //
 //    // Example sending a request using PutOrganizationConfigRuleRequest.
 //    req := client.PutOrganizationConfigRuleRequest(params)

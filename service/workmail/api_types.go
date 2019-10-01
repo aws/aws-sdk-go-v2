@@ -14,7 +14,6 @@ var _ = awsutil.Prettify
 
 // At least one delegate must be associated to the resource to disable automatic
 // replies from the resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/BookingOptions
 type BookingOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -36,7 +35,6 @@ func (s BookingOptions) String() string {
 
 // The name of the attribute, which is one of the values defined in the UserAttribute
 // enumeration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/Delegate
 type Delegate struct {
 	_ struct{} `type:"structure"`
 
@@ -57,7 +55,6 @@ func (s Delegate) String() string {
 }
 
 // The representation of an Amazon WorkMail group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/Group
 type Group struct {
 	_ struct{} `type:"structure"`
 
@@ -86,7 +83,6 @@ func (s Group) String() string {
 }
 
 // The representation of a user or group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/Member
 type Member struct {
 	_ struct{} `type:"structure"`
 
@@ -115,7 +111,6 @@ func (s Member) String() string {
 }
 
 // The representation of an organization.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/OrganizationSummary
 type OrganizationSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -141,7 +136,6 @@ func (s OrganizationSummary) String() string {
 
 // Permission granted to a user, group, or resource to access a certain aspect
 // of another user, group, or resource mailbox.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/Permission
 type Permission struct {
 	_ struct{} `type:"structure"`
 
@@ -173,7 +167,6 @@ func (s Permission) String() string {
 }
 
 // The representation of a resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/Resource
 type Resource struct {
 	_ struct{} `type:"structure"`
 
@@ -205,7 +198,6 @@ func (s Resource) String() string {
 }
 
 // The representation of an Amazon WorkMail user.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/User
 type User struct {
 	_ struct{} `type:"structure"`
 

@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListLicenseConfigurationsRequest
 type ListLicenseConfigurationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -32,7 +31,6 @@ func (s ListLicenseConfigurationsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListLicenseConfigurationsResponse
 type ListLicenseConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a ListApplicationRevisions operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListApplicationRevisionsInput
 type ListApplicationRevisionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -91,7 +90,6 @@ func (s *ListApplicationRevisionsInput) Validate() error {
 }
 
 // Represents the output of a ListApplicationRevisions operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListApplicationRevisionsOutput
 type ListApplicationRevisionsOutput struct {
 	_ struct{} `type:"structure"`
 

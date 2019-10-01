@@ -11,7 +11,6 @@ import (
 )
 
 // The request to list origin access identities.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListCloudFrontOriginAccessIdentitiesRequest
 type ListCloudFrontOriginAccessIdentitiesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +49,6 @@ func (s ListCloudFrontOriginAccessIdentitiesInput) MarshalFields(e protocol.Fiel
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListCloudFrontOriginAccessIdentitiesResult
 type ListCloudFrontOriginAccessIdentitiesOutput struct {
 	_ struct{} `type:"structure" payload:"CloudFrontOriginAccessIdentityList"`
 

@@ -11,7 +11,6 @@ import (
 )
 
 // A request to update the comment for a hosted zone.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHostedZoneCommentRequest
 type UpdateHostedZoneCommentInput struct {
 	_ struct{} `locationName:"UpdateHostedZoneCommentRequest" type:"structure" xmlURI:"https://route53.amazonaws.com/doc/2013-04-01/"`
 
@@ -67,7 +66,6 @@ func (s UpdateHostedZoneCommentInput) MarshalFields(e protocol.FieldEncoder) err
 
 // A complex type that contains the response to the UpdateHostedZoneComment
 // request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHostedZoneCommentResponse
 type UpdateHostedZoneCommentOutput struct {
 	_ struct{} `type:"structure"`
 

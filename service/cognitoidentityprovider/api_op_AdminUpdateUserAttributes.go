@@ -11,7 +11,6 @@ import (
 )
 
 // Represents the request to update the user's attributes as an administrator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUpdateUserAttributesRequest
 type AdminUpdateUserAttributesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -31,7 +30,7 @@ type AdminUpdateUserAttributesInput struct {
 	// The user name of the user for whom you want to update user attributes.
 	//
 	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true"`
+	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -76,7 +75,6 @@ func (s *AdminUpdateUserAttributesInput) Validate() error {
 
 // Represents the response from the server for the request to update user attributes
 // as an administrator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUpdateUserAttributesResponse
 type AdminUpdateUserAttributesOutput struct {
 	_ struct{} `type:"structure"`
 }

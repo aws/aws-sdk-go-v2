@@ -10,14 +10,13 @@ import (
 )
 
 // Represents the request to sign out all devices.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GlobalSignOutRequest
 type GlobalSignOutInput struct {
 	_ struct{} `type:"structure"`
 
 	// The access token.
 	//
 	// AccessToken is a required field
-	AccessToken *string `type:"string" required:"true"`
+	AccessToken *string `type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -40,7 +39,6 @@ func (s *GlobalSignOutInput) Validate() error {
 }
 
 // The response to the request to sign out all devices.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GlobalSignOutResponse
 type GlobalSignOutOutput struct {
 	_ struct{} `type:"structure"`
 }

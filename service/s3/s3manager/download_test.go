@@ -157,11 +157,18 @@ func dlLoggingSvcContentRangeTotalAny(data []byte, states []int) (*s3.Client, *[
 
 func dlLoggingSvcWithErrReader(cases []testErrReader) (*s3.Client, *[]string) {
 	var m sync.Mutex
-	names := []string{}
+	var names []string
 	var index int
 
 	cfg := unit.Config()
-	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: len(cases) - 1}
+	switch len(cases) - 1 {
+	case 0: // zero retries expected
+		cfg.Retryer = aws.NoOpRetryer{}
+	default:
+		cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+			d.NumMaxRetries = len(cases) - 1
+		})
+	}
 
 	svc := s3.New(cfg)
 

@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/CreateSystemInstanceRequest
 type CreateSystemInstanceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -90,7 +89,6 @@ func (s *CreateSystemInstanceInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/CreateSystemInstanceResponse
 type CreateSystemInstanceOutput struct {
 	_ struct{} `type:"structure"`
 

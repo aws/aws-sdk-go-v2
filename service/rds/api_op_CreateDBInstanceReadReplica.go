@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplicaMessage
 type CreateDBInstanceReadReplicaInput struct {
 	_ struct{} `type:"structure"`
 
@@ -46,6 +45,22 @@ type CreateDBInstanceReadReplicaInput struct {
 	//
 	// DBInstanceIdentifier is a required field
 	DBInstanceIdentifier *string `type:"string" required:"true"`
+
+	// The name of the DB parameter group to associate with this DB instance.
+	//
+	// If you do not specify a value for DBParameterGroupName, then Amazon RDS uses
+	// the DBParameterGroup of source DB instance for a same region Read Replica,
+	// or the default DBParameterGroup for the specified DB engine for a cross region
+	// Read Replica.
+	//
+	// Constraints:
+	//
+	//    * Must be 1 to 255 letters, numbers, or hyphens.
+	//
+	//    * First character must be a letter
+	//
+	//    * Can't end with a hyphen or contain two consecutive hyphens
+	DBParameterGroupName *string `type:"string"`
 
 	// Specifies a DB subnet group for the DB instance. The new DB instance is created
 	// in the VPC associated with the DB subnet group. If no DB subnet group is
@@ -309,7 +324,6 @@ func (s *CreateDBInstanceReadReplicaInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplicaResult
 type CreateDBInstanceReadReplicaOutput struct {
 	_ struct{} `type:"structure"`
 

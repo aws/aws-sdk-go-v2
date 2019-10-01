@@ -12,7 +12,6 @@ import (
 
 // Represents a request to send a single formatted email using Amazon SES. For
 // more information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-formatted.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendEmailRequest
 type SendEmailInput struct {
 	_ struct{} `type:"structure"`
 
@@ -138,7 +137,6 @@ func (s *SendEmailInput) Validate() error {
 }
 
 // Represents a unique message ID.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendEmailResponse
 type SendEmailOutput struct {
 	_ struct{} `type:"structure"`
 

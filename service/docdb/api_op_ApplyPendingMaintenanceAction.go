@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input to ApplyPendingMaintenanceAction.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ApplyPendingMaintenanceActionMessage
 type ApplyPendingMaintenanceActionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -70,7 +69,6 @@ func (s *ApplyPendingMaintenanceActionInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ApplyPendingMaintenanceActionResult
 type ApplyPendingMaintenanceActionOutput struct {
 	_ struct{} `type:"structure"`
 

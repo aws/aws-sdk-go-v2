@@ -10,7 +10,6 @@ import (
 )
 
 // CancelTaskExecutionRequest
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CancelTaskExecutionRequest
 type CancelTaskExecutionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -39,7 +38,6 @@ func (s *CancelTaskExecutionInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CancelTaskExecutionResponse
 type CancelTaskExecutionOutput struct {
 	_ struct{} `type:"structure"`
 }

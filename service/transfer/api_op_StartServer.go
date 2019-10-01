@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/StartServerRequest
 type StartServerInput struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s *StartServerInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/StartServerOutput
 type StartServerOutput struct {
 	_ struct{} `type:"structure"`
 }

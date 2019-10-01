@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the request to stop the user import job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/StopUserImportJobRequest
 type StopUserImportJobInput struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s *StopUserImportJobInput) Validate() error {
 
 // Represents the response from the server to the request to stop the user import
 // job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/StopUserImportJobResponse
 type StopUserImportJobOutput struct {
 	_ struct{} `type:"structure"`
 

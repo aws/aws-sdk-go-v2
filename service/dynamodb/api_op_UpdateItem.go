@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of an UpdateItem operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateItemInput
 type UpdateItemInput struct {
 	_ struct{} `type:"structure"`
 
@@ -253,7 +252,6 @@ func (s *UpdateItemInput) Validate() error {
 }
 
 // Represents the output of an UpdateItem operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateItemOutput
 type UpdateItemOutput struct {
 	_ struct{} `type:"structure"`
 

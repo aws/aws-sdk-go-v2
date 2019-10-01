@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/UpdateSecretRequest
 type UpdateSecretInput struct {
 	_ struct{} `type:"structure"`
 
@@ -71,7 +70,7 @@ type UpdateSecretInput struct {
 	// This parameter is not accessible using the Secrets Manager console.
 	//
 	// SecretBinary is automatically base64 encoded/decoded by the SDK.
-	SecretBinary []byte `type:"blob"`
+	SecretBinary []byte `type:"blob" sensitive:"true"`
 
 	// Specifies the secret that you want to modify or to which you want to add
 	// a new version. You can specify either the Amazon Resource Name (ARN) or the
@@ -117,7 +116,7 @@ type UpdateSecretInput struct {
 	// are escaped:
 	//
 	// "[{\"username\":\"bob\"},{\"password\":\"abc123xyz456\"}]"
-	SecretString *string `type:"string"`
+	SecretString *string `type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -145,7 +144,6 @@ func (s *UpdateSecretInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/UpdateSecretResponse
 type UpdateSecretOutput struct {
 	_ struct{} `type:"structure"`
 

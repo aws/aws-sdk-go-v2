@@ -11,7 +11,6 @@ import (
 )
 
 // Contains the parameters for RemoveTags.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/RemoveTagsInput
 type RemoveTagsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -61,7 +60,6 @@ func (s *RemoveTagsInput) Validate() error {
 }
 
 // Contains the output of RemoveTags.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/RemoveTagsOutput
 type RemoveTagsOutput struct {
 	_ struct{} `type:"structure"`
 }

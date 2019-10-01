@@ -10,13 +10,12 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateUserRequest
 type CreateUserInput struct {
 	_ struct{} `type:"structure"`
 
 	// Amazon WorkDocs authentication token. Do not set this field when using administrative
 	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string"`
+	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The email address of the user.
 	EmailAddress *string `min:"1" type:"string"`
@@ -32,7 +31,7 @@ type CreateUserInput struct {
 	// The password of the user.
 	//
 	// Password is a required field
-	Password *string `min:"4" type:"string" required:"true"`
+	Password *string `min:"4" type:"string" required:"true" sensitive:"true"`
 
 	// The amount of storage for the user.
 	StorageRule *StorageRuleType `type:"structure"`
@@ -167,7 +166,6 @@ func (s CreateUserInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateUserResponse
 type CreateUserOutput struct {
 	_ struct{} `type:"structure"`
 

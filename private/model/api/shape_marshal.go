@@ -79,7 +79,7 @@ func getContentType(s *Shape) string {
 	if s.API.Metadata.JSONVersion != "" && s.API.Metadata.Protocol == "json" {
 		return fmt.Sprintf("application/x-amz-json-%s", s.API.Metadata.JSONVersion)
 	}
-	if  s.API.Metadata.Protocol == "json" || s.API.Metadata.Protocol == "rest-json" {
+	if s.API.Metadata.Protocol == "json" || s.API.Metadata.Protocol == "rest-json" {
 		return "application/json"
 	}
 	return ""
@@ -90,8 +90,7 @@ var marshalShapeTmpl = template.Must(template.New("marshalShapeTmpl").Funcs(
 		"MarshalShapeRefGoCode": MarshalShapeRefGoCode,
 		"nestedRefsByLocation":  nestedRefsByLocation,
 		"isShapeFieldsNested":   isShapeFieldsNested,
-		"getContentType": getContentType,
-
+		"getContentType":        getContentType,
 	},
 ).Parse(`
 {{ define "encode shape" -}}
@@ -207,15 +206,15 @@ func isShapeFieldsNested(loc string, s *Shape) bool {
 	return loc == "Body" && len(s.LocationName) != 0 && s.API.Metadata.Protocol == "rest-xml"
 }
 
-func QuotedFormatTime(s marshalShapeRef) string  {
-	if  (s.Ref.API.Metadata.Protocol == "json" || s.Ref.API.Metadata.Protocol == "rest-json") && s.Location() == "Body" {
+func QuotedFormatTime(s marshalShapeRef) string {
+	if (s.Ref.API.Metadata.Protocol == "json" || s.Ref.API.Metadata.Protocol == "rest-json") && s.Location() == "Body" {
 		return "true"
 	}
 	return "false"
 }
 
 var marshalShapeRefTmpl = template.Must(template.New("marshalShapeRefTmpl").Funcs(template.FuncMap{
-	"Collection": Collection,
+	"Collection":       Collection,
 	"quotedFormatTime": QuotedFormatTime,
 }).Parse(`
 {{ define "encode field" -}}
@@ -723,11 +722,11 @@ func (r marshalShapeRef) IsIdempotencyToken() bool {
 }
 func (r marshalShapeRef) TimeFormat() string {
 
-	if r.Ref.TimestampFormat!="" {
-		return fmt.Sprintf("%q",r.Ref.TimestampFormat)
+	if r.Ref.TimestampFormat != "" {
+		return fmt.Sprintf("%q", r.Ref.TimestampFormat)
 	}
-	if r.Ref.Shape.TimestampFormat!= "" {
-		return fmt.Sprintf("%q",r.Ref.Shape.TimestampFormat)
+	if r.Ref.Shape.TimestampFormat != "" {
+		return fmt.Sprintf("%q", r.Ref.Shape.TimestampFormat)
 	}
 
 	switch r.Location() {

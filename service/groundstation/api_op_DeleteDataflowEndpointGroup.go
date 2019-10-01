@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/DeleteDataflowEndpointGroupRequest
 type DeleteDataflowEndpointGroupInput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +49,6 @@ func (s DeleteDataflowEndpointGroupInput) MarshalFields(e protocol.FieldEncoder)
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/DataflowEndpointGroupIdResponse
 type DeleteDataflowEndpointGroupOutput struct {
 	_ struct{} `type:"structure"`
 

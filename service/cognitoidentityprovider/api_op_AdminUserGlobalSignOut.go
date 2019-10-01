@@ -10,7 +10,6 @@ import (
 )
 
 // The request to sign out of all devices, as an administrator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUserGlobalSignOutRequest
 type AdminUserGlobalSignOutInput struct {
 	_ struct{} `type:"structure"`
 
@@ -22,7 +21,7 @@ type AdminUserGlobalSignOutInput struct {
 	// The user name.
 	//
 	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true"`
+	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -55,7 +54,6 @@ func (s *AdminUserGlobalSignOutInput) Validate() error {
 }
 
 // The global sign-out response, as an administrator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUserGlobalSignOutResponse
 type AdminUserGlobalSignOutOutput struct {
 	_ struct{} `type:"structure"`
 }

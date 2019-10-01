@@ -2003,6 +2003,8 @@ func ExampleClient_ModifyReplicationGroupRequest_shared00() {
 				fmt.Println(elasticache.ErrCodeCacheParameterGroupNotFoundFault, aerr.Error())
 			case elasticache.ErrCodeInvalidVPCNetworkStateFault:
 				fmt.Println(elasticache.ErrCodeInvalidVPCNetworkStateFault, aerr.Error())
+			case elasticache.ErrCodeInvalidKMSKeyFault:
+				fmt.Println(elasticache.ErrCodeInvalidKMSKeyFault, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterValueException:
 				fmt.Println(elasticache.ErrCodeInvalidParameterValueException, aerr.Error())
 			case elasticache.ErrCodeInvalidParameterCombinationException:

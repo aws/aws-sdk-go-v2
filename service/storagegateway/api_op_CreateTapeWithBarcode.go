@@ -11,13 +11,12 @@ import (
 )
 
 // CreateTapeWithBarcodeInput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateTapeWithBarcodeInput
 type CreateTapeWithBarcodeInput struct {
 	_ struct{} `type:"structure"`
 
 	// The unique Amazon Resource Name (ARN) that represents the gateway to associate
 	// the virtual tape with. Use the ListGateways operation to return a list of
-	// gateways for your account and region.
+	// gateways for your account and AWS Region.
 	//
 	// GatewayARN is a required field
 	GatewayARN *string `min:"50" type:"string" required:"true"`
@@ -111,7 +110,6 @@ func (s *CreateTapeWithBarcodeInput) Validate() error {
 }
 
 // CreateTapeOutput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateTapeWithBarcodeOutput
 type CreateTapeWithBarcodeOutput struct {
 	_ struct{} `type:"structure"`
 

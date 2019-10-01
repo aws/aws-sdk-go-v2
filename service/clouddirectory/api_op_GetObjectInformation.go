@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetObjectInformationRequest
 type GetObjectInformationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -76,7 +75,6 @@ func (s GetObjectInformationInput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetObjectInformationResponse
 type GetObjectInformationOutput struct {
 	_ struct{} `type:"structure"`
 

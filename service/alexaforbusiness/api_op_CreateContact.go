@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateContactRequest
 type CreateContactInput struct {
 	_ struct{} `type:"structure"`
 
@@ -32,7 +31,7 @@ type CreateContactInput struct {
 	// to WORK. You can specify PhoneNumber or PhoneNumbers. We recommend that you
 	// use PhoneNumbers, which lets you specify the phone number type and multiple
 	// numbers.
-	PhoneNumber *string `type:"string"`
+	PhoneNumber *string `type:"string" sensitive:"true"`
 
 	// The list of phone numbers for the contact.
 	PhoneNumbers []PhoneNumber `type:"list"`
@@ -86,7 +85,6 @@ func (s *CreateContactInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateContactResponse
 type CreateContactOutput struct {
 	_ struct{} `type:"structure"`
 

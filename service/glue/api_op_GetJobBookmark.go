@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobBookmarkRequest
 type GetJobBookmarkInput struct {
 	_ struct{} `type:"structure"`
 
@@ -41,7 +40,6 @@ func (s *GetJobBookmarkInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobBookmarkResponse
 type GetJobBookmarkOutput struct {
 	_ struct{} `type:"structure"`
 

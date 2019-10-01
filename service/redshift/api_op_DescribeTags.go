@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeTagsMessage
 type DescribeTagsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -81,7 +80,6 @@ func (s DescribeTagsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/TaggedResourceListMessage
 type DescribeTagsOutput struct {
 	_ struct{} `type:"structure"`
 

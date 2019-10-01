@@ -10,7 +10,6 @@ import (
 )
 
 // Represents a request to the list uploads operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListUploadsRequest
 type ListUploadsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -131,7 +130,6 @@ func (s *ListUploadsInput) Validate() error {
 }
 
 // Represents the result of a list uploads request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListUploadsResult
 type ListUploadsOutput struct {
 	_ struct{} `type:"structure"`
 

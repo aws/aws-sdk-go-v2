@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteMountTargetRequest
 type DeleteMountTargetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -53,7 +52,6 @@ func (s DeleteMountTargetInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteMountTargetOutput
 type DeleteMountTargetOutput struct {
 	_ struct{} `type:"structure"`
 }

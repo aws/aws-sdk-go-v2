@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SendDiagnosticInterruptRequest
 type SendDiagnosticInterruptInput struct {
 	_ struct{} `type:"structure"`
 
@@ -46,7 +45,6 @@ func (s *SendDiagnosticInterruptInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SendDiagnosticInterruptOutput
 type SendDiagnosticInterruptOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -76,8 +74,8 @@ const opSendDiagnosticInterrupt = "SendDiagnosticInterrupt"
 //
 // For more information about configuring your operating system to generate
 // a crash dump when a kernel panic or stop error occurs, see Send a Diagnostic
-// Interrupt (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-console.html#diagnostic-interrupt)
-// (Linux instances) or Send a Diagnostic Interrupt (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/unreachable-instance.html#diagnostic-interrupt)
+// Interrupt (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/diagnostic-interrupt.html)
+// (Linux instances) or Send a Diagnostic Interrupt (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/diagnostic-interrupt.html)
 // (Windows instances).
 //
 //    // Example sending a request using SendDiagnosticInterruptRequest.

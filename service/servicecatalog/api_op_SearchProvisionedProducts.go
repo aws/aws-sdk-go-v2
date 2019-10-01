@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProvisionedProductsInput
 type SearchProvisionedProductsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -54,7 +53,6 @@ func (s SearchProvisionedProductsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProvisionedProductsOutput
 type SearchProvisionedProductsOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 )
 
 // The input for DescribeStackEvents action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackEventsInput
 type DescribeStackEventsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -48,7 +47,6 @@ func (s *DescribeStackEventsInput) Validate() error {
 }
 
 // The output for a DescribeStackEvents action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackEventsOutput
 type DescribeStackEventsOutput struct {
 	_ struct{} `type:"structure"`
 

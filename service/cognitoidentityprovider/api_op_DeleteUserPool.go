@@ -12,7 +12,6 @@ import (
 )
 
 // Represents the request to delete a user pool.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserPoolRequest
 type DeleteUserPoolInput struct {
 	_ struct{} `type:"structure"`
 
@@ -44,7 +43,6 @@ func (s *DeleteUserPoolInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserPoolOutput
 type DeleteUserPoolOutput struct {
 	_ struct{} `type:"structure"`
 }

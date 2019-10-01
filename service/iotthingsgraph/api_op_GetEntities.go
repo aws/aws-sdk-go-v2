@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/GetEntitiesRequest
 type GetEntitiesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -46,7 +45,6 @@ func (s *GetEntitiesInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/GetEntitiesResponse
 type GetEntitiesOutput struct {
 	_ struct{} `type:"structure"`
 

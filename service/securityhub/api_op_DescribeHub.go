@@ -10,12 +10,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeHubRequest
 type DescribeHubInput struct {
 	_ struct{} `type:"structure"`
 
 	// The ARN of the Hub resource to retrieve.
-	HubArn *string `type:"string"`
+	HubArn *string `location:"querystring" locationName:"HubArn" type:"string"`
 }
 
 // String returns the string representation
@@ -31,12 +30,11 @@ func (s DescribeHubInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.HubArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "HubArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "HubArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeHubResponse
 type DescribeHubOutput struct {
 	_ struct{} `type:"structure"`
 

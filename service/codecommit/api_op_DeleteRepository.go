@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a delete repository operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteRepositoryInput
 type DeleteRepositoryInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *DeleteRepositoryInput) Validate() error {
 }
 
 // Represents the output of a delete repository operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteRepositoryOutput
 type DeleteRepositoryOutput struct {
 	_ struct{} `type:"structure"`
 

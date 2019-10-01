@@ -12,7 +12,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // A resource group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/Group
 type Group struct {
 	_ struct{} `type:"structure"`
 
@@ -60,7 +59,6 @@ func (s Group) MarshalFields(e protocol.FieldEncoder) error {
 
 // A filter name and value pair that is used to obtain more specific results
 // from a list of groups.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GroupFilter
 type GroupFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -125,7 +123,6 @@ func (s GroupFilter) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The ARN and group name of a group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GroupIdentifier
 type GroupIdentifier struct {
 	_ struct{} `type:"structure"`
 
@@ -160,7 +157,6 @@ func (s GroupIdentifier) MarshalFields(e protocol.FieldEncoder) error {
 
 // The underlying resource query of a resource group. Resources that match query
 // results are part of the group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GroupQuery
 type GroupQuery struct {
 	_ struct{} `type:"structure"`
 
@@ -205,7 +201,6 @@ func (s GroupQuery) MarshalFields(e protocol.FieldEncoder) error {
 // has a status that renders the stack inactive. A QueryError occurrence does
 // not necessarily mean that AWS Resource Groups could not complete the operation,
 // but the resulting group might have no member resources.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/QueryError
 type QueryError struct {
 	_ struct{} `type:"structure"`
 
@@ -243,7 +238,6 @@ func (s QueryError) MarshalFields(e protocol.FieldEncoder) error {
 
 // A filter name and value pair that is used to obtain more specific results
 // from a list of resources.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ResourceFilter
 type ResourceFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -308,7 +302,6 @@ func (s ResourceFilter) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The ARN of a resource, and its resource type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ResourceIdentifier
 type ResourceIdentifier struct {
 	_ struct{} `type:"structure"`
 
@@ -342,7 +335,6 @@ func (s ResourceIdentifier) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The query that is used to define a resource group or a search for resources.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ResourceQuery
 type ResourceQuery struct {
 	_ struct{} `type:"structure"`
 

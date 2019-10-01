@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateUserRequest
 type UpdateUserInput struct {
 	_ struct{} `type:"structure"`
 
@@ -83,7 +82,6 @@ func (s *UpdateUserInput) Validate() error {
 
 // UpdateUserResponse returns the user name and server identifier for the request
 // to update a user's properties.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateUserResponse
 type UpdateUserOutput struct {
 	_ struct{} `type:"structure"`
 

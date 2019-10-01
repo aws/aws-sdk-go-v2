@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/CancelPipelineReprocessingRequest
 type CancelPipelineReprocessingInput struct {
 	_ struct{} `type:"structure"`
 
@@ -70,7 +69,6 @@ func (s CancelPipelineReprocessingInput) MarshalFields(e protocol.FieldEncoder) 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/CancelPipelineReprocessingResponse
 type CancelPipelineReprocessingOutput struct {
 	_ struct{} `type:"structure"`
 }

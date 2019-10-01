@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateUserRequest
 type CreateUserInput struct {
 	_ struct{} `type:"structure"`
 
@@ -19,10 +18,10 @@ type CreateUserInput struct {
 	AuthenticationType AuthenticationType `type:"string" required:"true" enum:"true"`
 
 	// The first name, or given name, of the user.
-	FirstName *string `type:"string"`
+	FirstName *string `type:"string" sensitive:"true"`
 
 	// The last name, or surname, of the user.
-	LastName *string `type:"string"`
+	LastName *string `type:"string" sensitive:"true"`
 
 	// The action to take for the welcome email that is sent to a user after the
 	// user is created in the user pool. If you specify SUPPRESS, no email is sent.
@@ -42,7 +41,7 @@ type CreateUserInput struct {
 	// error message displays.
 	//
 	// UserName is a required field
-	UserName *string `min:"1" type:"string" required:"true"`
+	UserName *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -70,7 +69,6 @@ func (s *CreateUserInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateUserResult
 type CreateUserOutput struct {
 	_ struct{} `type:"structure"`
 }

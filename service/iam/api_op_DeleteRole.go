@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteRoleRequest
 type DeleteRoleInput struct {
 	_ struct{} `type:"structure"`
 
@@ -47,7 +46,6 @@ func (s *DeleteRoleInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteRoleOutput
 type DeleteRoleOutput struct {
 	_ struct{} `type:"structure"`
 }

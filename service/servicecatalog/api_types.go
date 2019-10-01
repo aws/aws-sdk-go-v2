@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // The access level to use to filter results.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AccessLevelFilter
 type AccessLevelFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -36,7 +35,6 @@ func (s AccessLevelFilter) String() string {
 }
 
 // Information about a budget.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/BudgetDetail
 type BudgetDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +48,6 @@ func (s BudgetDetail) String() string {
 }
 
 // Information about a CloudWatch dashboard.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CloudWatchDashboard
 type CloudWatchDashboard struct {
 	_ struct{} `type:"structure"`
 
@@ -64,7 +61,6 @@ func (s CloudWatchDashboard) String() string {
 }
 
 // Information about a constraint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ConstraintDetail
 type ConstraintDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -95,7 +91,6 @@ func (s ConstraintDetail) String() string {
 }
 
 // Summary information about a constraint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ConstraintSummary
 type ConstraintSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -119,7 +114,6 @@ func (s ConstraintSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ExecutionParameter
 type ExecutionParameter struct {
 	_ struct{} `type:"structure"`
 
@@ -137,7 +131,6 @@ func (s ExecutionParameter) String() string {
 
 // An object containing information about the error, along with identifying
 // information about the self-service action and its associations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/FailedServiceActionAssociation
 type FailedServiceActionAssociation struct {
 	_ struct{} `type:"structure"`
 
@@ -163,7 +156,6 @@ func (s FailedServiceActionAssociation) String() string {
 }
 
 // Summary information about a product path for a user.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/LaunchPathSummary
 type LaunchPathSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -186,7 +178,6 @@ func (s LaunchPathSummary) String() string {
 }
 
 // The search filter to use when listing history records.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListRecordHistorySearchFilter
 type ListRecordHistorySearchFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -208,7 +199,6 @@ func (s ListRecordHistorySearchFilter) String() string {
 }
 
 // Filters to use when listing TagOptions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListTagOptionsFilters
 type ListTagOptionsFilters struct {
 	_ struct{} `type:"structure"`
 
@@ -244,7 +234,6 @@ func (s *ListTagOptionsFilters) Validate() error {
 }
 
 // Information about the organization node.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/OrganizationNode
 type OrganizationNode struct {
 	_ struct{} `type:"structure"`
 
@@ -261,7 +250,6 @@ func (s OrganizationNode) String() string {
 }
 
 // The constraints that the administrator has put on the parameter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ParameterConstraints
 type ParameterConstraints struct {
 	_ struct{} `type:"structure"`
 
@@ -275,7 +263,6 @@ func (s ParameterConstraints) String() string {
 }
 
 // Information about a portfolio.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/PortfolioDetail
 type PortfolioDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -304,7 +291,6 @@ func (s PortfolioDetail) String() string {
 }
 
 // Information about a principal.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/Principal
 type Principal struct {
 	_ struct{} `type:"structure"`
 
@@ -322,7 +308,6 @@ func (s Principal) String() string {
 
 // A single product view aggregation value/count pair, containing metadata about
 // each product to which the calling user has access.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProductViewAggregationValue
 type ProductViewAggregationValue struct {
 	_ struct{} `type:"structure"`
 
@@ -339,7 +324,6 @@ func (s ProductViewAggregationValue) String() string {
 }
 
 // Information about a product view.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProductViewDetail
 type ProductViewDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -369,7 +353,6 @@ func (s ProductViewDetail) String() string {
 }
 
 // Summary information about a product view.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProductViewSummary
 type ProductViewSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -420,7 +403,6 @@ func (s ProductViewSummary) String() string {
 }
 
 // Information about a provisioned product.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionedProductAttribute
 type ProvisionedProductAttribute struct {
 	_ struct{} `type:"structure"`
 
@@ -500,7 +482,6 @@ func (s ProvisionedProductAttribute) String() string {
 }
 
 // Information about a provisioned product.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionedProductDetail
 type ProvisionedProductDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -566,7 +547,6 @@ func (s ProvisionedProductDetail) String() string {
 }
 
 // Information about a plan.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionedProductPlanDetails
 type ProvisionedProductPlanDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -626,7 +606,6 @@ func (s ProvisionedProductPlanDetails) String() string {
 }
 
 // Summary information about a plan.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionedProductPlanSummary
 type ProvisionedProductPlanSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -656,7 +635,6 @@ func (s ProvisionedProductPlanSummary) String() string {
 
 // Information about a provisioning artifact. A provisioning artifact is also
 // known as a product version.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifact
 type ProvisioningArtifact struct {
 	_ struct{} `type:"structure"`
 
@@ -684,7 +662,6 @@ func (s ProvisioningArtifact) String() string {
 
 // Information about a provisioning artifact (also known as a version) for a
 // product.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactDetail
 type ProvisioningArtifactDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -723,7 +700,6 @@ func (s ProvisioningArtifactDetail) String() string {
 }
 
 // Information about a parameter used to provision a product.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactParameter
 type ProvisioningArtifactParameter struct {
 	_ struct{} `type:"structure"`
 
@@ -759,7 +735,6 @@ func (s ProvisioningArtifactParameter) String() string {
 // For more information on maximum concurrent accounts and failure tolerance,
 // see Stack set operation options (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options)
 // in the AWS CloudFormation User Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactPreferences
 type ProvisioningArtifactPreferences struct {
 	_ struct{} `type:"structure"`
 
@@ -785,7 +760,6 @@ func (s ProvisioningArtifactPreferences) String() string {
 
 // Information about a provisioning artifact (also known as a version) for a
 // product.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactProperties
 type ProvisioningArtifactProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -843,7 +817,6 @@ func (s *ProvisioningArtifactProperties) Validate() error {
 
 // Summary information about a provisioning artifact (also known as a version)
 // for a product.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactSummary
 type ProvisioningArtifactSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -871,7 +844,6 @@ func (s ProvisioningArtifactSummary) String() string {
 
 // An object that contains summary information about a product view and a provisioning
 // artifact.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactView
 type ProvisioningArtifactView struct {
 	_ struct{} `type:"structure"`
 
@@ -889,7 +861,6 @@ func (s ProvisioningArtifactView) String() string {
 }
 
 // Information about a parameter used to provision a product.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningParameter
 type ProvisioningParameter struct {
 	_ struct{} `type:"structure"`
 
@@ -920,7 +891,6 @@ func (s *ProvisioningParameter) Validate() error {
 
 // The user-defined preferences that will be applied when updating a provisioned
 // product. Not all preferences are applicable to all provisioned product types.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningPreferences
 type ProvisioningPreferences struct {
 	_ struct{} `type:"structure"`
 
@@ -1030,7 +1000,6 @@ func (s *ProvisioningPreferences) Validate() error {
 }
 
 // Information about a request operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RecordDetail
 type RecordDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -1099,7 +1068,6 @@ func (s RecordDetail) String() string {
 }
 
 // The error code and description resulting from an operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RecordError
 type RecordError struct {
 	_ struct{} `type:"structure"`
 
@@ -1118,7 +1086,6 @@ func (s RecordError) String() string {
 // The output for the product created as the result of a request. For example,
 // the output for a CloudFormation-backed product that creates an S3 bucket
 // would include the S3 bucket URL.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RecordOutput
 type RecordOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -1138,7 +1105,6 @@ func (s RecordOutput) String() string {
 }
 
 // Information about a tag, which is a key-value pair.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RecordTag
 type RecordTag struct {
 	_ struct{} `type:"structure"`
 
@@ -1155,7 +1121,6 @@ func (s RecordTag) String() string {
 }
 
 // Information about a resource change that will occur when a plan is executed.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ResourceChange
 type ResourceChange struct {
 	_ struct{} `type:"structure"`
 
@@ -1188,7 +1153,6 @@ func (s ResourceChange) String() string {
 }
 
 // Information about a change to a resource attribute.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ResourceChangeDetail
 type ResourceChangeDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -1210,7 +1174,6 @@ func (s ResourceChangeDetail) String() string {
 }
 
 // Information about a resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ResourceDetail
 type ResourceDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -1236,7 +1199,6 @@ func (s ResourceDetail) String() string {
 }
 
 // Information about a change to a resource attribute.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ResourceTargetDefinition
 type ResourceTargetDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -1259,7 +1221,6 @@ func (s ResourceTargetDefinition) String() string {
 
 // A self-service action association consisting of the Action ID, the Product
 // ID, and the Provisioning Artifact ID.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ServiceActionAssociation
 type ServiceActionAssociation struct {
 	_ struct{} `type:"structure"`
 
@@ -1316,7 +1277,6 @@ func (s *ServiceActionAssociation) Validate() error {
 }
 
 // An object containing detailed information about the self-service action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ServiceActionDetail
 type ServiceActionDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -1333,7 +1293,6 @@ func (s ServiceActionDetail) String() string {
 }
 
 // Detailed information about the self-service action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ServiceActionSummary
 type ServiceActionSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1356,7 +1315,6 @@ func (s ServiceActionSummary) String() string {
 }
 
 // Information about the portfolio share operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ShareDetails
 type ShareDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -1373,7 +1331,6 @@ func (s ShareDetails) String() string {
 }
 
 // Errors that occurred during the portfolio share operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ShareError
 type ShareError struct {
 	_ struct{} `type:"structure"`
 
@@ -1399,7 +1356,6 @@ func (s ShareError) String() string {
 // for some reason. A stack instance is associated with only one stack set.
 // Each stack instance contains the ID of its associated stack set, as well
 // as the ID of the actual stack and the stack status.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/StackInstance
 type StackInstance struct {
 	_ struct{} `type:"structure"`
 
@@ -1434,7 +1390,6 @@ func (s StackInstance) String() string {
 
 // Information about a tag. A tag is a key-value pair. Tags are propagated to
 // the resources created when provisioning a product.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -1479,7 +1434,6 @@ func (s *Tag) Validate() error {
 }
 
 // Information about a TagOption.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TagOptionDetail
 type TagOptionDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -1502,7 +1456,6 @@ func (s TagOptionDetail) String() string {
 }
 
 // Summary information about a TagOption.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TagOptionSummary
 type TagOptionSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1519,7 +1472,6 @@ func (s TagOptionSummary) String() string {
 }
 
 // The parameter key-value pair used to update a provisioned product.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisioningParameter
 type UpdateProvisioningParameter struct {
 	_ struct{} `type:"structure"`
 
@@ -1553,7 +1505,6 @@ func (s *UpdateProvisioningParameter) Validate() error {
 
 // The user-defined preferences that will be applied when updating a provisioned
 // product. Not all preferences are applicable to all provisioned product types.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisioningPreferences
 type UpdateProvisioningPreferences struct {
 	_ struct{} `type:"structure"`
 
@@ -1687,7 +1638,6 @@ func (s *UpdateProvisioningPreferences) Validate() error {
 }
 
 // Additional information provided by the administrator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UsageInstruction
 type UsageInstruction struct {
 	_ struct{} `type:"structure"`
 

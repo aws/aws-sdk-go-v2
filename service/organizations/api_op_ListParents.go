@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListParentsRequest
 type ListParentsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -19,12 +18,12 @@ type ListParentsInput struct {
 	// The regex pattern (http://wikipedia.org/wiki/regex) for a child ID string
 	// requires one of the following:
 	//
-	//    * Account: a string that consists of exactly 12 digits.
+	//    * Account - A string that consists of exactly 12 digits.
 	//
-	//    * Organizational unit (OU): a string that begins with "ou-" followed by
-	//    from 4 to 32 lower-case letters or digits (the ID of the root that contains
-	//    the OU) followed by a second "-" dash and from 8 to 32 additional lower-case
-	//    letters or digits.
+	//    * Organizational unit (OU) - A string that begins with "ou-" followed
+	//    by from 4 to 32 lower-case letters or digits (the ID of the root that
+	//    contains the OU) followed by a second "-" dash and from 8 to 32 additional
+	//    lower-case letters or digits.
 	//
 	// ChildId is a required field
 	ChildId *string `type:"string" required:"true"`
@@ -69,7 +68,6 @@ func (s *ListParentsInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListParentsResponse
 type ListParentsOutput struct {
 	_ struct{} `type:"structure"`
 

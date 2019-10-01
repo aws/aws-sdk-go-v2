@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetConnectivityInfoRequest
 type GetConnectivityInfoInput struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +50,6 @@ func (s GetConnectivityInfoInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a Greengrass core's connectivity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetConnectivityInfoResponse
 type GetConnectivityInfoOutput struct {
 	_ struct{} `type:"structure"`
 

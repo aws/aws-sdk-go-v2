@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListLayerVersionsRequest
 type ListLayerVersionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -85,7 +84,6 @@ func (s ListLayerVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListLayerVersionsResponse
 type ListLayerVersionsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -147,6 +145,12 @@ func (c *Client) ListLayerVersionsRequest(input *ListLayerVersionsInput) ListLay
 		Name:       opListLayerVersions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2018-10-31/layers/{LayerName}/versions",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"NextMarker"},
+			LimitToken:      "MaxItems",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -179,6 +183,53 @@ func (r ListLayerVersionsRequest) Send(ctx context.Context) (*ListLayerVersionsR
 	}
 
 	return resp, nil
+}
+
+// NewListLayerVersionsRequestPaginator returns a paginator for ListLayerVersions.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListLayerVersionsRequest(input)
+//   p := lambda.NewListLayerVersionsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListLayerVersionsPaginator(req ListLayerVersionsRequest) ListLayerVersionsPaginator {
+	return ListLayerVersionsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListLayerVersionsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListLayerVersionsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListLayerVersionsPaginator struct {
+	aws.Pager
+}
+
+func (p *ListLayerVersionsPaginator) CurrentPage() *ListLayerVersionsOutput {
+	return p.Pager.CurrentPage().(*ListLayerVersionsOutput)
 }
 
 // ListLayerVersionsResponse is the response type for the

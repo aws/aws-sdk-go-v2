@@ -54,6 +54,23 @@ func (enum BuildStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type CertificateType string
+
+// Enum values for CertificateType
+const (
+	CertificateTypeDisabled  CertificateType = "DISABLED"
+	CertificateTypeGenerated CertificateType = "GENERATED"
+)
+
+func (enum CertificateType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CertificateType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ComparisonOperatorType string
 
 // Enum values for ComparisonOperatorType
@@ -235,6 +252,7 @@ const (
 	GameSessionPlacementStateFulfilled GameSessionPlacementState = "FULFILLED"
 	GameSessionPlacementStateCancelled GameSessionPlacementState = "CANCELLED"
 	GameSessionPlacementStateTimedOut  GameSessionPlacementState = "TIMED_OUT"
+	GameSessionPlacementStateFailed    GameSessionPlacementState = "FAILED"
 )
 
 func (enum GameSessionPlacementState) MarshalValue() (string, error) {

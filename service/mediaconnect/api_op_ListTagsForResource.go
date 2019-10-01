@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListTagsForResourceRequest
 type ListTagsForResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +50,6 @@ func (s ListTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The tags for the resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListTagsForResourceResponse
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 

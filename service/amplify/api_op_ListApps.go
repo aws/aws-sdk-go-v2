@@ -11,7 +11,6 @@ import (
 )
 
 // Request structure for an Amplify App list request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListAppsRequest
 type ListAppsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -61,7 +60,6 @@ func (s ListAppsInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Result structure for an Amplify App list request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListAppsResult
 type ListAppsOutput struct {
 	_ struct{} `type:"structure"`
 

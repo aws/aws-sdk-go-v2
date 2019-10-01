@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a DeleteSnapshot operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteSnapshotMessage
 type DeleteSnapshotInput struct {
 	_ struct{} `type:"structure"`
 
@@ -39,7 +38,6 @@ func (s *DeleteSnapshotInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteSnapshotResult
 type DeleteSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 

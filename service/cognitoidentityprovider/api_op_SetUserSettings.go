@@ -11,14 +11,13 @@ import (
 )
 
 // Represents the request to set user settings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserSettingsRequest
 type SetUserSettingsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The access token for the set user settings request.
 	//
 	// AccessToken is a required field
-	AccessToken *string `type:"string" required:"true"`
+	AccessToken *string `type:"string" required:"true" sensitive:"true"`
 
 	// Specifies the options for MFA (e.g., email or phone number).
 	//
@@ -57,7 +56,6 @@ func (s *SetUserSettingsInput) Validate() error {
 }
 
 // The response from the server for a set user settings request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserSettingsResponse
 type SetUserSettingsOutput struct {
 	_ struct{} `type:"structure"`
 }

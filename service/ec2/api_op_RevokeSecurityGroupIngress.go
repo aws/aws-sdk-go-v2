@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeSecurityGroupIngressRequest
 type RevokeSecurityGroupIngressInput struct {
 	_ struct{} `type:"structure"`
 
@@ -72,7 +71,6 @@ func (s RevokeSecurityGroupIngressInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeSecurityGroupIngressOutput
 type RevokeSecurityGroupIngressOutput struct {
 	_ struct{} `type:"structure"`
 }

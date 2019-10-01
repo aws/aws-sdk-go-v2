@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowExecutionTaskInvocationRequest
 type GetMaintenanceWindowExecutionTaskInvocationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -67,7 +66,6 @@ func (s *GetMaintenanceWindowExecutionTaskInvocationInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowExecutionTaskInvocationResult
 type GetMaintenanceWindowExecutionTaskInvocationOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -82,10 +80,10 @@ type GetMaintenanceWindowExecutionTaskInvocationOutput struct {
 
 	// User-provided value to be included in any CloudWatch events raised while
 	// running tasks for these targets in this maintenance window.
-	OwnerInformation *string `min:"1" type:"string"`
+	OwnerInformation *string `min:"1" type:"string" sensitive:"true"`
 
 	// The parameters used at the time that the task ran.
-	Parameters *string `type:"string"`
+	Parameters *string `type:"string" sensitive:"true"`
 
 	// The time that the task started running on the target.
 	StartTime *time.Time `type:"timestamp"`

@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/TagResourceInput
 type TagResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -60,7 +59,6 @@ func (s *TagResourceInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/TagResourceOutput
 type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
 }

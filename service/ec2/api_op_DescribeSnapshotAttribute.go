@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for DescribeSnapshotAttribute.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSnapshotAttributeRequest
 type DescribeSnapshotAttributeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -54,7 +53,6 @@ func (s *DescribeSnapshotAttributeInput) Validate() error {
 }
 
 // Contains the output of DescribeSnapshotAttribute.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSnapshotAttributeResult
 type DescribeSnapshotAttributeOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -12,7 +12,6 @@ import (
 
 // A request to retrieve a list of the health checks that are associated with
 // the current AWS account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHealthChecksRequest
 type ListHealthChecksInput struct {
 	_ struct{} `type:"structure"`
 
@@ -58,7 +57,6 @@ func (s ListHealthChecksInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains the response to a ListHealthChecks request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHealthChecksResponse
 type ListHealthChecksOutput struct {
 	_ struct{} `type:"structure"`
 

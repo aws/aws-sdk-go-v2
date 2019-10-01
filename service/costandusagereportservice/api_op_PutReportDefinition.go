@@ -10,7 +10,6 @@ import (
 )
 
 // Creates a Cost and Usage Report.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/PutReportDefinitionRequest
 type PutReportDefinitionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -47,7 +46,6 @@ func (s *PutReportDefinitionInput) Validate() error {
 
 // If the action is successful, the service sends back an HTTP 200 response
 // with an empty HTTP body.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/PutReportDefinitionResponse
 type PutReportDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 }

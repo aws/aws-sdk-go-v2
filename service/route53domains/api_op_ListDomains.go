@@ -10,7 +10,6 @@ import (
 )
 
 // The ListDomains request includes the following elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListDomainsRequest
 type ListDomainsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -36,7 +35,6 @@ func (s ListDomainsInput) String() string {
 }
 
 // The ListDomains response includes the following elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListDomainsResponse
 type ListDomainsOutput struct {
 	_ struct{} `type:"structure"`
 

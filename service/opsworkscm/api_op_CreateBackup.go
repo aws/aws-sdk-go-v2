@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/CreateBackupRequest
 type CreateBackupInput struct {
 	_ struct{} `type:"structure"`
 
@@ -44,7 +43,6 @@ func (s *CreateBackupInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/CreateBackupResponse
 type CreateBackupOutput struct {
 	_ struct{} `type:"structure"`
 

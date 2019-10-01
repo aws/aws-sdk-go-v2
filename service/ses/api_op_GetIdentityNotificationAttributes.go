@@ -12,7 +12,6 @@ import (
 // Represents a request to return the notification attributes for a list of
 // identities you verified with Amazon SES. For information about Amazon SES
 // notifications, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityNotificationAttributesRequest
 type GetIdentityNotificationAttributesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -44,7 +43,6 @@ func (s *GetIdentityNotificationAttributesInput) Validate() error {
 }
 
 // Represents the notification attributes for a list of identities.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityNotificationAttributesResponse
 type GetIdentityNotificationAttributesOutput struct {
 	_ struct{} `type:"structure"`
 

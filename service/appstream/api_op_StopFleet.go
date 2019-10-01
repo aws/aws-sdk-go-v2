@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopFleetRequest
 type StopFleetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -41,7 +40,6 @@ func (s *StopFleetInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopFleetResult
 type StopFleetOutput struct {
 	_ struct{} `type:"structure"`
 }

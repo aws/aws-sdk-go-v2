@@ -11,7 +11,6 @@ import (
 )
 
 // The name of a trail about which you want the current status.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetTrailStatusRequest
 type GetTrailStatusInput struct {
 	_ struct{} `type:"structure"`
 
@@ -46,7 +45,6 @@ func (s *GetTrailStatusInput) Validate() error {
 
 // Returns the objects or data listed below if successful. Otherwise, returns
 // an error.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetTrailStatusResponse
 type GetTrailStatusOutput struct {
 	_ struct{} `type:"structure"`
 

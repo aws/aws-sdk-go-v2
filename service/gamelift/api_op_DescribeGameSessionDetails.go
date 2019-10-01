@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input for a request action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionDetailsInput
 type DescribeGameSessionDetailsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -68,7 +67,6 @@ func (s *DescribeGameSessionDetailsInput) Validate() error {
 }
 
 // Represents the returned data in response to a request action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionDetailsOutput
 type DescribeGameSessionDetailsOutput struct {
 	_ struct{} `type:"structure"`
 

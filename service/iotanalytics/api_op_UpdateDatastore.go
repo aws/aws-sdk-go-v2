@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/UpdateDatastoreRequest
 type UpdateDatastoreInput struct {
 	_ struct{} `type:"structure"`
 
@@ -84,7 +83,6 @@ func (s UpdateDatastoreInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/UpdateDatastoreOutput
 type UpdateDatastoreOutput struct {
 	_ struct{} `type:"structure"`
 }

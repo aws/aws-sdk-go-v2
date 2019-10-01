@@ -21,7 +21,6 @@ var _ = awsutil.Prettify
 // RDNs are separated by commas in the certificate. The DN must be unique for
 // each entity, but your private CA can issue more than one certificate with
 // the same DN to the same entity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/ASN1Subject
 type ASN1Subject struct {
 	_ struct{} `type:"structure"`
 
@@ -92,7 +91,6 @@ func (s ASN1Subject) String() string {
 // CSR with your ACM Private CA-hosted or on-premises root or subordinate CA
 // certificate. Call the ImportCertificateAuthorityCertificate action to import
 // the signed certificate into AWS Certificate Manager (ACM).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/CertificateAuthority
 type CertificateAuthority struct {
 	_ struct{} `type:"structure"`
 
@@ -148,7 +146,6 @@ func (s CertificateAuthority) String() string {
 // also includes the signature algorithm that it uses when issuing certificates,
 // and its X.500 distinguished name. You must specify this information when
 // you call the CreateCertificateAuthority action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/CertificateAuthorityConfiguration
 type CertificateAuthorityConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -246,7 +243,6 @@ func (s *CertificateAuthorityConfiguration) Validate() error {
 // can use the following OpenSSL command to list a CRL.
 //
 // openssl crl -inform DER -text -in crl_path -noout
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/CrlConfiguration
 type CrlConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -306,7 +302,6 @@ func (s *CrlConfiguration) Validate() error {
 // GetCertificate, and ListPermissions). Permissions can be assigned with the
 // CreatePermission action, removed with the DeletePermission action, and listed
 // with the ListPermissions action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/Permission
 type Permission struct {
 	_ struct{} `type:"structure"`
 
@@ -341,7 +336,6 @@ func (s Permission) String() string {
 // (CA) can create and maintain a certificate revocation list (CRL). A CRL contains
 // information about certificates revoked by your CA. For more information,
 // see RevokeCertificate.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/RevocationConfiguration
 type RevocationConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -375,7 +369,6 @@ func (s *RevocationConfiguration) Validate() error {
 // 50 tags with a private CA. To add one or more tags to a private CA, call
 // the TagCertificateAuthority action. To remove a tag, call the UntagCertificateAuthority
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -413,7 +406,6 @@ func (s *Tag) Validate() error {
 // Length of time for which the certificate issued by your private certificate
 // authority (CA), or by the private CA itself, is valid in days, months, or
 // years. You can issue a certificate by calling the IssueCertificate action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/Validity
 type Validity struct {
 	_ struct{} `type:"structure"`
 

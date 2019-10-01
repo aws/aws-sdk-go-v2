@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteUserRequest
 type DeleteUserInput struct {
 	_ struct{} `type:"structure"`
 
@@ -23,7 +22,7 @@ type DeleteUserInput struct {
 	// Users' email addresses are case-sensitive.
 	//
 	// UserName is a required field
-	UserName *string `min:"1" type:"string" required:"true"`
+	UserName *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -51,7 +50,6 @@ func (s *DeleteUserInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteUserResult
 type DeleteUserOutput struct {
 	_ struct{} `type:"structure"`
 }

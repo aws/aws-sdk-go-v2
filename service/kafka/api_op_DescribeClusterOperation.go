@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeClusterOperationRequest
 type DescribeClusterOperationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +50,6 @@ func (s DescribeClusterOperationInput) MarshalFields(e protocol.FieldEncoder) er
 }
 
 // Information about a cluster operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeClusterOperationResponse
 type DescribeClusterOperationOutput struct {
 	_ struct{} `type:"structure"`
 

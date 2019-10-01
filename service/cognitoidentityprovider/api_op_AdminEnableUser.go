@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the request that enables the user as an administrator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminEnableUserRequest
 type AdminEnableUserInput struct {
 	_ struct{} `type:"structure"`
 
@@ -22,7 +21,7 @@ type AdminEnableUserInput struct {
 	// The user name of the user you wish to enable.
 	//
 	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true"`
+	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -56,7 +55,6 @@ func (s *AdminEnableUserInput) Validate() error {
 
 // Represents the response from the server for the request to enable a user
 // as an administrator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminEnableUserResponse
 type AdminEnableUserOutput struct {
 	_ struct{} `type:"structure"`
 }

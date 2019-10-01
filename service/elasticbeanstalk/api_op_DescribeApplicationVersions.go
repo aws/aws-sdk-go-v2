@@ -10,7 +10,6 @@ import (
 )
 
 // Request to describe application versions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeApplicationVersionsMessage
 type DescribeApplicationVersionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -57,7 +56,6 @@ func (s *DescribeApplicationVersionsInput) Validate() error {
 }
 
 // Result message wrapping a list of application version descriptions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationVersionDescriptionsMessage
 type DescribeApplicationVersionsOutput struct {
 	_ struct{} `type:"structure"`
 

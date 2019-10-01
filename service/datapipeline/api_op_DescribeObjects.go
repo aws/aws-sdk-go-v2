@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for DescribeObjects.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DescribeObjectsInput
 type DescribeObjectsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -63,7 +62,6 @@ func (s *DescribeObjectsInput) Validate() error {
 }
 
 // Contains the output of DescribeObjects.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DescribeObjectsOutput
 type DescribeObjectsOutput struct {
 	_ struct{} `type:"structure"`
 

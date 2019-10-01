@@ -10,12 +10,11 @@ import (
 )
 
 // SetLocalConsolePasswordInput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SetLocalConsolePasswordInput
 type SetLocalConsolePasswordInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	//
 	// GatewayARN is a required field
 	GatewayARN *string `min:"50" type:"string" required:"true"`
@@ -23,7 +22,7 @@ type SetLocalConsolePasswordInput struct {
 	// The password you want to set for your VM local console.
 	//
 	// LocalConsolePassword is a required field
-	LocalConsolePassword *string `min:"6" type:"string" required:"true"`
+	LocalConsolePassword *string `min:"6" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -55,12 +54,11 @@ func (s *SetLocalConsolePasswordInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SetLocalConsolePasswordOutput
 type SetLocalConsolePasswordOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string `min:"50" type:"string"`
 }
 

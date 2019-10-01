@@ -12,7 +12,6 @@ import (
 )
 
 // Request to delete a draft environment configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteEnvironmentConfigurationMessage
 type DeleteEnvironmentConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s *DeleteEnvironmentConfigurationInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteEnvironmentConfigurationOutput
 type DeleteEnvironmentConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 }

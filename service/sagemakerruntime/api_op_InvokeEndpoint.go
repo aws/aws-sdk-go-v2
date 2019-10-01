@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpointInput
 type InvokeEndpointInput struct {
 	_ struct{} `type:"structure" payload:"Body"`
 
@@ -24,12 +23,12 @@ type InvokeEndpointInput struct {
 	// (http://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html).
 	//
 	// Body is a required field
-	Body []byte `type:"blob" required:"true"`
+	Body []byte `type:"blob" required:"true" sensitive:"true"`
 
 	// The MIME type of the input data in the request body.
 	ContentType *string `location:"header" locationName:"Content-Type" type:"string"`
 
-	CustomAttributes *string `location:"header" locationName:"X-Amzn-SageMaker-Custom-Attributes" type:"string"`
+	CustomAttributes *string `location:"header" locationName:"X-Amzn-SageMaker-Custom-Attributes" type:"string" sensitive:"true"`
 
 	// The name of the endpoint that you specified when you created the endpoint
 	// using the CreateEndpoint (http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html)
@@ -98,7 +97,6 @@ func (s InvokeEndpointInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpointOutput
 type InvokeEndpointOutput struct {
 	_ struct{} `type:"structure" payload:"Body"`
 
@@ -108,12 +106,12 @@ type InvokeEndpointOutput struct {
 	// (http://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html).
 	//
 	// Body is a required field
-	Body []byte `type:"blob" required:"true"`
+	Body []byte `type:"blob" required:"true" sensitive:"true"`
 
 	// The MIME type of the inference returned in the response body.
 	ContentType *string `location:"header" locationName:"Content-Type" type:"string"`
 
-	CustomAttributes *string `location:"header" locationName:"X-Amzn-SageMaker-Custom-Attributes" type:"string"`
+	CustomAttributes *string `location:"header" locationName:"X-Amzn-SageMaker-Custom-Attributes" type:"string" sensitive:"true"`
 
 	// Identifies the production variant that was invoked.
 	InvokedProductionVariant *string `location:"header" locationName:"x-Amzn-Invoked-Production-Variant" type:"string"`

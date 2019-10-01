@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupCertificateConfigurationRequest
 type GetGroupCertificateConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +49,6 @@ func (s GetGroupCertificateConfigurationInput) MarshalFields(e protocol.FieldEnc
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupCertificateConfigurationResponse
 type GetGroupCertificateConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 

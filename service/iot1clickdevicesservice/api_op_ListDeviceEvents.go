@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/ListDeviceEventsRequest
 type ListDeviceEventsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -98,7 +97,6 @@ func (s ListDeviceEventsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/ListDeviceEventsResponse
 type ListDeviceEventsOutput struct {
 	_ struct{} `type:"structure"`
 

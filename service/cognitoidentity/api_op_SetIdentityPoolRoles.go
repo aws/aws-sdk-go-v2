@@ -13,7 +13,6 @@ import (
 )
 
 // Input to the SetIdentityPoolRoles action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/SetIdentityPoolRolesInput
 type SetIdentityPoolRolesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -70,7 +69,6 @@ func (s *SetIdentityPoolRolesInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/SetIdentityPoolRolesOutput
 type SetIdentityPoolRolesOutput struct {
 	_ struct{} `type:"structure"`
 }

@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/PutLifecycleConfigurationRequest
 type PutLifecycleConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -77,7 +76,6 @@ func (s PutLifecycleConfigurationInput) MarshalFields(e protocol.FieldEncoder) e
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/LifecycleConfigurationDescription
 type PutLifecycleConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 

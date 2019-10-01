@@ -15,7 +15,6 @@ var _ = awsutil.Prettify
 // An accelerator is a complex type that includes one or more listeners that
 // process inbound connections and then direct traffic to one or more endpoint
 // groups, each of which includes endpoints, such as load balancers.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/Accelerator
 type Accelerator struct {
 	_ struct{} `type:"structure"`
 
@@ -25,7 +24,7 @@ type Accelerator struct {
 	// The date and time that the accelerator was created.
 	CreatedTime *time.Time `type:"timestamp"`
 
-	// Indicates whether theaccelerator is enabled. The value is true or false.
+	// Indicates whether the accelerator is enabled. The value is true or false.
 	// The default value is true.
 	//
 	// If the value is set to true, the accelerator cannot be deleted. If set to
@@ -35,15 +34,14 @@ type Accelerator struct {
 	// The value for the address type must be IPv4.
 	IpAddressType IpAddressType `type:"string" enum:"true"`
 
-	// IP address set associated with the accelerator.
+	// The static IP addresses that Global Accelerator associates with the accelerator.
 	IpSets []IpSet `type:"list"`
 
 	// The date and time that the accelerator was last modified.
 	LastModifiedTime *time.Time `type:"timestamp"`
 
-	// The name of the accelerator. The name can have a maximum of 32 characters,
-	// must contain only alphanumeric characters or hyphens (-), and must not begin
-	// or end with a hyphen.
+	// The name of the accelerator. The name must contain only alphanumeric characters
+	// or hyphens (-), and must not begin or end with a hyphen.
 	Name *string `type:"string"`
 
 	// Describes the deployment status of the accelerator.
@@ -56,7 +54,6 @@ func (s Accelerator) String() string {
 }
 
 // Attributes of an accelerator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AcceleratorAttributes
 type AcceleratorAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -84,9 +81,21 @@ func (s AcceleratorAttributes) String() string {
 }
 
 // A complex type for endpoints.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointConfiguration
 type EndpointConfiguration struct {
 	_ struct{} `type:"structure"`
+
+	// Indicates whether client IP address preservation is enabled for an Application
+	// Load Balancer endpoint. The value is true or false. The default value is
+	// true for new accelerators.
+	//
+	// If the value is set to true, the client's IP address is preserved in the
+	// X-Forwarded-For request header as traffic travels to applications on the
+	// Application Load Balancer endpoint fronted by the accelerator.
+	//
+	// For more information, see Viewing Client IP Addresses in AWS Global Accelerator
+	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works-client-ip.html)
+	// in the AWS Global Accelerator Developer Guide.
+	ClientIPPreservationEnabled *bool `type:"boolean"`
 
 	// An ID for the endpoint. If the endpoint is a Network Load Balancer or Application
 	// Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If
@@ -112,14 +121,26 @@ func (s EndpointConfiguration) String() string {
 
 // A complex type for an endpoint. Each endpoint group can include one or more
 // endpoints, such as load balancers.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointDescription
 type EndpointDescription struct {
 	_ struct{} `type:"structure"`
+
+	// Indicates whether client IP address preservation is enabled for an Application
+	// Load Balancer endpoint. The value is true or false. The default value is
+	// true for new accelerators.
+	//
+	// If the value is set to true, the client's IP address is preserved in the
+	// X-Forwarded-For request header as traffic travels to applications on the
+	// Application Load Balancer endpoint fronted by the accelerator.
+	//
+	// For more information, see Viewing Client IP Addresses in AWS Global Accelerator
+	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works-client-ip.html)
+	// in the AWS Global Accelerator Developer Guide.
+	ClientIPPreservationEnabled *bool `type:"boolean"`
 
 	// An ID for the endpoint. If the endpoint is a Network Load Balancer or Application
 	// Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If
 	// the endpoint is an Elastic IP address, this is the Elastic IP address allocation
-	// ID.
+	// ID. An Application Load Balancer can be either internal or internet-facing.
 	EndpointId *string `type:"string"`
 
 	// The reason code associated with why the endpoint is not healthy. If the endpoint
@@ -165,7 +186,6 @@ func (s EndpointDescription) String() string {
 
 // A complex type for the endpoint group. An AWS Region can have only one endpoint
 // group for a specific listener.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointGroup
 type EndpointGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -221,7 +241,6 @@ func (s EndpointGroup) String() string {
 }
 
 // A complex type for the set of IP addresses for an accelerator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/IpSet
 type IpSet struct {
 	_ struct{} `type:"structure"`
 
@@ -239,7 +258,6 @@ func (s IpSet) String() string {
 }
 
 // A complex type for a listener.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/Listener
 type Listener struct {
 	_ struct{} `type:"structure"`
 
@@ -281,7 +299,6 @@ func (s Listener) String() string {
 }
 
 // A complex type for a range of ports for a listener.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/PortRange
 type PortRange struct {
 	_ struct{} `type:"structure"`
 

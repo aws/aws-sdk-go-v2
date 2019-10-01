@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a GetJobDetails action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetJobDetailsInput
 type GetJobDetailsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s *GetJobDetailsInput) Validate() error {
 }
 
 // Represents the output of a GetJobDetails action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetJobDetailsOutput
 type GetJobDetailsOutput struct {
 	_ struct{} `type:"structure"`
 

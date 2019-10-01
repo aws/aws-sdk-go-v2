@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/CreateSecretRequest
 type CreateSecretInput struct {
 	_ struct{} `type:"structure"`
 
@@ -93,7 +92,7 @@ type CreateSecretInput struct {
 	// be accessed only by using the AWS CLI or one of the AWS SDKs.
 	//
 	// SecretBinary is automatically base64 encoded/decoded by the SDK.
-	SecretBinary []byte `type:"blob"`
+	SecretBinary []byte `type:"blob" sensitive:"true"`
 
 	// (Optional) Specifies text data that you want to encrypt and store in this
 	// new version of the secret.
@@ -117,7 +116,7 @@ type CreateSecretInput struct {
 	// If your command-line tool or SDK requires quotation marks around the parameter,
 	// you should use single quotes to avoid confusion with the double quotes required
 	// in the JSON text.
-	SecretString *string `type:"string"`
+	SecretString *string `type:"string" sensitive:"true"`
 
 	// (Optional) Specifies a list of user-defined tags that are attached to the
 	// secret. Each tag is a "Key" and "Value" pair of strings. This operation only
@@ -197,7 +196,6 @@ func (s *CreateSecretInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/CreateSecretResponse
 type CreateSecretOutput struct {
 	_ struct{} `type:"structure"`
 

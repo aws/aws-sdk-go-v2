@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAliasRequest
 type GetAliasInput struct {
 	_ struct{} `type:"structure"`
 
@@ -85,7 +84,6 @@ func (s GetAliasInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Provides configuration information about a Lambda function alias (https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AliasConfiguration
 type GetAliasOutput struct {
 	_ struct{} `type:"structure"`
 

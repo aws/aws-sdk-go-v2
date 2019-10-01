@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeLayersRequest
 type DescribeLayersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -28,7 +27,6 @@ func (s DescribeLayersInput) String() string {
 }
 
 // Contains the response to a DescribeLayers request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeLayersResult
 type DescribeLayersOutput struct {
 	_ struct{} `type:"structure"`
 

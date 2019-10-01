@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeIpGroupsRequest
 type DescribeIpGroupsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -45,7 +44,6 @@ func (s *DescribeIpGroupsInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeIpGroupsResult
 type DescribeIpGroupsOutput struct {
 	_ struct{} `type:"structure"`
 

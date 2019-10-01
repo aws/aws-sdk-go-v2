@@ -11,7 +11,6 @@ import (
 )
 
 // Request structure for update branch request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateBranchRequest
 type UpdateBranchInput struct {
 	_ struct{} `type:"structure"`
 
@@ -183,7 +182,6 @@ func (s UpdateBranchInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Result structure for update branch request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateBranchResult
 type UpdateBranchOutput struct {
 	_ struct{} `type:"structure"`
 

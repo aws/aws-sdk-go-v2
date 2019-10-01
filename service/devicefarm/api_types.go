@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // A container for account-level settings within AWS Device Farm.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/AccountSettings
 type AccountSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -58,7 +57,6 @@ func (s AccountSettings) String() string {
 }
 
 // Represents the output of a test. Examples of artifacts include logs and screenshots.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Artifact
 type Artifact struct {
 	_ struct{} `type:"structure"`
 
@@ -146,7 +144,6 @@ func (s Artifact) String() string {
 // Represents the amount of CPU that an app is using on a physical device.
 //
 // Note that this does not represent system-wide CPU usage.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CPU
 type CPU struct {
 	_ struct{} `type:"structure"`
 
@@ -167,7 +164,6 @@ func (s CPU) String() string {
 }
 
 // Represents entity counters.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Counters
 type Counters struct {
 	_ struct{} `type:"structure"`
 
@@ -199,7 +195,6 @@ func (s Counters) String() string {
 }
 
 // Configuration settings for a remote access session, including billing method.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateRemoteAccessSessionConfiguration
 type CreateRemoteAccessSessionConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -221,7 +216,6 @@ func (s CreateRemoteAccessSessionConfiguration) String() string {
 // Specify deviceHostPaths and optionally specify either iosPaths or androidPaths.
 //
 // For web app tests, you can specify both iosPaths and androidPaths.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CustomerArtifactPaths
 type CustomerArtifactPaths struct {
 	_ struct{} `type:"structure"`
 
@@ -244,7 +238,6 @@ func (s CustomerArtifactPaths) String() string {
 }
 
 // Represents a device type that an app is tested against.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Device
 type Device struct {
 	_ struct{} `type:"structure"`
 
@@ -338,7 +331,6 @@ func (s Device) String() string {
 //
 // It is also passed in as the filters parameter to ListDevices. For an example
 // of the JSON request syntax, see ListDevices.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeviceFilter
 type DeviceFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -457,7 +449,6 @@ func (s DeviceFilter) String() string {
 }
 
 // Represents the device instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeviceInstance
 type DeviceInstance struct {
 	_ struct{} `type:"structure"`
 
@@ -487,7 +478,6 @@ func (s DeviceInstance) String() string {
 
 // Represents the total (metered or unmetered) minutes used by the resource
 // to run tests. Contains the sum of minutes consumed by all children.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeviceMinutes
 type DeviceMinutes struct {
 	_ struct{} `type:"structure"`
 
@@ -510,7 +500,6 @@ func (s DeviceMinutes) String() string {
 }
 
 // Represents a collection of device types.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DevicePool
 type DevicePool struct {
 	_ struct{} `type:"structure"`
 
@@ -553,7 +542,6 @@ func (s DevicePool) String() string {
 }
 
 // Represents a device pool compatibility result.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DevicePoolCompatibilityResult
 type DevicePoolCompatibilityResult struct {
 	_ struct{} `type:"structure"`
 
@@ -575,7 +563,6 @@ func (s DevicePoolCompatibilityResult) String() string {
 // Represents the device filters used in a test run as well as the maximum number
 // of devices to be included in the run. It is passed in as the deviceSelectionConfiguration
 // request parameter in ScheduleRun.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeviceSelectionConfiguration
 type DeviceSelectionConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -648,7 +635,6 @@ func (s *DeviceSelectionConfiguration) Validate() error {
 // Contains the run results requested by the device selection configuration
 // as well as how many devices were returned. For an example of the JSON response
 // syntax, see ScheduleRun.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeviceSelectionResult
 type DeviceSelectionResult struct {
 	_ struct{} `type:"structure"`
 
@@ -670,7 +656,6 @@ func (s DeviceSelectionResult) String() string {
 
 // Represents configuration information about a test run, such as the execution
 // timeout (in minutes).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ExecutionConfiguration
 type ExecutionConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -705,7 +690,6 @@ func (s ExecutionConfiguration) String() string {
 }
 
 // Represents information about incompatibility.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/IncompatibilityMessage
 type IncompatibilityMessage struct {
 	_ struct{} `type:"structure"`
 
@@ -736,7 +720,6 @@ func (s IncompatibilityMessage) String() string {
 }
 
 // Represents the instance profile.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/InstanceProfile
 type InstanceProfile struct {
 	_ struct{} `type:"structure"`
 
@@ -770,7 +753,6 @@ func (s InstanceProfile) String() string {
 }
 
 // Represents a device.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Job
 type Job struct {
 	_ struct{} `type:"structure"`
 
@@ -906,7 +888,6 @@ func (s Job) String() string {
 // system degrees (for example 47.6204, -122.3491).
 //
 // Elevation is currently not supported.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Location
 type Location struct {
 	_ struct{} `type:"structure"`
 
@@ -945,7 +926,6 @@ func (s *Location) Validate() error {
 }
 
 // A number representing the monetary amount for an offering or transaction.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/MonetaryAmount
 type MonetaryAmount struct {
 	_ struct{} `type:"structure"`
 
@@ -962,7 +942,6 @@ func (s MonetaryAmount) String() string {
 }
 
 // An array of settings that describes characteristics of a network profile.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/NetworkProfile
 type NetworkProfile struct {
 	_ struct{} `type:"structure"`
 
@@ -1013,7 +992,6 @@ func (s NetworkProfile) String() string {
 }
 
 // Represents the metadata of a device offering.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Offering
 type Offering struct {
 	_ struct{} `type:"structure"`
 
@@ -1039,7 +1017,6 @@ func (s Offering) String() string {
 }
 
 // Represents information about an offering promotion.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/OfferingPromotion
 type OfferingPromotion struct {
 	_ struct{} `type:"structure"`
 
@@ -1056,7 +1033,6 @@ func (s OfferingPromotion) String() string {
 }
 
 // The status of the offering.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/OfferingStatus
 type OfferingStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -1079,7 +1055,6 @@ func (s OfferingStatus) String() string {
 }
 
 // Represents the metadata of an offering transaction.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/OfferingTransaction
 type OfferingTransaction struct {
 	_ struct{} `type:"structure"`
 
@@ -1105,7 +1080,6 @@ func (s OfferingTransaction) String() string {
 }
 
 // Represents a specific warning or failure.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Problem
 type Problem struct {
 	_ struct{} `type:"structure"`
 
@@ -1153,7 +1127,6 @@ func (s Problem) String() string {
 }
 
 // Information about a problem detail.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ProblemDetail
 type ProblemDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -1171,7 +1144,6 @@ func (s ProblemDetail) String() string {
 
 // Represents an operating-system neutral workspace for running and managing
 // tests.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Project
 type Project struct {
 	_ struct{} `type:"structure"`
 
@@ -1196,7 +1168,6 @@ func (s Project) String() string {
 
 // Represents the set of radios and their states on a device. Examples of radios
 // include Wi-Fi, GPS, Bluetooth, and NFC.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Radios
 type Radios struct {
 	_ struct{} `type:"structure"`
 
@@ -1219,7 +1190,6 @@ func (s Radios) String() string {
 }
 
 // Specifies whether charges for devices will be recurring.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/RecurringCharge
 type RecurringCharge struct {
 	_ struct{} `type:"structure"`
 
@@ -1236,7 +1206,6 @@ func (s RecurringCharge) String() string {
 }
 
 // Represents information about the remote access session.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/RemoteAccessSession
 type RemoteAccessSession struct {
 	_ struct{} `type:"structure"`
 
@@ -1369,7 +1338,6 @@ func (s RemoteAccessSession) String() string {
 
 // Represents the screen resolution of a device in height and width, expressed
 // in pixels.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Resolution
 type Resolution struct {
 	_ struct{} `type:"structure"`
 
@@ -1386,7 +1354,6 @@ func (s Resolution) String() string {
 }
 
 // Represents a condition for a device pool.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Rule
 type Rule struct {
 	_ struct{} `type:"structure"`
 
@@ -1493,7 +1460,6 @@ func (s Rule) String() string {
 
 // Represents a test run on a set of devices with a given app package, test
 // parameters, etc.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Run
 type Run struct {
 	_ struct{} `type:"structure"`
 
@@ -1691,7 +1657,6 @@ func (s Run) String() string {
 }
 
 // Represents a sample of performance data.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Sample
 type Sample struct {
 	_ struct{} `type:"structure"`
 
@@ -1754,7 +1719,6 @@ func (s Sample) String() string {
 
 // Represents the settings for a run. Includes things like location, radio states,
 // auxiliary apps, and network profiles.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRunConfiguration
 type ScheduleRunConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1818,7 +1782,6 @@ func (s *ScheduleRunConfiguration) Validate() error {
 // Represents test settings. This data structure is passed in as the "test"
 // parameter to ScheduleRun. For an example of the JSON request syntax, see
 // ScheduleRun.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRunTest
 type ScheduleRunTest struct {
 	_ struct{} `type:"structure"`
 
@@ -1965,7 +1928,6 @@ func (s *ScheduleRunTest) Validate() error {
 }
 
 // Represents a collection of one or more tests.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Suite
 type Suite struct {
 	_ struct{} `type:"structure"`
 
@@ -2088,7 +2050,6 @@ func (s Suite) String() string {
 // it. Each tag consists of a key and an optional value, both of which you define.
 // Tag keys can have a maximum character length of 128 characters, and tag values
 // can have a maximum length of 256 characters.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -2132,7 +2093,6 @@ func (s *Tag) Validate() error {
 }
 
 // Represents a condition that is evaluated.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Test
 type Test struct {
 	_ struct{} `type:"structure"`
 
@@ -2252,7 +2212,6 @@ func (s Test) String() string {
 }
 
 // Represents information about free trial device minutes for an AWS account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/TrialMinutes
 type TrialMinutes struct {
 	_ struct{} `type:"structure"`
 
@@ -2269,7 +2228,6 @@ func (s TrialMinutes) String() string {
 }
 
 // A collection of one or more problems, grouped by their result.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UniqueProblem
 type UniqueProblem struct {
 	_ struct{} `type:"structure"`
 
@@ -2286,7 +2244,6 @@ func (s UniqueProblem) String() string {
 }
 
 // An app or a set of one or more tests to upload or that have been uploaded.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Upload
 type Upload struct {
 	_ struct{} `type:"structure"`
 
@@ -2421,7 +2378,6 @@ func (s Upload) String() string {
 }
 
 // Represents an Amazon Virtual Private Cloud (VPC) endpoint configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/VPCEConfiguration
 type VPCEConfiguration struct {
 	_ struct{} `type:"structure"`
 

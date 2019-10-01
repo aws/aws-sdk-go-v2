@@ -20,7 +20,6 @@ var _ = awsutil.Prettify
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html). For information
 // about using your own algorithms, see Using Your Own Algorithms with Amazon
 // SageMaker (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlgorithmSpecification
 type AlgorithmSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -96,7 +95,6 @@ func (s *AlgorithmSpecification) Validate() error {
 }
 
 // Specifies the validation and image scan statuses of the algorithm.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlgorithmStatusDetails
 type AlgorithmStatusDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -113,7 +111,6 @@ func (s AlgorithmStatusDetails) String() string {
 }
 
 // Represents the overall status of an algorithm.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlgorithmStatusItem
 type AlgorithmStatusItem struct {
 	_ struct{} `type:"structure"`
 
@@ -137,7 +134,6 @@ func (s AlgorithmStatusItem) String() string {
 }
 
 // Provides summary information about an algorithm.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlgorithmSummary
 type AlgorithmSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -175,7 +171,6 @@ func (s AlgorithmSummary) String() string {
 //
 // The data provided in the validation profile is made available to your buyers
 // on AWS Marketplace.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlgorithmValidationProfile
 type AlgorithmValidationProfile struct {
 	_ struct{} `type:"structure"`
 
@@ -234,7 +229,6 @@ func (s *AlgorithmValidationProfile) Validate() error {
 
 // Specifies configurations for one or more training jobs that Amazon SageMaker
 // runs to test the algorithm.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlgorithmValidationSpecification
 type AlgorithmValidationSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -288,7 +282,6 @@ func (s *AlgorithmValidationSpecification) Validate() error {
 }
 
 // Configures how labels are consolidated across human workers.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AnnotationConsolidationConfig
 type AnnotationConsolidationConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -393,7 +386,6 @@ func (s *AnnotationConsolidationConfig) Validate() error {
 }
 
 // A list of categorical hyperparameters to tune.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CategoricalParameterRange
 type CategoricalParameterRange struct {
 	_ struct{} `type:"structure"`
 
@@ -435,7 +427,6 @@ func (s *CategoricalParameterRange) Validate() error {
 }
 
 // Defines the possible values for a categorical hyperparameter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CategoricalParameterRangeSpecification
 type CategoricalParameterRangeSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -468,7 +459,6 @@ func (s *CategoricalParameterRangeSpecification) Validate() error {
 }
 
 // A channel is a named input source that training algorithms can consume.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Channel
 type Channel struct {
 	_ struct{} `type:"structure"`
 
@@ -566,7 +556,6 @@ func (s *Channel) Validate() error {
 }
 
 // Defines a named input source, called a channel, to be used by an algorithm.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ChannelSpecification
 type ChannelSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -637,7 +626,6 @@ func (s *ChannelSpecification) Validate() error {
 
 // Contains information about the output location for managed spot training
 // checkpoint data.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CheckpointConfig
 type CheckpointConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -672,7 +660,6 @@ func (s *CheckpointConfig) Validate() error {
 }
 
 // Specifies summary information about a Git repository.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CodeRepositorySummary
 type CodeRepositorySummary struct {
 	_ struct{} `type:"structure"`
 
@@ -709,7 +696,6 @@ func (s CodeRepositorySummary) String() string {
 
 // Identifies a Amazon Cognito user group. A user group can be used in on or
 // more work teams.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CognitoMemberDefinition
 type CognitoMemberDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -768,7 +754,6 @@ func (s *CognitoMemberDefinition) Validate() error {
 }
 
 // A summary of a model compilation job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CompilationJobSummary
 type CompilationJobSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -813,7 +798,6 @@ func (s CompilationJobSummary) String() string {
 }
 
 // Describes the container, as part of model definition.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ContainerDefinition
 type ContainerDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -886,7 +870,6 @@ func (s *ContainerDefinition) Validate() error {
 }
 
 // A list of continuous hyperparameters to tune.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ContinuousParameterRange
 type ContinuousParameterRange struct {
 	_ struct{} `type:"structure"`
 
@@ -967,7 +950,6 @@ func (s *ContinuousParameterRange) Validate() error {
 }
 
 // Defines the possible values for a continuous hyperparameter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ContinuousParameterRangeSpecification
 type ContinuousParameterRangeSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -1012,7 +994,6 @@ func (s *ContinuousParameterRangeSpecification) Validate() error {
 // filter provided allows you to include input data relevant to interpreting
 // the predictions in the output from the job. For more information, see Associate
 // Prediction Results with their Corresponding Input Records (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DataProcessing
 type DataProcessing struct {
 	_ struct{} `type:"structure"`
 
@@ -1061,7 +1042,6 @@ func (s DataProcessing) String() string {
 }
 
 // Describes the location of the channel data.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DataSource
 type DataSource struct {
 	_ struct{} `type:"structure"`
 
@@ -1106,7 +1086,6 @@ func (s *DataSource) Validate() error {
 // is a hash value that identifies a specific version of an image. For information
 // about Amazon ECR paths, see Pulling an Image (https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-pull-ecr-image.html)
 // in the Amazon ECR User Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeployedImage
 type DeployedImage struct {
 	_ struct{} `type:"structure"`
 
@@ -1126,7 +1105,6 @@ func (s DeployedImage) String() string {
 }
 
 // Specifies weight and capacity values for a production variant.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DesiredWeightAndCapacity
 type DesiredWeightAndCapacity struct {
 	_ struct{} `type:"structure"`
 
@@ -1165,7 +1143,6 @@ func (s *DesiredWeightAndCapacity) Validate() error {
 }
 
 // Provides summary information for an endpoint configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EndpointConfigSummary
 type EndpointConfigSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1191,7 +1168,6 @@ func (s EndpointConfigSummary) String() string {
 }
 
 // Provides summary information for an endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EndpointSummary
 type EndpointSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1257,7 +1233,6 @@ func (s EndpointSummary) String() string {
 }
 
 // Specifies a file system data source for a channel.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/FileSystemDataSource
 type FileSystemDataSource struct {
 	_ struct{} `type:"structure"`
 
@@ -1366,7 +1341,6 @@ func (s *FileSystemDataSource) Validate() error {
 // Tags
 //
 // To define a tag filter, enter a value with the form "Tags.<key>".
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Filter
 type Filter struct {
 	_ struct{} `type:"structure"`
 
@@ -1451,7 +1425,6 @@ func (s *Filter) Validate() error {
 // Shows the final value for the objective metric for a training job that was
 // launched by a hyperparameter tuning job. You define the objective metric
 // in the HyperParameterTuningJobObjective parameter of HyperParameterTuningJobConfig.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/FinalHyperParameterTuningJobObjectiveMetric
 type FinalHyperParameterTuningJobObjectiveMetric struct {
 	_ struct{} `type:"structure"`
 
@@ -1476,7 +1449,6 @@ func (s FinalHyperParameterTuningJobObjectiveMetric) String() string {
 }
 
 // Specifies configuration details for a Git repository in your AWS account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GitConfig
 type GitConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1523,7 +1495,6 @@ func (s *GitConfig) Validate() error {
 
 // Specifies configuration details for a Git repository when the repository
 // is updated.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GitConfigForUpdate
 type GitConfigForUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -1554,7 +1525,6 @@ func (s *GitConfigForUpdate) Validate() error {
 }
 
 // Information required for human workers to complete a labeling task.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HumanTaskConfig
 type HumanTaskConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1848,7 +1818,6 @@ func (s *HumanTaskConfig) Validate() error {
 
 // Specifies which training algorithm to use for training jobs that a hyperparameter
 // tuning job launches and the metrics to monitor.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterAlgorithmSpecification
 type HyperParameterAlgorithmSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -1914,7 +1883,6 @@ func (s *HyperParameterAlgorithmSpecification) Validate() error {
 }
 
 // Defines a hyperparameter to be used by an algorithm.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterSpecification
 type HyperParameterSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -1975,7 +1943,6 @@ func (s *HyperParameterSpecification) Validate() error {
 }
 
 // Defines the training jobs launched by a hyperparameter tuning job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTrainingJobDefinition
 type HyperParameterTrainingJobDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -2136,7 +2103,6 @@ func (s *HyperParameterTrainingJobDefinition) Validate() error {
 }
 
 // Specifies summary information about a training job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTrainingJobSummary
 type HyperParameterTrainingJobSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -2207,7 +2173,6 @@ func (s HyperParameterTrainingJobSummary) String() string {
 }
 
 // Configures a hyperparameter tuning job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTuningJobConfig
 type HyperParameterTuningJobConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -2292,7 +2257,6 @@ func (s *HyperParameterTuningJobConfig) Validate() error {
 // tuning uses the value of this metric to evaluate the training jobs it launches,
 // and returns the training job that results in either the highest or lowest
 // value for this metric, depending on the value you specify for the Type parameter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTuningJobObjective
 type HyperParameterTuningJobObjective struct {
 	_ struct{} `type:"structure"`
 
@@ -2333,7 +2297,6 @@ func (s *HyperParameterTuningJobObjective) Validate() error {
 }
 
 // Provides summary information about a hyperparameter tuning job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTuningJobSummary
 type HyperParameterTuningJobSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -2406,7 +2369,6 @@ func (s HyperParameterTuningJobSummary) String() string {
 // All training jobs launched by parent hyperparameter tuning jobs and the new
 // hyperparameter tuning jobs count against the limit of training jobs for the
 // tuning job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTuningJobWarmStartConfig
 type HyperParameterTuningJobWarmStartConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -2485,7 +2447,6 @@ func (s *HyperParameterTuningJobWarmStartConfig) Validate() error {
 }
 
 // Defines how to perform inference generation after a training job is run.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceSpecification
 type InferenceSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -2568,7 +2529,6 @@ func (s *InferenceSpecification) Validate() error {
 // Contains information about the location of input model artifacts, the name
 // and shape of the expected data inputs, and the framework in which the model
 // was trained.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InputConfig
 type InputConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -2652,7 +2612,6 @@ func (s *InputConfig) Validate() error {
 
 // For a hyperparameter of the integer type, specifies the range that a hyperparameter
 // tuning job searches.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/IntegerParameterRange
 type IntegerParameterRange struct {
 	_ struct{} `type:"structure"`
 
@@ -2723,7 +2682,6 @@ func (s *IntegerParameterRange) Validate() error {
 }
 
 // Defines the possible values for an integer hyperparameter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/IntegerParameterRangeSpecification
 type IntegerParameterRangeSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -2762,7 +2720,6 @@ func (s *IntegerParameterRangeSpecification) Validate() error {
 }
 
 // Provides a breakdown of the number of objects labeled.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelCounters
 type LabelCounters struct {
 	_ struct{} `type:"structure"`
 
@@ -2788,7 +2745,6 @@ func (s LabelCounters) String() string {
 }
 
 // Provides counts for human-labeled tasks in the labeling job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelCountersForWorkteam
 type LabelCountersForWorkteam struct {
 	_ struct{} `type:"structure"`
 
@@ -2809,7 +2765,6 @@ func (s LabelCountersForWorkteam) String() string {
 
 // Provides configuration information for auto-labeling of your data objects.
 // A LabelingJobAlgorithmsConfig object must be supplied in order to use auto-labeling.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobAlgorithmsConfig
 type LabelingJobAlgorithmsConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -2861,7 +2816,6 @@ func (s *LabelingJobAlgorithmsConfig) Validate() error {
 
 // Attributes of the data specified by the customer. Use these to describe the
 // data to be labeled.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobDataAttributes
 type LabelingJobDataAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -2877,7 +2831,6 @@ func (s LabelingJobDataAttributes) String() string {
 }
 
 // Provides information about the location of input data.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobDataSource
 type LabelingJobDataSource struct {
 	_ struct{} `type:"structure"`
 
@@ -2912,7 +2865,6 @@ func (s *LabelingJobDataSource) Validate() error {
 }
 
 // Provides summary information for a work team.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobForWorkteamSummary
 type LabelingJobForWorkteamSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -2946,7 +2898,6 @@ func (s LabelingJobForWorkteamSummary) String() string {
 }
 
 // Input configuration information for a labeling job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobInputConfig
 type LabelingJobInputConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -2984,7 +2935,6 @@ func (s *LabelingJobInputConfig) Validate() error {
 }
 
 // Specifies the location of the output produced by the labeling job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobOutput
 type LabelingJobOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -3004,7 +2954,6 @@ func (s LabelingJobOutput) String() string {
 }
 
 // Output configuration information for a labeling job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobOutputConfig
 type LabelingJobOutputConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -3053,7 +3002,6 @@ func (s *LabelingJobOutputConfig) Validate() error {
 }
 
 // Provides configuration information for labeling jobs.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobResourceConfig
 type LabelingJobResourceConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -3074,7 +3022,6 @@ func (s LabelingJobResourceConfig) String() string {
 }
 
 // The Amazon S3 location of the input data objects.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobS3DataSource
 type LabelingJobS3DataSource struct {
 	_ struct{} `type:"structure"`
 
@@ -3107,7 +3054,6 @@ func (s *LabelingJobS3DataSource) Validate() error {
 // A set of conditions for stopping a labeling job. If any of the conditions
 // are met, the job is automatically stopped. You can use these conditions to
 // control the cost of data labeling.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobStoppingConditions
 type LabelingJobStoppingConditions struct {
 	_ struct{} `type:"structure"`
 
@@ -3140,7 +3086,6 @@ func (s *LabelingJobStoppingConditions) Validate() error {
 }
 
 // Provides summary information about a labeling job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobSummary
 type LabelingJobSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -3207,7 +3152,6 @@ func (s LabelingJobSummary) String() string {
 }
 
 // Defines the Amazon Cognito user group that is part of a work team.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MemberDefinition
 type MemberDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -3237,7 +3181,6 @@ func (s *MemberDefinition) Validate() error {
 
 // The name, value, and date and time of a metric that was emitted to Amazon
 // CloudWatch.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MetricData
 type MetricData struct {
 	_ struct{} `type:"structure"`
 
@@ -3260,7 +3203,6 @@ func (s MetricData) String() string {
 // . Amazon SageMakerhyperparameter tuning captures all defined metrics. You
 // specify one metric that a hyperparameter tuning job uses as its objective
 // metric to choose the best training job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MetricDefinition
 type MetricDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -3308,7 +3250,6 @@ func (s *MetricDefinition) Validate() error {
 
 // Provides information about the location that is configured for storing model
 // artifacts.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelArtifacts
 type ModelArtifacts struct {
 	_ struct{} `type:"structure"`
 
@@ -3325,7 +3266,6 @@ func (s ModelArtifacts) String() string {
 }
 
 // Describes the Docker container for the model package.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageContainerDefinition
 type ModelPackageContainerDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -3377,7 +3317,6 @@ func (s *ModelPackageContainerDefinition) Validate() error {
 }
 
 // Specifies the validation and image scan statuses of the model package.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageStatusDetails
 type ModelPackageStatusDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -3396,7 +3335,6 @@ func (s ModelPackageStatusDetails) String() string {
 }
 
 // Represents the overall status of a model package.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageStatusItem
 type ModelPackageStatusItem struct {
 	_ struct{} `type:"structure"`
 
@@ -3420,7 +3358,6 @@ func (s ModelPackageStatusItem) String() string {
 }
 
 // Provides summary information about a model package.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageSummary
 type ModelPackageSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -3458,7 +3395,6 @@ func (s ModelPackageSummary) String() string {
 //
 // The data provided in the validation profile is made available to your buyers
 // on AWS Marketplace.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageValidationProfile
 type ModelPackageValidationProfile struct {
 	_ struct{} `type:"structure"`
 
@@ -3507,7 +3443,6 @@ func (s *ModelPackageValidationProfile) Validate() error {
 
 // Specifies batch transform jobs that Amazon SageMaker runs to validate your
 // model package.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageValidationSpecification
 type ModelPackageValidationSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -3560,7 +3495,6 @@ func (s *ModelPackageValidationSpecification) Validate() error {
 }
 
 // Provides summary information about a model.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelSummary
 type ModelSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -3601,7 +3535,6 @@ func (s ModelSummary) String() string {
 //
 //    * '{Name:"InputDataConfig.DataSource.S3DataSource.S3Uri", "Operator":"CONTAINS",
 //    "Value":"cat/data"}'
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/NestedFilters
 type NestedFilters struct {
 	_ struct{} `type:"structure"`
 
@@ -3656,7 +3589,6 @@ func (s *NestedFilters) Validate() error {
 }
 
 // Provides a summary of a notebook instance lifecycle configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/NotebookInstanceLifecycleConfigSummary
 type NotebookInstanceLifecycleConfigSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -3698,7 +3630,6 @@ func (s NotebookInstanceLifecycleConfigSummary) String() string {
 //
 // For information about notebook instance lifestyle configurations, see Step
 // 2.1: (Optional) Customize a Notebook Instance (https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/NotebookInstanceLifecycleHook
 type NotebookInstanceLifecycleHook struct {
 	_ struct{} `type:"structure"`
 
@@ -3726,7 +3657,6 @@ func (s *NotebookInstanceLifecycleHook) Validate() error {
 }
 
 // Provides summary information for an Amazon SageMaker notebook instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/NotebookInstanceSummary
 type NotebookInstanceSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -3788,7 +3718,6 @@ func (s NotebookInstanceSummary) String() string {
 
 // Configures SNS notifications of available or expiring work items for work
 // teams.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/NotificationConfiguration
 type NotificationConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -3806,7 +3735,6 @@ func (s NotificationConfiguration) String() string {
 // metric status shows whether the final objective metric for the training job
 // has been evaluated by the tuning job and used in the hyperparameter tuning
 // process.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ObjectiveStatusCounters
 type ObjectiveStatusCounters struct {
 	_ struct{} `type:"structure"`
 
@@ -3831,7 +3759,6 @@ func (s ObjectiveStatusCounters) String() string {
 
 // Contains information about the output location for the compiled model and
 // the device (target) that the model runs on.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OutputConfig
 type OutputConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -3871,7 +3798,6 @@ func (s *OutputConfig) Validate() error {
 }
 
 // Provides information about how to store model training results (model artifacts).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OutputDataConfig
 type OutputDataConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -3931,7 +3857,6 @@ func (s *OutputDataConfig) Validate() error {
 
 // Defines the possible values for categorical, continuous, and integer hyperparameters
 // to be used by an algorithm.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ParameterRange
 type ParameterRange struct {
 	_ struct{} `type:"structure"`
 
@@ -3988,7 +3913,6 @@ func (s *ParameterRange) Validate() error {
 // You can specify a maximum of 20 hyperparameters that a hyperparameter tuning
 // job can search over. Every possible value of a categorical parameter range
 // counts against this limit.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ParameterRanges
 type ParameterRanges struct {
 	_ struct{} `type:"structure"`
 
@@ -4043,7 +3967,6 @@ func (s *ParameterRanges) Validate() error {
 
 // A previously completed or stopped hyperparameter tuning job to be used as
 // a starting point for a new hyperparameter tuning job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ParentHyperParameterTuningJob
 type ParentHyperParameterTuningJob struct {
 	_ struct{} `type:"structure"`
 
@@ -4073,7 +3996,6 @@ func (s *ParentHyperParameterTuningJob) Validate() error {
 // Identifies a model that you want to host and the resources to deploy for
 // hosting it. If you are deploying multiple models, tell Amazon SageMaker how
 // to distribute traffic among the models by specifying variant weights.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariant
 type ProductionVariant struct {
 	_ struct{} `type:"structure"`
 
@@ -4147,7 +4069,6 @@ func (s *ProductionVariant) Validate() error {
 // an endpoint. If you sent a request to the UpdateEndpointWeightsAndCapacities
 // API and the endpoint status is Updating, you get different desired and current
 // values.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariantSummary
 type ProductionVariantSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -4182,7 +4103,6 @@ func (s ProductionVariantSummary) String() string {
 
 // A type of SuggestionQuery. A suggestion query for retrieving property names
 // that match the specified hint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PropertyNameQuery
 type PropertyNameQuery struct {
 	_ struct{} `type:"structure"`
 
@@ -4214,7 +4134,6 @@ func (s *PropertyNameQuery) Validate() error {
 
 // A property name returned from a GetSearchSuggestions call that specifies
 // a value in the PropertyNameQuery field.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PropertyNameSuggestion
 type PropertyNameSuggestion struct {
 	_ struct{} `type:"structure"`
 
@@ -4308,7 +4227,6 @@ func (s PropertyNameSuggestion) String() string {
 //    * 1.080
 //
 //    * 1.200
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PublicWorkforceTaskPrice
 type PublicWorkforceTaskPrice struct {
 	_ struct{} `type:"structure"`
 
@@ -4323,7 +4241,6 @@ func (s PublicWorkforceTaskPrice) String() string {
 }
 
 // Contains input values for a task.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RenderableTask
 type RenderableTask struct {
 	_ struct{} `type:"structure"`
 
@@ -4359,7 +4276,6 @@ func (s *RenderableTask) Validate() error {
 }
 
 // A description of an error that occurred while rendering the template.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RenderingError
 type RenderingError struct {
 	_ struct{} `type:"structure"`
 
@@ -4381,7 +4297,6 @@ func (s RenderingError) String() string {
 
 // Describes the resources, including ML compute instances and ML storage volumes,
 // to use for model training.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ResourceConfig
 type ResourceConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -4456,7 +4371,6 @@ func (s *ResourceConfig) Validate() error {
 
 // Specifies the maximum number of training jobs and parallel training jobs
 // that a hyperparameter tuning job can launch.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ResourceLimits
 type ResourceLimits struct {
 	_ struct{} `type:"structure"`
 
@@ -4503,7 +4417,6 @@ func (s *ResourceLimits) Validate() error {
 }
 
 // Describes the S3 data source.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/S3DataSource
 type S3DataSource struct {
 	_ struct{} `type:"structure"`
 
@@ -4605,7 +4518,6 @@ func (s *S3DataSource) Validate() error {
 //    nested in a list of search expression objects.
 //
 //    * A Boolean operator: And or Or.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchExpression
 type SearchExpression struct {
 	_ struct{} `type:"structure"`
 
@@ -4672,7 +4584,6 @@ func (s *SearchExpression) Validate() error {
 }
 
 // An individual search result record that contains a single resource object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchRecord
 type SearchRecord struct {
 	_ struct{} `type:"structure"`
 
@@ -4692,7 +4603,6 @@ func (s SearchRecord) String() string {
 // of intermediate states. For example, within the starting state, Amazon SageMaker
 // could be starting the training job or launching the ML instances. These transitional
 // states are referred to as the job's secondary status.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SecondaryStatusTransition
 type SecondaryStatusTransition struct {
 	_ struct{} `type:"structure"`
 
@@ -4813,7 +4723,6 @@ func (s SecondaryStatusTransition) String() string {
 // ShardedByS3Key, the data is shuffled across nodes so that the content sent
 // to a particular node on the first epoch might be sent to a different node
 // on the second epoch.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ShuffleConfig
 type ShuffleConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -4845,7 +4754,6 @@ func (s *ShuffleConfig) Validate() error {
 // Specifies an algorithm that was used to create the model package. The algorithm
 // must be either an algorithm resource in your Amazon SageMaker account or
 // an algorithm in AWS Marketplace that you are subscribed to.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SourceAlgorithm
 type SourceAlgorithm struct {
 	_ struct{} `type:"structure"`
 
@@ -4885,7 +4793,6 @@ func (s *SourceAlgorithm) Validate() error {
 }
 
 // A list of algorithms that were used to create a model package.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SourceAlgorithmSpecification
 type SourceAlgorithmSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -4943,7 +4850,6 @@ func (s *SourceAlgorithmSpecification) Validate() error {
 // The Neural Topic Model (NTM) currently does not support saving intermediate
 // model artifacts. When training NTMs, make sure that the maximum runtime is
 // sufficient for the training job to complete.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StoppingCondition
 type StoppingCondition struct {
 	_ struct{} `type:"structure"`
 
@@ -4982,7 +4888,6 @@ func (s *StoppingCondition) Validate() error {
 }
 
 // Describes a work team of a vendor that does the a labelling job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SubscribedWorkteam
 type SubscribedWorkteam struct {
 	_ struct{} `type:"structure"`
 
@@ -5009,7 +4914,6 @@ func (s SubscribedWorkteam) String() string {
 }
 
 // Limits the property names that are included in the response.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SuggestionQuery
 type SuggestionQuery struct {
 	_ struct{} `type:"structure"`
 
@@ -5039,7 +4943,6 @@ func (s *SuggestionQuery) Validate() error {
 }
 
 // Describes a tag.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -5081,7 +4984,6 @@ func (s *Tag) Validate() error {
 }
 
 // Contains information about a training job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingJob
 type TrainingJob struct {
 	_ struct{} `type:"structure"`
 
@@ -5262,7 +5164,6 @@ func (s TrainingJob) String() string {
 }
 
 // Defines the input needed to run a training job using the algorithm.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingJobDefinition
 type TrainingJobDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -5371,7 +5272,6 @@ func (s *TrainingJobDefinition) Validate() error {
 
 // The numbers of training jobs launched by a hyperparameter tuning job, categorized
 // by status.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingJobStatusCounters
 type TrainingJobStatusCounters struct {
 	_ struct{} `type:"structure"`
 
@@ -5402,7 +5302,6 @@ func (s TrainingJobStatusCounters) String() string {
 }
 
 // Provides summary information about a training job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingJobSummary
 type TrainingJobSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -5441,7 +5340,6 @@ func (s TrainingJobSummary) String() string {
 }
 
 // Defines how the algorithm is used for a training job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingSpecification
 type TrainingSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -5543,7 +5441,6 @@ func (s *TrainingSpecification) Validate() error {
 }
 
 // Describes the location of the channel data.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformDataSource
 type TransformDataSource struct {
 	_ struct{} `type:"structure"`
 
@@ -5579,7 +5476,6 @@ func (s *TransformDataSource) Validate() error {
 
 // Describes the input source of a transform job and the way the transform job
 // consumes it.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformInput
 type TransformInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5652,7 +5548,6 @@ func (s *TransformInput) Validate() error {
 
 // Defines the input needed to run a transform job using the inference specification
 // specified in the algorithm.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformJobDefinition
 type TransformJobDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -5737,7 +5632,6 @@ func (s *TransformJobDefinition) Validate() error {
 
 // Provides a summary of a transform job. Multiple TransformJobSummary objects
 // are returned as a list after in response to a ListTransformJobs call.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformJobSummary
 type TransformJobSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -5780,7 +5674,6 @@ func (s TransformJobSummary) String() string {
 }
 
 // Describes the results of a transform job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformOutput
 type TransformOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5857,7 +5750,6 @@ func (s *TransformOutput) Validate() error {
 
 // Describes the resources, including ML instance types and ML instance count,
 // to use for transform job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformResources
 type TransformResources struct {
 	_ struct{} `type:"structure"`
 
@@ -5911,7 +5803,6 @@ func (s *TransformResources) Validate() error {
 }
 
 // Describes the S3 data source.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformS3DataSource
 type TransformS3DataSource struct {
 	_ struct{} `type:"structure"`
 
@@ -5971,7 +5862,6 @@ func (s *TransformS3DataSource) Validate() error {
 }
 
 // Represents an amount of money in United States dollars/
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/USD
 type USD struct {
 	_ struct{} `type:"structure"`
 
@@ -5991,7 +5881,6 @@ func (s USD) String() string {
 }
 
 // Provided configuration information for the worker UI for a labeling job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UiConfig
 type UiConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -6023,7 +5912,6 @@ func (s *UiConfig) Validate() error {
 }
 
 // The Liquid template for the worker user interface.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UiTemplate
 type UiTemplate struct {
 	_ struct{} `type:"structure"`
 
@@ -6060,7 +5948,6 @@ func (s *UiTemplate) Validate() error {
 // the VPC. For more information, see Protect Endpoints by Using an Amazon Virtual
 // Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html)
 // and Protect Training Jobs by Using an Amazon Virtual Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/VpcConfig
 type VpcConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -6112,7 +5999,6 @@ func (s *VpcConfig) Validate() error {
 }
 
 // Provides details about a labeling work team.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Workteam
 type Workteam struct {
 	_ struct{} `type:"structure"`
 

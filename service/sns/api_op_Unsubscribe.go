@@ -12,7 +12,6 @@ import (
 )
 
 // Input for Unsubscribe action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/UnsubscribeInput
 type UnsubscribeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -41,7 +40,6 @@ func (s *UnsubscribeInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/UnsubscribeOutput
 type UnsubscribeOutput struct {
 	_ struct{} `type:"structure"`
 }

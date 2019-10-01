@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for DescribeScheduledInstances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeScheduledInstancesRequest
 type DescribeScheduledInstancesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +51,6 @@ func (s DescribeScheduledInstancesInput) String() string {
 }
 
 // Contains the output of DescribeScheduledInstances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeScheduledInstancesResult
 type DescribeScheduledInstancesOutput struct {
 	_ struct{} `type:"structure"`
 

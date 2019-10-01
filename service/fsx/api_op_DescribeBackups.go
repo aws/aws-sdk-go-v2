@@ -10,7 +10,6 @@ import (
 )
 
 // The request object for DescribeBackups operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeBackupsRequest
 type DescribeBackupsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s *DescribeBackupsInput) Validate() error {
 }
 
 // Response object for DescribeBackups operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeBackupsResponse
 type DescribeBackupsOutput struct {
 	_ struct{} `type:"structure"`
 

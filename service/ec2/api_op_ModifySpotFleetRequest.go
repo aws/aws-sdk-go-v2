@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for ModifySpotFleetRequest.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySpotFleetRequestRequest
 type ModifySpotFleetRequestInput struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +50,6 @@ func (s *ModifySpotFleetRequestInput) Validate() error {
 }
 
 // Contains the output of ModifySpotFleetRequest.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySpotFleetRequestResponse
 type ModifySpotFleetRequestOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -82,7 +80,7 @@ const opModifySpotFleetRequest = "ModifySpotFleetRequest"
 // price. If the allocation strategy is diversified, the Spot Fleet distributes
 // the instances across the Spot Instance pools. If the allocation strategy
 // is capacityOptimized, Spot Fleet launches instances from Spot Instance pools
-// that are optimally chosen based on the available Spot Instance capacity.
+// with optimal capacity for the number of instances that are launching.
 //
 // To scale down your Spot Fleet, decrease its target capacity. First, the Spot
 // Fleet cancels any open requests that exceed the new target capacity. You

@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for CreateVpnConnection.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnConnectionRequest
 type CreateVpnConnectionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -66,7 +65,6 @@ func (s *CreateVpnConnectionInput) Validate() error {
 }
 
 // Contains the output of CreateVpnConnection.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnConnectionResult
 type CreateVpnConnectionOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -85,7 +83,7 @@ const opCreateVpnConnection = "CreateVpnConnection"
 // Amazon Elastic Compute Cloud.
 //
 // Creates a VPN connection between an existing virtual private gateway and
-// a VPN customer gateway. The supported connection types is ipsec.1.
+// a VPN customer gateway. The supported connection type is ipsec.1.
 //
 // The response includes information that you need to give to your network administrator
 // to configure your customer gateway.

@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateMLTransformRequest
 type CreateMLTransformInput struct {
 	_ struct{} `type:"structure"`
 
@@ -128,7 +127,6 @@ func (s *CreateMLTransformInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateMLTransformResponse
 type CreateMLTransformOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTimeMessage
 type RestoreDBInstanceToPointInTimeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -46,9 +45,10 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	// This parameter is not used for the MySQL or MariaDB engines.
 	DBName *string `type:"string"`
 
-	// The name of the DB parameter group to associate with this DB instance. If
-	// this argument is omitted, the default DBParameterGroup for the specified
-	// engine is used.
+	// The name of the DB parameter group to associate with this DB instance.
+	//
+	// If you do not specify a value for DBParameterGroupName, then the default
+	// DBParameterGroup for the specified DB engine is used.
 	//
 	// Constraints:
 	//
@@ -268,7 +268,6 @@ func (s *RestoreDBInstanceToPointInTimeInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTimeResult
 type RestoreDBInstanceToPointInTimeOutput struct {
 	_ struct{} `type:"structure"`
 

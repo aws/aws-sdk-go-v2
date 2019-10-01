@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetConnectorDefinitionVersionRequest
 type GetConnectorDefinitionVersionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -72,7 +71,6 @@ func (s GetConnectorDefinitionVersionInput) MarshalFields(e protocol.FieldEncode
 }
 
 // Information about a connector definition version.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetConnectorDefinitionVersionResponse
 type GetConnectorDefinitionVersionOutput struct {
 	_ struct{} `type:"structure"`
 

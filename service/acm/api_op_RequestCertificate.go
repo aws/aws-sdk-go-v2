@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestCertificateRequest
 type RequestCertificateInput struct {
 	_ struct{} `type:"structure"`
 
@@ -128,7 +127,6 @@ func (s *RequestCertificateInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestCertificateResponse
 type RequestCertificateOutput struct {
 	_ struct{} `type:"structure"`
 

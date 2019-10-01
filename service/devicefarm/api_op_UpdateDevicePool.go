@@ -10,7 +10,6 @@ import (
 )
 
 // Represents a request to the update device pool operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateDevicePoolRequest
 type UpdateDevicePoolInput struct {
 	_ struct{} `type:"structure"`
 
@@ -78,7 +77,6 @@ func (s *UpdateDevicePoolInput) Validate() error {
 }
 
 // Represents the result of an update device pool request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateDevicePoolResult
 type UpdateDevicePoolOutput struct {
 	_ struct{} `type:"structure"`
 

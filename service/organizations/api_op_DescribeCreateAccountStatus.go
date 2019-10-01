@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeCreateAccountStatusRequest
 type DescribeCreateAccountStatusInput struct {
 	_ struct{} `type:"structure"`
 
@@ -17,7 +16,7 @@ type DescribeCreateAccountStatusInput struct {
 	// the ID from the response to an earlier CreateAccount request, or from the
 	// ListCreateAccountStatus operation.
 	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) for an create account
+	// The regex pattern (http://wikipedia.org/wiki/regex) for a create account
 	// request ID string requires "car-" followed by from 8 to 32 lower-case letters
 	// or digits.
 	//
@@ -44,7 +43,6 @@ func (s *DescribeCreateAccountStatusInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeCreateAccountStatusResponse
 type DescribeCreateAccountStatusOutput struct {
 	_ struct{} `type:"structure"`
 

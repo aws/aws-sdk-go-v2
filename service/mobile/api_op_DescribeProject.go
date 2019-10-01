@@ -11,7 +11,6 @@ import (
 )
 
 // Request structure used to request details about a project.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/DescribeProjectRequest
 type DescribeProjectInput struct {
 	_ struct{} `type:"structure"`
 
@@ -65,7 +64,6 @@ func (s DescribeProjectInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Result structure used for requests of project details.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/DescribeProjectResult
 type DescribeProjectOutput struct {
 	_ struct{} `type:"structure"`
 

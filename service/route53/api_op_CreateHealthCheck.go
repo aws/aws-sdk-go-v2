@@ -11,7 +11,6 @@ import (
 )
 
 // A complex type that contains the health check request information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateHealthCheckRequest
 type CreateHealthCheckInput struct {
 	_ struct{} `locationName:"CreateHealthCheckRequest" type:"structure" xmlURI:"https://route53.amazonaws.com/doc/2013-04-01/"`
 
@@ -98,7 +97,6 @@ func (s CreateHealthCheckInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type containing the response information for the new health check.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateHealthCheckResponse
 type CreateHealthCheckOutput struct {
 	_ struct{} `type:"structure"`
 

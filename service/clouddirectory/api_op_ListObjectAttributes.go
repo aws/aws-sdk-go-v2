@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectAttributesRequest
 type ListObjectAttributesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -115,7 +114,6 @@ func (s ListObjectAttributesInput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectAttributesResponse
 type ListObjectAttributesOutput struct {
 	_ struct{} `type:"structure"`
 

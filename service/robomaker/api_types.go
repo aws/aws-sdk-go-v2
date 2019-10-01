@@ -3,6 +3,7 @@
 package robomaker
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -14,7 +15,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Information about a data source.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DataSource
 type DataSource struct {
 	_ struct{} `type:"structure"`
 
@@ -63,7 +63,6 @@ func (s DataSource) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a data source.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DataSourceConfig
 type DataSourceConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -149,7 +148,6 @@ func (s DataSourceConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a deployment application configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DeploymentApplicationConfig
 type DeploymentApplicationConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -231,7 +229,6 @@ func (s DeploymentApplicationConfig) MarshalFields(e protocol.FieldEncoder) erro
 }
 
 // Information about a deployment configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DeploymentConfig
 type DeploymentConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -292,7 +289,6 @@ func (s DeploymentConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a deployment job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DeploymentJob
 type DeploymentJob struct {
 	_ struct{} `type:"structure"`
 
@@ -387,7 +383,6 @@ func (s DeploymentJob) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Configuration information for a deployment launch.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DeploymentLaunchConfig
 type DeploymentLaunchConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -491,7 +486,6 @@ func (s DeploymentLaunchConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a filter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/Filter
 type Filter struct {
 	_ struct{} `type:"structure"`
 
@@ -547,7 +541,6 @@ func (s Filter) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a fleet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/Fleet
 type Fleet struct {
 	_ struct{} `type:"structure"`
 
@@ -619,7 +612,6 @@ func (s Fleet) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a launch configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/LaunchConfig
 type LaunchConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -635,6 +627,9 @@ type LaunchConfig struct {
 	//
 	// PackageName is a required field
 	PackageName *string `locationName:"packageName" min:"1" type:"string" required:"true"`
+
+	// The port forwarding configuration.
+	PortForwardingConfig *PortForwardingConfig `locationName:"portForwardingConfig" type:"structure"`
 }
 
 // String returns the string representation
@@ -658,6 +653,11 @@ func (s *LaunchConfig) Validate() error {
 	}
 	if s.PackageName != nil && len(*s.PackageName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PackageName", 1))
+	}
+	if s.PortForwardingConfig != nil {
+		if err := s.PortForwardingConfig.Validate(); err != nil {
+			invalidParams.AddNested("PortForwardingConfig", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -692,11 +692,16 @@ func (s LaunchConfig) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "packageName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.PortForwardingConfig != nil {
+		v := s.PortForwardingConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "portForwardingConfig", v, metadata)
+	}
 	return nil
 }
 
 // The logging configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/LoggingConfig
 type LoggingConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -736,8 +741,49 @@ func (s LoggingConfig) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Describes a network interface.
+type NetworkInterface struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the network interface.
+	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
+
+	// The IPv4 address of the network interface within the subnet.
+	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
+
+	// The IPv4 public address of the network interface.
+	PublicIpAddress *string `locationName:"publicIpAddress" type:"string"`
+}
+
+// String returns the string representation
+func (s NetworkInterface) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s NetworkInterface) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NetworkInterfaceId != nil {
+		v := *s.NetworkInterfaceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "networkInterfaceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PrivateIpAddress != nil {
+		v := *s.PrivateIpAddress
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "privateIpAddress", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PublicIpAddress != nil {
+		v := *s.PublicIpAddress
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "publicIpAddress", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The output location.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/OutputLocation
 type OutputLocation struct {
 	_ struct{} `type:"structure"`
 
@@ -786,8 +832,125 @@ func (s OutputLocation) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Configuration information for port forwarding.
+type PortForwardingConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The port mappings for the configuration.
+	PortMappings []PortMapping `locationName:"portMappings" type:"list"`
+}
+
+// String returns the string representation
+func (s PortForwardingConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PortForwardingConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PortForwardingConfig"}
+	if s.PortMappings != nil {
+		for i, v := range s.PortMappings {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PortMappings", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PortForwardingConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.PortMappings != nil {
+		v := s.PortMappings
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "portMappings", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// An object representing a port mapping.
+type PortMapping struct {
+	_ struct{} `type:"structure"`
+
+	// The port number on the application.
+	//
+	// ApplicationPort is a required field
+	ApplicationPort *int64 `locationName:"applicationPort" min:"1024" type:"integer" required:"true"`
+
+	// A Boolean indicating whether to enable this port mapping on public IP.
+	EnableOnPublicIp *bool `locationName:"enableOnPublicIp" type:"boolean"`
+
+	// The port number on the simulation job instance to use as a remote connection
+	// point.
+	//
+	// JobPort is a required field
+	JobPort *int64 `locationName:"jobPort" min:"1" type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s PortMapping) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PortMapping) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PortMapping"}
+
+	if s.ApplicationPort == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationPort"))
+	}
+	if s.ApplicationPort != nil && *s.ApplicationPort < 1024 {
+		invalidParams.Add(aws.NewErrParamMinValue("ApplicationPort", 1024))
+	}
+
+	if s.JobPort == nil {
+		invalidParams.Add(aws.NewErrParamRequired("JobPort"))
+	}
+	if s.JobPort != nil && *s.JobPort < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("JobPort", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PortMapping) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ApplicationPort != nil {
+		v := *s.ApplicationPort
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "applicationPort", protocol.Int64Value(v), metadata)
+	}
+	if s.EnableOnPublicIp != nil {
+		v := *s.EnableOnPublicIp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "enableOnPublicIp", protocol.BoolValue(v), metadata)
+	}
+	if s.JobPort != nil {
+		v := *s.JobPort
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobPort", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // Information about the progress of a deployment job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ProgressDetail
 type ProgressDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -866,7 +1029,6 @@ func (s ProgressDetail) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a rendering engine.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/RenderingEngine
 type RenderingEngine struct {
 	_ struct{} `type:"structure"`
 
@@ -900,7 +1062,6 @@ func (s RenderingEngine) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a robot.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/Robot
 type Robot struct {
 	_ struct{} `type:"structure"`
 
@@ -999,7 +1160,6 @@ func (s Robot) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Application configuration information for a robot.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/RobotApplicationConfig
 type RobotApplicationConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1075,7 +1235,6 @@ func (s RobotApplicationConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Summary information for a robot application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/RobotApplicationSummary
 type RobotApplicationSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1138,7 +1297,6 @@ func (s RobotApplicationSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a robot deployment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/RobotDeployment
 type RobotDeployment struct {
 	_ struct{} `type:"structure"`
 
@@ -1219,7 +1377,6 @@ func (s RobotDeployment) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a robot software suite.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/RobotSoftwareSuite
 type RobotSoftwareSuite struct {
 	_ struct{} `type:"structure"`
 
@@ -1253,7 +1410,6 @@ func (s RobotSoftwareSuite) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about S3 keys.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/S3KeyOutput
 type S3KeyOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -1287,7 +1443,6 @@ func (s S3KeyOutput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a simulation application configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SimulationApplicationConfig
 type SimulationApplicationConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1363,7 +1518,6 @@ func (s SimulationApplicationConfig) MarshalFields(e protocol.FieldEncoder) erro
 }
 
 // Summary information for a simulation application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SimulationApplicationSummary
 type SimulationApplicationSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1435,7 +1589,6 @@ func (s SimulationApplicationSummary) MarshalFields(e protocol.FieldEncoder) err
 }
 
 // Information about a simulation job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SimulationJob
 type SimulationJob struct {
 	_ struct{} `type:"structure"`
 
@@ -1487,6 +1640,9 @@ type SimulationJob struct {
 
 	// The name of the simulation job.
 	Name *string `locationName:"name" min:"1" type:"string"`
+
+	// Describes a network interface.
+	NetworkInterface *NetworkInterface `locationName:"networkInterface" type:"structure"`
 
 	// Location for output files generated by the simulation job.
 	OutputLocation *OutputLocation `locationName:"outputLocation" type:"structure"`
@@ -1598,6 +1754,12 @@ func (s SimulationJob) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.NetworkInterface != nil {
+		v := s.NetworkInterface
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "networkInterface", v, metadata)
+	}
 	if s.OutputLocation != nil {
 		v := s.OutputLocation
 
@@ -1662,7 +1824,6 @@ func (s SimulationJob) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Summary information for a simulation job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SimulationJobSummary
 type SimulationJobSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1761,7 +1922,6 @@ func (s SimulationJobSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a simulation software suite.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SimulationSoftwareSuite
 type SimulationSoftwareSuite struct {
 	_ struct{} `type:"structure"`
 
@@ -1795,7 +1955,6 @@ func (s SimulationSoftwareSuite) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a source.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/Source
 type Source struct {
 	_ struct{} `type:"structure"`
 
@@ -1847,7 +2006,6 @@ func (s Source) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a source configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SourceConfig
 type SourceConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1909,7 +2067,6 @@ func (s SourceConfig) MarshalFields(e protocol.FieldEncoder) error {
 // identifying the list of security group IDs and subnet IDs. These must belong
 // to the same VPC. You must provide at least one security group and two subnet
 // IDs.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/VPCConfig
 type VPCConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1986,7 +2143,6 @@ func (s VPCConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // VPC configuration associated with your simulation job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/VPCConfigResponse
 type VPCConfigResponse struct {
 	_ struct{} `type:"structure"`
 

@@ -12,7 +12,6 @@ import (
 // Represents a request to delete a configuration set. Configuration sets enable
 // you to publish email sending events. For information about using configuration
 // sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteConfigurationSetRequest
 type DeleteConfigurationSetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -42,7 +41,6 @@ func (s *DeleteConfigurationSetInput) Validate() error {
 }
 
 // An empty element returned on a successful request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteConfigurationSetResponse
 type DeleteConfigurationSetOutput struct {
 	_ struct{} `type:"structure"`
 }

@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for ListPipelines.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ListPipelinesInput
 type ListPipelinesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -27,7 +26,6 @@ func (s ListPipelinesInput) String() string {
 }
 
 // Contains the output of ListPipelines.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ListPipelinesOutput
 type ListPipelinesOutput struct {
 	_ struct{} `type:"structure"`
 

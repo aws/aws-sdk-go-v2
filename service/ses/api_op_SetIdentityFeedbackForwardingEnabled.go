@@ -12,7 +12,6 @@ import (
 // Represents a request to enable or disable whether Amazon SES forwards you
 // bounce and complaint notifications through email. For information about email
 // feedback forwarding, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-email.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityFeedbackForwardingEnabledRequest
 type SetIdentityFeedbackForwardingEnabledInput struct {
 	_ struct{} `type:"structure"`
 
@@ -57,7 +56,6 @@ func (s *SetIdentityFeedbackForwardingEnabledInput) Validate() error {
 }
 
 // An empty element returned on a successful request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityFeedbackForwardingEnabledResponse
 type SetIdentityFeedbackForwardingEnabledOutput struct {
 	_ struct{} `type:"structure"`
 }

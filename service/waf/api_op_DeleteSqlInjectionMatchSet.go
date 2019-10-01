@@ -10,7 +10,6 @@ import (
 )
 
 // A request to delete a SqlInjectionMatchSet from AWS WAF.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteSqlInjectionMatchSetRequest
 type DeleteSqlInjectionMatchSetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s *DeleteSqlInjectionMatchSetInput) Validate() error {
 }
 
 // The response to a request to delete a SqlInjectionMatchSet from AWS WAF.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteSqlInjectionMatchSetResponse
 type DeleteSqlInjectionMatchSetOutput struct {
 	_ struct{} `type:"structure"`
 

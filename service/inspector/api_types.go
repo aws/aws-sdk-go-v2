@@ -16,7 +16,6 @@ var _ = awsutil.Prettify
 // Used in the exception error that is thrown if you start an assessment run
 // for an assessment target that includes an EC2 instance that is already participating
 // in another started assessment run.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AgentAlreadyRunningAssessment
 type AgentAlreadyRunningAssessment struct {
 	_ struct{} `type:"structure"`
 
@@ -39,7 +38,6 @@ func (s AgentAlreadyRunningAssessment) String() string {
 
 // Contains information about an Amazon Inspector agent. This data type is used
 // as a request parameter in the ListAssessmentRunAgents action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AgentFilter
 type AgentFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -79,7 +77,6 @@ func (s *AgentFilter) Validate() error {
 }
 
 // Used as a response element in the PreviewAgents action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AgentPreview
 type AgentPreview struct {
 	_ struct{} `type:"structure"`
 
@@ -122,7 +119,6 @@ func (s AgentPreview) String() string {
 // of the assessment run .
 //
 // Used as the response element in the DescribeAssessmentRuns action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssessmentRun
 type AssessmentRun struct {
 	_ struct{} `type:"structure"`
 
@@ -209,7 +205,6 @@ func (s AssessmentRun) String() string {
 
 // Contains information about an Amazon Inspector agent. This data type is used
 // as a response element in the ListAssessmentRunAgents action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssessmentRunAgent
 type AssessmentRunAgent struct {
 	_ struct{} `type:"structure"`
 
@@ -252,7 +247,6 @@ func (s AssessmentRunAgent) String() string {
 }
 
 // Used as the request parameter in the ListAssessmentRuns action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssessmentRunFilter
 type AssessmentRunFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -318,7 +312,6 @@ func (s *AssessmentRunFilter) Validate() error {
 }
 
 // Used as one of the elements of the AssessmentRun data type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssessmentRunNotification
 type AssessmentRunNotification struct {
 	_ struct{} `type:"structure"`
 
@@ -353,7 +346,6 @@ func (s AssessmentRunNotification) String() string {
 }
 
 // Used as one of the elements of the AssessmentRun data type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssessmentRunStateChange
 type AssessmentRunStateChange struct {
 	_ struct{} `type:"structure"`
 
@@ -375,7 +367,6 @@ func (s AssessmentRunStateChange) String() string {
 
 // Contains information about an Amazon Inspector application. This data type
 // is used as the response element in the DescribeAssessmentTargets action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssessmentTarget
 type AssessmentTarget struct {
 	_ struct{} `type:"structure"`
 
@@ -410,7 +401,6 @@ func (s AssessmentTarget) String() string {
 }
 
 // Used as the request parameter in the ListAssessmentTargets action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssessmentTargetFilter
 type AssessmentTargetFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -441,7 +431,6 @@ func (s *AssessmentTargetFilter) Validate() error {
 // Contains information about an Amazon Inspector assessment template. This
 // data type is used as the response element in the DescribeAssessmentTemplates
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssessmentTemplate
 type AssessmentTemplate struct {
 	_ struct{} `type:"structure"`
 
@@ -501,7 +490,6 @@ func (s AssessmentTemplate) String() string {
 }
 
 // Used as the request parameter in the ListAssessmentTemplates action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssessmentTemplateFilter
 type AssessmentTemplateFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -545,7 +533,6 @@ func (s *AssessmentTemplateFilter) Validate() error {
 }
 
 // A collection of attributes of the host from which the finding is generated.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssetAttributes
 type AssetAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -586,7 +573,6 @@ func (s AssetAttributes) String() string {
 
 // This data type is used as a request parameter in the AddAttributesToFindings
 // and CreateAssessmentTemplate actions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/Attribute
 type Attribute struct {
 	_ struct{} `type:"structure"`
 
@@ -625,7 +611,6 @@ func (s *Attribute) Validate() error {
 }
 
 // This data type is used in the AssessmentTemplateFilter data type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DurationRange
 type DurationRange struct {
 	_ struct{} `type:"structure"`
 
@@ -659,7 +644,6 @@ func (s *DurationRange) Validate() error {
 }
 
 // This data type is used in the Subscription data type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/EventSubscription
 type EventSubscription struct {
 	_ struct{} `type:"structure"`
 
@@ -681,7 +665,6 @@ func (s EventSubscription) String() string {
 }
 
 // Contains information about what was excluded from an assessment run.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/Exclusion
 type Exclusion struct {
 	_ struct{} `type:"structure"`
 
@@ -721,7 +704,6 @@ func (s Exclusion) String() string {
 
 // Contains information about what is excluded from an assessment run given
 // the current state of the assessment template.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ExclusionPreview
 type ExclusionPreview struct {
 	_ struct{} `type:"structure"`
 
@@ -755,7 +737,6 @@ func (s ExclusionPreview) String() string {
 }
 
 // Includes details about the failed items.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/FailedItemDetails
 type FailedItemDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -778,7 +759,6 @@ func (s FailedItemDetails) String() string {
 
 // Contains information about an Amazon Inspector finding. This data type is
 // used as the response element in the DescribeFindings action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/Finding
 type Finding struct {
 	_ struct{} `type:"structure"`
 
@@ -853,7 +833,6 @@ func (s Finding) String() string {
 }
 
 // This data type is used as a request parameter in the ListFindings action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/FindingFilter
 type FindingFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -926,7 +905,6 @@ func (s *FindingFilter) Validate() error {
 }
 
 // This data type is used in the Finding data type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/InspectorServiceAttributes
 type InspectorServiceAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -950,7 +928,6 @@ func (s InspectorServiceAttributes) String() string {
 // Contains information about the network interfaces interacting with an EC2
 // instance. This data type is used as one of the elements of the AssetAttributes
 // data type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/NetworkInterface
 type NetworkInterface struct {
 	_ struct{} `type:"structure"`
 
@@ -995,7 +972,6 @@ func (s NetworkInterface) String() string {
 // Contains information about a private IP address associated with a network
 // interface. This data type is used as a response element in the DescribeFindings
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/PrivateIp
 type PrivateIp struct {
 	_ struct{} `type:"structure"`
 
@@ -1015,7 +991,6 @@ func (s PrivateIp) String() string {
 // set of tags that, when queried, identify the AWS resources that make up the
 // assessment target. This data type is used as the response element in the
 // DescribeResourceGroups action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ResourceGroup
 type ResourceGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -1042,7 +1017,6 @@ func (s ResourceGroup) String() string {
 }
 
 // This data type is used as one of the elements of the ResourceGroup data type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ResourceGroupTag
 type ResourceGroupTag struct {
 	_ struct{} `type:"structure"`
 
@@ -1082,7 +1056,6 @@ func (s *ResourceGroupTag) Validate() error {
 
 // Contains information about an Amazon Inspector rules package. This data type
 // is used as the response element in the DescribeRulesPackages action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/RulesPackage
 type RulesPackage struct {
 	_ struct{} `type:"structure"`
 
@@ -1116,7 +1089,6 @@ func (s RulesPackage) String() string {
 }
 
 // This data type contains key-value pairs that identify various Amazon resources.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/Scope
 type Scope struct {
 	_ struct{} `type:"structure"`
 
@@ -1135,7 +1107,6 @@ func (s Scope) String() string {
 // Contains information about a security group associated with a network interface.
 // This data type is used as one of the elements of the NetworkInterface data
 // type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/SecurityGroup
 type SecurityGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -1153,7 +1124,6 @@ func (s SecurityGroup) String() string {
 
 // This data type is used as a response element in the ListEventSubscriptions
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/Subscription
 type Subscription struct {
 	_ struct{} `type:"structure"`
 
@@ -1183,7 +1153,6 @@ func (s Subscription) String() string {
 // A key and value pair. This data type is used as a request parameter in the
 // SetTagsForResource action and a response element in the ListTagsForResource
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -1224,7 +1193,6 @@ func (s *Tag) Validate() error {
 // The metadata about the Amazon Inspector application data metrics collected
 // by the agent. This data type is used as the response element in the GetTelemetryMetadata
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/TelemetryMetadata
 type TelemetryMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -1248,7 +1216,6 @@ func (s TelemetryMetadata) String() string {
 }
 
 // This data type is used in the AssessmentRunFilter data type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/TimestampRange
 type TimestampRange struct {
 	_ struct{} `type:"structure"`
 

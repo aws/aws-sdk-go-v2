@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/GetRandomPasswordRequest
 type GetRandomPasswordInput struct {
 	_ struct{} `type:"structure"`
 
@@ -76,12 +75,11 @@ func (s *GetRandomPasswordInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/GetRandomPasswordResponse
 type GetRandomPasswordOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A string with the generated password.
-	RandomPassword *string `type:"string"`
+	RandomPassword *string `type:"string" sensitive:"true"`
 }
 
 // String returns the string representation

@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetDesiredCapacityType
 type SetDesiredCapacityInput struct {
 	_ struct{} `type:"structure"`
 
@@ -58,7 +57,6 @@ func (s *SetDesiredCapacityInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetDesiredCapacityOutput
 type SetDesiredCapacityOutput struct {
 	_ struct{} `type:"structure"`
 }

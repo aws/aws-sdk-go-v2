@@ -15,7 +15,6 @@ var _ = awsutil.Prettify
 
 // Information about how AWS Ground Station should configure an antenna for
 // downlink during a contact.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/AntennaDownlinkConfig
 type AntennaDownlinkConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -62,7 +61,6 @@ func (s AntennaDownlinkConfig) MarshalFields(e protocol.FieldEncoder) error {
 
 // Information about how AWS Ground Station should conﬁgure an antenna for
 // downlink demod decode during a contact.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/AntennaDownlinkDemodDecodeConfig
 type AntennaDownlinkDemodDecodeConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -148,7 +146,6 @@ func (s AntennaDownlinkDemodDecodeConfig) MarshalFields(e protocol.FieldEncoder)
 }
 
 // Information about the uplink Config of an antenna.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/AntennaUplinkConfig
 type AntennaUplinkConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -214,7 +211,6 @@ func (s AntennaUplinkConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An item in a list of Config objects.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ConfigListItem
 type ConfigListItem struct {
 	_ struct{} `type:"structure"`
 
@@ -264,7 +260,6 @@ func (s ConfigListItem) MarshalFields(e protocol.FieldEncoder) error {
 // Object containing the parameters for a Config.
 //
 // See the subtype definitions for what each type of Config contains.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ConfigTypeData
 type ConfigTypeData struct {
 	_ struct{} `type:"structure"`
 
@@ -380,7 +375,6 @@ func (s ConfigTypeData) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Data describing a contact.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ContactData
 type ContactData struct {
 	_ struct{} `type:"structure"`
 
@@ -503,7 +497,6 @@ func (s ContactData) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a dataflow endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/DataflowEndpoint
 type DataflowEndpoint struct {
 	_ struct{} `type:"structure"`
 
@@ -562,7 +555,6 @@ func (s DataflowEndpoint) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about the dataflow endpoint Config.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/DataflowEndpointConfig
 type DataflowEndpointConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -601,7 +593,6 @@ func (s DataflowEndpointConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Item in a list of DataflowEndpoint groups.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/DataflowEndpointListItem
 type DataflowEndpointListItem struct {
 	_ struct{} `type:"structure"`
 
@@ -633,7 +624,6 @@ func (s DataflowEndpointListItem) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about the decode Config.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/DecodeConfig
 type DecodeConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -675,7 +665,6 @@ func (s DecodeConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about the demodulation Config.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/DemodulationConfig
 type DemodulationConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -717,7 +706,6 @@ func (s DemodulationConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Object that represents EIRP.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/Eirp
 type Eirp struct {
 	_ struct{} `type:"structure"`
 
@@ -768,7 +756,6 @@ func (s Eirp) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Elevation angle of the satellite in the sky during a contact.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/Elevation
 type Elevation struct {
 	_ struct{} `type:"structure"`
 
@@ -802,7 +789,6 @@ func (s Elevation) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about the endpoint details.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/EndpointDetails
 type EndpointDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -856,7 +842,6 @@ func (s EndpointDetails) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Object that describes the frequency.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/Frequency
 type Frequency struct {
 	_ struct{} `type:"structure"`
 
@@ -907,7 +892,6 @@ func (s Frequency) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Object that describes the frequency bandwidth.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/FrequencyBandwidth
 type FrequencyBandwidth struct {
 	_ struct{} `type:"structure"`
 
@@ -958,7 +942,6 @@ func (s FrequencyBandwidth) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about the ground station data.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/GroundStationData
 type GroundStationData struct {
 	_ struct{} `type:"structure"`
 
@@ -998,7 +981,6 @@ func (s GroundStationData) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Item in a list of mission profiles.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/MissionProfileListItem
 type MissionProfileListItem struct {
 	_ struct{} `type:"structure"`
 
@@ -1046,7 +1028,6 @@ func (s MissionProfileListItem) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Item in a list of satellites.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/SatelliteListItem
 type SatelliteListItem struct {
 	_ struct{} `type:"structure"`
 
@@ -1086,7 +1067,6 @@ func (s SatelliteListItem) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about endpoints.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/SecurityDetails
 type SecurityDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -1163,7 +1143,6 @@ func (s SecurityDetails) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about the socket address.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/SocketAddress
 type SocketAddress struct {
 	_ struct{} `type:"structure"`
 
@@ -1215,7 +1194,6 @@ func (s SocketAddress) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Object that describes a spectral Config.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/SpectrumConfig
 type SpectrumConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1290,7 +1268,6 @@ func (s SpectrumConfig) MarshalFields(e protocol.FieldEncoder) error {
 
 // Object that determines whether tracking should be used during a contact executed
 // with this Config in the mission profile.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/TrackingConfig
 type TrackingConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1331,7 +1308,6 @@ func (s TrackingConfig) MarshalFields(e protocol.FieldEncoder) error {
 //
 // Parameters from the AntennaUplinkConfig, corresponding to the specified AntennaUplinkConfigArn,
 // are used when this UplinkEchoConfig is used in a contact.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/UplinkEchoConfig
 type UplinkEchoConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1383,7 +1359,6 @@ func (s UplinkEchoConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about the uplink spectral Config.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/UplinkSpectrumConfig
 type UplinkSpectrumConfig struct {
 	_ struct{} `type:"structure"`
 

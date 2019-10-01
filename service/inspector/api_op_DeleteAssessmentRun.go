@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DeleteAssessmentRunRequest
 type DeleteAssessmentRunInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *DeleteAssessmentRunInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DeleteAssessmentRunOutput
 type DeleteAssessmentRunOutput struct {
 	_ struct{} `type:"structure"`
 }

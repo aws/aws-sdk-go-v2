@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RemoveListenerCertificatesInput
 type RemoveListenerCertificatesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -48,7 +47,6 @@ func (s *RemoveListenerCertificatesInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RemoveListenerCertificatesOutput
 type RemoveListenerCertificatesOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -64,7 +62,7 @@ const opRemoveListenerCertificates = "RemoveListenerCertificates"
 // Elastic Load Balancing.
 //
 // Removes the specified certificate from the certificate list for the specified
-// HTTPS listener.
+// HTTPS or TLS listener.
 //
 // You can't remove the default certificate for a listener. To replace the default
 // certificate, call ModifyListener.

@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Describes a custom algorithm.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/Algorithm
 type Algorithm struct {
 	_ struct{} `type:"structure"`
 
@@ -58,7 +57,6 @@ func (s Algorithm) String() string {
 }
 
 // Describes an algorithm image.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/AlgorithmImage
 type AlgorithmImage struct {
 	_ struct{} `type:"structure"`
 
@@ -79,7 +77,6 @@ func (s AlgorithmImage) String() string {
 // When the solution performs AutoML (performAutoML is true in CreateSolution),
 // Amazon Personalize determines which recipe, from the specified list, optimizes
 // the given metric. Amazon Personalize then uses that recipe for the solution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/AutoMLConfig
 type AutoMLConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -97,7 +94,6 @@ func (s AutoMLConfig) String() string {
 
 // When the solution performs AutoML (performAutoML is true in CreateSolution),
 // specifies the recipe that best optimized the specified metric.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/AutoMLResult
 type AutoMLResult struct {
 	_ struct{} `type:"structure"`
 
@@ -112,7 +108,6 @@ func (s AutoMLResult) String() string {
 
 // Describes a deployed solution version, otherwise known as a campaign. For
 // more information on campaigns, see CreateCampaign.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/Campaign
 type Campaign struct {
 	_ struct{} `type:"structure"`
 
@@ -159,7 +154,6 @@ func (s Campaign) String() string {
 
 // Provides a summary of the properties of a campaign. For a complete listing,
 // call the DescribeCampaign API.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CampaignSummary
 type CampaignSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -195,7 +189,6 @@ func (s CampaignSummary) String() string {
 
 // Provides a summary of the properties of a campaign update. For a complete
 // listing, call the DescribeCampaign API.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CampaignUpdateSummary
 type CampaignUpdateSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -231,7 +224,6 @@ func (s CampaignUpdateSummary) String() string {
 }
 
 // Provides the name and range of a categorical hyperparameter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CategoricalHyperParameterRange
 type CategoricalHyperParameterRange struct {
 	_ struct{} `type:"structure"`
 
@@ -248,7 +240,6 @@ func (s CategoricalHyperParameterRange) String() string {
 }
 
 // Provides the name and range of a continuous hyperparameter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ContinuousHyperParameterRange
 type ContinuousHyperParameterRange struct {
 	_ struct{} `type:"structure"`
 
@@ -284,7 +275,6 @@ func (s *ContinuousHyperParameterRange) Validate() error {
 }
 
 // Describes the data source that contains the data to upload to a dataset.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DataSource
 type DataSource struct {
 	_ struct{} `type:"structure"`
 
@@ -301,7 +291,6 @@ func (s DataSource) String() string {
 }
 
 // Provides metadata for a dataset.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/Dataset
 type Dataset struct {
 	_ struct{} `type:"structure"`
 
@@ -355,7 +344,6 @@ func (s Dataset) String() string {
 //
 // You can specify an AWS Key Management Service (KMS) key to encrypt the datasets
 // in the group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DatasetGroup
 type DatasetGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -397,7 +385,6 @@ func (s DatasetGroup) String() string {
 
 // Provides a summary of the properties of a dataset group. For a complete listing,
 // call the DescribeDatasetGroup API.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DatasetGroupSummary
 type DatasetGroupSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -437,7 +424,6 @@ func (s DatasetGroupSummary) String() string {
 // A dataset import job can be in one of the following states:
 //
 //    * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DatasetImportJob
 type DatasetImportJob struct {
 	_ struct{} `type:"structure"`
 
@@ -482,7 +468,6 @@ func (s DatasetImportJob) String() string {
 
 // Provides a summary of the properties of a dataset import job. For a complete
 // listing, call the DescribeDatasetImportJob API.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DatasetImportJobSummary
 type DatasetImportJobSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -516,7 +501,6 @@ func (s DatasetImportJobSummary) String() string {
 
 // Describes the schema for a dataset. For more information on schemas, see
 // CreateSchema.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DatasetSchema
 type DatasetSchema struct {
 	_ struct{} `type:"structure"`
 
@@ -543,7 +527,6 @@ func (s DatasetSchema) String() string {
 
 // Provides a summary of the properties of a dataset schema. For a complete
 // listing, call the DescribeSchema API.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DatasetSchemaSummary
 type DatasetSchemaSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -567,7 +550,6 @@ func (s DatasetSchemaSummary) String() string {
 
 // Provides a summary of the properties of a dataset. For a complete listing,
 // call the DescribeDataset API.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DatasetSummary
 type DatasetSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -612,7 +594,6 @@ func (s DatasetSummary) String() string {
 // Provides the name and default range of a categorical hyperparameter and whether
 // the hyperparameter is tunable. A tunable hyperparameter can have its value
 // determined during hyperparameter optimization (HPO).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DefaultCategoricalHyperParameterRange
 type DefaultCategoricalHyperParameterRange struct {
 	_ struct{} `type:"structure"`
 
@@ -634,7 +615,6 @@ func (s DefaultCategoricalHyperParameterRange) String() string {
 // Provides the name and default range of a continuous hyperparameter and whether
 // the hyperparameter is tunable. A tunable hyperparameter can have its value
 // determined during hyperparameter optimization (HPO).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DefaultContinuousHyperParameterRange
 type DefaultContinuousHyperParameterRange struct {
 	_ struct{} `type:"structure"`
 
@@ -658,7 +638,6 @@ func (s DefaultContinuousHyperParameterRange) String() string {
 
 // Specifies the hyperparameters and their default ranges. Hyperparameters can
 // be categorical, continuous, or integer-valued.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DefaultHyperParameterRanges
 type DefaultHyperParameterRanges struct {
 	_ struct{} `type:"structure"`
 
@@ -680,7 +659,6 @@ func (s DefaultHyperParameterRanges) String() string {
 // Provides the name and default range of a integer-valued hyperparameter and
 // whether the hyperparameter is tunable. A tunable hyperparameter can have
 // its value determined during hyperparameter optimization (HPO).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DefaultIntegerHyperParameterRange
 type DefaultIntegerHyperParameterRange struct {
 	_ struct{} `type:"structure"`
 
@@ -703,7 +681,6 @@ func (s DefaultIntegerHyperParameterRange) String() string {
 }
 
 // Provides information about an event tracker.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/EventTracker
 type EventTracker struct {
 	_ struct{} `type:"structure"`
 
@@ -748,7 +725,6 @@ func (s EventTracker) String() string {
 
 // Provides a summary of the properties of an event tracker. For a complete
 // listing, call the DescribeEventTracker API.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/EventTrackerSummary
 type EventTrackerSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -781,7 +757,6 @@ func (s EventTrackerSummary) String() string {
 
 // Provides feature transformation information. Feature transformation is the
 // process of modifying raw input data into a form more suitable for model training.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/FeatureTransformation
 type FeatureTransformation struct {
 	_ struct{} `type:"structure"`
 
@@ -816,7 +791,6 @@ func (s FeatureTransformation) String() string {
 // Describes the properties for hyperparameter optimization (HPO). For use with
 // the bring-your-own-recipe feature. Do not use for Amazon Personalize native
 // recipes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/HPOConfig
 type HPOConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -851,7 +825,6 @@ func (s *HPOConfig) Validate() error {
 }
 
 // The metric to optimize during hyperparameter optimization (HPO).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/HPOObjective
 type HPOObjective struct {
 	_ struct{} `type:"structure"`
 
@@ -871,7 +844,6 @@ func (s HPOObjective) String() string {
 }
 
 // Describes the resource configuration for hyperparameter optimization (HPO).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/HPOResourceConfig
 type HPOResourceConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -889,7 +861,6 @@ func (s HPOResourceConfig) String() string {
 
 // Specifies the hyperparameters and their ranges. Hyperparameters can be categorical,
 // continuous, or integer-valued.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/HyperParameterRanges
 type HyperParameterRanges struct {
 	_ struct{} `type:"structure"`
 
@@ -933,7 +904,6 @@ func (s *HyperParameterRanges) Validate() error {
 }
 
 // Provides the name and range of an integer-valued hyperparameter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/IntegerHyperParameterRange
 type IntegerHyperParameterRange struct {
 	_ struct{} `type:"structure"`
 
@@ -968,7 +938,6 @@ func (s *IntegerHyperParameterRange) Validate() error {
 // Provides information about a recipe. Each recipe provides an algorithm that
 // Amazon Personalize uses in model training when you use the CreateSolution
 // operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/Recipe
 type Recipe struct {
 	_ struct{} `type:"structure"`
 
@@ -1014,7 +983,6 @@ func (s Recipe) String() string {
 
 // Provides a summary of the properties of a recipe. For a complete listing,
 // call the DescribeRecipe API.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/RecipeSummary
 type RecipeSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1041,7 +1009,6 @@ func (s RecipeSummary) String() string {
 
 // An object that provides information about a solution. A solution is a trained
 // model that can be deployed as a campaign.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/Solution
 type Solution struct {
 	_ struct{} `type:"structure"`
 
@@ -1104,7 +1071,6 @@ func (s Solution) String() string {
 }
 
 // Describes the configuration properties for the solution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/SolutionConfig
 type SolutionConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1150,7 +1116,6 @@ func (s *SolutionConfig) Validate() error {
 
 // Provides a summary of the properties of a solution. For a complete listing,
 // call the DescribeSolution API.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/SolutionSummary
 type SolutionSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1182,7 +1147,6 @@ func (s SolutionSummary) String() string {
 }
 
 // An object that provides information about a specific version of a Solution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/SolutionVersion
 type SolutionVersion struct {
 	_ struct{} `type:"structure"`
 
@@ -1230,6 +1194,9 @@ type SolutionVersion struct {
 	//
 	//    * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 	Status *string `locationName:"status" type:"string"`
+
+	// The time used to train the model.
+	TrainingHours *float64 `locationName:"trainingHours" type:"double"`
 }
 
 // String returns the string representation
@@ -1239,7 +1206,6 @@ func (s SolutionVersion) String() string {
 
 // Provides a summary of the properties of a solution version. For a complete
 // listing, call the DescribeSolutionVersion API.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/SolutionVersionSummary
 type SolutionVersionSummary struct {
 	_ struct{} `type:"structure"`
 

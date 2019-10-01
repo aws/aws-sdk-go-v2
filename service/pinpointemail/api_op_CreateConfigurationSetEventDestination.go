@@ -11,7 +11,6 @@ import (
 )
 
 // A request to add an event destination to a configuration set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateConfigurationSetEventDestinationRequest
 type CreateConfigurationSetEventDestinationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -91,7 +90,6 @@ func (s CreateConfigurationSetEventDestinationInput) MarshalFields(e protocol.Fi
 
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateConfigurationSetEventDestinationResponse
 type CreateConfigurationSetEventDestinationOutput struct {
 	_ struct{} `type:"structure"`
 }

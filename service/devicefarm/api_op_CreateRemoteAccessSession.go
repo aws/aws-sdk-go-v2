@@ -10,7 +10,6 @@ import (
 )
 
 // Creates and submits a request to start a remote access session.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateRemoteAccessSessionRequest
 type CreateRemoteAccessSessionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -118,7 +117,6 @@ func (s *CreateRemoteAccessSessionInput) Validate() error {
 }
 
 // Represents the server response from a request to create a remote access session.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateRemoteAccessSessionResult
 type CreateRemoteAccessSessionOutput struct {
 	_ struct{} `type:"structure"`
 

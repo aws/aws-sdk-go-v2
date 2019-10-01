@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccountAliasRequest
 type DeleteAccountAliasInput struct {
 	_ struct{} `type:"structure"`
 
@@ -48,7 +47,6 @@ func (s *DeleteAccountAliasInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccountAliasOutput
 type DeleteAccountAliasOutput struct {
 	_ struct{} `type:"structure"`
 }

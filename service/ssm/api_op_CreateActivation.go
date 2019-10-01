@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateActivationRequest
 type CreateActivationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -95,7 +94,6 @@ func (s *CreateActivationInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateActivationResult
 type CreateActivationOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -14,7 +14,6 @@ import (
 // available for a campaign only if the campaign sent email by using a domain
 // that the Deliverability dashboard is enabled for (PutDeliverabilityDashboardOption
 // operation).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDomainDeliverabilityCampaignRequest
 type GetDomainDeliverabilityCampaignInput struct {
 	_ struct{} `type:"structure"`
 
@@ -64,7 +63,6 @@ func (s GetDomainDeliverabilityCampaignInput) MarshalFields(e protocol.FieldEnco
 // This data is available for a campaign only if the campaign sent email by
 // using a domain that the Deliverability dashboard is enabled for (PutDeliverabilityDashboardOption
 // operation).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDomainDeliverabilityCampaignResponse
 type GetDomainDeliverabilityCampaignOutput struct {
 	_ struct{} `type:"structure"`
 

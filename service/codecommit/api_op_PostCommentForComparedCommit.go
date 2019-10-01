@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PostCommentForComparedCommitInput
 type PostCommentForComparedCommitInput struct {
 	_ struct{} `type:"structure"`
 
@@ -77,7 +76,6 @@ func (s *PostCommentForComparedCommitInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PostCommentForComparedCommitOutput
 type PostCommentForComparedCommitOutput struct {
 	_ struct{} `type:"structure"`
 

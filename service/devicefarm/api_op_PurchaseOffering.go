@@ -10,7 +10,6 @@ import (
 )
 
 // Represents a request for a purchase offering.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/PurchaseOfferingRequest
 type PurchaseOfferingInput struct {
 	_ struct{} `type:"structure"`
 
@@ -46,7 +45,6 @@ func (s *PurchaseOfferingInput) Validate() error {
 }
 
 // The result of the purchase offering (e.g., success or failure).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/PurchaseOfferingResult
 type PurchaseOfferingOutput struct {
 	_ struct{} `type:"structure"`
 

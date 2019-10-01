@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeMountTargetSecurityGroupsRequest
 type DescribeMountTargetSecurityGroupsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +51,6 @@ func (s DescribeMountTargetSecurityGroupsInput) MarshalFields(e protocol.FieldEn
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeMountTargetSecurityGroupsResponse
 type DescribeMountTargetSecurityGroupsOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // A document that defines an entity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/DefinitionDocument
 type DefinitionDocument struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +51,6 @@ func (s *DefinitionDocument) Validate() error {
 
 // An object that contains the ID and revision number of a workflow or system
 // that is part of a deployment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/DependencyRevision
 type DependencyRevision struct {
 	_ struct{} `type:"structure"`
 
@@ -69,7 +67,6 @@ func (s DependencyRevision) String() string {
 }
 
 // Describes the properties of an entity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/EntityDescription
 type EntityDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -98,7 +95,6 @@ func (s EntityDescription) String() string {
 // criteria in the search. For example a search that includes a NAMESPACE and
 // a REFERENCED_ENTITY_ID filter searches for entities in the specified namespace
 // that use the entity specified by the value of REFERENCED_ENTITY_ID.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/EntityFilter
 type EntityFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -118,7 +114,6 @@ func (s EntityFilter) String() string {
 }
 
 // An object that contains information about a flow event.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/FlowExecutionMessage
 type FlowExecutionMessage struct {
 	_ struct{} `type:"structure"`
 
@@ -141,7 +136,6 @@ func (s FlowExecutionMessage) String() string {
 }
 
 // An object that contains summary information about a flow execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/FlowExecutionSummary
 type FlowExecutionSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -170,7 +164,6 @@ func (s FlowExecutionSummary) String() string {
 }
 
 // An object that contains a workflow's definition and summary information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/FlowTemplateDescription
 type FlowTemplateDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -191,7 +184,6 @@ func (s FlowTemplateDescription) String() string {
 }
 
 // An object that filters a workflow search.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/FlowTemplateFilter
 type FlowTemplateFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -230,7 +222,6 @@ func (s *FlowTemplateFilter) Validate() error {
 }
 
 // An object that contains summary information about a workflow.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/FlowTemplateSummary
 type FlowTemplateSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -254,7 +245,6 @@ func (s FlowTemplateSummary) String() string {
 
 // An object that specifies whether cloud metrics are collected in a deployment
 // and, if so, what role is used to collect metrics.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/MetricsConfiguration
 type MetricsConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -284,7 +274,6 @@ func (s *MetricsConfiguration) Validate() error {
 }
 
 // An object that contains a system instance definition and summary information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/SystemInstanceDescription
 type SystemInstanceDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -326,7 +315,6 @@ func (s SystemInstanceDescription) String() string {
 // as OR criteria in the search. For example a search that includes a GREENGRASS_GROUP_NAME
 // and a STATUS filter searches for system instances in the specified Greengrass
 // group that have the specified status.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/SystemInstanceFilter
 type SystemInstanceFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -344,7 +332,6 @@ func (s SystemInstanceFilter) String() string {
 }
 
 // An object that contains summary information about a system instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/SystemInstanceSummary
 type SystemInstanceSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -382,7 +369,6 @@ func (s SystemInstanceSummary) String() string {
 }
 
 // An object that contains a system's definition document and summary information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/SystemTemplateDescription
 type SystemTemplateDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -403,7 +389,6 @@ func (s SystemTemplateDescription) String() string {
 }
 
 // An object that filters a system search.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/SystemTemplateFilter
 type SystemTemplateFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -442,7 +427,6 @@ func (s *SystemTemplateFilter) Validate() error {
 }
 
 // An object that contains information about a system.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/SystemTemplateSummary
 type SystemTemplateSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -466,7 +450,6 @@ func (s SystemTemplateSummary) String() string {
 
 // Metadata assigned to an AWS IoT Things Graph resource consisting of a key-value
 // pair.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -513,7 +496,6 @@ func (s *Tag) Validate() error {
 }
 
 // An AWS IoT thing.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/Thing
 type Thing struct {
 	_ struct{} `type:"structure"`
 

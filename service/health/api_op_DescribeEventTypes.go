@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventTypesRequest
 type DescribeEventTypesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -57,7 +56,6 @@ func (s *DescribeEventTypesInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventTypesResponse
 type DescribeEventTypesOutput struct {
 	_ struct{} `type:"structure"`
 

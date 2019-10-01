@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a DescribeReplicationGroups operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeReplicationGroupsMessage
 type DescribeReplicationGroupsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -42,7 +41,6 @@ func (s DescribeReplicationGroupsInput) String() string {
 }
 
 // Represents the output of a DescribeReplicationGroups operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroupMessage
 type DescribeReplicationGroupsOutput struct {
 	_ struct{} `type:"structure"`
 

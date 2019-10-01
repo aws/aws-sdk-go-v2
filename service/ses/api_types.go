@@ -18,7 +18,6 @@ var _ = awsutil.Prettify
 //
 // For information about adding a header using a receipt rule, see the Amazon
 // SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-add-header.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/AddHeaderAction
 type AddHeaderAction struct {
 	_ struct{} `type:"structure"`
 
@@ -61,7 +60,6 @@ func (s *AddHeaderAction) Validate() error {
 // Represents the body of the message. You can specify text, HTML, or both.
 // If you use both, then the message should display correctly in the widest
 // variety of email clients.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/Body
 type Body struct {
 	_ struct{} `type:"structure"`
 
@@ -106,7 +104,6 @@ func (s *Body) Validate() error {
 //
 // For information about sending a bounce message in response to a received
 // email, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-bounce.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/BounceAction
 type BounceAction struct {
 	_ struct{} `type:"structure"`
 
@@ -168,7 +165,6 @@ func (s *BounceAction) Validate() error {
 //
 // For information about receiving email through Amazon SES, see the Amazon
 // SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/BouncedRecipientInfo
 type BouncedRecipientInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -218,7 +214,6 @@ func (s *BouncedRecipientInfo) Validate() error {
 
 // An array that contains one or more Destinations, as well as the tags and
 // replacement data associated with each of those Destinations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/BulkEmailDestination
 type BulkEmailDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -274,7 +269,6 @@ func (s *BulkEmailDestination) Validate() error {
 }
 
 // An object that contains the response from the SendBulkTemplatedEmail operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/BulkEmailDestinationStatus
 type BulkEmailDestinationStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -343,7 +337,6 @@ func (s BulkEmailDestinationStatus) String() string {
 // Event destinations, such as Amazon CloudWatch, are associated with configuration
 // sets, which enable you to publish email sending events. For information about
 // using configuration sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CloudWatchDestination
 type CloudWatchDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -385,7 +378,6 @@ func (s *CloudWatchDestination) Validate() error {
 //
 // For information about publishing email sending events to Amazon CloudWatch,
 // see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CloudWatchDimensionConfiguration
 type CloudWatchDimensionConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -454,7 +446,6 @@ func (s *CloudWatchDimensionConfiguration) Validate() error {
 // emails you send using Amazon SES. For more information about using configuration
 // sets, see Using Amazon SES Configuration Sets (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/using-configuration-sets.html)
 // in the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ConfigurationSet
 type ConfigurationSet struct {
 	_ struct{} `type:"structure"`
 
@@ -493,7 +484,6 @@ func (s *ConfigurationSet) Validate() error {
 // By default, the text must be 7-bit ASCII, due to the constraints of the SMTP
 // protocol. If the text must contain any other characters, then you must also
 // specify a character set. Examples include UTF-8, ISO-8859-1, and Shift_JIS.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/Content
 type Content struct {
 	_ struct{} `type:"structure"`
 
@@ -526,7 +516,6 @@ func (s *Content) Validate() error {
 }
 
 // Contains information about a custom verification email template.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CustomVerificationEmailTemplate
 type CustomVerificationEmailTemplate struct {
 	_ struct{} `type:"structure"`
 
@@ -555,7 +544,6 @@ func (s CustomVerificationEmailTemplate) String() string {
 
 // Specifies whether messages that use the configuration set are required to
 // use Transport Layer Security (TLS).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeliveryOptions
 type DeliveryOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -581,17 +569,16 @@ func (s DeliveryOptions) String() string {
 // If the domain part of an address (the part after the @ sign) contains non-ASCII
 // characters, they must be encoded using Punycode, as described in RFC3492
 // (https://tools.ietf.org/html/rfc3492.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/Destination
 type Destination struct {
 	_ struct{} `type:"structure"`
 
-	// The BCC: field(s) of the message.
+	// The recipients to place on the BCC: line of the message.
 	BccAddresses []string `type:"list"`
 
-	// The CC: field(s) of the message.
+	// The recipients to place on the CC: line of the message.
 	CcAddresses []string `type:"list"`
 
-	// The To: field(s) of the message.
+	// The recipients to place on the To: line of the message.
 	ToAddresses []string `type:"list"`
 }
 
@@ -611,7 +598,6 @@ func (s Destination) String() string {
 // to publish email sending events to Amazon CloudWatch, Amazon Kinesis Firehose,
 // or Amazon Simple Notification Service (Amazon SNS). For information about
 // using configuration sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/EventDestination
 type EventDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -692,7 +678,6 @@ func (s *EventDestination) Validate() error {
 //
 // For information about receiving email through Amazon SES, see the Amazon
 // SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ExtensionField
 type ExtensionField struct {
 	_ struct{} `type:"structure"`
 
@@ -733,7 +718,6 @@ func (s *ExtensionField) Validate() error {
 }
 
 // Represents the DKIM attributes of a verified email address or a domain.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/IdentityDkimAttributes
 type IdentityDkimAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -770,7 +754,6 @@ func (s IdentityDkimAttributes) String() string {
 
 // Represents the custom MAIL FROM domain attributes of a verified identity
 // (email address or domain).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/IdentityMailFromDomainAttributes
 type IdentityMailFromDomainAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -811,7 +794,6 @@ func (s IdentityMailFromDomainAttributes) String() string {
 // an identity has Amazon Simple Notification Service (Amazon SNS) topics set
 // for bounce, complaint, and/or delivery notifications, and whether feedback
 // forwarding is enabled for bounce and complaint notifications.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/IdentityNotificationAttributes
 type IdentityNotificationAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -866,7 +848,6 @@ func (s IdentityNotificationAttributes) String() string {
 }
 
 // Represents the verification attributes of a single identity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/IdentityVerificationAttributes
 type IdentityVerificationAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -892,7 +873,6 @@ func (s IdentityVerificationAttributes) String() string {
 // configuration sets, which enable you to publish email sending events. For
 // information about using configuration sets, see the Amazon SES Developer
 // Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/KinesisFirehoseDestination
 type KinesisFirehoseDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -943,7 +923,6 @@ func (s *KinesisFirehoseDestination) Validate() error {
 //
 // For information about using AWS Lambda actions in receipt rules, see the
 // Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-lambda.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/LambdaAction
 type LambdaAction struct {
 	_ struct{} `type:"structure"`
 
@@ -994,7 +973,6 @@ func (s *LambdaAction) Validate() error {
 }
 
 // Represents the message to be sent, composed of a subject and a body.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/Message
 type Message struct {
 	_ struct{} `type:"structure"`
 
@@ -1048,7 +1026,6 @@ func (s *Message) Validate() error {
 //
 // For information about receiving email through Amazon SES, see the Amazon
 // SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/MessageDsn
 type MessageDsn struct {
 	_ struct{} `type:"structure"`
 
@@ -1099,7 +1076,6 @@ func (s *MessageDsn) Validate() error {
 // Message tags, which you use with configuration sets, enable you to publish
 // email sending events. For information about using configuration sets, see
 // the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/MessageTag
 type MessageTag struct {
 	_ struct{} `type:"structure"`
 
@@ -1148,7 +1124,6 @@ func (s *MessageTag) Validate() error {
 }
 
 // Represents the raw data of the message.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/RawMessage
 type RawMessage struct {
 	_ struct{} `type:"structure"`
 
@@ -1201,7 +1176,6 @@ func (s *RawMessage) Validate() error {
 //
 // For information about setting up receipt rules, see the Amazon SES Developer
 // Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ReceiptAction
 type ReceiptAction struct {
 	_ struct{} `type:"structure"`
 
@@ -1288,7 +1262,6 @@ func (s *ReceiptAction) Validate() error {
 //
 // For information about setting up IP address filters, see the Amazon SES Developer
 // Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-ip-filters.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ReceiptFilter
 type ReceiptFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -1344,7 +1317,6 @@ func (s *ReceiptFilter) Validate() error {
 //
 // For information about setting up IP address filters, see the Amazon SES Developer
 // Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-ip-filters.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ReceiptIpFilter
 type ReceiptIpFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -1395,7 +1367,6 @@ func (s *ReceiptIpFilter) Validate() error {
 //
 // For information about setting up receipt rules, see the Amazon SES Developer
 // Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ReceiptRule
 type ReceiptRule struct {
 	_ struct{} `type:"structure"`
 
@@ -1467,7 +1438,6 @@ func (s *ReceiptRule) Validate() error {
 //
 // For information about setting up receipt rule sets, see the Amazon SES Developer
 // Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ReceiptRuleSetMetadata
 type ReceiptRuleSetMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -1495,7 +1465,6 @@ func (s ReceiptRuleSetMetadata) String() string {
 //
 // For information about receiving email through Amazon SES, see the Amazon
 // SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/RecipientDsnFields
 type RecipientDsnFields struct {
 	_ struct{} `type:"structure"`
 
@@ -1571,7 +1540,6 @@ func (s *RecipientDsnFields) Validate() error {
 }
 
 // Contains information about the reputation settings for a configuration set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ReputationOptions
 type ReputationOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -1620,7 +1588,6 @@ func (s ReputationOptions) String() string {
 //
 // For information about specifying Amazon S3 actions in receipt rules, see
 // the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-s3.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/S3Action
 type S3Action struct {
 	_ struct{} `type:"structure"`
 
@@ -1709,7 +1676,6 @@ func (s *S3Action) Validate() error {
 //
 // For information about using a receipt rule to publish an Amazon SNS notification,
 // see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-sns.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SNSAction
 type SNSAction struct {
 	_ struct{} `type:"structure"`
 
@@ -1753,7 +1719,6 @@ func (s *SNSAction) Validate() error {
 // Event destinations, such as Amazon SNS, are associated with configuration
 // sets, which enable you to publish email sending events. For information about
 // using configuration sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SNSDestination
 type SNSDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -1787,7 +1752,6 @@ func (s *SNSDestination) Validate() error {
 
 // Represents sending statistics data. Each SendDataPoint contains statistics
 // for a 15-minute period of sending activity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendDataPoint
 type SendDataPoint struct {
 	_ struct{} `type:"structure"`
 
@@ -1818,11 +1782,10 @@ func (s SendDataPoint) String() string {
 //
 // For information about setting a stop action in a receipt rule, see the Amazon
 // SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-stop.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/StopAction
 type StopAction struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the RuleSet that is being stopped.
+	// The scope of the StopAction. The only acceptable value is RuleSet.
 	//
 	// Scope is a required field
 	Scope StopScope `type:"string" required:"true" enum:"true"`
@@ -1854,7 +1817,6 @@ func (s *StopAction) Validate() error {
 
 // The content of the email, composed of a subject line, an HTML part, and a
 // text-only part.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/Template
 type Template struct {
 	_ struct{} `type:"structure"`
 
@@ -1895,7 +1857,6 @@ func (s *Template) Validate() error {
 }
 
 // Contains information about an email template.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/TemplateMetadata
 type TemplateMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -1918,7 +1879,6 @@ func (s TemplateMetadata) String() string {
 // For more information, see Configuring Custom Domains to Handle Open and Click
 // Tracking (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html)
 // in the Amazon SES Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/TrackingOptions
 type TrackingOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -1939,7 +1899,6 @@ func (s TrackingOptions) String() string {
 //
 // For information using a receipt rule to call Amazon WorkMail, see the Amazon
 // SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-workmail.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/WorkmailAction
 type WorkmailAction struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for SetLoadBalancePoliciesOfListener.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerPoliciesOfListenerInput
 type SetLoadBalancerPoliciesOfListenerInput struct {
 	_ struct{} `type:"structure"`
 
@@ -60,7 +59,6 @@ func (s *SetLoadBalancerPoliciesOfListenerInput) Validate() error {
 }
 
 // Contains the output of SetLoadBalancePoliciesOfListener.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerPoliciesOfListenerOutput
 type SetLoadBalancerPoliciesOfListenerOutput struct {
 	_ struct{} `type:"structure"`
 }

@@ -10,12 +10,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStackRequest
 type CreateStackInput struct {
 	_ struct{} `type:"structure"`
 
-	// The list of virtual private cloud (VPC) interface endpoint objects. Users
-	// of the stack can connect to AppStream 2.0 only through the specified endpoints.
+	// The list of interface VPC endpoint (interface endpoint) objects. Users of
+	// the stack can connect to AppStream 2.0 only through the specified endpoints.
 	AccessEndpoints []AccessEndpoint `min:"1" type:"list"`
 
 	// The persistent application settings for users of a stack. When these settings
@@ -118,7 +117,6 @@ func (s *CreateStackInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStackResult
 type CreateStackOutput struct {
 	_ struct{} `type:"structure"`
 

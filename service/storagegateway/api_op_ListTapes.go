@@ -16,7 +16,6 @@ import (
 //    * ListTapesInput$Marker
 //
 //    * ListTapesInput$TapeARNs
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListTapesInput
 type ListTapesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s *ListTapesInput) Validate() error {
 //    * ListTapesOutput$Marker
 //
 //    * ListTapesOutput$VolumeInfos
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListTapesOutput
 type ListTapesOutput struct {
 	_ struct{} `type:"structure"`
 

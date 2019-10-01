@@ -10,7 +10,6 @@ import (
 )
 
 // Specifies the settings for each trail.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateTrailRequest
 type CreateTrailInput struct {
 	_ struct{} `type:"structure"`
 
@@ -124,7 +123,6 @@ func (s *CreateTrailInput) Validate() error {
 
 // Returns the objects or data listed below if successful. Otherwise, returns
 // an error.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateTrailResponse
 type CreateTrailOutput struct {
 	_ struct{} `type:"structure"`
 

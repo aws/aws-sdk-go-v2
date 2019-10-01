@@ -10,9 +10,11 @@ import (
 )
 
 // Represents the input of a CopySnapshotMessage operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CopySnapshotMessage
 type CopySnapshotInput struct {
 	_ struct{} `type:"structure"`
+
+	// The ID of the KMS key used to encrypt the target snapshot.
+	KmsKeyId *string `type:"string"`
 
 	// The name of an existing snapshot from which to make a copy.
 	//
@@ -62,7 +64,6 @@ func (s *CopySnapshotInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CopySnapshotResult
 type CopySnapshotOutput struct {
 	_ struct{} `type:"structure"`
 

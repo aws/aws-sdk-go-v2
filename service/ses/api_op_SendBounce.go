@@ -12,7 +12,6 @@ import (
 
 // Represents a request to send a bounce message to the sender of an email you
 // received through Amazon SES.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendBounceRequest
 type SendBounceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -90,7 +89,6 @@ func (s *SendBounceInput) Validate() error {
 }
 
 // Represents a unique message ID.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendBounceResponse
 type SendBounceOutput struct {
 	_ struct{} `type:"structure"`
 

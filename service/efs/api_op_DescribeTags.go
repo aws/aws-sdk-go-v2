@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeTagsRequest
 type DescribeTagsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -77,7 +76,6 @@ func (s DescribeTagsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeTagsResponse
 type DescribeTagsOutput struct {
 	_ struct{} `type:"structure"`
 

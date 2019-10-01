@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateRuleInput
 type CreateRuleInput struct {
 	_ struct{} `type:"structure"`
 
@@ -96,7 +95,6 @@ func (s *CreateRuleInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateRuleOutput
 type CreateRuleOutput struct {
 	_ struct{} `type:"structure"`
 

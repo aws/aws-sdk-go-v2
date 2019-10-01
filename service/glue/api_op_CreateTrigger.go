@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateTriggerRequest
 type CreateTriggerInput struct {
 	_ struct{} `type:"structure"`
 
@@ -103,7 +102,6 @@ func (s *CreateTriggerInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateTriggerResponse
 type CreateTriggerOutput struct {
 	_ struct{} `type:"structure"`
 

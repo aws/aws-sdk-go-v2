@@ -10,7 +10,6 @@ import (
 )
 
 // The request that specifies the name of a trail to delete.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DeleteTrailRequest
 type DeleteTrailInput struct {
 	_ struct{} `type:"structure"`
 
@@ -42,7 +41,6 @@ func (s *DeleteTrailInput) Validate() error {
 
 // Returns the objects or data listed below if successful. Otherwise, returns
 // an error.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DeleteTrailResponse
 type DeleteTrailOutput struct {
 	_ struct{} `type:"structure"`
 }

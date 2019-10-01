@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RegisterWebhookWithThirdPartyInput
 type RegisterWebhookWithThirdPartyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -36,7 +35,6 @@ func (s *RegisterWebhookWithThirdPartyInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RegisterWebhookWithThirdPartyOutput
 type RegisterWebhookWithThirdPartyOutput struct {
 	_ struct{} `type:"structure"`
 }

@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/EnableUserRequest
 type EnableUserInput struct {
 	_ struct{} `type:"structure"`
 
@@ -26,7 +25,7 @@ type EnableUserInput struct {
 	// error message displays.
 	//
 	// UserName is a required field
-	UserName *string `min:"1" type:"string" required:"true"`
+	UserName *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -54,7 +53,6 @@ func (s *EnableUserInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/EnableUserResult
 type EnableUserOutput struct {
 	_ struct{} `type:"structure"`
 }

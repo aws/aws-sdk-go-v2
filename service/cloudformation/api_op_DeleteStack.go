@@ -12,7 +12,6 @@ import (
 )
 
 // The input for DeleteStack action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackInput
 type DeleteStackInput struct {
 	_ struct{} `type:"structure"`
 
@@ -81,7 +80,6 @@ func (s *DeleteStackInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackOutput
 type DeleteStackOutput struct {
 	_ struct{} `type:"structure"`
 }

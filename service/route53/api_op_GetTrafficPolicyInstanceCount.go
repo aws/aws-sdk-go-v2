@@ -12,7 +12,6 @@ import (
 
 // Request to get the number of traffic policy instances that are associated
 // with the current AWS account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyInstanceCountRequest
 type GetTrafficPolicyInstanceCountInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -30,7 +29,6 @@ func (s GetTrafficPolicyInstanceCountInput) MarshalFields(e protocol.FieldEncode
 
 // A complex type that contains information about the resource record sets that
 // Amazon Route 53 created based on a specified traffic policy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyInstanceCountResponse
 type GetTrafficPolicyInstanceCountOutput struct {
 	_ struct{} `type:"structure"`
 

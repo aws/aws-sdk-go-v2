@@ -10,7 +10,6 @@ import (
 )
 
 // DeleteTapeArchiveInput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteTapeArchiveInput
 type DeleteTapeArchiveInput struct {
 	_ struct{} `type:"structure"`
 
@@ -44,7 +43,6 @@ func (s *DeleteTapeArchiveInput) Validate() error {
 }
 
 // DeleteTapeArchiveOutput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteTapeArchiveOutput
 type DeleteTapeArchiveOutput struct {
 	_ struct{} `type:"structure"`
 

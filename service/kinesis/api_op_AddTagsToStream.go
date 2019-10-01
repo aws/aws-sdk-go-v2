@@ -12,7 +12,6 @@ import (
 )
 
 // Represents the input for AddTagsToStream.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/AddTagsToStreamInput
 type AddTagsToStreamInput struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s *AddTagsToStreamInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/AddTagsToStreamOutput
 type AddTagsToStreamOutput struct {
 	_ struct{} `type:"structure"`
 }

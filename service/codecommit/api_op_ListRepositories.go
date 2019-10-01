@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a list repositories operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListRepositoriesInput
 type ListRepositoriesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -33,7 +32,6 @@ func (s ListRepositoriesInput) String() string {
 }
 
 // Represents the output of a list repositories operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListRepositoriesOutput
 type ListRepositoriesOutput struct {
 	_ struct{} `type:"structure"`
 

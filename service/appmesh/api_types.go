@@ -15,7 +15,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // An object representing the access logging information for a virtual node.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/AccessLog
 type AccessLog struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s AccessLog) MarshalFields(e protocol.FieldEncoder) error {
 
 // An object representing the AWS Cloud Map attribute information for your virtual
 // node.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/AwsCloudMapInstanceAttribute
 type AwsCloudMapInstanceAttribute struct {
 	_ struct{} `type:"structure"`
 
@@ -115,7 +113,6 @@ func (s AwsCloudMapInstanceAttribute) MarshalFields(e protocol.FieldEncoder) err
 
 // An object representing the AWS Cloud Map service discovery information for
 // your virtual node.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/AwsCloudMapServiceDiscovery
 type AwsCloudMapServiceDiscovery struct {
 	_ struct{} `type:"structure"`
 
@@ -195,7 +192,6 @@ func (s AwsCloudMapServiceDiscovery) MarshalFields(e protocol.FieldEncoder) erro
 
 // An object representing the backends that a virtual node is expected to send
 // outbound traffic to.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/Backend
 type Backend struct {
 	_ struct{} `type:"structure"`
 
@@ -236,7 +232,6 @@ func (s Backend) MarshalFields(e protocol.FieldEncoder) error {
 
 // An object representing the DNS service discovery information for your virtual
 // node.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DnsServiceDiscovery
 type DnsServiceDiscovery struct {
 	_ struct{} `type:"structure"`
 
@@ -274,8 +269,38 @@ func (s DnsServiceDiscovery) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An object representing the duration between retry attempts.
+type Duration struct {
+	_ struct{} `type:"structure"`
+
+	Unit DurationUnit `locationName:"unit" type:"string" enum:"true"`
+
+	Value *int64 `locationName:"value" type:"long"`
+}
+
+// String returns the string representation
+func (s Duration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Duration) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Unit) > 0 {
+		v := s.Unit
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "unit", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "value", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // An object representing the egress filter rules for a service mesh.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/EgressFilter
 type EgressFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -313,7 +338,6 @@ func (s EgressFilter) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing an access log file.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/FileAccessLog
 type FileAccessLog struct {
 	_ struct{} `type:"structure"`
 
@@ -356,7 +380,6 @@ func (s FileAccessLog) MarshalFields(e protocol.FieldEncoder) error {
 
 // An object representing the method and value to match the header value sent
 // with a request. Specify one match method.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HeaderMatchMethod
 type HeaderMatchMethod struct {
 	_ struct{} `type:"structure"`
 
@@ -442,7 +465,6 @@ func (s HeaderMatchMethod) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing the health check policy for a virtual node's listener.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HealthCheckPolicy
 type HealthCheckPolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -562,8 +584,94 @@ func (s HealthCheckPolicy) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An object that represents a retry policy.
+type HttpRetryPolicy struct {
+	_ struct{} `type:"structure"`
+
+	HttpRetryEvents []string `locationName:"httpRetryEvents" min:"1" type:"list"`
+
+	// MaxRetries is a required field
+	MaxRetries *int64 `locationName:"maxRetries" type:"long" required:"true"`
+
+	// An object representing the duration between retry attempts.
+	//
+	// PerRetryTimeout is a required field
+	PerRetryTimeout *Duration `locationName:"perRetryTimeout" type:"structure" required:"true"`
+
+	TcpRetryEvents []TcpRetryPolicyEvent `locationName:"tcpRetryEvents" min:"1" type:"list"`
+}
+
+// String returns the string representation
+func (s HttpRetryPolicy) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HttpRetryPolicy) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HttpRetryPolicy"}
+	if s.HttpRetryEvents != nil && len(s.HttpRetryEvents) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("HttpRetryEvents", 1))
+	}
+
+	if s.MaxRetries == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MaxRetries"))
+	}
+
+	if s.PerRetryTimeout == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PerRetryTimeout"))
+	}
+	if s.TcpRetryEvents != nil && len(s.TcpRetryEvents) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TcpRetryEvents", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HttpRetryPolicy) MarshalFields(e protocol.FieldEncoder) error {
+	if s.HttpRetryEvents != nil {
+		v := s.HttpRetryEvents
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "httpRetryEvents", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.MaxRetries != nil {
+		v := *s.MaxRetries
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxRetries", protocol.Int64Value(v), metadata)
+	}
+	if s.PerRetryTimeout != nil {
+		v := s.PerRetryTimeout
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "perRetryTimeout", v, metadata)
+	}
+	if s.TcpRetryEvents != nil {
+		v := s.TcpRetryEvents
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tcpRetryEvents", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // An object representing the HTTP routing specification for a route.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpRoute
 type HttpRoute struct {
 	_ struct{} `type:"structure"`
 
@@ -578,6 +686,9 @@ type HttpRoute struct {
 	//
 	// Match is a required field
 	Match *HttpRouteMatch `locationName:"match" type:"structure" required:"true"`
+
+	// An object that represents a retry policy.
+	RetryPolicy *HttpRetryPolicy `locationName:"retryPolicy" type:"structure"`
 }
 
 // String returns the string representation
@@ -606,6 +717,11 @@ func (s *HttpRoute) Validate() error {
 			invalidParams.AddNested("Match", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.RetryPolicy != nil {
+		if err := s.RetryPolicy.Validate(); err != nil {
+			invalidParams.AddNested("RetryPolicy", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -627,12 +743,17 @@ func (s HttpRoute) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "match", v, metadata)
 	}
+	if s.RetryPolicy != nil {
+		v := s.RetryPolicy
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "retryPolicy", v, metadata)
+	}
 	return nil
 }
 
 // An object representing the traffic distribution requirements for matched
 // HTTP requests.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpRouteAction
 type HttpRouteAction struct {
 	_ struct{} `type:"structure"`
 
@@ -687,7 +808,6 @@ func (s HttpRouteAction) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing the HTTP header in the request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpRouteHeader
 type HttpRouteHeader struct {
 	_ struct{} `type:"structure"`
 
@@ -753,7 +873,6 @@ func (s HttpRouteHeader) MarshalFields(e protocol.FieldEncoder) error {
 
 // An object representing the requirements for a route to match HTTP requests
 // for a virtual router.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpRouteMatch
 type HttpRouteMatch struct {
 	_ struct{} `type:"structure"`
 
@@ -832,7 +951,6 @@ func (s HttpRouteMatch) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing a listener for a virtual node.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/Listener
 type Listener struct {
 	_ struct{} `type:"structure"`
 
@@ -892,7 +1010,6 @@ func (s Listener) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing the logging information for a virtual node.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/Logging
 type Logging struct {
 	_ struct{} `type:"structure"`
 
@@ -934,7 +1051,6 @@ func (s Logging) MarshalFields(e protocol.FieldEncoder) error {
 // The range of values to match on. The first character of the range is included
 // in the range, though the last character is not. For example, if the range
 // specified were 1-100, only values 1-99 would be matched.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/MatchRange
 type MatchRange struct {
 	_ struct{} `type:"structure"`
 
@@ -986,7 +1102,6 @@ func (s MatchRange) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing a service mesh returned by a describe operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/MeshData
 type MeshData struct {
 	_ struct{} `type:"structure"`
 
@@ -1044,7 +1159,6 @@ func (s MeshData) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing a service mesh returned by a list operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/MeshRef
 type MeshRef struct {
 	_ struct{} `type:"structure"`
 
@@ -1078,7 +1192,6 @@ func (s MeshRef) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing the specification of a service mesh.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/MeshSpec
 type MeshSpec struct {
 	_ struct{} `type:"structure"`
 
@@ -1118,7 +1231,6 @@ func (s MeshSpec) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing the status of a service mesh.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/MeshStatus
 type MeshStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -1142,7 +1254,6 @@ func (s MeshStatus) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing a virtual node or virtual router listener port mapping.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/PortMapping
 type PortMapping struct {
 	_ struct{} `type:"structure"`
 
@@ -1196,7 +1307,6 @@ func (s PortMapping) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing metadata for a resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ResourceMetadata
 type ResourceMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -1259,7 +1369,6 @@ func (s ResourceMetadata) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing a route returned by a describe operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/RouteData
 type RouteData struct {
 	_ struct{} `type:"structure"`
 
@@ -1335,7 +1444,6 @@ func (s RouteData) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing a route returned by a list operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/RouteRef
 type RouteRef struct {
 	_ struct{} `type:"structure"`
 
@@ -1387,7 +1495,6 @@ func (s RouteRef) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing the specification of a route.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/RouteSpec
 type RouteSpec struct {
 	_ struct{} `type:"structure"`
 
@@ -1449,7 +1556,6 @@ func (s RouteSpec) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing the current status of a route.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/RouteStatus
 type RouteStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -1474,7 +1580,6 @@ func (s RouteStatus) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing the service discovery information for a virtual node.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ServiceDiscovery
 type ServiceDiscovery struct {
 	_ struct{} `type:"structure"`
 
@@ -1533,7 +1638,6 @@ func (s ServiceDiscovery) MarshalFields(e protocol.FieldEncoder) error {
 // and organization. Each tag consists of a key and an optional value, both
 // of which you define. Tag keys can have a maximum character length of 128
 // characters, and tag values can have a maximum length of 256 characters.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TagRef
 type TagRef struct {
 	_ struct{} `type:"structure"`
 
@@ -1583,7 +1687,6 @@ func (s TagRef) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing the TCP routing specification for a route.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TcpRoute
 type TcpRoute struct {
 	_ struct{} `type:"structure"`
 
@@ -1631,7 +1734,6 @@ func (s TcpRoute) MarshalFields(e protocol.FieldEncoder) error {
 
 // An object representing the traffic distribution requirements for matched
 // TCP requests.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TcpRouteAction
 type TcpRouteAction struct {
 	_ struct{} `type:"structure"`
 
@@ -1686,7 +1788,6 @@ func (s TcpRouteAction) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing a virtual node returned by a describe operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualNodeData
 type VirtualNodeData struct {
 	_ struct{} `type:"structure"`
 
@@ -1753,7 +1854,6 @@ func (s VirtualNodeData) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing a virtual node returned by a list operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualNodeRef
 type VirtualNodeRef struct {
 	_ struct{} `type:"structure"`
 
@@ -1796,7 +1896,6 @@ func (s VirtualNodeRef) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing a virtual node service provider.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualNodeServiceProvider
 type VirtualNodeServiceProvider struct {
 	_ struct{} `type:"structure"`
 
@@ -1838,7 +1937,6 @@ func (s VirtualNodeServiceProvider) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // An object representing the specification of a virtual node.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualNodeSpec
 type VirtualNodeSpec struct {
 	_ struct{} `type:"structure"`
 
@@ -1934,7 +2032,6 @@ func (s VirtualNodeSpec) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing the current status of the virtual node.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualNodeStatus
 type VirtualNodeStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -1959,7 +2056,6 @@ func (s VirtualNodeStatus) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing a virtual router returned by a describe operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualRouterData
 type VirtualRouterData struct {
 	_ struct{} `type:"structure"`
 
@@ -2026,7 +2122,6 @@ func (s VirtualRouterData) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing a virtual router listener.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualRouterListener
 type VirtualRouterListener struct {
 	_ struct{} `type:"structure"`
 
@@ -2072,7 +2167,6 @@ func (s VirtualRouterListener) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing a virtual router returned by a list operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualRouterRef
 type VirtualRouterRef struct {
 	_ struct{} `type:"structure"`
 
@@ -2115,7 +2209,6 @@ func (s VirtualRouterRef) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing a virtual node service provider.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualRouterServiceProvider
 type VirtualRouterServiceProvider struct {
 	_ struct{} `type:"structure"`
 
@@ -2157,7 +2250,6 @@ func (s VirtualRouterServiceProvider) MarshalFields(e protocol.FieldEncoder) err
 }
 
 // An object representing the specification of a virtual router.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualRouterSpec
 type VirtualRouterSpec struct {
 	_ struct{} `type:"structure"`
 
@@ -2207,7 +2299,6 @@ func (s VirtualRouterSpec) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing the status of a virtual router.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualRouterStatus
 type VirtualRouterStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -2232,7 +2323,6 @@ func (s VirtualRouterStatus) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing a virtual service backend for a virtual node.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualServiceBackend
 type VirtualServiceBackend struct {
 	_ struct{} `type:"structure"`
 
@@ -2271,7 +2361,6 @@ func (s VirtualServiceBackend) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing a virtual service returned by a describe operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualServiceData
 type VirtualServiceData struct {
 	_ struct{} `type:"structure"`
 
@@ -2338,7 +2427,6 @@ func (s VirtualServiceData) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing the provider for a virtual service.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualServiceProvider
 type VirtualServiceProvider struct {
 	_ struct{} `type:"structure"`
 
@@ -2392,7 +2480,6 @@ func (s VirtualServiceProvider) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing a virtual service returned by a list operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualServiceRef
 type VirtualServiceRef struct {
 	_ struct{} `type:"structure"`
 
@@ -2435,7 +2522,6 @@ func (s VirtualServiceRef) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing the specification of a virtual service.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualServiceSpec
 type VirtualServiceSpec struct {
 	_ struct{} `type:"structure"`
 
@@ -2475,7 +2561,6 @@ func (s VirtualServiceSpec) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing the status of a virtual service.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualServiceStatus
 type VirtualServiceStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -2503,7 +2588,6 @@ func (s VirtualServiceStatus) MarshalFields(e protocol.FieldEncoder) error {
 // across targets according to their relative weight. For example, a weighted
 // target with a relative weight of 50 receives five times as much traffic as
 // one with a relative weight of 10.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/WeightedTarget
 type WeightedTarget struct {
 	_ struct{} `type:"structure"`
 

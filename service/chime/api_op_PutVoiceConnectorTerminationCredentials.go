@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorTerminationCredentialsRequest
 type PutVoiceConnectorTerminationCredentialsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -68,7 +67,6 @@ func (s PutVoiceConnectorTerminationCredentialsInput) MarshalFields(e protocol.F
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorTerminationCredentialsOutput
 type PutVoiceConnectorTerminationCredentialsOutput struct {
 	_ struct{} `type:"structure"`
 }

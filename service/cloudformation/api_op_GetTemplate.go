@@ -10,7 +10,6 @@ import (
 )
 
 // The input for a GetTemplate action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplateInput
 type GetTemplateInput struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s *GetTemplateInput) Validate() error {
 }
 
 // The output for GetTemplate action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplateOutput
 type GetTemplateOutput struct {
 	_ struct{} `type:"structure"`
 

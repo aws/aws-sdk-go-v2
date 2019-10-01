@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Aac Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AacSettings
 type AacSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -123,7 +122,6 @@ func (s AacSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Ac3 Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Ac3Settings
 type Ac3Settings struct {
 	_ struct{} `type:"structure"`
 
@@ -221,7 +219,6 @@ func (s Ac3Settings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Archive Container Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ArchiveContainerSettings
 type ArchiveContainerSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -261,7 +258,6 @@ func (s ArchiveContainerSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Archive Group Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ArchiveGroupSettings
 type ArchiveGroupSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -315,7 +311,6 @@ func (s ArchiveGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Archive Output Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ArchiveOutputSettings
 type ArchiveOutputSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -381,7 +376,6 @@ func (s ArchiveOutputSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Arib Destination Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AribDestinationSettings
 type AribDestinationSettings struct {
 	_ struct{} `type:"structure"`
 }
@@ -397,7 +391,6 @@ func (s AribDestinationSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Arib Source Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AribSourceSettings
 type AribSourceSettings struct {
 	_ struct{} `type:"structure"`
 }
@@ -413,7 +406,6 @@ func (s AribSourceSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Audio Channel Mapping
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioChannelMapping
 type AudioChannelMapping struct {
 	_ struct{} `type:"structure"`
 
@@ -483,7 +475,6 @@ func (s AudioChannelMapping) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Audio Codec Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioCodecSettings
 type AudioCodecSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -564,7 +555,6 @@ func (s AudioCodecSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Audio Description
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioDescription
 type AudioDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -719,7 +709,6 @@ func (s AudioDescription) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Audio Language Selection
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioLanguageSelection
 type AudioLanguageSelection struct {
 	_ struct{} `type:"structure"`
 
@@ -774,7 +763,6 @@ func (s AudioLanguageSelection) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Audio Normalization Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioNormalizationSettings
 type AudioNormalizationSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -822,20 +810,17 @@ func (s AudioNormalizationSettings) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // Audio Only Hls Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioOnlyHlsSettings
 type AudioOnlyHlsSettings struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies the group to which the audio Rendition belongs.
 	AudioGroupId *string `locationName:"audioGroupId" type:"string"`
 
-	// For use with an audio only Stream. Must be a .jpg or .png file. If given,
-	// this image will be used as the cover-art for the audio only output. Ideally,
-	// it should be formatted for an iPhone screen for two reasons. The iPhone does
-	// not resize the image, it crops a centered image on the top/bottom and left/right.
-	// Additionally, this image file gets saved bit-for-bit into every 10-second
-	// segment file, so will increase bandwidth by {image file size} * {segment
-	// count} * {user count.}.
+	// Optional. Specifies the .jpg or .png image to use as the cover art for an
+	// audio-only output. We recommend a low bit-size file because the image increases
+	// the output audio bandwidth.The image is attached to the audio as an ID3 tag,
+	// frame type APIC, picture type 0x10, as per the "ID3 tag version 2.4.0 - Native
+	// Frames" standard.
 	AudioOnlyImage *InputLocation `locationName:"audioOnlyImage" type:"structure"`
 
 	// Four types of audio-only tracks are supported:Audio-Only Variant StreamThe
@@ -896,7 +881,6 @@ func (s AudioOnlyHlsSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Audio Pid Selection
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioPidSelection
 type AudioPidSelection struct {
 	_ struct{} `type:"structure"`
 
@@ -937,7 +921,6 @@ func (s AudioPidSelection) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Audio Selector
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioSelector
 type AudioSelector struct {
 	_ struct{} `type:"structure"`
 
@@ -996,7 +979,6 @@ func (s AudioSelector) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Audio Selector Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioSelectorSettings
 type AudioSelectorSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -1050,7 +1032,6 @@ func (s AudioSelectorSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Avail Blanking
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AvailBlanking
 type AvailBlanking struct {
 	_ struct{} `type:"structure"`
 
@@ -1101,7 +1082,6 @@ func (s AvailBlanking) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Avail Configuration
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AvailConfiguration
 type AvailConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1141,7 +1121,6 @@ func (s AvailConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Avail Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AvailSettings
 type AvailSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -1196,7 +1175,6 @@ func (s AvailSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 // A list of schedule actions to create (in a request) or that have been created
 // (in a response).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchScheduleActionCreateRequest
 type BatchScheduleActionCreateRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -1250,7 +1228,6 @@ func (s BatchScheduleActionCreateRequest) MarshalFields(e protocol.FieldEncoder)
 }
 
 // List of actions that have been created in the schedule.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchScheduleActionCreateResult
 type BatchScheduleActionCreateResult struct {
 	_ struct{} `type:"structure"`
 
@@ -1283,7 +1260,6 @@ func (s BatchScheduleActionCreateResult) MarshalFields(e protocol.FieldEncoder) 
 }
 
 // A list of schedule actions to delete.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchScheduleActionDeleteRequest
 type BatchScheduleActionDeleteRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -1330,7 +1306,6 @@ func (s BatchScheduleActionDeleteRequest) MarshalFields(e protocol.FieldEncoder)
 }
 
 // List of actions that have been deleted from the schedule.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchScheduleActionDeleteResult
 type BatchScheduleActionDeleteResult struct {
 	_ struct{} `type:"structure"`
 
@@ -1363,7 +1338,6 @@ func (s BatchScheduleActionDeleteResult) MarshalFields(e protocol.FieldEncoder) 
 }
 
 // Blackout Slate
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BlackoutSlate
 type BlackoutSlate struct {
 	_ struct{} `type:"structure"`
 
@@ -1455,7 +1429,6 @@ func (s BlackoutSlate) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Burn In Destination Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BurnInDestinationSettings
 type BurnInDestinationSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -1685,7 +1658,6 @@ func (s BurnInDestinationSettings) MarshalFields(e protocol.FieldEncoder) error 
 
 // Output groups for this Live Event. Output groups contain information about
 // where streams should be distributed.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CaptionDescription
 type CaptionDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -1777,7 +1749,6 @@ func (s CaptionDescription) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Caption Destination Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CaptionDestinationSettings
 type CaptionDestinationSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -1922,7 +1893,6 @@ func (s CaptionDestinationSettings) MarshalFields(e protocol.FieldEncoder) error
 
 // Maps a caption channel to an ISO 693-2 language code (http://www.loc.gov/standards/iso639-2),
 // with an optional description.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CaptionLanguageMapping
 type CaptionLanguageMapping struct {
 	_ struct{} `type:"structure"`
 
@@ -2004,7 +1974,6 @@ func (s CaptionLanguageMapping) MarshalFields(e protocol.FieldEncoder) error {
 
 // Output groups for this Live Event. Output groups contain information about
 // where streams should be distributed.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CaptionSelector
 type CaptionSelector struct {
 	_ struct{} `type:"structure"`
 
@@ -2074,7 +2043,6 @@ func (s CaptionSelector) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Caption Selector Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CaptionSelectorSettings
 type CaptionSelectorSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -2173,7 +2141,6 @@ func (s CaptionSelectorSettings) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Channel
 type Channel struct {
 	_ struct{} `type:"structure"`
 
@@ -2354,7 +2321,6 @@ func (s Channel) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ChannelEgressEndpoint
 type ChannelEgressEndpoint struct {
 	_ struct{} `type:"structure"`
 
@@ -2378,7 +2344,6 @@ func (s ChannelEgressEndpoint) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ChannelSummary
 type ChannelSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -2535,8 +2500,22 @@ func (s ChannelSummary) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Passthrough applies no color space conversion to the output
+type ColorSpacePassthroughSettings struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s ColorSpacePassthroughSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ColorSpacePassthroughSettings) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
 // DVB Network Information Table (NIT)
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DvbNitSettings
 type DvbNitSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -2609,7 +2588,6 @@ func (s DvbNitSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // DVB Service Description Table (SDT)
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DvbSdtSettings
 type DvbSdtSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -2688,7 +2666,6 @@ func (s DvbSdtSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Dvb Sub Destination Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DvbSubDestinationSettings
 type DvbSubDestinationSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -2923,7 +2900,6 @@ func (s DvbSubDestinationSettings) MarshalFields(e protocol.FieldEncoder) error 
 }
 
 // Dvb Sub Source Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DvbSubSourceSettings
 type DvbSubSourceSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -2963,7 +2939,6 @@ func (s DvbSubSourceSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // DVB Time and Date Table (SDT)
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DvbTdtSettings
 type DvbTdtSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -3002,7 +2977,6 @@ func (s DvbTdtSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Eac3 Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Eac3Settings
 type Eac3Settings struct {
 	_ struct{} `type:"structure"`
 
@@ -3224,7 +3198,6 @@ func (s Eac3Settings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Embedded Destination Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/EmbeddedDestinationSettings
 type EmbeddedDestinationSettings struct {
 	_ struct{} `type:"structure"`
 }
@@ -3240,7 +3213,6 @@ func (s EmbeddedDestinationSettings) MarshalFields(e protocol.FieldEncoder) erro
 }
 
 // Embedded Plus Scte20 Destination Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/EmbeddedPlusScte20DestinationSettings
 type EmbeddedPlusScte20DestinationSettings struct {
 	_ struct{} `type:"structure"`
 }
@@ -3256,7 +3228,6 @@ func (s EmbeddedPlusScte20DestinationSettings) MarshalFields(e protocol.FieldEnc
 }
 
 // Embedded Source Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/EmbeddedSourceSettings
 type EmbeddedSourceSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -3328,7 +3299,6 @@ func (s EmbeddedSourceSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Encoder Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/EncoderSettings
 type EncoderSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -3530,7 +3500,6 @@ func (s EncoderSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Fec Output Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FecOutputSettings
 type FecOutputSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -3596,7 +3565,6 @@ func (s FecOutputSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Start time for the action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FixedModeScheduleActionStartSettings
 type FixedModeScheduleActionStartSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -3641,7 +3609,6 @@ func (s FixedModeScheduleActionStartSettings) MarshalFields(e protocol.FieldEnco
 }
 
 // Settings to specify if an action follows another.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FollowModeScheduleActionStartSettings
 type FollowModeScheduleActionStartSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -3697,7 +3664,6 @@ func (s FollowModeScheduleActionStartSettings) MarshalFields(e protocol.FieldEnc
 }
 
 // Frame Capture Group Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FrameCaptureGroupSettings
 type FrameCaptureGroupSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -3744,7 +3710,6 @@ func (s FrameCaptureGroupSettings) MarshalFields(e protocol.FieldEncoder) error 
 }
 
 // Frame Capture Output Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FrameCaptureOutputSettings
 type FrameCaptureOutputSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -3770,7 +3735,6 @@ func (s FrameCaptureOutputSettings) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // Frame Capture Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FrameCaptureSettings
 type FrameCaptureSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -3815,7 +3779,6 @@ func (s FrameCaptureSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Global Configuration
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/GlobalConfiguration
 type GlobalConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -3915,8 +3878,49 @@ func (s GlobalConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// H264 Color Space Settings
+type H264ColorSpaceSettings struct {
+	_ struct{} `type:"structure"`
+
+	// Passthrough applies no color space conversion to the output
+	ColorSpacePassthroughSettings *ColorSpacePassthroughSettings `locationName:"colorSpacePassthroughSettings" type:"structure"`
+
+	// Rec601 Settings
+	Rec601Settings *Rec601Settings `locationName:"rec601Settings" type:"structure"`
+
+	// Rec709 Settings
+	Rec709Settings *Rec709Settings `locationName:"rec709Settings" type:"structure"`
+}
+
+// String returns the string representation
+func (s H264ColorSpaceSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s H264ColorSpaceSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ColorSpacePassthroughSettings != nil {
+		v := s.ColorSpacePassthroughSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "colorSpacePassthroughSettings", v, metadata)
+	}
+	if s.Rec601Settings != nil {
+		v := s.Rec601Settings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "rec601Settings", v, metadata)
+	}
+	if s.Rec709Settings != nil {
+		v := s.Rec709Settings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "rec709Settings", v, metadata)
+	}
+	return nil
+}
+
 // H264 Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/H264Settings
 type H264Settings struct {
 	_ struct{} `type:"structure"`
 
@@ -3939,11 +3943,14 @@ type H264Settings struct {
 	// Percentage of the buffer that should initially be filled (HRD buffer model).
 	BufFillPct *int64 `locationName:"bufFillPct" type:"integer"`
 
-	// Size of buffer (HRD buffer model) in bits/second.
+	// Size of buffer (HRD buffer model) in bits.
 	BufSize *int64 `locationName:"bufSize" type:"integer"`
 
 	// Includes colorspace metadata in the output.
 	ColorMetadata H264ColorMetadata `locationName:"colorMetadata" type:"string" enum:"true"`
+
+	// Color Space settings
+	ColorSpaceSettings *H264ColorSpaceSettings `locationName:"colorSpaceSettings" type:"structure"`
 
 	// Entropy encoding mode. Use cabac (must be in Main or High profile) or cavlc.
 	EntropyEncoding H264EntropyEncoding `locationName:"entropyEncoding" type:"string" enum:"true"`
@@ -3997,7 +4004,7 @@ type H264Settings struct {
 	// while high can produce better quality for certain content.
 	LookAheadRateControl H264LookAheadRateControl `locationName:"lookAheadRateControl" type:"string" enum:"true"`
 
-	// For QVBR: See the tooltip for Quality level For VBR: Set the maximum bitrate
+	// For QVBR: See the tooltip for Quality levelFor VBR: Set the maximum bitrate
 	// in order to accommodate expected spikes in the complexity of the video.
 	MaxBitrate *int64 `locationName:"maxBitrate" min:"1000" type:"integer"`
 
@@ -4038,7 +4045,7 @@ type H264Settings struct {
 	// level: 6. Max bitrate: 1M to 1.5M
 	QvbrQualityLevel *int64 `locationName:"qvbrQualityLevel" min:"1" type:"integer"`
 
-	// Rate control mode. QVBR: Quality will match the specified quality level except
+	// Rate control mode.QVBR: Quality will match the specified quality level except
 	// when it is constrained by themaximum bitrate. Recommended if you or your
 	// viewers pay for bandwidth.VBR: Quality and bitrate vary, depending on the
 	// video complexity. Recommended instead of QVBRif you want to maintain a specific
@@ -4162,6 +4169,12 @@ func (s H264Settings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "colorMetadata", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.ColorSpaceSettings != nil {
+		v := s.ColorSpaceSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "colorSpaceSettings", v, metadata)
 	}
 	if len(s.EntropyEncoding) > 0 {
 		v := s.EntropyEncoding
@@ -4352,8 +4365,448 @@ func (s H264Settings) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// H265 Color Space Settings
+type H265ColorSpaceSettings struct {
+	_ struct{} `type:"structure"`
+
+	// Passthrough applies no color space conversion to the output
+	ColorSpacePassthroughSettings *ColorSpacePassthroughSettings `locationName:"colorSpacePassthroughSettings" type:"structure"`
+
+	// Hdr10 Settings
+	Hdr10Settings *Hdr10Settings `locationName:"hdr10Settings" type:"structure"`
+
+	// Rec601 Settings
+	Rec601Settings *Rec601Settings `locationName:"rec601Settings" type:"structure"`
+
+	// Rec709 Settings
+	Rec709Settings *Rec709Settings `locationName:"rec709Settings" type:"structure"`
+}
+
+// String returns the string representation
+func (s H265ColorSpaceSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s H265ColorSpaceSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ColorSpacePassthroughSettings != nil {
+		v := s.ColorSpacePassthroughSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "colorSpacePassthroughSettings", v, metadata)
+	}
+	if s.Hdr10Settings != nil {
+		v := s.Hdr10Settings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "hdr10Settings", v, metadata)
+	}
+	if s.Rec601Settings != nil {
+		v := s.Rec601Settings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "rec601Settings", v, metadata)
+	}
+	if s.Rec709Settings != nil {
+		v := s.Rec709Settings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "rec709Settings", v, metadata)
+	}
+	return nil
+}
+
+// H265 Settings
+type H265Settings struct {
+	_ struct{} `type:"structure"`
+
+	// Adaptive quantization. Allows intra-frame quantizers to vary to improve visual
+	// quality.
+	AdaptiveQuantization H265AdaptiveQuantization `locationName:"adaptiveQuantization" type:"string" enum:"true"`
+
+	// Indicates that AFD values will be written into the output stream. If afdSignaling
+	// is "auto", the system will try to preserve the input AFD value (in cases
+	// where multiple AFD values are valid). If set to "fixed", the AFD value will
+	// be the value configured in the fixedAfd parameter.
+	AfdSignaling AfdSignaling `locationName:"afdSignaling" type:"string" enum:"true"`
+
+	// Whether or not EML should insert an Alternative Transfer Function SEI message
+	// to support backwards compatibility with non-HDR decoders and displays.
+	AlternativeTransferFunction H265AlternativeTransferFunction `locationName:"alternativeTransferFunction" type:"string" enum:"true"`
+
+	// Average bitrate in bits/second. Required when the rate control mode is VBR
+	// or CBR. Not used for QVBR. In an MS Smooth output group, each output must
+	// have a unique value when its bitrate is rounded down to the nearest multiple
+	// of 1000.
+	Bitrate *int64 `locationName:"bitrate" min:"100000" type:"integer"`
+
+	// Size of buffer (HRD buffer model) in bits.
+	BufSize *int64 `locationName:"bufSize" min:"100000" type:"integer"`
+
+	// Includes colorspace metadata in the output.
+	ColorMetadata H265ColorMetadata `locationName:"colorMetadata" type:"string" enum:"true"`
+
+	// Color Space settings
+	ColorSpaceSettings *H265ColorSpaceSettings `locationName:"colorSpaceSettings" type:"structure"`
+
+	// Four bit AFD value to write on all frames of video in the output stream.
+	// Only valid when afdSignaling is set to 'Fixed'.
+	FixedAfd FixedAfd `locationName:"fixedAfd" type:"string" enum:"true"`
+
+	// If set to enabled, adjust quantization within each frame to reduce flicker
+	// or 'pop' on I-frames.
+	FlickerAq H265FlickerAq `locationName:"flickerAq" type:"string" enum:"true"`
+
+	// Framerate denominator.
+	//
+	// FramerateDenominator is a required field
+	FramerateDenominator *int64 `locationName:"framerateDenominator" min:"1" type:"integer" required:"true"`
+
+	// Framerate numerator - framerate is a fraction, e.g. 24000 / 1001 = 23.976
+	// fps.
+	//
+	// FramerateNumerator is a required field
+	FramerateNumerator *int64 `locationName:"framerateNumerator" min:"1" type:"integer" required:"true"`
+
+	// Frequency of closed GOPs. In streaming applications, it is recommended that
+	// this be set to 1 so a decoder joining mid-stream will receive an IDR frame
+	// as quickly as possible. Setting this value to 0 will break output segmenting.
+	GopClosedCadence *int64 `locationName:"gopClosedCadence" type:"integer"`
+
+	// GOP size (keyframe interval) in units of either frames or seconds per gopSizeUnits.
+	// Must be greater than zero.
+	GopSize *float64 `locationName:"gopSize" type:"double"`
+
+	// Indicates if the gopSize is specified in frames or seconds. If seconds the
+	// system will convert the gopSize into a frame count at run time.
+	GopSizeUnits H265GopSizeUnits `locationName:"gopSizeUnits" type:"string" enum:"true"`
+
+	// H.265 Level.
+	Level H265Level `locationName:"level" type:"string" enum:"true"`
+
+	// Amount of lookahead. A value of low can decrease latency and memory usage,
+	// while high can produce better quality for certain content.
+	LookAheadRateControl H265LookAheadRateControl `locationName:"lookAheadRateControl" type:"string" enum:"true"`
+
+	// For QVBR: See the tooltip for Quality level
+	MaxBitrate *int64 `locationName:"maxBitrate" min:"100000" type:"integer"`
+
+	// Only meaningful if sceneChangeDetect is set to enabled. Enforces separation
+	// between repeated (cadence) I-frames and I-frames inserted by Scene Change
+	// Detection. If a scene change I-frame is within I-interval frames of a cadence
+	// I-frame, the GOP is shrunk and/or stretched to the scene change I-frame.
+	// GOP stretch requires enabling lookahead as well as setting I-interval. The
+	// normal cadence resumes for the next GOP. Note: Maximum GOP stretch = GOP
+	// size + Min-I-interval - 1
+	MinIInterval *int64 `locationName:"minIInterval" type:"integer"`
+
+	// Pixel Aspect Ratio denominator.
+	ParDenominator *int64 `locationName:"parDenominator" min:"1" type:"integer"`
+
+	// Pixel Aspect Ratio numerator.
+	ParNumerator *int64 `locationName:"parNumerator" min:"1" type:"integer"`
+
+	// H.265 Profile.
+	Profile H265Profile `locationName:"profile" type:"string" enum:"true"`
+
+	// Controls the target quality for the video encode. Applies only when the rate
+	// control mode is QVBR. Set values for the QVBR quality level field and Max
+	// bitrate field that suit your most important viewing devices. Recommended
+	// values are:- Primary screen: Quality level: 8 to 10. Max bitrate: 4M- PC
+	// or tablet: Quality level: 7. Max bitrate: 1.5M to 3M- Smartphone: Quality
+	// level: 6. Max bitrate: 1M to 1.5M
+	QvbrQualityLevel *int64 `locationName:"qvbrQualityLevel" min:"1" type:"integer"`
+
+	// Rate control mode.QVBR: Quality will match the specified quality level except
+	// when it is constrained by themaximum bitrate. Recommended if you or your
+	// viewers pay for bandwidth.CBR: Quality varies, depending on the video complexity.
+	// Recommended only if you distributeyour assets to devices that cannot handle
+	// variable bitrates.
+	RateControlMode H265RateControlMode `locationName:"rateControlMode" type:"string" enum:"true"`
+
+	// Sets the scan type of the output to progressive or top-field-first interlaced.
+	ScanType H265ScanType `locationName:"scanType" type:"string" enum:"true"`
+
+	// Scene change detection.
+	SceneChangeDetect H265SceneChangeDetect `locationName:"sceneChangeDetect" type:"string" enum:"true"`
+
+	// Number of slices per picture. Must be less than or equal to the number of
+	// macroblock rows for progressive pictures, and less than or equal to half
+	// the number of macroblock rows for interlaced pictures.This field is optional;
+	// when no value is specified the encoder will choose the number of slices based
+	// on encode resolution.
+	Slices *int64 `locationName:"slices" min:"1" type:"integer"`
+
+	// H.265 Tier.
+	Tier H265Tier `locationName:"tier" type:"string" enum:"true"`
+
+	// Determines how timecodes should be inserted into the video elementary stream.-
+	// 'disabled': Do not include timecodes- 'picTimingSei': Pass through picture
+	// timing SEI messages from the source specified in Timecode Config
+	TimecodeInsertion H265TimecodeInsertionBehavior `locationName:"timecodeInsertion" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s H265Settings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *H265Settings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "H265Settings"}
+	if s.Bitrate != nil && *s.Bitrate < 100000 {
+		invalidParams.Add(aws.NewErrParamMinValue("Bitrate", 100000))
+	}
+	if s.BufSize != nil && *s.BufSize < 100000 {
+		invalidParams.Add(aws.NewErrParamMinValue("BufSize", 100000))
+	}
+
+	if s.FramerateDenominator == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FramerateDenominator"))
+	}
+	if s.FramerateDenominator != nil && *s.FramerateDenominator < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("FramerateDenominator", 1))
+	}
+
+	if s.FramerateNumerator == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FramerateNumerator"))
+	}
+	if s.FramerateNumerator != nil && *s.FramerateNumerator < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("FramerateNumerator", 1))
+	}
+	if s.MaxBitrate != nil && *s.MaxBitrate < 100000 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxBitrate", 100000))
+	}
+	if s.ParDenominator != nil && *s.ParDenominator < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("ParDenominator", 1))
+	}
+	if s.ParNumerator != nil && *s.ParNumerator < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("ParNumerator", 1))
+	}
+	if s.QvbrQualityLevel != nil && *s.QvbrQualityLevel < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("QvbrQualityLevel", 1))
+	}
+	if s.Slices != nil && *s.Slices < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Slices", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s H265Settings) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.AdaptiveQuantization) > 0 {
+		v := s.AdaptiveQuantization
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "adaptiveQuantization", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.AfdSignaling) > 0 {
+		v := s.AfdSignaling
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "afdSignaling", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.AlternativeTransferFunction) > 0 {
+		v := s.AlternativeTransferFunction
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "alternativeTransferFunction", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Bitrate != nil {
+		v := *s.Bitrate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "bitrate", protocol.Int64Value(v), metadata)
+	}
+	if s.BufSize != nil {
+		v := *s.BufSize
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "bufSize", protocol.Int64Value(v), metadata)
+	}
+	if len(s.ColorMetadata) > 0 {
+		v := s.ColorMetadata
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "colorMetadata", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.ColorSpaceSettings != nil {
+		v := s.ColorSpaceSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "colorSpaceSettings", v, metadata)
+	}
+	if len(s.FixedAfd) > 0 {
+		v := s.FixedAfd
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "fixedAfd", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.FlickerAq) > 0 {
+		v := s.FlickerAq
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "flickerAq", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.FramerateDenominator != nil {
+		v := *s.FramerateDenominator
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "framerateDenominator", protocol.Int64Value(v), metadata)
+	}
+	if s.FramerateNumerator != nil {
+		v := *s.FramerateNumerator
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "framerateNumerator", protocol.Int64Value(v), metadata)
+	}
+	if s.GopClosedCadence != nil {
+		v := *s.GopClosedCadence
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "gopClosedCadence", protocol.Int64Value(v), metadata)
+	}
+	if s.GopSize != nil {
+		v := *s.GopSize
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "gopSize", protocol.Float64Value(v), metadata)
+	}
+	if len(s.GopSizeUnits) > 0 {
+		v := s.GopSizeUnits
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "gopSizeUnits", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.Level) > 0 {
+		v := s.Level
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "level", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.LookAheadRateControl) > 0 {
+		v := s.LookAheadRateControl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lookAheadRateControl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.MaxBitrate != nil {
+		v := *s.MaxBitrate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxBitrate", protocol.Int64Value(v), metadata)
+	}
+	if s.MinIInterval != nil {
+		v := *s.MinIInterval
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "minIInterval", protocol.Int64Value(v), metadata)
+	}
+	if s.ParDenominator != nil {
+		v := *s.ParDenominator
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "parDenominator", protocol.Int64Value(v), metadata)
+	}
+	if s.ParNumerator != nil {
+		v := *s.ParNumerator
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "parNumerator", protocol.Int64Value(v), metadata)
+	}
+	if len(s.Profile) > 0 {
+		v := s.Profile
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "profile", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.QvbrQualityLevel != nil {
+		v := *s.QvbrQualityLevel
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "qvbrQualityLevel", protocol.Int64Value(v), metadata)
+	}
+	if len(s.RateControlMode) > 0 {
+		v := s.RateControlMode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "rateControlMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.ScanType) > 0 {
+		v := s.ScanType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "scanType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.SceneChangeDetect) > 0 {
+		v := s.SceneChangeDetect
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "sceneChangeDetect", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Slices != nil {
+		v := *s.Slices
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "slices", protocol.Int64Value(v), metadata)
+	}
+	if len(s.Tier) > 0 {
+		v := s.Tier
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "tier", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.TimecodeInsertion) > 0 {
+		v := s.TimecodeInsertion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "timecodeInsertion", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Hdr10 Settings
+type Hdr10Settings struct {
+	_ struct{} `type:"structure"`
+
+	// Maximum Content Light LevelAn integer metadata value defining the maximum
+	// light level, in nits,of any single pixel within an encoded HDR video stream
+	// or file.
+	MaxCll *int64 `locationName:"maxCll" type:"integer"`
+
+	// Maximum Frame Average Light LevelAn integer metadata value defining the maximum
+	// average light level, in nits,for any single frame within an encoded HDR video
+	// stream or file.
+	MaxFall *int64 `locationName:"maxFall" type:"integer"`
+}
+
+// String returns the string representation
+func (s Hdr10Settings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Hdr10Settings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.MaxCll != nil {
+		v := *s.MaxCll
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxCll", protocol.Int64Value(v), metadata)
+	}
+	if s.MaxFall != nil {
+		v := *s.MaxFall
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxFall", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // Hls Akamai Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsAkamaiSettings
 type HlsAkamaiSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -4436,7 +4889,6 @@ func (s HlsAkamaiSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Hls Basic Put Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsBasicPutSettings
 type HlsBasicPutSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -4491,7 +4943,6 @@ func (s HlsBasicPutSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Hls Cdn Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsCdnSettings
 type HlsCdnSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -4543,7 +4994,6 @@ func (s HlsCdnSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Hls Group Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsGroupSettings
 type HlsGroupSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -5020,7 +5470,6 @@ func (s HlsGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Hls Input Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsInputSettings
 type HlsInputSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -5079,7 +5528,6 @@ func (s HlsInputSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Hls Media Store Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsMediaStoreSettings
 type HlsMediaStoreSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -5144,7 +5592,6 @@ func (s HlsMediaStoreSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Hls Output Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsOutputSettings
 type HlsOutputSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -5213,7 +5660,6 @@ func (s HlsOutputSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Hls Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsSettings
 type HlsSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -5267,7 +5713,6 @@ func (s HlsSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Settings for the action to emit HLS metadata
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsTimedMetadataScheduleActionSettings
 type HlsTimedMetadataScheduleActionSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -5308,7 +5753,6 @@ func (s HlsTimedMetadataScheduleActionSettings) MarshalFields(e protocol.FieldEn
 }
 
 // Hls Webdav Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsWebdavSettings
 type HlsWebdavSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -5373,7 +5817,6 @@ func (s HlsWebdavSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 // Settings to configure an action so that it occurs immediately. This is only
 // supported for input switch actions currently.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ImmediateModeScheduleActionStartSettings
 type ImmediateModeScheduleActionStartSettings struct {
 	_ struct{} `type:"structure"`
 }
@@ -5388,7 +5831,6 @@ func (s ImmediateModeScheduleActionStartSettings) MarshalFields(e protocol.Field
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Input
 type Input struct {
 	_ struct{} `type:"structure"`
 
@@ -5573,7 +6015,6 @@ func (s Input) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputAttachment
 type InputAttachment struct {
 	_ struct{} `type:"structure"`
 
@@ -5632,7 +6073,6 @@ func (s InputAttachment) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Input Channel Level
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputChannelLevel
 type InputChannelLevel struct {
 	_ struct{} `type:"structure"`
 
@@ -5693,7 +6133,6 @@ func (s InputChannelLevel) MarshalFields(e protocol.FieldEncoder) error {
 
 // Settings to let you create a clip of the file input, in order to set up the
 // input to ingest only a portion of the file.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputClippingSettings
 type InputClippingSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -5751,7 +6190,6 @@ func (s InputClippingSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The settings for a PUSH type input.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDestination
 type InputDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -5804,7 +6242,6 @@ func (s InputDestination) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Endpoint settings for a PUSH type input.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDestinationRequest
 type InputDestinationRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -5829,7 +6266,6 @@ func (s InputDestinationRequest) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The properties for a VPC type input destination.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDestinationVpc
 type InputDestinationVpc struct {
 	_ struct{} `type:"structure"`
 
@@ -5863,7 +6299,6 @@ func (s InputDestinationVpc) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Input Location
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputLocation
 type InputLocation struct {
 	_ struct{} `type:"structure"`
 
@@ -5927,7 +6362,6 @@ func (s InputLocation) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Input Loss Behavior
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputLossBehavior
 type InputLossBehavior struct {
 	_ struct{} `type:"structure"`
 
@@ -6014,7 +6448,6 @@ func (s InputLossBehavior) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An Input Security Group
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputSecurityGroup
 type InputSecurityGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -6103,7 +6536,6 @@ func (s InputSecurityGroup) MarshalFields(e protocol.FieldEncoder) error {
 
 // Live Event input parameters. There can be multiple inputs in a single Live
 // Event.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputSettings
 type InputSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -6243,7 +6675,6 @@ func (s InputSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The settings for a PULL type input.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputSource
 type InputSource struct {
 	_ struct{} `type:"structure"`
 
@@ -6286,7 +6717,6 @@ func (s InputSource) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Settings for for a PULL type input.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputSourceRequest
 type InputSourceRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -6328,7 +6758,6 @@ func (s InputSourceRequest) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputSpecification
 type InputSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -6372,7 +6801,6 @@ func (s InputSpecification) MarshalFields(e protocol.FieldEncoder) error {
 
 // Settings for the "switch input" action: to switch from ingesting one input
 // to ingesting another input.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputSwitchScheduleActionSettings
 type InputSwitchScheduleActionSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -6450,7 +6878,6 @@ func (s InputSwitchScheduleActionSettings) MarshalFields(e protocol.FieldEncoder
 // destination addresses will be created in a VPC rather than with public Internet
 // addresses.This property requires setting the roleArn property on Input creation.Not
 // compatible with the inputSecurityGroups property.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputVpcRequest
 type InputVpcRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -6515,7 +6942,6 @@ func (s InputVpcRequest) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Whitelist rule
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputWhitelistRule
 type InputWhitelistRule struct {
 	_ struct{} `type:"structure"`
 
@@ -6540,7 +6966,6 @@ func (s InputWhitelistRule) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An IPv4 CIDR to whitelist.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputWhitelistRuleCidr
 type InputWhitelistRuleCidr struct {
 	_ struct{} `type:"structure"`
 
@@ -6565,7 +6990,6 @@ func (s InputWhitelistRuleCidr) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Key Provider Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/KeyProviderSettings
 type KeyProviderSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -6605,7 +7029,6 @@ func (s KeyProviderSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // M2ts Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/M2tsSettings
 type M2tsSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -7143,7 +7566,6 @@ func (s M2tsSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Settings information for the .m3u8 container
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/M3u8Settings
 type M3u8Settings struct {
 	_ struct{} `type:"structure"`
 
@@ -7318,7 +7740,6 @@ func (s M3u8Settings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The settings for a MediaConnect Flow.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaConnectFlow
 type MediaConnectFlow struct {
 	_ struct{} `type:"structure"`
 
@@ -7343,7 +7764,6 @@ func (s MediaConnectFlow) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The settings for a MediaConnect Flow.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaConnectFlowRequest
 type MediaConnectFlowRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -7368,7 +7788,6 @@ func (s MediaConnectFlowRequest) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Media Package Group Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaPackageGroupSettings
 type MediaPackageGroupSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -7409,7 +7828,6 @@ func (s MediaPackageGroupSettings) MarshalFields(e protocol.FieldEncoder) error 
 }
 
 // MediaPackage Output Destination Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaPackageOutputDestinationSettings
 type MediaPackageOutputDestinationSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -7451,7 +7869,6 @@ func (s MediaPackageOutputDestinationSettings) MarshalFields(e protocol.FieldEnc
 }
 
 // Media Package Output Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaPackageOutputSettings
 type MediaPackageOutputSettings struct {
 	_ struct{} `type:"structure"`
 }
@@ -7467,7 +7884,6 @@ func (s MediaPackageOutputSettings) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // Mp2 Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Mp2Settings
 type Mp2Settings struct {
 	_ struct{} `type:"structure"`
 
@@ -7511,7 +7927,6 @@ func (s Mp2Settings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Ms Smooth Group Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MsSmoothGroupSettings
 type MsSmoothGroupSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -7739,9 +8154,12 @@ func (s MsSmoothGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Ms Smooth Output Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MsSmoothOutputSettings
 type MsSmoothOutputSettings struct {
 	_ struct{} `type:"structure"`
+
+	// Only applicable when this output is referencing an H.265 video description.Specifies
+	// whether MP4 segments should be packaged as HEV1 or HVC1.
+	H265PackagingType MsSmoothH265PackagingType `locationName:"h265PackagingType" type:"string" enum:"true"`
 
 	// String concatenated to the end of the destination filename. Required for
 	// multiple outputs of the same type.
@@ -7755,6 +8173,12 @@ func (s MsSmoothOutputSettings) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s MsSmoothOutputSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.H265PackagingType) > 0 {
+		v := s.H265PackagingType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "h265PackagingType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.NameModifier != nil {
 		v := *s.NameModifier
 
@@ -7766,7 +8190,6 @@ func (s MsSmoothOutputSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 // Network source to transcode. Must be accessible to the Elemental Live node
 // that is running the live event through a network connection.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/NetworkInputSettings
 type NetworkInputSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -7805,7 +8228,6 @@ func (s NetworkInputSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Reserved resources available for purchase
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Offering
 type Offering struct {
 	_ struct{} `type:"structure"`
 
@@ -7921,7 +8343,6 @@ func (s Offering) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Output settings. There can be multiple outputs within a group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Output
 type Output struct {
 	_ struct{} `type:"structure"`
 
@@ -8017,7 +8438,6 @@ func (s Output) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputDestination
 type OutputDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -8090,7 +8510,6 @@ func (s OutputDestination) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputDestinationSettings
 type OutputDestinationSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -8143,7 +8562,6 @@ func (s OutputDestinationSettings) MarshalFields(e protocol.FieldEncoder) error 
 
 // Output groups for this Live Event. Output groups contain information about
 // where streams should be distributed.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputGroup
 type OutputGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -8225,7 +8643,6 @@ func (s OutputGroup) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Output Group Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputGroupSettings
 type OutputGroupSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -8344,7 +8761,6 @@ func (s OutputGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Reference to an OutputDestination ID defined in the channel
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputLocationRef
 type OutputLocationRef struct {
 	_ struct{} `type:"structure"`
 
@@ -8368,7 +8784,6 @@ func (s OutputLocationRef) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Output Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputSettings
 type OutputSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -8477,7 +8892,6 @@ func (s OutputSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Pass Through Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PassThroughSettings
 type PassThroughSettings struct {
 	_ struct{} `type:"structure"`
 }
@@ -8493,7 +8907,6 @@ func (s PassThroughSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Settings for the action to set pause state of a channel.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PauseStateScheduleActionSettings
 type PauseStateScheduleActionSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -8540,7 +8953,6 @@ func (s PauseStateScheduleActionSettings) MarshalFields(e protocol.FieldEncoder)
 }
 
 // Runtime details of a pipeline when a channel is running.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PipelineDetail
 type PipelineDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -8586,7 +8998,6 @@ func (s PipelineDetail) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Settings for pausing a pipeline.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PipelinePauseStateSettings
 type PipelinePauseStateSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -8625,8 +9036,37 @@ func (s PipelinePauseStateSettings) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
+// Rec601 Settings
+type Rec601Settings struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s Rec601Settings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Rec601Settings) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Rec709 Settings
+type Rec709Settings struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s Rec709Settings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Rec709Settings) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
 // Remix Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RemixSettings
 type RemixSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -8704,7 +9144,6 @@ func (s RemixSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Reserved resources available to use
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Reservation
 type Reservation struct {
 	_ struct{} `type:"structure"`
 
@@ -8889,7 +9328,6 @@ func (s Reservation) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Resource configuration (codec, resolution, bitrate, ...)
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ReservationResourceSpecification
 type ReservationResourceSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -8977,7 +9415,6 @@ func (s ReservationResourceSpecification) MarshalFields(e protocol.FieldEncoder)
 }
 
 // Rtmp Caption Info Destination Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RtmpCaptionInfoDestinationSettings
 type RtmpCaptionInfoDestinationSettings struct {
 	_ struct{} `type:"structure"`
 }
@@ -8993,7 +9430,6 @@ func (s RtmpCaptionInfoDestinationSettings) MarshalFields(e protocol.FieldEncode
 }
 
 // Rtmp Group Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RtmpGroupSettings
 type RtmpGroupSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -9089,7 +9525,6 @@ func (s RtmpGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Rtmp Output Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RtmpOutputSettings
 type RtmpOutputSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -9165,7 +9600,6 @@ func (s RtmpOutputSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Contains information on a single schedule action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ScheduleAction
 type ScheduleAction struct {
 	_ struct{} `type:"structure"`
 
@@ -9250,7 +9684,6 @@ func (s ScheduleAction) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Holds the settings for a single schedule action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ScheduleActionSettings
 type ScheduleActionSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -9384,7 +9817,6 @@ func (s ScheduleActionSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 // Settings to specify when an action should occur. Only one of the options
 // must be selected.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ScheduleActionStartSettings
 type ScheduleActionStartSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -9447,7 +9879,6 @@ func (s ScheduleActionStartSettings) MarshalFields(e protocol.FieldEncoder) erro
 }
 
 // Scte20 Plus Embedded Destination Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte20PlusEmbeddedDestinationSettings
 type Scte20PlusEmbeddedDestinationSettings struct {
 	_ struct{} `type:"structure"`
 }
@@ -9463,7 +9894,6 @@ func (s Scte20PlusEmbeddedDestinationSettings) MarshalFields(e protocol.FieldEnc
 }
 
 // Scte20 Source Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte20SourceSettings
 type Scte20SourceSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -9513,7 +9943,6 @@ func (s Scte20SourceSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Scte27 Destination Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte27DestinationSettings
 type Scte27DestinationSettings struct {
 	_ struct{} `type:"structure"`
 }
@@ -9529,7 +9958,6 @@ func (s Scte27DestinationSettings) MarshalFields(e protocol.FieldEncoder) error 
 }
 
 // Scte27 Source Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte27SourceSettings
 type Scte27SourceSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -9575,7 +10003,6 @@ func (s Scte27SourceSettings) MarshalFields(e protocol.FieldEncoder) error {
 // Corresponds to SCTE-35 delivery_not_restricted_flag parameter. To declare
 // delivery restrictions, include this element and its four "restriction" flags.
 // To declare that there are no restrictions, omit this element.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte35DeliveryRestrictions
 type Scte35DeliveryRestrictions struct {
 	_ struct{} `type:"structure"`
 
@@ -9657,7 +10084,6 @@ func (s Scte35DeliveryRestrictions) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // Holds one set of SCTE-35 Descriptor Settings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte35Descriptor
 type Scte35Descriptor struct {
 	_ struct{} `type:"structure"`
 
@@ -9703,7 +10129,6 @@ func (s Scte35Descriptor) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // SCTE-35 Descriptor settings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte35DescriptorSettings
 type Scte35DescriptorSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -9749,7 +10174,6 @@ func (s Scte35DescriptorSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Settings for a SCTE-35 return_to_network message.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte35ReturnToNetworkScheduleActionSettings
 type Scte35ReturnToNetworkScheduleActionSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -9790,7 +10214,6 @@ func (s Scte35ReturnToNetworkScheduleActionSettings) MarshalFields(e protocol.Fi
 }
 
 // Corresponds to SCTE-35 segmentation_descriptor.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte35SegmentationDescriptor
 type Scte35SegmentationDescriptor struct {
 	_ struct{} `type:"structure"`
 
@@ -9950,7 +10373,6 @@ func (s Scte35SegmentationDescriptor) MarshalFields(e protocol.FieldEncoder) err
 }
 
 // Scte35 Splice Insert
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte35SpliceInsert
 type Scte35SpliceInsert struct {
 	_ struct{} `type:"structure"`
 
@@ -10010,7 +10432,6 @@ func (s Scte35SpliceInsert) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Settings for a SCTE-35 splice_insert message.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte35SpliceInsertScheduleActionSettings
 type Scte35SpliceInsertScheduleActionSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -10065,7 +10486,6 @@ func (s Scte35SpliceInsertScheduleActionSettings) MarshalFields(e protocol.Field
 }
 
 // Scte35 Time Signal Apos
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte35TimeSignalApos
 type Scte35TimeSignalApos struct {
 	_ struct{} `type:"structure"`
 
@@ -10125,7 +10545,6 @@ func (s Scte35TimeSignalApos) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Settings for a SCTE-35 time_signal.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte35TimeSignalScheduleActionSettings
 type Scte35TimeSignalScheduleActionSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -10179,7 +10598,6 @@ func (s Scte35TimeSignalScheduleActionSettings) MarshalFields(e protocol.FieldEn
 }
 
 // Smpte Tt Destination Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/SmpteTtDestinationSettings
 type SmpteTtDestinationSettings struct {
 	_ struct{} `type:"structure"`
 }
@@ -10195,7 +10613,6 @@ func (s SmpteTtDestinationSettings) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // Standard Hls Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StandardHlsSettings
 type StandardHlsSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -10246,7 +10663,6 @@ func (s StandardHlsSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Settings to identify the start of the clip.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartTimecode
 type StartTimecode struct {
 	_ struct{} `type:"structure"`
 
@@ -10273,7 +10689,6 @@ func (s StartTimecode) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Settings for the action to activate a static image.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StaticImageActivateScheduleActionSettings
 type StaticImageActivateScheduleActionSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -10427,7 +10842,6 @@ func (s StaticImageActivateScheduleActionSettings) MarshalFields(e protocol.Fiel
 }
 
 // Settings for the action to deactivate the image in a specific layer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StaticImageDeactivateScheduleActionSettings
 type StaticImageDeactivateScheduleActionSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -10461,7 +10875,6 @@ func (s StaticImageDeactivateScheduleActionSettings) MarshalFields(e protocol.Fi
 }
 
 // Static Key Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StaticKeySettings
 type StaticKeySettings struct {
 	_ struct{} `type:"structure"`
 
@@ -10519,7 +10932,6 @@ func (s StaticKeySettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Settings to identify the end of the clip.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StopTimecode
 type StopTimecode struct {
 	_ struct{} `type:"structure"`
 
@@ -10557,7 +10969,6 @@ func (s StopTimecode) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Teletext Destination Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/TeletextDestinationSettings
 type TeletextDestinationSettings struct {
 	_ struct{} `type:"structure"`
 }
@@ -10573,7 +10984,6 @@ func (s TeletextDestinationSettings) MarshalFields(e protocol.FieldEncoder) erro
 }
 
 // Teletext Source Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/TeletextSourceSettings
 type TeletextSourceSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -10600,7 +11010,6 @@ func (s TeletextSourceSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Timecode Config
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/TimecodeConfig
 type TimecodeConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -10660,7 +11069,6 @@ func (s TimecodeConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Ttml Destination Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/TtmlDestinationSettings
 type TtmlDestinationSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -10687,7 +11095,6 @@ func (s TtmlDestinationSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Udp Container Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UdpContainerSettings
 type UdpContainerSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -10727,7 +11134,6 @@ func (s UdpContainerSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Udp Group Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UdpGroupSettings
 type UdpGroupSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -10776,7 +11182,6 @@ func (s UdpGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Udp Output Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UdpOutputSettings
 type UdpOutputSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -10863,7 +11268,6 @@ func (s UdpOutputSettings) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ValidationError
 type ValidationError struct {
 	_ struct{} `type:"structure"`
 
@@ -10895,7 +11299,6 @@ func (s ValidationError) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Video Codec Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/VideoCodecSettings
 type VideoCodecSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -10904,6 +11307,9 @@ type VideoCodecSettings struct {
 
 	// H264 Settings
 	H264Settings *H264Settings `locationName:"h264Settings" type:"structure"`
+
+	// H265 Settings
+	H265Settings *H265Settings `locationName:"h265Settings" type:"structure"`
 }
 
 // String returns the string representation
@@ -10922,6 +11328,11 @@ func (s *VideoCodecSettings) Validate() error {
 	if s.H264Settings != nil {
 		if err := s.H264Settings.Validate(); err != nil {
 			invalidParams.AddNested("H264Settings", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.H265Settings != nil {
+		if err := s.H265Settings.Validate(); err != nil {
+			invalidParams.AddNested("H265Settings", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -10945,11 +11356,16 @@ func (s VideoCodecSettings) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "h264Settings", v, metadata)
 	}
+	if s.H265Settings != nil {
+		v := s.H265Settings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "h265Settings", v, metadata)
+	}
 	return nil
 }
 
 // Video settings for this stream.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/VideoDescription
 type VideoDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -11069,12 +11485,12 @@ func (s VideoDescription) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies a particular video stream within an input source. An input may
 // have only a single video selector.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/VideoSelector
 type VideoSelector struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the colorspace of an input. This setting works in tandem with colorSpaceConversion
-	// to determine if any conversion will be performed.
+	// Specifies the color space of an input. This setting works in tandem with
+	// colorSpaceUsage and a video description's colorSpaceSettingsChoice to determine
+	// if any conversion will be performed.
 	ColorSpace VideoSelectorColorSpace `locationName:"colorSpace" type:"string" enum:"true"`
 
 	// Applies only if colorSpace is a value other than follow. This field controls
@@ -11120,7 +11536,6 @@ func (s VideoSelector) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Video Selector Pid
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/VideoSelectorPid
 type VideoSelectorPid struct {
 	_ struct{} `type:"structure"`
 
@@ -11145,7 +11560,6 @@ func (s VideoSelectorPid) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Video Selector Program Id
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/VideoSelectorProgramId
 type VideoSelectorProgramId struct {
 	_ struct{} `type:"structure"`
 
@@ -11172,7 +11586,6 @@ func (s VideoSelectorProgramId) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Video Selector Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/VideoSelectorSettings
 type VideoSelectorSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -11206,7 +11619,6 @@ func (s VideoSelectorSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Webvtt Destination Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/WebvttDestinationSettings
 type WebvttDestinationSettings struct {
 	_ struct{} `type:"structure"`
 }

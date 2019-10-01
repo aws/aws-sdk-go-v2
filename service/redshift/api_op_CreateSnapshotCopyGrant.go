@@ -10,7 +10,6 @@ import (
 )
 
 // The result of the CreateSnapshotCopyGrant action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateSnapshotCopyGrantMessage
 type CreateSnapshotCopyGrantInput struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s *CreateSnapshotCopyGrantInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateSnapshotCopyGrantResult
 type CreateSnapshotCopyGrantOutput struct {
 	_ struct{} `type:"structure"`
 

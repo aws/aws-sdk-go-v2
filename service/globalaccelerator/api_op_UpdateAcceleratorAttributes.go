@@ -9,13 +9,13 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/UpdateAcceleratorAttributesRequest
 type UpdateAcceleratorAttributesInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the accelerator that you want to update.
-	// Attribute is required.
-	AcceleratorArn *string `type:"string"`
+	//
+	// AcceleratorArn is a required field
+	AcceleratorArn *string `type:"string" required:"true"`
 
 	// Update whether flow logs are enabled. The default value is false. If the
 	// value is true, FlowLogsS3Bucket and FlowLogsS3Prefix must be specified.
@@ -40,7 +40,20 @@ func (s UpdateAcceleratorAttributesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/UpdateAcceleratorAttributesResponse
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateAcceleratorAttributesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateAcceleratorAttributesInput"}
+
+	if s.AcceleratorArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AcceleratorArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 type UpdateAcceleratorAttributesOutput struct {
 	_ struct{} `type:"structure"`
 

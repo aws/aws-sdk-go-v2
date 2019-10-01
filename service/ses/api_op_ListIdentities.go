@@ -12,7 +12,6 @@ import (
 // Represents a request to return a list of all identities (email addresses
 // and domains) that you have attempted to verify under your AWS account, regardless
 // of verification status.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListIdentitiesRequest
 type ListIdentitiesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -34,7 +33,6 @@ func (s ListIdentitiesInput) String() string {
 
 // A list of all identities that you have attempted to verify under your AWS
 // account, regardless of verification status.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListIdentitiesResponse
 type ListIdentitiesOutput struct {
 	_ struct{} `type:"structure"`
 

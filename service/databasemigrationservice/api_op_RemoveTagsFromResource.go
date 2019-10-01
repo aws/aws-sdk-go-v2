@@ -10,7 +10,6 @@ import (
 )
 
 // Removes one or more tags from an AWS DMS resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RemoveTagsFromResourceMessage
 type RemoveTagsFromResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -49,7 +48,6 @@ func (s *RemoveTagsFromResourceInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RemoveTagsFromResourceResponse
 type RemoveTagsFromResourceOutput struct {
 	_ struct{} `type:"structure"`
 }

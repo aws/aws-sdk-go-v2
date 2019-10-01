@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a DescribeEngineDefaultParameters operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeEngineDefaultParametersMessage
 type DescribeEngineDefaultParametersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s *DescribeEngineDefaultParametersInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeEngineDefaultParametersResult
 type DescribeEngineDefaultParametersOutput struct {
 	_ struct{} `type:"structure"`
 

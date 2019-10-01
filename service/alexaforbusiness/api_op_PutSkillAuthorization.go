@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutSkillAuthorizationRequest
 type PutSkillAuthorizationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -17,7 +16,7 @@ type PutSkillAuthorizationInput struct {
 	// be populated in the AuthorizationResult map to establish the authorization.
 	//
 	// AuthorizationResult is a required field
-	AuthorizationResult map[string]string `type:"map" required:"true"`
+	AuthorizationResult map[string]string `type:"map" required:"true" sensitive:"true"`
 
 	// The room that the skill is authorized for.
 	RoomArn *string `type:"string"`
@@ -51,7 +50,6 @@ func (s *PutSkillAuthorizationInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutSkillAuthorizationResponse
 type PutSkillAuthorizationOutput struct {
 	_ struct{} `type:"structure"`
 }

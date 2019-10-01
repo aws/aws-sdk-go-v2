@@ -12,7 +12,6 @@ import (
 // Represents a request to list the receipt rule sets that exist under your
 // AWS account. You use receipt rule sets to receive email with Amazon SES.
 // For more information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListReceiptRuleSetsRequest
 type ListReceiptRuleSetsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -27,7 +26,6 @@ func (s ListReceiptRuleSetsInput) String() string {
 }
 
 // A list of receipt rule sets that exist under your AWS account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListReceiptRuleSetsResponse
 type ListReceiptRuleSetsOutput struct {
 	_ struct{} `type:"structure"`
 

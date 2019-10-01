@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/StartImportRequest
 type StartImportInput struct {
 	_ struct{} `type:"structure"`
 
@@ -99,7 +98,6 @@ func (s StartImportInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/StartImportResponse
 type StartImportOutput struct {
 	_ struct{} `type:"structure"`
 

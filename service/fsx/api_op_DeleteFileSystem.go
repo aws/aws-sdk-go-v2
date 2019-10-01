@@ -10,7 +10,6 @@ import (
 )
 
 // The request object for DeleteFileSystem operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteFileSystemRequest
 type DeleteFileSystemInput struct {
 	_ struct{} `type:"structure"`
 
@@ -60,7 +59,6 @@ func (s *DeleteFileSystemInput) Validate() error {
 }
 
 // The response object for the DeleteFileSystem operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteFileSystemResponse
 type DeleteFileSystemOutput struct {
 	_ struct{} `type:"structure"`
 

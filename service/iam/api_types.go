@@ -19,7 +19,6 @@ var _ = awsutil.Prettify
 //
 // This data type is a response element in the GetOrganizationsAccessReport
 // operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AccessDetail
 type AccessDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -83,7 +82,6 @@ func (s AccessDetail) String() string {
 // You can get a secret access key only when you first create an access key;
 // you cannot recover the secret access key later. If you lose a secret access
 // key, you must create a new access key.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AccessKey
 type AccessKey struct {
 	_ struct{} `type:"structure"`
 
@@ -98,7 +96,7 @@ type AccessKey struct {
 	// The secret key used to sign requests.
 	//
 	// SecretAccessKey is a required field
-	SecretAccessKey *string `type:"string" required:"true"`
+	SecretAccessKey *string `type:"string" required:"true" sensitive:"true"`
 
 	// The status of the access key. Active means that the key is valid for API
 	// calls, while Inactive means it is not.
@@ -122,7 +120,6 @@ func (s AccessKey) String() string {
 //
 // This data type is used as a response element in the GetAccessKeyLastUsed
 // operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AccessKeyLastUsed
 type AccessKeyLastUsed struct {
 	_ struct{} `type:"structure"`
 
@@ -178,7 +175,6 @@ func (s AccessKeyLastUsed) String() string {
 // Contains information about an AWS access key, without its secret key.
 //
 // This data type is used as a response element in the ListAccessKeys operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AccessKeyMetadata
 type AccessKeyMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -209,7 +205,6 @@ func (s AccessKeyMetadata) String() string {
 // For more information about permissions boundaries, see Permissions Boundaries
 // for IAM Identities (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
 // in the IAM User Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachedPermissionsBoundary
 type AttachedPermissionsBoundary struct {
 	_ struct{} `type:"structure"`
 
@@ -238,7 +233,6 @@ func (s AttachedPermissionsBoundary) String() string {
 // For more information about managed policies, refer to Managed Policies and
 // Inline Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the Using IAM guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachedPolicy
 type AttachedPolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -264,8 +258,7 @@ func (s AttachedPolicy) String() string {
 // evaluating the Condition elements of the input policies.
 //
 // This data type is used as an input parameter to SimulateCustomPolicy and
-// SimulateCustomPolicy .
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ContextEntry
+// SimulatePrincipalPolicy .
 type ContextEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -305,7 +298,6 @@ func (s *ContextEntry) Validate() error {
 //
 // This data type is used as a response element in the GetServiceLinkedRoleDeletionStatus
 // operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeletionTaskFailureReasonType
 type DeletionTaskFailureReasonType struct {
 	_ struct{} `type:"structure"`
 
@@ -331,7 +323,6 @@ func (s DeletionTaskFailureReasonType) String() string {
 //
 // This data type is a response element in the GetServiceLastAccessedDetailsWithEntities
 // operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EntityDetails
 type EntityDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -357,7 +348,6 @@ func (s EntityDetails) String() string {
 // Contains details about the specified entity (user or role).
 //
 // This data type is an element of the EntityDetails object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EntityInfo
 type EntityInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -401,7 +391,6 @@ func (s EntityInfo) String() string {
 // This data type is used as a response element in the GetOrganizationsAccessReport,
 // GetServiceLastAccessedDetails, and GetServiceLastAccessedDetailsWithEntities
 // operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ErrorDetails
 type ErrorDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -425,7 +414,6 @@ func (s ErrorDetails) String() string {
 //
 // This data type is used by the return parameter of SimulateCustomPolicy and
 // SimulatePrincipalPolicy .
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EvaluationResult
 type EvaluationResult struct {
 	_ struct{} `type:"structure"`
 
@@ -490,7 +478,6 @@ func (s EvaluationResult) String() string {
 //    * GetGroup
 //
 //    * ListGroups
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/Group
 type Group struct {
 	_ struct{} `type:"structure"`
 
@@ -536,7 +523,6 @@ func (s Group) String() string {
 //
 // This data type is used as a response element in the GetAccountAuthorizationDetails
 // operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GroupDetail
 type GroupDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -587,7 +573,6 @@ func (s GroupDetail) String() string {
 //    * ListInstanceProfiles
 //
 //    * ListInstanceProfilesForRole
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/InstanceProfile
 type InstanceProfile struct {
 	_ struct{} `type:"structure"`
 
@@ -639,7 +624,6 @@ func (s InstanceProfile) String() string {
 //
 // This data type is used as a response element in the ListPoliciesGrantingServiceAccess
 // operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPoliciesGrantingServiceAccessEntry
 type ListPoliciesGrantingServiceAccessEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -668,7 +652,6 @@ func (s ListPoliciesGrantingServiceAccessEntry) String() string {
 //
 // This data type is used as a response element in the CreateLoginProfile and
 // GetLoginProfile operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/LoginProfile
 type LoginProfile struct {
 	_ struct{} `type:"structure"`
 
@@ -695,7 +678,6 @@ func (s LoginProfile) String() string {
 // Contains information about an MFA device.
 //
 // This data type is used as a response element in the ListMFADevices operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/MFADevice
 type MFADevice struct {
 	_ struct{} `type:"structure"`
 
@@ -731,7 +713,6 @@ func (s MFADevice) String() string {
 // For more information about managed policies, see Managed Policies and Inline
 // Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the Using IAM guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ManagedPolicyDetail
 type ManagedPolicyDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -806,7 +787,6 @@ func (s ManagedPolicyDetail) String() string {
 }
 
 // Contains the Amazon Resource Name (ARN) for an IAM OpenID Connect provider.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/OpenIDConnectProviderListEntry
 type OpenIDConnectProviderListEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -825,7 +805,6 @@ func (s OpenIDConnectProviderListEntry) String() string {
 
 // Contains information about the effect that Organizations has on a policy
 // simulation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/OrganizationsDecisionDetail
 type OrganizationsDecisionDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -843,7 +822,6 @@ func (s OrganizationsDecisionDetail) String() string {
 //
 // This data type is used as a response element in the GetAccountPasswordPolicy
 // operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PasswordPolicy
 type PasswordPolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -895,7 +873,6 @@ func (s PasswordPolicy) String() string {
 // For more information about managed policies, refer to Managed Policies and
 // Inline Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the Using IAM guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/Policy
 type Policy struct {
 	_ struct{} `type:"structure"`
 
@@ -968,7 +945,6 @@ func (s Policy) String() string {
 //
 // This data type is used as a response element in the GetAccountAuthorizationDetails
 // operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PolicyDetail
 type PolicyDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -989,7 +965,6 @@ func (s PolicyDetail) String() string {
 //
 // This data type is an element of the ListPoliciesGrantingServiceAccessEntry
 // object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PolicyGrantingServiceAccess
 type PolicyGrantingServiceAccess struct {
 	_ struct{} `type:"structure"`
 
@@ -1041,7 +1016,6 @@ func (s PolicyGrantingServiceAccess) String() string {
 // For more information about managed policies, refer to Managed Policies and
 // Inline Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the Using IAM guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PolicyGroup
 type PolicyGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -1067,7 +1041,6 @@ func (s PolicyGroup) String() string {
 // For more information about managed policies, refer to Managed Policies and
 // Inline Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the Using IAM guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PolicyRole
 type PolicyRole struct {
 	_ struct{} `type:"structure"`
 
@@ -1093,7 +1066,6 @@ func (s PolicyRole) String() string {
 // For more information about managed policies, refer to Managed Policies and
 // Inline Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the Using IAM guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PolicyUser
 type PolicyUser struct {
 	_ struct{} `type:"structure"`
 
@@ -1120,7 +1092,6 @@ func (s PolicyUser) String() string {
 // For more information about managed policies, refer to Managed Policies and
 // Inline Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the Using IAM guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PolicyVersion
 type PolicyVersion struct {
 	_ struct{} `type:"structure"`
 
@@ -1160,7 +1131,6 @@ func (s PolicyVersion) String() string {
 // document.
 //
 // This data type is used as a member of the Statement type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/Position
 type Position struct {
 	_ struct{} `type:"structure"`
 
@@ -1180,7 +1150,6 @@ func (s Position) String() string {
 // single resource.
 //
 // This data type is used by a member of the EvaluationResult data type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ResourceSpecificResult
 type ResourceSpecificResult struct {
 	_ struct{} `type:"structure"`
 
@@ -1227,7 +1196,6 @@ func (s ResourceSpecificResult) String() string {
 
 // Contains information about an IAM role. This structure is returned as a response
 // element in several API operations that interact with roles.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/Role
 type Role struct {
 	_ struct{} `type:"structure"`
 
@@ -1297,7 +1265,6 @@ func (s Role) String() string {
 //
 // This data type is used as a response element in the GetAccountAuthorizationDetails
 // operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RoleDetail
 type RoleDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -1362,7 +1329,6 @@ func (s RoleDetail) String() string {
 //
 // This data type is used as a response element in the GetServiceLinkedRoleDeletionStatus
 // operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RoleUsageType
 type RoleUsageType struct {
 	_ struct{} `type:"structure"`
 
@@ -1379,7 +1345,6 @@ func (s RoleUsageType) String() string {
 }
 
 // Contains the list of SAML providers for this account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SAMLProviderListEntry
 type SAMLProviderListEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -1402,7 +1367,6 @@ func (s SAMLProviderListEntry) String() string {
 //
 // This data type is used as a response element in the GetSSHPublicKey and UploadSSHPublicKey
 // operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SSHPublicKey
 type SSHPublicKey struct {
 	_ struct{} `type:"structure"`
 
@@ -1446,7 +1410,6 @@ func (s SSHPublicKey) String() string {
 // Contains information about an SSH public key, without the key's body or fingerprint.
 //
 // This data type is used as a response element in the ListSSHPublicKeys operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SSHPublicKeyMetadata
 type SSHPublicKeyMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -1483,7 +1446,6 @@ func (s SSHPublicKeyMetadata) String() string {
 //
 // This data type is used as a response element in the GetServerCertificate
 // operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ServerCertificate
 type ServerCertificate struct {
 	_ struct{} `type:"structure"`
 
@@ -1512,7 +1474,6 @@ func (s ServerCertificate) String() string {
 //
 // This data type is used as a response element in the UploadServerCertificate
 // and ListServerCertificates operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ServerCertificateMetadata
 type ServerCertificateMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -1559,7 +1520,6 @@ func (s ServerCertificateMetadata) String() string {
 //
 // This data type is used as a response element in the GetServiceLastAccessedDetails
 // operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ServiceLastAccessed
 type ServiceLastAccessed struct {
 	_ struct{} `type:"structure"`
 
@@ -1610,7 +1570,6 @@ func (s ServiceLastAccessed) String() string {
 }
 
 // Contains the details of a service-specific credential.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ServiceSpecificCredential
 type ServiceSpecificCredential struct {
 	_ struct{} `type:"structure"`
 
@@ -1628,7 +1587,7 @@ type ServiceSpecificCredential struct {
 	// The generated password for the service-specific credential.
 	//
 	// ServicePassword is a required field
-	ServicePassword *string `type:"string" required:"true"`
+	ServicePassword *string `type:"string" required:"true" sensitive:"true"`
 
 	// The unique identifier for the service-specific credential.
 	//
@@ -1661,7 +1620,6 @@ func (s ServiceSpecificCredential) String() string {
 }
 
 // Contains additional details about a service-specific credential.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ServiceSpecificCredentialMetadata
 type ServiceSpecificCredentialMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -1707,7 +1665,6 @@ func (s ServiceSpecificCredentialMetadata) String() string {
 //
 // This data type is used as a response element in the UploadSigningCertificate
 // and ListSigningCertificates operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SigningCertificate
 type SigningCertificate struct {
 	_ struct{} `type:"structure"`
 
@@ -1746,7 +1703,6 @@ func (s SigningCertificate) String() string {
 //
 // This data type is used by the MatchedStatements member of the EvaluationResult
 // type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/Statement
 type Statement struct {
 	_ struct{} `type:"structure"`
 
@@ -1772,7 +1728,6 @@ func (s Statement) String() string {
 // with a resource such as an IAM user or role. For more information about tagging,
 // see Tagging IAM Identities (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html)
 // in the IAM User Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -1831,7 +1786,6 @@ func (s *Tag) Validate() error {
 //    * GetUser
 //
 //    * ListUsers
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/User
 type User struct {
 	_ struct{} `type:"structure"`
 
@@ -1911,7 +1865,6 @@ func (s User) String() string {
 //
 // This data type is used as a response element in the GetAccountAuthorizationDetails
 // operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UserDetail
 type UserDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -1967,7 +1920,6 @@ func (s UserDetail) String() string {
 }
 
 // Contains information about a virtual MFA device.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/VirtualMFADevice
 type VirtualMFADevice struct {
 	_ struct{} `type:"structure"`
 
@@ -1975,7 +1927,7 @@ type VirtualMFADevice struct {
 	// The Base32StringSeed is base64-encoded.
 	//
 	// Base32StringSeed is automatically base64 encoded/decoded by the SDK.
-	Base32StringSeed []byte `type:"blob"`
+	Base32StringSeed []byte `type:"blob" sensitive:"true"`
 
 	// The date and time on which the virtual MFA device was enabled.
 	EnableDate *time.Time `type:"timestamp"`
@@ -1986,7 +1938,7 @@ type VirtualMFADevice struct {
 	// is the seed in base32 format. The Base32String value is base64-encoded.
 	//
 	// QRCodePNG is automatically base64 encoded/decoded by the SDK.
-	QRCodePNG []byte `type:"blob"`
+	QRCodePNG []byte `type:"blob" sensitive:"true"`
 
 	// The serial number associated with VirtualMFADevice.
 	//

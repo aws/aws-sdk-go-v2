@@ -13,7 +13,6 @@ import (
 // To add tags to a queue, preset, or job template, send a request with the
 // Amazon Resource Name (ARN) of the resource and the tags that you want to
 // add.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TagResourceRequest
 type TagResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -79,7 +78,6 @@ func (s TagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A successful request to add tags to a resource returns an OK message.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TagResourceResponse
 type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
 }

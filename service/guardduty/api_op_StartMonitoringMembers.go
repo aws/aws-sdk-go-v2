@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StartMonitoringMembersRequest
 type StartMonitoringMembersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -81,7 +80,6 @@ func (s StartMonitoringMembersInput) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StartMonitoringMembersResponse
 type StartMonitoringMembersOutput struct {
 	_ struct{} `type:"structure"`
 

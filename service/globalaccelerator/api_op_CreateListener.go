@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CreateListenerRequest
 type CreateListenerInput struct {
 	_ struct{} `type:"structure"`
 
@@ -98,7 +97,6 @@ func (s *CreateListenerInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CreateListenerResponse
 type CreateListenerOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -11,7 +11,6 @@ import (
 )
 
 // Represents the input for a request action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleetInput
 type CreateFleetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -20,6 +19,8 @@ type CreateFleetInput struct {
 	// and be in a READY status. This fleet setting cannot be changed once the fleet
 	// is created.
 	BuildId *string `type:"string"`
+
+	CertificateConfiguration *CertificateConfiguration `type:"structure"`
 
 	// Human-readable description of a fleet.
 	Description *string `min:"1" type:"string"`
@@ -166,6 +167,11 @@ func (s *CreateFleetInput) Validate() error {
 	if s.ServerLaunchPath != nil && len(*s.ServerLaunchPath) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ServerLaunchPath", 1))
 	}
+	if s.CertificateConfiguration != nil {
+		if err := s.CertificateConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("CertificateConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.EC2InboundPermissions != nil {
 		for i, v := range s.EC2InboundPermissions {
 			if err := v.Validate(); err != nil {
@@ -186,7 +192,6 @@ func (s *CreateFleetInput) Validate() error {
 }
 
 // Represents the returned data in response to a request action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleetOutput
 type CreateFleetOutput struct {
 	_ struct{} `type:"structure"`
 

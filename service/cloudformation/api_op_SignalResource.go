@@ -12,7 +12,6 @@ import (
 )
 
 // The input for the SignalResource action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SignalResourceInput
 type SignalResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -79,7 +78,6 @@ func (s *SignalResourceInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SignalResourceOutput
 type SignalResourceOutput struct {
 	_ struct{} `type:"structure"`
 }

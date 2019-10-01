@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetPublicAccessBlockRequest
 type GetPublicAccessBlockInput struct {
 	_ struct{} `type:"structure"`
 
@@ -49,7 +48,6 @@ func (s GetPublicAccessBlockInput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetPublicAccessBlockOutput
 type GetPublicAccessBlockOutput struct {
 	_ struct{} `type:"structure" payload:"PublicAccessBlockConfiguration"`
 

@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorCheckSummariesRequest
 type DescribeTrustedAdvisorCheckSummariesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s *DescribeTrustedAdvisorCheckSummariesInput) Validate() error {
 
 // The summaries of the Trusted Advisor checks returned by the DescribeTrustedAdvisorCheckSummaries
 // operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorCheckSummariesResponse
 type DescribeTrustedAdvisorCheckSummariesOutput struct {
 	_ struct{} `type:"structure"`
 

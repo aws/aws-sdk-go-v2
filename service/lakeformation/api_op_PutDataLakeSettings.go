@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/PutDataLakeSettingsRequest
 type PutDataLakeSettingsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +51,6 @@ func (s *PutDataLakeSettingsInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/PutDataLakeSettingsResponse
 type PutDataLakeSettingsOutput struct {
 	_ struct{} `type:"structure"`
 }

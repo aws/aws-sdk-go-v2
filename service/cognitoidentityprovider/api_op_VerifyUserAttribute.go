@@ -10,14 +10,13 @@ import (
 )
 
 // Represents the request to verify user attributes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/VerifyUserAttributeRequest
 type VerifyUserAttributeInput struct {
 	_ struct{} `type:"structure"`
 
 	// Represents the access token of the request to verify user attributes.
 	//
 	// AccessToken is a required field
-	AccessToken *string `type:"string" required:"true"`
+	AccessToken *string `type:"string" required:"true" sensitive:"true"`
 
 	// The attribute name in the request to verify user attributes.
 	//
@@ -65,7 +64,6 @@ func (s *VerifyUserAttributeInput) Validate() error {
 
 // A container representing the response from the server from the request to
 // verify user attributes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/VerifyUserAttributeResponse
 type VerifyUserAttributeOutput struct {
 	_ struct{} `type:"structure"`
 }

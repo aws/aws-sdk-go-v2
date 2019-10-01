@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/RegisterResourceRequest
 type RegisterResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -45,7 +44,6 @@ func (s *RegisterResourceInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/RegisterResourceResponse
 type RegisterResourceOutput struct {
 	_ struct{} `type:"structure"`
 }

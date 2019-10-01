@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSmsChannelRequest
 type GetSmsChannelInput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +49,6 @@ func (s GetSmsChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSmsChannelResponse
 type GetSmsChannelOutput struct {
 	_ struct{} `type:"structure" payload:"SMSChannelResponse"`
 

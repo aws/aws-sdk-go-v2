@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEndpointMessage
 type ModifyEndpointInput struct {
 	_ struct{} `type:"structure"`
 
@@ -90,7 +89,7 @@ type ModifyEndpointInput struct {
 	MongoDbSettings *MongoDbSettings `type:"structure"`
 
 	// The password to be used to login to the endpoint database.
-	Password *string `type:"string"`
+	Password *string `type:"string" sensitive:"true"`
 
 	// The port used by the endpoint database.
 	Port *int64 `type:"integer"`
@@ -146,7 +145,6 @@ func (s *ModifyEndpointInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEndpointResponse
 type ModifyEndpointOutput struct {
 	_ struct{} `type:"structure"`
 

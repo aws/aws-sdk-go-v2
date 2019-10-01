@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EncryptRequest
 type EncryptInput struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +51,7 @@ type EncryptInput struct {
 	// Plaintext is automatically base64 encoded/decoded by the SDK.
 	//
 	// Plaintext is a required field
-	Plaintext []byte `min:"1" type:"blob" required:"true"`
+	Plaintext []byte `min:"1" type:"blob" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -84,7 +83,6 @@ func (s *EncryptInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EncryptResponse
 type EncryptOutput struct {
 	_ struct{} `type:"structure"`
 

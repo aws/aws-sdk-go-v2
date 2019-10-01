@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListResolversByFunctionRequest
 type ListResolversByFunctionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -86,7 +85,6 @@ func (s ListResolversByFunctionInput) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListResolversByFunctionResponse
 type ListResolversByFunctionOutput struct {
 	_ struct{} `type:"structure"`
 

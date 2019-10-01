@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SendCommandRequest
 type SendCommandInput struct {
 	_ struct{} `type:"structure"`
 
@@ -153,7 +152,6 @@ func (s *SendCommandInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SendCommandResult
 type SendCommandOutput struct {
 	_ struct{} `type:"structure"`
 

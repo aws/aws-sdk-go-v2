@@ -21,7 +21,6 @@ import (
 //    * CreateStorediSCSIVolumeInput$SnapshotId
 //
 //    * CreateStorediSCSIVolumeInput$TargetName
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateStorediSCSIVolumeInput
 type CreateStorediSCSIVolumeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -33,7 +32,7 @@ type CreateStorediSCSIVolumeInput struct {
 	DiskId *string `min:"1" type:"string" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	//
 	// GatewayARN is a required field
 	GatewayARN *string `min:"50" type:"string" required:"true"`
@@ -146,7 +145,6 @@ func (s *CreateStorediSCSIVolumeInput) Validate() error {
 }
 
 // A JSON object containing the following fields:
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateStorediSCSIVolumeOutput
 type CreateStorediSCSIVolumeOutput struct {
 	_ struct{} `type:"structure"`
 

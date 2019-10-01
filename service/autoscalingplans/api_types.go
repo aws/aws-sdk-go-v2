@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Represents an application source.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/ApplicationSource
 type ApplicationSource struct {
 	_ struct{} `type:"structure"`
 
@@ -68,7 +67,6 @@ func (s *ApplicationSource) Validate() error {
 // For information about terminology, available metrics, or how to publish new
 // metrics, see Amazon CloudWatch Concepts (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html)
 // in the Amazon CloudWatch User Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/CustomizedLoadMetricSpecification
 type CustomizedLoadMetricSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -147,7 +145,6 @@ func (s *CustomizedLoadMetricSpecification) Validate() error {
 //    when capacity increases.
 //
 // For more information about CloudWatch, see Amazon CloudWatch Concepts (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/CustomizedScalingMetricSpecification
 type CustomizedScalingMetricSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -210,7 +207,6 @@ func (s *CustomizedScalingMetricSpecification) Validate() error {
 }
 
 // Represents a single value in the forecast data used for predictive scaling.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/Datapoint
 type Datapoint struct {
 	_ struct{} `type:"structure"`
 
@@ -227,7 +223,6 @@ func (s Datapoint) String() string {
 }
 
 // Represents a dimension for a customized metric.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/MetricDimension
 type MetricDimension struct {
 	_ struct{} `type:"structure"`
 
@@ -266,7 +261,6 @@ func (s *MetricDimension) Validate() error {
 }
 
 // Represents a predefined metric that can be used for predictive scaling.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/PredefinedLoadMetricSpecification
 type PredefinedLoadMetricSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -314,7 +308,6 @@ func (s *PredefinedLoadMetricSpecification) Validate() error {
 
 // Represents a predefined metric that can be used for dynamic scaling as part
 // of a target tracking scaling policy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/PredefinedScalingMetricSpecification
 type PredefinedScalingMetricSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -387,7 +380,6 @@ func (s *PredefinedScalingMetricSpecification) Validate() error {
 // of historical data to generate a forecast.
 //
 // For more information, see Getting Started with AWS Auto Scaling (https://docs.aws.amazon.com/autoscaling/plans/userguide/auto-scaling-getting-started.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/ScalingInstruction
 type ScalingInstruction struct {
 	_ struct{} `type:"structure"`
 
@@ -617,7 +609,6 @@ func (s *ScalingInstruction) Validate() error {
 }
 
 // Represents a scaling plan.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/ScalingPlan
 type ScalingPlan struct {
 	_ struct{} `type:"structure"`
 
@@ -679,7 +670,6 @@ func (s ScalingPlan) String() string {
 }
 
 // Represents a scalable resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/ScalingPlanResource
 type ScalingPlanResource struct {
 	_ struct{} `type:"structure"`
 
@@ -779,7 +769,6 @@ func (s ScalingPlanResource) String() string {
 }
 
 // Represents a scaling policy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/ScalingPolicy
 type ScalingPolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -804,7 +793,6 @@ func (s ScalingPolicy) String() string {
 }
 
 // Represents a tag.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/TagFilter
 type TagFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -835,7 +823,6 @@ func (s *TagFilter) Validate() error {
 
 // Describes a target tracking configuration to use with AWS Auto Scaling. Used
 // with ScalingInstruction and ScalingPolicy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/TargetTrackingConfiguration
 type TargetTrackingConfiguration struct {
 	_ struct{} `type:"structure"`
 

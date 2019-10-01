@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUserHierarchyStructureRequest
 type DescribeUserHierarchyStructureInput struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s DescribeUserHierarchyStructureInput) MarshalFields(e protocol.FieldEncod
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUserHierarchyStructureResponse
 type DescribeUserHierarchyStructureOutput struct {
 	_ struct{} `type:"structure"`
 

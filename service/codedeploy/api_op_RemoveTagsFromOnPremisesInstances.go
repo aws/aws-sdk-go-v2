@@ -12,7 +12,6 @@ import (
 )
 
 // Represents the input of a RemoveTagsFromOnPremisesInstances operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RemoveTagsFromOnPremisesInstancesInput
 type RemoveTagsFromOnPremisesInstancesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +49,6 @@ func (s *RemoveTagsFromOnPremisesInstancesInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RemoveTagsFromOnPremisesInstancesOutput
 type RemoveTagsFromOnPremisesInstancesOutput struct {
 	_ struct{} `type:"structure"`
 }

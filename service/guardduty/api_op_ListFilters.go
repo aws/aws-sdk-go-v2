@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListFiltersRequest
 type ListFiltersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -80,7 +79,6 @@ func (s ListFiltersInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListFiltersResponse
 type ListFiltersOutput struct {
 	_ struct{} `type:"structure"`
 

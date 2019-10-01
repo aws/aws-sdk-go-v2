@@ -12,7 +12,6 @@ import (
 )
 
 // Contains the parameters for DisableVgwRoutePropagation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableVgwRoutePropagationRequest
 type DisableVgwRoutePropagationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +49,6 @@ func (s *DisableVgwRoutePropagationInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableVgwRoutePropagationOutput
 type DisableVgwRoutePropagationOutput struct {
 	_ struct{} `type:"structure"`
 }
