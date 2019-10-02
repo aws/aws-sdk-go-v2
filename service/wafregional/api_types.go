@@ -807,7 +807,7 @@ func (s HTTPRequest) String() string {
 // ranges: /24, /32, /48, /56, /64, and /128.
 //
 // To specify an individual IP address, you specify the four-part IP address
-// followed by a /32, for example, 192.0.2.0/31. To block a range of IP addresses,
+// followed by a /32, for example, 192.0.2.0/32. To block a range of IP addresses,
 // you can specify /8 or any range between /16 through /32 (for IPv4) or /24,
 // /32, /48, /56, /64, or /128 (for IPv6). For more information about CIDR notation,
 // see the Wikipedia entry Classless Inter-Domain Routing (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing).
@@ -1135,7 +1135,7 @@ type RateBasedRule struct {
 	// rule.
 	//
 	// RateLimit is a required field
-	RateLimit *int64 `min:"2000" type:"long" required:"true"`
+	RateLimit *int64 `min:"100" type:"long" required:"true"`
 
 	// A unique identifier for a RateBasedRule. You use RuleId to get more information
 	// about a RateBasedRule (see GetRateBasedRule), update a RateBasedRule (see

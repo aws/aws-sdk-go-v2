@@ -13,7 +13,7 @@ import (
 type ListPipelinesInput struct {
 	_ struct{} `type:"structure"`
 
-	// An identifier that was returned from the previous list pipelines call, which
+	// An identifier that was returned from the previous list pipelines call. It
 	// can be used to return the next set of pipelines in the list.
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 }
@@ -41,8 +41,8 @@ type ListPipelinesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// If the amount of returned information is significantly large, an identifier
-	// is also returned which can be used in a subsequent list pipelines call to
-	// return the next set of pipelines in the list.
+	// is also returned. It can be used in a subsequent list pipelines call to return
+	// the next set of pipelines in the list.
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 
 	// The list of pipelines.

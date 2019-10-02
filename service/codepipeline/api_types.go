@@ -58,8 +58,8 @@ func (s ActionConfiguration) String() string {
 type ActionConfigurationProperty struct {
 	_ struct{} `type:"structure"`
 
-	// The description of the action configuration property that will be displayed
-	// to users.
+	// The description of the action configuration property that is displayed to
+	// users.
 	Description *string `locationName:"description" min:"1" type:"string"`
 
 	// Whether the configuration property is a key.
@@ -72,14 +72,14 @@ type ActionConfigurationProperty struct {
 	// Name is a required field
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 
-	// Indicates that the property will be used in conjunction with PollForJobs.
-	// When creating a custom action, an action can have up to one queryable property.
-	// If it has one, that property must be both required and not secret.
+	// Indicates that the property is used with PollForJobs. When creating a custom
+	// action, an action can have up to one queryable property. If it has one, that
+	// property must be both required and not secret.
 	//
 	// If you create a pipeline with a custom action type, and that custom action
 	// contains a queryable property, the value for that configuration property
-	// is subject to additional restrictions. The value must be less than or equal
-	// to twenty (20) characters. The value can contain only alphanumeric characters,
+	// is subject to other restrictions. The value must be less than or equal to
+	// twenty (20) characters. The value can contain only alphanumeric characters,
 	// underscores, and hyphens.
 	Queryable *bool `locationName:"queryable" type:"boolean"`
 
@@ -93,7 +93,7 @@ type ActionConfigurationProperty struct {
 	// PollForThirdPartyJobs.
 	//
 	// When updating a pipeline, passing * * * * * without changing any other values
-	// of the action will preserve the prior value of the secret.
+	// of the action preserves the previous value of the secret.
 	//
 	// Secret is a required field
 	Secret *bool `locationName:"secret" type:"boolean" required:"true"`
@@ -139,15 +139,14 @@ func (s *ActionConfigurationProperty) Validate() error {
 	return nil
 }
 
-// Represents the context of an action within the stage of a pipeline to a job
-// worker.
+// Represents the context of an action in the stage of a pipeline to a job worker.
 type ActionContext struct {
 	_ struct{} `type:"structure"`
 
 	// The system-generated unique ID that corresponds to an action's execution.
 	ActionExecutionId *string `locationName:"actionExecutionId" type:"string"`
 
-	// The name of the action within the context of a job.
+	// The name of the action in the context of a job.
 	Name *string `locationName:"name" min:"1" type:"string"`
 }
 
@@ -198,8 +197,8 @@ type ActionDeclaration struct {
 	// The action declaration's AWS Region, such as us-east-1.
 	Region *string `locationName:"region" min:"4" type:"string"`
 
-	// The ARN of the IAM service role that will perform the declared action. This
-	// is assumed through the roleArn for the pipeline.
+	// The ARN of the IAM service role that performs the declared action. This is
+	// assumed through the roleArn for the pipeline.
 	RoleArn *string `locationName:"roleArn" type:"string"`
 
 	// The order in which actions are run.
@@ -267,8 +266,8 @@ type ActionExecution struct {
 	// The external ID of the run of the action.
 	ExternalExecutionId *string `locationName:"externalExecutionId" min:"1" type:"string"`
 
-	// The URL of a resource external to AWS that will be used when running the
-	// action, for example an external repository URL.
+	// The URL of a resource external to AWS that is used when running the action
+	// (for example, an external repository URL).
 	ExternalExecutionUrl *string `locationName:"externalExecutionUrl" min:"1" type:"string"`
 
 	// The last status change of the action.
@@ -289,7 +288,7 @@ type ActionExecution struct {
 
 	// The system-generated token used to identify a unique approval request. The
 	// token for each open approval request can be obtained using the GetPipelineState
-	// command and is used to validate that the approval request corresponding to
+	// command. It is used to validate that the approval request corresponding to
 	// this token is still valid.
 	Token *string `locationName:"token" type:"string"`
 }
@@ -428,8 +427,8 @@ type ActionRevision struct {
 	// Created is a required field
 	Created *time.Time `locationName:"created" type:"timestamp" required:"true"`
 
-	// The unique identifier of the change that set the state to this revision,
-	// for example a deployment ID or timestamp.
+	// The unique identifier of the change that set the state to this revision (for
+	// example, a deployment ID or timestamp).
 	//
 	// RevisionChangeId is a required field
 	RevisionChangeId *string `locationName:"revisionChangeId" min:"1" type:"string" required:"true"`
@@ -538,7 +537,7 @@ type ActionTypeId struct {
 
 	// A category defines what kind of action can be taken in the stage, and constrains
 	// the provider type for the action. Valid categories are limited to one of
-	// the values below.
+	// the following values.
 	//
 	// Category is a required field
 	Category ActionCategory `locationName:"category" type:"string" required:"true" enum:"true"`
@@ -551,8 +550,8 @@ type ActionTypeId struct {
 	// The provider of the service being called by the action. Valid providers are
 	// determined by the action category. For example, an action in the Deploy category
 	// type might have a provider of AWS CodeDeploy, which would be specified as
-	// CodeDeploy. To reference a list of action providers by action type, see Valid
-	// Action Types and Providers in CodePipeline (https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#actions-valid-providers).
+	// CodeDeploy. For more information, see Valid Action Types and Providers in
+	// CodePipeline (https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#actions-valid-providers).
 	//
 	// Provider is a required field
 	Provider *string `locationName:"provider" min:"1" type:"string" required:"true"`
@@ -605,11 +604,11 @@ type ActionTypeSettings struct {
 	// The URL returned to the AWS CodePipeline console that provides a deep link
 	// to the resources of the external system, such as the configuration page for
 	// an AWS CodeDeploy deployment group. This link is provided as part of the
-	// action display within the pipeline.
+	// action display in the pipeline.
 	EntityUrlTemplate *string `locationName:"entityUrlTemplate" min:"1" type:"string"`
 
 	// The URL returned to the AWS CodePipeline console that contains a link to
-	// the top-level landing page for the external system, such as console page
+	// the top-level landing page for the external system, such as the console page
 	// for AWS CodeDeploy. This link is shown on the pipeline view page in the AWS
 	// CodePipeline console and provides a link to the execution entity of the external
 	// action.
@@ -689,8 +688,8 @@ func (s *ApprovalResult) Validate() error {
 	return nil
 }
 
-// Represents information about an artifact that will be worked upon by actions
-// in the pipeline.
+// Represents information about an artifact that is worked on by actions in
+// the pipeline.
 type Artifact struct {
 	_ struct{} `type:"structure"`
 
@@ -789,7 +788,7 @@ type ArtifactRevision struct {
 	Created *time.Time `locationName:"created" type:"timestamp"`
 
 	// The name of an artifact. This name might be system-generated, such as "MyApp",
-	// or might be defined by the user when an action is created.
+	// or defined by the user when an action is created.
 	Name *string `locationName:"name" min:"1" type:"string"`
 
 	// An additional identifier for a revision, such as a commit date or, for artifacts
@@ -816,7 +815,7 @@ func (s ArtifactRevision) String() string {
 	return awsutil.Prettify(s)
 }
 
-// The Amazon S3 bucket where artifacts are stored for the pipeline.
+// The Amazon S3 bucket where artifacts for the pipeline are stored.
 //
 // You must include either artifactStore or artifactStores in your pipeline,
 // but you cannot use both. If you create a cross-region action in your pipeline,
@@ -830,7 +829,7 @@ type ArtifactStore struct {
 	EncryptionKey *EncryptionKey `locationName:"encryptionKey" type:"structure"`
 
 	// The Amazon S3 bucket used for storing the artifacts for a pipeline. You can
-	// specify the name of an S3 bucket but not a folder within the bucket. A folder
+	// specify the name of an S3 bucket but not a folder in the bucket. A folder
 	// to contain the pipeline artifacts is created for you based on the name of
 	// the pipeline. You can use any Amazon S3 bucket in the same AWS Region as
 	// the pipeline to store your pipeline artifacts.
@@ -1019,7 +1018,7 @@ func (s *EncryptionKey) Validate() error {
 type ErrorDetails struct {
 	_ struct{} `type:"structure"`
 
-	// The system ID or error number code of the error.
+	// The system ID or number code of the error.
 	Code *string `locationName:"code" type:"string"`
 
 	// The text of the error message.
@@ -1041,7 +1040,7 @@ type ExecutionDetails struct {
 	ExternalExecutionId *string `locationName:"externalExecutionId" min:"1" type:"string"`
 
 	// The percentage of work completed on the action, represented on a scale of
-	// zero to one hundred percent.
+	// 0 to 100 percent.
 	PercentComplete *int64 `locationName:"percentComplete" type:"integer"`
 
 	// The summary of the current status of the actions.
@@ -1139,7 +1138,7 @@ func (s *FailureDetails) Validate() error {
 type InputArtifact struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the artifact to be worked on, for example, "My App".
+	// The name of the artifact to be worked on (for example, "My App").
 	//
 	// The input artifact of an action must exactly match the output artifact declared
 	// in a preceding action, but the input artifact does not have to be the next
@@ -1180,7 +1179,7 @@ type Job struct {
 	// The ID of the AWS account to use when performing the job.
 	AccountId *string `locationName:"accountId" type:"string"`
 
-	// Additional data about a job.
+	// Other data about a job.
 	Data *JobData `locationName:"data" type:"structure"`
 
 	// The unique system-generated ID of the job.
@@ -1197,8 +1196,8 @@ func (s Job) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Represents additional information about a job required for a job worker to
-// complete the job.
+// Represents other information about a job required for a job worker to complete
+// the job.
 type JobData struct {
 	_ struct{} `type:"structure"`
 
@@ -1214,8 +1213,8 @@ type JobData struct {
 	// store artifacts for the pipeline in AWS CodePipeline.
 	ArtifactCredentials *AWSSessionCredentials `locationName:"artifactCredentials" type:"structure" sensitive:"true"`
 
-	// A system-generated token, such as a AWS CodeDeploy deployment ID, that a
-	// job requires in order to continue the job asynchronously.
+	// A system-generated token, such as a AWS CodeDeploy deployment ID, required
+	// by a job to continue the job asynchronously.
 	ContinuationToken *string `locationName:"continuationToken" min:"1" type:"string"`
 
 	// Represents information about the key used to encrypt data in the artifact
@@ -1230,7 +1229,7 @@ type JobData struct {
 
 	// Represents information about a pipeline to a job worker.
 	//
-	// Includes pipelineArn and pipelineExecutionId for Custom jobs.
+	// Includes pipelineArn and pipelineExecutionId for custom jobs.
 	PipelineContext *PipelineContext `locationName:"pipelineContext" type:"structure"`
 }
 
@@ -1246,8 +1245,8 @@ type JobDetails struct {
 	// The AWS account ID associated with the job.
 	AccountId *string `locationName:"accountId" type:"string"`
 
-	// Represents additional information about a job required for a job worker to
-	// complete the job.
+	// Represents other information about a job required for a job worker to complete
+	// the job.
 	Data *JobData `locationName:"data" type:"structure"`
 
 	// The unique system-generated ID of the job.
@@ -1289,7 +1288,7 @@ type ListWebhookItem struct {
 	// A unique URL generated by CodePipeline. When a POST request is made to this
 	// URL, the defined pipeline is started as long as the body of the post request
 	// satisfies the defined authentication and filtering conditions. Deleting and
-	// re-creating a webhook will make the old URL invalid and generate a new URL.
+	// re-creating a webhook makes the old URL invalid and generates a new one.
 	//
 	// Url is a required field
 	Url *string `locationName:"url" min:"1" type:"string" required:"true"`
@@ -1348,7 +1347,7 @@ func (s *OutputArtifact) Validate() error {
 type PipelineContext struct {
 	_ struct{} `type:"structure"`
 
-	// The context of an action to a job worker within the stage of a pipeline.
+	// The context of an action to a job worker in the stage of a pipeline.
 	Action *ActionContext `locationName:"action" type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the pipeline.
@@ -1382,9 +1381,9 @@ type PipelineDeclaration struct {
 	// you must use artifactStores.
 	ArtifactStore *ArtifactStore `locationName:"artifactStore" type:"structure"`
 
-	// A mapping of artifactStore objects and their corresponding regions. There
-	// must be an artifact store for the pipeline region and for each cross-region
-	// action within the pipeline.
+	// A mapping of artifactStore objects and their corresponding AWS Regions. There
+	// must be an artifact store for the pipeline Region and for each cross-region
+	// action in the pipeline.
 	//
 	// You must include either artifactStore or artifactStores in your pipeline,
 	// but you cannot use both. If you create a cross-region action in your pipeline,
@@ -1409,7 +1408,7 @@ type PipelineDeclaration struct {
 	Stages []StageDeclaration `locationName:"stages" type:"list" required:"true"`
 
 	// The version number of the pipeline. A new pipeline always has a version number
-	// of 1. This number is automatically incremented when a pipeline is updated.
+	// of 1. This number is incremented when a pipeline is updated.
 	Version *int64 `locationName:"version" min:"1" type:"integer"`
 }
 
@@ -1764,7 +1763,7 @@ func (s StageState) String() string {
 	return awsutil.Prettify(s)
 }
 
-// A tag is a key/value pair that is used to manage the resource.
+// A tag is a key-value pair that is used to manage the resource.
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -1806,7 +1805,7 @@ func (s *Tag) Validate() error {
 }
 
 // A response to a PollForThirdPartyJobs request returned by AWS CodePipeline
-// when there is a job to be worked upon by a partner action.
+// when there is a job to be worked on by a partner action.
 type ThirdPartyJob struct {
 	_ struct{} `type:"structure"`
 
@@ -1840,7 +1839,7 @@ type ThirdPartyJobData struct {
 	ArtifactCredentials *AWSSessionCredentials `locationName:"artifactCredentials" type:"structure" sensitive:"true"`
 
 	// A system-generated token, such as a AWS CodeDeploy deployment ID, that a
-	// job requires in order to continue the job asynchronously.
+	// job requires to continue the job asynchronously.
 	ContinuationToken *string `locationName:"continuationToken" min:"1" type:"string"`
 
 	// The encryption key used to encrypt and decrypt data in the artifact store
@@ -1848,16 +1847,16 @@ type ThirdPartyJobData struct {
 	// is optional and might not be present.
 	EncryptionKey *EncryptionKey `locationName:"encryptionKey" type:"structure"`
 
-	// The name of the artifact that will be worked upon by the action, if any.
-	// This name might be system-generated, such as "MyApp", or might be defined
-	// by the user when the action is created. The input artifact name must match
-	// the name of an output artifact generated by an action in an earlier action
-	// or stage of the pipeline.
+	// The name of the artifact that is worked on by the action, if any. This name
+	// might be system-generated, such as "MyApp", or it might be defined by the
+	// user when the action is created. The input artifact name must match the name
+	// of an output artifact generated by an action in an earlier action or stage
+	// of the pipeline.
 	InputArtifacts []Artifact `locationName:"inputArtifacts" type:"list"`
 
-	// The name of the artifact that will be the result of the action, if any. This
-	// name might be system-generated, such as "MyBuiltApp", or might be defined
-	// by the user when the action is created.
+	// The name of the artifact that is the result of the action, if any. This name
+	// might be system-generated, such as "MyBuiltApp", or it might be defined by
+	// the user when the action is created.
 	OutputArtifacts []Artifact `locationName:"outputArtifacts" type:"list"`
 
 	// Represents information about a pipeline to a job worker.
@@ -1920,9 +1919,9 @@ func (s TransitionState) String() string {
 type WebhookAuthConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// The property used to configure acceptance of webhooks within a specific IP
-	// range. For IP, only the AllowedIPRange property must be set, and this property
-	// must be set to a valid CIDR range.
+	// The property used to configure acceptance of webhooks in an IP address range.
+	// For IP, only the AllowedIPRange property must be set. This property must
+	// be set to a valid CIDR range.
 	AllowedIPRange *string `min:"1" type:"string"`
 
 	// The property used to configure GitHub authentication. For GITHUB_HMAC, only
@@ -1955,17 +1954,16 @@ func (s *WebhookAuthConfiguration) Validate() error {
 type WebhookDefinition struct {
 	_ struct{} `type:"structure"`
 
-	// Supported options are GITHUB_HMAC, IP and UNAUTHENTICATED.
+	// Supported options are GITHUB_HMAC, IP, and UNAUTHENTICATED.
 	//
 	//    * For information about the authentication scheme implemented by GITHUB_HMAC,
 	//    see Securing your webhooks (https://developer.github.com/webhooks/securing/)
 	//    on the GitHub Developer website.
 	//
-	//    * IP will reject webhooks trigger requests unless they originate from
-	//    an IP within the IP range whitelisted in the authentication configuration.
+	//    * IP rejects webhooks trigger requests unless they originate from an IP
+	//    address in the IP range whitelisted in the authentication configuration.
 	//
-	//    * UNAUTHENTICATED will accept all webhook trigger requests regardless
-	//    of origin.
+	//    * UNAUTHENTICATED accepts all webhook trigger requests regardless of origin.
 	//
 	// Authentication is a required field
 	Authentication WebhookAuthenticationType `locationName:"authentication" type:"string" required:"true" enum:"true"`
@@ -2067,24 +2065,24 @@ func (s *WebhookDefinition) Validate() error {
 type WebhookFilterRule struct {
 	_ struct{} `type:"structure"`
 
-	// A JsonPath expression that will be applied to the body/payload of the webhook.
+	// A JsonPath expression that is applied to the body/payload of the webhook.
 	// The value selected by the JsonPath expression must match the value specified
-	// in the MatchEquals field, otherwise the request will be ignored. For more
-	// information about JsonPath expressions, see Java JsonPath implementation
-	// (https://github.com/json-path/JsonPath) in GitHub.
+	// in the MatchEquals field. Otherwise, the request is ignored. For more information,
+	// see Java JsonPath implementation (https://github.com/json-path/JsonPath)
+	// in GitHub.
 	//
 	// JsonPath is a required field
 	JsonPath *string `locationName:"jsonPath" min:"1" type:"string" required:"true"`
 
 	// The value selected by the JsonPath expression must match what is supplied
-	// in the MatchEquals field, otherwise the request will be ignored. Properties
-	// from the target action configuration can be included as placeholders in this
-	// value by surrounding the action configuration key with curly braces. For
-	// example, if the value supplied here is "refs/heads/{Branch}" and the target
-	// action has an action configuration property called "Branch" with a value
-	// of "master", the MatchEquals value will be evaluated as "refs/heads/master".
-	// For a list of action configuration properties for built-in action types,
-	// see Pipeline Structure Reference Action Requirements (https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements).
+	// in the MatchEquals field. Otherwise, the request is ignored. Properties from
+	// the target action configuration can be included as placeholders in this value
+	// by surrounding the action configuration key with curly brackets. For example,
+	// if the value supplied here is "refs/heads/{Branch}" and the target action
+	// has an action configuration property called "Branch" with a value of "master",
+	// the MatchEquals value is evaluated as "refs/heads/master". For a list of
+	// action configuration properties for built-in action types, see Pipeline Structure
+	// Reference Action Requirements (https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements).
 	MatchEquals *string `locationName:"matchEquals" min:"1" type:"string"`
 }
 

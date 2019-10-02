@@ -86,8 +86,8 @@ const opAcknowledgeThirdPartyJob = "AcknowledgeThirdPartyJob"
 // AcknowledgeThirdPartyJobRequest returns a request value for making API operation for
 // AWS CodePipeline.
 //
-// Confirms a job worker has received the specified job. Only used for partner
-// actions.
+// Confirms a job worker has received the specified job. Used for partner actions
+// only.
 //
 //    // Example sending a request using AcknowledgeThirdPartyJobRequest.
 //    req := client.AcknowledgeThirdPartyJobRequest(params)

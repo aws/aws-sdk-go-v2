@@ -84,9 +84,9 @@ const opTagResource = "TagResource"
 // TagResourceRequest returns a request value for making API operation for
 // AWS Greengrass.
 //
-// Add resource tags to a Greengrass Resource. Valid resources are Group, Connector,
-// Core, Device, Function, Logger, Subscription, and Resource Defintions, and
-// also BulkDeploymentIds.
+// Adds tags to a Greengrass resource. Valid resources are 'Group', 'ConnectorDefinition',
+// 'CoreDefinition', 'DeviceDefinition', 'FunctionDefinition', 'LoggerDefinition',
+// 'SubscriptionDefinition', 'ResourceDefinition', and 'BulkDeployment'.
 //
 //    // Example sending a request using TagResourceRequest.
 //    req := client.TagResourceRequest(params)

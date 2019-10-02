@@ -70,7 +70,7 @@ const opPutJobFailureResult = "PutJobFailureResult"
 // AWS CodePipeline.
 //
 // Represents the failure of a job as returned to the pipeline by a job worker.
-// Only used for custom actions.
+// Used for custom actions only.
 //
 //    // Example sending a request using PutJobFailureResultRequest.
 //    req := client.PutJobFailureResultRequest(params)

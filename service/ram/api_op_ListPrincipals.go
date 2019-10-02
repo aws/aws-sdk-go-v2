@@ -35,6 +35,9 @@ type ListPrincipalsInput struct {
 	ResourceShareArns []string `locationName:"resourceShareArns" type:"list"`
 
 	// The resource type.
+	//
+	// Valid values: route53resolver:ResolverRule | ec2:TransitGateway | ec2:Subnet
+	// | license-manager:LicenseConfiguration
 	ResourceType *string `locationName:"resourceType" type:"string"`
 }
 
@@ -164,7 +167,8 @@ const opListPrincipals = "ListPrincipals"
 // ListPrincipalsRequest returns a request value for making API operation for
 // AWS Resource Access Manager.
 //
-// Lists the principals with access to the specified resource.
+// Lists the principals that you have shared resources with or the principals
+// that have shared resources with you.
 //
 //    // Example sending a request using ListPrincipalsRequest.
 //    req := client.ListPrincipalsRequest(params)

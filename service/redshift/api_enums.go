@@ -2,6 +2,62 @@
 
 package redshift
 
+type ActionType string
+
+// Enum values for ActionType
+const (
+	ActionTypeRestoreCluster ActionType = "restore-cluster"
+)
+
+func (enum ActionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ActionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type NodeConfigurationOptionsFilterName string
+
+// Enum values for NodeConfigurationOptionsFilterName
+const (
+	NodeConfigurationOptionsFilterNameNodeType                        NodeConfigurationOptionsFilterName = "NodeType"
+	NodeConfigurationOptionsFilterNameNumberOfNodes                   NodeConfigurationOptionsFilterName = "NumberOfNodes"
+	NodeConfigurationOptionsFilterNameEstimatedDiskUtilizationPercent NodeConfigurationOptionsFilterName = "EstimatedDiskUtilizationPercent"
+)
+
+func (enum NodeConfigurationOptionsFilterName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NodeConfigurationOptionsFilterName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type OperatorType string
+
+// Enum values for OperatorType
+const (
+	OperatorTypeEq      OperatorType = "eq"
+	OperatorTypeLt      OperatorType = "lt"
+	OperatorTypeGt      OperatorType = "gt"
+	OperatorTypeLe      OperatorType = "le"
+	OperatorTypeGe      OperatorType = "ge"
+	OperatorTypeIn      OperatorType = "in"
+	OperatorTypeBetween OperatorType = "between"
+)
+
+func (enum OperatorType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OperatorType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ParameterApplyType string
 
 // Enum values for ParameterApplyType

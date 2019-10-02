@@ -23,6 +23,8 @@ type UpdateBrokerInput struct {
 
 	EngineVersion *string `locationName:"engineVersion" type:"string"`
 
+	HostInstanceType *string `locationName:"hostInstanceType" type:"string"`
+
 	// The list of information about logs to be enabled for the specified broker.
 	Logs *Logs `locationName:"logs" type:"structure"`
 
@@ -70,6 +72,12 @@ func (s UpdateBrokerInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "engineVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.HostInstanceType != nil {
+		v := *s.HostInstanceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "hostInstanceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.Logs != nil {
 		v := s.Logs
 
@@ -109,6 +117,8 @@ type UpdateBrokerOutput struct {
 
 	EngineVersion *string `locationName:"engineVersion" type:"string"`
 
+	HostInstanceType *string `locationName:"hostInstanceType" type:"string"`
+
 	// The list of information about logs to be enabled for the specified broker.
 	Logs *Logs `locationName:"logs" type:"structure"`
 
@@ -145,6 +155,12 @@ func (s UpdateBrokerOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "engineVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.HostInstanceType != nil {
+		v := *s.HostInstanceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "hostInstanceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Logs != nil {
 		v := s.Logs

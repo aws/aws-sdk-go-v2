@@ -72,7 +72,7 @@ type ModifyDBClusterInput struct {
 	// printable ASCII character except forward slash (/), double quote ("), or
 	// the "at" symbol (@).
 	//
-	// Constraints: Must contain from 8 to 41 characters.
+	// Constraints: Must contain from 8 to 100 characters.
 	MasterUserPassword *string `type:"string"`
 
 	// The new DB cluster identifier for the DB cluster when renaming a DB cluster.

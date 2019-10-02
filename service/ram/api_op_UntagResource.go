@@ -91,7 +91,7 @@ const opUntagResource = "UntagResource"
 // UntagResourceRequest returns a request value for making API operation for
 // AWS Resource Access Manager.
 //
-// Removes the specified tags from the specified resource share.
+// Removes the specified tags from the specified resource share that you own.
 //
 //    // Example sending a request using UntagResourceRequest.
 //    req := client.UntagResourceRequest(params)

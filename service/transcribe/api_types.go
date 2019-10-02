@@ -202,7 +202,7 @@ func (s TranscriptionJob) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Provides a summary of information about a transcription job. .
+// Provides a summary of information about a transcription job.
 type TranscriptionJobSummary struct {
 	_ struct{} `type:"structure"`
 

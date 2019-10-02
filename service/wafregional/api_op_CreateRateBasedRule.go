@@ -51,7 +51,7 @@ type CreateRateBasedRuleInput struct {
 	// rule.
 	//
 	// RateLimit is a required field
-	RateLimit *int64 `min:"2000" type:"long" required:"true"`
+	RateLimit *int64 `min:"100" type:"long" required:"true"`
 
 	Tags []waf.Tag `min:"1" type:"list"`
 }
@@ -89,8 +89,8 @@ func (s *CreateRateBasedRuleInput) Validate() error {
 	if s.RateLimit == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RateLimit"))
 	}
-	if s.RateLimit != nil && *s.RateLimit < 2000 {
-		invalidParams.Add(aws.NewErrParamMinValue("RateLimit", 2000))
+	if s.RateLimit != nil && *s.RateLimit < 100 {
+		invalidParams.Add(aws.NewErrParamMinValue("RateLimit", 100))
 	}
 	if s.Tags != nil && len(s.Tags) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))

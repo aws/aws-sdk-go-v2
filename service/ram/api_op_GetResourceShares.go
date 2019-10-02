@@ -164,7 +164,8 @@ const opGetResourceShares = "GetResourceShares"
 // GetResourceSharesRequest returns a request value for making API operation for
 // AWS Resource Access Manager.
 //
-// Gets the specified resource shares or all of your resource shares.
+// Gets the resource shares that you own or the resource shares that are shared
+// with you.
 //
 //    // Example sending a request using GetResourceSharesRequest.
 //    req := client.GetResourceSharesRequest(params)

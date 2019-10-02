@@ -38,12 +38,12 @@ type CreateAgentInput struct {
 	SecurityGroupArns []string `min:"1" type:"list"`
 
 	// The Amazon Resource Names (ARNs) of the subnets in which DataSync will create
-	// Elastic Network Interfaces (ENIs) for each data transfer task. The agent
-	// that runs a task must be private. When you start a task that is associated
-	// with an agent created in a VPC, or one that has access to an IP address in
-	// a VPC, then the task is also private. In this case, DataSync creates four
-	// ENIs for each task in your subnet. For a data transfer to work, the agent
-	// must be able to route to all these four ENIs.
+	// elastic network interfaces for each data transfer task. The agent that runs
+	// a task must be private. When you start a task that is associated with an
+	// agent created in a VPC, or one that has access to an IP address in a VPC,
+	// then the task is also private. In this case, DataSync creates four network
+	// interfaces for each task in your subnet. For a data transfer to work, the
+	// agent must be able to route to all these four network interfaces.
 	SubnetArns []string `min:"1" type:"list"`
 
 	// The key-value pair that represents the tag that you want to associate with

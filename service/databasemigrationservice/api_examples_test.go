@@ -352,6 +352,46 @@ func ExampleClient_DeleteCertificateRequest_shared00() {
 	fmt.Println(result)
 }
 
+// Delete Connection
+//
+// Deletes the connection between the replication instance and the endpoint.
+func ExampleClient_DeleteConnectionRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := databasemigrationservice.New(cfg)
+	input := &databasemigrationservice.DeleteConnectionInput{
+		EndpointArn:            aws.String("arn:aws:dms:us-east-1:123456789012:endpoint:RAAR3R22XSH46S3PWLC3NJAWKM"),
+		ReplicationInstanceArn: aws.String("arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ"),
+	}
+
+	req := svc.DeleteConnectionRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case databasemigrationservice.ErrCodeAccessDeniedFault:
+				fmt.Println(databasemigrationservice.ErrCodeAccessDeniedFault, aerr.Error())
+			case databasemigrationservice.ErrCodeResourceNotFoundFault:
+				fmt.Println(databasemigrationservice.ErrCodeResourceNotFoundFault, aerr.Error())
+			case databasemigrationservice.ErrCodeInvalidResourceStateFault:
+				fmt.Println(databasemigrationservice.ErrCodeInvalidResourceStateFault, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
 // Delete Endpoint
 //
 // Deletes the specified endpoint. All tasks associated with the endpoint must be deleted

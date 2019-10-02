@@ -2338,6 +2338,9 @@ type OrderableDBInstanceOption struct {
 	// Indicates whether a DB instance supports provisioned IOPS.
 	SupportsIops *bool `type:"boolean"`
 
+	// Whether a DB instance supports Kerberos Authentication.
+	SupportsKerberosAuthentication *bool `type:"boolean"`
+
 	// True if a DB instance supports Performance Insights, otherwise false.
 	SupportsPerformanceInsights *bool `type:"boolean"`
 
@@ -2634,6 +2637,12 @@ type ReservedDBInstance struct {
 
 	// The fixed price charged for this reserved DB instance.
 	FixedPrice *float64 `type:"double"`
+
+	// The unique identifier for the lease associated with the reserved DB instance.
+	//
+	// AWS Support might request the lease ID for an issue related to a reserved
+	// DB instance.
+	LeaseId *string `type:"string"`
 
 	// Indicates if the reservation applies to Multi-AZ deployments.
 	MultiAZ *bool `type:"boolean"`

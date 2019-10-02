@@ -13,6 +13,18 @@ type UpdateDevEndpointInput struct {
 	_ struct{} `type:"structure"`
 
 	// The map of arguments to add the map of arguments used to configure the DevEndpoint.
+	//
+	// Valid arguments are:
+	//
+	//    * "--enable-glue-datacatalog": ""
+	//
+	//    * "GLUE_PYTHON_VERSION": "3"
+	//
+	//    * "GLUE_PYTHON_VERSION": "2"
+	//
+	// You can specify a version of Python support for development endpoints by
+	// using the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint
+	// APIs. If no arguments are provided, the version defaults to Python 2.
 	AddArguments map[string]string `type:"map"`
 
 	// The list of public keys for the DevEndpoint to use.

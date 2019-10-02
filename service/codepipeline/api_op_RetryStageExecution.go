@@ -91,6 +91,9 @@ const opRetryStageExecution = "RetryStageExecution"
 // AWS CodePipeline.
 //
 // Resumes the pipeline execution by retrying the last failed actions in a stage.
+// You can retry a stage immediately if any of the actions in the stage fail.
+// When you retry, all actions that are still in progress continue working,
+// and failed actions are triggered again.
 //
 //    // Example sending a request using RetryStageExecutionRequest.
 //    req := client.RetryStageExecutionRequest(params)

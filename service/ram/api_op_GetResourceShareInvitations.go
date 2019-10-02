@@ -132,7 +132,7 @@ const opGetResourceShareInvitations = "GetResourceShareInvitations"
 // GetResourceShareInvitationsRequest returns a request value for making API operation for
 // AWS Resource Access Manager.
 //
-// Gets the specified invitations for resource sharing.
+// Gets the invitations for resource sharing that you've received.
 //
 //    // Example sending a request using GetResourceShareInvitationsRequest.
 //    req := client.GetResourceShareInvitationsRequest(params)

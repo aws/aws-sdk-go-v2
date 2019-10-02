@@ -13,7 +13,7 @@ import (
 type UpdateResourceShareInput struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates whether principals outside your organization can be associated
+	// Indicates whether principals outside your AWS organization can be associated
 	// with a resource share.
 	AllowExternalPrincipals *bool `locationName:"allowExternalPrincipals" type:"boolean"`
 
@@ -118,7 +118,7 @@ const opUpdateResourceShare = "UpdateResourceShare"
 // UpdateResourceShareRequest returns a request value for making API operation for
 // AWS Resource Access Manager.
 //
-// Updates the specified resource share.
+// Updates the specified resource share that you own.
 //
 //    // Example sending a request using UpdateResourceShareRequest.
 //    req := client.UpdateResourceShareRequest(params)

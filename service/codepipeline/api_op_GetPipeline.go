@@ -14,13 +14,13 @@ type GetPipelineInput struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the pipeline for which you want to get information. Pipeline
-	// names must be unique under an Amazon Web Services (AWS) user account.
+	// names must be unique under an AWS user account.
 	//
 	// Name is a required field
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 
 	// The version number of the pipeline. If you do not specify a version, defaults
-	// to the most current version.
+	// to the current version.
 	Version *int64 `locationName:"version" min:"1" type:"integer"`
 }
 

@@ -241,6 +241,9 @@ func (s *PutParameterInput) Validate() error {
 type PutParameterOutput struct {
 	_ struct{} `type:"structure"`
 
+	// The tier assigned to the parameter.
+	Tier ParameterTier `type:"string" enum:"true"`
+
 	// The new version number of a parameter. If you edit a parameter value, Parameter
 	// Store automatically creates a new version and assigns this new version a
 	// unique ID. You can reference a parameter version ID in API actions or in

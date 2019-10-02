@@ -166,7 +166,7 @@ type RegisterTaskDefinitionInput struct {
 	// The process namespace to use for the containers in the task. The valid values
 	// are host or task. If host is specified, then all containers within the tasks
 	// that specified the host PID mode on the same container instance share the
-	// same IPC resources with the host Amazon EC2 instance. If task is specified,
+	// same process namespace with the host Amazon EC2 instance. If task is specified,
 	// all containers within the specified task share the same process namespace.
 	// If no value is specified, the default is a private namespace. For more information,
 	// see PID settings (https://docs.docker.com/engine/reference/run/#pid-settings---pid)

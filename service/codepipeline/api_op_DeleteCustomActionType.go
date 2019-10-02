@@ -79,8 +79,8 @@ const opDeleteCustomActionType = "DeleteCustomActionType"
 // DeleteCustomActionTypeRequest returns a request value for making API operation for
 // AWS CodePipeline.
 //
-// Marks a custom action as deleted. PollForJobs for the custom action will
-// fail after the action is marked for deletion. Only used for custom actions.
+// Marks a custom action as deleted. PollForJobs for the custom action fails
+// after the action is marked for deletion. Used for custom actions only.
 //
 // To re-create a custom action after it has been deleted you must use a string
 // in the version field that has never been used before. This string can be

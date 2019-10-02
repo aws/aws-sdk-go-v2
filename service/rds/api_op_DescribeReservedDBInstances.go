@@ -26,6 +26,13 @@ type DescribeReservedDBInstancesInput struct {
 	// This parameter is not currently supported.
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
+	// The lease identifier filter value. Specify this parameter to show only the
+	// reservation that matches the specified lease ID.
+	//
+	// AWS Support might request the lease ID for an issue related to a reserved
+	// DB instance.
+	LeaseId *string `type:"string"`
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to
 	// the value specified by MaxRecords.

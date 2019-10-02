@@ -81,7 +81,11 @@ type ClientAPI interface {
 
 	DeleteWebhookRequest(*amplify.DeleteWebhookInput) amplify.DeleteWebhookRequest
 
+	GenerateAccessLogsRequest(*amplify.GenerateAccessLogsInput) amplify.GenerateAccessLogsRequest
+
 	GetAppRequest(*amplify.GetAppInput) amplify.GetAppRequest
+
+	GetArtifactUrlRequest(*amplify.GetArtifactUrlInput) amplify.GetArtifactUrlRequest
 
 	GetBranchRequest(*amplify.GetBranchInput) amplify.GetBranchRequest
 
@@ -92,6 +96,8 @@ type ClientAPI interface {
 	GetWebhookRequest(*amplify.GetWebhookInput) amplify.GetWebhookRequest
 
 	ListAppsRequest(*amplify.ListAppsInput) amplify.ListAppsRequest
+
+	ListArtifactsRequest(*amplify.ListArtifactsInput) amplify.ListArtifactsRequest
 
 	ListBranchesRequest(*amplify.ListBranchesInput) amplify.ListBranchesRequest
 

@@ -13,7 +13,7 @@ import (
 type PutActionRevisionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the action that will process the revision.
+	// The name of the action that processes the revision.
 	//
 	// ActionName is a required field
 	ActionName *string `locationName:"actionName" min:"1" type:"string" required:"true"`
@@ -23,12 +23,12 @@ type PutActionRevisionInput struct {
 	// ActionRevision is a required field
 	ActionRevision *ActionRevision `locationName:"actionRevision" type:"structure" required:"true"`
 
-	// The name of the pipeline that will start processing the revision to the source.
+	// The name of the pipeline that starts processing the revision to the source.
 	//
 	// PipelineName is a required field
 	PipelineName *string `locationName:"pipelineName" min:"1" type:"string" required:"true"`
 
-	// The name of the stage that contains the action that will act upon the revision.
+	// The name of the stage that contains the action that acts on the revision.
 	//
 	// StageName is a required field
 	StageName *string `locationName:"stageName" min:"1" type:"string" required:"true"`

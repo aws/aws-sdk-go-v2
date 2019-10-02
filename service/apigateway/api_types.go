@@ -1118,6 +1118,10 @@ type EndpointConfiguration struct {
 	// "EDGE". For a regional API and its custom domain name, the endpoint type
 	// is REGIONAL. For a private API, the endpoint type is PRIVATE.
 	Types []EndpointType `locationName:"types" type:"list"`
+
+	// A list of VpcEndpointIds of an API (RestApi) against which to create Route53
+	// ALIASes. It is only supported for PRIVATE endpoint type.
+	VpcEndpointIds []string `locationName:"vpcEndpointIds" type:"list"`
 }
 
 // String returns the string representation
@@ -1132,6 +1136,18 @@ func (s EndpointConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		ls0 := e.List(protocol.BodyTarget, "types", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.VpcEndpointIds != nil {
+		v := s.VpcEndpointIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "vpcEndpointIds", metadata)
 		ls0.Start()
 		for _, v1 := range v {
 			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})

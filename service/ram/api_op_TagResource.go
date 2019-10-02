@@ -91,7 +91,7 @@ const opTagResource = "TagResource"
 // TagResourceRequest returns a request value for making API operation for
 // AWS Resource Access Manager.
 //
-// Adds the specified tags to the specified resource share.
+// Adds the specified tags to the specified resource share that you own.
 //
 //    // Example sending a request using TagResourceRequest.
 //    req := client.TagResourceRequest(params)

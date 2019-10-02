@@ -124,6 +124,23 @@ func (enum NfsVersion) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type OverwriteMode string
+
+// Enum values for OverwriteMode
+const (
+	OverwriteModeAlways OverwriteMode = "ALWAYS"
+	OverwriteModeNever  OverwriteMode = "NEVER"
+)
+
+func (enum OverwriteMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OverwriteMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PhaseStatus string
 
 // Enum values for PhaseStatus
@@ -190,6 +207,27 @@ func (enum PreserveDevices) MarshalValue() (string, error) {
 }
 
 func (enum PreserveDevices) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type S3StorageClass string
+
+// Enum values for S3StorageClass
+const (
+	S3StorageClassStandard           S3StorageClass = "STANDARD"
+	S3StorageClassStandardIa         S3StorageClass = "STANDARD_IA"
+	S3StorageClassOnezoneIa          S3StorageClass = "ONEZONE_IA"
+	S3StorageClassIntelligentTiering S3StorageClass = "INTELLIGENT_TIERING"
+	S3StorageClassGlacier            S3StorageClass = "GLACIER"
+	S3StorageClassDeepArchive        S3StorageClass = "DEEP_ARCHIVE"
+)
+
+func (enum S3StorageClass) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum S3StorageClass) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -276,6 +314,7 @@ type VerifyMode string
 // Enum values for VerifyMode
 const (
 	VerifyModePointInTimeConsistent VerifyMode = "POINT_IN_TIME_CONSISTENT"
+	VerifyModeOnlyFilesTransferred  VerifyMode = "ONLY_FILES_TRANSFERRED"
 	VerifyModeNone                  VerifyMode = "NONE"
 )
 

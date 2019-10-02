@@ -17,6 +17,9 @@ type PutLoggingConfigurationInput struct {
 	// the redacted fields details, and the Amazon Resource Name (ARN) of the web
 	// ACL to monitor.
 	//
+	// When specifying Type in RedactedFields, you must use one of the following
+	// values: URI, QUERY_STRING, HEADER, or METHOD.
+	//
 	// LoggingConfiguration is a required field
 	LoggingConfiguration *waf.LoggingConfiguration `type:"structure" required:"true"`
 }
@@ -67,7 +70,7 @@ const opPutLoggingConfiguration = "PutLoggingConfiguration"
 // You can access information about all traffic that AWS WAF inspects using
 // the following steps:
 //
-// Create an Amazon Kinesis Data Firehose .
+// Create an Amazon Kinesis Data Firehose.
 //
 // Create the data firehose with a PUT source and in the region that you are
 // operating. However, if you are capturing logs for Amazon CloudFront, always

@@ -35,6 +35,9 @@ type ListResourcesInput struct {
 	ResourceShareArns []string `locationName:"resourceShareArns" type:"list"`
 
 	// The resource type.
+	//
+	// Valid values: route53resolver:ResolverRule | ec2:TransitGateway | ec2:Subnet
+	// | license-manager:LicenseConfiguration
 	ResourceType *string `locationName:"resourceType" type:"string"`
 }
 
@@ -164,7 +167,8 @@ const opListResources = "ListResources"
 // ListResourcesRequest returns a request value for making API operation for
 // AWS Resource Access Manager.
 //
-// Lists the resources that the specified principal can access.
+// Lists the resources that you added to a resource shares or the resources
+// that are shared with you.
 //
 //    // Example sending a request using ListResourcesRequest.
 //    req := client.ListResourcesRequest(params)

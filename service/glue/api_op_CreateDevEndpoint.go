@@ -34,6 +34,22 @@ type CreateDevEndpointInput struct {
 	// data analysis library, are not yet supported.
 	ExtraPythonLibsS3Path *string `type:"string"`
 
+	// Glue version determines the versions of Apache Spark and Python that AWS
+	// Glue supports. The Python version indicates the version supported for running
+	// your ETL scripts on development endpoints.
+	//
+	// For more information about the available AWS Glue versions and corresponding
+	// Spark and Python versions, see Glue version (https://docs.aws.amazon.com/glue/latest/dg/add-job.html)
+	// in the developer guide.
+	//
+	// Development endpoints that are created without specifying a Glue version
+	// default to Glue 0.9.
+	//
+	// You can specify a version of Python support for development endpoints by
+	// using the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint
+	// APIs. If no arguments are provided, the version defaults to Python 2.
+	GlueVersion *string `min:"1" type:"string"`
+
 	// The number of AWS Glue Data Processing Units (DPUs) to allocate to this DevEndpoint.
 	NumberOfNodes *int64 `type:"integer"`
 
@@ -111,6 +127,9 @@ func (s *CreateDevEndpointInput) Validate() error {
 	if s.EndpointName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndpointName"))
 	}
+	if s.GlueVersion != nil && len(*s.GlueVersion) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("GlueVersion", 1))
+	}
 
 	if s.RoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
@@ -129,6 +148,18 @@ type CreateDevEndpointOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The map of arguments used to configure this DevEndpoint.
+	//
+	// Valid arguments are:
+	//
+	//    * "--enable-glue-datacatalog": ""
+	//
+	//    * "GLUE_PYTHON_VERSION": "3"
+	//
+	//    * "GLUE_PYTHON_VERSION": "2"
+	//
+	// You can specify a version of Python support for development endpoints by
+	// using the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint
+	// APIs. If no arguments are provided, the version defaults to Python 2.
 	Arguments map[string]string `type:"map"`
 
 	// The AWS Availability Zone where this DevEndpoint is located.
@@ -150,6 +181,11 @@ type CreateDevEndpointOutput struct {
 
 	// The reason for a current failure in this DevEndpoint.
 	FailureReason *string `type:"string"`
+
+	// Glue version determines the versions of Apache Spark and Python that AWS
+	// Glue supports. The Python version indicates the version supported for running
+	// your ETL scripts on development endpoints.
+	GlueVersion *string `min:"1" type:"string"`
 
 	// The number of AWS Glue Data Processing Units (DPUs) allocated to this DevEndpoint.
 	NumberOfNodes *int64 `type:"integer"`

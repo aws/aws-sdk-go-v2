@@ -136,9 +136,22 @@ type NfsMountOptions struct {
 	_ struct{} `type:"structure"`
 
 	// The specific NFS version that you want DataSync to use to mount your NFS
-	// share. If you don't specify a version, DataSync defaults to AUTOMATIC. That
+	// share. If the server refuses to use the version specified, the sync will
+	// fail. If you don't specify a version, DataSync defaults to AUTOMATIC. That
 	// is, DataSync automatically selects a version based on negotiation with the
 	// NFS server.
+	//
+	// You can specify the following NFS versions:
+	//
+	//    * NFSv3 (https://tools.ietf.org/html/rfc1813) - stateless protocol version
+	//    that allows for asynchronous writes on the server.
+	//
+	//    * NFSv4.0 (https://tools.ietf.org/html/rfc3530) - stateful, firewall-friendly
+	//    protocol version that supports delegations and pseudo filesystems.
+	//
+	//    * NFSv4.1 (https://tools.ietf.org/html/rfc5661) - stateful protocol version
+	//    that supports sessions, directory delegations, and parallel data processing.
+	//    Version 4.1 also includes all features available in version 4.0.
 	Version NfsVersion `type:"string" enum:"true"`
 }
 
@@ -237,6 +250,17 @@ type Options struct {
 	// If Mtime is set to NONE, Atime must also be set to NONE.
 	Mtime Mtime `type:"string" enum:"true"`
 
+	// A value that determines whether files at the destination should be overwritten
+	// or preserved when copying files. If set to NEVER a destination file will
+	// not be replaced by a source file, even if the destination file differs from
+	// the source file. If you modify files in the destination and you sync the
+	// files, you can use this value to protect against overwriting those changes.
+	//
+	// Some storage classes have specific behaviors that can affect your S3 storage
+	// cost. For detailed information, see using-storage-classes in the AWS DataSync
+	// User Guide.
+	OverwriteMode OverwriteMode `type:"string" enum:"true"`
+
 	// A value that determines which users or groups can access a file for a specific
 	// purpose such as reading, writing, or execution of the file.
 	//
@@ -250,7 +274,10 @@ type Options struct {
 	PosixPermissions PosixPermissions `type:"string" enum:"true"`
 
 	// A value that specifies whether files in the destination that don't exist
-	// in the source file system should be preserved.
+	// in the source file system should be preserved. This option can affect your
+	// storage cost. If your task deletes objects, you might incur minimum storage
+	// duration charges for certain storage classes. For detailed information, see
+	// using-storage-classes in the AWS DataSync User Guide.
 	//
 	// Default value: PRESERVE.
 	//
@@ -289,6 +316,8 @@ type Options struct {
 	// Default value: POINT_IN_TIME_CONSISTENT.
 	//
 	// POINT_IN_TIME_CONSISTENT: Perform verification (recommended).
+	//
+	// ONLY_FILES_TRANSFERRED: Perform verification on only files that were transferred.
 	//
 	// NONE: Skip verification.
 	VerifyMode VerifyMode `type:"string" enum:"true"`
@@ -385,7 +414,7 @@ type SmbMountOptions struct {
 	// The specific SMB version that you want DataSync to use to mount your SMB
 	// share. If you don't specify a version, DataSync defaults to AUTOMATIC. That
 	// is, DataSync automatically selects a version based on negotiation with the
-	// SMB Server server.
+	// SMB server.
 	Version SmbVersion `type:"string" enum:"true"`
 }
 

@@ -13,7 +13,7 @@ import (
 type CreateResourceShareInput struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates whether principals outside your organization can be associated
+	// Indicates whether principals outside your AWS organization can be associated
 	// with a resource share.
 	AllowExternalPrincipals *bool `locationName:"allowExternalPrincipals" type:"boolean"`
 

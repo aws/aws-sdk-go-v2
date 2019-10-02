@@ -25,6 +25,44 @@ func (s AvailabilityZone) String() string {
 	return awsutil.Prettify(s)
 }
 
+// A certificate authority (CA) certificate for an AWS account.
+type Certificate struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) for the certificate.
+	//
+	// Example: arn:aws:rds:us-east-1::cert:rds-ca-2019
+	CertificateArn *string `type:"string"`
+
+	// The unique key that identifies a certificate.
+	//
+	// Example: rds-ca-2019
+	CertificateIdentifier *string `type:"string"`
+
+	// The type of the certificate.
+	//
+	// Example: CA
+	CertificateType *string `type:"string"`
+
+	// The thumbprint of the certificate.
+	Thumbprint *string `type:"string"`
+
+	// The starting date-time from which the certificate is valid.
+	//
+	// Example: 2019-07-31T17:57:09Z
+	ValidFrom *time.Time `type:"timestamp"`
+
+	// The date-time after which the certificate is no longer valid.
+	//
+	// Example: 2024-07-31T17:57:09Z
+	ValidTill *time.Time `type:"timestamp"`
+}
+
+// String returns the string representation
+func (s Certificate) String() string {
+	return awsutil.Prettify(s)
+}
+
 // The configuration setting for the log types to be enabled for export to Amazon
 // CloudWatch Logs for a specific DB instance or DB cluster.
 //
@@ -415,6 +453,9 @@ type DBInstance struct {
 	// Specifies the number of days for which automatic DB snapshots are retained.
 	BackupRetentionPeriod *int64 `type:"integer"`
 
+	// The identifier of the CA certificate for this DB instance.
+	CACertificateIdentifier *string `type:"string"`
+
 	// Contains the name of the DB cluster that the DB instance is a member of if
 	// the DB instance is a member of a DB cluster.
 	DBClusterIdentifier *string `type:"string"`
@@ -482,17 +523,15 @@ type DBInstance struct {
 	// instance.
 	PromotionTier *int64 `type:"integer"`
 
-	// Specifies the availability options for the DB instance. A value of true specifies
-	// an internet-facing instance with a publicly resolvable DNS name, which resolves
-	// to a public IP address. A value of false specifies an internal instance with
-	// a DNS name that resolves to a private IP address.
+	// Not supported. Amazon DocumentDB does not currently support public endpoints.
+	// The value of PubliclyAccessible is always false.
 	PubliclyAccessible *bool `type:"boolean"`
 
 	// The status of a read replica. If the instance is not a read replica, this
 	// is blank.
 	StatusInfos []DBInstanceStatusInfo `locationNameList:"DBInstanceStatusInfo" type:"list"`
 
-	// Specifies whether the DB instance is encrypted.
+	// Specifies whether or not the DB instance is encrypted.
 	StorageEncrypted *bool `type:"boolean"`
 
 	// Provides a list of VPC security group elements that the DB instance belongs
@@ -534,7 +573,7 @@ func (s DBInstanceStatusInfo) String() string {
 type DBSubnetGroup struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Identifier (ARN) for the DB subnet group.
+	// The Amazon Resource Name (ARN) for the DB subnet group.
 	DBSubnetGroupArn *string `type:"string"`
 
 	// Provides the description of the DB subnet group.

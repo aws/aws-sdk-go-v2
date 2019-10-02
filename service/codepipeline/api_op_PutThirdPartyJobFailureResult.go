@@ -85,7 +85,7 @@ const opPutThirdPartyJobFailureResult = "PutThirdPartyJobFailureResult"
 // AWS CodePipeline.
 //
 // Represents the failure of a third party job as returned to the pipeline by
-// a job worker. Only used for partner actions.
+// a job worker. Used for partner actions only.
 //
 //    // Example sending a request using PutThirdPartyJobFailureResultRequest.
 //    req := client.PutThirdPartyJobFailureResultRequest(params)

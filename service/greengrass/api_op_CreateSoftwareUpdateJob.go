@@ -143,6 +143,9 @@ type CreateSoftwareUpdateJobOutput struct {
 
 	// The IoT Job Id corresponding to this update.
 	IotJobId *string `type:"string"`
+
+	// The software version installed on the device or devices after the update.
+	PlatformSoftwareVersion *string `type:"string"`
 }
 
 // String returns the string representation
@@ -163,6 +166,12 @@ func (s CreateSoftwareUpdateJobOutput) MarshalFields(e protocol.FieldEncoder) er
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "IotJobId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PlatformSoftwareVersion != nil {
+		v := *s.PlatformSoftwareVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PlatformSoftwareVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

@@ -20,21 +20,21 @@ type CreateLocationSmbInput struct {
 	// AgentArns is a required field
 	AgentArns []string `min:"1" type:"list" required:"true"`
 
-	// The name of the domain that the SMB server belongs to.
+	// The name of the Windows domain that the SMB server belongs to.
 	Domain *string `type:"string"`
 
-	// The mount options that are available for DataSync to use to access an SMB
-	// location.
+	// The mount options used by DataSync to access the SMB server.
 	MountOptions *SmbMountOptions `type:"structure"`
 
-	// The password of the user who has permission to access the SMB server.
+	// The password of the user who can mount the share, has the permissions to
+	// access files and folders in the SMB share.
 	//
 	// Password is a required field
 	Password *string `type:"string" required:"true"`
 
 	// The name of the SMB server. This value is the IP address or Domain Name Service
 	// (DNS) name of the SMB server. An agent that is installed on-premises uses
-	// this host name to mount the SMB server in a network.
+	// this hostname to mount the SMB server in a network.
 	//
 	// This name must either be DNS-compliant or must be an IP version 4 (IPv4)
 	// address.
@@ -65,7 +65,7 @@ type CreateLocationSmbInput struct {
 	Tags []TagListEntry `type:"list"`
 
 	// The user who can mount the share, has the permissions to access files and
-	// directories in the SMB share.
+	// folders in the SMB share.
 	//
 	// User is a required field
 	User *string `type:"string" required:"true"`

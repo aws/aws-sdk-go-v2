@@ -144,6 +144,9 @@ type DescribeTrainingJobOutput struct {
 	//
 	//    * Training - Training is in progress.
 	//
+	//    * Interrupted - The job stopped because the managed spot training instances
+	//    were interrupted.
+	//
 	//    * Uploading - Training is complete and the model artifacts are being uploaded
 	//    to the S3 location.
 	//
@@ -163,9 +166,6 @@ type DescribeTrainingJobOutput struct {
 	//
 	//    * MaxWaitTmeExceeded - The job stopped because it exceeded the maximum
 	//    allowed wait time.
-	//
-	//    * Interrupted - The job stopped because the managed spot training instances
-	//    were interrupted.
 	//
 	//    * Stopped - The training job has stopped.
 	//

@@ -286,6 +286,10 @@ type ClientAPI interface {
 
 	StopDBInstanceRequest(*rds.StopDBInstanceInput) rds.StopDBInstanceRequest
 
+	WaitUntilDBClusterSnapshotAvailable(context.Context, *rds.DescribeDBClusterSnapshotsInput, ...aws.WaiterOption) error
+
+	WaitUntilDBClusterSnapshotDeleted(context.Context, *rds.DescribeDBClusterSnapshotsInput, ...aws.WaiterOption) error
+
 	WaitUntilDBInstanceAvailable(context.Context, *rds.DescribeDBInstancesInput, ...aws.WaiterOption) error
 
 	WaitUntilDBInstanceDeleted(context.Context, *rds.DescribeDBInstancesInput, ...aws.WaiterOption) error

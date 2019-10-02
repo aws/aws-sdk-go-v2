@@ -26,7 +26,7 @@ type UpdateRateBasedRuleInput struct {
 	// rule.
 	//
 	// RateLimit is a required field
-	RateLimit *int64 `min:"2000" type:"long" required:"true"`
+	RateLimit *int64 `min:"100" type:"long" required:"true"`
 
 	// The RuleId of the RateBasedRule that you want to update. RuleId is returned
 	// by CreateRateBasedRule and by ListRateBasedRules.
@@ -60,8 +60,8 @@ func (s *UpdateRateBasedRuleInput) Validate() error {
 	if s.RateLimit == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RateLimit"))
 	}
-	if s.RateLimit != nil && *s.RateLimit < 2000 {
-		invalidParams.Add(aws.NewErrParamMinValue("RateLimit", 2000))
+	if s.RateLimit != nil && *s.RateLimit < 100 {
+		invalidParams.Add(aws.NewErrParamMinValue("RateLimit", 100))
 	}
 
 	if s.RuleId == nil {

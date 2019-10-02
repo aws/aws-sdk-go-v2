@@ -21,7 +21,7 @@ type DisableStageTransitionInput struct {
 	// PipelineName is a required field
 	PipelineName *string `locationName:"pipelineName" min:"1" type:"string" required:"true"`
 
-	// The reason given to the user why a stage is disabled, such as waiting for
+	// The reason given to the user that a stage is disabled, such as waiting for
 	// manual approval or manual tests. This message is displayed in the pipeline
 	// console UI.
 	//
@@ -34,8 +34,8 @@ type DisableStageTransitionInput struct {
 	// StageName is a required field
 	StageName *string `locationName:"stageName" min:"1" type:"string" required:"true"`
 
-	// Specifies whether artifacts will be prevented from transitioning into the
-	// stage and being processed by the actions in that stage (inbound), or prevented
+	// Specifies whether artifacts are prevented from transitioning into the stage
+	// and being processed by the actions in that stage (inbound), or prevented
 	// from transitioning from the stage after they have been processed by the actions
 	// in that stage (outbound).
 	//

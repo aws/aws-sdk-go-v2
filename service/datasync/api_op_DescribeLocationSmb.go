@@ -50,7 +50,7 @@ type DescribeLocationSmbOutput struct {
 	// The time that the SMB location was created.
 	CreationTime *time.Time `type:"timestamp"`
 
-	// The name of the domain that the SMB server belongs to.
+	// The name of the Windows domain that the SMB server belongs to.
 	Domain *string `type:"string"`
 
 	// The Amazon resource Name (ARN) of the SMB location that was described.
@@ -63,7 +63,8 @@ type DescribeLocationSmbOutput struct {
 	// location.
 	MountOptions *SmbMountOptions `type:"structure"`
 
-	// The user who is logged on the SMB server.
+	// The user who can mount the share, has the permissions to access files and
+	// folders in the SMB share.
 	User *string `type:"string"`
 }
 

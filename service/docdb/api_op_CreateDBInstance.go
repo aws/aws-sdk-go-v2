@@ -85,7 +85,8 @@ type CreateDBInstanceInput struct {
 	// Valid values: 0-15
 	PromotionTier *int64 `type:"integer"`
 
-	// The tags to be assigned to the DB instance.
+	// The tags to be assigned to the DB instance. You can assign up to 10 tags
+	// to an instance.
 	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 

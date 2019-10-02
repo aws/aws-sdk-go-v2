@@ -132,7 +132,7 @@ const opGetResourcePolicies = "GetResourcePolicies"
 // GetResourcePoliciesRequest returns a request value for making API operation for
 // AWS Resource Access Manager.
 //
-// Gets the policies for the specifies resources.
+// Gets the policies for the specified resources that you own and have shared.
 //
 //    // Example sending a request using GetResourcePoliciesRequest.
 //    req := client.GetResourcePoliciesRequest(params)
