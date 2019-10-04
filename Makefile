@@ -8,7 +8,7 @@ LINTIGNOREDEPS='vendor/.+\.go'
 LINTIGNOREPKGCOMMENT='service/[^/]+/doc_custom.go:.+package comment should be of the form'
 LINTIGNOREENDPOINTS='aws/endpoints/defaults.go:.+(method|const) .+ should be '
 UNIT_TEST_TAGS="example codegen awsinclude"
-ALL_TAGS="example codegen awsinclude integration perftest"
+ALL_TAGS="example codegen awsinclude integration perftest sdktool"
 
 # SDK's Core and client packages that are compatable with Go 1.9+.
 SDK_CORE_PKGS=./aws/... ./private/... ./internal/...
@@ -48,7 +48,7 @@ gen-endpoints:
 	go generate ./models/endpoints
 
 gen-tools:
-	go generate ./internal/awstesting/cmd/op_crawler/
+	go generate -tags sdktool ./internal/awstesting/cmd/op_crawler/
 
 cleanup-models:
 	@echo "Cleaning up stale model versions"

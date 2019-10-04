@@ -1,3 +1,5 @@
+// +build sdktool
+
 package main
 
 import (
