@@ -12,6 +12,10 @@ import (
 type DeleteInstanceInput struct {
 	_ struct{} `type:"structure"`
 
+	// A Boolean value to indicate whether to delete the enabled add-ons for the
+	// disk.
+	ForceDeleteAddOns *bool `locationName:"forceDeleteAddOns" type:"boolean"`
+
 	// The name of the instance to delete.
 	//
 	// InstanceName is a required field
@@ -55,10 +59,10 @@ const opDeleteInstance = "DeleteInstance"
 // DeleteInstanceRequest returns a request value for making API operation for
 // Amazon Lightsail.
 //
-// Deletes a specific Amazon Lightsail virtual private server, or instance.
+// Deletes an Amazon Lightsail instance.
 //
 // The delete instance operation supports tag-based access control via resource
-// tags applied to the resource identified by instanceName. For more information,
+// tags applied to the resource identified by instance name. For more information,
 // see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //
 //    // Example sending a request using DeleteInstanceRequest.

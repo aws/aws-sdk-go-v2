@@ -73,7 +73,7 @@ const opListGroups = "ListGroups"
 //
 // Lists the groups associated with a user pool.
 //
-// Requires developer credentials.
+// Calling this action requires developer credentials.
 //
 //    // Example sending a request using ListGroupsRequest.
 //    req := client.ListGroupsRequest(params)

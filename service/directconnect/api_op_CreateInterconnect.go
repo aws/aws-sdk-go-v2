@@ -32,7 +32,10 @@ type CreateInterconnectInput struct {
 	// Location is a required field
 	Location *string `locationName:"location" type:"string" required:"true"`
 
-	// The tags to assign to the interconnect,
+	// The name of the service provider associated with the interconnect.
+	ProviderName *string `locationName:"providerName" type:"string"`
+
+	// The tags to associate with the interconnect.
 	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 }
 
@@ -128,10 +131,13 @@ type CreateInterconnectOutput struct {
 	// The location of the connection.
 	Location *string `locationName:"location" type:"string"`
 
+	// The name of the service provider associated with the interconnect.
+	ProviderName *string `locationName:"providerName" type:"string"`
+
 	// The AWS Region where the connection is located.
 	Region *string `locationName:"region" type:"string"`
 
-	// Any tags assigned to the interconnect.
+	// The tags associated with the interconnect.
 	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 }
 

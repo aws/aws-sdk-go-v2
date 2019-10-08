@@ -71,7 +71,7 @@ const opAdminEnableUser = "AdminEnableUser"
 //
 // Enables the specified user as an administrator. Works on any user.
 //
-// Requires developer credentials.
+// Calling this action requires developer credentials.
 //
 //    // Example sending a request using AdminEnableUserRequest.
 //    req := client.AdminEnableUserRequest(params)

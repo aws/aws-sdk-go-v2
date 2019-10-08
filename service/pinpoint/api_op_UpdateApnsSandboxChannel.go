@@ -96,7 +96,8 @@ const opUpdateApnsSandboxChannel = "UpdateApnsSandboxChannel"
 // UpdateApnsSandboxChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Updates the APNs sandbox channel settings for an application.
+// Enables the APNs sandbox channel for an application or updates the status
+// and settings of the APNs sandbox channel for an application.
 //
 //    // Example sending a request using UpdateApnsSandboxChannelRequest.
 //    req := client.UpdateApnsSandboxChannelRequest(params)

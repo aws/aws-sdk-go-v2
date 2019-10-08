@@ -12,6 +12,166 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// Describes an add-on that is enabled for an Amazon Lightsail resource.
+type AddOn struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the add-on.
+	Name *string `locationName:"name" type:"string"`
+
+	// The next daily time an automatic snapshot will be created.
+	//
+	// The time shown is in HH:00 format, and in Coordinated Universal Time (UTC).
+	//
+	// The snapshot is automatically created between the time shown and up to 45
+	// minutes after.
+	NextSnapshotTimeOfDay *string `locationName:"nextSnapshotTimeOfDay" type:"string"`
+
+	// The daily time when an automatic snapshot is created.
+	//
+	// The time shown is in HH:00 format, and in Coordinated Universal Time (UTC).
+	//
+	// The snapshot is automatically created between the time shown and up to 45
+	// minutes after.
+	SnapshotTimeOfDay *string `locationName:"snapshotTimeOfDay" type:"string"`
+
+	// The status of the add-on.
+	Status *string `locationName:"status" type:"string"`
+}
+
+// String returns the string representation
+func (s AddOn) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Describes a request to enable, modify, or disable an add-on for an Amazon
+// Lightsail resource.
+//
+// An additional cost may be associated with enabling add-ons. For more information,
+// see the Lightsail pricing page (https://aws.amazon.com/lightsail/pricing/).
+type AddOnRequest struct {
+	_ struct{} `type:"structure"`
+
+	// The add-on type.
+	//
+	// AddOnType is a required field
+	AddOnType AddOnType `locationName:"addOnType" type:"string" required:"true" enum:"true"`
+
+	// An object that represents additional parameters when enabling or modifying
+	// the automatic snapshot add-on.
+	AutoSnapshotAddOnRequest *AutoSnapshotAddOnRequest `locationName:"autoSnapshotAddOnRequest" type:"structure"`
+}
+
+// String returns the string representation
+func (s AddOnRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AddOnRequest) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AddOnRequest"}
+	if len(s.AddOnType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("AddOnType"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Describes a block storage disk that is attached to an instance, and is included
+// in an automatic snapshot.
+type AttachedDisk struct {
+	_ struct{} `type:"structure"`
+
+	// The path of the disk (e.g., /dev/xvdf).
+	Path *string `locationName:"path" type:"string"`
+
+	// The size of the disk in GB.
+	SizeInGb *int64 `locationName:"sizeInGb" type:"integer"`
+}
+
+// String returns the string representation
+func (s AttachedDisk) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Describes a request to enable or modify the automatic snapshot add-on for
+// an Amazon Lightsail instance or disk.
+//
+// When you modify the automatic snapshot time for a resource, it is typically
+// effective immediately except under the following conditions:
+//
+//    * If an automatic snapshot has been created for the current day, and you
+//    change the snapshot time to a later time of day, then the new snapshot
+//    time will be effective the following day. This ensures that two snapshots
+//    are not created for the current day.
+//
+//    * If an automatic snapshot has not yet been created for the current day,
+//    and you change the snapshot time to an earlier time of day, then the new
+//    snapshot time will be effective the following day and a snapshot is automatically
+//    created at the previously set time for the current day. This ensures that
+//    a snapshot is created for the current day.
+//
+//    * If an automatic snapshot has not yet been created for the current day,
+//    and you change the snapshot time to a time that is within 30 minutes from
+//    your current time, then the new snapshot time will be effective the following
+//    day and a snapshot is automatically created at the previously set time
+//    for the current day. This ensures that a snapshot is created for the current
+//    day, because 30 minutes is required between your current time and the
+//    new snapshot time that you specify.
+//
+//    * If an automatic snapshot is scheduled to be created within 30 minutes
+//    from your current time and you change the snapshot time, then the new
+//    snapshot time will be effective the following day and a snapshot is automatically
+//    created at the previously set time for the current day. This ensures that
+//    a snapshot is created for the current day, because 30 minutes is required
+//    between your current time and the new snapshot time that you specify.
+type AutoSnapshotAddOnRequest struct {
+	_ struct{} `type:"structure"`
+
+	// The daily time when an automatic snapshot will be created.
+	//
+	// Constraints:
+	//
+	//    * Must be in HH:00 format, and in an hourly increment.
+	//
+	//    * Specified in Coordinated Universal Time (UTC).
+	//
+	//    * The snapshot will be automatically created between the time specified
+	//    and up to 45 minutes after.
+	SnapshotTimeOfDay *string `locationName:"snapshotTimeOfDay" type:"string"`
+}
+
+// String returns the string representation
+func (s AutoSnapshotAddOnRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Describes an automatic snapshot.
+type AutoSnapshotDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The timestamp when the automatic snapshot was created.
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
+
+	// The date of the automatic snapshot in YYYY-MM-DD format.
+	Date *string `locationName:"date" type:"string"`
+
+	// An array of objects that describe the block storage disks attached to the
+	// instance when the automatic snapshot was created.
+	FromAttachedDisks []AttachedDisk `locationName:"fromAttachedDisks" type:"list"`
+
+	// The status of the automatic snapshot.
+	Status AutoSnapshotStatus `locationName:"status" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s AutoSnapshotDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Describes an Availability Zone.
 type AvailabilityZone struct {
 	_ struct{} `type:"structure"`
@@ -211,9 +371,12 @@ func (s DestinationInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Describes a system disk or an block storage disk.
+// Describes a system disk or a block storage disk.
 type Disk struct {
 	_ struct{} `type:"structure"`
+
+	// An array of objects representing the add-ons enabled on the disk.
+	AddOns []AddOn `locationName:"addOns" type:"list"`
 
 	// The Amazon Resource Name (ARN) of the disk.
 	Arn *string `locationName:"arn" type:"string"`
@@ -343,6 +506,10 @@ type DiskSnapshot struct {
 	// The unique name of the source instance from which the disk (system volume)
 	// snapshot was created.
 	FromInstanceName *string `locationName:"fromInstanceName" type:"string"`
+
+	// A Boolean value indicating whether the snapshot was created from an automatic
+	// snapshot.
+	IsFromAutoSnapshot *bool `locationName:"isFromAutoSnapshot" type:"boolean"`
 
 	// The AWS Region and Availability Zone where the disk snapshot was created.
 	Location *ResourceLocation `locationName:"location" type:"structure"`
@@ -601,6 +768,9 @@ func (s HostKeyAttributes) String() string {
 // Describes an instance (a virtual private server).
 type Instance struct {
 	_ struct{} `type:"structure"`
+
+	// An array of objects representing the add-ons enabled on the instance.
+	AddOns []AddOn `locationName:"addOns" type:"list"`
 
 	// The Amazon Resource Name (ARN) of the instance (e.g., arn:aws:lightsail:us-east-2:123456789101:Instance/244ad76f-8aad-4741-809f-12345EXAMPLE).
 	Arn *string `locationName:"arn" type:"string"`
@@ -994,7 +1164,7 @@ func (s InstancePortState) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Describes the snapshot of the virtual private server, or instance.
+// Describes an instance snapshot.
 type InstanceSnapshot struct {
 	_ struct{} `type:"structure"`
 
@@ -1021,6 +1191,10 @@ type InstanceSnapshot struct {
 
 	// The instance from which the snapshot was created.
 	FromInstanceName *string `locationName:"fromInstanceName" type:"string"`
+
+	// A Boolean value indicating whether the snapshot was created from an automatic
+	// snapshot.
+	IsFromAutoSnapshot *bool `locationName:"isFromAutoSnapshot" type:"boolean"`
 
 	// The region name and Availability Zone where you created the snapshot.
 	Location *ResourceLocation `locationName:"location" type:"structure"`
@@ -1476,7 +1650,7 @@ type Operation struct {
 	// A Boolean value indicating whether the operation is terminal.
 	IsTerminal *bool `locationName:"isTerminal" type:"boolean"`
 
-	// The region and Availability Zone.
+	// The AWS Region and Availability Zone.
 	Location *ResourceLocation `locationName:"location" type:"structure"`
 
 	// Details about the operation (e.g., Debian-1GB-Ohio-1).

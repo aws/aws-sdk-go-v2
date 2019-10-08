@@ -4,6 +4,7 @@ package lightsail
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -11,6 +12,9 @@ import (
 
 type CreateInstancesFromSnapshotInput struct {
 	_ struct{} `type:"structure"`
+
+	// An array of objects representing the add-ons to enable for the new instance.
+	AddOns []AddOnRequest `locationName:"addOns" type:"list"`
 
 	// An object containing information about one or more disk mappings.
 	AttachedDiskMapping map[string][]DiskMap `locationName:"attachedDiskMapping" type:"map"`
@@ -39,16 +43,57 @@ type CreateInstancesFromSnapshotInput struct {
 	// Use the get instance snapshots operation to return information about your
 	// existing snapshots.
 	//
-	// InstanceSnapshotName is a required field
-	InstanceSnapshotName *string `locationName:"instanceSnapshotName" type:"string" required:"true"`
+	// This parameter cannot be defined together with the source instance name parameter.
+	// The instance snapshot name and source instance name parameters are mutually
+	// exclusive.
+	InstanceSnapshotName *string `locationName:"instanceSnapshotName" type:"string"`
 
 	// The name for your key pair.
 	KeyPairName *string `locationName:"keyPairName" type:"string"`
+
+	// The date of the automatic snapshot to use for the new instance.
+	//
+	// Use the get auto snapshots operation to identify the dates of the available
+	// automatic snapshots.
+	//
+	// Constraints:
+	//
+	//    * Must be specified in YYYY-MM-DD format.
+	//
+	//    * This parameter cannot be defined together with the use latest restorable
+	//    auto snapshot parameter. The restore date and use latest restorable auto
+	//    snapshot parameters are mutually exclusive.
+	//
+	// Define this parameter only when creating a new instance from an automatic
+	// snapshot. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
+	RestoreDate *string `locationName:"restoreDate" type:"string"`
+
+	// The name of the source instance from which the source automatic snapshot
+	// was created.
+	//
+	// This parameter cannot be defined together with the instance snapshot name
+	// parameter. The source instance name and instance snapshot name parameters
+	// are mutually exclusive.
+	//
+	// Define this parameter only when creating a new instance from an automatic
+	// snapshot. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
+	SourceInstanceName *string `locationName:"sourceInstanceName" type:"string"`
 
 	// The tag keys and optional values to add to the resource during create.
 	//
 	// To tag a resource after it has been created, see the tag resource operation.
 	Tags []Tag `locationName:"tags" type:"list"`
+
+	// A Boolean value to indicate whether to use the latest available automatic
+	// snapshot.
+	//
+	// This parameter cannot be defined together with the restore date parameter.
+	// The use latest restorable auto snapshot and restore date parameters are mutually
+	// exclusive.
+	//
+	// Define this parameter only when creating a new instance from an automatic
+	// snapshot. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
+	UseLatestRestorableAutoSnapshot *bool `locationName:"useLatestRestorableAutoSnapshot" type:"boolean"`
 
 	// You can create a launch script that configures a server with additional user
 	// data. For example, apt-get -y update.
@@ -80,9 +125,12 @@ func (s *CreateInstancesFromSnapshotInput) Validate() error {
 	if s.InstanceNames == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceNames"))
 	}
-
-	if s.InstanceSnapshotName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceSnapshotName"))
+	if s.AddOns != nil {
+		for i, v := range s.AddOns {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AddOns", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -109,12 +157,13 @@ const opCreateInstancesFromSnapshot = "CreateInstancesFromSnapshot"
 // CreateInstancesFromSnapshotRequest returns a request value for making API operation for
 // Amazon Lightsail.
 //
-// Uses a specific snapshot as a blueprint for creating one or more new instances
-// that are based on that identical configuration.
+// Creates one or more new instances from a manual or automatic snapshot of
+// an instance.
 //
 // The create instances from snapshot operation supports tag-based access control
 // via request tags and resource tags applied to the resource identified by
-// instanceSnapshotName. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+// instance snapshot name. For more information, see the Lightsail Dev Guide
+// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //
 //    // Example sending a request using CreateInstancesFromSnapshotRequest.
 //    req := client.CreateInstancesFromSnapshotRequest(params)

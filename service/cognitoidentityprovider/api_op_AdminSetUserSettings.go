@@ -10,22 +10,24 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Represents the request to set user settings as an administrator.
+// You can use this parameter to set an MFA configuration that uses the SMS
+// delivery medium.
 type AdminSetUserSettingsInput struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the options for MFA (e.g., email or phone number).
+	// You can use this parameter only to set an SMS configuration that uses SMS
+	// for delivery.
 	//
 	// MFAOptions is a required field
 	MFAOptions []MFAOptionType `type:"list" required:"true"`
 
-	// The user pool ID for the user pool where you want to set the user's settings,
-	// such as MFA options.
+	// The ID of the user pool that contains the user that you are setting options
+	// for.
 	//
 	// UserPoolId is a required field
 	UserPoolId *string `min:"1" type:"string" required:"true"`
 
-	// The user name of the user for whom you wish to set user settings.
+	// The user name of the user that you are setting options for.
 	//
 	// Username is a required field
 	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
@@ -86,9 +88,9 @@ const opAdminSetUserSettings = "AdminSetUserSettings"
 // AdminSetUserSettingsRequest returns a request value for making API operation for
 // Amazon Cognito Identity Provider.
 //
-// Sets all the user settings for a specified user name. Works on any user.
-//
-// Requires developer credentials.
+// This action is no longer supported. You can use it to configure only SMS
+// MFA. You can't use it to configure TOTP software token MFA. To configure
+// either type of MFA, use the AdminSetUserMFAPreference action instead.
 //
 //    // Example sending a request using AdminSetUserSettingsRequest.
 //    req := client.AdminSetUserSettingsRequest(params)

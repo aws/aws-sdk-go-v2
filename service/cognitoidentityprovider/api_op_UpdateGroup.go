@@ -85,7 +85,7 @@ const opUpdateGroup = "UpdateGroup"
 //
 // Updates the specified group with the specified attributes.
 //
-// Requires developer credentials.
+// Calling this action requires developer credentials.
 //
 //    // Example sending a request using UpdateGroupRequest.
 //    req := client.UpdateGroupRequest(params)

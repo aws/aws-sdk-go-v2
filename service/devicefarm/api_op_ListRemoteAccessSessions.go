@@ -13,8 +13,8 @@ import (
 type ListRemoteAccessSessionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the remote access session about which you
-	// are requesting information.
+	// The Amazon Resource Name (ARN) of the project about which you are requesting
+	// information.
 	//
 	// Arn is a required field
 	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`

@@ -1375,7 +1375,7 @@ func ExampleClient_ListSamplesRequest_shared00() {
 // To get information about suites
 //
 // The following example returns information about suites, given a specific Device Farm
-// project.
+// job.
 func ExampleClient_ListSuitesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -1384,7 +1384,7 @@ func ExampleClient_ListSuitesRequest_shared00() {
 
 	svc := devicefarm.New(cfg)
 	input := &devicefarm.ListSuitesInput{
-		Arn:       aws.String("arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456"),
+		Arn:       aws.String("arn:aws:devicefarm:us-west-2:123456789101:job:EXAMPLE-GUID-123-456"),
 		NextToken: aws.String("RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE"),
 	}
 

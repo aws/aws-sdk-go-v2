@@ -518,10 +518,10 @@ type DeliveryOptions struct {
 	// set.
 	SendingPoolName *string `type:"string"`
 
-	// Specifies whether Amazon Pinpoint should require that incoming email is delivered
-	// over a connection that’s encrypted by using Transport Layer Security (TLS).
-	// If this value is set to Require, Amazon Pinpoint will bounce email messages
-	// that cannot be delivered over TLS. The default value is Optional.
+	// Specifies whether messages that use the configuration set are required to
+	// use Transport Layer Security (TLS). If the value is Require, messages are
+	// only delivered if a TLS connection can be established. If the value is Optional,
+	// messages can be delivered in plain text if a TLS connection can't be established.
 	TlsPolicy TlsPolicy `type:"string" enum:"true"`
 }
 
@@ -1006,6 +1006,9 @@ type EmailContent struct {
 	// The simple email message. The message consists of a subject and a message
 	// body.
 	Simple *Message `type:"structure"`
+
+	// The template to use for the email message.
+	Template *Template `type:"structure"`
 }
 
 // String returns the string representation
@@ -1046,6 +1049,12 @@ func (s EmailContent) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Simple", v, metadata)
+	}
+	if s.Template != nil {
+		v := s.Template
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Template", v, metadata)
 	}
 	return nil
 }
@@ -2104,6 +2113,41 @@ func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Value", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+type Template struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the template.
+	TemplateArn *string `type:"string"`
+
+	// An object that defines the values to use for message variables in the template.
+	// This object is a set of key-value pairs. Each key defines a message variable
+	// in the template. The corresponding value defines the value to use for that
+	// variable.
+	TemplateData *string `type:"string"`
+}
+
+// String returns the string representation
+func (s Template) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Template) MarshalFields(e protocol.FieldEncoder) error {
+	if s.TemplateArn != nil {
+		v := *s.TemplateArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TemplateData != nil {
+		v := *s.TemplateData
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateData", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

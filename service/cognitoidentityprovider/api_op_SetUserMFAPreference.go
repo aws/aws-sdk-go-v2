@@ -12,7 +12,7 @@ import (
 type SetUserMFAPreferenceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The access token.
+	// The access token for the user.
 	//
 	// AccessToken is a required field
 	AccessToken *string `type:"string" required:"true" sensitive:"true"`
@@ -57,7 +57,12 @@ const opSetUserMFAPreference = "SetUserMFAPreference"
 // SetUserMFAPreferenceRequest returns a request value for making API operation for
 // Amazon Cognito Identity Provider.
 //
-// Set the user's multi-factor authentication (MFA) method preference.
+// Set the user's multi-factor authentication (MFA) method preference, including
+// which MFA factors are enabled and if any are preferred. Only one factor can
+// be set as preferred. The preferred MFA factor will be used to authenticate
+// a user if multiple factors are enabled. If multiple options are enabled and
+// no preference is set, a challenge to choose an MFA option will be returned
+// during sign in.
 //
 //    // Example sending a request using SetUserMFAPreferenceRequest.
 //    req := client.SetUserMFAPreferenceRequest(params)

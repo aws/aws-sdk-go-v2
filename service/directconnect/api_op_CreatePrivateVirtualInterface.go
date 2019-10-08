@@ -65,6 +65,8 @@ type CreatePrivateVirtualInterfaceOutput struct {
 	AmazonSideAsn *int64 `locationName:"amazonSideAsn" type:"long"`
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+	//
+	// The valid values are 1-2147483647.
 	Asn *int64 `locationName:"asn" type:"integer"`
 
 	// The authentication key for BGP configuration. This string has a minimum length
@@ -109,11 +111,11 @@ type CreatePrivateVirtualInterfaceOutput struct {
 	// public virtual interfaces.
 	RouteFilterPrefixes []RouteFilterPrefix `locationName:"routeFilterPrefixes" type:"list"`
 
-	// Any tags assigned to the virtual interface.
+	// The tags associated with the virtual interface.
 	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 
 	// The ID of the virtual private gateway. Applies only to private virtual interfaces.
-	VirtualGatewayId *string `locationName:"virtualGatewayId" deprecated:"true" type:"string"`
+	VirtualGatewayId *string `locationName:"virtualGatewayId" type:"string"`
 
 	// The ID of the virtual interface.
 	VirtualInterfaceId *string `locationName:"virtualInterfaceId" type:"string"`

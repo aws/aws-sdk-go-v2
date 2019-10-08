@@ -609,6 +609,24 @@ func (enum DeleteFleetErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type DeleteQueuedReservedInstancesErrorCode string
+
+// Enum values for DeleteQueuedReservedInstancesErrorCode
+const (
+	DeleteQueuedReservedInstancesErrorCodeReservedInstancesIdInvalid        DeleteQueuedReservedInstancesErrorCode = "reserved-instances-id-invalid"
+	DeleteQueuedReservedInstancesErrorCodeReservedInstancesNotInQueuedState DeleteQueuedReservedInstancesErrorCode = "reserved-instances-not-in-queued-state"
+	DeleteQueuedReservedInstancesErrorCodeUnexpectedError                   DeleteQueuedReservedInstancesErrorCode = "unexpected-error"
+)
+
+func (enum DeleteQueuedReservedInstancesErrorCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeleteQueuedReservedInstancesErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeviceType string
 
 // Enum values for DeviceType
@@ -2090,6 +2108,8 @@ const (
 	ReservedInstanceStateActive         ReservedInstanceState = "active"
 	ReservedInstanceStatePaymentFailed  ReservedInstanceState = "payment-failed"
 	ReservedInstanceStateRetired        ReservedInstanceState = "retired"
+	ReservedInstanceStateQueued         ReservedInstanceState = "queued"
+	ReservedInstanceStateQueuedDeleted  ReservedInstanceState = "queued-deleted"
 )
 
 func (enum ReservedInstanceState) MarshalValue() (string, error) {

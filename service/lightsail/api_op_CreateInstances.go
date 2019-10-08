@@ -4,6 +4,7 @@ package lightsail
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -11,6 +12,9 @@ import (
 
 type CreateInstancesInput struct {
 	_ struct{} `type:"structure"`
+
+	// An array of objects representing the add-ons to enable for the new instance.
+	AddOns []AddOnRequest `locationName:"addOns" type:"list"`
 
 	// The Availability Zone in which to create your instance. Use the following
 	// format: us-east-2a (case sensitive). You can get a list of Availability Zones
@@ -24,6 +28,11 @@ type CreateInstancesInput struct {
 	// The ID for a virtual private server image (e.g., app_wordpress_4_4 or app_lamp_7_0).
 	// Use the get blueprints operation to return a list of available images (or
 	// blueprints).
+	//
+	// Use active blueprints when creating new instances. Inactive blueprints are
+	// listed to support customers with existing instances and are not necessarily
+	// available to create new instances. Blueprints are marked inactive when they
+	// become outdated due to operating system updates or new application releases.
 	//
 	// BlueprintId is a required field
 	BlueprintId *string `locationName:"blueprintId" type:"string" required:"true"`
@@ -88,6 +97,13 @@ func (s *CreateInstancesInput) Validate() error {
 	if s.InstanceNames == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceNames"))
 	}
+	if s.AddOns != nil {
+		for i, v := range s.AddOns {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AddOns", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -113,12 +129,7 @@ const opCreateInstances = "CreateInstances"
 // CreateInstancesRequest returns a request value for making API operation for
 // Amazon Lightsail.
 //
-// Creates one or more Amazon Lightsail virtual private servers, or instances.
-// Create instances using active blueprints. Inactive blueprints are listed
-// to support customers with existing instances but are not necessarily available
-// for launch of new instances. Blueprints are marked inactive when they become
-// outdated due to operating system updates or new application releases. Use
-// the get blueprints operation to return a list of available blueprints.
+// Creates one or more Amazon Lightsail instances.
 //
 // The create instances operation supports tag-based access control via request
 // tags. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).

@@ -70,7 +70,7 @@ const opDeleteGroup = "DeleteGroup"
 //
 // Deletes a group. Currently only groups with no members can be deleted.
 //
-// Requires developer credentials.
+// Calling this action requires developer credentials.
 //
 //    // Example sending a request using DeleteGroupRequest.
 //    req := client.DeleteGroupRequest(params)

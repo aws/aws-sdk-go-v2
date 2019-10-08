@@ -85,6 +85,8 @@ type ClientAPI interface {
 
 	GetSnowballUsageRequest(*snowball.GetSnowballUsageInput) snowball.GetSnowballUsageRequest
 
+	GetSoftwareUpdatesRequest(*snowball.GetSoftwareUpdatesInput) snowball.GetSoftwareUpdatesRequest
+
 	ListClusterJobsRequest(*snowball.ListClusterJobsInput) snowball.ListClusterJobsRequest
 
 	ListClustersRequest(*snowball.ListClustersInput) snowball.ListClustersRequest

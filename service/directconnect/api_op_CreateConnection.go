@@ -32,7 +32,10 @@ type CreateConnectionInput struct {
 	// Location is a required field
 	Location *string `locationName:"location" type:"string" required:"true"`
 
-	// The tags to assign to the connection.
+	// The name of the service provider associated with the requested connection.
+	ProviderName *string `locationName:"providerName" type:"string"`
+
+	// The tags to associate with the lag.
 	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 }
 
@@ -140,10 +143,13 @@ type CreateConnectionOutput struct {
 	// The name of the AWS Direct Connect service provider associated with the connection.
 	PartnerName *string `locationName:"partnerName" type:"string"`
 
+	// The name of the service provider associated with the connection.
+	ProviderName *string `locationName:"providerName" type:"string"`
+
 	// The AWS Region where the connection is located.
 	Region *string `locationName:"region" type:"string"`
 
-	// Any tags assigned to the connection.
+	// The tags associated with the connection.
 	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 
 	// The ID of the VLAN.

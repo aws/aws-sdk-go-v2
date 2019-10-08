@@ -13,11 +13,7 @@ import (
 type CreateLagInput struct {
 	_ struct{} `type:"structure"`
 
-	// The tags to assign to the child connections of the LAG. Only newly created
-	// child connections as the result of creating a LAG connection are assigned
-	// the provided tags. The tags are not assigned to an existing connection that
-	// is provided via the “connectionId” parameter that will be migrated to
-	// the LAG.
+	// The tags to associate with the automtically created LAGs.
 	ChildConnectionTags []Tag `locationName:"childConnectionTags" min:"1" type:"list"`
 
 	// The ID of an existing connection to migrate to the LAG.
@@ -46,7 +42,10 @@ type CreateLagInput struct {
 	// NumberOfConnections is a required field
 	NumberOfConnections *int64 `locationName:"numberOfConnections" type:"integer" required:"true"`
 
-	// The tags to assign to the link aggregation group (LAG).
+	// The name of the service provider associated with the LAG.
+	ProviderName *string `locationName:"providerName" type:"string"`
+
+	// The tags to associate with the LAG.
 	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 }
 
@@ -167,10 +166,13 @@ type CreateLagOutput struct {
 	// The ID of the AWS account that owns the LAG.
 	OwnerAccount *string `locationName:"ownerAccount" type:"string"`
 
+	// The name of the service provider associated with the LAG.
+	ProviderName *string `locationName:"providerName" type:"string"`
+
 	// The AWS Region where the connection is located.
 	Region *string `locationName:"region" type:"string"`
 
-	// Any tags assigned to link aggregation group (LAG).
+	// The tags associated with the LAG.
 	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 }
 

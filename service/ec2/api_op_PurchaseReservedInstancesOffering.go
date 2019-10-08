@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -28,6 +29,9 @@ type PurchaseReservedInstancesOfferingInput struct {
 	// order and ensure that the Reserved Instances are not purchased at unexpected
 	// prices.
 	LimitPrice *ReservedInstanceLimitPrice `locationName:"limitPrice" type:"structure"`
+
+	// The time at which to purchase the Reserved Instance.
+	PurchaseTime *time.Time `type:"timestamp"`
 
 	// The ID of the Reserved Instance offering to purchase.
 	//
@@ -82,6 +86,9 @@ const opPurchaseReservedInstancesOffering = "PurchaseReservedInstancesOffering"
 // Use DescribeReservedInstancesOfferings to get a list of Reserved Instance
 // offerings that match your specifications. After you've purchased a Reserved
 // Instance, you can check for your new Reserved Instance with DescribeReservedInstances.
+//
+// To queue a purchase for a future date and time, specify a purchase time.
+// If you do not specify a purchase time, the default is the current time.
 //
 // For more information, see Reserved Instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html)
 // and Reserved Instance Marketplace (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html)

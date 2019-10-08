@@ -68,7 +68,7 @@ type CreateRelationalDatabaseInput struct {
 	//
 	//    * Must be in the hh24:mi-hh24:mi format. Example: 16:00-16:30
 	//
-	//    * Specified in Universal Coordinated Time (UTC).
+	//    * Specified in Coordinated Universal Time (UTC).
 	//
 	//    * Must not conflict with the preferred maintenance window.
 	//
@@ -89,7 +89,7 @@ type CreateRelationalDatabaseInput struct {
 	//
 	//    * Must be at least 30 minutes.
 	//
-	//    * Specified in Universal Coordinated Time (UTC).
+	//    * Specified in Coordinated Universal Time (UTC).
 	//
 	//    * Example: Tue:17:00-Tue:17:30
 	PreferredMaintenanceWindow *string `locationName:"preferredMaintenanceWindow" type:"string"`

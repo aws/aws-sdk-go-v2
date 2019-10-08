@@ -96,7 +96,8 @@ const opUpdateApnsVoipSandboxChannel = "UpdateApnsVoipSandboxChannel"
 // UpdateApnsVoipSandboxChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Updates the settings for the APNs VoIP sandbox channel for an application.
+// Enables the APNs VoIP sandbox channel for an application or updates the status
+// and settings of the APNs VoIP sandbox channel for an application.
 //
 //    // Example sending a request using UpdateApnsVoipSandboxChannelRequest.
 //    req := client.UpdateApnsVoipSandboxChannelRequest(params)

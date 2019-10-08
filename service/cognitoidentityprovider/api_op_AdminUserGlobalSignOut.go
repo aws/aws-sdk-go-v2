@@ -70,7 +70,7 @@ const opAdminUserGlobalSignOut = "AdminUserGlobalSignOut"
 //
 // Signs out users from all devices, as an administrator.
 //
-// Requires developer credentials.
+// Calling this action requires developer credentials.
 //
 //    // Example sending a request using AdminUserGlobalSignOutRequest.
 //    req := client.AdminUserGlobalSignOutRequest(params)

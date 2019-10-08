@@ -82,7 +82,7 @@ const opAdminAddUserToGroup = "AdminAddUserToGroup"
 //
 // Adds the specified user to the specified group.
 //
-// Requires developer credentials.
+// Calling this action requires developer credentials.
 //
 //    // Example sending a request using AdminAddUserToGroupRequest.
 //    req := client.AdminAddUserToGroupRequest(params)

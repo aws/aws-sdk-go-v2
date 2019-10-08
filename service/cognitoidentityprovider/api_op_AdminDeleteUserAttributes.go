@@ -84,7 +84,7 @@ const opAdminDeleteUserAttributes = "AdminDeleteUserAttributes"
 // Deletes the user attributes in a user pool as an administrator. Works on
 // any user.
 //
-// Requires developer credentials.
+// Calling this action requires developer credentials.
 //
 //    // Example sending a request using AdminDeleteUserAttributesRequest.
 //    req := client.AdminDeleteUserAttributesRequest(params)

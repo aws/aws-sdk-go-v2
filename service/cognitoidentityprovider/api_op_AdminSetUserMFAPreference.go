@@ -72,7 +72,12 @@ const opAdminSetUserMFAPreference = "AdminSetUserMFAPreference"
 // AdminSetUserMFAPreferenceRequest returns a request value for making API operation for
 // Amazon Cognito Identity Provider.
 //
-// Sets the user's multi-factor authentication (MFA) preference.
+// Sets the user's multi-factor authentication (MFA) preference, including which
+// MFA options are enabled and if any are preferred. Only one factor can be
+// set as preferred. The preferred MFA factor will be used to authenticate a
+// user if multiple factors are enabled. If multiple options are enabled and
+// no preference is set, a challenge to choose an MFA option will be returned
+// during sign in.
 //
 //    // Example sending a request using AdminSetUserMFAPreferenceRequest.
 //    req := client.AdminSetUserMFAPreferenceRequest(params)

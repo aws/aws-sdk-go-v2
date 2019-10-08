@@ -103,7 +103,7 @@ const opCreateImportJob = "CreateImportJob"
 // CreateImportJobRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Creates a new import job for an application.
+// Creates an import job for an application.
 //
 //    // Example sending a request using CreateImportJobRequest.
 //    req := client.CreateImportJobRequest(params)

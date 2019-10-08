@@ -104,7 +104,8 @@ const opUpdateGcmChannel = "UpdateGcmChannel"
 // UpdateGcmChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Updates the status and settings of the GCM channel for an application.
+// Enables the GCM channel for an application or updates the status and settings
+// of the GCM channel for an application.
 //
 //    // Example sending a request using UpdateGcmChannelRequest.
 //    req := client.UpdateGcmChannelRequest(params)

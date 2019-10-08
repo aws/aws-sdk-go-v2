@@ -31,9 +31,11 @@ type ListDevicesInput struct {
 	//    For example, "Apple". REMOTE_ACCESS_ENABLED: Whether the device is enabled
 	//    for remote access. Valid values are "TRUE" or "FALSE". REMOTE_DEBUG_ENABLED:
 	//    Whether the device is enabled for remote debugging. Valid values are "TRUE"
-	//    or "FALSE". INSTANCE_ARN: The Amazon Resource Name (ARN) of the device
-	//    instance. INSTANCE_LABELS: The label of the device instance. FLEET_TYPE:
-	//    The fleet type. Valid values are "PUBLIC" or "PRIVATE".
+	//    or "FALSE". This attribute will be ignored, as remote debugging is no
+	//    longer supported (https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html).
+	//    INSTANCE_ARN: The Amazon Resource Name (ARN) of the device instance. INSTANCE_LABELS:
+	//    The label of the device instance. FLEET_TYPE: The fleet type. Valid values
+	//    are "PUBLIC" or "PRIVATE".
 	//
 	//    * Operator: The filter operator. The EQUALS operator is available for
 	//    every attribute except INSTANCE_LABELS. The CONTAINS operator is available

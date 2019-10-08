@@ -63,7 +63,10 @@ type AdminGetUserOutput struct {
 	// Indicates that the status is enabled.
 	Enabled *bool `type:"boolean"`
 
-	// Specifies the options for MFA (e.g., email or phone number).
+	// This response parameter is no longer supported. It provides information only
+	// about SMS MFA configurations. It doesn't provide information about TOTP software
+	// token MFA configurations. To look up information about either type of MFA
+	// configuration, use the AdminGetUserResponse$UserMFASettingList response instead.
 	MFAOptions []MFAOptionType `type:"list"`
 
 	// The user's preferred MFA setting.
@@ -78,7 +81,8 @@ type AdminGetUserOutput struct {
 	// The date the user was last modified.
 	UserLastModifiedDate *time.Time `type:"timestamp"`
 
-	// The list of the user's MFA settings.
+	// The MFA options that are enabled for the user. The possible values in this
+	// list are SMS_MFA and SOFTWARE_TOKEN_MFA.
 	UserMFASettingList []string `type:"list"`
 
 	// The user status. Can be one of the following:
@@ -120,7 +124,7 @@ const opAdminGetUser = "AdminGetUser"
 // Gets the specified user by user name in a user pool as an administrator.
 // Works on any user.
 //
-// Requires developer credentials.
+// Calling this action requires developer credentials.
 //
 //    // Example sending a request using AdminGetUserRequest.
 //    req := client.AdminGetUserRequest(params)

@@ -304,6 +304,83 @@ func (s CompatibleVersionsMap) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Options to configure endpoint for the Elasticsearch domain.
+type DomainEndpointOptions struct {
+	_ struct{} `type:"structure"`
+
+	// Specify if only HTTPS endpoint should be enabled for the Elasticsearch domain.
+	EnforceHTTPS *bool `type:"boolean"`
+
+	// Specify the TLS security policy that needs to be applied to the HTTPS endpoint
+	// of Elasticsearch domain. It can be one of the following values:
+	//    * Policy-Min-TLS-1-0-2019-07: TLS security policy which supports TLSv1.0
+	//    and higher.
+	//
+	//    * Policy-Min-TLS-1-2-2019-07: TLS security policy which supports only
+	//    TLSv1.2
+	TLSSecurityPolicy TLSSecurityPolicy `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s DomainEndpointOptions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DomainEndpointOptions) MarshalFields(e protocol.FieldEncoder) error {
+	if s.EnforceHTTPS != nil {
+		v := *s.EnforceHTTPS
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "EnforceHTTPS", protocol.BoolValue(v), metadata)
+	}
+	if len(s.TLSSecurityPolicy) > 0 {
+		v := s.TLSSecurityPolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TLSSecurityPolicy", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// The configured endpoint options for the domain and their current status.
+type DomainEndpointOptionsStatus struct {
+	_ struct{} `type:"structure"`
+
+	// Options to configure endpoint for the Elasticsearch domain.
+	//
+	// Options is a required field
+	Options *DomainEndpointOptions `type:"structure" required:"true"`
+
+	// The status of the endpoint options for the Elasticsearch domain. See OptionStatus
+	// for the status information that's included.
+	//
+	// Status is a required field
+	Status *OptionStatus `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s DomainEndpointOptionsStatus) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DomainEndpointOptionsStatus) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Options != nil {
+		v := s.Options
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Options", v, metadata)
+	}
+	if s.Status != nil {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Status", v, metadata)
+	}
+	return nil
+}
+
 type DomainInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -554,6 +631,9 @@ type ElasticsearchDomainConfig struct {
 	// Cognito Authentication for Kibana (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html).
 	CognitoOptions *CognitoOptionsStatus `type:"structure"`
 
+	// Specifies the DomainEndpointOptions for the Elasticsearch domain.
+	DomainEndpointOptions *DomainEndpointOptionsStatus `type:"structure"`
+
 	// Specifies the EBSOptions for the Elasticsearch domain.
 	EBSOptions *EBSOptionsStatus `type:"structure"`
 
@@ -604,6 +684,12 @@ func (s ElasticsearchDomainConfig) MarshalFields(e protocol.FieldEncoder) error 
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "CognitoOptions", v, metadata)
+	}
+	if s.DomainEndpointOptions != nil {
+		v := s.DomainEndpointOptions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "DomainEndpointOptions", v, metadata)
 	}
 	if s.EBSOptions != nil {
 		v := s.EBSOptions
@@ -686,6 +772,9 @@ type ElasticsearchDomainStatus struct {
 	// has not been deleted. Once domain deletion is complete, the status of the
 	// domain is no longer returned.
 	Deleted *bool `type:"boolean"`
+
+	// The current status of the Elasticsearch domain's endpoint options.
+	DomainEndpointOptions *DomainEndpointOptions `type:"structure"`
 
 	// The unique identifier for the specified Elasticsearch domain.
 	//
@@ -797,6 +886,12 @@ func (s ElasticsearchDomainStatus) MarshalFields(e protocol.FieldEncoder) error 
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Deleted", protocol.BoolValue(v), metadata)
+	}
+	if s.DomainEndpointOptions != nil {
+		v := s.DomainEndpointOptions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "DomainEndpointOptions", v, metadata)
 	}
 	if s.DomainId != nil {
 		v := *s.DomainId

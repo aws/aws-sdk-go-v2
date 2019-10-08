@@ -63,6 +63,8 @@ import (
 type ClientAPI interface {
 	CreateChannelRequest(*mediapackage.CreateChannelInput) mediapackage.CreateChannelRequest
 
+	CreateHarvestJobRequest(*mediapackage.CreateHarvestJobInput) mediapackage.CreateHarvestJobRequest
+
 	CreateOriginEndpointRequest(*mediapackage.CreateOriginEndpointInput) mediapackage.CreateOriginEndpointRequest
 
 	DeleteChannelRequest(*mediapackage.DeleteChannelInput) mediapackage.DeleteChannelRequest
@@ -71,9 +73,13 @@ type ClientAPI interface {
 
 	DescribeChannelRequest(*mediapackage.DescribeChannelInput) mediapackage.DescribeChannelRequest
 
+	DescribeHarvestJobRequest(*mediapackage.DescribeHarvestJobInput) mediapackage.DescribeHarvestJobRequest
+
 	DescribeOriginEndpointRequest(*mediapackage.DescribeOriginEndpointInput) mediapackage.DescribeOriginEndpointRequest
 
 	ListChannelsRequest(*mediapackage.ListChannelsInput) mediapackage.ListChannelsRequest
+
+	ListHarvestJobsRequest(*mediapackage.ListHarvestJobsInput) mediapackage.ListHarvestJobsRequest
 
 	ListOriginEndpointsRequest(*mediapackage.ListOriginEndpointsInput) mediapackage.ListOriginEndpointsRequest
 

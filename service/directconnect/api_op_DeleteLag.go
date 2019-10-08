@@ -103,10 +103,13 @@ type DeleteLagOutput struct {
 	// The ID of the AWS account that owns the LAG.
 	OwnerAccount *string `locationName:"ownerAccount" type:"string"`
 
+	// The name of the service provider associated with the LAG.
+	ProviderName *string `locationName:"providerName" type:"string"`
+
 	// The AWS Region where the connection is located.
 	Region *string `locationName:"region" type:"string"`
 
-	// Any tags assigned to link aggregation group (LAG).
+	// The tags associated with the LAG.
 	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 }
 

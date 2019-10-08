@@ -59,9 +59,9 @@ type RegisterScalableTargetInput struct {
 	// to modify the scalable target on your behalf. For more information, see Service-Linked
 	// Roles for Application Auto Scaling (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-service-linked-roles.html).
 	//
-	// For resources that are not supported using a service-linked role, this parameter
-	// is required, and it must specify the ARN of an IAM role that allows Application
-	// Auto Scaling to modify the scalable target on your behalf.
+	// For Amazon EMR, this parameter is required, and it must specify the ARN of
+	// an IAM role that allows Application Auto Scaling to modify the scalable target
+	// on your behalf.
 	RoleARN *string `min:"1" type:"string"`
 
 	// The scalable dimension associated with the scalable target. This string consists

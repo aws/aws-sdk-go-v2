@@ -15,20 +15,27 @@ var _ = awsutil.Prettify
 
 // Describes hints for the buffering to perform before delivering data to the
 // destination. These options are treated as hints, and therefore Kinesis Data
-// Firehose might choose to use different values when it is optimal.
+// Firehose might choose to use different values when it is optimal. The SizeInMBs
+// and IntervalInSeconds parameters are optional. However, if specify a value
+// for one of them, you must also provide a value for the other.
 type BufferingHints struct {
 	_ struct{} `type:"structure"`
 
 	// Buffer incoming data for the specified period of time, in seconds, before
-	// delivering it to the destination. The default value is 300.
+	// delivering it to the destination. The default value is 300. This parameter
+	// is optional but if you specify a value for it, you must also specify a value
+	// for SizeInMBs, and vice versa.
 	IntervalInSeconds *int64 `min:"60" type:"integer"`
 
-	// Buffer incoming data to the specified size, in MBs, before delivering it
-	// to the destination. The default value is 5.
+	// Buffer incoming data to the specified size, in MiBs, before delivering it
+	// to the destination. The default value is 5. This parameter is optional but
+	// if you specify a value for it, you must also specify a value for IntervalInSeconds,
+	// and vice versa.
 	//
 	// We recommend setting this parameter to a value greater than the amount of
 	// data you typically ingest into the delivery stream in 10 seconds. For example,
-	// if you typically ingest data at 1 MB/sec, the value should be 10 MB or higher.
+	// if you typically ingest data at 1 MiB/sec, the value should be 10 MiB or
+	// higher.
 	SizeInMBs *int64 `min:"1" type:"integer"`
 }
 
@@ -80,7 +87,7 @@ type CopyCommand struct {
 
 	// Optional parameters to use with the Amazon Redshift COPY command. For more
 	// information, see the "Optional Parameters" section of Amazon Redshift COPY
-	// command (http://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html). Some
+	// command (https://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html). Some
 	// possible examples that would apply to Kinesis Data Firehose are as follows:
 	//
 	// delimiter '\t' lzop; - fields are delimited with "\t" (TAB character) and
@@ -97,7 +104,7 @@ type CopyCommand struct {
 	// JSON 's3://mybucket/jsonpaths.txt' - data is in JSON format, and the path
 	// specified is the format of the data.
 	//
-	// For more examples, see Amazon Redshift COPY command examples (http://docs.aws.amazon.com/redshift/latest/dg/r_COPY_command_examples.html).
+	// For more examples, see Amazon Redshift COPY command examples (https://docs.aws.amazon.com/redshift/latest/dg/r_COPY_command_examples.html).
 	CopyOptions *string `type:"string"`
 
 	// A comma-separated list of column names.
@@ -365,13 +372,17 @@ type ElasticsearchDestinationConfiguration struct {
 	// The Amazon CloudWatch logging options for your delivery stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions `type:"structure"`
 
+	// The endpoint to use when communicating with the cluster. Specify either this
+	// ClusterEndpoint or the DomainARN field.
+	ClusterEndpoint *string `min:"1" type:"string"`
+
 	// The ARN of the Amazon ES domain. The IAM role must have permissions for DescribeElasticsearchDomain,
 	// DescribeElasticsearchDomains, and DescribeElasticsearchDomainConfig after
 	// assuming the role specified in RoleARN. For more information, see Amazon
 	// Resource Names (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
-	// DomainARN is a required field
-	DomainARN *string `min:"1" type:"string" required:"true"`
+	// Specify either ClusterEndpoint or DomainARN.
+	DomainARN *string `min:"1" type:"string"`
 
 	// The Elasticsearch index name.
 	//
@@ -380,7 +391,7 @@ type ElasticsearchDestinationConfiguration struct {
 
 	// The Elasticsearch index rotation period. Index rotation appends a timestamp
 	// to the IndexName to facilitate the expiration of old data. For more information,
-	// see Index Rotation for the Amazon ES Destination (http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation).
+	// see Index Rotation for the Amazon ES Destination (https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation).
 	// The default value is OneDay.
 	IndexRotationPeriod ElasticsearchIndexRotationPeriod `type:"string" enum:"true"`
 
@@ -394,7 +405,7 @@ type ElasticsearchDestinationConfiguration struct {
 	// The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data
 	// Firehose for calling the Amazon ES Configuration API and for indexing documents.
 	// For more information, see Grant Kinesis Data Firehose Access to an Amazon
-	// S3 Destination (http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3)
+	// S3 Destination (https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3)
 	// and Amazon Resource Names (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// RoleARN is a required field
@@ -406,7 +417,7 @@ type ElasticsearchDestinationConfiguration struct {
 	// appended to the key prefix. When set to AllDocuments, Kinesis Data Firehose
 	// delivers all incoming records to Amazon S3, and also writes failed documents
 	// with elasticsearch-failed/ appended to the prefix. For more information,
-	// see Amazon S3 Backup for the Amazon ES Destination (http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-s3-backup).
+	// see Amazon S3 Backup for the Amazon ES Destination (https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-s3-backup).
 	// Default value is FailedDocumentsOnly.
 	S3BackupMode ElasticsearchS3BackupMode `type:"string" enum:"true"`
 
@@ -432,9 +443,8 @@ func (s ElasticsearchDestinationConfiguration) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ElasticsearchDestinationConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ElasticsearchDestinationConfiguration"}
-
-	if s.DomainARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainARN"))
+	if s.ClusterEndpoint != nil && len(*s.ClusterEndpoint) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ClusterEndpoint", 1))
 	}
 	if s.DomainARN != nil && len(*s.DomainARN) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DomainARN", 1))
@@ -496,8 +506,16 @@ type ElasticsearchDestinationDescription struct {
 	// The Amazon CloudWatch logging options.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions `type:"structure"`
 
+	// The endpoint to use when communicating with the cluster. Kinesis Data Firehose
+	// uses either this ClusterEndpoint or the DomainARN field to send data to Amazon
+	// ES.
+	ClusterEndpoint *string `min:"1" type:"string"`
+
 	// The ARN of the Amazon ES domain. For more information, see Amazon Resource
 	// Names (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	//
+	// Kinesis Data Firehose uses either ClusterEndpoint or DomainARN to send data
+	// to Amazon ES.
 	DomainARN *string `min:"1" type:"string"`
 
 	// The Elasticsearch index name.
@@ -542,10 +560,16 @@ type ElasticsearchDestinationUpdate struct {
 	// The CloudWatch logging options for your delivery stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions `type:"structure"`
 
+	// The endpoint to use when communicating with the cluster. Specify either this
+	// ClusterEndpoint or the DomainARN field.
+	ClusterEndpoint *string `min:"1" type:"string"`
+
 	// The ARN of the Amazon ES domain. The IAM role must have permissions for DescribeElasticsearchDomain,
 	// DescribeElasticsearchDomains, and DescribeElasticsearchDomainConfig after
 	// assuming the IAM role specified in RoleARN. For more information, see Amazon
 	// Resource Names (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	//
+	// Specify either ClusterEndpoint or DomainARN.
 	DomainARN *string `min:"1" type:"string"`
 
 	// The Elasticsearch index name.
@@ -553,7 +577,7 @@ type ElasticsearchDestinationUpdate struct {
 
 	// The Elasticsearch index rotation period. Index rotation appends a timestamp
 	// to IndexName to facilitate the expiration of old data. For more information,
-	// see Index Rotation for the Amazon ES Destination (http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation).
+	// see Index Rotation for the Amazon ES Destination (https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation).
 	// Default value is OneDay.
 	IndexRotationPeriod ElasticsearchIndexRotationPeriod `type:"string" enum:"true"`
 
@@ -567,7 +591,7 @@ type ElasticsearchDestinationUpdate struct {
 	// The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data
 	// Firehose for calling the Amazon ES Configuration API and for indexing documents.
 	// For more information, see Grant Kinesis Data Firehose Access to an Amazon
-	// S3 Destination (http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3)
+	// S3 Destination (https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3)
 	// and Amazon Resource Names (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	RoleARN *string `min:"1" type:"string"`
 
@@ -588,6 +612,9 @@ func (s ElasticsearchDestinationUpdate) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ElasticsearchDestinationUpdate) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ElasticsearchDestinationUpdate"}
+	if s.ClusterEndpoint != nil && len(*s.ClusterEndpoint) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ClusterEndpoint", 1))
+	}
 	if s.DomainARN != nil && len(*s.DomainARN) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DomainARN", 1))
 	}
@@ -701,15 +728,13 @@ type ExtendedS3DestinationConfiguration struct {
 
 	// A prefix that Kinesis Data Firehose evaluates and adds to failed records
 	// before writing them to S3. This prefix appears immediately following the
-	// bucket name.
+	// bucket name. For information about how to specify this prefix, see Custom
+	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	ErrorOutputPrefix *string `type:"string"`
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered
-	// Amazon S3 files. You can specify an extra prefix to be added in front of
-	// the time format prefix. If the prefix ends with a slash, it appears as a
-	// folder in the S3 bucket. For more information, see Amazon S3 Object Name
-	// Format (http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name)
-	// in the Amazon Kinesis Data Firehose Developer Guide.
+	// Amazon S3 files. You can also specify a custom prefix, as described in Custom
+	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	Prefix *string `type:"string"`
 
 	// The data processing configuration.
@@ -817,15 +842,13 @@ type ExtendedS3DestinationDescription struct {
 
 	// A prefix that Kinesis Data Firehose evaluates and adds to failed records
 	// before writing them to S3. This prefix appears immediately following the
-	// bucket name.
+	// bucket name. For information about how to specify this prefix, see Custom
+	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	ErrorOutputPrefix *string `type:"string"`
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered
-	// Amazon S3 files. You can specify an extra prefix to be added in front of
-	// the time format prefix. If the prefix ends with a slash, it appears as a
-	// folder in the S3 bucket. For more information, see Amazon S3 Object Name
-	// Format (http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name)
-	// in the Amazon Kinesis Data Firehose Developer Guide.
+	// Amazon S3 files. You can also specify a custom prefix, as described in Custom
+	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	Prefix *string `type:"string"`
 
 	// The data processing configuration.
@@ -876,15 +899,13 @@ type ExtendedS3DestinationUpdate struct {
 
 	// A prefix that Kinesis Data Firehose evaluates and adds to failed records
 	// before writing them to S3. This prefix appears immediately following the
-	// bucket name.
+	// bucket name. For information about how to specify this prefix, see Custom
+	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	ErrorOutputPrefix *string `type:"string"`
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered
-	// Amazon S3 files. You can specify an extra prefix to be added in front of
-	// the time format prefix. If the prefix ends with a slash, it appears as a
-	// folder in the S3 bucket. For more information, see Amazon S3 Object Name
-	// Format (http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name)
-	// in the Amazon Kinesis Data Firehose Developer Guide.
+	// Amazon S3 files. You can also specify a custom prefix, as described in Custom
+	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	Prefix *string `type:"string"`
 
 	// The data processing configuration.
@@ -1778,15 +1799,13 @@ type S3DestinationConfiguration struct {
 
 	// A prefix that Kinesis Data Firehose evaluates and adds to failed records
 	// before writing them to S3. This prefix appears immediately following the
-	// bucket name.
+	// bucket name. For information about how to specify this prefix, see Custom
+	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	ErrorOutputPrefix *string `type:"string"`
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered
-	// Amazon S3 files. You can specify an extra prefix to be added in front of
-	// the time format prefix. If the prefix ends with a slash, it appears as a
-	// folder in the S3 bucket. For more information, see Amazon S3 Object Name
-	// Format (http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name)
-	// in the Amazon Kinesis Data Firehose Developer Guide.
+	// Amazon S3 files. You can also specify a custom prefix, as described in Custom
+	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	Prefix *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the AWS credentials. For more information,
@@ -1867,15 +1886,13 @@ type S3DestinationDescription struct {
 
 	// A prefix that Kinesis Data Firehose evaluates and adds to failed records
 	// before writing them to S3. This prefix appears immediately following the
-	// bucket name.
+	// bucket name. For information about how to specify this prefix, see Custom
+	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	ErrorOutputPrefix *string `type:"string"`
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered
-	// Amazon S3 files. You can specify an extra prefix to be added in front of
-	// the time format prefix. If the prefix ends with a slash, it appears as a
-	// folder in the S3 bucket. For more information, see Amazon S3 Object Name
-	// Format (http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name)
-	// in the Amazon Kinesis Data Firehose Developer Guide.
+	// Amazon S3 files. You can also specify a custom prefix, as described in Custom
+	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	Prefix *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the AWS credentials. For more information,
@@ -1918,15 +1935,13 @@ type S3DestinationUpdate struct {
 
 	// A prefix that Kinesis Data Firehose evaluates and adds to failed records
 	// before writing them to S3. This prefix appears immediately following the
-	// bucket name.
+	// bucket name. For information about how to specify this prefix, see Custom
+	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	ErrorOutputPrefix *string `type:"string"`
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered
-	// Amazon S3 files. You can specify an extra prefix to be added in front of
-	// the time format prefix. If the prefix ends with a slash, it appears as a
-	// folder in the S3 bucket. For more information, see Amazon S3 Object Name
-	// Format (http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name)
-	// in the Amazon Kinesis Data Firehose Developer Guide.
+	// Amazon S3 files. You can also specify a custom prefix, as described in Custom
+	// Prefixes for Amazon S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	Prefix *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the AWS credentials. For more information,

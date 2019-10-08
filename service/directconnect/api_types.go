@@ -162,10 +162,13 @@ type Connection struct {
 	// The name of the AWS Direct Connect service provider associated with the connection.
 	PartnerName *string `locationName:"partnerName" type:"string"`
 
+	// The name of the service provider associated with the connection.
+	ProviderName *string `locationName:"providerName" type:"string"`
+
 	// The AWS Region where the connection is located.
 	Region *string `locationName:"region" type:"string"`
 
-	// Any tags assigned to the connection.
+	// The tags associated with the connection.
 	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 
 	// The ID of the VLAN.
@@ -252,7 +255,7 @@ type DirectConnectGatewayAssociation struct {
 	StateChangeError *string `locationName:"stateChangeError" type:"string"`
 
 	// The ID of the virtual private gateway. Applies only to private virtual interfaces.
-	VirtualGatewayId *string `locationName:"virtualGatewayId" deprecated:"true" type:"string"`
+	VirtualGatewayId *string `locationName:"virtualGatewayId" type:"string"`
 
 	// The ID of the AWS account that owns the virtual private gateway.
 	VirtualGatewayOwnerAccount *string `locationName:"virtualGatewayOwnerAccount" type:"string"`
@@ -327,7 +330,7 @@ type DirectConnectGatewayAttachment struct {
 	//    is stopped.
 	AttachmentState DirectConnectGatewayAttachmentState `locationName:"attachmentState" type:"string" enum:"true"`
 
-	// The interface type.
+	// The type of attachment.
 	AttachmentType DirectConnectGatewayAttachmentType `locationName:"attachmentType" type:"string" enum:"true"`
 
 	// The ID of the Direct Connect gateway.
@@ -406,10 +409,13 @@ type Interconnect struct {
 	// The location of the connection.
 	Location *string `locationName:"location" type:"string"`
 
+	// The name of the service provider associated with the interconnect.
+	ProviderName *string `locationName:"providerName" type:"string"`
+
 	// The AWS Region where the connection is located.
 	Region *string `locationName:"region" type:"string"`
 
-	// Any tags assigned to the interconnect.
+	// The tags associated with the interconnect.
 	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 }
 
@@ -484,10 +490,13 @@ type Lag struct {
 	// The ID of the AWS account that owns the LAG.
 	OwnerAccount *string `locationName:"ownerAccount" type:"string"`
 
+	// The name of the service provider associated with the LAG.
+	ProviderName *string `locationName:"providerName" type:"string"`
+
 	// The AWS Region where the connection is located.
 	Region *string `locationName:"region" type:"string"`
 
-	// Any tags assigned to link aggregation group (LAG).
+	// The tags associated with the LAG.
 	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 }
 
@@ -522,6 +531,9 @@ type Location struct {
 
 	// The available port speeds for the location.
 	AvailablePortSpeeds []string `locationName:"availablePortSpeeds" type:"list"`
+
+	// The name of the service provider for the location.
+	AvailableProviders []string `locationName:"availableProviders" type:"list"`
 
 	// The code for the location.
 	LocationCode *string `locationName:"locationCode" type:"string"`
@@ -577,6 +589,8 @@ type NewPrivateVirtualInterface struct {
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
 	//
+	// The valid values are 1-2147483647.
+	//
 	// Asn is a required field
 	Asn *int64 `locationName:"asn" type:"integer" required:"true"`
 
@@ -594,11 +608,11 @@ type NewPrivateVirtualInterface struct {
 	// and 9001. The default value is 1500.
 	Mtu *int64 `locationName:"mtu" type:"integer"`
 
-	// Any tags assigned to the private virtual interface.
+	// The tags associated with the private virtual interface.
 	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 
 	// The ID of the virtual private gateway.
-	VirtualGatewayId *string `locationName:"virtualGatewayId" deprecated:"true" type:"string"`
+	VirtualGatewayId *string `locationName:"virtualGatewayId" type:"string"`
 
 	// The name of the virtual interface assigned by the customer network.
 	//
@@ -660,6 +674,8 @@ type NewPrivateVirtualInterfaceAllocation struct {
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
 	//
+	// The valid values are 1-2147483647.
+	//
 	// Asn is a required field
 	Asn *int64 `locationName:"asn" type:"integer" required:"true"`
 
@@ -674,8 +690,7 @@ type NewPrivateVirtualInterfaceAllocation struct {
 	// and 9001. The default value is 1500.
 	Mtu *int64 `locationName:"mtu" type:"integer"`
 
-	// Any tags assigned to the private virtual interface to be provisioned on a
-	// connection.
+	// The tags associated with the private virtual interface.
 	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 
 	// The name of the virtual interface assigned by the customer network.
@@ -738,6 +753,8 @@ type NewPublicVirtualInterface struct {
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
 	//
+	// The valid values are 1-2147483647.
+	//
 	// Asn is a required field
 	Asn *int64 `locationName:"asn" type:"integer" required:"true"`
 
@@ -752,7 +769,7 @@ type NewPublicVirtualInterface struct {
 	// public virtual interfaces.
 	RouteFilterPrefixes []RouteFilterPrefix `locationName:"routeFilterPrefixes" type:"list"`
 
-	// Any tags assigned to the public virtual interface.
+	// The tags associated with the public virtual interface.
 	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 
 	// The name of the virtual interface assigned by the customer network.
@@ -815,6 +832,8 @@ type NewPublicVirtualInterfaceAllocation struct {
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
 	//
+	// The valid values are 1-2147483647.
+	//
 	// Asn is a required field
 	Asn *int64 `locationName:"asn" type:"integer" required:"true"`
 
@@ -829,8 +848,7 @@ type NewPublicVirtualInterfaceAllocation struct {
 	// public virtual interfaces.
 	RouteFilterPrefixes []RouteFilterPrefix `locationName:"routeFilterPrefixes" type:"list"`
 
-	// Any tags assigned to the public virtual interface to be provisioned on a
-	// connection.
+	// The tags associated with the public virtual interface.
 	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 
 	// The name of the virtual interface assigned by the customer network.
@@ -881,7 +899,7 @@ func (s *NewPublicVirtualInterfaceAllocation) Validate() error {
 	return nil
 }
 
-// Information about the transit virtual interface.
+// Information about a transit virtual interface.
 type NewTransitVirtualInterface struct {
 	_ struct{} `type:"structure"`
 
@@ -892,9 +910,12 @@ type NewTransitVirtualInterface struct {
 	AmazonAddress *string `locationName:"amazonAddress" type:"string"`
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+	//
+	// The valid values are 1-2147483647.
 	Asn *int64 `locationName:"asn" type:"integer"`
 
-	// The authentication key for BGP configuration.
+	// The authentication key for BGP configuration. This string has a minimum length
+	// of 6 characters and and a maximun lenth of 80 characters.
 	AuthKey *string `locationName:"authKey" type:"string"`
 
 	// The IP address assigned to the customer interface.
@@ -904,10 +925,10 @@ type NewTransitVirtualInterface struct {
 	DirectConnectGatewayId *string `locationName:"directConnectGatewayId" type:"string"`
 
 	// The maximum transmission unit (MTU), in bytes. The supported values are 1500
-	// and 8500. The default value is 1500.
+	// and 9001. The default value is 1500.
 	Mtu *int64 `locationName:"mtu" type:"integer"`
 
-	// Any tags assigned to the transit virtual interface.
+	// The tags associated with the transitive virtual interface.
 	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 
 	// The name of the virtual interface assigned by the customer network.
@@ -942,7 +963,7 @@ func (s *NewTransitVirtualInterface) Validate() error {
 	return nil
 }
 
-// Information about a transit virtual interface.
+// Information about a transit virtual interface to be provisioned on a connection.
 type NewTransitVirtualInterfaceAllocation struct {
 	_ struct{} `type:"structure"`
 
@@ -953,19 +974,22 @@ type NewTransitVirtualInterfaceAllocation struct {
 	AmazonAddress *string `locationName:"amazonAddress" type:"string"`
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+	//
+	// The valid values are 1-2147483647.
 	Asn *int64 `locationName:"asn" type:"integer"`
 
-	// The authentication key for BGP configuration.
+	// The authentication key for BGP configuration. This string has a minimum length
+	// of 6 characters and and a maximun lenth of 80 characters.
 	AuthKey *string `locationName:"authKey" type:"string"`
 
 	// The IP address assigned to the customer interface.
 	CustomerAddress *string `locationName:"customerAddress" type:"string"`
 
 	// The maximum transmission unit (MTU), in bytes. The supported values are 1500
-	// and 8500. The default value is 1500.
+	// and 9001. The default value is 1500.
 	Mtu *int64 `locationName:"mtu" type:"integer"`
 
-	// Any tags assigned to the transit virtual interface.
+	// The tags associated with the transitive virtual interface.
 	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 
 	// The name of the virtual interface assigned by the customer network.
@@ -1071,7 +1095,7 @@ type VirtualGateway struct {
 	_ struct{} `type:"structure"`
 
 	// The ID of the virtual private gateway.
-	VirtualGatewayId *string `locationName:"virtualGatewayId" deprecated:"true" type:"string"`
+	VirtualGatewayId *string `locationName:"virtualGatewayId" type:"string"`
 
 	// The state of the virtual private gateway. The following are the possible
 	// values:
@@ -1106,6 +1130,8 @@ type VirtualInterface struct {
 	AmazonSideAsn *int64 `locationName:"amazonSideAsn" type:"long"`
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+	//
+	// The valid values are 1-2147483647.
 	Asn *int64 `locationName:"asn" type:"integer"`
 
 	// The authentication key for BGP configuration. This string has a minimum length
@@ -1150,11 +1176,11 @@ type VirtualInterface struct {
 	// public virtual interfaces.
 	RouteFilterPrefixes []RouteFilterPrefix `locationName:"routeFilterPrefixes" type:"list"`
 
-	// Any tags assigned to the virtual interface.
+	// The tags associated with the virtual interface.
 	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 
 	// The ID of the virtual private gateway. Applies only to private virtual interfaces.
-	VirtualGatewayId *string `locationName:"virtualGatewayId" deprecated:"true" type:"string"`
+	VirtualGatewayId *string `locationName:"virtualGatewayId" type:"string"`
 
 	// The ID of the virtual interface.
 	VirtualInterfaceId *string `locationName:"virtualInterfaceId" type:"string"`

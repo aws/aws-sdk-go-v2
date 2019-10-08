@@ -19,6 +19,41 @@ func (enum AccessDirection) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type AddOnType string
+
+// Enum values for AddOnType
+const (
+	AddOnTypeAutoSnapshot AddOnType = "AutoSnapshot"
+)
+
+func (enum AddOnType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AddOnType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type AutoSnapshotStatus string
+
+// Enum values for AutoSnapshotStatus
+const (
+	AutoSnapshotStatusSuccess    AutoSnapshotStatus = "Success"
+	AutoSnapshotStatusFailed     AutoSnapshotStatus = "Failed"
+	AutoSnapshotStatusInProgress AutoSnapshotStatus = "InProgress"
+	AutoSnapshotStatusNotFound   AutoSnapshotStatus = "NotFound"
+)
+
+func (enum AutoSnapshotStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AutoSnapshotStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type BlueprintType string
 
 // Enum values for BlueprintType
@@ -564,6 +599,8 @@ const (
 	OperationTypeStartRelationalDatabase              OperationType = "StartRelationalDatabase"
 	OperationTypeRebootRelationalDatabase             OperationType = "RebootRelationalDatabase"
 	OperationTypeStopRelationalDatabase               OperationType = "StopRelationalDatabase"
+	OperationTypeEnableAddOn                          OperationType = "EnableAddOn"
+	OperationTypeDisableAddOn                         OperationType = "DisableAddOn"
 )
 
 func (enum OperationType) MarshalValue() (string, error) {

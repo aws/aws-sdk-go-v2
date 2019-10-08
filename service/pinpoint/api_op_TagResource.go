@@ -17,7 +17,8 @@ type TagResourceInput struct {
 	// ResourceArn is a required field
 	ResourceArn *string `location:"uri" locationName:"resource-arn" type:"string" required:"true"`
 
-	// Specifies the tags (keys and values) for an application, campaign, or segment.
+	// Specifies the tags (keys and values) for an application, campaign, message
+	// template, or segment.
 	//
 	// TagsModel is a required field
 	TagsModel *TagsModel `type:"structure" required:"true"`
@@ -89,7 +90,8 @@ const opTagResource = "TagResource"
 // TagResourceRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Adds one or more tags (keys and values) to an application, campaign, or segment.
+// Adds one or more tags (keys and values) to an application, campaign, message
+// template, or segment.
 //
 //    // Example sending a request using TagResourceRequest.
 //    req := client.TagResourceRequest(params)

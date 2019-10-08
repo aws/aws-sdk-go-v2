@@ -101,7 +101,8 @@ const opUpdateAdmChannel = "UpdateAdmChannel"
 // UpdateAdmChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Updates the ADM channel settings for an application.
+// Enables the ADM channel for an application or updates the status and settings
+// of the ADM channel for an application.
 //
 //    // Example sending a request using UpdateAdmChannelRequest.
 //    req := client.UpdateAdmChannelRequest(params)

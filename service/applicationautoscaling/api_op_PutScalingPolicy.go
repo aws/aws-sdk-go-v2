@@ -26,9 +26,8 @@ type PutScalingPolicyInput struct {
 	//
 	// StepScaling—Not supported for Amazon DynamoDB
 	//
-	// For more information, see Step Scaling Policies for Application Auto Scaling
-	// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html)
-	// and Target Tracking Scaling Policies for Application Auto Scaling (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html)
+	// For more information, see Target Tracking Scaling Policies (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html)
+	// and Step Scaling Policies (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html)
 	// in the Application Auto Scaling User Guide.
 	PolicyType PolicyType `type:"string" enum:"true"`
 
@@ -214,7 +213,7 @@ const opPutScalingPolicy = "PutScalingPolicy"
 // more step scaling policies, or both. However, there is a chance that multiple
 // policies could conflict, instructing the scalable target to scale out or
 // in at the same time. Application Auto Scaling gives precedence to the policy
-// that provides the largest capacity for both scale in and scale out. For example,
+// that provides the largest capacity for both scale out and scale in. For example,
 // if one policy increases capacity by 3, another policy increases capacity
 // by 200 percent, and the current capacity is 10, Application Auto Scaling
 // uses the policy with the highest calculated capacity (200% of 10 = 20) and

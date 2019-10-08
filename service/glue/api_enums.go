@@ -60,19 +60,22 @@ type ConnectionPropertyKey string
 
 // Enum values for ConnectionPropertyKey
 const (
-	ConnectionPropertyKeyHost                ConnectionPropertyKey = "HOST"
-	ConnectionPropertyKeyPort                ConnectionPropertyKey = "PORT"
-	ConnectionPropertyKeyUsername            ConnectionPropertyKey = "USERNAME"
-	ConnectionPropertyKeyPassword            ConnectionPropertyKey = "PASSWORD"
-	ConnectionPropertyKeyEncryptedPassword   ConnectionPropertyKey = "ENCRYPTED_PASSWORD"
-	ConnectionPropertyKeyJdbcDriverJarUri    ConnectionPropertyKey = "JDBC_DRIVER_JAR_URI"
-	ConnectionPropertyKeyJdbcDriverClassName ConnectionPropertyKey = "JDBC_DRIVER_CLASS_NAME"
-	ConnectionPropertyKeyJdbcEngine          ConnectionPropertyKey = "JDBC_ENGINE"
-	ConnectionPropertyKeyJdbcEngineVersion   ConnectionPropertyKey = "JDBC_ENGINE_VERSION"
-	ConnectionPropertyKeyConfigFiles         ConnectionPropertyKey = "CONFIG_FILES"
-	ConnectionPropertyKeyInstanceId          ConnectionPropertyKey = "INSTANCE_ID"
-	ConnectionPropertyKeyJdbcConnectionUrl   ConnectionPropertyKey = "JDBC_CONNECTION_URL"
-	ConnectionPropertyKeyJdbcEnforceSsl      ConnectionPropertyKey = "JDBC_ENFORCE_SSL"
+	ConnectionPropertyKeyHost                         ConnectionPropertyKey = "HOST"
+	ConnectionPropertyKeyPort                         ConnectionPropertyKey = "PORT"
+	ConnectionPropertyKeyUsername                     ConnectionPropertyKey = "USERNAME"
+	ConnectionPropertyKeyPassword                     ConnectionPropertyKey = "PASSWORD"
+	ConnectionPropertyKeyEncryptedPassword            ConnectionPropertyKey = "ENCRYPTED_PASSWORD"
+	ConnectionPropertyKeyJdbcDriverJarUri             ConnectionPropertyKey = "JDBC_DRIVER_JAR_URI"
+	ConnectionPropertyKeyJdbcDriverClassName          ConnectionPropertyKey = "JDBC_DRIVER_CLASS_NAME"
+	ConnectionPropertyKeyJdbcEngine                   ConnectionPropertyKey = "JDBC_ENGINE"
+	ConnectionPropertyKeyJdbcEngineVersion            ConnectionPropertyKey = "JDBC_ENGINE_VERSION"
+	ConnectionPropertyKeyConfigFiles                  ConnectionPropertyKey = "CONFIG_FILES"
+	ConnectionPropertyKeyInstanceId                   ConnectionPropertyKey = "INSTANCE_ID"
+	ConnectionPropertyKeyJdbcConnectionUrl            ConnectionPropertyKey = "JDBC_CONNECTION_URL"
+	ConnectionPropertyKeyJdbcEnforceSsl               ConnectionPropertyKey = "JDBC_ENFORCE_SSL"
+	ConnectionPropertyKeyCustomJdbcCert               ConnectionPropertyKey = "CUSTOM_JDBC_CERT"
+	ConnectionPropertyKeySkipCustomJdbcCertValidation ConnectionPropertyKey = "SKIP_CUSTOM_JDBC_CERT_VALIDATION"
+	ConnectionPropertyKeyCustomJdbcCertString         ConnectionPropertyKey = "CUSTOM_JDBC_CERT_STRING"
 )
 
 func (enum ConnectionPropertyKey) MarshalValue() (string, error) {

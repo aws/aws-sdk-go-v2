@@ -690,17 +690,46 @@ type APNSMessage struct {
 
 	// The raw, JSON-formatted string to use as the payload for the notification
 	// message. This value overrides the message.
+	//
+	// If you specify the raw content of an APNs push notification, the message
+	// payload has to include the content-available key. The value of the content-available
+	// key has to be an integer, and can only be 0 or 1. If you're sending a standard
+	// notification, set the value of content-available to 0. If you're sending
+	// a silent (background) notification, set the value of content-available to
+	// 1. Additionally, silent notification payloads can't include the alert, badge,
+	// or sound keys. For more information, see Generating a Remote Notification
+	// (https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification)
+	// and Pushing Background Updates to Your App (https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app)
+	// on the Apple Developer website.
 	RawContent *string `type:"string"`
 
-	// Specifies whether the notification is a silent push notification, which is
-	// a push notification that doesn't display on a recipient's device. Silent
-	// push notifications can be used for cases such as updating an app's configuration,
-	// displaying messages in an in-app message center, or supporting phone home
-	// functionality.
+	// Specifies whether the notification is a silent push notification. A silent
+	// (or background) push notification isn't displayed on recipients' devices.
+	// You can use silent push notifications to make small updates to your app,
+	// or to display messages in an in-app message center.
+	//
+	// Amazon Pinpoint uses this property to determine the correct value for the
+	// apns-push-type request header when it sends the notification message to APNs.
+	// If you specify a value of true for this property, Amazon Pinpoint sets the
+	// value for the apns-push-type header field to background.
+	//
+	// If you specify the raw content of an APNs push notification, the message
+	// payload has to include the content-available key. For silent (background)
+	// notifications, set the value of content-available to 1. Additionally, the
+	// message payload for a silent notification can't include the alert, badge,
+	// or sound keys. For more information, see Generating a Remote Notification
+	// (https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification)
+	// and Pushing Background Updates to Your App (https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app)
+	// on the Apple Developer website.
+	//
+	// Apple has indicated that they will throttle "excessive" background notifications
+	// based on current traffic volumes. To prevent your notifications being throttled,
+	// Apple recommends that you send no more than 3 silent push notifications to
+	// each recipient per hour.
 	SilentPush *bool `type:"boolean"`
 
 	// The key for the sound to play when the recipient receives the push notification.
-	// The value of this key is the name of a sound file in your app's main bundle
+	// The value for this key is the name of a sound file in your app's main bundle
 	// or the Library/Sounds folder in your app's data container. If the sound file
 	// can't be found or you specify default for the value, the system plays the
 	// default alert sound.
@@ -846,6 +875,96 @@ func (s APNSMessage) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "TimeToLive", protocol.Int64Value(v), metadata)
+	}
+	if s.Title != nil {
+		v := *s.Title
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Title", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Url != nil {
+		v := *s.Url
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Url", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Specifies the content and settings for a message template that can be used
+// in push notifications that are sent through the APNs (Apple Push Notification
+// service) channel.
+type APNSPushNotificationTemplate struct {
+	_ struct{} `type:"structure"`
+
+	// The action to occur if a recipient taps a push notification that's based
+	// on the message template. Valid values are:
+	//
+	//    * OPEN_APP - Your app opens or it becomes the foreground app if it was
+	//    sent to the background. This is the default action.
+	//
+	//    * DEEP_LINK - Your app opens and displays a designated user interface
+	//    in the app. This setting uses the deep-linking features of the iOS platform.
+	//
+	//    * URL - The default mobile browser on the recipient's device opens and
+	//    loads the web page at a URL that you specify.
+	Action Action `type:"string" enum:"true"`
+
+	// The message body to use in push notifications that are based on the message
+	// template.
+	Body *string `type:"string"`
+
+	// The URL of an image or video to display in push notifications that are based
+	// on the message template.
+	MediaUrl *string `type:"string"`
+
+	// The key for the sound to play when the recipient receives a push notification
+	// that's based on the message template. The value for this key is the name
+	// of a sound file in your app's main bundle or the Library/Sounds folder in
+	// your app's data container. If the sound file can't be found or you specify
+	// default for the value, the system plays the default alert sound.
+	Sound *string `type:"string"`
+
+	// The title to use in push notifications that are based on the message template.
+	// This title appears above the notification message on a recipient's device.
+	Title *string `type:"string"`
+
+	// The URL to open in the recipient's default mobile browser, if a recipient
+	// taps a push notification that's based on the message template and the value
+	// of the Action property is URL.
+	Url *string `type:"string"`
+}
+
+// String returns the string representation
+func (s APNSPushNotificationTemplate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s APNSPushNotificationTemplate) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Action) > 0 {
+		v := s.Action
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Action", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Body != nil {
+		v := *s.Body
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Body", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MediaUrl != nil {
+		v := *s.MediaUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MediaUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Sound != nil {
+		v := *s.Sound
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Sound", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Title != nil {
 		v := *s.Title
@@ -1827,6 +1946,117 @@ func (s AddressConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies the content and settings for a message template can be used in
+// push notifications that are sent through the ADM (Amazon Device Messaging),
+// GCM (Firebase Cloud Messaging, formerly Google Cloud Messaging), or Baidu
+// (Baidu Cloud Push) channel.
+type AndroidPushNotificationTemplate struct {
+	_ struct{} `type:"structure"`
+
+	// The action to occur if a recipient taps a push notification that's based
+	// on the message template. Valid values are:
+	//
+	//    * OPEN_APP - Your app opens or it becomes the foreground app if it was
+	//    sent to the background. This is the default action.
+	//
+	//    * DEEP_LINK - Your app opens and displays a designated user interface
+	//    in the app. This action uses the deep-linking features of the Android
+	//    platform.
+	//
+	//    * URL - The default mobile browser on the recipient's device opens and
+	//    loads the web page at a URL that you specify.
+	Action Action `type:"string" enum:"true"`
+
+	// The message body to use in a push notification that's based on the message
+	// template.
+	Body *string `type:"string"`
+
+	// The URL of the large icon image to display in the content view of a push
+	// notification that's based on the message template.
+	ImageIconUrl *string `type:"string"`
+
+	// The URL of an image to display in a push notification that's based on the
+	// message template.
+	ImageUrl *string `type:"string"`
+
+	// The URL of the small icon image to display in the status bar and the content
+	// view of a push notification that's based on the message template.
+	SmallImageIconUrl *string `type:"string"`
+
+	// The sound to play when a recipient receives a push notification that's based
+	// on the message template. You can use the default stream or specify the file
+	// name of a sound resource that's bundled in your app. On an Android platform,
+	// the sound file must reside in /res/raw/.
+	Sound *string `type:"string"`
+
+	// The title to use in a push notification that's based on the message template.
+	// This title appears above the notification message on a recipient's device.
+	Title *string `type:"string"`
+
+	// The URL to open in a recipient's default mobile browser, if a recipient taps
+	// a a push notification that's based on the message template and the value
+	// of the Action property is URL.
+	Url *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AndroidPushNotificationTemplate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AndroidPushNotificationTemplate) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Action) > 0 {
+		v := s.Action
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Action", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Body != nil {
+		v := *s.Body
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Body", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ImageIconUrl != nil {
+		v := *s.ImageIconUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ImageIconUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ImageUrl != nil {
+		v := *s.ImageUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ImageUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SmallImageIconUrl != nil {
+		v := *s.SmallImageIconUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SmallImageIconUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Sound != nil {
+		v := *s.Sound
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Sound", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Title != nil {
+		v := *s.Title
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Title", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Url != nil {
+		v := *s.Url
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Url", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Provides the results of a query that retrieved the data for a standard metric
 // that applies to an application, and provides information about that query.
 type ApplicationDateRangeKpiResponse struct {
@@ -1844,7 +2074,7 @@ type ApplicationDateRangeKpiResponse struct {
 	// that the data was retrieved for. This value describes the associated metric
 	// and consists of two or more terms, which are comprised of lowercase alphanumeric
 	// characters, separated by a hyphen. For a list of valid values, see the Amazon
-	// Pinpoint Developer Guide (developerguide.html).
+	// Pinpoint Developer Guide (https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html).
 	//
 	// KpiName is a required field
 	KpiName *string `type:"string" required:"true"`
@@ -1856,8 +2086,8 @@ type ApplicationDateRangeKpiResponse struct {
 	KpiResult *BaseKpiResult `type:"structure" required:"true"`
 
 	// The string to use in a subsequent request to get the next page of results
-	// in a paginated response. This value is null for the App Metrics resource.
-	// The App Metrics resource returns all results in a single page.
+	// in a paginated response. This value is null for the Application Metrics resource.
+	// The Application Metrics resource returns all results in a single page.
 	NextToken *string `type:"string"`
 
 	// StartTime is a required field
@@ -2174,12 +2404,12 @@ type AttributesResource struct {
 	// The type of attribute or attributes that were removed from the endpoints.
 	// Valid values are:
 	//
-	//    * endpoint-custom-attributes - Custom attributes that describe endpoints
+	//    * endpoint-custom-attributes - Custom attributes that describe endpoints.
 	//
 	//    * endpoint-custom-metrics - Custom metrics that your app reports to Amazon
-	//    Pinpoint for endpoints
+	//    Pinpoint for endpoints.
 	//
-	//    * endpoint-user-attributes - Custom attributes that describe users
+	//    * endpoint-user-attributes - Custom attributes that describe users.
 	//
 	// AttributeType is a required field
 	AttributeType *string `type:"string" required:"true"`
@@ -2654,7 +2884,7 @@ type CampaignDateRangeKpiResponse struct {
 	// that the data was retrieved for. This value describes the associated metric
 	// and consists of two or more terms, which are comprised of lowercase alphanumeric
 	// characters, separated by a hyphen. For a list of valid values, see the Amazon
-	// Pinpoint Developer Guide (developerguide.html).
+	// Pinpoint Developer Guide (https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html).
 	//
 	// KpiName is a required field
 	KpiName *string `type:"string" required:"true"`
@@ -3042,6 +3272,9 @@ type CampaignResponse struct {
 	// an associated tag value.
 	Tags map[string]string `locationName:"tags" type:"map"`
 
+	// The message template that’s used for the campaign.
+	TemplateConfiguration *TemplateConfiguration `type:"structure"`
+
 	// The custom description of a variation of the campaign that's used for A/B
 	// testing.
 	TreatmentDescription *string `type:"string"`
@@ -3185,6 +3418,12 @@ func (s CampaignResponse) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ms0.End()
 
+	}
+	if s.TemplateConfiguration != nil {
+		v := s.TemplateConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "TemplateConfiguration", v, metadata)
 	}
 	if s.TreatmentDescription != nil {
 		v := *s.TreatmentDescription
@@ -3514,6 +3753,45 @@ func (s CreateApplicationRequest) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Provides information about an API request or response.
+type CreateTemplateMessageBody struct {
+	_ struct{} `type:"structure"`
+
+	Arn *string `type:"string"`
+
+	Message *string `type:"string"`
+
+	RequestID *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CreateTemplateMessageBody) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateTemplateMessageBody) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Message != nil {
+		v := *s.Message
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Message", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RequestID != nil {
+		v := *s.RequestID
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RequestID", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Specifies the default message to use for all channels.
 type DefaultMessage struct {
 	_ struct{} `type:"structure"`
@@ -3675,6 +3953,90 @@ func (s DefaultPushNotificationMessage) MarshalFields(e protocol.FieldEncoder) e
 	return nil
 }
 
+// Specifies the settings and content for the default message template that's
+// used in messages that are sent through a push notification channel.
+type DefaultPushNotificationTemplate struct {
+	_ struct{} `type:"structure"`
+
+	// The action to occur if a recipient taps a push notification that's based
+	// on the message template. Valid values are:
+	//
+	//    * OPEN_APP - Your app opens or it becomes the foreground app if it was
+	//    sent to the background. This is the default action.
+	//
+	//    * DEEP_LINK - Your app opens and displays a designated user interface
+	//    in the app. This setting uses the deep-linking features of the iOS and
+	//    Android platforms.
+	//
+	//    * URL - The default mobile browser on the recipient's device opens and
+	//    loads the web page at a URL that you specify.
+	Action Action `type:"string" enum:"true"`
+
+	// The message body to use in push notifications that are based on the message
+	// template.
+	Body *string `type:"string"`
+
+	// The sound to play when a recipient receives a push notification that's based
+	// on the message template. You can use the default stream or specify the file
+	// name of a sound resource that's bundled in your app. On an Android platform,
+	// the sound file must reside in /res/raw/.
+	//
+	// For an iOS platform, this value is the key for the name of a sound file in
+	// your app's main bundle or the Library/Sounds folder in your app's data container.
+	// If the sound file can't be found or you specify default for the value, the
+	// system plays the default alert sound.
+	Sound *string `type:"string"`
+
+	// The title to use in push notifications that are based on the message template.
+	// This title appears above the notification message on a recipient's device.
+	Title *string `type:"string"`
+
+	// The URL to open in a recipient's default mobile browser, if a recipient taps
+	// a push notification that's based on the message template and the value of
+	// the Action property is URL.
+	Url *string `type:"string"`
+}
+
+// String returns the string representation
+func (s DefaultPushNotificationTemplate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DefaultPushNotificationTemplate) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Action) > 0 {
+		v := s.Action
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Action", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Body != nil {
+		v := *s.Body
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Body", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Sound != nil {
+		v := *s.Sound
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Sound", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Title != nil {
+		v := *s.Title
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Title", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Url != nil {
+		v := *s.Url
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Url", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Specifies the settings and content for the default message and any default
 // messages that you tailored for specific channels.
 type DirectMessageConfiguration struct {
@@ -3696,7 +4058,7 @@ type DirectMessageConfiguration struct {
 	// The default message body for all channels.
 	DefaultMessage *DefaultMessage `type:"structure"`
 
-	// The default push notification message for all push channels.
+	// The default push notification message for all push notification channels.
 	DefaultPushNotificationMessage *DefaultPushNotificationMessage `type:"structure"`
 
 	// The default message for the email channel. This message overrides the default
@@ -4130,6 +4492,189 @@ func (s EmailMessage) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies the content and settings for a message template that can be used
+// in messages that are sent through the email channel.
+type EmailTemplateRequest struct {
+	_ struct{} `type:"structure"`
+
+	// The message body, in HTML format, to use in email messages that are based
+	// on the message template. We recommend using HTML format for email clients
+	// that support HTML. You can include links, formatted text, and more in an
+	// HTML message.
+	HtmlPart *string `type:"string"`
+
+	// The subject line, or title, to use in email messages that are based on the
+	// message template.
+	Subject *string `type:"string"`
+
+	// A string-to-string map of key-value pairs that defines the tags to associate
+	// with the message template. Each tag consists of a required tag key and an
+	// associated tag value.
+	Tags map[string]string `locationName:"tags" type:"map"`
+
+	// The message body, in text format, to use in email messages that are based
+	// on the message template. We recommend using text format for email clients
+	// that don't support HTML and clients that are connected to high-latency networks,
+	// such as mobile devices.
+	TextPart *string `type:"string"`
+}
+
+// String returns the string representation
+func (s EmailTemplateRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s EmailTemplateRequest) MarshalFields(e protocol.FieldEncoder) error {
+	if s.HtmlPart != nil {
+		v := *s.HtmlPart
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "HtmlPart", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Subject != nil {
+		v := *s.Subject
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Subject", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.TextPart != nil {
+		v := *s.TextPart
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TextPart", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Provides information about the content and settings for a message template
+// that can be used in messages that are sent through the email channel.
+type EmailTemplateResponse struct {
+	_ struct{} `type:"structure"`
+
+	Arn *string `type:"string"`
+
+	// The date when the message template was created.
+	//
+	// CreationDate is a required field
+	CreationDate *string `type:"string" required:"true"`
+
+	// The message body, in HTML format, that's used in email messages that are
+	// based on the message template.
+	HtmlPart *string `type:"string"`
+
+	// The date when the message template was last modified.
+	//
+	// LastModifiedDate is a required field
+	LastModifiedDate *string `type:"string" required:"true"`
+
+	// The subject line, or title, that's used in email messages that are based
+	// on the message template.
+	Subject *string `type:"string"`
+
+	// A string-to-string map of key-value pairs that identifies the tags that are
+	// associated with the message template. Each tag consists of a required tag
+	// key and an associated tag value.
+	Tags map[string]string `locationName:"tags" type:"map"`
+
+	// The name of the message template.
+	//
+	// TemplateName is a required field
+	TemplateName *string `type:"string" required:"true"`
+
+	// The type of channel that the message template is designed for. For an email
+	// template, this value is EMAIL.
+	//
+	// TemplateType is a required field
+	TemplateType TemplateType `type:"string" required:"true" enum:"true"`
+
+	// The message body, in text format, that's used in email messages that are
+	// based on the message template.
+	TextPart *string `type:"string"`
+}
+
+// String returns the string representation
+func (s EmailTemplateResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s EmailTemplateResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationDate != nil {
+		v := *s.CreationDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.HtmlPart != nil {
+		v := *s.HtmlPart
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "HtmlPart", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LastModifiedDate != nil {
+		v := *s.LastModifiedDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastModifiedDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Subject != nil {
+		v := *s.Subject
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Subject", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.TemplateName != nil {
+		v := *s.TemplateName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.TemplateType) > 0 {
+		v := s.TemplateType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.TextPart != nil {
+		v := *s.TextPart
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TextPart", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Specifies an endpoint to create or update and the settings and attributes
 // to set or change for the endpoint.
 type EndpointBatchItem struct {
@@ -4164,7 +4709,14 @@ type EndpointBatchItem struct {
 	// The date and time, in ISO 8601 format, when the endpoint was created or updated.
 	EffectiveDate *string `type:"string"`
 
-	// Not used.
+	// Specifies whether to send messages or push notifications to the endpoint.
+	// Valid values are: ACTIVE, messages are sent to the endpoint; and, INACTIVE,
+	// messages aren’t sent to the endpoint.
+	//
+	// Amazon Pinpoint automatically sets this value to ACTIVE when you create an
+	// endpoint or update an existing endpoint. Amazon Pinpoint automatically sets
+	// this value to INACTIVE if you update another endpoint that has the same address
+	// specified by the Address property.
 	EndpointStatus *string `type:"string"`
 
 	// The unique identifier for the endpoint in the context of the batch.
@@ -4586,7 +5138,8 @@ type EndpointMessageResult struct {
 	StatusMessage *string `type:"string"`
 
 	// For push notifications that are sent through the GCM channel, specifies whether
-	// the token was updated as part of delivering the message.
+	// the endpoint's device registration token was updated as part of delivering
+	// the message.
 	UpdatedToken *string `type:"string"`
 }
 
@@ -4669,7 +5222,14 @@ type EndpointRequest struct {
 	// The date and time, in ISO 8601 format, when the endpoint is updated.
 	EffectiveDate *string `type:"string"`
 
-	// Not used.
+	// Specifies whether to send messages or push notifications to the endpoint.
+	// Valid values are: ACTIVE, messages are sent to the endpoint; and, INACTIVE,
+	// messages aren’t sent to the endpoint.
+	//
+	// Amazon Pinpoint automatically sets this value to ACTIVE when you create an
+	// endpoint or update an existing endpoint. Amazon Pinpoint automatically sets
+	// this value to INACTIVE if you update another endpoint that has the same address
+	// specified by the Address property.
 	EndpointStatus *string `type:"string"`
 
 	// The geographic information for the endpoint.
@@ -4828,7 +5388,14 @@ type EndpointResponse struct {
 	// The date and time, in ISO 8601 format, when the endpoint was last updated.
 	EffectiveDate *string `type:"string"`
 
-	// Not used.
+	// Specifies whether messages or push notifications are sent to the endpoint.
+	// Possible values are: ACTIVE, messages are sent to the endpoint; and, INACTIVE,
+	// messages aren’t sent to the endpoint.
+	//
+	// Amazon Pinpoint automatically sets this value to ACTIVE when you create an
+	// endpoint or update an existing endpoint. Amazon Pinpoint automatically sets
+	// this value to INACTIVE if you update another endpoint that has the same address
+	// specified by the Address property.
 	EndpointStatus *string `type:"string"`
 
 	// The unique identifier that you assigned to the endpoint. The identifier should
@@ -6020,8 +6587,8 @@ func (s ExportJobsResponse) MarshalFields(e protocol.FieldEncoder) error {
 type GCMChannelRequest struct {
 	_ struct{} `type:"structure"`
 
-	// The API key, also referred to as a server key, that you received from Google
-	// to communicate with Google services.
+	// The Web API Key, also referred to as an API_KEY or server key, that you received
+	// from Google to communicate with Google services.
 	//
 	// ApiKey is a required field
 	ApiKey *string `type:"string" required:"true"`
@@ -6079,8 +6646,8 @@ type GCMChannelResponse struct {
 	// The date and time when the GCM channel was enabled.
 	CreationDate *string `type:"string"`
 
-	// The API key, also referred to as a server key, that you received from Google
-	// to communicate with Google services.
+	// The Web API Key, also referred to as an API_KEY or server key, that you received
+	// from Google to communicate with Google services.
 	//
 	// Credential is a required field
 	Credential *string `type:"string" required:"true"`
@@ -7355,6 +7922,9 @@ type MessageRequest struct {
 	// MessageConfiguration is a required field
 	MessageConfiguration *DirectMessageConfiguration `type:"structure" required:"true"`
 
+	// The message template to use for the message.
+	TemplateConfiguration *TemplateConfiguration `type:"structure"`
+
 	// The unique identifier for tracing the message. This identifier is visible
 	// to message recipients.
 	TraceId *string `type:"string"`
@@ -7422,6 +7992,12 @@ func (s MessageRequest) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "MessageConfiguration", v, metadata)
+	}
+	if s.TemplateConfiguration != nil {
+		v := s.TemplateConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "TemplateConfiguration", v, metadata)
 	}
 	if s.TraceId != nil {
 		v := *s.TraceId
@@ -7548,7 +8124,8 @@ type MessageResult struct {
 	StatusMessage *string `type:"string"`
 
 	// For push notifications that are sent through the GCM channel, specifies whether
-	// the token was updated as part of delivering the message.
+	// the endpoint's device registration token was updated as part of delivering
+	// the message.
 	UpdatedToken *string `type:"string"`
 }
 
@@ -7861,8 +8438,14 @@ type PublicEndpoint struct {
 	// The date and time, in ISO 8601 format, when the endpoint was last updated.
 	EffectiveDate *string `type:"string"`
 
-	// The status of the update request for the endpoint. Possible values are: INACTIVE,
-	// the update failed; and, ACTIVE, the endpoint was updated successfully.
+	// Specifies whether to send messages or push notifications to the endpoint.
+	// Valid values are: ACTIVE, messages are sent to the endpoint; and, INACTIVE,
+	// messages aren’t sent to the endpoint.
+	//
+	// Amazon Pinpoint automatically sets this value to ACTIVE when you create an
+	// endpoint or update an existing endpoint. Amazon Pinpoint automatically sets
+	// this value to INACTIVE if you update another endpoint that has the same address
+	// specified by the Address property.
 	EndpointStatus *string `type:"string"`
 
 	// The geographic information for the endpoint.
@@ -7976,6 +8559,233 @@ func (s PublicEndpoint) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "User", v, metadata)
+	}
+	return nil
+}
+
+// Specifies the content and settings for a message template that can be used
+// in messages that are sent through a push notification channel.
+type PushNotificationTemplateRequest struct {
+	_ struct{} `type:"structure"`
+
+	// The message template to use for the ADM (Amazon Device Messaging) channel.
+	// This message template overrides the default template for push notification
+	// channels (DefaultPushNotificationTemplate).
+	ADM *AndroidPushNotificationTemplate `type:"structure"`
+
+	// The message template to use for the APNs (Apple Push Notification service)
+	// channel. This message template overrides the default template for push notification
+	// channels (DefaultPushNotificationTemplate).
+	APNS *APNSPushNotificationTemplate `type:"structure"`
+
+	// The message template to use for the Baidu (Baidu Cloud Push) channel. This
+	// message template overrides the default template for push notification channels
+	// (DefaultPushNotificationTemplate).
+	Baidu *AndroidPushNotificationTemplate `type:"structure"`
+
+	// The default message template to use for push notification channels.
+	Default *DefaultPushNotificationTemplate `type:"structure"`
+
+	// The message template to use for the GCM channel, which is used to send notifications
+	// through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging
+	// (GCM), service. This message template overrides the default template for
+	// push notification channels (DefaultPushNotificationTemplate).
+	GCM *AndroidPushNotificationTemplate `type:"structure"`
+
+	// A string-to-string map of key-value pairs that defines the tags to associate
+	// with the message template. Each tag consists of a required tag key and an
+	// associated tag value.
+	Tags map[string]string `locationName:"tags" type:"map"`
+}
+
+// String returns the string representation
+func (s PushNotificationTemplateRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PushNotificationTemplateRequest) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ADM != nil {
+		v := s.ADM
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ADM", v, metadata)
+	}
+	if s.APNS != nil {
+		v := s.APNS
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "APNS", v, metadata)
+	}
+	if s.Baidu != nil {
+		v := s.Baidu
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Baidu", v, metadata)
+	}
+	if s.Default != nil {
+		v := s.Default
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Default", v, metadata)
+	}
+	if s.GCM != nil {
+		v := s.GCM
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "GCM", v, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	return nil
+}
+
+// Provides information about the content and settings for a message template
+// that can be used in messages that are sent through a push notification channel.
+type PushNotificationTemplateResponse struct {
+	_ struct{} `type:"structure"`
+
+	// The message template that's used for the ADM (Amazon Device Messaging) channel.
+	// This message template overrides the default template for push notification
+	// channels (DefaultPushNotificationTemplate).
+	ADM *AndroidPushNotificationTemplate `type:"structure"`
+
+	// The message template that's used for the APNs (Apple Push Notification service)
+	// channel. This message template overrides the default template for push notification
+	// channels (DefaultPushNotificationTemplate).
+	APNS *APNSPushNotificationTemplate `type:"structure"`
+
+	Arn *string `type:"string"`
+
+	// The message template that's used for the Baidu (Baidu Cloud Push) channel.
+	// This message template overrides the default template for push notification
+	// channels (DefaultPushNotificationTemplate).
+	Baidu *AndroidPushNotificationTemplate `type:"structure"`
+
+	// The date when the message template was created.
+	//
+	// CreationDate is a required field
+	CreationDate *string `type:"string" required:"true"`
+
+	// The default message template that's used for push notification channels.
+	Default *DefaultPushNotificationTemplate `type:"structure"`
+
+	// The message template that's used for the GCM channel, which is used to send
+	// notifications through the Firebase Cloud Messaging (FCM), formerly Google
+	// Cloud Messaging (GCM), service. This message template overrides the default
+	// template for push notification channels (DefaultPushNotificationTemplate).
+	GCM *AndroidPushNotificationTemplate `type:"structure"`
+
+	// The date when the message template was last modified.
+	//
+	// LastModifiedDate is a required field
+	LastModifiedDate *string `type:"string" required:"true"`
+
+	// A string-to-string map of key-value pairs that identifies the tags that are
+	// associated with the message template. Each tag consists of a required tag
+	// key and an associated tag value.
+	Tags map[string]string `locationName:"tags" type:"map"`
+
+	// The name of the message template.
+	//
+	// TemplateName is a required field
+	TemplateName *string `type:"string" required:"true"`
+
+	// The type of channel that the message template is designed for. For a push
+	// notification template, this value is PUSH.
+	//
+	// TemplateType is a required field
+	TemplateType TemplateType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s PushNotificationTemplateResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PushNotificationTemplateResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ADM != nil {
+		v := s.ADM
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ADM", v, metadata)
+	}
+	if s.APNS != nil {
+		v := s.APNS
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "APNS", v, metadata)
+	}
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Baidu != nil {
+		v := s.Baidu
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Baidu", v, metadata)
+	}
+	if s.CreationDate != nil {
+		v := *s.CreationDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Default != nil {
+		v := s.Default
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Default", v, metadata)
+	}
+	if s.GCM != nil {
+		v := s.GCM
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "GCM", v, metadata)
+	}
+	if s.LastModifiedDate != nil {
+		v := *s.LastModifiedDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastModifiedDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.TemplateName != nil {
+		v := *s.TemplateName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.TemplateType) > 0 {
+		v := s.TemplateType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -8418,10 +9228,10 @@ type SMSMessage struct {
 	// a marketing message.
 	MessageType MessageType `type:"string" enum:"true"`
 
-	// The number that the SMS message originates from. This should be one of the
-	// dedicated long codes or short codes that you requested from AWS Support and
-	// is assigned to your AWS account. If you don't specify a long or short code,
-	// Amazon Pinpoint assigns a random long code to the SMS message.
+	// The number to send the SMS message from. This value should be one of the
+	// dedicated long or short codes that's assigned to your AWS account. If you
+	// don't specify a long or short code, Amazon Pinpoint assigns a random long
+	// code to the SMS message and sends the message from that code.
 	OriginationNumber *string `type:"string"`
 
 	// The sender ID to display as the sender of the message on a recipient's device.
@@ -8486,6 +9296,144 @@ func (s SMSMessage) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ms0.End()
 
+	}
+	return nil
+}
+
+// Specifies the content and settings for a message template that can be used
+// in text messages that are sent through the SMS channel.
+type SMSTemplateRequest struct {
+	_ struct{} `type:"structure"`
+
+	// The message body to use in text messages that are based on the message template.
+	Body *string `type:"string"`
+
+	// A string-to-string map of key-value pairs that defines the tags to associate
+	// with the message template. Each tag consists of a required tag key and an
+	// associated tag value.
+	Tags map[string]string `locationName:"tags" type:"map"`
+}
+
+// String returns the string representation
+func (s SMSTemplateRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SMSTemplateRequest) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Body != nil {
+		v := *s.Body
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Body", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	return nil
+}
+
+// Provides information about the content and settings for a message template
+// that can be used in text messages that are sent through the SMS channel.
+type SMSTemplateResponse struct {
+	_ struct{} `type:"structure"`
+
+	Arn *string `type:"string"`
+
+	// The message body that's used in text messages that are based on the message
+	// template.
+	Body *string `type:"string"`
+
+	// The date when the message template was created.
+	//
+	// CreationDate is a required field
+	CreationDate *string `type:"string" required:"true"`
+
+	// The date when the message template was last modified.
+	//
+	// LastModifiedDate is a required field
+	LastModifiedDate *string `type:"string" required:"true"`
+
+	// A string-to-string map of key-value pairs that identifies the tags that are
+	// associated with the message template. Each tag consists of a required tag
+	// key and an associated tag value.
+	Tags map[string]string `locationName:"tags" type:"map"`
+
+	// The name of the message template.
+	//
+	// TemplateName is a required field
+	TemplateName *string `type:"string" required:"true"`
+
+	// The type of channel that the message template is designed for. For an SMS
+	// template, this value is SMS.
+	//
+	// TemplateType is a required field
+	TemplateType TemplateType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s SMSTemplateResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SMSTemplateResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Body != nil {
+		v := *s.Body
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Body", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationDate != nil {
+		v := *s.CreationDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LastModifiedDate != nil {
+		v := *s.LastModifiedDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastModifiedDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.TemplateName != nil {
+		v := *s.TemplateName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.TemplateType) > 0 {
+		v := s.TemplateType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -9469,6 +10417,9 @@ type SendUsersMessageRequest struct {
 	// MessageConfiguration is a required field
 	MessageConfiguration *DirectMessageConfiguration `type:"structure" required:"true"`
 
+	// The message template to use for the message.
+	TemplateConfiguration *TemplateConfiguration `type:"structure"`
+
 	// The unique identifier for tracing the message. This identifier is visible
 	// to message recipients.
 	TraceId *string `type:"string"`
@@ -9523,6 +10474,12 @@ func (s SendUsersMessageRequest) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "MessageConfiguration", v, metadata)
+	}
+	if s.TemplateConfiguration != nil {
+		v := s.TemplateConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "TemplateConfiguration", v, metadata)
 	}
 	if s.TraceId != nil {
 		v := *s.TraceId
@@ -9735,7 +10692,7 @@ func (s SetDimension) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Specifies the content of an email message, composed of a subject, a text
+// Specifies the contents of an email message, composed of a subject, a text
 // part, and an HTML part.
 type SimpleEmail struct {
 	_ struct{} `type:"structure"`
@@ -9816,13 +10773,14 @@ func (s SimpleEmailPart) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Specifies the tags (keys and values) for an application, campaign, or segment.
+// Specifies the tags (keys and values) for an application, campaign, message
+// template, or segment.
 type TagsModel struct {
 	_ struct{} `type:"structure"`
 
 	// A string-to-string map of key-value pairs that defines the tags for an application,
-	// campaign, or segment. A project, campaign, or segment can have a maximum
-	// of 50 tags.
+	// campaign, message template, or segment. Each project, campaign, message template,
+	// or segment can have a maximum of 50 tags.
 	//
 	// Each tag consists of a required tag key and an associated tag value. The
 	// maximum length of a tag key is 128 characters. The maximum length of a tag
@@ -9868,6 +10826,204 @@ func (s TagsModel) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies the name of the message template to use for the message.
+type Template struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the message template to use for the message. If specified, this
+	// value must match the name of an existing message template.
+	Name *string `type:"string"`
+}
+
+// String returns the string representation
+func (s Template) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Template) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Specifies the message template to use for the message, for each type of channel.
+type TemplateConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The email template to use for the message.
+	EmailTemplate *Template `type:"structure"`
+
+	// The push notification template to use for the message.
+	PushTemplate *Template `type:"structure"`
+
+	// The SMS template to use for the message.
+	SMSTemplate *Template `type:"structure"`
+}
+
+// String returns the string representation
+func (s TemplateConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TemplateConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.EmailTemplate != nil {
+		v := s.EmailTemplate
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "EmailTemplate", v, metadata)
+	}
+	if s.PushTemplate != nil {
+		v := s.PushTemplate
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "PushTemplate", v, metadata)
+	}
+	if s.SMSTemplate != nil {
+		v := s.SMSTemplate
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "SMSTemplate", v, metadata)
+	}
+	return nil
+}
+
+// Provides information about a message template that's associated with your
+// Amazon Pinpoint account.
+type TemplateResponse struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the message template.
+	Arn *string `type:"string"`
+
+	// The date when the message template was created.
+	//
+	// CreationDate is a required field
+	CreationDate *string `type:"string" required:"true"`
+
+	// The date when the message template was last modified.
+	//
+	// LastModifiedDate is a required field
+	LastModifiedDate *string `type:"string" required:"true"`
+
+	// A string-to-string map of key-value pairs that identifies the tags that are
+	// associated with the message template. Each tag consists of a required tag
+	// key and an associated tag value.
+	Tags map[string]string `locationName:"tags" type:"map"`
+
+	// The name of the message template.
+	//
+	// TemplateName is a required field
+	TemplateName *string `type:"string" required:"true"`
+
+	// The type of channel that the message template is designed for.
+	//
+	// TemplateType is a required field
+	TemplateType TemplateType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s TemplateResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TemplateResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationDate != nil {
+		v := *s.CreationDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LastModifiedDate != nil {
+		v := *s.LastModifiedDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastModifiedDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.TemplateName != nil {
+		v := *s.TemplateName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.TemplateType) > 0 {
+		v := s.TemplateType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Provides information about all the message templates that are associated
+// with your Amazon Pinpoint account.
+type TemplatesResponse struct {
+	_ struct{} `type:"structure"`
+
+	// An array of responses, one for each message template that's associated with
+	// your Amazon Pinpoint account and meets any filter criteria that you specified
+	// in the request.
+	//
+	// Item is a required field
+	Item []TemplateResponse `type:"list" required:"true"`
+
+	// The string to use in a subsequent request to get the next page of results
+	// in a paginated response. This value is null if there are no additional pages.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s TemplatesResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TemplatesResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Item != nil {
+		v := s.Item
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Item", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Specifies the settings for a campaign treatment. A treatment is a variation
 // of a campaign that's used for A/B testing of a campaign.
 type TreatmentResource struct {
@@ -9892,6 +11048,9 @@ type TreatmentResource struct {
 
 	// The status of the treatment.
 	State *CampaignState `type:"structure"`
+
+	// The message template that’s used for the treatment.
+	TemplateConfiguration *TemplateConfiguration `type:"structure"`
 
 	// The custom description of the treatment.
 	TreatmentDescription *string `type:"string"`
@@ -9937,6 +11096,12 @@ func (s TreatmentResource) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "State", v, metadata)
+	}
+	if s.TemplateConfiguration != nil {
+		v := s.TemplateConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "TemplateConfiguration", v, metadata)
 	}
 	if s.TreatmentDescription != nil {
 		v := *s.TreatmentDescription
@@ -10142,9 +11307,10 @@ type VoiceMessage struct {
 	// languages, see the Amazon Polly Developer Guide (AmazonPollyDG.html).
 	LanguageCode *string `type:"string"`
 
-	// The phone number from the pool or messaging service to send the message from.
-	// Although it isn't required, we recommend that you specify the phone number
-	// in E.164 format to ensure prompt and accurate delivery.
+	// The long code to send the voice message from. This value should be one of
+	// the dedicated long codes that's assigned to your AWS account. Although it
+	// isn't required, we recommend that you specify the long code in E.164 format,
+	// for example +12065550100, to ensure prompt and accurate delivery of the message.
 	OriginationNumber *string `type:"string"`
 
 	// The default message variables to use in the voice message. You can override
@@ -10327,6 +11493,9 @@ type WriteCampaignRequest struct {
 	// tag value.
 	Tags map[string]string `locationName:"tags" type:"map"`
 
+	// The message template to use for the campaign.
+	TemplateConfiguration *TemplateConfiguration `type:"structure"`
+
 	// The custom description of a variation of the campaign to use for A/B testing.
 	TreatmentDescription *string `type:"string"`
 
@@ -10451,6 +11620,12 @@ func (s WriteCampaignRequest) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ms0.End()
 
+	}
+	if s.TemplateConfiguration != nil {
+		v := s.TemplateConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "TemplateConfiguration", v, metadata)
 	}
 	if s.TreatmentDescription != nil {
 		v := *s.TreatmentDescription
@@ -10631,6 +11806,9 @@ type WriteTreatmentResource struct {
 	// SizePercent is a required field
 	SizePercent *int64 `type:"integer" required:"true"`
 
+	// The message template to use for the treatment.
+	TemplateConfiguration *TemplateConfiguration `type:"structure"`
+
 	// The custom description of the treatment.
 	TreatmentDescription *string `type:"string"`
 
@@ -10687,6 +11865,12 @@ func (s WriteTreatmentResource) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SizePercent", protocol.Int64Value(v), metadata)
+	}
+	if s.TemplateConfiguration != nil {
+		v := s.TemplateConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "TemplateConfiguration", v, metadata)
 	}
 	if s.TreatmentDescription != nil {
 		v := *s.TreatmentDescription

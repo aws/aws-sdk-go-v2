@@ -87,7 +87,7 @@ const opAdminGetDevice = "AdminGetDevice"
 //
 // Gets the device, as an administrator.
 //
-// Requires developer credentials.
+// Calling this action requires developer credentials.
 //
 //    // Example sending a request using AdminGetDeviceRequest.
 //    req := client.AdminGetDeviceRequest(params)

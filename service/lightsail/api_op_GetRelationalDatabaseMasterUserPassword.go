@@ -72,7 +72,7 @@ const opGetRelationalDatabaseMasterUserPassword = "GetRelationalDatabaseMasterUs
 // Returns the current, previous, or pending versions of the master user password
 // for a Lightsail database.
 //
-// The asdf operation GetRelationalDatabaseMasterUserPassword supports tag-based
+// The GetRelationalDatabaseMasterUserPassword operation supports tag-based
 // access control via resource tags applied to the resource identified by relationalDatabaseName.
 //
 //    // Example sending a request using GetRelationalDatabaseMasterUserPasswordRequest.

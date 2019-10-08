@@ -191,7 +191,7 @@ const opCreateDeliveryStream = "CreateDeliveryStream"
 // the destination. The role should allow the Kinesis Data Firehose principal
 // to assume the role, and the role should have permissions that allow the service
 // to deliver the data. For more information, see Grant Kinesis Data Firehose
-// Access to an Amazon S3 Destination (http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3)
+// Access to an Amazon S3 Destination (https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3)
 // in the Amazon Kinesis Data Firehose Developer Guide.
 //
 //    // Example sending a request using CreateDeliveryStreamRequest.

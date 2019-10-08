@@ -12,7 +12,14 @@ import (
 type SetUserPoolMfaConfigInput struct {
 	_ struct{} `type:"structure"`
 
-	// The MFA configuration.
+	// The MFA configuration. Valid values include:
+	//
+	//    * OFF MFA will not be used for any users.
+	//
+	//    * ON MFA is required for all users to sign in.
+	//
+	//    * OPTIONAL MFA will be required only for individual users who have an
+	//    MFA factor enabled.
 	MfaConfiguration UserPoolMfaType `type:"string" enum:"true"`
 
 	// The SMS text message MFA configuration.
@@ -57,7 +64,14 @@ func (s *SetUserPoolMfaConfigInput) Validate() error {
 type SetUserPoolMfaConfigOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The MFA configuration.
+	// The MFA configuration. Valid values include:
+	//
+	//    * OFF MFA will not be used for any users.
+	//
+	//    * ON MFA is required for all users to sign in.
+	//
+	//    * OPTIONAL MFA will be required only for individual users who have an
+	//    MFA factor enabled.
 	MfaConfiguration UserPoolMfaType `type:"string" enum:"true"`
 
 	// The SMS text message MFA configuration.
@@ -77,7 +91,7 @@ const opSetUserPoolMfaConfig = "SetUserPoolMfaConfig"
 // SetUserPoolMfaConfigRequest returns a request value for making API operation for
 // Amazon Cognito Identity Provider.
 //
-// Set the user pool MFA configuration.
+// Set the user pool multi-factor authentication (MFA) configuration.
 //
 //    // Example sending a request using SetUserPoolMfaConfigRequest.
 //    req := client.SetUserPoolMfaConfigRequest(params)
