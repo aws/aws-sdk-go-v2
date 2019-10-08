@@ -83,7 +83,7 @@ const opAdminForgetDevice = "AdminForgetDevice"
 //
 // Forgets the device, as an administrator.
 //
-// Requires developer credentials.
+// Calling this action requires developer credentials.
 //
 //    // Example sending a request using AdminForgetDeviceRequest.
 //    req := client.AdminForgetDeviceRequest(params)

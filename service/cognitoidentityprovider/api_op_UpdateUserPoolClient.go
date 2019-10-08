@@ -23,7 +23,8 @@ type UpdateUserPoolClientInput struct {
 	AllowedOAuthFlowsUserPoolClient *bool `type:"boolean"`
 
 	// A list of allowed OAuth scopes. Currently supported values are "phone", "email",
-	// "openid", and "Cognito".
+	// "openid", and "Cognito". In addition to these values, custom scopes created
+	// in Resource Servers are also supported.
 	AllowedOAuthScopes []string `type:"list"`
 
 	// The Amazon Pinpoint analytics configuration for collecting metrics for this

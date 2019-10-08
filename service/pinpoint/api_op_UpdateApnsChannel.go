@@ -96,7 +96,8 @@ const opUpdateApnsChannel = "UpdateApnsChannel"
 // UpdateApnsChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Updates the APNs channel settings for an application.
+// Enables the APNs channel for an application or updates the status and settings
+// of the APNs channel for an application.
 //
 //    // Example sending a request using UpdateApnsChannelRequest.
 //    req := client.UpdateApnsChannelRequest(params)

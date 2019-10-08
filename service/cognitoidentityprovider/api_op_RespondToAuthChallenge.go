@@ -27,21 +27,62 @@ type RespondToAuthChallengeInput struct {
 	// The challenge responses. These are inputs corresponding to the value of ChallengeName,
 	// for example:
 	//
-	//    * SMS_MFA: SMS_MFA_CODE, USERNAME, SECRET_HASH (if app client is configured
-	//    with client secret).
+	// SECRET_HASH (if app client is configured with client secret) applies to all
+	// inputs below (including SOFTWARE_TOKEN_MFA).
+	//
+	//    * SMS_MFA: SMS_MFA_CODE, USERNAME.
 	//
 	//    * PASSWORD_VERIFIER: PASSWORD_CLAIM_SIGNATURE, PASSWORD_CLAIM_SECRET_BLOCK,
-	//    TIMESTAMP, USERNAME, SECRET_HASH (if app client is configured with client
-	//    secret).
+	//    TIMESTAMP, USERNAME.
 	//
 	//    * NEW_PASSWORD_REQUIRED: NEW_PASSWORD, any other required attributes,
-	//    USERNAME, SECRET_HASH (if app client is configured with client secret).
+	//    USERNAME.
+	//
+	//    * SOFTWARE_TOKEN_MFA: USERNAME and SOFTWARE_TOKEN_MFA_CODE are required
+	//    attributes.
+	//
+	//    * DEVICE_SRP_AUTH requires USERNAME, DEVICE_KEY, SRP_A (and SECRET_HASH).
+	//
+	//    * DEVICE_PASSWORD_VERIFIER requires everything that PASSWORD_VERIFIER
+	//    requires plus DEVICE_KEY.
 	ChallengeResponses map[string]string `type:"map"`
 
 	// The app client ID.
 	//
 	// ClientId is a required field
 	ClientId *string `min:"1" type:"string" required:"true" sensitive:"true"`
+
+	// A map of custom key-value pairs that you can provide as input for any custom
+	// workflows that this action triggers.
+	//
+	// You create custom workflows by assigning AWS Lambda functions to user pool
+	// triggers. When you use the RespondToAuthChallenge API action, Amazon Cognito
+	// invokes any functions that are assigned to the following triggers: post authentication,
+	// pre token generation, define auth challenge, create auth challenge, and verify
+	// auth challenge. When Amazon Cognito invokes any of these functions, it passes
+	// a JSON payload, which the function receives as input. This payload contains
+	// a clientMetadata attribute, which provides the data that you assigned to
+	// the ClientMetadata parameter in your RespondToAuthChallenge request. In your
+	// function code in AWS Lambda, you can process the clientMetadata value to
+	// enhance your workflow for your specific needs.
+	//
+	// For more information, see Customizing User Pool Workflows with Lambda Triggers
+	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
+	// in the Amazon Cognito Developer Guide.
+	//
+	// Take the following limitations into consideration when you use the ClientMetadata
+	// parameter:
+	//
+	//    * Amazon Cognito does not store the ClientMetadata value. This data is
+	//    available only to AWS Lambda triggers that are assigned to a user pool
+	//    to support custom workflows. If your user pool configuration does not
+	//    include triggers, the ClientMetadata parameter serves no purpose.
+	//
+	//    * Amazon Cognito does not validate the ClientMetadata value.
+	//
+	//    * Amazon Cognito does not encrypt the the ClientMetadata value, so don't
+	//    use it to provide sensitive information.
+	ClientMetadata map[string]string `type:"map"`
 
 	// The session which should be passed both ways in challenge-response calls
 	// to the service. If InitiateAuth or RespondToAuthChallenge API call determines

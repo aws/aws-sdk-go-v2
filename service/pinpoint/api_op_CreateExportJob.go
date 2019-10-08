@@ -103,7 +103,7 @@ const opCreateExportJob = "CreateExportJob"
 // CreateExportJobRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Creates a new export job for an application.
+// Creates an export job for an application.
 //
 //    // Example sending a request using CreateExportJobRequest.
 //    req := client.CreateExportJobRequest(params)

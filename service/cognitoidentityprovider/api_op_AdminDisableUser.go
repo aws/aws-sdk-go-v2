@@ -69,9 +69,9 @@ const opAdminDisableUser = "AdminDisableUser"
 // AdminDisableUserRequest returns a request value for making API operation for
 // Amazon Cognito Identity Provider.
 //
-// Disables the specified user as an administrator. Works on any user.
+// Disables the specified user.
 //
-// Requires developer credentials.
+// Calling this action requires developer credentials.
 //
 //    // Example sending a request using AdminDisableUserRequest.
 //    req := client.AdminDisableUserRequest(params)

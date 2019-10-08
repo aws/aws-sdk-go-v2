@@ -85,7 +85,7 @@ const opListUsersInGroup = "ListUsersInGroup"
 //
 // Lists the users in the specified group.
 //
-// Requires developer credentials.
+// Calling this action requires developer credentials.
 //
 //    // Example sending a request using ListUsersInGroupRequest.
 //    req := client.ListUsersInGroupRequest(params)

@@ -90,6 +90,9 @@ const opStartSession = "StartSession"
 // For information, see Install the Session Manager Plugin for the AWS CLI (http://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html)
 // in the AWS Systems Manager User Guide.
 //
+// AWS Tools for PowerShell usage: Start-SSMSession is not currently supported
+// by AWS Tools for PowerShell on Windows local machines.
+//
 //    // Example sending a request using StartSessionRequest.
 //    req := client.StartSessionRequest(params)
 //    resp, err := req.Send(context.TODO())

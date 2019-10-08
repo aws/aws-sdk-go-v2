@@ -276,6 +276,8 @@ type ClientAPI interface {
 
 	DeletePlacementGroupRequest(*ec2.DeletePlacementGroupInput) ec2.DeletePlacementGroupRequest
 
+	DeleteQueuedReservedInstancesRequest(*ec2.DeleteQueuedReservedInstancesInput) ec2.DeleteQueuedReservedInstancesRequest
+
 	DeleteRouteRequest(*ec2.DeleteRouteInput) ec2.DeleteRouteRequest
 
 	DeleteRouteTableRequest(*ec2.DeleteRouteTableInput) ec2.DeleteRouteTableRequest

@@ -97,7 +97,7 @@ const opCreateGroup = "CreateGroup"
 //
 // Creates a new group in the specified user pool.
 //
-// Requires developer credentials.
+// Calling this action requires developer credentials.
 //
 //    // Example sending a request using CreateGroupRequest.
 //    req := client.CreateGroupRequest(params)

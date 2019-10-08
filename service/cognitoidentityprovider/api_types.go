@@ -156,7 +156,7 @@ type AdminCreateUserConfigType struct {
 
 	// The message template to be used for the welcome message to new users.
 	//
-	// See also Customizing User Invitation Messages (http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-message-customizations.html#cognito-user-pool-settings-user-invitation-message-customization).
+	// See also Customizing User Invitation Messages (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-message-customizations.html#cognito-user-pool-settings-user-invitation-message-customization).
 	InviteMessageTemplate *MessageTemplateType `type:"structure"`
 
 	// The user account expiration limit, in days, after which the account is no
@@ -969,14 +969,22 @@ func (s *LambdaConfigType) Validate() error {
 	return nil
 }
 
-// Specifies the different settings for multi-factor authentication (MFA).
+// This data type is no longer supported. You can use it only for SMS MFA configurations.
+// You can't use it for TOTP software token MFA configurations.
+//
+// To set either type of MFA configuration, use the AdminSetUserMFAPreference
+// or SetUserMFAPreference actions.
+//
+// To look up information about either type of MFA configuration, use the AdminGetUserResponse$UserMFASettingList
+// or GetUserResponse$UserMFASettingList responses.
 type MFAOptionType struct {
 	_ struct{} `type:"structure"`
 
-	// The attribute name of the MFA option type.
+	// The attribute name of the MFA option type. The only valid value is phone_number.
 	AttributeName *string `min:"1" type:"string"`
 
-	// The delivery medium (email message or SMS message) to send the MFA code.
+	// The delivery medium to send the MFA code. You can use this parameter to set
+	// only the SMS delivery medium value.
 	DeliveryMedium DeliveryMediumType `type:"string" enum:"true"`
 }
 
@@ -1204,6 +1212,13 @@ type PasswordPolicyType struct {
 	// users to use at least one uppercase letter in their password.
 	RequireUppercase *bool `type:"boolean"`
 
+	// In the password policy you have set, refers to the number of days a temporary
+	// password is valid. If the user does not sign-in during this time, their password
+	// will need to be reset by an administrator.
+	//
+	// When you set TemporaryPasswordValidityDays for a user pool, you will no longer
+	// be able to set the deprecated UnusedAccountValidityDays value for that user
+	// pool.
 	TemporaryPasswordValidityDays *int64 `type:"integer"`
 }
 
@@ -1394,14 +1409,14 @@ func (s RiskExceptionConfigurationType) String() string {
 	return awsutil.Prettify(s)
 }
 
-// The SMS multi-factor authentication (MFA) settings type.
+// The type used for enabling SMS MFA at the user level.
 type SMSMfaSettingsType struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies whether SMS text message MFA is enabled.
 	Enabled *bool `type:"boolean"`
 
-	// The preferred MFA method.
+	// Specifies whether SMS is the preferred MFA method.
 	PreferredMfa *bool `type:"boolean"`
 }
 
@@ -1463,15 +1478,25 @@ func (s *SchemaAttributeType) Validate() error {
 	return nil
 }
 
-// The SMS configuration type.
+// The SMS configuration type that includes the settings the Cognito User Pool
+// needs to call for the Amazon SNS service to send an SMS message from your
+// AWS account. The Cognito User Pool makes the request to the Amazon SNS Service
+// by using an AWS IAM role that you provide for your AWS account.
 type SmsConfigurationType struct {
 	_ struct{} `type:"structure"`
 
-	// The external ID.
+	// The external ID is a value that we recommend you use to add security to your
+	// IAM role which is used to call Amazon SNS to send SMS messages for your user
+	// pool. If you provide an ExternalId, the Cognito User Pool will include it
+	// when attempting to assume your IAM role, so that you can set your roles trust
+	// policy to require the ExternalID. If you use the Cognito Management Console
+	// to create a role for SMS MFA, Cognito will create a role with the required
+	// permissions and a trust policy that demonstrates use of the ExternalId.
 	ExternalId *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service
-	// (SNS) caller.
+	// (SNS) caller. This is the ARN of the IAM role in your AWS account which Cognito
+	// will use to send SMS messages.
 	//
 	// SnsCallerArn is a required field
 	SnsCallerArn *string `min:"20" type:"string" required:"true"`
@@ -1503,7 +1528,10 @@ func (s *SmsConfigurationType) Validate() error {
 type SmsMfaConfigType struct {
 	_ struct{} `type:"structure"`
 
-	// The SMS authentication message.
+	// The SMS authentication message that will be sent to users with the code they
+	// need to sign in. The message must contain the ‘{####}’ placeholder, which
+	// will be replaced with the code. If the message is not included, and default
+	// message will be used.
 	SmsAuthenticationMessage *string `min:"6" type:"string"`
 
 	// The SMS configuration.
@@ -1553,7 +1581,7 @@ type SoftwareTokenMfaSettingsType struct {
 	// Specifies whether software token MFA is enabled.
 	Enabled *bool `type:"boolean"`
 
-	// The preferred MFA method.
+	// Specifies whether software token MFA is the preferred MFA method.
 	PreferredMfa *bool `type:"boolean"`
 }
 
@@ -1764,7 +1792,8 @@ type UserPoolClientType struct {
 	AllowedOAuthFlowsUserPoolClient *bool `type:"boolean"`
 
 	// A list of allowed OAuth scopes. Currently supported values are "phone", "email",
-	// "openid", and "Cognito".
+	// "openid", and "Cognito". In addition to these values, custom scopes created
+	// in Resource Servers are also supported.
 	AllowedOAuthScopes []string `type:"list"`
 
 	// The Amazon Pinpoint analytics configuration for the user pool client.

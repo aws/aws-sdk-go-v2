@@ -43,7 +43,14 @@ func (s *GetUserPoolMfaConfigInput) Validate() error {
 type GetUserPoolMfaConfigOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The multi-factor (MFA) configuration.
+	// The multi-factor (MFA) configuration. Valid values include:
+	//
+	//    * OFF MFA will not be used for any users.
+	//
+	//    * ON MFA is required for all users to sign in.
+	//
+	//    * OPTIONAL MFA will be required only for individual users who have an
+	//    MFA factor enabled.
 	MfaConfiguration UserPoolMfaType `type:"string" enum:"true"`
 
 	// The SMS text message multi-factor (MFA) configuration.

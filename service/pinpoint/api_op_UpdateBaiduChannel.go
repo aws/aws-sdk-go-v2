@@ -101,7 +101,8 @@ const opUpdateBaiduChannel = "UpdateBaiduChannel"
 // UpdateBaiduChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Updates the settings of the Baidu channel for an application.
+// Enables the Baidu channel for an application or updates the status and settings
+// of the Baidu channel for an application.
 //
 //    // Example sending a request using UpdateBaiduChannelRequest.
 //    req := client.UpdateBaiduChannelRequest(params)

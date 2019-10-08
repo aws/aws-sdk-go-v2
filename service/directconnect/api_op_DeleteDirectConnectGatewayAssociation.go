@@ -19,7 +19,7 @@ type DeleteDirectConnectGatewayAssociationInput struct {
 	DirectConnectGatewayId *string `locationName:"directConnectGatewayId" type:"string"`
 
 	// The ID of the virtual private gateway.
-	VirtualGatewayId *string `locationName:"virtualGatewayId" deprecated:"true" type:"string"`
+	VirtualGatewayId *string `locationName:"virtualGatewayId" type:"string"`
 }
 
 // String returns the string representation
@@ -46,6 +46,11 @@ const opDeleteDirectConnectGatewayAssociation = "DeleteDirectConnectGatewayAssoc
 //
 // Deletes the association between the specified Direct Connect gateway and
 // virtual private gateway.
+//
+// We recommend that you specify the associationID to delete the association.
+// Alternatively, if you own virtual gateway and a Direct Connect gateway association,
+// you can specify the virtualGatewayId and directConnectGatewayId to delete
+// an association.
 //
 //    // Example sending a request using DeleteDirectConnectGatewayAssociationRequest.
 //    req := client.DeleteDirectConnectGatewayAssociationRequest(params)

@@ -1287,6 +1287,23 @@ func (s DeleteLaunchTemplateVersionsResponseSuccessItem) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Describes the error for a Reserved Instance whose queued purchase could not
+// be deleted.
+type DeleteQueuedReservedInstancesError struct {
+	_ struct{} `type:"structure"`
+
+	// The error code.
+	Code DeleteQueuedReservedInstancesErrorCode `locationName:"code" type:"string" enum:"true"`
+
+	// The error message.
+	Message *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation
+func (s DeleteQueuedReservedInstancesError) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Describes the instances that could not be launched by the fleet.
 type DescribeFleetError struct {
 	_ struct{} `type:"structure"`
@@ -1582,7 +1599,10 @@ func (s DnsServersOptionsModifyStructure) String() string {
 type EbsBlockDevice struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates whether the EBS volume is deleted on instance termination.
+	// Indicates whether the EBS volume is deleted on instance termination. For
+	// more information, see Preserving Amazon EBS Volumes on Instance Termination
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html#preserving-volumes-on-termination)
+	// in the Amazon Elastic Compute Cloud User Guide.
 	DeleteOnTermination *bool `locationName:"deleteOnTermination" type:"boolean"`
 
 	// Indicates whether the encryption state of an EBS volume is changed while
@@ -2102,6 +2122,22 @@ type ExportToS3TaskSpecification struct {
 
 // String returns the string representation
 func (s ExportToS3TaskSpecification) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Describes a Reserved Instance whose queued purchase was not deleted.
+type FailedQueuedPurchaseDeletion struct {
+	_ struct{} `type:"structure"`
+
+	// The error.
+	Error *DeleteQueuedReservedInstancesError `locationName:"error" type:"structure"`
+
+	// The ID of the Reserved Instance.
+	ReservedInstancesId *string `locationName:"reservedInstancesId" type:"string"`
+}
+
+// String returns the string representation
+func (s FailedQueuedPurchaseDeletion) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -9316,6 +9352,19 @@ type SuccessfulInstanceCreditSpecificationItem struct {
 
 // String returns the string representation
 func (s SuccessfulInstanceCreditSpecificationItem) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Describes a Reserved Instance whose queued purchase was successfully deleted.
+type SuccessfulQueuedPurchaseDeletion struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the Reserved Instance.
+	ReservedInstancesId *string `locationName:"reservedInstancesId" type:"string"`
+}
+
+// String returns the string representation
+func (s SuccessfulQueuedPurchaseDeletion) String() string {
 	return awsutil.Prettify(s)
 }
 

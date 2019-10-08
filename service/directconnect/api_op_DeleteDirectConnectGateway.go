@@ -56,8 +56,7 @@ const opDeleteDirectConnectGateway = "DeleteDirectConnectGateway"
 //
 // Deletes the specified Direct Connect gateway. You must first delete all virtual
 // interfaces that are attached to the Direct Connect gateway and disassociate
-// all virtual private gateways that are associated with the Direct Connect
-// gateway.
+// all virtual private gateways associated with the Direct Connect gateway.
 //
 //    // Example sending a request using DeleteDirectConnectGatewayRequest.
 //    req := client.DeleteDirectConnectGatewayRequest(params)

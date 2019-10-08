@@ -19,7 +19,8 @@ type SetUserSettingsInput struct {
 	// AccessToken is a required field
 	AccessToken *string `type:"string" required:"true" sensitive:"true"`
 
-	// Specifies the options for MFA (e.g., email or phone number).
+	// You can use this parameter only to set an SMS configuration that uses SMS
+	// for delivery.
 	//
 	// MFAOptions is a required field
 	MFAOptions []MFAOptionType `type:"list" required:"true"`
@@ -70,9 +71,9 @@ const opSetUserSettings = "SetUserSettings"
 // SetUserSettingsRequest returns a request value for making API operation for
 // Amazon Cognito Identity Provider.
 //
-// Sets the user settings like multi-factor authentication (MFA). If MFA is
-// to be removed for a particular attribute pass the attribute with code delivery
-// as null. If null list is passed, all MFA options are removed.
+// This action is no longer supported. You can use it to configure only SMS
+// MFA. You can't use it to configure TOTP software token MFA. To configure
+// either type of MFA, use the SetUserMFAPreference action instead.
 //
 //    // Example sending a request using SetUserSettingsRequest.
 //    req := client.SetUserSettingsRequest(params)

@@ -323,6 +323,24 @@ func (enum SourceType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type TemplateType string
+
+// Enum values for TemplateType
+const (
+	TemplateTypeEmail TemplateType = "EMAIL"
+	TemplateTypeSms   TemplateType = "SMS"
+	TemplateTypePush  TemplateType = "PUSH"
+)
+
+func (enum TemplateType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TemplateType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Type string
 
 // Enum values for Type

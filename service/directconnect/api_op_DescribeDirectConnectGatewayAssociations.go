@@ -31,7 +31,7 @@ type DescribeDirectConnectGatewayAssociationsInput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// The ID of the virtual private gateway.
-	VirtualGatewayId *string `locationName:"virtualGatewayId" deprecated:"true" type:"string"`
+	VirtualGatewayId *string `locationName:"virtualGatewayId" type:"string"`
 }
 
 // String returns the string representation

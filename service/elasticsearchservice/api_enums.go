@@ -163,6 +163,23 @@ func (enum ReservedElasticsearchInstancePaymentOption) MarshalValueBuf(b []byte)
 	return append(b, enum...), nil
 }
 
+type TLSSecurityPolicy string
+
+// Enum values for TLSSecurityPolicy
+const (
+	TLSSecurityPolicyPolicyMinTls10201907 TLSSecurityPolicy = "Policy-Min-TLS-1-0-2019-07"
+	TLSSecurityPolicyPolicyMinTls12201907 TLSSecurityPolicy = "Policy-Min-TLS-1-2-2019-07"
+)
+
+func (enum TLSSecurityPolicy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TLSSecurityPolicy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type UpgradeStatus string
 
 // Enum values for UpgradeStatus

@@ -12,6 +12,10 @@ import (
 type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon Resource Name (ARN) of the resource from which you want to remove
+	// a tag.
+	ResourceArn *string `locationName:"resourceArn" type:"string"`
+
 	// The name of the resource from which you are removing a tag.
 	//
 	// ResourceName is a required field
@@ -67,7 +71,7 @@ const opUntagResource = "UntagResource"
 // Amazon Lightsail resource.
 //
 // The untag resource operation supports tag-based access control via request
-// tags and resource tags applied to the resource identified by resourceName.
+// tags and resource tags applied to the resource identified by resource name.
 // For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //
 //    // Example sending a request using UntagResourceRequest.

@@ -71,7 +71,7 @@ const opGetGroup = "GetGroup"
 //
 // Gets a group.
 //
-// Requires developer credentials.
+// Calling this action requires developer credentials.
 //
 //    // Example sending a request using GetGroupRequest.
 //    req := client.GetGroupRequest(params)

@@ -26,9 +26,12 @@ type CreateElasticsearchDomainInput struct {
 	// For more information, see Amazon Cognito Authentication for Kibana (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html).
 	CognitoOptions *CognitoOptions `type:"structure"`
 
+	// Options to specify configuration that will be applied to the domain endpoint.
+	DomainEndpointOptions *DomainEndpointOptions `type:"structure"`
+
 	// The name of the Elasticsearch domain that you are creating. Domain names
 	// are unique across the domains owned by an account within an AWS region. Domain
-	// names must start with a letter or number and can contain the following characters:
+	// names must start with a lowercase letter and can contain the following characters:
 	// a-z (lowercase), 0-9, and - (hyphen).
 	//
 	// DomainName is a required field
@@ -126,6 +129,12 @@ func (s CreateElasticsearchDomainInput) MarshalFields(e protocol.FieldEncoder) e
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "CognitoOptions", v, metadata)
+	}
+	if s.DomainEndpointOptions != nil {
+		v := s.DomainEndpointOptions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "DomainEndpointOptions", v, metadata)
 	}
 	if s.DomainName != nil {
 		v := *s.DomainName

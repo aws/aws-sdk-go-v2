@@ -17,6 +17,8 @@ type CreateRemoteAccessSessionInput struct {
 	// on the same client, you should pass the same clientId value in each call
 	// to CreateRemoteAccessSession. This is required only if remoteDebugEnabled
 	// is set to true.
+	//
+	// Remote debugging is no longer supported (https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html).
 	ClientId *string `locationName:"clientId" type:"string"`
 
 	// The configuration information for the remote access session request.
@@ -57,6 +59,8 @@ type CreateRemoteAccessSessionInput struct {
 
 	// Set to true if you want to access devices remotely for debugging in your
 	// remote access session.
+	//
+	// Remote debugging is no longer supported (https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html).
 	RemoteDebugEnabled *bool `locationName:"remoteDebugEnabled" type:"boolean"`
 
 	// The Amazon Resource Name (ARN) for the app to be recorded in the remote access
@@ -75,9 +79,11 @@ type CreateRemoteAccessSessionInput struct {
 	// Farm FAQs.
 	SkipAppResign *bool `locationName:"skipAppResign" type:"boolean"`
 
-	// The public key of the ssh key pair you want to use for connecting to remote
-	// devices in your remote debugging session. This is only required if remoteDebugEnabled
-	// is set to true.
+	// Ignored. The public key of the ssh key pair you want to use for connecting
+	// to remote devices in your remote debugging session. This is only required
+	// if remoteDebugEnabled is set to true.
+	//
+	// Remote debugging is no longer supported (https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html).
 	SshPublicKey *string `locationName:"sshPublicKey" type:"string"`
 }
 

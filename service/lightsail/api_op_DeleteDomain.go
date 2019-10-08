@@ -58,7 +58,7 @@ const opDeleteDomain = "DeleteDomain"
 // Deletes the specified domain recordset and all of its domain records.
 //
 // The delete domain operation supports tag-based access control via resource
-// tags applied to the resource identified by domainName. For more information,
+// tags applied to the resource identified by domain name. For more information,
 // see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //
 //    // Example sending a request using DeleteDomainRequest.

@@ -533,6 +533,107 @@ func (s DashPackage) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// A HarvestJob resource configuration
+type HarvestJob struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) assigned to the HarvestJob.
+	Arn *string `locationName:"arn" type:"string"`
+
+	// The ID of the Channel that the HarvestJob will harvest from.
+	ChannelId *string `locationName:"channelId" type:"string"`
+
+	// The time the HarvestJob was submitted
+	CreatedAt *string `locationName:"createdAt" type:"string"`
+
+	// The end of the time-window which will be harvested.
+	EndTime *string `locationName:"endTime" type:"string"`
+
+	// The ID of the HarvestJob. The ID must be unique within the regionand it cannot
+	// be changed after the HarvestJob is submitted.
+	Id *string `locationName:"id" type:"string"`
+
+	// The ID of the OriginEndpoint that the HarvestJob will harvest from.This cannot
+	// be changed after the HarvestJob is submitted.
+	OriginEndpointId *string `locationName:"originEndpointId" type:"string"`
+
+	// Configuration parameters for where in an S3 bucket to place the harvested
+	// content
+	S3Destination *S3Destination `locationName:"s3Destination" type:"structure"`
+
+	// The start of the time-window which will be harvested.
+	StartTime *string `locationName:"startTime" type:"string"`
+
+	// The current status of the HarvestJob. Consider setting up a CloudWatch Event
+	// to listen forHarvestJobs as they succeed or fail. In the event of failure,
+	// the CloudWatch Event willinclude an explanation of why the HarvestJob failed.
+	Status Status `locationName:"status" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s HarvestJob) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HarvestJob) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ChannelId != nil {
+		v := *s.ChannelId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "channelId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreatedAt != nil {
+		v := *s.CreatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createdAt", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.EndTime != nil {
+		v := *s.EndTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "endTime", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.OriginEndpointId != nil {
+		v := *s.OriginEndpointId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "originEndpointId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.S3Destination != nil {
+		v := s.S3Destination
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "s3Destination", v, metadata)
+	}
+	if s.StartTime != nil {
+		v := *s.StartTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "startTime", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 // An HTTP Live Streaming (HLS) encryption configuration.
 type HlsEncryption struct {
 	_ struct{} `type:"structure"`
@@ -1248,6 +1349,13 @@ type OriginEndpoint struct {
 	// A Microsoft Smooth Streaming (MSS) packaging configuration.
 	MssPackage *MssPackage `locationName:"mssPackage" type:"structure"`
 
+	// Control whether origination of video is allowed for this OriginEndpoint.
+	// If set to ALLOW, the OriginEndpointmay by requested, pursuant to any other
+	// form of access control. If set to DENY, the OriginEndpoint may not berequested.
+	// This can be helpful for Live to VOD harvesting, or for temporarily disabling
+	// origination
+	Origination Origination `locationName:"origination" type:"string" enum:"true"`
+
 	// Maximum duration (seconds) of content to retain for startover playback.If
 	// not specified, startover playback will be disabled for the OriginEndpoint.
 	StartoverWindowSeconds *int64 `locationName:"startoverWindowSeconds" type:"integer"`
@@ -1327,6 +1435,12 @@ func (s OriginEndpoint) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "mssPackage", v, metadata)
 	}
+	if len(s.Origination) > 0 {
+		v := s.Origination
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "origination", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.StartoverWindowSeconds != nil {
 		v := *s.StartoverWindowSeconds
 
@@ -1368,6 +1482,78 @@ func (s OriginEndpoint) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	return nil
+}
+
+// Configuration parameters for where in an S3 bucket to place the harvested
+// content
+type S3Destination struct {
+	_ struct{} `type:"structure"`
+
+	// The name of an S3 bucket within which harvested content will be exported
+	//
+	// BucketName is a required field
+	BucketName *string `locationName:"bucketName" type:"string" required:"true"`
+
+	// The key in the specified S3 bucket where the harvested top-level manifest
+	// will be placed.
+	//
+	// ManifestKey is a required field
+	ManifestKey *string `locationName:"manifestKey" type:"string" required:"true"`
+
+	// The IAM role used to write to the specified S3 bucket
+	//
+	// RoleArn is a required field
+	RoleArn *string `locationName:"roleArn" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s S3Destination) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *S3Destination) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "S3Destination"}
+
+	if s.BucketName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("BucketName"))
+	}
+
+	if s.ManifestKey == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ManifestKey"))
+	}
+
+	if s.RoleArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s S3Destination) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BucketName != nil {
+		v := *s.BucketName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "bucketName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ManifestKey != nil {
+		v := *s.ManifestKey
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "manifestKey", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

@@ -32,7 +32,7 @@ type CreateClusterInput struct {
 	JobType JobType `type:"string" required:"true" enum:"true"`
 
 	// The KmsKeyARN value that you want to associate with this cluster. KmsKeyARN
-	// values are created by using the CreateKey (http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html)
+	// values are created by using the CreateKey (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html)
 	// API action in AWS Key Management Service (AWS KMS).
 	KmsKeyARN *string `type:"string"`
 
@@ -47,7 +47,7 @@ type CreateClusterInput struct {
 	Resources *JobResource `type:"structure" required:"true"`
 
 	// The RoleARN that you want to associate with this cluster. RoleArn values
-	// are created by using the CreateRole (http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html)
+	// are created by using the CreateRole (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html)
 	// API action in AWS Identity and Access Management (IAM).
 	//
 	// RoleARN is a required field
@@ -66,15 +66,15 @@ type CreateClusterInput struct {
 	//    most countries in the EU have access to standard shipping, which typically
 	//    takes less than a week, one way.
 	//
-	//    * In India, devices are delivered in one to seven days.
+	//    * In India, Snowball Edges are delivered in one to seven days.
 	//
 	//    * In the US, you have access to one-day shipping and two-day shipping.
 	//
 	// ShippingOption is a required field
 	ShippingOption ShippingOption `type:"string" required:"true" enum:"true"`
 
-	// The type of AWS Snowball device to use for this cluster. The only supported
-	// device types for cluster jobs are EDGE, EDGE_C, and EDGE_CG.
+	// The type of AWS Snowball device to use for this cluster. Currently, the only
+	// supported device type for cluster jobs is EDGE.
 	SnowballType SnowballType `type:"string" enum:"true"`
 }
 

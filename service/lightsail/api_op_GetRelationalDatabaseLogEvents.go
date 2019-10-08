@@ -17,7 +17,7 @@ type GetRelationalDatabaseLogEventsInput struct {
 	//
 	// Constraints:
 	//
-	//    * Specified in Universal Coordinated Time (UTC).
+	//    * Specified in Coordinated Universal Time (UTC).
 	//
 	//    * Specified in the Unix time format. For example, if you wish to use an
 	//    end time of October 1, 2018, at 8 PM UTC, then you input 1538424000 as
@@ -45,14 +45,14 @@ type GetRelationalDatabaseLogEventsInput struct {
 	// specified, the log event starts from the head of the log. If false is specified,
 	// the log event starts from the tail of the log.
 	//
-	// Default: false
+	// For PostgreSQL, the default value of false is the only option available.
 	StartFromHead *bool `locationName:"startFromHead" type:"boolean"`
 
 	// The start of the time interval from which to get log events.
 	//
 	// Constraints:
 	//
-	//    * Specified in Universal Coordinated Time (UTC).
+	//    * Specified in Coordinated Universal Time (UTC).
 	//
 	//    * Specified in the Unix time format. For example, if you wish to use a
 	//    start time of October 1, 2018, at 8 PM UTC, then you input 1538424000

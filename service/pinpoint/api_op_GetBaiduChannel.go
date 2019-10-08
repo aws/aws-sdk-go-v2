@@ -80,8 +80,8 @@ const opGetBaiduChannel = "GetBaiduChannel"
 // GetBaiduChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Retrieves information about the status and settings of the Baidu Cloud Push
-// channel for an application.
+// Retrieves information about the status and settings of the Baidu channel
+// for an application.
 //
 //    // Example sending a request using GetBaiduChannelRequest.
 //    req := client.GetBaiduChannelRequest(params)

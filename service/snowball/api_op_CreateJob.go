@@ -32,7 +32,7 @@ type CreateJobInput struct {
 	JobType JobType `type:"string" enum:"true"`
 
 	// The KmsKeyARN that you want to associate with this job. KmsKeyARNs are created
-	// using the CreateKey (http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html)
+	// using the CreateKey (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html)
 	// AWS Key Management Service (KMS) API action.
 	KmsKeyARN *string `type:"string"`
 
@@ -53,7 +53,7 @@ type CreateJobInput struct {
 	Resources *JobResource `type:"structure"`
 
 	// The RoleARN that you want to associate with this job. RoleArns are created
-	// using the CreateRole (http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html)
+	// using the CreateRole (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html)
 	// AWS Identity and Access Management (IAM) API action.
 	RoleARN *string `type:"string"`
 
@@ -79,8 +79,8 @@ type CreateJobInput struct {
 	// Snowballs come with 80 TB in storage capacity.
 	SnowballCapacityPreference SnowballCapacity `type:"string" enum:"true"`
 
-	// The type of AWS Snowball device to use for this job. The only supported device
-	// types for cluster jobs are EDGE, EDGE_C, and EDGE_CG.
+	// The type of AWS Snowball device to use for this job. Currently, the only
+	// supported device type for cluster jobs is EDGE.
 	SnowballType SnowballType `type:"string" enum:"true"`
 }
 

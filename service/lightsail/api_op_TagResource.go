@@ -12,6 +12,10 @@ import (
 type TagResourceInput struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon Resource Name (ARN) of the resource to which you want to add a
+	// tag.
+	ResourceArn *string `locationName:"resourceArn" type:"string"`
+
 	// The name of the resource to which you are adding tags.
 	//
 	// ResourceName is a required field
@@ -69,7 +73,7 @@ const opTagResource = "TagResource"
 // see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
 //
 // The tag resource operation supports tag-based access control via request
-// tags and resource tags applied to the resource identified by resourceName.
+// tags and resource tags applied to the resource identified by resource name.
 // For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //
 //    // Example sending a request using TagResourceRequest.

@@ -74,6 +74,8 @@ type DescribeOriginEndpointOutput struct {
 	// A Microsoft Smooth Streaming (MSS) packaging configuration.
 	MssPackage *MssPackage `locationName:"mssPackage" type:"structure"`
 
+	Origination Origination `locationName:"origination" type:"string" enum:"true"`
+
 	StartoverWindowSeconds *int64 `locationName:"startoverWindowSeconds" type:"integer"`
 
 	// A collection of tags associated with a resource
@@ -146,6 +148,12 @@ func (s DescribeOriginEndpointOutput) MarshalFields(e protocol.FieldEncoder) err
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "mssPackage", v, metadata)
+	}
+	if len(s.Origination) > 0 {
+		v := s.Origination
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "origination", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.StartoverWindowSeconds != nil {
 		v := *s.StartoverWindowSeconds

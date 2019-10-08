@@ -100,7 +100,8 @@ const opUpdateEmailChannel = "UpdateEmailChannel"
 // UpdateEmailChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Updates the status and settings of the email channel for an application.
+// Enables the email channel for an application or updates the status and settings
+// of the email channel for an application.
 //
 //    // Example sending a request using UpdateEmailChannelRequest.
 //    req := client.UpdateEmailChannelRequest(params)

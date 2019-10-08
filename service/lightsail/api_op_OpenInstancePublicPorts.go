@@ -66,7 +66,7 @@ const opOpenInstancePublicPorts = "OpenInstancePublicPorts"
 // Adds public ports to an Amazon Lightsail instance.
 //
 // The open instance public ports operation supports tag-based access control
-// via resource tags applied to the resource identified by instanceName. For
+// via resource tags applied to the resource identified by instance name. For
 // more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //
 //    // Example sending a request using OpenInstancePublicPortsRequest.

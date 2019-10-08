@@ -105,6 +105,8 @@ type ClientAPI interface {
 
 	CreateRelationalDatabaseSnapshotRequest(*lightsail.CreateRelationalDatabaseSnapshotInput) lightsail.CreateRelationalDatabaseSnapshotRequest
 
+	DeleteAutoSnapshotRequest(*lightsail.DeleteAutoSnapshotInput) lightsail.DeleteAutoSnapshotRequest
+
 	DeleteDiskRequest(*lightsail.DeleteDiskInput) lightsail.DeleteDiskRequest
 
 	DeleteDiskSnapshotRequest(*lightsail.DeleteDiskSnapshotInput) lightsail.DeleteDiskSnapshotRequest
@@ -135,11 +137,17 @@ type ClientAPI interface {
 
 	DetachStaticIpRequest(*lightsail.DetachStaticIpInput) lightsail.DetachStaticIpRequest
 
+	DisableAddOnRequest(*lightsail.DisableAddOnInput) lightsail.DisableAddOnRequest
+
 	DownloadDefaultKeyPairRequest(*lightsail.DownloadDefaultKeyPairInput) lightsail.DownloadDefaultKeyPairRequest
+
+	EnableAddOnRequest(*lightsail.EnableAddOnInput) lightsail.EnableAddOnRequest
 
 	ExportSnapshotRequest(*lightsail.ExportSnapshotInput) lightsail.ExportSnapshotRequest
 
 	GetActiveNamesRequest(*lightsail.GetActiveNamesInput) lightsail.GetActiveNamesRequest
+
+	GetAutoSnapshotsRequest(*lightsail.GetAutoSnapshotsInput) lightsail.GetAutoSnapshotsRequest
 
 	GetBlueprintsRequest(*lightsail.GetBlueprintsInput) lightsail.GetBlueprintsRequest
 

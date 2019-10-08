@@ -85,7 +85,7 @@ const opAdminUpdateDeviceStatus = "AdminUpdateDeviceStatus"
 //
 // Updates the device status as an administrator.
 //
-// Requires developer credentials.
+// Calling this action requires developer credentials.
 //
 //    // Example sending a request using AdminUpdateDeviceStatusRequest.
 //    req := client.AdminUpdateDeviceStatusRequest(params)

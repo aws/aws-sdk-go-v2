@@ -77,7 +77,7 @@ const opAttachDisk = "AttachDisk"
 // and exposes it to the instance with the specified disk name.
 //
 // The attach disk operation supports tag-based access control via resource
-// tags applied to the resource identified by diskName. For more information,
+// tags applied to the resource identified by disk name. For more information,
 // see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //
 //    // Example sending a request using AttachDiskRequest.

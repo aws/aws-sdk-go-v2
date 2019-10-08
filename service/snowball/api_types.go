@@ -172,7 +172,7 @@ type ClusterMetadata struct {
 	JobType JobType `type:"string" enum:"true"`
 
 	// The KmsKeyARN Amazon Resource Name (ARN) associated with this cluster. This
-	// ARN was created using the CreateKey (http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html)
+	// ARN was created using the CreateKey (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html)
 	// API action in AWS Key Management Service (AWS KMS).
 	KmsKeyARN *string `type:"string"`
 
@@ -185,30 +185,30 @@ type ClusterMetadata struct {
 	Resources *JobResource `type:"structure"`
 
 	// The role ARN associated with this cluster. This ARN was created using the
-	// CreateRole (http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html)
+	// CreateRole (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html)
 	// API action in AWS Identity and Access Management (IAM).
 	RoleARN *string `type:"string"`
 
 	// The shipping speed for each node in this cluster. This speed doesn't dictate
-	// how soon you'll get each device, rather it represents how quickly each device
-	// moves to its destination while in transit. Regional shipping speeds are as
-	// follows:
+	// how soon you'll get each Snowball Edge device, rather it represents how quickly
+	// each device moves to its destination while in transit. Regional shipping
+	// speeds are as follows:
 	//
 	//    * In Australia, you have access to express shipping. Typically, devices
 	//    shipped express are delivered in about a day.
 	//
 	//    * In the European Union (EU), you have access to express shipping. Typically,
-	//    devices shipped express are delivered in about a day. In addition, most
-	//    countries in the EU have access to standard shipping, which typically
+	//    Snowball Edges shipped express are delivered in about a day. In addition,
+	//    most countries in the EU have access to standard shipping, which typically
 	//    takes less than a week, one way.
 	//
-	//    * In India, devices are delivered in one to seven days.
+	//    * In India, Snowball Edges are delivered in one to seven days.
 	//
 	//    * In the US, you have access to one-day shipping and two-day shipping.
 	ShippingOption ShippingOption `type:"string" enum:"true"`
 
-	// The type of AWS Snowball device to use for this cluster. The only supported
-	// device types for cluster jobs are EDGE, EDGE_C, and EDGE_CG.
+	// The type of AWS Snowball device to use for this cluster. Currently, the only
+	// supported device type for cluster jobs is EDGE.
 	SnowballType SnowballType `type:"string" enum:"true"`
 }
 
@@ -218,9 +218,9 @@ func (s ClusterMetadata) String() string {
 }
 
 // A JSON-formatted object that describes a compatible Amazon Machine Image
-// (AMI). For more information on compatible AMIs, see Using Amazon EC2 Compute
-// Instances (http://docs.aws.amazon.com/snowball/latest/developer-guide/using-ec2.html)
-// in the AWS Snowball Developer Guide.
+// (AMI), including the ID and name for a Snowball Edge AMI. This AMI is compatible
+// with the device's physical hardware requirements, and it should be able to
+// be run in an SBE1 instance on the device.
 type CompatibleImage struct {
 	_ struct{} `type:"structure"`
 
@@ -276,7 +276,7 @@ type Ec2AmiResource struct {
 	// AmiId is a required field
 	AmiId *string `min:"12" type:"string" required:"true"`
 
-	// The ID of the AMI on the supported device.
+	// The ID of the AMI on the Snowball Edge device.
 	SnowballAmiId *string `min:"1" type:"string"`
 }
 
@@ -438,7 +438,7 @@ type JobMetadata struct {
 	JobType JobType `type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) for the AWS Key Management Service (AWS KMS)
-	// key associated with this job. This ARN was created using the CreateKey (http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html)
+	// key associated with this job. This ARN was created using the CreateKey (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html)
 	// API action in AWS KMS.
 	KmsKeyARN *string `type:"string"`
 
@@ -453,7 +453,7 @@ type JobMetadata struct {
 	Resources *JobResource `type:"structure"`
 
 	// The role ARN associated with this job. This ARN was created using the CreateRole
-	// (http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html)
+	// (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html)
 	// API action in AWS Identity and Access Management (IAM).
 	RoleARN *string `type:"string"`
 
@@ -594,11 +594,11 @@ type Notification struct {
 	NotifyAll *bool `type:"boolean"`
 
 	// The new SNS TopicArn that you want to associate with this job. You can create
-	// Amazon Resource Names (ARNs) for topics by using the CreateTopic (http://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html)
+	// Amazon Resource Names (ARNs) for topics by using the CreateTopic (https://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html)
 	// Amazon SNS API action.
 	//
 	// You can subscribe email addresses to an Amazon SNS topic through the AWS
-	// Management Console, or by using the Subscribe (http://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html)
+	// Management Console, or by using the Subscribe (https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html)
 	// AWS Simple Notification Service (SNS) API action.
 	SnsTopicARN *string `type:"string"`
 }

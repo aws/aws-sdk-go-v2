@@ -4,6 +4,7 @@ package lightsail
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -12,11 +13,14 @@ import (
 type CreateDiskInput struct {
 	_ struct{} `type:"structure"`
 
+	// An array of objects that represent the add-ons to enable for the new disk.
+	AddOns []AddOnRequest `locationName:"addOns" type:"list"`
+
 	// The Availability Zone where you want to create the disk (e.g., us-east-2a).
-	// Choose the same Availability Zone as the Lightsail instance where you want
-	// to create the disk.
+	// Use the same Availability Zone as the Lightsail instance to which you want
+	// to attach the disk.
 	//
-	// Use the GetRegions operation to list the Availability Zones where Lightsail
+	// Use the get regions operation to list the Availability Zones where Lightsail
 	// is currently available.
 	//
 	// AvailabilityZone is a required field
@@ -58,6 +62,13 @@ func (s *CreateDiskInput) Validate() error {
 	if s.SizeInGb == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SizeInGb"))
 	}
+	if s.AddOns != nil {
+		for i, v := range s.AddOns {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AddOns", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -82,10 +93,8 @@ const opCreateDisk = "CreateDisk"
 // CreateDiskRequest returns a request value for making API operation for
 // Amazon Lightsail.
 //
-// Creates a block storage disk that can be attached to a Lightsail instance
-// in the same Availability Zone (e.g., us-east-2a). The disk is created in
-// the regional endpoint that you send the HTTP request to. For more information,
-// see Regions and Availability Zones in Lightsail (https://lightsail.aws.amazon.com/ls/docs/overview/article/understanding-regions-and-availability-zones-in-amazon-lightsail).
+// Creates a block storage disk that can be attached to an Amazon Lightsail
+// instance in the same Availability Zone (e.g., us-east-2a).
 //
 // The create disk operation supports tag-based access control via request tags.
 // For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).

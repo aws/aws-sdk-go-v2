@@ -4,6 +4,7 @@ package lightsail
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -11,6 +12,9 @@ import (
 
 type CreateDiskFromSnapshotInput struct {
 	_ struct{} `type:"structure"`
+
+	// An array of objects that represent the add-ons to enable for the new disk.
+	AddOns []AddOnRequest `locationName:"addOns" type:"list"`
 
 	// The Availability Zone where you want to create the disk (e.g., us-east-2a).
 	// Choose the same Availability Zone as the Lightsail instance where you want
@@ -30,18 +34,57 @@ type CreateDiskFromSnapshotInput struct {
 	// The name of the disk snapshot (e.g., my-snapshot) from which to create the
 	// new storage disk.
 	//
-	// DiskSnapshotName is a required field
-	DiskSnapshotName *string `locationName:"diskSnapshotName" type:"string" required:"true"`
+	// This parameter cannot be defined together with the source disk name parameter.
+	// The disk snapshot name and source disk name parameters are mutually exclusive.
+	DiskSnapshotName *string `locationName:"diskSnapshotName" type:"string"`
+
+	// The date of the automatic snapshot to use for the new disk.
+	//
+	// Use the get auto snapshots operation to identify the dates of the available
+	// automatic snapshots.
+	//
+	// Constraints:
+	//
+	//    * Must be specified in YYYY-MM-DD format.
+	//
+	//    * This parameter cannot be defined together with the use latest restorable
+	//    auto snapshot parameter. The restore date and use latest restorable auto
+	//    snapshot parameters are mutually exclusive.
+	//
+	// Define this parameter only when creating a new disk from an automatic snapshot.
+	// For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
+	RestoreDate *string `locationName:"restoreDate" type:"string"`
 
 	// The size of the disk in GB (e.g., 32).
 	//
 	// SizeInGb is a required field
 	SizeInGb *int64 `locationName:"sizeInGb" type:"integer" required:"true"`
 
+	// The name of the source disk from which the source automatic snapshot was
+	// created.
+	//
+	// This parameter cannot be defined together with the disk snapshot name parameter.
+	// The source disk name and disk snapshot name parameters are mutually exclusive.
+	//
+	// Define this parameter only when creating a new disk from an automatic snapshot.
+	// For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
+	SourceDiskName *string `locationName:"sourceDiskName" type:"string"`
+
 	// The tag keys and optional values to add to the resource during create.
 	//
 	// To tag a resource after it has been created, see the tag resource operation.
 	Tags []Tag `locationName:"tags" type:"list"`
+
+	// A Boolean value to indicate whether to use the latest available automatic
+	// snapshot.
+	//
+	// This parameter cannot be defined together with the restore date parameter.
+	// The use latest restorable auto snapshot and restore date parameters are mutually
+	// exclusive.
+	//
+	// Define this parameter only when creating a new disk from an automatic snapshot.
+	// For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
+	UseLatestRestorableAutoSnapshot *bool `locationName:"useLatestRestorableAutoSnapshot" type:"boolean"`
 }
 
 // String returns the string representation
@@ -61,12 +104,15 @@ func (s *CreateDiskFromSnapshotInput) Validate() error {
 		invalidParams.Add(aws.NewErrParamRequired("DiskName"))
 	}
 
-	if s.DiskSnapshotName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DiskSnapshotName"))
-	}
-
 	if s.SizeInGb == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SizeInGb"))
+	}
+	if s.AddOns != nil {
+		for i, v := range s.AddOns {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AddOns", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -92,14 +138,13 @@ const opCreateDiskFromSnapshot = "CreateDiskFromSnapshot"
 // CreateDiskFromSnapshotRequest returns a request value for making API operation for
 // Amazon Lightsail.
 //
-// Creates a block storage disk from a disk snapshot that can be attached to
-// a Lightsail instance in the same Availability Zone (e.g., us-east-2a). The
-// disk is created in the regional endpoint that you send the HTTP request to.
-// For more information, see Regions and Availability Zones in Lightsail (https://lightsail.aws.amazon.com/ls/docs/overview/article/understanding-regions-and-availability-zones-in-amazon-lightsail).
+// Creates a block storage disk from a manual or automatic snapshot of a disk.
+// The resulting disk can be attached to an Amazon Lightsail instance in the
+// same Availability Zone (e.g., us-east-2a).
 //
 // The create disk from snapshot operation supports tag-based access control
 // via request tags and resource tags applied to the resource identified by
-// diskSnapshotName. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+// disk snapshot name. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //
 //    // Example sending a request using CreateDiskFromSnapshotRequest.
 //    req := client.CreateDiskFromSnapshotRequest(params)

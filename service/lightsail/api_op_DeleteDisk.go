@@ -16,6 +16,10 @@ type DeleteDiskInput struct {
 	//
 	// DiskName is a required field
 	DiskName *string `locationName:"diskName" type:"string" required:"true"`
+
+	// A Boolean value to indicate whether to delete the enabled add-ons for the
+	// disk.
+	ForceDeleteAddOns *bool `locationName:"forceDeleteAddOns" type:"boolean"`
 }
 
 // String returns the string representation
@@ -40,7 +44,7 @@ func (s *DeleteDiskInput) Validate() error {
 type DeleteDiskOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An object describing the API operations.
+	// An array of objects that describe the result of your request.
 	Operations []Operation `locationName:"operations" type:"list"`
 }
 
@@ -60,7 +64,7 @@ const opDeleteDisk = "DeleteDisk"
 // The disk may remain in the deleting state for several minutes.
 //
 // The delete disk operation supports tag-based access control via resource
-// tags applied to the resource identified by diskName. For more information,
+// tags applied to the resource identified by disk name. For more information,
 // see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //
 //    // Example sending a request using DeleteDiskRequest.

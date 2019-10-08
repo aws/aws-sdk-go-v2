@@ -59,7 +59,7 @@ type CreateRelationalDatabaseFromSnapshotInput struct {
 	//
 	//    * Cannot be specified if the use latest restorable time parameter is true.
 	//
-	//    * Specified in Universal Coordinated Time (UTC).
+	//    * Specified in Coordinated Universal Time (UTC).
 	//
 	//    * Specified in the Unix time format. For example, if you wish to use a
 	//    restore time of October 1, 2018, at 8 PM UTC, then you input 1538424000

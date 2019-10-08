@@ -13,6 +13,37 @@ import (
 type AdminResetUserPasswordInput struct {
 	_ struct{} `type:"structure"`
 
+	// A map of custom key-value pairs that you can provide as input for any custom
+	// workflows that this action triggers.
+	//
+	// You create custom workflows by assigning AWS Lambda functions to user pool
+	// triggers. When you use the AdminResetUserPassword API action, Amazon Cognito
+	// invokes the function that is assigned to the custom message trigger. When
+	// Amazon Cognito invokes this function, it passes a JSON payload, which the
+	// function receives as input. This payload contains a clientMetadata attribute,
+	// which provides the data that you assigned to the ClientMetadata parameter
+	// in your AdminResetUserPassword request. In your function code in AWS Lambda,
+	// you can process the clientMetadata value to enhance your workflow for your
+	// specific needs.
+	//
+	// For more information, see Customizing User Pool Workflows with Lambda Triggers
+	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
+	// in the Amazon Cognito Developer Guide.
+	//
+	// Take the following limitations into consideration when you use the ClientMetadata
+	// parameter:
+	//
+	//    * Amazon Cognito does not store the ClientMetadata value. This data is
+	//    available only to AWS Lambda triggers that are assigned to a user pool
+	//    to support custom workflows. If your user pool configuration does not
+	//    include triggers, the ClientMetadata parameter serves no purpose.
+	//
+	//    * Amazon Cognito does not validate the ClientMetadata value.
+	//
+	//    * Amazon Cognito does not encrypt the the ClientMetadata value, so don't
+	//    use it to provide sensitive information.
+	ClientMetadata map[string]string `type:"map"`
+
 	// The user pool ID for the user pool where you want to reset the user's password.
 	//
 	// UserPoolId is a required field
@@ -81,7 +112,7 @@ const opAdminResetUserPassword = "AdminResetUserPassword"
 // also result in sending a message to the end user with the code to change
 // their password.
 //
-// Requires developer credentials.
+// Calling this action requires developer credentials.
 //
 //    // Example sending a request using AdminResetUserPasswordRequest.
 //    req := client.AdminResetUserPasswordRequest(params)

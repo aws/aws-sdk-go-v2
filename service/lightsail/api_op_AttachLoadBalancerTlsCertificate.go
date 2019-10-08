@@ -72,13 +72,13 @@ const opAttachLoadBalancerTlsCertificate = "AttachLoadBalancerTlsCertificate"
 //
 // Once you create and validate your certificate, you can attach it to your
 // load balancer. You can also use this API to rotate the certificates on your
-// account. Use the AttachLoadBalancerTlsCertificate operation with the non-attached
-// certificate, and it will replace the existing one and become the attached
-// certificate.
+// account. Use the attach load balancer tls certificate operation with the
+// non-attached certificate, and it will replace the existing one and become
+// the attached certificate.
 //
 // The attach load balancer tls certificate operation supports tag-based access
-// control via resource tags applied to the resource identified by loadBalancerName.
-// For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+// control via resource tags applied to the resource identified by load balancer
+// name. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //
 //    // Example sending a request using AttachLoadBalancerTlsCertificateRequest.
 //    req := client.AttachLoadBalancerTlsCertificateRequest(params)

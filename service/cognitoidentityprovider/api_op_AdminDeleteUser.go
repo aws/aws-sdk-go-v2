@@ -71,7 +71,7 @@ const opAdminDeleteUser = "AdminDeleteUser"
 //
 // Deletes a user as an administrator. Works on any user.
 //
-// Requires developer credentials.
+// Calling this action requires developer credentials.
 //
 //    // Example sending a request using AdminDeleteUserRequest.
 //    req := client.AdminDeleteUserRequest(params)

@@ -67,9 +67,59 @@ type InitiateAuthInput struct {
 	// ClientId is a required field
 	ClientId *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
-	// This is a random key-value pair map which can contain any key and will be
-	// passed to your PreAuthentication Lambda trigger as-is. It can be used to
-	// implement additional validations around authentication.
+	// A map of custom key-value pairs that you can provide as input for certain
+	// custom workflows that this action triggers.
+	//
+	// You create custom workflows by assigning AWS Lambda functions to user pool
+	// triggers. When you use the InitiateAuth API action, Amazon Cognito invokes
+	// the AWS Lambda functions that are specified for various triggers. The ClientMetadata
+	// value is passed as input to the functions for only the following triggers:
+	//
+	//    * Pre signup
+	//
+	//    * Pre authentication
+	//
+	//    * User migration
+	//
+	// When Amazon Cognito invokes the functions for these triggers, it passes a
+	// JSON payload, which the function receives as input. This payload contains
+	// a validationData attribute, which provides the data that you assigned to
+	// the ClientMetadata parameter in your InitiateAuth request. In your function
+	// code in AWS Lambda, you can process the validationData value to enhance your
+	// workflow for your specific needs.
+	//
+	// When you use the InitiateAuth API action, Amazon Cognito also invokes the
+	// functions for the following triggers, but it does not provide the ClientMetadata
+	// value as input:
+	//
+	//    * Post authentication
+	//
+	//    * Custom message
+	//
+	//    * Pre token generation
+	//
+	//    * Create auth challenge
+	//
+	//    * Define auth challenge
+	//
+	//    * Verify auth challenge
+	//
+	// For more information, see Customizing User Pool Workflows with Lambda Triggers
+	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
+	// in the Amazon Cognito Developer Guide.
+	//
+	// Take the following limitations into consideration when you use the ClientMetadata
+	// parameter:
+	//
+	//    * Amazon Cognito does not store the ClientMetadata value. This data is
+	//    available only to AWS Lambda triggers that are assigned to a user pool
+	//    to support custom workflows. If your user pool configuration does not
+	//    include triggers, the ClientMetadata parameter serves no purpose.
+	//
+	//    * Amazon Cognito does not validate the ClientMetadata value.
+	//
+	//    * Amazon Cognito does not encrypt the the ClientMetadata value, so don't
+	//    use it to provide sensitive information.
 	ClientMetadata map[string]string `type:"map"`
 
 	// Contextual data such as the user's device fingerprint, IP address, or location

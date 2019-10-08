@@ -85,7 +85,7 @@ const opAdminListDevices = "AdminListDevices"
 //
 // Lists devices, as an administrator.
 //
-// Requires developer credentials.
+// Calling this action requires developer credentials.
 //
 //    // Example sending a request using AdminListDevicesRequest.
 //    req := client.AdminListDevicesRequest(params)

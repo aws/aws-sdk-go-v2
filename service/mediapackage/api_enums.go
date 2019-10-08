@@ -83,6 +83,23 @@ func (enum ManifestLayout) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type Origination string
+
+// Enum values for Origination
+const (
+	OriginationAllow Origination = "ALLOW"
+	OriginationDeny  Origination = "DENY"
+)
+
+func (enum Origination) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Origination) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PlaylistType string
 
 // Enum values for PlaylistType
@@ -132,6 +149,24 @@ func (enum SegmentTemplateFormat) MarshalValue() (string, error) {
 }
 
 func (enum SegmentTemplateFormat) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type Status string
+
+// Enum values for Status
+const (
+	StatusInProgress Status = "IN_PROGRESS"
+	StatusSucceeded  Status = "SUCCEEDED"
+	StatusFailed     Status = "FAILED"
+)
+
+func (enum Status) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Status) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

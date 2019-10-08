@@ -96,7 +96,8 @@ const opUpdateApnsVoipChannel = "UpdateApnsVoipChannel"
 // UpdateApnsVoipChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Updates the APNs VoIP channel settings for an application.
+// Enables the APNs VoIP channel for an application or updates the status and
+// settings of the APNs VoIP channel for an application.
 //
 //    // Example sending a request using UpdateApnsVoipChannelRequest.
 //    req := client.UpdateApnsVoipChannelRequest(params)

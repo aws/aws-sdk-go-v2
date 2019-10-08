@@ -12,14 +12,21 @@ import (
 type AdminSetUserPasswordInput struct {
 	_ struct{} `type:"structure"`
 
+	// The password for the user.
+	//
 	// Password is a required field
 	Password *string `min:"6" type:"string" required:"true" sensitive:"true"`
 
+	// True if the password is permanent, False if it is temporary.
 	Permanent *bool `type:"boolean"`
 
+	// The user pool ID for the user pool where you want to set the user's password.
+	//
 	// UserPoolId is a required field
 	UserPoolId *string `min:"1" type:"string" required:"true"`
 
+	// The user name of the user whose password you wish to set.
+	//
 	// Username is a required field
 	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
@@ -73,6 +80,19 @@ const opAdminSetUserPassword = "AdminSetUserPassword"
 
 // AdminSetUserPasswordRequest returns a request value for making API operation for
 // Amazon Cognito Identity Provider.
+//
+// Sets the specified user's password in a user pool as an administrator. Works
+// on any user.
+//
+// The password can be temporary or permanent. If it is temporary, the user
+// status will be placed into the FORCE_CHANGE_PASSWORD state. When the user
+// next tries to sign in, the InitiateAuth/AdminInitiateAuth response will contain
+// the NEW_PASSWORD_REQUIRED challenge. If the user does not sign in before
+// it expires, the user will not be able to sign in and their password will
+// need to be reset by an administrator.
+//
+// Once the user has set a new password, or the password is permanent, the user
+// status will be set to Confirmed.
 //
 //    // Example sending a request using AdminSetUserPasswordRequest.
 //    req := client.AdminSetUserPasswordRequest(params)

@@ -13,7 +13,7 @@ type ListCompatibleImagesInput struct {
 	_ struct{} `type:"structure"`
 
 	// The maximum number of results for the list of compatible images. Currently,
-	// each supported device can store 10 AMIs.
+	// a Snowball Edge device can store 10 AMIs.
 	MaxResults *int64 `type:"integer"`
 
 	// HTTP requests are stateless. To identify what object comes "next" in the
@@ -43,7 +43,8 @@ func (s *ListCompatibleImagesInput) Validate() error {
 type ListCompatibleImagesOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A JSON-formatted object that describes a compatible AMI.
+	// A JSON-formatted object that describes a compatible AMI, including the ID
+	// and name for a Snowball Edge AMI.
 	CompatibleImages []CompatibleImage `type:"list"`
 
 	// Because HTTP requests are stateless, this is the starting point for your
@@ -63,9 +64,9 @@ const opListCompatibleImages = "ListCompatibleImages"
 //
 // This action returns a list of the different Amazon EC2 Amazon Machine Images
 // (AMIs) that are owned by your AWS account that would be supported for use
-// on EDGE, EDGE_C, and EDGE_CG devices. For more information on compatible
-// AMIs, see Using Amazon EC2 Compute Instances (http://docs.aws.amazon.com/snowball/latest/developer-guide/using-ec2.html)
-// in the AWS Snowball Developer Guide.
+// on a Snowball Edge device. Currently, supported AMIs are based on the CentOS
+// 7 (x86_64) - with Updates HVM, Ubuntu Server 14.04 LTS (HVM), and Ubuntu
+// 16.04 LTS - Xenial (HVM) images, available on the AWS Marketplace.
 //
 //    // Example sending a request using ListCompatibleImagesRequest.
 //    req := client.ListCompatibleImagesRequest(params)

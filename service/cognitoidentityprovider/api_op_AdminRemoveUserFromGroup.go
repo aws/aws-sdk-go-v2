@@ -82,7 +82,7 @@ const opAdminRemoveUserFromGroup = "AdminRemoveUserFromGroup"
 //
 // Removes the specified user from the specified group.
 //
-// Requires developer credentials.
+// Calling this action requires developer credentials.
 //
 //    // Example sending a request using AdminRemoveUserFromGroupRequest.
 //    req := client.AdminRemoveUserFromGroupRequest(params)

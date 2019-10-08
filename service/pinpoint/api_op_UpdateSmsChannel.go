@@ -95,7 +95,8 @@ const opUpdateSmsChannel = "UpdateSmsChannel"
 // UpdateSmsChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Updates the status and settings of the SMS channel for an application.
+// Enables the SMS channel for an application or updates the status and settings
+// of the SMS channel for an application.
 //
 //    // Example sending a request using UpdateSmsChannelRequest.
 //    req := client.UpdateSmsChannelRequest(params)

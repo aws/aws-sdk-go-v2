@@ -85,7 +85,7 @@ const opAdminListGroupsForUser = "AdminListGroupsForUser"
 //
 // Lists the groups that the user belongs to.
 //
-// Requires developer credentials.
+// Calling this action requires developer credentials.
 //
 //    // Example sending a request using AdminListGroupsForUserRequest.
 //    req := client.AdminListGroupsForUserRequest(params)
