@@ -17,13 +17,12 @@ type UpdateClusterConfigurationInput struct {
 	// ClusterArn is a required field
 	ClusterArn *string `location:"uri" locationName:"clusterArn" type:"string" required:"true"`
 
-	// Represents the configuration that you want MSK to use for the brokers in
-	// a cluster.
+	// Represents the configuration that you want MSK to use for the cluster.
 	//
 	// ConfigurationInfo is a required field
 	ConfigurationInfo *ConfigurationInfo `locationName:"configurationInfo" type:"structure" required:"true"`
 
-	// The version of the cluster that needs to be updated.
+	// The version of the cluster that you want to update.
 	//
 	// CurrentVersion is a required field
 	CurrentVersion *string `locationName:"currentVersion" type:"string" required:"true"`

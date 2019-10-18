@@ -14,7 +14,7 @@ type GetProtectionStatusInput struct {
 	_ struct{} `type:"structure"`
 
 	// The end of the time period to query for the attacks. This is a timestamp
-	// type. The sample request above indicates a number type because the default
+	// type. The request syntax listing indicates a number type because the default
 	// used by AWS Firewall Manager is Unix time in seconds. However, any valid
 	// timestamp format is allowed.
 	EndTime *time.Time `type:"timestamp"`
@@ -31,8 +31,8 @@ type GetProtectionStatusInput struct {
 
 	// If you specify a value for MaxResults and you have more objects than the
 	// number that you specify for MaxResults, AWS Firewall Manager returns a NextToken
-	// value in the response that allows you to list another group of objects. For
-	// the second and subsequent GetProtectionStatus requests, specify the value
+	// value in the response, which you can use to retrieve another group of objects.
+	// For the second and subsequent GetProtectionStatus requests, specify the value
 	// of NextToken from the previous response to get information about another
 	// batch of objects.
 	NextToken *string `min:"1" type:"string"`
@@ -43,7 +43,7 @@ type GetProtectionStatusInput struct {
 	PolicyId *string `min:"36" type:"string" required:"true"`
 
 	// The start of the time period to query for the attacks. This is a timestamp
-	// type. The sample request above indicates a number type because the default
+	// type. The request syntax listing indicates a number type because the default
 	// used by AWS Firewall Manager is Unix time in seconds. However, any valid
 	// timestamp format is allowed.
 	StartTime *time.Time `type:"timestamp"`
@@ -98,8 +98,7 @@ type GetProtectionStatusOutput struct {
 	//
 	//    * End time of the attack (ongoing attacks will not have an end time)
 	//
-	// The details are in JSON format. An example is shown in the Examples section
-	// below.
+	// The details are in JSON format.
 	Data *string `type:"string"`
 
 	// If you have more objects than the number that you specified for MaxResults
@@ -129,7 +128,8 @@ const opGetProtectionStatus = "GetProtectionStatus"
 // Firewall Management Service.
 //
 // If you created a Shield Advanced policy, returns policy-level attack summary
-// information in the event of a potential DDoS attack.
+// information in the event of a potential DDoS attack. Other policy types are
+// currently unsupported.
 //
 //    // Example sending a request using GetProtectionStatusRequest.
 //    req := client.GetProtectionStatusRequest(params)

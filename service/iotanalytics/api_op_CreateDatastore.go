@@ -19,10 +19,13 @@ type CreateDatastoreInput struct {
 	// DatastoreName is a required field
 	DatastoreName *string `locationName:"datastoreName" min:"1" type:"string" required:"true"`
 
-	// Where data store data is stored.
+	// Where data store data is stored. You may choose one of "serviceManagedS3"
+	// or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3".
+	// This cannot be changed after the data store is created.
 	DatastoreStorage *DatastoreStorage `locationName:"datastoreStorage" type:"structure"`
 
-	// How long, in days, message data is kept for the data store.
+	// How long, in days, message data is kept for the data store. When "customerManagedS3"
+	// storage is selected, this parameter is ignored.
 	RetentionPeriod *RetentionPeriod `locationName:"retentionPeriod" type:"structure"`
 
 	// Metadata which can be used to manage the data store.

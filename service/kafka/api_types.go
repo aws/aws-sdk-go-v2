@@ -110,8 +110,8 @@ type BrokerNodeGroupInfo struct {
 	ClientSubnets []string `locationName:"clientSubnets" type:"list" required:"true"`
 
 	// The type of Amazon EC2 instances to use for Kafka brokers. The following
-	// instance types are allowed: kafka.m5.large, kafka.m5.xlarge, kafka.m5.2xlarge,kafka.m5.4xlarge,
-	// kafka.m5.12xlarge, and kafka.m5.24xlarge.
+	// instance types are allowed: kafka.m5.large, kafka.m5.xlarge, kafka.m5.2xlarge,
+	// kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
 	//
 	// InstanceType is a required field
 	InstanceType *string `locationName:"instanceType" min:"5" type:"string" required:"true"`
@@ -119,7 +119,9 @@ type BrokerNodeGroupInfo struct {
 	// The AWS security groups to associate with the elastic network interfaces
 	// in order to specify who can connect to and communicate with the Amazon MSK
 	// cluster. If you don't specify a security group, Amazon MSK uses the default
-	// security group associated with the VPC.
+	// security group associated with the VPC. If you specify security groups that
+	// were shared with you, you must ensure that you have permissions to them.
+	// Specifically, you need the ec2:DescribeSecurityGroups permission.
 	SecurityGroups []string `locationName:"securityGroups" type:"list"`
 
 	// Contains information about storage volumes attached to MSK broker nodes.
@@ -350,7 +352,9 @@ type ClusterInfo struct {
 	// brokers in the cluster.
 	CurrentBrokerSoftwareInfo *BrokerSoftwareInfo `locationName:"currentBrokerSoftwareInfo" type:"structure"`
 
-	// The current version of the MSK cluster.
+	// The current version of the MSK cluster. Cluster versions aren't simple integers.
+	// You can obtain the current version by describing the cluster. An example
+	// version is KTVPDKIKX0DER.
 	CurrentVersion *string `locationName:"currentVersion" type:"string"`
 
 	// Includes all encryption-related information.
@@ -612,7 +616,8 @@ type Configuration struct {
 	// LatestRevision is a required field
 	LatestRevision *ConfigurationRevision `locationName:"latestRevision" type:"structure" required:"true"`
 
-	// The name of the configuration.
+	// The name of the configuration. Configuration names are strings that match
+	// the regex "^[0-9A-Za-z-]+$".
 	//
 	// Name is a required field
 	Name *string `locationName:"name" type:"string" required:"true"`
@@ -857,7 +862,7 @@ type EncryptionInTransit struct {
 	_ struct{} `type:"structure"`
 
 	// Indicates the encryption setting for data in transit between clients and
-	// brokers. The following are the possible values.
+	// brokers. You must set it to one of the following values.
 	//
 	// TLS means that client-broker communication is enabled with TLS only.
 	//
@@ -867,7 +872,7 @@ type EncryptionInTransit struct {
 	// PLAINTEXT means that client-broker communication is enabled in plaintext
 	// only.
 	//
-	// The default value is TLS_PLAINTEXT.
+	// The default value is TLS.
 	ClientBroker Broker `locationName:"clientBroker" type:"string" enum:"true"`
 
 	// When set to true, it indicates that data communication among the broker nodes

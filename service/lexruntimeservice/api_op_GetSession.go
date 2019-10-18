@@ -23,6 +23,13 @@ type GetSessionInput struct {
 	// BotName is a required field
 	BotName *string `location:"uri" locationName:"botName" type:"string" required:"true"`
 
+	// A string used to filter the intents returned in the recentIntentSummaryView
+	// structure.
+	//
+	// When you specify a filter, only intents with their checkpointLabel field
+	// set to that string are returned.
+	CheckpointLabelFilter *string `location:"querystring" locationName:"checkpointLabelFilter" min:"1" type:"string"`
+
 	// The ID of the client application user. Amazon Lex uses this to identify a
 	// user's conversation with your bot.
 	//
@@ -45,6 +52,9 @@ func (s *GetSessionInput) Validate() error {
 
 	if s.BotName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BotName"))
+	}
+	if s.CheckpointLabelFilter != nil && len(*s.CheckpointLabelFilter) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CheckpointLabelFilter", 1))
 	}
 
 	if s.UserId == nil {
@@ -82,6 +92,12 @@ func (s GetSessionInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.PathTarget, "userId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.CheckpointLabelFilter != nil {
+		v := *s.CheckpointLabelFilter
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "checkpointLabelFilter", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	return nil
 }
 
@@ -95,6 +111,9 @@ type GetSessionOutput struct {
 	// can contain a maximum of three summaries. If more than three intents are
 	// used in the session, the recentIntentSummaryView operation contains information
 	// about the last three intents used.
+	//
+	// If you set the checkpointLabelFilter parameter in the request, the array
+	// contains only the intents with the specified label.
 	RecentIntentSummaryView []IntentSummary `locationName:"recentIntentSummaryView" type:"list"`
 
 	// Map of key/value pairs representing the session-specific context information.
@@ -171,7 +190,7 @@ func (c *Client) GetSessionRequest(input *GetSessionInput) GetSessionRequest {
 	op := &aws.Operation{
 		Name:       opGetSession,
 		HTTPMethod: "GET",
-		HTTPPath:   "/bot/{botName}/alias/{botAlias}/user/{userId}/session",
+		HTTPPath:   "/bot/{botName}/alias/{botAlias}/user/{userId}/session/",
 	}
 
 	if input == nil {

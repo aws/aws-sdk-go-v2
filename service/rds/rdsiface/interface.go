@@ -88,6 +88,8 @@ type ClientAPI interface {
 
 	CopyOptionGroupRequest(*rds.CopyOptionGroupInput) rds.CopyOptionGroupRequest
 
+	CreateCustomAvailabilityZoneRequest(*rds.CreateCustomAvailabilityZoneInput) rds.CreateCustomAvailabilityZoneRequest
+
 	CreateDBClusterRequest(*rds.CreateDBClusterInput) rds.CreateDBClusterRequest
 
 	CreateDBClusterEndpointRequest(*rds.CreateDBClusterEndpointInput) rds.CreateDBClusterEndpointRequest
@@ -114,6 +116,8 @@ type ClientAPI interface {
 
 	CreateOptionGroupRequest(*rds.CreateOptionGroupInput) rds.CreateOptionGroupRequest
 
+	DeleteCustomAvailabilityZoneRequest(*rds.DeleteCustomAvailabilityZoneInput) rds.DeleteCustomAvailabilityZoneRequest
+
 	DeleteDBClusterRequest(*rds.DeleteDBClusterInput) rds.DeleteDBClusterRequest
 
 	DeleteDBClusterEndpointRequest(*rds.DeleteDBClusterEndpointInput) rds.DeleteDBClusterEndpointRequest
@@ -138,11 +142,15 @@ type ClientAPI interface {
 
 	DeleteGlobalClusterRequest(*rds.DeleteGlobalClusterInput) rds.DeleteGlobalClusterRequest
 
+	DeleteInstallationMediaRequest(*rds.DeleteInstallationMediaInput) rds.DeleteInstallationMediaRequest
+
 	DeleteOptionGroupRequest(*rds.DeleteOptionGroupInput) rds.DeleteOptionGroupRequest
 
 	DescribeAccountAttributesRequest(*rds.DescribeAccountAttributesInput) rds.DescribeAccountAttributesRequest
 
 	DescribeCertificatesRequest(*rds.DescribeCertificatesInput) rds.DescribeCertificatesRequest
+
+	DescribeCustomAvailabilityZonesRequest(*rds.DescribeCustomAvailabilityZonesInput) rds.DescribeCustomAvailabilityZonesRequest
 
 	DescribeDBClusterBacktracksRequest(*rds.DescribeDBClusterBacktracksInput) rds.DescribeDBClusterBacktracksRequest
 
@@ -190,6 +198,8 @@ type ClientAPI interface {
 
 	DescribeGlobalClustersRequest(*rds.DescribeGlobalClustersInput) rds.DescribeGlobalClustersRequest
 
+	DescribeInstallationMediaRequest(*rds.DescribeInstallationMediaInput) rds.DescribeInstallationMediaRequest
+
 	DescribeOptionGroupOptionsRequest(*rds.DescribeOptionGroupOptionsInput) rds.DescribeOptionGroupOptionsRequest
 
 	DescribeOptionGroupsRequest(*rds.DescribeOptionGroupsInput) rds.DescribeOptionGroupsRequest
@@ -209,6 +219,8 @@ type ClientAPI interface {
 	DownloadDBLogFilePortionRequest(*rds.DownloadDBLogFilePortionInput) rds.DownloadDBLogFilePortionRequest
 
 	FailoverDBClusterRequest(*rds.FailoverDBClusterInput) rds.FailoverDBClusterRequest
+
+	ImportInstallationMediaRequest(*rds.ImportInstallationMediaInput) rds.ImportInstallationMediaRequest
 
 	ListTagsForResourceRequest(*rds.ListTagsForResourceInput) rds.ListTagsForResourceRequest
 

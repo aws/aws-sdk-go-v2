@@ -368,6 +368,41 @@ func (s CacheNodeTypeSpecificValue) String() string {
 	return awsutil.Prettify(s)
 }
 
+// The status of the service update on the cache node
+type CacheNodeUpdateStatus struct {
+	_ struct{} `type:"structure"`
+
+	// The node ID of the cache cluster
+	CacheNodeId *string `type:"string"`
+
+	// The deletion date of the node
+	NodeDeletionDate *time.Time `type:"timestamp"`
+
+	// The end date of the update for a node
+	NodeUpdateEndDate *time.Time `type:"timestamp"`
+
+	// Reflects whether the update was initiated by the customer or automatically
+	// applied
+	NodeUpdateInitiatedBy NodeUpdateInitiatedBy `type:"string" enum:"true"`
+
+	// The date when the update is triggered
+	NodeUpdateInitiatedDate *time.Time `type:"timestamp"`
+
+	// The start date of the update for a node
+	NodeUpdateStartDate *time.Time `type:"timestamp"`
+
+	// The update status of the node
+	NodeUpdateStatus NodeUpdateStatus `type:"string" enum:"true"`
+
+	// The date when the NodeUpdateStatus was last modified>
+	NodeUpdateStatusModifiedDate *time.Time `type:"timestamp"`
+}
+
+// String returns the string representation
+func (s CacheNodeUpdateStatus) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Represents the output of a CreateCacheParameterGroup operation.
 type CacheParameterGroup struct {
 	_ struct{} `type:"structure"`
@@ -942,6 +977,9 @@ func (s PendingModifiedValues) String() string {
 type ProcessedUpdateAction struct {
 	_ struct{} `type:"structure"`
 
+	// The ID of the cache cluster
+	CacheClusterId *string `type:"string"`
+
 	// The ID of the replication group
 	ReplicationGroupId *string `type:"string"`
 
@@ -1346,10 +1384,11 @@ type ServiceUpdate struct {
 	// recommended apply-by date has expired.
 	AutoUpdateAfterRecommendedApplyByDate *bool `type:"boolean"`
 
-	// The Redis engine to which the service update applies
+	// The Elasticache engine to which the update applies. Either Redis or Memcached
 	Engine *string `type:"string"`
 
-	// The Redis engine version to which the service update applies
+	// The Elasticache engine version to which the update applies. Either Redis
+	// or Memcached engine version
 	EngineVersion *string `type:"string"`
 
 	// The estimated length of time the service update will take
@@ -1629,6 +1668,9 @@ func (s TimeRangeFilter) String() string {
 type UnprocessedUpdateAction struct {
 	_ struct{} `type:"structure"`
 
+	// The ID of the cache cluster
+	CacheClusterId *string `type:"string"`
+
 	// The error message that describes the reason the request was not processed
 	ErrorMessage *string `type:"string"`
 
@@ -1650,6 +1692,15 @@ func (s UnprocessedUpdateAction) String() string {
 // The status of the service update for a specific replication group
 type UpdateAction struct {
 	_ struct{} `type:"structure"`
+
+	// The ID of the cache cluster
+	CacheClusterId *string `type:"string"`
+
+	// The status of the service update on the cache node
+	CacheNodeUpdateStatus []CacheNodeUpdateStatus `locationNameList:"CacheNodeUpdateStatus" type:"list"`
+
+	// The Elasticache engine to which the update applies. Either Redis or Memcached
+	Engine *string `type:"string"`
 
 	// The estimated length of time for the update to complete
 	EstimatedUpdateTime *string `type:"string"`

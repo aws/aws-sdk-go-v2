@@ -204,6 +204,7 @@ type UpdateTargetsArchitecture string
 
 // Enum values for UpdateTargetsArchitecture
 const (
+	UpdateTargetsArchitectureArmv6l  UpdateTargetsArchitecture = "armv6l"
 	UpdateTargetsArchitectureArmv7l  UpdateTargetsArchitecture = "armv7l"
 	UpdateTargetsArchitectureX8664   UpdateTargetsArchitecture = "x86_64"
 	UpdateTargetsArchitectureAarch64 UpdateTargetsArchitecture = "aarch64"

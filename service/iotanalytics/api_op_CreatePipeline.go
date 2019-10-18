@@ -159,10 +159,10 @@ const opCreatePipeline = "CreatePipeline"
 // CreatePipelineRequest returns a request value for making API operation for
 // AWS IoT Analytics.
 //
-// Creates a pipeline. A pipeline consumes messages from one or more channels
-// and allows you to process the messages before storing them in a data store.
-// You must specify both a channel and a datastore activity and, optionally,
-// as many as 23 additional activities in the pipelineActivities array.
+// Creates a pipeline. A pipeline consumes messages from a channel and allows
+// you to process the messages before storing them in a data store. You must
+// specify both a channel and a datastore activity and, optionally, as many
+// as 23 additional activities in the pipelineActivities array.
 //
 //    // Example sending a request using CreatePipelineRequest.
 //    req := client.CreatePipelineRequest(params)

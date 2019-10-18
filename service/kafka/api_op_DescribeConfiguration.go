@@ -69,7 +69,8 @@ type DescribeConfigurationOutput struct {
 	// Latest revision of the configuration.
 	LatestRevision *ConfigurationRevision `locationName:"latestRevision" type:"structure"`
 
-	// The name of the configuration.
+	// The name of the configuration. Configuration names are strings that match
+	// the regex "^[0-9A-Za-z-]+$".
 	Name *string `locationName:"name" type:"string"`
 }
 

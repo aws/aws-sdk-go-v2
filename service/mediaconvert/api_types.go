@@ -275,7 +275,8 @@ func (s Ac3Settings) MarshalFields(e protocol.FieldEncoder) error {
 type AccelerationSettings struct {
 	_ struct{} `type:"structure"`
 
-	// Acceleration configuration for the job.
+	// Specify the conditions when the service will run your job with accelerated
+	// transcoding.
 	//
 	// Mode is a required field
 	Mode AccelerationMode `locationName:"mode" type:"string" required:"true" enum:"true"`
@@ -2012,6 +2013,14 @@ type CmafGroupSettings struct {
 	// to 1, your final segment is 3.5 seconds.
 	MinFinalSegmentLength *float64 `locationName:"minFinalSegmentLength" type:"double"`
 
+	// Specify whether your DASH profile is on-demand or main. When you choose Main
+	// profile (MAIN_PROFILE), the service signals urn:mpeg:dash:profile:isoff-main:2011
+	// in your .mpd DASH manifest. When you choose On-demand (ON_DEMAND_PROFILE),
+	// the service signals urn:mpeg:dash:profile:isoff-on-demand:2011 in your .mpd.
+	// When you choose On-demand, you must also set the output group setting Segment
+	// control (SegmentControl) to Single file (SINGLE_FILE).
+	MpdProfile CmafMpdProfile `locationName:"mpdProfile" type:"string" enum:"true"`
+
 	// When set to SINGLE_FILE, a single output file is generated, which is internally
 	// segmented using the Fragment Length and Segment Length. When set to SEGMENTED_FILES,
 	// separate segment files will be created.
@@ -2131,6 +2140,12 @@ func (s CmafGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "minFinalSegmentLength", protocol.Float64Value(v), metadata)
+	}
+	if len(s.MpdProfile) > 0 {
+		v := s.MpdProfile
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "mpdProfile", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.SegmentControl) > 0 {
 		v := s.SegmentControl
@@ -2450,6 +2465,14 @@ type DashIsoGroupSettings struct {
 	// playout.
 	MinBufferTime *int64 `locationName:"minBufferTime" type:"integer"`
 
+	// Specify whether your DASH profile is on-demand or main. When you choose Main
+	// profile (MAIN_PROFILE), the service signals urn:mpeg:dash:profile:isoff-main:2011
+	// in your .mpd DASH manifest. When you choose On-demand (ON_DEMAND_PROFILE),
+	// the service signals urn:mpeg:dash:profile:isoff-on-demand:2011 in your .mpd.
+	// When you choose On-demand, you must also set the output group setting Segment
+	// control (SegmentControl) to Single file (SINGLE_FILE).
+	MpdProfile DashIsoMpdProfile `locationName:"mpdProfile" type:"string" enum:"true"`
+
 	// When set to SINGLE_FILE, a single output file is generated, which is internally
 	// segmented using the Fragment Length and Segment Length. When set to SEGMENTED_FILES,
 	// separate segment files will be created.
@@ -2462,12 +2485,13 @@ type DashIsoGroupSettings struct {
 	// files as in other output types.
 	SegmentLength *int64 `locationName:"segmentLength" min:"1" type:"integer"`
 
-	// When you enable Precise segment duration in manifests (writeSegmentTimelineInRepresentation),
-	// your DASH manifest shows precise segment durations. The segment duration
-	// information appears inside the SegmentTimeline element, inside SegmentTemplate
-	// at the Representation level. When this feature isn't enabled, the segment
-	// durations in your DASH manifest are approximate. The segment duration information
-	// appears in the duration attribute of the SegmentTemplate element.
+	// If you get an HTTP error in the 400 range when you play back your DASH output,
+	// enable this setting and run your transcoding job again. When you enable this
+	// setting, the service writes precise segment durations in the DASH manifest.
+	// The segment duration information appears inside the SegmentTimeline element,
+	// inside SegmentTemplate at the Representation level. When you don't enable
+	// this setting, the service writes approximate segment durations in your DASH
+	// manifest.
 	WriteSegmentTimelineInRepresentation DashIsoWriteSegmentTimelineInRepresentation `locationName:"writeSegmentTimelineInRepresentation" type:"string" enum:"true"`
 }
 
@@ -2535,6 +2559,12 @@ func (s DashIsoGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "minBufferTime", protocol.Int64Value(v), metadata)
+	}
+	if len(s.MpdProfile) > 0 {
+		v := s.MpdProfile
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "mpdProfile", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.SegmentControl) > 0 {
 		v := s.SegmentControl
@@ -4834,17 +4864,16 @@ type H265Settings struct {
 	// Inserts timecode for each frame as 4 bytes of an unregistered SEI message.
 	UnregisteredSeiTimecode H265UnregisteredSeiTimecode `locationName:"unregisteredSeiTimecode" type:"string" enum:"true"`
 
-	// Use this setting only for outputs encoded with H.265 that are in CMAF or
-	// DASH output groups. If you include writeMp4PackagingType in your JSON job
-	// specification for other outputs, your video might not work properly with
-	// downstream systems and video players. If the location of parameter set NAL
-	// units don't matter in your workflow, ignore this setting. The service defaults
-	// to marking your output as HEV1. Choose HVC1 to mark your output as HVC1.
-	// This makes your output compliant with this specification: ISO IECJTC1 SC29
-	// N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service
-	// stores parameter set NAL units in the sample headers but not in the samples
-	// directly. Keep the default HEV1 to mark your output as HEV1. For these outputs,
-	// the service writes parameter set NAL units directly into the samples.
+	// If the location of parameter set NAL units doesn't matter in your workflow,
+	// ignore this setting. Use this setting in your CMAF, DASH, or file MP4 output.
+	// For file MP4 outputs, choosing HVC1 can create video that doesn't work properly
+	// with some downstream systems and video players. Choose HVC1 to mark your
+	// output as HVC1. This makes your output compliant with the following specification:
+	// ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these
+	// outputs, the service stores parameter set NAL units in the sample headers
+	// but not in the samples directly. The service defaults to marking your output
+	// as HEV1. For these outputs, the service writes parameter set NAL units directly
+	// into the samples.
 	WriteMp4PackagingType H265WriteMp4PackagingType `locationName:"writeMp4PackagingType" type:"string" enum:"true"`
 }
 
@@ -6751,8 +6780,8 @@ type InsertableImage struct {
 	// blank.
 	Height *int64 `locationName:"height" type:"integer"`
 
-	// Specify the Amazon S3 location of the image that you want to overlay on the
-	// video. Use a PNG or TGA file.
+	// Specify the HTTP, HTTPS, or Amazon S3 location of the image that you want
+	// to overlay on the video. Use a PNG or TGA file.
 	ImageInserterInput *string `locationName:"imageInserterInput" min:"14" type:"string"`
 
 	// Specify the distance, in pixels, between the inserted image and the left
@@ -6882,6 +6911,19 @@ type Job struct {
 	// complex content.
 	AccelerationSettings *AccelerationSettings `locationName:"accelerationSettings" type:"structure"`
 
+	// Describes whether the current job is running with accelerated transcoding.
+	// For jobs that have Acceleration (AccelerationMode) set to DISABLED, AccelerationStatus
+	// is always NOT_APPLICABLE. For jobs that have Acceleration (AccelerationMode)
+	// set to ENABLED or PREFERRED, AccelerationStatus is one of the other states.
+	// AccelerationStatus is IN_PROGRESS initially, while the service determines
+	// whether the input files and job settings are compatible with accelerated
+	// transcoding. If they are, AcclerationStatus is ACCELERATED. If your input
+	// files and job settings aren't compatible with accelerated transcoding, the
+	// service either fails your job or runs it without accelerated transcoding,
+	// depending on how you set Acceleration (AccelerationMode). When the service
+	// runs your job without accelerated transcoding, AccelerationStatus is NOT_ACCELERATED.
+	AccelerationStatus AccelerationStatus `locationName:"accelerationStatus" type:"string" enum:"true"`
+
 	// An identifier for this resource that is unique within all of AWS.
 	Arn *string `locationName:"arn" type:"string"`
 
@@ -6921,6 +6963,10 @@ type Job struct {
 	// The job template that the job is created from, if it is created from a job
 	// template.
 	JobTemplate *string `locationName:"jobTemplate" type:"string"`
+
+	// Provides messages from the service about jobs that you have already successfully
+	// submitted.
+	Messages *JobMessages `locationName:"messages" type:"structure"`
 
 	// List of output group details
 	OutputGroupDetails []OutputGroupDetail `locationName:"outputGroupDetails" type:"list"`
@@ -6985,6 +7031,12 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "accelerationSettings", v, metadata)
 	}
+	if len(s.AccelerationStatus) > 0 {
+		v := s.AccelerationStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "accelerationStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.Arn != nil {
 		v := *s.Arn
 
@@ -7039,6 +7091,12 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "jobTemplate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Messages != nil {
+		v := s.Messages
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "messages", v, metadata)
 	}
 	if s.OutputGroupDetails != nil {
 		v := s.OutputGroupDetails
@@ -7116,6 +7174,54 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ms0.End()
+
+	}
+	return nil
+}
+
+// Provides messages from the service about jobs that you have already successfully
+// submitted.
+type JobMessages struct {
+	_ struct{} `type:"structure"`
+
+	// List of messages that are informational only and don't indicate a problem
+	// with your job.
+	Info []string `locationName:"info" type:"list"`
+
+	// List of messages that warn about conditions that might cause your job not
+	// to run or to fail.
+	Warning []string `locationName:"warning" type:"list"`
+}
+
+// String returns the string representation
+func (s JobMessages) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JobMessages) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Info != nil {
+		v := s.Info
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "info", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Warning != nil {
+		v := s.Warning
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "warning", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
 
 	}
 	return nil

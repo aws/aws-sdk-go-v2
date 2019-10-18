@@ -212,6 +212,35 @@ func (s CloudwatchLogsExportConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
+// A custom Availability Zone (AZ) is an on-premises AZ that is integrated with
+// a VMware vSphere cluster.
+//
+// For more information about RDS on VMware, see the RDS on VMware User Guide.
+// (https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html)
+type CustomAvailabilityZone struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the custom AZ.
+	//
+	// Amazon RDS generates a unique identifier when a custom AZ is created.
+	CustomAvailabilityZoneId *string `type:"string"`
+
+	// The name of the custom AZ.
+	CustomAvailabilityZoneName *string `type:"string"`
+
+	// The status of the custom AZ.
+	CustomAvailabilityZoneStatus *string `type:"string"`
+
+	// Information about the virtual private network (VPN) between the VMware vSphere
+	// cluster and the AWS website.
+	VpnDetails *VpnDetails `type:"structure"`
+}
+
+// String returns the string representation
+func (s CustomAvailabilityZone) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Contains the details of an Amazon Aurora DB cluster.
 //
 // This data type is used as a response element in the DescribeDBClusters, StopDBCluster,
@@ -1951,6 +1980,57 @@ func (s IPRange) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Contains the installation media for on-premises, bring your own media (BYOM)
+// DB engines, such as Microsoft SQL Server.
+type InstallationMedia struct {
+	_ struct{} `type:"structure"`
+
+	// The custom Availability Zone (AZ) that contains the installation media.
+	CustomAvailabilityZoneId *string `type:"string"`
+
+	// The DB engine.
+	Engine *string `type:"string"`
+
+	// The path to the installation media for the DB engine.
+	EngineInstallationMediaPath *string `type:"string"`
+
+	// The engine version of the DB engine.
+	EngineVersion *string `type:"string"`
+
+	// If an installation media failure occurred, the cause of the failure.
+	FailureCause *InstallationMediaFailureCause `type:"structure"`
+
+	// The installation media ID.
+	InstallationMediaId *string `type:"string"`
+
+	// The path to the installation media for the operating system associated with
+	// the DB engine.
+	OSInstallationMediaPath *string `type:"string"`
+
+	// The status of the installation media.
+	Status *string `type:"string"`
+}
+
+// String returns the string representation
+func (s InstallationMedia) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Contains the cause of an installation media failure. Installation media is
+// used for on-premises, bring your own media (BYOM) DB engines, such as Microsoft
+// SQL Server.
+type InstallationMediaFailureCause struct {
+	_ struct{} `type:"structure"`
+
+	// The reason that an installation media import failed.
+	Message *string `type:"string"`
+}
+
+// String returns the string representation
+func (s InstallationMediaFailureCause) String() string {
+	return awsutil.Prettify(s)
+}
+
 // The minimum DB engine version required for each corresponding allowed value
 // for an option setting.
 type MinimumEngineVersionPerAllowedValue struct {
@@ -3013,5 +3093,38 @@ type VpcSecurityGroupMembership struct {
 
 // String returns the string representation
 func (s VpcSecurityGroupMembership) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Information about the virtual private network (VPN) between the VMware vSphere
+// cluster and the AWS website.
+//
+// For more information about RDS on VMware, see the RDS on VMware User Guide.
+// (https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html)
+type VpnDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The IP address of network traffic from AWS to your on-premises data center.
+	VpnGatewayIp *string `type:"string"`
+
+	// The ID of the VPN.
+	VpnId *string `type:"string"`
+
+	// The name of the VPN.
+	VpnName *string `type:"string"`
+
+	// The preshared key (PSK) for the VPN.
+	VpnPSK *string `type:"string" sensitive:"true"`
+
+	// The state of the VPN.
+	VpnState *string `type:"string"`
+
+	// The IP address of network traffic from your on-premises data center. A custom
+	// AZ receives the network traffic.
+	VpnTunnelOriginatorIP *string `type:"string"`
+}
+
+// String returns the string representation
+func (s VpnDetails) String() string {
 	return awsutil.Prettify(s)
 }

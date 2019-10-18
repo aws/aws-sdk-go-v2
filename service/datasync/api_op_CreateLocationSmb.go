@@ -135,7 +135,8 @@ const opCreateLocationSmb = "CreateLocationSmb"
 // CreateLocationSmbRequest returns a request value for making API operation for
 // AWS DataSync.
 //
-// Creates an endpoint for a Server Message Block (SMB) file system.
+// Defines a file system on an Server Message Block (SMB) server that can be
+// read from or written to
 //
 //    // Example sending a request using CreateLocationSmbRequest.
 //    req := client.CreateLocationSmbRequest(params)

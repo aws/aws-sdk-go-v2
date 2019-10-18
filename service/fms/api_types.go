@@ -20,8 +20,8 @@ type ComplianceViolator struct {
 	// The resource ID.
 	ResourceId *string `min:"1" type:"string"`
 
-	// The resource type. This is in the format shown in AWS Resource Types Reference
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html).
+	// The resource type. This is in the format shown in the AWS Resource Types
+	// Reference (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html).
 	// For example: AWS::ElasticLoadBalancingV2::LoadBalancer or AWS::CloudFront::Distribution.
 	ResourceType *string `min:"1" type:"string"`
 
@@ -35,20 +35,23 @@ func (s ComplianceViolator) String() string {
 }
 
 // Describes the compliance status for the account. An account is considered
-// non-compliant if it includes resources that are not protected by the specified
-// policy.
+// noncompliant if it includes resources that are not protected by the specified
+// policy or that don't comply with the policy.
 type EvaluationResult struct {
 	_ struct{} `type:"structure"`
 
 	// Describes an AWS account's compliance with the AWS Firewall Manager policy.
 	ComplianceStatus PolicyComplianceStatusType `type:"string" enum:"true"`
 
-	// Indicates that over 100 resources are non-compliant with the AWS Firewall
+	// Indicates that over 100 resources are noncompliant with the AWS Firewall
 	// Manager policy.
 	EvaluationLimitExceeded *bool `type:"boolean"`
 
-	// Number of resources that are non-compliant with the specified policy. A resource
-	// is considered non-compliant if it is not associated with the specified policy.
+	// The number of resources that are noncompliant with the specified policy.
+	// For AWS WAF and Shield Advanced policies, a resource is considered noncompliant
+	// if it is not associated with the policy. For security group policies, a resource
+	// is considered noncompliant if it doesn't comply with the rules of the policy
+	// and remediation is disabled or not possible.
 	ViolatorCount *int64 `type:"long"`
 }
 
@@ -71,9 +74,9 @@ type Policy struct {
 	ExcludeMap map[string][]string `type:"map"`
 
 	// If set to True, resources with the tags that are specified in the ResourceTag
-	// array are not protected by the policy. If set to False, and the ResourceTag
-	// array is not null, only resources with the specified tags are associated
-	// with the policy.
+	// array are not in scope of the policy. If set to False, and the ResourceTag
+	// array is not null, only resources with the specified tags are in scope of
+	// the policy.
 	//
 	// ExcludeResourceTags is a required field
 	ExcludeResourceTags *bool `type:"boolean" required:"true"`
@@ -109,9 +112,14 @@ type Policy struct {
 	// An array of ResourceTag objects.
 	ResourceTags []ResourceTag `type:"list"`
 
-	// The type of resource to protect with the policy. This is in the format shown
-	// in AWS Resource Types Reference (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html).
-	// For example: AWS::ElasticLoadBalancingV2::LoadBalancer or AWS::CloudFront::Distribution.
+	// The type of resource protected by or in scope of the policy. This is in the
+	// format shown in the AWS Resource Types Reference (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html).
+	// For AWS WAF and Shield Advanced, examples include AWS::ElasticLoadBalancingV2::LoadBalancer
+	// and AWS::CloudFront::Distribution. For a security group common policy, valid
+	// values are AWS::EC2::NetworkInterface and AWS::EC2::Instance. For a security
+	// group content audit policy, valid values are AWS::EC2::SecurityGroup, AWS::EC2::NetworkInterface,
+	// and AWS::EC2::Instance. For a security group usage audit policy, the value
+	// is AWS::EC2::SecurityGroup.
 	//
 	// ResourceType is a required field
 	ResourceType *string `min:"1" type:"string" required:"true"`
@@ -184,24 +192,24 @@ func (s *Policy) Validate() error {
 	return nil
 }
 
-// Describes the non-compliant resources in a member account for a specific
-// AWS Firewall Manager policy. A maximum of 100 entries are displayed. If more
-// than 100 resources are non-compliant, EvaluationLimitExceeded is set to True.
+// Describes the noncompliant resources in a member account for a specific AWS
+// Firewall Manager policy. A maximum of 100 entries are displayed. If more
+// than 100 resources are noncompliant, EvaluationLimitExceeded is set to True.
 type PolicyComplianceDetail struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates if over 100 resources are non-compliant with the AWS Firewall Manager
+	// Indicates if over 100 resources are noncompliant with the AWS Firewall Manager
 	// policy.
 	EvaluationLimitExceeded *bool `type:"boolean"`
 
-	// A time stamp that indicates when the returned information should be considered
-	// out-of-date.
+	// A timestamp that indicates when the returned information should be considered
+	// out of date.
 	ExpiredAt *time.Time `type:"timestamp"`
 
 	// Details about problems with dependent services, such as AWS WAF or AWS Config,
-	// that are causing a resource to be non-compliant. The details include the
-	// name of the dependent service and the error message received that indicates
-	// the problem with the service.
+	// that are causing a resource to be noncompliant. The details include the name
+	// of the dependent service and the error message received that indicates the
+	// problem with the service.
 	IssueInfoMap map[string]string `type:"map"`
 
 	// The AWS account ID.
@@ -213,7 +221,8 @@ type PolicyComplianceDetail struct {
 	// The AWS account that created the AWS Firewall Manager policy.
 	PolicyOwner *string `min:"1" type:"string"`
 
-	// An array of resources that are not protected by the policy.
+	// An array of resources that aren't protected by the AWS WAF or Shield Advanced
+	// policy or that aren't in compliance with the security group policy.
 	Violators []ComplianceViolator `type:"list"`
 }
 
@@ -223,8 +232,9 @@ func (s PolicyComplianceDetail) String() string {
 }
 
 // Indicates whether the account is compliant with the specified policy. An
-// account is considered non-compliant if it includes resources that are not
-// protected by the policy.
+// account is considered noncompliant if it includes resources that are not
+// protected by the policy, for AWS WAF and Shield Advanced policies, or that
+// are noncompliant with the policy, for security group policies.
 type PolicyComplianceStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -232,12 +242,12 @@ type PolicyComplianceStatus struct {
 	EvaluationResults []EvaluationResult `type:"list"`
 
 	// Details about problems with dependent services, such as AWS WAF or AWS Config,
-	// that are causing a resource to be non-compliant. The details include the
-	// name of the dependent service and the error message received that indicates
-	// the problem with the service.
+	// that are causing a resource to be noncompliant. The details include the name
+	// of the dependent service and the error message received that indicates the
+	// problem with the service.
 	IssueInfoMap map[string]string `type:"map"`
 
-	// Time stamp of the last update to the EvaluationResult objects.
+	// Timestamp of the last update to the EvaluationResult objects.
 	LastUpdated *time.Time `type:"timestamp"`
 
 	// The member account ID.
@@ -274,14 +284,19 @@ type PolicySummary struct {
 	// Indicates if the policy should be automatically applied to new resources.
 	RemediationEnabled *bool `type:"boolean"`
 
-	// The type of resource to protect with the policy. This is in the format shown
-	// in AWS Resource Types Reference (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html).
-	// For example: AWS::ElasticLoadBalancingV2::LoadBalancer or AWS::CloudFront::Distribution.
+	// The type of resource protected by or in scope of the policy. This is in the
+	// format shown in the AWS Resource Types Reference (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html).
+	// For AWS WAF and Shield Advanced, examples include AWS::ElasticLoadBalancingV2::LoadBalancer
+	// and AWS::CloudFront::Distribution. For a security group common policy, valid
+	// values are AWS::EC2::NetworkInterface and AWS::EC2::Instance. For a security
+	// group content audit policy, valid values are AWS::EC2::SecurityGroup, AWS::EC2::NetworkInterface,
+	// and AWS::EC2::Instance. For a security group usage audit policy, the value
+	// is AWS::EC2::SecurityGroup.
 	ResourceType *string `min:"1" type:"string"`
 
 	// The service that the policy is using to protect the resources. This specifies
-	// the type of policy that is created, either a WAF policy or Shield Advanced
-	// policy.
+	// the type of policy that is created, either an AWS WAF policy, a Shield Advanced
+	// policy, or a security group policy.
 	SecurityServiceType SecurityServiceType `type:"string" enum:"true"`
 }
 
@@ -291,13 +306,13 @@ func (s PolicySummary) String() string {
 }
 
 // The resource tags that AWS Firewall Manager uses to determine if a particular
-// resource should be included or excluded from protection by the AWS Firewall
-// Manager policy. Tags enable you to categorize your AWS resources in different
-// ways, for example, by purpose, owner, or environment. Each tag consists of
-// a key and an optional value, both of which you define. Tags are combined
-// with an "OR." That is, if you add more than one tag, if any of the tags matches,
-// the resource is considered a match for the include or exclude. Working with
-// Tag Editor (https://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/tag-editor.html).
+// resource should be included or excluded from the AWS Firewall Manager policy.
+// Tags enable you to categorize your AWS resources in different ways, for example,
+// by purpose, owner, or environment. Each tag consists of a key and an optional
+// value. Firewall Manager combines the tags with "AND" so that, if you add
+// more than one tag to a policy scope, a resource must have all the specified
+// tags to be included or excluded. For more information, see Working with Tag
+// Editor (https://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/tag-editor.html).
 type ResourceTag struct {
 	_ struct{} `type:"structure"`
 
@@ -336,19 +351,34 @@ func (s *ResourceTag) Validate() error {
 type SecurityServicePolicyData struct {
 	_ struct{} `type:"structure"`
 
-	// Details about the service. This contains WAF data in JSON format, as shown
-	// in the following example:
+	// Details about the service that are specific to the service type, in JSON
+	// format. For service type SHIELD_ADVANCED, this is an empty string.
 	//
-	// ManagedServiceData": "{\"type\": \"WAF\", \"ruleGroups\": [{\"id\": \"12345678-1bcd-9012-efga-0987654321ab\",
-	// \"overrideAction\" : {\"type\": \"COUNT\"}}], \"defaultAction\": {\"type\":
-	// \"BLOCK\"}}
+	//    * Example: WAF ManagedServiceData": "{\"type\": \"WAF\", \"ruleGroups\":
+	//    [{\"id\": \"12345678-1bcd-9012-efga-0987654321ab\", \"overrideAction\"
+	//    : {\"type\": \"COUNT\"}}], \"defaultAction\": {\"type\": \"BLOCK\"}}
 	//
-	// If this is a Shield Advanced policy, this string will be empty.
+	//    * Example: SECURITY_GROUPS_COMMON "SecurityServicePolicyData":{"Type":"SECURITY_GROUPS_COMMON","ManagedServiceData":"{\"type\":\"SECURITY_GROUPS_COMMON\",\"revertManualSecurityGroupChanges\":false,\"exclusiveResourceSecurityGroupManagement\":false,\"securityGroups\":[{\"id\":\"
+	//    sg-000e55995d61a06bd\"}]}"},"RemediationEnabled":false,"ResourceType":"AWS::EC2::NetworkInterface"}
+	//
+	//    * Example: SECURITY_GROUPS_CONTENT_AUDIT "SecurityServicePolicyData":{"Type":"SECURITY_GROUPS_CONTENT_AUDIT","ManagedServiceData":"{\"type\":\"SECURITY_GROUPS_CONTENT_AUDIT\",\"securityGroups\":[{\"id\":\"
+	//    sg-000e55995d61a06bd \"}],\"securityGroupAction\":{\"type\":\"ALLOW\"}}"},"RemediationEnabled":false,"ResourceType":"AWS::EC2::NetworkInterface"}
+	//    The security group action for content audit can be ALLOW or DENY. For
+	//    ALLOW, all in-scope security group rules must be within the allowed range
+	//    of the policy's security group rules. For DENY, all in-scope security
+	//    group rules must not contain a value or a range that matches a rule value
+	//    or range in the policy security group.
+	//
+	//    * Example: SECURITY_GROUPS_USAGE_AUDIT "SecurityServicePolicyData":{"Type":"SECURITY_GROUPS_USAGE_AUDIT","ManagedServiceData":"{\"type\":\"SECURITY_GROUPS_USAGE_AUDIT\",\"deleteUnusedSecurityGroups\":true,\"coalesceRedundantSecurityGroups\":true}"},"RemediationEnabled":false,"Resou
+	//    rceType":"AWS::EC2::SecurityGroup"}
 	ManagedServiceData *string `min:"1" type:"string"`
 
 	// The service that the policy is using to protect the resources. This specifies
-	// the type of policy that is created, either a WAF policy or Shield Advanced
-	// policy.
+	// the type of policy that is created, either an AWS WAF policy, a Shield Advanced
+	// policy, or a security group policy. For security group policies, Firewall
+	// Manager supports one security group for each common policy and for each content
+	// audit policy. This is an adjustable limit that you can increase by contacting
+	// AWS Support.
 	//
 	// Type is a required field
 	Type SecurityServiceType `type:"string" required:"true" enum:"true"`

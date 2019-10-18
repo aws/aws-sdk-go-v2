@@ -45,6 +45,7 @@ const (
 	DependentServiceNameAwsconfig         DependentServiceName = "AWSCONFIG"
 	DependentServiceNameAwswaf            DependentServiceName = "AWSWAF"
 	DependentServiceNameAwsshieldAdvanced DependentServiceName = "AWSSHIELD_ADVANCED"
+	DependentServiceNameAwsvpc            DependentServiceName = "AWSVPC"
 )
 
 func (enum DependentServiceName) MarshalValue() (string, error) {
@@ -77,8 +78,11 @@ type SecurityServiceType string
 
 // Enum values for SecurityServiceType
 const (
-	SecurityServiceTypeWaf            SecurityServiceType = "WAF"
-	SecurityServiceTypeShieldAdvanced SecurityServiceType = "SHIELD_ADVANCED"
+	SecurityServiceTypeWaf                        SecurityServiceType = "WAF"
+	SecurityServiceTypeShieldAdvanced             SecurityServiceType = "SHIELD_ADVANCED"
+	SecurityServiceTypeSecurityGroupsCommon       SecurityServiceType = "SECURITY_GROUPS_COMMON"
+	SecurityServiceTypeSecurityGroupsContentAudit SecurityServiceType = "SECURITY_GROUPS_CONTENT_AUDIT"
+	SecurityServiceTypeSecurityGroupsUsageAudit   SecurityServiceType = "SECURITY_GROUPS_USAGE_AUDIT"
 )
 
 func (enum SecurityServiceType) MarshalValue() (string, error) {
@@ -94,10 +98,15 @@ type ViolationReason string
 
 // Enum values for ViolationReason
 const (
-	ViolationReasonWebAclMissingRuleGroup          ViolationReason = "WEB_ACL_MISSING_RULE_GROUP"
-	ViolationReasonResourceMissingWebAcl           ViolationReason = "RESOURCE_MISSING_WEB_ACL"
-	ViolationReasonResourceIncorrectWebAcl         ViolationReason = "RESOURCE_INCORRECT_WEB_ACL"
-	ViolationReasonResourceMissingShieldProtection ViolationReason = "RESOURCE_MISSING_SHIELD_PROTECTION"
+	ViolationReasonWebAclMissingRuleGroup                  ViolationReason = "WEB_ACL_MISSING_RULE_GROUP"
+	ViolationReasonResourceMissingWebAcl                   ViolationReason = "RESOURCE_MISSING_WEB_ACL"
+	ViolationReasonResourceIncorrectWebAcl                 ViolationReason = "RESOURCE_INCORRECT_WEB_ACL"
+	ViolationReasonResourceMissingShieldProtection         ViolationReason = "RESOURCE_MISSING_SHIELD_PROTECTION"
+	ViolationReasonResourceMissingWebAclOrShieldProtection ViolationReason = "RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION"
+	ViolationReasonResourceMissingSecurityGroup            ViolationReason = "RESOURCE_MISSING_SECURITY_GROUP"
+	ViolationReasonResourceViolatesAuditSecurityGroup      ViolationReason = "RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP"
+	ViolationReasonSecurityGroupUnused                     ViolationReason = "SECURITY_GROUP_UNUSED"
+	ViolationReasonSecurityGroupRedundant                  ViolationReason = "SECURITY_GROUP_REDUNDANT"
 )
 
 func (enum ViolationReason) MarshalValue() (string, error) {

@@ -44,8 +44,8 @@ type PutPermissionInput struct {
 	// If you specify "*" without specifying Condition, avoid creating rules that
 	// might match undesirable events. To create more secure rules, make sure that
 	// the event pattern for each rule contains an account field with a specific
-	// account ID to receive events from. Rules with an account field don't match
-	// any events sent from other accounts.
+	// account ID to receive events from. Rules that have an account field match
+	// events sent only from accounts that are listed in the rule's account field.
 	//
 	// Principal is a required field
 	Principal *string `min:"1" type:"string" required:"true"`

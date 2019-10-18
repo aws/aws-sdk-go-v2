@@ -74,6 +74,24 @@ func (enum CEType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type CRAllocationStrategy string
+
+// Enum values for CRAllocationStrategy
+const (
+	CRAllocationStrategyBestFit               CRAllocationStrategy = "BEST_FIT"
+	CRAllocationStrategyBestFitProgressive    CRAllocationStrategy = "BEST_FIT_PROGRESSIVE"
+	CRAllocationStrategySpotCapacityOptimized CRAllocationStrategy = "SPOT_CAPACITY_OPTIMIZED"
+)
+
+func (enum CRAllocationStrategy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CRAllocationStrategy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type CRType string
 
 // Enum values for CRType
