@@ -41,7 +41,7 @@ type DescribeWorkspaceSnapshotsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the snapshots that can be used to rebuild a WorkSpace.
-	// These snapshots include the root volume.
+	// These snapshots include the user volume.
 	RebuildSnapshots []Snapshot `type:"list"`
 
 	// Information about the snapshots that can be used to restore a WorkSpace.

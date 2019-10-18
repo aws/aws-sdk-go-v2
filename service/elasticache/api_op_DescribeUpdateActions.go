@@ -12,6 +12,12 @@ import (
 type DescribeUpdateActionsInput struct {
 	_ struct{} `type:"structure"`
 
+	// The cache cluster IDs
+	CacheClusterIds []string `type:"list"`
+
+	// The Elasticache engine to which the update applies. Either Redis or Memcached
+	Engine *string `type:"string"`
+
 	// An optional marker returned from a prior request. Use this marker for pagination
 	// of results from this operation. If this parameter is specified, the response
 	// includes only records beyond the marker, up to the value specified by MaxRecords.

@@ -27,8 +27,7 @@ type CreateClusterInput struct {
 	// ClusterName is a required field
 	ClusterName *string `locationName:"clusterName" min:"1" type:"string" required:"true"`
 
-	// Represents the configuration that you want MSK to use for the brokers in
-	// a cluster.
+	// Represents the configuration that you want MSK to use for the cluster.
 	ConfigurationInfo *ConfigurationInfo `locationName:"configurationInfo" type:"structure"`
 
 	// Includes all encryption-related information.

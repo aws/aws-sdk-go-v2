@@ -56,7 +56,9 @@ type GetBootstrapBrokersOutput struct {
 	// A string containing one or more hostname:port pairs.
 	BootstrapBrokerString *string `locationName:"bootstrapBrokerString" type:"string"`
 
-	// A string containing one or more DNS names (or IP) and TLS port pairs.
+	// A string containing one or more DNS names (or IP) and TLS port pairs. The
+	// following is an example.
+	//  { "BootstrapBrokerStringTls": "b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094,b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094"}
 	BootstrapBrokerStringTls *string `locationName:"bootstrapBrokerStringTls" type:"string"`
 }
 

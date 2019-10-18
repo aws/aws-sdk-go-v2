@@ -254,6 +254,7 @@ type TaskExecutionStatus string
 
 // Enum values for TaskExecutionStatus
 const (
+	TaskExecutionStatusQueued       TaskExecutionStatus = "QUEUED"
 	TaskExecutionStatusLaunching    TaskExecutionStatus = "LAUNCHING"
 	TaskExecutionStatusPreparing    TaskExecutionStatus = "PREPARING"
 	TaskExecutionStatusTransferring TaskExecutionStatus = "TRANSFERRING"
@@ -271,12 +272,30 @@ func (enum TaskExecutionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type TaskQueueing string
+
+// Enum values for TaskQueueing
+const (
+	TaskQueueingEnabled  TaskQueueing = "ENABLED"
+	TaskQueueingDisabled TaskQueueing = "DISABLED"
+)
+
+func (enum TaskQueueing) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TaskQueueing) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type TaskStatus string
 
 // Enum values for TaskStatus
 const (
 	TaskStatusAvailable   TaskStatus = "AVAILABLE"
 	TaskStatusCreating    TaskStatus = "CREATING"
+	TaskStatusQueued      TaskStatus = "QUEUED"
 	TaskStatusRunning     TaskStatus = "RUNNING"
 	TaskStatusUnavailable TaskStatus = "UNAVAILABLE"
 )

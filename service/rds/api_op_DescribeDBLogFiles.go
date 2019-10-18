@@ -44,7 +44,7 @@ type DescribeDBLogFilesInput struct {
 
 	// The maximum number of records to include in the response. If more records
 	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
+	// is included in the response so that you can retrieve the remaining results.
 	MaxRecords *int64 `type:"integer"`
 }
 

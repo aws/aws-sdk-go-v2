@@ -4,6 +4,7 @@ package lexruntimeservice
 
 import (
 	"context"
+	"fmt"
 	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -45,6 +46,27 @@ type PutSessionInput struct {
 	// Sets the next action that the bot should take to fulfill the conversation.
 	DialogAction *DialogAction `locationName:"dialogAction" type:"structure"`
 
+	// A summary of the recent intents for the bot. You can use the intent summary
+	// view to set a checkpoint label on an intent and modify attributes of intents.
+	// You can also use it to remove or add intent summary objects to the list.
+	//
+	// An intent that you modify or add to the list must make sense for the bot.
+	// For example, the intent name must be valid for the bot. You must provide
+	// valid values for:
+	//
+	//    * intentName
+	//
+	//    * slot names
+	//
+	//    * slotToElict
+	//
+	// If you send the recentIntentSummaryView parameter in a PutSession request,
+	// the contents of the new summary view replaces the old summary view. For example,
+	// if a GetSession request returns three intents in the summary view and you
+	// call PutSession with one intent in the summary view, the next call to GetSession
+	// will only return one intent.
+	RecentIntentSummaryView []IntentSummary `locationName:"recentIntentSummaryView" type:"list"`
+
 	// Map of key/value pairs representing the session-specific context information.
 	// It contains application information passed between Amazon Lex and a client
 	// application.
@@ -85,6 +107,13 @@ func (s *PutSessionInput) Validate() error {
 			invalidParams.AddNested("DialogAction", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.RecentIntentSummaryView != nil {
+		for i, v := range s.RecentIntentSummaryView {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RecentIntentSummaryView", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -101,6 +130,18 @@ func (s PutSessionInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "dialogAction", v, metadata)
+	}
+	if s.RecentIntentSummaryView != nil {
+		v := s.RecentIntentSummaryView
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "recentIntentSummaryView", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.SessionAttributes != nil {
 		v := s.SessionAttributes

@@ -252,14 +252,20 @@ func (enum Ac3MetadataControl) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Enable Acceleration (AccelerationMode) on any job that you want processed
-// with accelerated transcoding.
+// Specify whether the service runs your job with accelerated transcoding. Choose
+// DISABLED if you don't want accelerated transcoding. Choose ENABLED if you
+// want your job to run with accelerated transcoding and to fail if your input
+// files or your job settings aren't compatible with accelerated transcoding.
+// Choose PREFERRED if you want your job to run with accelerated transcoding
+// if the job is compatible with the feature and to run at standard speed if
+// it's not.
 type AccelerationMode string
 
 // Enum values for AccelerationMode
 const (
-	AccelerationModeDisabled AccelerationMode = "DISABLED"
-	AccelerationModeEnabled  AccelerationMode = "ENABLED"
+	AccelerationModeDisabled  AccelerationMode = "DISABLED"
+	AccelerationModeEnabled   AccelerationMode = "ENABLED"
+	AccelerationModePreferred AccelerationMode = "PREFERRED"
 )
 
 func (enum AccelerationMode) MarshalValue() (string, error) {
@@ -267,6 +273,36 @@ func (enum AccelerationMode) MarshalValue() (string, error) {
 }
 
 func (enum AccelerationMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Describes whether the current job is running with accelerated transcoding.
+// For jobs that have Acceleration (AccelerationMode) set to DISABLED, AccelerationStatus
+// is always NOT_APPLICABLE. For jobs that have Acceleration (AccelerationMode)
+// set to ENABLED or PREFERRED, AccelerationStatus is one of the other states.
+// AccelerationStatus is IN_PROGRESS initially, while the service determines
+// whether the input files and job settings are compatible with accelerated
+// transcoding. If they are, AcclerationStatus is ACCELERATED. If your input
+// files and job settings aren't compatible with accelerated transcoding, the
+// service either fails your job or runs it without accelerated transcoding,
+// depending on how you set Acceleration (AccelerationMode). When the service
+// runs your job without accelerated transcoding, AccelerationStatus is NOT_ACCELERATED.
+type AccelerationStatus string
+
+// Enum values for AccelerationStatus
+const (
+	AccelerationStatusNotApplicable  AccelerationStatus = "NOT_APPLICABLE"
+	AccelerationStatusInProgress     AccelerationStatus = "IN_PROGRESS"
+	AccelerationStatusAccelerated    AccelerationStatus = "ACCELERATED"
+	AccelerationStatusNotAccelerated AccelerationStatus = "NOT_ACCELERATED"
+)
+
+func (enum AccelerationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AccelerationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -560,6 +596,7 @@ const (
 	BillingTagsSourceQueue       BillingTagsSource = "QUEUE"
 	BillingTagsSourcePreset      BillingTagsSource = "PRESET"
 	BillingTagsSourceJobTemplate BillingTagsSource = "JOB_TEMPLATE"
+	BillingTagsSourceJob         BillingTagsSource = "JOB"
 )
 
 func (enum BillingTagsSource) MarshalValue() (string, error) {
@@ -902,6 +939,29 @@ func (enum CmafManifestDurationFormat) MarshalValueBuf(b []byte) ([]byte, error)
 	return append(b, enum...), nil
 }
 
+// Specify whether your DASH profile is on-demand or main. When you choose Main
+// profile (MAIN_PROFILE), the service signals urn:mpeg:dash:profile:isoff-main:2011
+// in your .mpd DASH manifest. When you choose On-demand (ON_DEMAND_PROFILE),
+// the service signals urn:mpeg:dash:profile:isoff-on-demand:2011 in your .mpd.
+// When you choose On-demand, you must also set the output group setting Segment
+// control (SegmentControl) to Single file (SINGLE_FILE).
+type CmafMpdProfile string
+
+// Enum values for CmafMpdProfile
+const (
+	CmafMpdProfileMainProfile     CmafMpdProfile = "MAIN_PROFILE"
+	CmafMpdProfileOnDemandProfile CmafMpdProfile = "ON_DEMAND_PROFILE"
+)
+
+func (enum CmafMpdProfile) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CmafMpdProfile) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // When set to SINGLE_FILE, a single output file is generated, which is internally
 // segmented using the Fragment Length and Segment Length. When set to SEGMENTED_FILES,
 // separate segment files will be created.
@@ -1134,6 +1194,29 @@ func (enum DashIsoHbbtvCompliance) MarshalValue() (string, error) {
 }
 
 func (enum DashIsoHbbtvCompliance) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Specify whether your DASH profile is on-demand or main. When you choose Main
+// profile (MAIN_PROFILE), the service signals urn:mpeg:dash:profile:isoff-main:2011
+// in your .mpd DASH manifest. When you choose On-demand (ON_DEMAND_PROFILE),
+// the service signals urn:mpeg:dash:profile:isoff-on-demand:2011 in your .mpd.
+// When you choose On-demand, you must also set the output group setting Segment
+// control (SegmentControl) to Single file (SINGLE_FILE).
+type DashIsoMpdProfile string
+
+// Enum values for DashIsoMpdProfile
+const (
+	DashIsoMpdProfileMainProfile     DashIsoMpdProfile = "MAIN_PROFILE"
+	DashIsoMpdProfileOnDemandProfile DashIsoMpdProfile = "ON_DEMAND_PROFILE"
+)
+
+func (enum DashIsoMpdProfile) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DashIsoMpdProfile) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -3015,17 +3098,16 @@ func (enum H265UnregisteredSeiTimecode) MarshalValueBuf(b []byte) ([]byte, error
 	return append(b, enum...), nil
 }
 
-// Use this setting only for outputs encoded with H.265 that are in CMAF or
-// DASH output groups. If you include writeMp4PackagingType in your JSON job
-// specification for other outputs, your video might not work properly with
-// downstream systems and video players. If the location of parameter set NAL
-// units don't matter in your workflow, ignore this setting. The service defaults
-// to marking your output as HEV1. Choose HVC1 to mark your output as HVC1.
-// This makes your output compliant with this specification: ISO IECJTC1 SC29
-// N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service
-// stores parameter set NAL units in the sample headers but not in the samples
-// directly. Keep the default HEV1 to mark your output as HEV1. For these outputs,
-// the service writes parameter set NAL units directly into the samples.
+// If the location of parameter set NAL units doesn't matter in your workflow,
+// ignore this setting. Use this setting in your CMAF, DASH, or file MP4 output.
+// For file MP4 outputs, choosing HVC1 can create video that doesn't work properly
+// with some downstream systems and video players. Choose HVC1 to mark your
+// output as HVC1. This makes your output compliant with the following specification:
+// ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these
+// outputs, the service stores parameter set NAL units in the sample headers
+// but not in the samples directly. The service defaults to marking your output
+// as HEV1. For these outputs, the service writes parameter set NAL units directly
+// into the samples.
 type H265WriteMp4PackagingType string
 
 // Enum values for H265WriteMp4PackagingType

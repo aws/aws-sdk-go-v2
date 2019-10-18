@@ -66,6 +66,8 @@ const opUntagResource = "UntagResource"
 //
 // Currently, you can tag and untag accounts in AWS Organizations.
 //
+// This operation can be called only from the organization's master account.
+//
 //    // Example sending a request using UntagResourceRequest.
 //    req := client.UntagResourceRequest(params)
 //    resp, err := req.Send(context.TODO())

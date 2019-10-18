@@ -19,7 +19,8 @@ type DescribeChannelInput struct {
 	ChannelName *string `location:"uri" locationName:"channelName" min:"1" type:"string" required:"true"`
 
 	// If true, additional statistical information about the channel is included
-	// in the response.
+	// in the response. This feature cannot be used with a channel whose S3 storage
+	// is customer-managed.
 	IncludeStatistics *bool `location:"querystring" locationName:"includeStatistics" type:"boolean"`
 }
 

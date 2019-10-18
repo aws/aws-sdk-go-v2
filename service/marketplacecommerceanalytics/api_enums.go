@@ -24,6 +24,8 @@ const (
 	DataSetTypeDisbursedAmountByCustomerGeo                 DataSetType = "disbursed_amount_by_customer_geo"
 	DataSetTypeDisbursedAmountByAgeOfUncollectedFunds       DataSetType = "disbursed_amount_by_age_of_uncollected_funds"
 	DataSetTypeDisbursedAmountByAgeOfDisbursedFunds         DataSetType = "disbursed_amount_by_age_of_disbursed_funds"
+	DataSetTypeDisbursedAmountByAgeOfPastDueFunds           DataSetType = "disbursed_amount_by_age_of_past_due_funds"
+	DataSetTypeDisbursedAmountByUncollectedFundsBreakdown   DataSetType = "disbursed_amount_by_uncollected_funds_breakdown"
 	DataSetTypeCustomerProfileByIndustry                    DataSetType = "customer_profile_by_industry"
 	DataSetTypeCustomerProfileByRevenue                     DataSetType = "customer_profile_by_revenue"
 	DataSetTypeCustomerProfileByGeography                   DataSetType = "customer_profile_by_geography"

@@ -120,7 +120,8 @@ const opCreateLocationNfs = "CreateLocationNfs"
 // CreateLocationNfsRequest returns a request value for making API operation for
 // AWS DataSync.
 //
-// Creates an endpoint for a Network File System (NFS) file system.
+// Defines a file system on a Network File System (NFS) server that can be read
+// from or written to
 //
 //    // Example sending a request using CreateLocationNfsRequest.
 //    req := client.CreateLocationNfsRequest(params)

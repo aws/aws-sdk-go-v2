@@ -109,6 +109,10 @@ type CreateAccountStatus struct {
 	//    * EMAIL_ALREADY_EXISTS: The account could not be created because another
 	//    AWS account with that email address already exists.
 	//
+	//    * GOVCLOUD_ACCOUNT_ALREADY_EXISTS: The account in the AWS GovCloud (US)
+	//    Region could not be created because this Region already includes an account
+	//    with that email address.
+	//
 	//    * INVALID_ADDRESS: The account could not be created because the address
 	//    you provided is not valid.
 	//

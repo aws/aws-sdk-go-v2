@@ -93,6 +93,8 @@ type ClientAPI interface {
 
 	UntagResourceRequest(*kafka.UntagResourceInput) kafka.UntagResourceRequest
 
+	UpdateBrokerCountRequest(*kafka.UpdateBrokerCountInput) kafka.UpdateBrokerCountRequest
+
 	UpdateBrokerStorageRequest(*kafka.UpdateBrokerStorageInput) kafka.UpdateBrokerStorageRequest
 
 	UpdateClusterConfigurationRequest(*kafka.UpdateClusterConfigurationInput) kafka.UpdateClusterConfigurationRequest

@@ -301,6 +301,13 @@ type Options struct {
 	// currently supported for Amazon EFS.
 	PreserveDevices PreserveDevices `type:"string" enum:"true"`
 
+	// A value that determines whether tasks should be queued before executing the
+	// tasks. If set to Enabled, the tasks will queued. The default is Enabled.
+	//
+	// If you use the same agent to run multiple tasks you can enable the tasks
+	// to run in series. For more information see task-queue.
+	TaskQueueing TaskQueueing `type:"string" enum:"true"`
+
 	// The user ID (UID) of the file's owner.
 	//
 	// Default value: INT_VALUE. This preserves the integer value of the ID.

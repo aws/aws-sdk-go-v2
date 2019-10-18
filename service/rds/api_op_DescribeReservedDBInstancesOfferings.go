@@ -33,7 +33,7 @@ type DescribeReservedDBInstancesOfferingsInput struct {
 
 	// The maximum number of records to include in the response. If more than the
 	// MaxRecords value is available, a pagination token called a marker is included
-	// in the response so that the following results can be retrieved.
+	// in the response so that you can retrieve the reamaining results.
 	//
 	// Default: 100
 	//
