@@ -18,7 +18,7 @@ type UpdateVirtualNodeInput struct {
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
 
-	// An object representing the specification of a virtual node.
+	// An object that represents the specification of a virtual node.
 	//
 	// Spec is a required field
 	Spec *VirtualNodeSpec `locationName:"spec" type:"structure" required:"true"`
@@ -105,7 +105,7 @@ func (s UpdateVirtualNodeInput) MarshalFields(e protocol.FieldEncoder) error {
 type UpdateVirtualNodeOutput struct {
 	_ struct{} `type:"structure" payload:"VirtualNode"`
 
-	// An object representing a virtual node returned by a describe operation.
+	// An object that represents a virtual node returned by a describe operation.
 	//
 	// VirtualNode is a required field
 	VirtualNode *VirtualNodeData `locationName:"virtualNode" type:"structure" required:"true"`

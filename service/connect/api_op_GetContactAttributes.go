@@ -13,13 +13,12 @@ import (
 type GetContactAttributesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID for the initial contact in Amazon Connect associated with the attributes
-	// to update.
+	// The identifier of the initial contact.
 	//
 	// InitialContactId is a required field
 	InitialContactId *string `location:"uri" locationName:"InitialContactId" min:"1" type:"string" required:"true"`
 
-	// The instance ID for the instance from which to retrieve contact attributes.
+	// The identifier of the Amazon Connect instance.
 	//
 	// InstanceId is a required field
 	InstanceId *string `location:"uri" locationName:"InstanceId" min:"1" type:"string" required:"true"`
@@ -76,7 +75,7 @@ func (s GetContactAttributesInput) MarshalFields(e protocol.FieldEncoder) error 
 type GetContactAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The attributes to update.
+	// Information about the attributes.
 	Attributes map[string]string `type:"map"`
 }
 
@@ -107,7 +106,7 @@ const opGetContactAttributes = "GetContactAttributes"
 // GetContactAttributesRequest returns a request value for making API operation for
 // Amazon Connect Service.
 //
-// Retrieves the contact attributes associated with a contact.
+// Retrieves the contact attributes for the specified contact.
 //
 //    // Example sending a request using GetContactAttributesRequest.
 //    req := client.GetContactAttributesRequest(params)

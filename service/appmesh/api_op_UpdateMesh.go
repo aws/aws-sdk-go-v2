@@ -18,7 +18,7 @@ type UpdateMeshInput struct {
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
 
-	// An object representing the specification of a service mesh.
+	// An object that represents the specification of a service mesh.
 	Spec *MeshSpec `locationName:"spec" type:"structure"`
 }
 
@@ -83,7 +83,7 @@ func (s UpdateMeshInput) MarshalFields(e protocol.FieldEncoder) error {
 type UpdateMeshOutput struct {
 	_ struct{} `type:"structure" payload:"Mesh"`
 
-	// An object representing a service mesh returned by a describe operation.
+	// An object that represents a service mesh returned by a describe operation.
 	//
 	// Mesh is a required field
 	Mesh *MeshData `locationName:"mesh" type:"structure" required:"true"`

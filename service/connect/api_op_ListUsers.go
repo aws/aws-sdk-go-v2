@@ -13,16 +13,12 @@ import (
 type ListUsersInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier for your Amazon Connect instance. To find the ID of your instance,
-	// open the AWS console and select Amazon Connect. Select the alias of the instance
-	// in the Instance alias column. The instance ID is displayed in the Overview
-	// section of your instance settings. For example, the instance ID is the set
-	// of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+	// The identifier of the Amazon Connect instance.
 	//
 	// InstanceId is a required field
 	InstanceId *string `location:"uri" locationName:"InstanceId" min:"1" type:"string" required:"true"`
 
-	// The maximum number of results to return in the response.
+	// The maximimum number of results to return per page.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -83,13 +79,10 @@ func (s ListUsersInput) MarshalFields(e protocol.FieldEncoder) error {
 type ListUsersOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A string returned in the response. Use the value returned in the response
-	// as the value of the NextToken in a subsequent request to retrieve the next
-	// set of results.
+	// If there are additional results, this is the token for the next set of results.
 	NextToken *string `type:"string"`
 
-	// An array of UserSummary objects that contain information about the users
-	// in your instance.
+	// Information about the users.
 	UserSummaryList []UserSummary `type:"list"`
 }
 
@@ -126,7 +119,8 @@ const opListUsers = "ListUsers"
 // ListUsersRequest returns a request value for making API operation for
 // Amazon Connect Service.
 //
-// Returns a UserSummaryList, which is an array of UserSummary objects.
+// Provides summary information about the users for the specified Amazon Connect
+// instance.
 //
 //    // Example sending a request using ListUsersRequest.
 //    req := client.ListUsersRequest(params)
@@ -141,6 +135,12 @@ func (c *Client) ListUsersRequest(input *ListUsersInput) ListUsersRequest {
 		Name:       opListUsers,
 		HTTPMethod: "GET",
 		HTTPPath:   "/users-summary/{InstanceId}",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -173,6 +173,53 @@ func (r ListUsersRequest) Send(ctx context.Context) (*ListUsersResponse, error) 
 	}
 
 	return resp, nil
+}
+
+// NewListUsersRequestPaginator returns a paginator for ListUsers.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListUsersRequest(input)
+//   p := connect.NewListUsersRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListUsersPaginator(req ListUsersRequest) ListUsersPaginator {
+	return ListUsersPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListUsersInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListUsersPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListUsersPaginator struct {
+	aws.Pager
+}
+
+func (p *ListUsersPaginator) CurrentPage() *ListUsersOutput {
+	return p.Pager.CurrentPage().(*ListUsersOutput)
 }
 
 // ListUsersResponse is the response type for the

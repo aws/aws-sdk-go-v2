@@ -13,6 +13,10 @@ import (
 type CreateVoiceConnectorInput struct {
 	_ struct{} `type:"structure"`
 
+	// The AWS Region in which the Amazon Chime Voice Connector is created. Default
+	// value: us-east-1.
+	AwsRegion VoiceConnectorAwsRegion `type:"string" enum:"true"`
+
 	// The name of the Amazon Chime Voice Connector.
 	//
 	// Name is a required field
@@ -54,6 +58,12 @@ func (s *CreateVoiceConnectorInput) Validate() error {
 func (s CreateVoiceConnectorInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
+	if len(s.AwsRegion) > 0 {
+		v := s.AwsRegion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AwsRegion", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.Name != nil {
 		v := *s.Name
 
@@ -98,6 +108,9 @@ const opCreateVoiceConnector = "CreateVoiceConnector"
 // Amazon Chime.
 //
 // Creates an Amazon Chime Voice Connector under the administrator's AWS account.
+// You can choose to create an Amazon Chime Voice Connector in a specific AWS
+// Region.
+//
 // Enabling CreateVoiceConnectorRequest$RequireEncryption configures your Amazon
 // Chime Voice Connector to use TLS transport for SIP signaling and Secure RTP
 // (SRTP) for media. Inbound calls use TLS transport, and unencrypted outbound

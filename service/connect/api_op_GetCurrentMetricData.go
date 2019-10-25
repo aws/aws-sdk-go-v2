@@ -14,33 +14,14 @@ import (
 type GetCurrentMetricDataInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of CurrentMetric objects for the metrics to retrieve. Each CurrentMetric
-	// includes a name of a metric to retrieve and the unit to use for it. You must
-	// list each metric to retrieve data for in the request.
-	//
-	// The following metrics are available:
-	//
-	// AGENTS_AVAILABLE
-	//
-	// Unit: COUNT
-	//
-	// AGENTS_ONLINE
-	//
-	// Unit: COUNT
-	//
-	// AGENTS_ON_CALL
-	//
-	// Unit: COUNT
-	//
-	// AGENTS_STAFFED
-	//
-	// Unit: COUNT
+	// The metrics to retrieve. Specify the name and unit for each metric. The following
+	// metrics are available:
 	//
 	// AGENTS_AFTER_CONTACT_WORK
 	//
 	// Unit: COUNT
 	//
-	// AGENTS_NON_PRODUCTIVE
+	// AGENTS_AVAILABLE
 	//
 	// Unit: COUNT
 	//
@@ -48,7 +29,27 @@ type GetCurrentMetricDataInput struct {
 	//
 	// Unit: COUNT
 	//
+	// AGENTS_NON_PRODUCTIVE
+	//
+	// Unit: COUNT
+	//
+	// AGENTS_ON_CALL
+	//
+	// Unit: COUNT
+	//
+	// AGENTS_ONLINE
+	//
+	// Unit: COUNT
+	//
+	// AGENTS_STAFFED
+	//
+	// Unit: COUNT
+	//
 	// CONTACTS_IN_QUEUE
+	//
+	// Unit: COUNT
+	//
+	// CONTACTS_SCHEDULED
 	//
 	// Unit: COUNT
 	//
@@ -56,25 +57,13 @@ type GetCurrentMetricDataInput struct {
 	//
 	// Unit: SECONDS
 	//
-	// CONTACTS_SCHEDULED
-	//
-	// Unit: COUNT
-	//
 	// CurrentMetrics is a required field
 	CurrentMetrics []CurrentMetric `type:"list" required:"true"`
 
-	// A Filters object that contains a list of queue IDs or queue ARNs, up to 100,
-	// or list of Channels to use to filter the metrics returned in the response.
-	// Metric data is retrieved only for the resources associated with the queue
-	// IDs, ARNs, or Channels included in the filter. You can include both IDs and
-	// ARNs in the same request. To retrieve metrics for all queues, add the queue
-	// ID or ARN for each queue in your instance. Only VOICE is supported for Channels.
-	//
-	// To find the ARN for a queue, open the queue you want to use in the Amazon
-	// Connect Queue editor. The ARN for the queue is displayed in the address bar
-	// as part of the URL. For example, the queue ARN is the set of characters at
-	// the end of the URL, after 'id=' such as arn:aws:connect:us-east-1:270923740243:instance/78fb859d-1b7d-44b1-8aa3-12f0835c5855/queue/1d1a4575-9618-40ab-bbeb-81e45795fe61.
-	// The queue ID is also included in the URL, and is the string after 'queue/'.
+	// The queues, up to 100, or channels, to use to filter the metrics returned.
+	// Metric data is retrieved only for the resources associated with the queues
+	// or channels included in the filter. You can include both queue IDs and queue
+	// ARNs in the same request. The only supported channel is VOICE.
 	//
 	// Filters is a required field
 	Filters *Filters `type:"structure" required:"true"`
@@ -84,29 +73,23 @@ type GetCurrentMetricDataInput struct {
 	// all queues. If you group by CHANNEL, you should include a Channels filter.
 	// The only supported channel is VOICE.
 	//
-	// If no Grouping is included in the request, a summary of CurrentMetrics is
-	// returned.
+	// If no Grouping is included in the request, a summary of metrics is returned.
 	Groupings []Grouping `type:"list"`
 
-	// The identifier for your Amazon Connect instance. To find the ID of your instance,
-	// open the AWS console and select Amazon Connect. Select the alias of the instance
-	// in the Instance alias column. The instance ID is displayed in the Overview
-	// section of your instance settings. For example, the instance ID is the set
-	// of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+	// The identifier of the Amazon Connect instance.
 	//
 	// InstanceId is a required field
 	InstanceId *string `location:"uri" locationName:"InstanceId" min:"1" type:"string" required:"true"`
 
-	// MaxResults indicates the maximum number of results to return per page in
-	// the response, between 1 and 100.
+	// The maximimum number of results to return per page.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	//
 	// The token expires after 5 minutes from the time it is created. Subsequent
-	// requests that use the NextToken must use the same request parameters as the
-	// request that generated the token.
+	// requests that use the token must use the same request parameters as the request
+	// that generated the token.
 	NextToken *string `type:"string"`
 }
 
@@ -206,28 +189,17 @@ func (s GetCurrentMetricDataInput) MarshalFields(e protocol.FieldEncoder) error 
 type GetCurrentMetricDataOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The time at which CurrentMetricData was retrieved and cached for pagination.
+	// The time at which the metrics were retrieved and cached for pagination.
 	DataSnapshotTime *time.Time `type:"timestamp"`
 
-	// A list of CurrentMetricResult objects organized by Dimensions combining with
-	// CurrentMetricDataCollections.
-	//
-	// Dimensions is the resourceId specified in the Filters of the request.
-	//
-	// Collections is a list of CurrentMetricData objects with corresponding values
-	// to the CurrentMetrics specified in the request.
-	//
-	// If no Grouping is specified in the request, Collections is a summary for
-	// the CurrentMetric returned.
+	// Information about the real-time metrics.
 	MetricResults []CurrentMetricResult `type:"list"`
 
-	// A string returned in the response. Use the value returned in the response
-	// as the value of the NextToken in a subsequent request to retrieve the next
-	// set of results.
+	// If there are additional results, this is the token for the next set of results.
 	//
 	// The token expires after 5 minutes from the time it is created. Subsequent
-	// requests that use the NextToken must use the same request parameters as the
-	// request that generated the token.
+	// requests that use the token must use the same request parameters as the request
+	// that generated the token.
 	NextToken *string `type:"string"`
 }
 
@@ -271,11 +243,10 @@ const opGetCurrentMetricData = "GetCurrentMetricData"
 // GetCurrentMetricDataRequest returns a request value for making API operation for
 // Amazon Connect Service.
 //
-// The GetCurrentMetricData operation retrieves current metric data from your
-// Amazon Connect instance.
+// Gets the real-time metric data from the specified Amazon Connect instance.
 //
-// If you are using an IAM account, it must have permission to the connect:GetCurrentMetricData
-// action.
+// For more information, see Real-time Metrics Reports (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-reports.html)
+// in the Amazon Connect Administrator Guide.
 //
 //    // Example sending a request using GetCurrentMetricDataRequest.
 //    req := client.GetCurrentMetricDataRequest(params)

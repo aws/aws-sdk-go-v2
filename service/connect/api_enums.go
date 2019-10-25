@@ -34,7 +34,31 @@ func (enum Comparison) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// A list of current metric names.
+type ContactFlowType string
+
+// Enum values for ContactFlowType
+const (
+	ContactFlowTypeContactFlow     ContactFlowType = "CONTACT_FLOW"
+	ContactFlowTypeCustomerQueue   ContactFlowType = "CUSTOMER_QUEUE"
+	ContactFlowTypeCustomerHold    ContactFlowType = "CUSTOMER_HOLD"
+	ContactFlowTypeCustomerWhisper ContactFlowType = "CUSTOMER_WHISPER"
+	ContactFlowTypeAgentHold       ContactFlowType = "AGENT_HOLD"
+	ContactFlowTypeAgentWhisper    ContactFlowType = "AGENT_WHISPER"
+	ContactFlowTypeOutboundWhisper ContactFlowType = "OUTBOUND_WHISPER"
+	ContactFlowTypeAgentTransfer   ContactFlowType = "AGENT_TRANSFER"
+	ContactFlowTypeQueueTransfer   ContactFlowType = "QUEUE_TRANSFER"
+)
+
+func (enum ContactFlowType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ContactFlowType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// The current metric names.
 type CurrentMetricName string
 
 // Enum values for CurrentMetricName
@@ -77,7 +101,7 @@ func (enum Grouping) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// A list of historical metric names.
+// The historical metric names.
 type HistoricalMetricName string
 
 // Enum values for HistoricalMetricName
@@ -118,6 +142,275 @@ func (enum HistoricalMetricName) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type PhoneNumberCountryCode string
+
+// Enum values for PhoneNumberCountryCode
+const (
+	PhoneNumberCountryCodeAf PhoneNumberCountryCode = "AF"
+	PhoneNumberCountryCodeAl PhoneNumberCountryCode = "AL"
+	PhoneNumberCountryCodeDz PhoneNumberCountryCode = "DZ"
+	PhoneNumberCountryCodeAs PhoneNumberCountryCode = "AS"
+	PhoneNumberCountryCodeAd PhoneNumberCountryCode = "AD"
+	PhoneNumberCountryCodeAo PhoneNumberCountryCode = "AO"
+	PhoneNumberCountryCodeAi PhoneNumberCountryCode = "AI"
+	PhoneNumberCountryCodeAq PhoneNumberCountryCode = "AQ"
+	PhoneNumberCountryCodeAg PhoneNumberCountryCode = "AG"
+	PhoneNumberCountryCodeAr PhoneNumberCountryCode = "AR"
+	PhoneNumberCountryCodeAm PhoneNumberCountryCode = "AM"
+	PhoneNumberCountryCodeAw PhoneNumberCountryCode = "AW"
+	PhoneNumberCountryCodeAu PhoneNumberCountryCode = "AU"
+	PhoneNumberCountryCodeAt PhoneNumberCountryCode = "AT"
+	PhoneNumberCountryCodeAz PhoneNumberCountryCode = "AZ"
+	PhoneNumberCountryCodeBs PhoneNumberCountryCode = "BS"
+	PhoneNumberCountryCodeBh PhoneNumberCountryCode = "BH"
+	PhoneNumberCountryCodeBd PhoneNumberCountryCode = "BD"
+	PhoneNumberCountryCodeBb PhoneNumberCountryCode = "BB"
+	PhoneNumberCountryCodeBy PhoneNumberCountryCode = "BY"
+	PhoneNumberCountryCodeBe PhoneNumberCountryCode = "BE"
+	PhoneNumberCountryCodeBz PhoneNumberCountryCode = "BZ"
+	PhoneNumberCountryCodeBj PhoneNumberCountryCode = "BJ"
+	PhoneNumberCountryCodeBm PhoneNumberCountryCode = "BM"
+	PhoneNumberCountryCodeBt PhoneNumberCountryCode = "BT"
+	PhoneNumberCountryCodeBo PhoneNumberCountryCode = "BO"
+	PhoneNumberCountryCodeBa PhoneNumberCountryCode = "BA"
+	PhoneNumberCountryCodeBw PhoneNumberCountryCode = "BW"
+	PhoneNumberCountryCodeBr PhoneNumberCountryCode = "BR"
+	PhoneNumberCountryCodeIo PhoneNumberCountryCode = "IO"
+	PhoneNumberCountryCodeVg PhoneNumberCountryCode = "VG"
+	PhoneNumberCountryCodeBn PhoneNumberCountryCode = "BN"
+	PhoneNumberCountryCodeBg PhoneNumberCountryCode = "BG"
+	PhoneNumberCountryCodeBf PhoneNumberCountryCode = "BF"
+	PhoneNumberCountryCodeBi PhoneNumberCountryCode = "BI"
+	PhoneNumberCountryCodeKh PhoneNumberCountryCode = "KH"
+	PhoneNumberCountryCodeCm PhoneNumberCountryCode = "CM"
+	PhoneNumberCountryCodeCa PhoneNumberCountryCode = "CA"
+	PhoneNumberCountryCodeCv PhoneNumberCountryCode = "CV"
+	PhoneNumberCountryCodeKy PhoneNumberCountryCode = "KY"
+	PhoneNumberCountryCodeCf PhoneNumberCountryCode = "CF"
+	PhoneNumberCountryCodeTd PhoneNumberCountryCode = "TD"
+	PhoneNumberCountryCodeCl PhoneNumberCountryCode = "CL"
+	PhoneNumberCountryCodeCn PhoneNumberCountryCode = "CN"
+	PhoneNumberCountryCodeCx PhoneNumberCountryCode = "CX"
+	PhoneNumberCountryCodeCc PhoneNumberCountryCode = "CC"
+	PhoneNumberCountryCodeCo PhoneNumberCountryCode = "CO"
+	PhoneNumberCountryCodeKm PhoneNumberCountryCode = "KM"
+	PhoneNumberCountryCodeCk PhoneNumberCountryCode = "CK"
+	PhoneNumberCountryCodeCr PhoneNumberCountryCode = "CR"
+	PhoneNumberCountryCodeHr PhoneNumberCountryCode = "HR"
+	PhoneNumberCountryCodeCu PhoneNumberCountryCode = "CU"
+	PhoneNumberCountryCodeCw PhoneNumberCountryCode = "CW"
+	PhoneNumberCountryCodeCy PhoneNumberCountryCode = "CY"
+	PhoneNumberCountryCodeCz PhoneNumberCountryCode = "CZ"
+	PhoneNumberCountryCodeCd PhoneNumberCountryCode = "CD"
+	PhoneNumberCountryCodeDk PhoneNumberCountryCode = "DK"
+	PhoneNumberCountryCodeDj PhoneNumberCountryCode = "DJ"
+	PhoneNumberCountryCodeDm PhoneNumberCountryCode = "DM"
+	PhoneNumberCountryCodeDo PhoneNumberCountryCode = "DO"
+	PhoneNumberCountryCodeTl PhoneNumberCountryCode = "TL"
+	PhoneNumberCountryCodeEc PhoneNumberCountryCode = "EC"
+	PhoneNumberCountryCodeEg PhoneNumberCountryCode = "EG"
+	PhoneNumberCountryCodeSv PhoneNumberCountryCode = "SV"
+	PhoneNumberCountryCodeGq PhoneNumberCountryCode = "GQ"
+	PhoneNumberCountryCodeEr PhoneNumberCountryCode = "ER"
+	PhoneNumberCountryCodeEe PhoneNumberCountryCode = "EE"
+	PhoneNumberCountryCodeEt PhoneNumberCountryCode = "ET"
+	PhoneNumberCountryCodeFk PhoneNumberCountryCode = "FK"
+	PhoneNumberCountryCodeFo PhoneNumberCountryCode = "FO"
+	PhoneNumberCountryCodeFj PhoneNumberCountryCode = "FJ"
+	PhoneNumberCountryCodeFi PhoneNumberCountryCode = "FI"
+	PhoneNumberCountryCodeFr PhoneNumberCountryCode = "FR"
+	PhoneNumberCountryCodePf PhoneNumberCountryCode = "PF"
+	PhoneNumberCountryCodeGa PhoneNumberCountryCode = "GA"
+	PhoneNumberCountryCodeGm PhoneNumberCountryCode = "GM"
+	PhoneNumberCountryCodeGe PhoneNumberCountryCode = "GE"
+	PhoneNumberCountryCodeDe PhoneNumberCountryCode = "DE"
+	PhoneNumberCountryCodeGh PhoneNumberCountryCode = "GH"
+	PhoneNumberCountryCodeGi PhoneNumberCountryCode = "GI"
+	PhoneNumberCountryCodeGr PhoneNumberCountryCode = "GR"
+	PhoneNumberCountryCodeGl PhoneNumberCountryCode = "GL"
+	PhoneNumberCountryCodeGd PhoneNumberCountryCode = "GD"
+	PhoneNumberCountryCodeGu PhoneNumberCountryCode = "GU"
+	PhoneNumberCountryCodeGt PhoneNumberCountryCode = "GT"
+	PhoneNumberCountryCodeGg PhoneNumberCountryCode = "GG"
+	PhoneNumberCountryCodeGn PhoneNumberCountryCode = "GN"
+	PhoneNumberCountryCodeGw PhoneNumberCountryCode = "GW"
+	PhoneNumberCountryCodeGy PhoneNumberCountryCode = "GY"
+	PhoneNumberCountryCodeHt PhoneNumberCountryCode = "HT"
+	PhoneNumberCountryCodeHn PhoneNumberCountryCode = "HN"
+	PhoneNumberCountryCodeHk PhoneNumberCountryCode = "HK"
+	PhoneNumberCountryCodeHu PhoneNumberCountryCode = "HU"
+	PhoneNumberCountryCodeIs PhoneNumberCountryCode = "IS"
+	PhoneNumberCountryCodeIn PhoneNumberCountryCode = "IN"
+	PhoneNumberCountryCodeId PhoneNumberCountryCode = "ID"
+	PhoneNumberCountryCodeIr PhoneNumberCountryCode = "IR"
+	PhoneNumberCountryCodeIq PhoneNumberCountryCode = "IQ"
+	PhoneNumberCountryCodeIe PhoneNumberCountryCode = "IE"
+	PhoneNumberCountryCodeIm PhoneNumberCountryCode = "IM"
+	PhoneNumberCountryCodeIl PhoneNumberCountryCode = "IL"
+	PhoneNumberCountryCodeIt PhoneNumberCountryCode = "IT"
+	PhoneNumberCountryCodeCi PhoneNumberCountryCode = "CI"
+	PhoneNumberCountryCodeJm PhoneNumberCountryCode = "JM"
+	PhoneNumberCountryCodeJp PhoneNumberCountryCode = "JP"
+	PhoneNumberCountryCodeJe PhoneNumberCountryCode = "JE"
+	PhoneNumberCountryCodeJo PhoneNumberCountryCode = "JO"
+	PhoneNumberCountryCodeKz PhoneNumberCountryCode = "KZ"
+	PhoneNumberCountryCodeKe PhoneNumberCountryCode = "KE"
+	PhoneNumberCountryCodeKi PhoneNumberCountryCode = "KI"
+	PhoneNumberCountryCodeKw PhoneNumberCountryCode = "KW"
+	PhoneNumberCountryCodeKg PhoneNumberCountryCode = "KG"
+	PhoneNumberCountryCodeLa PhoneNumberCountryCode = "LA"
+	PhoneNumberCountryCodeLv PhoneNumberCountryCode = "LV"
+	PhoneNumberCountryCodeLb PhoneNumberCountryCode = "LB"
+	PhoneNumberCountryCodeLs PhoneNumberCountryCode = "LS"
+	PhoneNumberCountryCodeLr PhoneNumberCountryCode = "LR"
+	PhoneNumberCountryCodeLy PhoneNumberCountryCode = "LY"
+	PhoneNumberCountryCodeLi PhoneNumberCountryCode = "LI"
+	PhoneNumberCountryCodeLt PhoneNumberCountryCode = "LT"
+	PhoneNumberCountryCodeLu PhoneNumberCountryCode = "LU"
+	PhoneNumberCountryCodeMo PhoneNumberCountryCode = "MO"
+	PhoneNumberCountryCodeMk PhoneNumberCountryCode = "MK"
+	PhoneNumberCountryCodeMg PhoneNumberCountryCode = "MG"
+	PhoneNumberCountryCodeMw PhoneNumberCountryCode = "MW"
+	PhoneNumberCountryCodeMy PhoneNumberCountryCode = "MY"
+	PhoneNumberCountryCodeMv PhoneNumberCountryCode = "MV"
+	PhoneNumberCountryCodeMl PhoneNumberCountryCode = "ML"
+	PhoneNumberCountryCodeMt PhoneNumberCountryCode = "MT"
+	PhoneNumberCountryCodeMh PhoneNumberCountryCode = "MH"
+	PhoneNumberCountryCodeMr PhoneNumberCountryCode = "MR"
+	PhoneNumberCountryCodeMu PhoneNumberCountryCode = "MU"
+	PhoneNumberCountryCodeYt PhoneNumberCountryCode = "YT"
+	PhoneNumberCountryCodeMx PhoneNumberCountryCode = "MX"
+	PhoneNumberCountryCodeFm PhoneNumberCountryCode = "FM"
+	PhoneNumberCountryCodeMd PhoneNumberCountryCode = "MD"
+	PhoneNumberCountryCodeMc PhoneNumberCountryCode = "MC"
+	PhoneNumberCountryCodeMn PhoneNumberCountryCode = "MN"
+	PhoneNumberCountryCodeMe PhoneNumberCountryCode = "ME"
+	PhoneNumberCountryCodeMs PhoneNumberCountryCode = "MS"
+	PhoneNumberCountryCodeMa PhoneNumberCountryCode = "MA"
+	PhoneNumberCountryCodeMz PhoneNumberCountryCode = "MZ"
+	PhoneNumberCountryCodeMm PhoneNumberCountryCode = "MM"
+	PhoneNumberCountryCodeNa PhoneNumberCountryCode = "NA"
+	PhoneNumberCountryCodeNr PhoneNumberCountryCode = "NR"
+	PhoneNumberCountryCodeNp PhoneNumberCountryCode = "NP"
+	PhoneNumberCountryCodeNl PhoneNumberCountryCode = "NL"
+	PhoneNumberCountryCodeAn PhoneNumberCountryCode = "AN"
+	PhoneNumberCountryCodeNc PhoneNumberCountryCode = "NC"
+	PhoneNumberCountryCodeNz PhoneNumberCountryCode = "NZ"
+	PhoneNumberCountryCodeNi PhoneNumberCountryCode = "NI"
+	PhoneNumberCountryCodeNe PhoneNumberCountryCode = "NE"
+	PhoneNumberCountryCodeNg PhoneNumberCountryCode = "NG"
+	PhoneNumberCountryCodeNu PhoneNumberCountryCode = "NU"
+	PhoneNumberCountryCodeKp PhoneNumberCountryCode = "KP"
+	PhoneNumberCountryCodeMp PhoneNumberCountryCode = "MP"
+	PhoneNumberCountryCodeNo PhoneNumberCountryCode = "NO"
+	PhoneNumberCountryCodeOm PhoneNumberCountryCode = "OM"
+	PhoneNumberCountryCodePk PhoneNumberCountryCode = "PK"
+	PhoneNumberCountryCodePw PhoneNumberCountryCode = "PW"
+	PhoneNumberCountryCodePa PhoneNumberCountryCode = "PA"
+	PhoneNumberCountryCodePg PhoneNumberCountryCode = "PG"
+	PhoneNumberCountryCodePy PhoneNumberCountryCode = "PY"
+	PhoneNumberCountryCodePe PhoneNumberCountryCode = "PE"
+	PhoneNumberCountryCodePh PhoneNumberCountryCode = "PH"
+	PhoneNumberCountryCodePn PhoneNumberCountryCode = "PN"
+	PhoneNumberCountryCodePl PhoneNumberCountryCode = "PL"
+	PhoneNumberCountryCodePt PhoneNumberCountryCode = "PT"
+	PhoneNumberCountryCodePr PhoneNumberCountryCode = "PR"
+	PhoneNumberCountryCodeQa PhoneNumberCountryCode = "QA"
+	PhoneNumberCountryCodeCg PhoneNumberCountryCode = "CG"
+	PhoneNumberCountryCodeRe PhoneNumberCountryCode = "RE"
+	PhoneNumberCountryCodeRo PhoneNumberCountryCode = "RO"
+	PhoneNumberCountryCodeRu PhoneNumberCountryCode = "RU"
+	PhoneNumberCountryCodeRw PhoneNumberCountryCode = "RW"
+	PhoneNumberCountryCodeBl PhoneNumberCountryCode = "BL"
+	PhoneNumberCountryCodeSh PhoneNumberCountryCode = "SH"
+	PhoneNumberCountryCodeKn PhoneNumberCountryCode = "KN"
+	PhoneNumberCountryCodeLc PhoneNumberCountryCode = "LC"
+	PhoneNumberCountryCodeMf PhoneNumberCountryCode = "MF"
+	PhoneNumberCountryCodePm PhoneNumberCountryCode = "PM"
+	PhoneNumberCountryCodeVc PhoneNumberCountryCode = "VC"
+	PhoneNumberCountryCodeWs PhoneNumberCountryCode = "WS"
+	PhoneNumberCountryCodeSm PhoneNumberCountryCode = "SM"
+	PhoneNumberCountryCodeSt PhoneNumberCountryCode = "ST"
+	PhoneNumberCountryCodeSa PhoneNumberCountryCode = "SA"
+	PhoneNumberCountryCodeSn PhoneNumberCountryCode = "SN"
+	PhoneNumberCountryCodeRs PhoneNumberCountryCode = "RS"
+	PhoneNumberCountryCodeSc PhoneNumberCountryCode = "SC"
+	PhoneNumberCountryCodeSl PhoneNumberCountryCode = "SL"
+	PhoneNumberCountryCodeSg PhoneNumberCountryCode = "SG"
+	PhoneNumberCountryCodeSx PhoneNumberCountryCode = "SX"
+	PhoneNumberCountryCodeSk PhoneNumberCountryCode = "SK"
+	PhoneNumberCountryCodeSi PhoneNumberCountryCode = "SI"
+	PhoneNumberCountryCodeSb PhoneNumberCountryCode = "SB"
+	PhoneNumberCountryCodeSo PhoneNumberCountryCode = "SO"
+	PhoneNumberCountryCodeZa PhoneNumberCountryCode = "ZA"
+	PhoneNumberCountryCodeKr PhoneNumberCountryCode = "KR"
+	PhoneNumberCountryCodeEs PhoneNumberCountryCode = "ES"
+	PhoneNumberCountryCodeLk PhoneNumberCountryCode = "LK"
+	PhoneNumberCountryCodeSd PhoneNumberCountryCode = "SD"
+	PhoneNumberCountryCodeSr PhoneNumberCountryCode = "SR"
+	PhoneNumberCountryCodeSj PhoneNumberCountryCode = "SJ"
+	PhoneNumberCountryCodeSz PhoneNumberCountryCode = "SZ"
+	PhoneNumberCountryCodeSe PhoneNumberCountryCode = "SE"
+	PhoneNumberCountryCodeCh PhoneNumberCountryCode = "CH"
+	PhoneNumberCountryCodeSy PhoneNumberCountryCode = "SY"
+	PhoneNumberCountryCodeTw PhoneNumberCountryCode = "TW"
+	PhoneNumberCountryCodeTj PhoneNumberCountryCode = "TJ"
+	PhoneNumberCountryCodeTz PhoneNumberCountryCode = "TZ"
+	PhoneNumberCountryCodeTh PhoneNumberCountryCode = "TH"
+	PhoneNumberCountryCodeTg PhoneNumberCountryCode = "TG"
+	PhoneNumberCountryCodeTk PhoneNumberCountryCode = "TK"
+	PhoneNumberCountryCodeTo PhoneNumberCountryCode = "TO"
+	PhoneNumberCountryCodeTt PhoneNumberCountryCode = "TT"
+	PhoneNumberCountryCodeTn PhoneNumberCountryCode = "TN"
+	PhoneNumberCountryCodeTr PhoneNumberCountryCode = "TR"
+	PhoneNumberCountryCodeTm PhoneNumberCountryCode = "TM"
+	PhoneNumberCountryCodeTc PhoneNumberCountryCode = "TC"
+	PhoneNumberCountryCodeTv PhoneNumberCountryCode = "TV"
+	PhoneNumberCountryCodeVi PhoneNumberCountryCode = "VI"
+	PhoneNumberCountryCodeUg PhoneNumberCountryCode = "UG"
+	PhoneNumberCountryCodeUa PhoneNumberCountryCode = "UA"
+	PhoneNumberCountryCodeAe PhoneNumberCountryCode = "AE"
+	PhoneNumberCountryCodeGb PhoneNumberCountryCode = "GB"
+	PhoneNumberCountryCodeUs PhoneNumberCountryCode = "US"
+	PhoneNumberCountryCodeUy PhoneNumberCountryCode = "UY"
+	PhoneNumberCountryCodeUz PhoneNumberCountryCode = "UZ"
+	PhoneNumberCountryCodeVu PhoneNumberCountryCode = "VU"
+	PhoneNumberCountryCodeVa PhoneNumberCountryCode = "VA"
+	PhoneNumberCountryCodeVe PhoneNumberCountryCode = "VE"
+	PhoneNumberCountryCodeVn PhoneNumberCountryCode = "VN"
+	PhoneNumberCountryCodeWf PhoneNumberCountryCode = "WF"
+	PhoneNumberCountryCodeEh PhoneNumberCountryCode = "EH"
+	PhoneNumberCountryCodeYe PhoneNumberCountryCode = "YE"
+	PhoneNumberCountryCodeZm PhoneNumberCountryCode = "ZM"
+	PhoneNumberCountryCodeZw PhoneNumberCountryCode = "ZW"
+)
+
+func (enum PhoneNumberCountryCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PhoneNumberCountryCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type PhoneNumberType string
+
+// Enum values for PhoneNumberType
+const (
+	PhoneNumberTypeTollFree PhoneNumberType = "TOLL_FREE"
+	PhoneNumberTypeDid      PhoneNumberType = "DID"
+)
+
+func (enum PhoneNumberType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PhoneNumberType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PhoneType string
 
 // Enum values for PhoneType
@@ -131,6 +424,23 @@ func (enum PhoneType) MarshalValue() (string, error) {
 }
 
 func (enum PhoneType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type QueueType string
+
+// Enum values for QueueType
+const (
+	QueueTypeStandard QueueType = "STANDARD"
+	QueueTypeAgent    QueueType = "AGENT"
+)
+
+func (enum QueueType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum QueueType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
