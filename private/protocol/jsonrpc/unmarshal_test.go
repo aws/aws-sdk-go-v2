@@ -90,30 +90,6 @@ func (c *OutputService1ProtocolTest) newRequest(op *aws.Operation, params, data 
 	return req
 }
 
-type OutputService1TestShapeOutputService1TestCaseOperation1Input struct {
-	_ struct{} `type:"structure"`
-}
-
-type OutputService1TestShapeOutputService1TestCaseOperation1Output struct {
-	_ struct{} `type:"structure"`
-
-	Char *string `type:"character"`
-
-	Double *float64 `type:"double"`
-
-	FalseBool *bool `type:"boolean"`
-
-	Float *float64 `type:"float"`
-
-	Long *int64 `type:"long"`
-
-	Num *int64 `type:"integer"`
-
-	Str *string `type:"string"`
-
-	TrueBool *bool `type:"boolean"`
-}
-
 const opOutputService1TestCaseOperation1 = "OperationName"
 
 // OutputService1TestCaseOperation1Request returns a request value for making API operation for
@@ -125,7 +101,7 @@ const opOutputService1TestCaseOperation1 = "OperationName"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *OutputService1ProtocolTest) OutputService1TestCaseOperation1Request(input *OutputService1TestShapeOutputService1TestCaseOperation1Input) OutputService1TestCaseOperation1Request {
+func (c *OutputService1ProtocolTest) OutputService1TestCaseOperation1Request(input *types.OutputService1TestShapeOutputService1TestCaseOperation1Input) OutputService1TestCaseOperation1Request {
 	op := &aws.Operation{
 		Name: opOutputService1TestCaseOperation1,
 
@@ -133,10 +109,12 @@ func (c *OutputService1ProtocolTest) OutputService1TestCaseOperation1Request(inp
 	}
 
 	if input == nil {
-		input = &OutputService1TestShapeOutputService1TestCaseOperation1Input{}
+		input = &types.OutputService1TestShapeOutputService1TestCaseOperation1Input{}
 	}
 
-	req := c.newRequest(op, input, &OutputService1TestShapeOutputService1TestCaseOperation1Output{})
+	req := c.newRequest(op, input, &types.OutputService1TestShapeOutputService1TestCaseOperation1Output{})
+	req.Handlers.Build.Remove(jsonrpc.BuildHandler)
+	req.Handlers.Build.PushBack(aws_jsonrpc.NewOutputService1TestCaseOperation1Marshaler(input).MarshalOperation)
 	return OutputService1TestCaseOperation1Request{Request: req, Input: input, Copy: c.OutputService1TestCaseOperation1Request}
 }
 
@@ -144,8 +122,8 @@ func (c *OutputService1ProtocolTest) OutputService1TestCaseOperation1Request(inp
 // OutputService1TestCaseOperation1 API operation.
 type OutputService1TestCaseOperation1Request struct {
 	*aws.Request
-	Input *OutputService1TestShapeOutputService1TestCaseOperation1Input
-	Copy  func(*OutputService1TestShapeOutputService1TestCaseOperation1Input) OutputService1TestCaseOperation1Request
+	Input *types.OutputService1TestShapeOutputService1TestCaseOperation1Input
+	Copy  func(*types.OutputService1TestShapeOutputService1TestCaseOperation1Input) OutputService1TestCaseOperation1Request
 }
 
 // Send marshals and sends the OutputService1TestCaseOperation1 API request.
@@ -157,7 +135,7 @@ func (r OutputService1TestCaseOperation1Request) Send(ctx context.Context) (*Out
 	}
 
 	resp := &OutputService1TestCaseOperation1Response{
-		OutputService1TestShapeOutputService1TestCaseOperation1Output: r.Request.Data.(*OutputService1TestShapeOutputService1TestCaseOperation1Output),
+		OutputService1TestShapeOutputService1TestCaseOperation1Output: r.Request.Data.(*types.OutputService1TestShapeOutputService1TestCaseOperation1Output),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -167,7 +145,7 @@ func (r OutputService1TestCaseOperation1Request) Send(ctx context.Context) (*Out
 // OutputService1TestCaseOperation1Response is the response type for the
 // OutputService1TestCaseOperation1 API operation.
 type OutputService1TestCaseOperation1Response struct {
-	*OutputService1TestShapeOutputService1TestCaseOperation1Output
+	*types.OutputService1TestShapeOutputService1TestCaseOperation1Output
 
 	response *aws.Response
 }
@@ -226,19 +204,6 @@ func (c *OutputService2ProtocolTest) newRequest(op *aws.Operation, params, data 
 	return req
 }
 
-type OutputService2TestShapeOutputService2TestCaseOperation1Input struct {
-	_ struct{} `type:"structure"`
-}
-
-type OutputService2TestShapeOutputService2TestCaseOperation1Output struct {
-	_ struct{} `type:"structure"`
-
-	// BlobMember is automatically base64 encoded/decoded by the SDK.
-	BlobMember []byte `type:"blob"`
-
-	StructMember *OutputService2TestShapeBlobContainer `type:"structure"`
-}
-
 const opOutputService2TestCaseOperation1 = "OperationName"
 
 // OutputService2TestCaseOperation1Request returns a request value for making API operation for
@@ -250,7 +215,7 @@ const opOutputService2TestCaseOperation1 = "OperationName"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *OutputService2ProtocolTest) OutputService2TestCaseOperation1Request(input *OutputService2TestShapeOutputService2TestCaseOperation1Input) OutputService2TestCaseOperation1Request {
+func (c *OutputService2ProtocolTest) OutputService2TestCaseOperation1Request(input *types.OutputService2TestShapeOutputService2TestCaseOperation1Input) OutputService2TestCaseOperation1Request {
 	op := &aws.Operation{
 		Name: opOutputService2TestCaseOperation1,
 
@@ -258,10 +223,12 @@ func (c *OutputService2ProtocolTest) OutputService2TestCaseOperation1Request(inp
 	}
 
 	if input == nil {
-		input = &OutputService2TestShapeOutputService2TestCaseOperation1Input{}
+		input = &types.OutputService2TestShapeOutputService2TestCaseOperation1Input{}
 	}
 
-	req := c.newRequest(op, input, &OutputService2TestShapeOutputService2TestCaseOperation1Output{})
+	req := c.newRequest(op, input, &types.OutputService2TestShapeOutputService2TestCaseOperation1Output{})
+	req.Handlers.Build.Remove(jsonrpc.BuildHandler)
+	req.Handlers.Build.PushBack(aws_jsonrpc.NewOutputService2TestCaseOperation1Marshaler(input).MarshalOperation)
 	return OutputService2TestCaseOperation1Request{Request: req, Input: input, Copy: c.OutputService2TestCaseOperation1Request}
 }
 
@@ -269,8 +236,8 @@ func (c *OutputService2ProtocolTest) OutputService2TestCaseOperation1Request(inp
 // OutputService2TestCaseOperation1 API operation.
 type OutputService2TestCaseOperation1Request struct {
 	*aws.Request
-	Input *OutputService2TestShapeOutputService2TestCaseOperation1Input
-	Copy  func(*OutputService2TestShapeOutputService2TestCaseOperation1Input) OutputService2TestCaseOperation1Request
+	Input *types.OutputService2TestShapeOutputService2TestCaseOperation1Input
+	Copy  func(*types.OutputService2TestShapeOutputService2TestCaseOperation1Input) OutputService2TestCaseOperation1Request
 }
 
 // Send marshals and sends the OutputService2TestCaseOperation1 API request.
@@ -282,7 +249,7 @@ func (r OutputService2TestCaseOperation1Request) Send(ctx context.Context) (*Out
 	}
 
 	resp := &OutputService2TestCaseOperation1Response{
-		OutputService2TestShapeOutputService2TestCaseOperation1Output: r.Request.Data.(*OutputService2TestShapeOutputService2TestCaseOperation1Output),
+		OutputService2TestShapeOutputService2TestCaseOperation1Output: r.Request.Data.(*types.OutputService2TestShapeOutputService2TestCaseOperation1Output),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -292,7 +259,7 @@ func (r OutputService2TestCaseOperation1Request) Send(ctx context.Context) (*Out
 // OutputService2TestCaseOperation1Response is the response type for the
 // OutputService2TestCaseOperation1 API operation.
 type OutputService2TestCaseOperation1Response struct {
-	*OutputService2TestShapeOutputService2TestCaseOperation1Output
+	*types.OutputService2TestShapeOutputService2TestCaseOperation1Output
 
 	response *aws.Response
 }
@@ -358,22 +325,6 @@ func (c *OutputService3ProtocolTest) newRequest(op *aws.Operation, params, data 
 	return req
 }
 
-type OutputService3TestShapeOutputService3TestCaseOperation1Input struct {
-	_ struct{} `type:"structure"`
-}
-
-type OutputService3TestShapeOutputService3TestCaseOperation1Output struct {
-	_ struct{} `type:"structure"`
-
-	StructMember *OutputService3TestShapeTimeContainer `type:"structure"`
-
-	TimeArg *time.Time `type:"timestamp"`
-
-	TimeCustom *time.Time `type:"timestamp" timestampFormat:"rfc822"`
-
-	TimeFormat *time.Time `type:"timestamp" timestampFormat:"iso8601"`
-}
-
 const opOutputService3TestCaseOperation1 = "OperationName"
 
 // OutputService3TestCaseOperation1Request returns a request value for making API operation for
@@ -385,7 +336,7 @@ const opOutputService3TestCaseOperation1 = "OperationName"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *OutputService3ProtocolTest) OutputService3TestCaseOperation1Request(input *OutputService3TestShapeOutputService3TestCaseOperation1Input) OutputService3TestCaseOperation1Request {
+func (c *OutputService3ProtocolTest) OutputService3TestCaseOperation1Request(input *types.OutputService3TestShapeOutputService3TestCaseOperation1Input) OutputService3TestCaseOperation1Request {
 	op := &aws.Operation{
 		Name: opOutputService3TestCaseOperation1,
 
@@ -393,10 +344,12 @@ func (c *OutputService3ProtocolTest) OutputService3TestCaseOperation1Request(inp
 	}
 
 	if input == nil {
-		input = &OutputService3TestShapeOutputService3TestCaseOperation1Input{}
+		input = &types.OutputService3TestShapeOutputService3TestCaseOperation1Input{}
 	}
 
-	req := c.newRequest(op, input, &OutputService3TestShapeOutputService3TestCaseOperation1Output{})
+	req := c.newRequest(op, input, &types.OutputService3TestShapeOutputService3TestCaseOperation1Output{})
+	req.Handlers.Build.Remove(jsonrpc.BuildHandler)
+	req.Handlers.Build.PushBack(aws_jsonrpc.NewOutputService3TestCaseOperation1Marshaler(input).MarshalOperation)
 	return OutputService3TestCaseOperation1Request{Request: req, Input: input, Copy: c.OutputService3TestCaseOperation1Request}
 }
 
@@ -404,8 +357,8 @@ func (c *OutputService3ProtocolTest) OutputService3TestCaseOperation1Request(inp
 // OutputService3TestCaseOperation1 API operation.
 type OutputService3TestCaseOperation1Request struct {
 	*aws.Request
-	Input *OutputService3TestShapeOutputService3TestCaseOperation1Input
-	Copy  func(*OutputService3TestShapeOutputService3TestCaseOperation1Input) OutputService3TestCaseOperation1Request
+	Input *types.OutputService3TestShapeOutputService3TestCaseOperation1Input
+	Copy  func(*types.OutputService3TestShapeOutputService3TestCaseOperation1Input) OutputService3TestCaseOperation1Request
 }
 
 // Send marshals and sends the OutputService3TestCaseOperation1 API request.
@@ -417,7 +370,7 @@ func (r OutputService3TestCaseOperation1Request) Send(ctx context.Context) (*Out
 	}
 
 	resp := &OutputService3TestCaseOperation1Response{
-		OutputService3TestShapeOutputService3TestCaseOperation1Output: r.Request.Data.(*OutputService3TestShapeOutputService3TestCaseOperation1Output),
+		OutputService3TestShapeOutputService3TestCaseOperation1Output: r.Request.Data.(*types.OutputService3TestShapeOutputService3TestCaseOperation1Output),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -427,7 +380,7 @@ func (r OutputService3TestCaseOperation1Request) Send(ctx context.Context) (*Out
 // OutputService3TestCaseOperation1Response is the response type for the
 // OutputService3TestCaseOperation1 API operation.
 type OutputService3TestCaseOperation1Response struct {
-	*OutputService3TestShapeOutputService3TestCaseOperation1Output
+	*types.OutputService3TestShapeOutputService3TestCaseOperation1Output
 
 	response *aws.Response
 }
@@ -494,20 +447,6 @@ func (c *OutputService4ProtocolTest) newRequest(op *aws.Operation, params, data 
 	return req
 }
 
-type OutputService4TestShapeOutputService4TestCaseOperation1Input struct {
-	_ struct{} `type:"structure"`
-}
-
-type OutputService4TestShapeOutputService4TestCaseOperation1Output struct {
-	_ struct{} `type:"structure"`
-
-	ListMember []string `type:"list"`
-
-	ListMemberMap []map[string]string `type:"list"`
-
-	ListMemberStruct []OutputService4TestShapeStructType `type:"list"`
-}
-
 const opOutputService4TestCaseOperation1 = "OperationName"
 
 // OutputService4TestCaseOperation1Request returns a request value for making API operation for
@@ -519,7 +458,7 @@ const opOutputService4TestCaseOperation1 = "OperationName"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *OutputService4ProtocolTest) OutputService4TestCaseOperation1Request(input *OutputService4TestShapeOutputService4TestCaseOperation1Input) OutputService4TestCaseOperation1Request {
+func (c *OutputService4ProtocolTest) OutputService4TestCaseOperation1Request(input *types.OutputService4TestShapeOutputService4TestCaseOperation1Input) OutputService4TestCaseOperation1Request {
 	op := &aws.Operation{
 		Name: opOutputService4TestCaseOperation1,
 
@@ -527,10 +466,12 @@ func (c *OutputService4ProtocolTest) OutputService4TestCaseOperation1Request(inp
 	}
 
 	if input == nil {
-		input = &OutputService4TestShapeOutputService4TestCaseOperation1Input{}
+		input = &types.OutputService4TestShapeOutputService4TestCaseOperation1Input{}
 	}
 
-	req := c.newRequest(op, input, &OutputService4TestShapeOutputService4TestCaseOperation1Output{})
+	req := c.newRequest(op, input, &types.OutputService4TestShapeOutputService4TestCaseOperation1Output{})
+	req.Handlers.Build.Remove(jsonrpc.BuildHandler)
+	req.Handlers.Build.PushBack(aws_jsonrpc.NewOutputService4TestCaseOperation1Marshaler(input).MarshalOperation)
 	return OutputService4TestCaseOperation1Request{Request: req, Input: input, Copy: c.OutputService4TestCaseOperation1Request}
 }
 
@@ -538,8 +479,8 @@ func (c *OutputService4ProtocolTest) OutputService4TestCaseOperation1Request(inp
 // OutputService4TestCaseOperation1 API operation.
 type OutputService4TestCaseOperation1Request struct {
 	*aws.Request
-	Input *OutputService4TestShapeOutputService4TestCaseOperation1Input
-	Copy  func(*OutputService4TestShapeOutputService4TestCaseOperation1Input) OutputService4TestCaseOperation1Request
+	Input *types.OutputService4TestShapeOutputService4TestCaseOperation1Input
+	Copy  func(*types.OutputService4TestShapeOutputService4TestCaseOperation1Input) OutputService4TestCaseOperation1Request
 }
 
 // Send marshals and sends the OutputService4TestCaseOperation1 API request.
@@ -551,7 +492,7 @@ func (r OutputService4TestCaseOperation1Request) Send(ctx context.Context) (*Out
 	}
 
 	resp := &OutputService4TestCaseOperation1Response{
-		OutputService4TestShapeOutputService4TestCaseOperation1Output: r.Request.Data.(*OutputService4TestShapeOutputService4TestCaseOperation1Output),
+		OutputService4TestShapeOutputService4TestCaseOperation1Output: r.Request.Data.(*types.OutputService4TestShapeOutputService4TestCaseOperation1Output),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -561,7 +502,7 @@ func (r OutputService4TestCaseOperation1Request) Send(ctx context.Context) (*Out
 // OutputService4TestCaseOperation1Response is the response type for the
 // OutputService4TestCaseOperation1 API operation.
 type OutputService4TestCaseOperation1Response struct {
-	*OutputService4TestShapeOutputService4TestCaseOperation1Output
+	*types.OutputService4TestShapeOutputService4TestCaseOperation1Output
 
 	response *aws.Response
 }
@@ -570,20 +511,6 @@ type OutputService4TestCaseOperation1Response struct {
 // OutputService4TestCaseOperation1 request.
 func (r *OutputService4TestCaseOperation1Response) SDKResponseMetdata() *aws.Response {
 	return r.response
-}
-
-type OutputService4TestShapeOutputService4TestCaseOperation2Input struct {
-	_ struct{} `type:"structure"`
-}
-
-type OutputService4TestShapeOutputService4TestCaseOperation2Output struct {
-	_ struct{} `type:"structure"`
-
-	ListMember []string `type:"list"`
-
-	ListMemberMap []map[string]string `type:"list"`
-
-	ListMemberStruct []OutputService4TestShapeStructType `type:"list"`
 }
 
 const opOutputService4TestCaseOperation2 = "OperationName"
@@ -597,7 +524,7 @@ const opOutputService4TestCaseOperation2 = "OperationName"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *OutputService4ProtocolTest) OutputService4TestCaseOperation2Request(input *OutputService4TestShapeOutputService4TestCaseOperation2Input) OutputService4TestCaseOperation2Request {
+func (c *OutputService4ProtocolTest) OutputService4TestCaseOperation2Request(input *types.OutputService4TestShapeOutputService4TestCaseOperation2Input) OutputService4TestCaseOperation2Request {
 	op := &aws.Operation{
 		Name: opOutputService4TestCaseOperation2,
 
@@ -605,10 +532,12 @@ func (c *OutputService4ProtocolTest) OutputService4TestCaseOperation2Request(inp
 	}
 
 	if input == nil {
-		input = &OutputService4TestShapeOutputService4TestCaseOperation2Input{}
+		input = &types.OutputService4TestShapeOutputService4TestCaseOperation2Input{}
 	}
 
-	req := c.newRequest(op, input, &OutputService4TestShapeOutputService4TestCaseOperation2Output{})
+	req := c.newRequest(op, input, &types.OutputService4TestShapeOutputService4TestCaseOperation2Output{})
+	req.Handlers.Build.Remove(jsonrpc.BuildHandler)
+	req.Handlers.Build.PushBack(aws_jsonrpc.NewOutputService4TestCaseOperation2Marshaler(input).MarshalOperation)
 	return OutputService4TestCaseOperation2Request{Request: req, Input: input, Copy: c.OutputService4TestCaseOperation2Request}
 }
 
@@ -616,8 +545,8 @@ func (c *OutputService4ProtocolTest) OutputService4TestCaseOperation2Request(inp
 // OutputService4TestCaseOperation2 API operation.
 type OutputService4TestCaseOperation2Request struct {
 	*aws.Request
-	Input *OutputService4TestShapeOutputService4TestCaseOperation2Input
-	Copy  func(*OutputService4TestShapeOutputService4TestCaseOperation2Input) OutputService4TestCaseOperation2Request
+	Input *types.OutputService4TestShapeOutputService4TestCaseOperation2Input
+	Copy  func(*types.OutputService4TestShapeOutputService4TestCaseOperation2Input) OutputService4TestCaseOperation2Request
 }
 
 // Send marshals and sends the OutputService4TestCaseOperation2 API request.
@@ -629,7 +558,7 @@ func (r OutputService4TestCaseOperation2Request) Send(ctx context.Context) (*Out
 	}
 
 	resp := &OutputService4TestCaseOperation2Response{
-		OutputService4TestShapeOutputService4TestCaseOperation2Output: r.Request.Data.(*OutputService4TestShapeOutputService4TestCaseOperation2Output),
+		OutputService4TestShapeOutputService4TestCaseOperation2Output: r.Request.Data.(*types.OutputService4TestShapeOutputService4TestCaseOperation2Output),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -639,7 +568,7 @@ func (r OutputService4TestCaseOperation2Request) Send(ctx context.Context) (*Out
 // OutputService4TestCaseOperation2Response is the response type for the
 // OutputService4TestCaseOperation2 API operation.
 type OutputService4TestCaseOperation2Response struct {
-	*OutputService4TestShapeOutputService4TestCaseOperation2Output
+	*types.OutputService4TestShapeOutputService4TestCaseOperation2Output
 
 	response *aws.Response
 }
@@ -702,16 +631,6 @@ func (c *OutputService5ProtocolTest) newRequest(op *aws.Operation, params, data 
 	return req
 }
 
-type OutputService5TestShapeOutputService5TestCaseOperation1Input struct {
-	_ struct{} `type:"structure"`
-}
-
-type OutputService5TestShapeOutputService5TestCaseOperation1Output struct {
-	_ struct{} `type:"structure"`
-
-	MapMember map[string][]int64 `type:"map"`
-}
-
 const opOutputService5TestCaseOperation1 = "OperationName"
 
 // OutputService5TestCaseOperation1Request returns a request value for making API operation for
@@ -723,7 +642,7 @@ const opOutputService5TestCaseOperation1 = "OperationName"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *OutputService5ProtocolTest) OutputService5TestCaseOperation1Request(input *OutputService5TestShapeOutputService5TestCaseOperation1Input) OutputService5TestCaseOperation1Request {
+func (c *OutputService5ProtocolTest) OutputService5TestCaseOperation1Request(input *types.OutputService5TestShapeOutputService5TestCaseOperation1Input) OutputService5TestCaseOperation1Request {
 	op := &aws.Operation{
 		Name: opOutputService5TestCaseOperation1,
 
@@ -731,10 +650,12 @@ func (c *OutputService5ProtocolTest) OutputService5TestCaseOperation1Request(inp
 	}
 
 	if input == nil {
-		input = &OutputService5TestShapeOutputService5TestCaseOperation1Input{}
+		input = &types.OutputService5TestShapeOutputService5TestCaseOperation1Input{}
 	}
 
-	req := c.newRequest(op, input, &OutputService5TestShapeOutputService5TestCaseOperation1Output{})
+	req := c.newRequest(op, input, &types.OutputService5TestShapeOutputService5TestCaseOperation1Output{})
+	req.Handlers.Build.Remove(jsonrpc.BuildHandler)
+	req.Handlers.Build.PushBack(aws_jsonrpc.NewOutputService5TestCaseOperation1Marshaler(input).MarshalOperation)
 	return OutputService5TestCaseOperation1Request{Request: req, Input: input, Copy: c.OutputService5TestCaseOperation1Request}
 }
 
@@ -742,8 +663,8 @@ func (c *OutputService5ProtocolTest) OutputService5TestCaseOperation1Request(inp
 // OutputService5TestCaseOperation1 API operation.
 type OutputService5TestCaseOperation1Request struct {
 	*aws.Request
-	Input *OutputService5TestShapeOutputService5TestCaseOperation1Input
-	Copy  func(*OutputService5TestShapeOutputService5TestCaseOperation1Input) OutputService5TestCaseOperation1Request
+	Input *types.OutputService5TestShapeOutputService5TestCaseOperation1Input
+	Copy  func(*types.OutputService5TestShapeOutputService5TestCaseOperation1Input) OutputService5TestCaseOperation1Request
 }
 
 // Send marshals and sends the OutputService5TestCaseOperation1 API request.
@@ -755,7 +676,7 @@ func (r OutputService5TestCaseOperation1Request) Send(ctx context.Context) (*Out
 	}
 
 	resp := &OutputService5TestCaseOperation1Response{
-		OutputService5TestShapeOutputService5TestCaseOperation1Output: r.Request.Data.(*OutputService5TestShapeOutputService5TestCaseOperation1Output),
+		OutputService5TestShapeOutputService5TestCaseOperation1Output: r.Request.Data.(*types.OutputService5TestShapeOutputService5TestCaseOperation1Output),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -765,7 +686,7 @@ func (r OutputService5TestCaseOperation1Request) Send(ctx context.Context) (*Out
 // OutputService5TestCaseOperation1Response is the response type for the
 // OutputService5TestCaseOperation1 API operation.
 type OutputService5TestCaseOperation1Response struct {
-	*OutputService5TestShapeOutputService5TestCaseOperation1Output
+	*types.OutputService5TestShapeOutputService5TestCaseOperation1Output
 
 	response *aws.Response
 }
@@ -824,16 +745,6 @@ func (c *OutputService6ProtocolTest) newRequest(op *aws.Operation, params, data 
 	return req
 }
 
-type OutputService6TestShapeOutputService6TestCaseOperation1Input struct {
-	_ struct{} `type:"structure"`
-}
-
-type OutputService6TestShapeOutputService6TestCaseOperation1Output struct {
-	_ struct{} `type:"structure"`
-
-	StrType *string `type:"string"`
-}
-
 const opOutputService6TestCaseOperation1 = "OperationName"
 
 // OutputService6TestCaseOperation1Request returns a request value for making API operation for
@@ -845,7 +756,7 @@ const opOutputService6TestCaseOperation1 = "OperationName"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *OutputService6ProtocolTest) OutputService6TestCaseOperation1Request(input *OutputService6TestShapeOutputService6TestCaseOperation1Input) OutputService6TestCaseOperation1Request {
+func (c *OutputService6ProtocolTest) OutputService6TestCaseOperation1Request(input *types.OutputService6TestShapeOutputService6TestCaseOperation1Input) OutputService6TestCaseOperation1Request {
 	op := &aws.Operation{
 		Name: opOutputService6TestCaseOperation1,
 
@@ -853,10 +764,12 @@ func (c *OutputService6ProtocolTest) OutputService6TestCaseOperation1Request(inp
 	}
 
 	if input == nil {
-		input = &OutputService6TestShapeOutputService6TestCaseOperation1Input{}
+		input = &types.OutputService6TestShapeOutputService6TestCaseOperation1Input{}
 	}
 
-	req := c.newRequest(op, input, &OutputService6TestShapeOutputService6TestCaseOperation1Output{})
+	req := c.newRequest(op, input, &types.OutputService6TestShapeOutputService6TestCaseOperation1Output{})
+	req.Handlers.Build.Remove(jsonrpc.BuildHandler)
+	req.Handlers.Build.PushBack(aws_jsonrpc.NewOutputService6TestCaseOperation1Marshaler(input).MarshalOperation)
 	return OutputService6TestCaseOperation1Request{Request: req, Input: input, Copy: c.OutputService6TestCaseOperation1Request}
 }
 
@@ -864,8 +777,8 @@ func (c *OutputService6ProtocolTest) OutputService6TestCaseOperation1Request(inp
 // OutputService6TestCaseOperation1 API operation.
 type OutputService6TestCaseOperation1Request struct {
 	*aws.Request
-	Input *OutputService6TestShapeOutputService6TestCaseOperation1Input
-	Copy  func(*OutputService6TestShapeOutputService6TestCaseOperation1Input) OutputService6TestCaseOperation1Request
+	Input *types.OutputService6TestShapeOutputService6TestCaseOperation1Input
+	Copy  func(*types.OutputService6TestShapeOutputService6TestCaseOperation1Input) OutputService6TestCaseOperation1Request
 }
 
 // Send marshals and sends the OutputService6TestCaseOperation1 API request.
@@ -877,7 +790,7 @@ func (r OutputService6TestCaseOperation1Request) Send(ctx context.Context) (*Out
 	}
 
 	resp := &OutputService6TestCaseOperation1Response{
-		OutputService6TestShapeOutputService6TestCaseOperation1Output: r.Request.Data.(*OutputService6TestShapeOutputService6TestCaseOperation1Output),
+		OutputService6TestShapeOutputService6TestCaseOperation1Output: r.Request.Data.(*types.OutputService6TestShapeOutputService6TestCaseOperation1Output),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -887,7 +800,7 @@ func (r OutputService6TestCaseOperation1Request) Send(ctx context.Context) (*Out
 // OutputService6TestCaseOperation1Response is the response type for the
 // OutputService6TestCaseOperation1 API operation.
 type OutputService6TestCaseOperation1Response struct {
-	*OutputService6TestShapeOutputService6TestCaseOperation1Output
+	*types.OutputService6TestShapeOutputService6TestCaseOperation1Output
 
 	response *aws.Response
 }
@@ -946,18 +859,6 @@ func (c *OutputService7ProtocolTest) newRequest(op *aws.Operation, params, data 
 	return req
 }
 
-type OutputService7TestShapeOutputService7TestCaseOperation1Input struct {
-	_ struct{} `type:"structure"`
-}
-
-type OutputService7TestShapeOutputService7TestCaseOperation1Output struct {
-	_ struct{} `type:"structure"`
-
-	FooEnum OutputService7TestShapeJSONEnumType `type:"string" enum:"true"`
-
-	ListEnums []OutputService7TestShapeJSONEnumType `type:"list"`
-}
-
 const opOutputService7TestCaseOperation1 = "OperationName"
 
 // OutputService7TestCaseOperation1Request returns a request value for making API operation for
@@ -969,7 +870,7 @@ const opOutputService7TestCaseOperation1 = "OperationName"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *OutputService7ProtocolTest) OutputService7TestCaseOperation1Request(input *OutputService7TestShapeOutputService7TestCaseOperation1Input) OutputService7TestCaseOperation1Request {
+func (c *OutputService7ProtocolTest) OutputService7TestCaseOperation1Request(input *types.OutputService7TestShapeOutputService7TestCaseOperation1Input) OutputService7TestCaseOperation1Request {
 	op := &aws.Operation{
 		Name: opOutputService7TestCaseOperation1,
 
@@ -977,10 +878,12 @@ func (c *OutputService7ProtocolTest) OutputService7TestCaseOperation1Request(inp
 	}
 
 	if input == nil {
-		input = &OutputService7TestShapeOutputService7TestCaseOperation1Input{}
+		input = &types.OutputService7TestShapeOutputService7TestCaseOperation1Input{}
 	}
 
-	req := c.newRequest(op, input, &OutputService7TestShapeOutputService7TestCaseOperation1Output{})
+	req := c.newRequest(op, input, &types.OutputService7TestShapeOutputService7TestCaseOperation1Output{})
+	req.Handlers.Build.Remove(jsonrpc.BuildHandler)
+	req.Handlers.Build.PushBack(aws_jsonrpc.NewOutputService7TestCaseOperation1Marshaler(input).MarshalOperation)
 	return OutputService7TestCaseOperation1Request{Request: req, Input: input, Copy: c.OutputService7TestCaseOperation1Request}
 }
 
@@ -988,8 +891,8 @@ func (c *OutputService7ProtocolTest) OutputService7TestCaseOperation1Request(inp
 // OutputService7TestCaseOperation1 API operation.
 type OutputService7TestCaseOperation1Request struct {
 	*aws.Request
-	Input *OutputService7TestShapeOutputService7TestCaseOperation1Input
-	Copy  func(*OutputService7TestShapeOutputService7TestCaseOperation1Input) OutputService7TestCaseOperation1Request
+	Input *types.OutputService7TestShapeOutputService7TestCaseOperation1Input
+	Copy  func(*types.OutputService7TestShapeOutputService7TestCaseOperation1Input) OutputService7TestCaseOperation1Request
 }
 
 // Send marshals and sends the OutputService7TestCaseOperation1 API request.
@@ -1001,7 +904,7 @@ func (r OutputService7TestCaseOperation1Request) Send(ctx context.Context) (*Out
 	}
 
 	resp := &OutputService7TestCaseOperation1Response{
-		OutputService7TestShapeOutputService7TestCaseOperation1Output: r.Request.Data.(*OutputService7TestShapeOutputService7TestCaseOperation1Output),
+		OutputService7TestShapeOutputService7TestCaseOperation1Output: r.Request.Data.(*types.OutputService7TestShapeOutputService7TestCaseOperation1Output),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -1011,7 +914,7 @@ func (r OutputService7TestCaseOperation1Request) Send(ctx context.Context) (*Out
 // OutputService7TestCaseOperation1Response is the response type for the
 // OutputService7TestCaseOperation1 API operation.
 type OutputService7TestCaseOperation1Response struct {
-	*OutputService7TestShapeOutputService7TestCaseOperation1Output
+	*types.OutputService7TestShapeOutputService7TestCaseOperation1Output
 
 	response *aws.Response
 }

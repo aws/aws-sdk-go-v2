@@ -35,10 +35,10 @@ func (a *API) EnableSelectGeneratedMarshalers() {
 	a.NoGenUnmarshalers = true
 
 	// Enable generated marshalers
-	switch a.Metadata.Protocol {
-	case "rest-xml", "rest-json":
-		a.NoGenMarshalers = false
-	}
+	// switch a.Metadata.Protocol {
+	// case "rest-xml", "rest-json":
+	// 	a.NoGenMarshalers = false
+	// }
 }
 
 // customizationPasses Executes customization logic for the API by package name.

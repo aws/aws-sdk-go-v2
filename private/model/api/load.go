@@ -93,7 +93,7 @@ func attachModelFiles(modelPath string, modelFiles ...modelLoader) error {
 //   Or with specific model file:
 //   models/apis/service/version/api-2.json
 func ExpandModelGlobPath(globs ...string) ([]string, error) {
-	modelPaths := []string{}
+	var modelPaths []string
 
 	for _, g := range globs {
 		filepaths, err := filepath.Glob(g)
@@ -161,6 +161,7 @@ func (a *API) AttachString(str string) {
 	}
 }
 
+// setup completes all customizations and passes.
 // Setup initializes the API.
 func (a *API) Setup() {
 	a.setMetadataEndpointsKey()
@@ -184,6 +185,7 @@ func (a *API) Setup() {
 	a.customizationPasses()
 	a.injectUnboundedOutputStreaming()
 
+	// possible duplicate
 	if !a.NoRemoveUnusedShapes {
 		a.removeUnusedShapes()
 	}

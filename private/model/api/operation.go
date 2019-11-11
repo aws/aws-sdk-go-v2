@@ -92,14 +92,6 @@ var operationTmpl = template.Must(template.New("operation").Funcs(template.FuncM
 {{ $respType := printf "%sResponse" .ExportedName -}}
 {{ $pagerType := printf "%sPaginator" .ExportedName -}}
 
-{{ if .HasInput -}}
-	{{ .InputRef.Shape.GoCode }}
-{{- end }}
-
-{{ if .HasOutput -}}
-	{{ .OutputRef.Shape.GoCode }}
-{{- end }}
-
 const op{{ .ExportedName }} = "{{ .Name }}"
 
 // {{ $reqType }} returns a request value for making API operation for
@@ -120,7 +112,7 @@ const op{{ .ExportedName }} = "{{ .Name }}"
 //
 // Please also see {{ $crosslinkURL }}
 {{ end -}}
-func (c *{{ .API.StructName }}) {{ $reqType }}(input {{ .InputRef.GoType }}) ({{ $reqType }}) {
+func (c *{{ .API.StructName }}) {{ $reqType }}(input {{ .InputRef.GoTypeWithPkgNameforType }}) ({{ $reqType }}) {
 	{{ if (or .Deprecated (or .InputRef.Deprecated .OutputRef.Deprecated)) -}}
 		if c.Client.Config.Logger != nil {
 			c.Client.Config.Logger.Log("This operation, {{ .ExportedName }}, has been deprecated")
@@ -142,10 +134,13 @@ func (c *{{ .API.StructName }}) {{ $reqType }}(input {{ .InputRef.GoType }}) ({{
 	}
 
 	if input == nil {
-		input = &{{ .InputRef.GoTypeElem }}{}
+		input = &{{ .InputRef.GoTypeWithPkgNameforTypeElem }}{}
 	}
 
-	req := c.newRequest(op, input, &{{ .OutputRef.GoTypeElem }}{})
+	req := c.newRequest(op, input, &{{ .OutputRef.GoTypeWithPkgNameforTypeElem }}{})
+	{{ $initMarshalFnName := printf "New%sMarshaler" $.ExportedName -}}
+	req.Handlers.Build.Remove({{ .API.ProtocolPackage }}.BuildHandler)
+	req.Handlers.Build.PushBack({{ .API.ProtocolCanonicalPackageName }}.{{ $initMarshalFnName }}(input).MarshalOperation)
 	{{ if eq .OutputRef.Shape.Placeholder true -}}
 		req.Handlers.Unmarshal.Remove({{ .API.ProtocolPackage }}.UnmarshalHandler)
 		req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
@@ -163,8 +158,8 @@ func (c *{{ .API.StructName }}) {{ $reqType }}(input {{ .InputRef.GoType }}) ({{
 // {{ .ExportedName }} API operation.
 type {{ $reqType}} struct {
 	*aws.Request
-	Input {{ .InputRef.GoType }}
-	Copy func({{ .InputRef.GoType }}) {{ $reqType }}
+	Input {{ .InputRef.GoTypeWithPkgNameforType }}
+	Copy func({{ .InputRef.GoTypeWithPkgNameforType }}) {{ $reqType }}
 }
 
 // Send marshals and sends the {{ .ExportedName }} API request.
@@ -177,7 +172,7 @@ func (r {{ $reqType }}) Send(ctx context.Context) (*{{ $respType }}, error) {
 
 	resp := &{{ $respType }}{
 		{{ if .HasOutput -}}
-			{{ .OutputRef.GoTypeElem }}: r.Request.Data.({{ .OutputRef.GoType }}),
+			{{ .OutputRef.GoTypeElem }}: r.Request.Data.({{ .OutputRef.GoTypeWithPkgNameforType }}),
 		{{- end }}
 		response: &aws.Response{Request: r.Request},
 	}
@@ -209,7 +204,7 @@ func (r {{ $reqType }}) Send(ctx context.Context) (*{{ $respType }}, error) {
 		return {{ $pagerType }}{
 			Pager: aws.Pager {
 				NewRequest: func(ctx context.Context) (*aws.Request, error) {
-					var inCpy {{ .InputRef.GoType }}
+					var inCpy {{ .InputRef.GoTypeWithPkgNameforType }}
 					if req.Input != nil  {
 						tmp := *req.Input
 						inCpy = &tmp
@@ -229,8 +224,8 @@ func (r {{ $reqType }}) Send(ctx context.Context) (*{{ $respType }}, error) {
 		aws.Pager
 	}
 
-	func (p *{{ $pagerType}}) CurrentPage() {{ .OutputRef.GoType }} {
-		return p.Pager.CurrentPage().({{ .OutputRef.GoType }})
+	func (p *{{ $pagerType}}) CurrentPage() {{ .OutputRef.GoTypeWithPkgNameforType }} {
+		return p.Pager.CurrentPage().({{ .OutputRef.GoTypeWithPkgNameforType }})
 	}
 {{ end }}
 
@@ -238,7 +233,7 @@ func (r {{ $reqType }}) Send(ctx context.Context) (*{{ $respType }}, error) {
 // {{ .ExportedName }} API operation.
 type {{ $respType }} struct {
 	{{ if .HasOutput -}}
-		{{ .OutputRef.GoType }}
+		{{ .OutputRef.GoTypeWithPkgNameforType }}
 	{{- end }}
 
 	response *aws.Response
@@ -249,6 +244,17 @@ type {{ $respType }} struct {
 func (r * {{ $respType }}) SDKResponseMetdata() *aws.Response {
 	return r.response
 }
+`))
+
+var operationIOTypeTmpl = template.Must(template.New("operationIOType").Parse(
+	`
+{{ if .HasInput -}}
+	{{ .InputRef.Shape.GoCode }}
+{{- end }}
+
+{{ if .HasOutput -}}
+	{{ .OutputRef.Shape.GoCode }}
+{{- end }}
 `))
 
 // GoCode returns a string of rendered GoCode for this Operation
@@ -266,8 +272,20 @@ func (o *Operation) GoCode() string {
 	return strings.TrimSpace(buf.String())
 }
 
+// IOGoCode returns a string of rendered GoCode for this Operations Input, Output type
+func (o *Operation) IOGoCode() string {
+
+	var buf bytes.Buffer
+	err := operationIOTypeTmpl.Execute(&buf, o)
+	if err != nil {
+		panic(err)
+	}
+
+	return strings.TrimSpace(buf.String())
+}
+
 // tplInfSig defines the template for rendering an Operation's signature within an Interface definition.
-var tplInfSig = template.Must(template.New("opsig").Parse(`{{ .ExportedName }}Request({{ .InputRef.GoTypeWithPkgName }}) {{ .API.PackageName }}.{{ .ExportedName }}Request
+var tplInfSig = template.Must(template.New("opsig").Parse(`{{ .ExportedName }}Request({{ .InputRef.GoTypeWithPkgNameforType }}) {{ .API.PackageName }}.{{ .ExportedName }}Request
 `))
 
 // InterfaceSignature returns a string representing the Operation's interface{}
@@ -506,3 +524,24 @@ func (e *example) traverseScalar(s *Shape, required, payload bool) string {
 
 	return str
 }
+
+// A tplMarshalOperation is the top level template for the API
+var tplGenMarshalerStruct = template.Must(template.New("genMarshaler").Parse(`
+{{ range $_, $op := $}}
+
+	{{ $opMarshalerName := printf "%sMarshaler" $op.ExportedName -}}
+	
+	// {{$opMarshalerName}} defines marshaler for {{ $op.ExportedName }} operation 
+	type {{ $opMarshalerName }} struct {
+		input {{$op.InputRef.GoTypeWithPkgNameforType -}}
+	}
+
+	{{ $newOperationMarshalerFnName := printf "New%sMarshaler" $op.ExportedName -}}
+
+	// {{ $newOperationMarshalerFnName }} defines an init function to retrieve a marshaler for {{ $op.ExportedName }} operation 
+	func {{ $newOperationMarshalerFnName -}} (v {{$op.InputRef.GoTypeWithPkgNameforType -}}) *{{ $opMarshalerName -}} {
+		return &{{ $opMarshalerName -}}{input : v}
+	}
+
+{{ end }}
+`))

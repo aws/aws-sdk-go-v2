@@ -73,8 +73,11 @@ func main() {
 		fmt.Fprintln(os.Stderr, "failed to glob file pattern", err)
 		os.Exit(1)
 	}
+	// Return the latest service version; excludes the service version
 	modelPaths, _ = api.TrimModelServiceVersions(modelPaths)
 
+	// Load all the api's for the model path of service
+	// This include paginators, waiters, service-docs etc.
 	apis, err := api.LoadAPIs(modelPaths, svcImportPath)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "failed to load API models", err)
@@ -111,6 +114,8 @@ func main() {
 		// Create the output path for the model.
 		pkgDir := filepath.Join(svcPath, a.PackageName())
 		os.MkdirAll(filepath.Join(pkgDir, a.InterfacePackageName()), 0775)
+		os.MkdirAll(filepath.Join(pkgDir, "types"), 0775)
+		os.Mkdir(filepath.Join(pkgDir, "enums"), 0775)
 
 		if _, ok := servicePaths[pkgDir]; ok {
 			fmt.Fprintf(os.Stderr,
@@ -140,10 +145,12 @@ type generateInfo struct {
 	PackageDir string
 }
 
+// excludeServices exclude the services from being generated.
 var excludeServices = map[string]struct{}{
 	"importexport": {},
 }
 
+// write service files  using the loaded api struct.
 func writeServiceFiles(g *generateInfo, pkgDir string) {
 	defer func() {
 		if r := recover(); r != nil {
@@ -164,8 +171,10 @@ func writeServiceFiles(g *generateInfo, pkgDir string) {
 	Must(writeWaitersFile(g))
 	Must(writeAPIErrorsFile(g))
 	Must(writeExamplesFile(g))
+	Must(writeAPISerializerFile(g))
 
 	if g.API.PackageName() == "s3" {
+		// Must(writeAPISerializerFile(g))
 		Must(writeS3ManagerUploadInputFile(g))
 	}
 
@@ -244,6 +253,7 @@ func writeInterfaceFile(g *generateInfo) error {
 	)
 }
 
+// writeWaitersFile writes the service waiter file
 func writeWaitersFile(g *generateInfo) error {
 	if len(g.API.Waiters) == 0 {
 		return nil
@@ -259,34 +269,44 @@ func writeWaitersFile(g *generateInfo) error {
 
 // writeAPIFile writes out the service API file.
 func writeAPIFile(g *generateInfo) error {
+
 	for opName, op := range g.API.Operations {
-		err := writeGoFile(
+		if err := writeGoFile(
 			filepath.Join(g.PackageDir, "api_op_"+op.ExportedName+".go"),
 			codeLayout,
 			"",
 			g.API.PackageName(),
 			g.API.APIOperationGoCode(op),
-		)
-
-		if err != nil {
+		); err != nil {
 			return fmt.Errorf("failed to write %s operation file, %v", opName, err)
+		}
+
+		// add in input and output to api_op_types.go
+		if err := writeGoFile(
+			filepath.Join(g.PackageDir, "types", "api_op_"+op.ExportedName+".go"),
+			codeLayout,
+			"",
+			"types",
+			g.API.APIOperationTypeGoCode(op),
+		); err != nil {
+			return fmt.Errorf("failed to write %s operation types file, %v", opName, err)
 		}
 	}
 
-	if err := writeGoFile(filepath.Join(g.PackageDir, "api_enums.go"),
+	if err := writeGoFile(filepath.Join(g.PackageDir, "types", "api_types.go"),
 		codeLayout,
 		"",
-		g.API.PackageName(),
-		g.API.APIEnumsGoCode(),
+		"types",
+		g.API.APIParamShapesGoCode(),
 	); err != nil {
 		return err
 	}
 
-	if err := writeGoFile(filepath.Join(g.PackageDir, "api_types.go"),
+	if err := writeGoFile(filepath.Join(g.PackageDir, "enums", "api_enums.go"),
 		codeLayout,
 		"",
-		g.API.PackageName(),
-		g.API.APIParamShapesGoCode(),
+		"enums",
+		g.API.APIEnumsGoCode(),
 	); err != nil {
 		return err
 	}
@@ -319,5 +339,25 @@ func writeAPISmokeTestsFile(g *generateInfo) error {
 		"// +build integration\n",
 		g.API.PackageName()+"_test",
 		g.API.APISmokeTestsGoCode(),
+	)
+}
+
+// 1: Correct the package name
+// 2. Correct pkg imports
+
+func writeAPISerializerFile(g *generateInfo) error {
+	const pkgDoc = `
+	// Package %s service, marshal.go contains the generated operation marshalers and methods on it. 
+`
+	err := os.MkdirAll(filepath.Join(g.PackageDir, "internal", g.API.ProtocolCanonicalPackageName()), 0775)
+	if err != nil {
+		return err
+	}
+
+	return writeGoFile(filepath.Join(g.PackageDir, "internal", g.API.ProtocolCanonicalPackageName(), "marshal.go"),
+		codeLayout,
+		fmt.Sprintf(pkgDoc, g.API.ProtocolCanonicalPackageName()),
+		g.API.ProtocolCanonicalPackageName(),
+		g.API.APIMarshalOperationGoCode(),
 	)
 }
