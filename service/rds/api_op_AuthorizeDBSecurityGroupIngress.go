@@ -31,7 +31,7 @@ type AuthorizeDBSecurityGroupIngressInput struct {
 	EC2SecurityGroupName *string `type:"string"`
 
 	// AWS account number of the owner of the EC2 security group specified in the
-	// EC2SecurityGroupName parameter. The AWS Access Key ID is not an acceptable
+	// EC2SecurityGroupName parameter. The AWS access key ID isn't an acceptable
 	// value. For VPC DB security groups, EC2SecurityGroupId must be provided. Otherwise,
 	// EC2SecurityGroupOwnerId and either EC2SecurityGroupName or EC2SecurityGroupId
 	// must be provided.

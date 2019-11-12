@@ -191,6 +191,7 @@ type EnvironmentVariableType string
 const (
 	EnvironmentVariableTypePlaintext      EnvironmentVariableType = "PLAINTEXT"
 	EnvironmentVariableTypeParameterStore EnvironmentVariableType = "PARAMETER_STORE"
+	EnvironmentVariableTypeSecretsManager EnvironmentVariableType = "SECRETS_MANAGER"
 )
 
 func (enum EnvironmentVariableType) MarshalValue() (string, error) {

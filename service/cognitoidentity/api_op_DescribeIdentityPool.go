@@ -45,6 +45,11 @@ func (s *DescribeIdentityPoolInput) Validate() error {
 type DescribeIdentityPoolOutput struct {
 	_ struct{} `type:"structure"`
 
+	// Enables or disables the Basic (Classic) authentication flow. For more information,
+	// see Identity Pools (Federated Identities) Authentication Flow (https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html)
+	// in the Amazon Cognito Developer Guide.
+	AllowClassicFlow *bool `type:"boolean"`
+
 	// TRUE if the identity pool supports unauthenticated logins.
 	//
 	// AllowUnauthenticatedIdentities is a required field

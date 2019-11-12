@@ -63,13 +63,25 @@ func (s AccountGateResult) String() string {
 	return awsutil.Prettify(s)
 }
 
-// The AccountLimit data type. For more information about account limits, see
-// AWS CloudFormation Limits (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html)
+// The AccountLimit data type.
+//
+// CloudFormation has the following limits per account:
+//
+//    * Number of concurrent resources
+//
+//    * Number of stacks
+//
+//    * Number of stack outputs
+//
+// For more information about these account limits, and other CloudFormation
+// limits, see AWS CloudFormation Limits (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html)
 // in the AWS CloudFormation User Guide.
 type AccountLimit struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the account limit.
+	//
+	// Values: ConcurrentResourcesLimit | StackLimit | StackOutputsLimit
 	Name *string `type:"string"`
 
 	// The value that is associated with the account limit name.
@@ -439,6 +451,30 @@ func (s ResourceChangeDetail) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Describes the target resources of a specific type in your import template
+// (for example, all AWS::S3::Bucket resources) and the properties you can provide
+// during the import to identify resources of that type.
+type ResourceIdentifierSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The logical IDs of the target resources of the specified ResourceType, as
+	// defined in the import template.
+	LogicalResourceIds []string `min:"1" type:"list"`
+
+	// The resource properties you can provide during the import to identify your
+	// target resources. For example, BucketName is a possible identifier property
+	// for AWS::S3::Bucket resources.
+	ResourceIdentifiers []string `type:"list"`
+
+	// The template resource type of the target resources, such as AWS::S3::Bucket.
+	ResourceType *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ResourceIdentifierSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
 // The field that AWS CloudFormation will change, such as the name of a resource's
 // property, and whether the resource will be recreated.
 type ResourceTargetDefinition struct {
@@ -463,6 +499,61 @@ type ResourceTargetDefinition struct {
 // String returns the string representation
 func (s ResourceTargetDefinition) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Describes the target resource of an import operation.
+type ResourceToImport struct {
+	_ struct{} `type:"structure"`
+
+	// The logical ID of the target resource as specified in the template.
+	//
+	// LogicalResourceId is a required field
+	LogicalResourceId *string `type:"string" required:"true"`
+
+	// A key-value pair that identifies the target resource. The key is an identifier
+	// property (for example, BucketName for AWS::S3::Bucket resources) and the
+	// value is the actual property value (for example, MyS3Bucket).
+	//
+	// ResourceIdentifier is a required field
+	ResourceIdentifier map[string]string `min:"1" type:"map" required:"true"`
+
+	// The type of resource to import into your stack, such as AWS::S3::Bucket.
+	//
+	// ResourceType is a required field
+	ResourceType *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ResourceToImport) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ResourceToImport) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ResourceToImport"}
+
+	if s.LogicalResourceId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("LogicalResourceId"))
+	}
+
+	if s.ResourceIdentifier == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceIdentifier"))
+	}
+	if s.ResourceIdentifier != nil && len(s.ResourceIdentifier) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceIdentifier", 1))
+	}
+
+	if s.ResourceType == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
+	}
+	if s.ResourceType != nil && len(*s.ResourceType) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceType", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Structure containing the rollback triggers for AWS CloudFormation to monitor
@@ -663,7 +754,7 @@ type Stack struct {
 	RollbackConfiguration *RollbackConfiguration `type:"structure"`
 
 	// For nested stacks--stacks created as resources for another stack--the stack
-	// ID of the the top-level stack to which the nested stack ultimately belongs.
+	// ID of the top-level stack to which the nested stack ultimately belongs.
 	//
 	// For more information, see Working with Nested Stacks (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html)
 	// in the AWS CloudFormation User Guide.
@@ -1617,7 +1708,7 @@ type StackSummary struct {
 	ParentId *string `type:"string"`
 
 	// For nested stacks--stacks created as resources for another stack--the stack
-	// ID of the the top-level stack to which the nested stack ultimately belongs.
+	// ID of the top-level stack to which the nested stack ultimately belongs.
 	//
 	// For more information, see Working with Nested Stacks (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html)
 	// in the AWS CloudFormation User Guide.

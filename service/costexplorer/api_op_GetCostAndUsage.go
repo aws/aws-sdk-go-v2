@@ -18,8 +18,9 @@ type GetCostAndUsageInput struct {
 	// of dimension filters. For more information, see Expression (http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html).
 	Filter *Expression `type:"structure"`
 
-	// Sets the AWS cost granularity to MONTHLY or DAILY. If Granularity isn't set,
-	// the response object doesn't include the Granularity, either MONTHLY or DAILY.
+	// Sets the AWS cost granularity to MONTHLY or DAILY, or HOURLY. If Granularity
+	// isn't set, the response object doesn't include the Granularity, either MONTHLY
+	// or DAILY, or HOURLY.
 	//
 	// The GetCostAndUsageRequest operation supports only DAILY and MONTHLY granularities.
 	Granularity Granularity `type:"string" enum:"true"`

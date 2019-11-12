@@ -19,7 +19,7 @@ type CreateMeshInput struct {
 	// MeshName is a required field
 	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
 
-	// An object representing the specification of a service mesh.
+	// An object that represents the specification of a service mesh.
 	Spec *MeshSpec `locationName:"spec" type:"structure"`
 
 	Tags []TagRef `locationName:"tags" type:"list"`
@@ -105,7 +105,7 @@ func (s CreateMeshInput) MarshalFields(e protocol.FieldEncoder) error {
 type CreateMeshOutput struct {
 	_ struct{} `type:"structure" payload:"Mesh"`
 
-	// An object representing a service mesh returned by a describe operation.
+	// An object that represents a service mesh returned by a describe operation.
 	//
 	// Mesh is a required field
 	Mesh *MeshData `locationName:"mesh" type:"structure" required:"true"`

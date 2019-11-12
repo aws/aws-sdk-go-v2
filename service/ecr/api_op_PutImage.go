@@ -15,7 +15,7 @@ type PutImageInput struct {
 	// The image manifest corresponding to the image to be uploaded.
 	//
 	// ImageManifest is a required field
-	ImageManifest *string `locationName:"imageManifest" type:"string" required:"true"`
+	ImageManifest *string `locationName:"imageManifest" min:"1" type:"string" required:"true"`
 
 	// The tag to associate with the image. This parameter is required for images
 	// that use the Docker Image Manifest V2 Schema 2 or OCI formats.
@@ -43,6 +43,9 @@ func (s *PutImageInput) Validate() error {
 
 	if s.ImageManifest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ImageManifest"))
+	}
+	if s.ImageManifest != nil && len(*s.ImageManifest) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ImageManifest", 1))
 	}
 	if s.ImageTag != nil && len(*s.ImageTag) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ImageTag", 1))

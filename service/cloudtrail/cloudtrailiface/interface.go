@@ -71,11 +71,15 @@ type ClientAPI interface {
 
 	GetEventSelectorsRequest(*cloudtrail.GetEventSelectorsInput) cloudtrail.GetEventSelectorsRequest
 
+	GetTrailRequest(*cloudtrail.GetTrailInput) cloudtrail.GetTrailRequest
+
 	GetTrailStatusRequest(*cloudtrail.GetTrailStatusInput) cloudtrail.GetTrailStatusRequest
 
 	ListPublicKeysRequest(*cloudtrail.ListPublicKeysInput) cloudtrail.ListPublicKeysRequest
 
 	ListTagsRequest(*cloudtrail.ListTagsInput) cloudtrail.ListTagsRequest
+
+	ListTrailsRequest(*cloudtrail.ListTrailsInput) cloudtrail.ListTrailsRequest
 
 	LookupEventsRequest(*cloudtrail.LookupEventsInput) cloudtrail.LookupEventsRequest
 

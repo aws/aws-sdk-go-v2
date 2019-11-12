@@ -63,6 +63,8 @@ import (
 type ClientAPI interface {
 	GetCostAndUsageRequest(*costexplorer.GetCostAndUsageInput) costexplorer.GetCostAndUsageRequest
 
+	GetCostAndUsageWithResourcesRequest(*costexplorer.GetCostAndUsageWithResourcesInput) costexplorer.GetCostAndUsageWithResourcesRequest
+
 	GetCostForecastRequest(*costexplorer.GetCostForecastInput) costexplorer.GetCostForecastRequest
 
 	GetDimensionValuesRequest(*costexplorer.GetDimensionValuesInput) costexplorer.GetDimensionValuesRequest
@@ -74,6 +76,14 @@ type ClientAPI interface {
 	GetReservationUtilizationRequest(*costexplorer.GetReservationUtilizationInput) costexplorer.GetReservationUtilizationRequest
 
 	GetRightsizingRecommendationRequest(*costexplorer.GetRightsizingRecommendationInput) costexplorer.GetRightsizingRecommendationRequest
+
+	GetSavingsPlansCoverageRequest(*costexplorer.GetSavingsPlansCoverageInput) costexplorer.GetSavingsPlansCoverageRequest
+
+	GetSavingsPlansPurchaseRecommendationRequest(*costexplorer.GetSavingsPlansPurchaseRecommendationInput) costexplorer.GetSavingsPlansPurchaseRecommendationRequest
+
+	GetSavingsPlansUtilizationRequest(*costexplorer.GetSavingsPlansUtilizationInput) costexplorer.GetSavingsPlansUtilizationRequest
+
+	GetSavingsPlansUtilizationDetailsRequest(*costexplorer.GetSavingsPlansUtilizationDetailsInput) costexplorer.GetSavingsPlansUtilizationDetailsRequest
 
 	GetTagsRequest(*costexplorer.GetTagsInput) costexplorer.GetTagsRequest
 

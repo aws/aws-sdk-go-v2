@@ -87,7 +87,7 @@ func (s DeleteRouteInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteRouteOutput struct {
 	_ struct{} `type:"structure" payload:"Route"`
 
-	// An object representing a route returned by a describe operation.
+	// An object that represents a route returned by a describe operation.
 	//
 	// Route is a required field
 	Route *RouteData `locationName:"route" type:"structure" required:"true"`

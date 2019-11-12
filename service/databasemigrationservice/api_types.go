@@ -1084,8 +1084,25 @@ type ReplicationTaskStats struct {
 	// The elapsed time of the task, in milliseconds.
 	ElapsedTimeMillis *int64 `type:"long"`
 
+	// The date the replication task was started either with a fresh start or a
+	// target reload.
+	FreshStartDate *time.Time `type:"timestamp"`
+
+	// The date the replication task full load was completed.
+	FullLoadFinishDate *time.Time `type:"timestamp"`
+
 	// The percent complete for the full load migration task.
 	FullLoadProgressPercent *int64 `type:"integer"`
+
+	// The date the the replication task full load was started.
+	FullLoadStartDate *time.Time `type:"timestamp"`
+
+	// The date the replication task was started either with a fresh start or a
+	// resume. For more information, see StartReplicationTaskType (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html#DMS-StartReplicationTask-request-StartReplicationTaskType).
+	StartDate *time.Time `type:"timestamp"`
+
+	// The date the replication task was stopped.
+	StopDate *time.Time `type:"timestamp"`
 
 	// The number of errors that have occurred during this task.
 	TablesErrored *int64 `type:"integer"`

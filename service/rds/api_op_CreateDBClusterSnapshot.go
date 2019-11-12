@@ -13,7 +13,7 @@ type CreateDBClusterSnapshotInput struct {
 	_ struct{} `type:"structure"`
 
 	// The identifier of the DB cluster to create a snapshot for. This parameter
-	// is not case-sensitive.
+	// isn't case-sensitive.
 	//
 	// Constraints:
 	//

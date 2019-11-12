@@ -13,7 +13,7 @@ import (
 type DescribeEventCategoriesInput struct {
 	_ struct{} `type:"structure"`
 
-	// This parameter is not currently supported.
+	// This parameter isn't currently supported.
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// The type of source that is generating the events.

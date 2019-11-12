@@ -323,16 +323,17 @@ type InventoryOptionalField string
 
 // Enum values for InventoryOptionalField
 const (
-	InventoryOptionalFieldSize                      InventoryOptionalField = "Size"
-	InventoryOptionalFieldLastModifiedDate          InventoryOptionalField = "LastModifiedDate"
-	InventoryOptionalFieldStorageClass              InventoryOptionalField = "StorageClass"
-	InventoryOptionalFieldEtag                      InventoryOptionalField = "ETag"
-	InventoryOptionalFieldIsMultipartUploaded       InventoryOptionalField = "IsMultipartUploaded"
-	InventoryOptionalFieldReplicationStatus         InventoryOptionalField = "ReplicationStatus"
-	InventoryOptionalFieldEncryptionStatus          InventoryOptionalField = "EncryptionStatus"
-	InventoryOptionalFieldObjectLockRetainUntilDate InventoryOptionalField = "ObjectLockRetainUntilDate"
-	InventoryOptionalFieldObjectLockMode            InventoryOptionalField = "ObjectLockMode"
-	InventoryOptionalFieldObjectLockLegalHoldStatus InventoryOptionalField = "ObjectLockLegalHoldStatus"
+	InventoryOptionalFieldSize                         InventoryOptionalField = "Size"
+	InventoryOptionalFieldLastModifiedDate             InventoryOptionalField = "LastModifiedDate"
+	InventoryOptionalFieldStorageClass                 InventoryOptionalField = "StorageClass"
+	InventoryOptionalFieldEtag                         InventoryOptionalField = "ETag"
+	InventoryOptionalFieldIsMultipartUploaded          InventoryOptionalField = "IsMultipartUploaded"
+	InventoryOptionalFieldReplicationStatus            InventoryOptionalField = "ReplicationStatus"
+	InventoryOptionalFieldEncryptionStatus             InventoryOptionalField = "EncryptionStatus"
+	InventoryOptionalFieldObjectLockRetainUntilDate    InventoryOptionalField = "ObjectLockRetainUntilDate"
+	InventoryOptionalFieldObjectLockMode               InventoryOptionalField = "ObjectLockMode"
+	InventoryOptionalFieldObjectLockLegalHoldStatus    InventoryOptionalField = "ObjectLockLegalHoldStatus"
+	InventoryOptionalFieldIntelligentTieringAccessTier InventoryOptionalField = "IntelligentTieringAccessTier"
 )
 
 func (enum InventoryOptionalField) MarshalValue() (string, error) {

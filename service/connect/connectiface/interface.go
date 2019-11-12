@@ -79,6 +79,14 @@ type ClientAPI interface {
 
 	GetMetricDataRequest(*connect.GetMetricDataInput) connect.GetMetricDataRequest
 
+	ListContactFlowsRequest(*connect.ListContactFlowsInput) connect.ListContactFlowsRequest
+
+	ListHoursOfOperationsRequest(*connect.ListHoursOfOperationsInput) connect.ListHoursOfOperationsRequest
+
+	ListPhoneNumbersRequest(*connect.ListPhoneNumbersInput) connect.ListPhoneNumbersRequest
+
+	ListQueuesRequest(*connect.ListQueuesInput) connect.ListQueuesRequest
+
 	ListRoutingProfilesRequest(*connect.ListRoutingProfilesInput) connect.ListRoutingProfilesRequest
 
 	ListSecurityProfilesRequest(*connect.ListSecurityProfilesInput) connect.ListSecurityProfilesRequest

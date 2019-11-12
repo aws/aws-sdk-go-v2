@@ -67,8 +67,8 @@ const opDescribeTrails = "DescribeTrails"
 // DescribeTrailsRequest returns a request value for making API operation for
 // AWS CloudTrail.
 //
-// Retrieves settings for the trail associated with the current region for your
-// account.
+// Retrieves settings for one or more trails associated with the current region
+// for your account.
 //
 //    // Example sending a request using DescribeTrailsRequest.
 //    req := client.DescribeTrailsRequest(params)

@@ -68,7 +68,7 @@ func (s DeleteVirtualServiceInput) MarshalFields(e protocol.FieldEncoder) error 
 type DeleteVirtualServiceOutput struct {
 	_ struct{} `type:"structure" payload:"VirtualService"`
 
-	// An object representing a virtual service returned by a describe operation.
+	// An object that represents a virtual service returned by a describe operation.
 	//
 	// VirtualService is a required field
 	VirtualService *VirtualServiceData `locationName:"virtualService" type:"structure" required:"true"`

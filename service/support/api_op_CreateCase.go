@@ -30,6 +30,9 @@ type CreateCaseInput struct {
 
 	// The type of issue for the case. You can specify either "customer-service"
 	// or "technical." If you do not indicate a value, the default is "technical."
+	//
+	// Service limit increases are not supported by the Support API; you must submit
+	// service limit increase requests in Support Center (https://console.aws.amazon.com/support).
 	IssueType *string `locationName:"issueType" type:"string"`
 
 	// The ISO 639-1 code for the language in which AWS provides support. AWS Support
@@ -42,9 +45,7 @@ type CreateCaseInput struct {
 
 	// The code for the severity level returned by the call to DescribeSeverityLevels.
 	//
-	// The availability of severity levels depends on each customer's support subscription.
-	// In other words, your subscription may not necessarily require the urgent
-	// level of response time.
+	// The availability of severity levels depends on the support plan for the account.
 	SeverityCode *string `locationName:"severityCode" type:"string"`
 
 	// The title of the AWS Support case.
@@ -105,17 +106,23 @@ const opCreateCase = "CreateCase"
 //
 //    * issueType. The type of issue for the case. You can specify either "customer-service"
 //    or "technical." If you do not indicate a value, the default is "technical."
+//    Service limit increases are not supported by the Support API; you must
+//    submit service limit increase requests in Support Center (https://console.aws.amazon.com/support).
+//    The caseId is not the displayId that appears in Support Center (https://console.aws.amazon.com/support).
+//    You can use the DescribeCases API to get the displayId.
 //
-//    * serviceCode. The code for an AWS service. You obtain the serviceCode
-//    by calling DescribeServices.
+//    * serviceCode. The code for an AWS service. You can get the possible serviceCode
+//    values by calling DescribeServices.
 //
 //    * categoryCode. The category for the service defined for the serviceCode
-//    value. You also obtain the category code for a service by calling DescribeServices.
+//    value. You also get the category code for a service by calling DescribeServices.
 //    Each AWS service defines its own set of category codes.
 //
 //    * severityCode. A value that indicates the urgency of the case, which
 //    in turn determines the response time according to your service level agreement
-//    with AWS Support. You obtain the SeverityCode by calling DescribeSeverityLevels.
+//    with AWS Support. You can get the possible severityCode values by calling
+//    DescribeSeverityLevels. For more information about the meaning of the
+//    codes, see SeverityLevel and Choosing a Severity (https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html#choosing-severity).
 //
 //    * subject. The Subject field on the AWS Support Center Create Case (https://console.aws.amazon.com/support/home#/case/create)
 //    page.

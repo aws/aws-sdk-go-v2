@@ -121,6 +121,9 @@ type RestoreDBClusterFromSnapshotInput struct {
 	//
 	// aws rds describe-db-engine-versions --engine aurora-postgresql --query "DBEngineVersions[].EngineVersion"
 	//
+	// If you aren't using the default engine version, then you must specify the
+	// engine version.
+	//
 	// Aurora MySQL
 	//
 	// Example: 5.6.10a, 5.6.mysql_aurora.1.19.2, 5.7.12, 5.7.mysql_aurora.2.04.5
@@ -145,8 +148,8 @@ type RestoreDBClusterFromSnapshotInput struct {
 	//    then the restored DB cluster is encrypted using the KMS key that was used
 	//    to encrypt the DB snapshot or DB cluster snapshot.
 	//
-	//    * If the DB snapshot or DB cluster snapshot in SnapshotIdentifier is not
-	//    encrypted, then the restored DB cluster is not encrypted.
+	//    * If the DB snapshot or DB cluster snapshot in SnapshotIdentifier isn't
+	//    encrypted, then the restored DB cluster isn't encrypted.
 	KmsKeyId *string `type:"string"`
 
 	// The name of the option group to use for the restored DB cluster.
@@ -237,8 +240,8 @@ const opRestoreDBClusterFromSnapshot = "RestoreDBClusterFromSnapshot"
 //
 // If a DB cluster snapshot is specified, the target DB cluster is created from
 // the source DB cluster restore point with the same configuration as the original
-// source DB cluster, except that the new DB cluster is created with the default
-// security group.
+// source DB cluster. If you don't specify a security group, the new DB cluster
+// is associated with the default security group.
 //
 // For more information on Amazon Aurora, see What Is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide.

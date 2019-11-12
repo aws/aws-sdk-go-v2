@@ -235,7 +235,7 @@ func (s AutoScalingPolicyDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Represents the autoscaling policy to be modified.
+// Represents the auto scaling policy to be modified.
 type AutoScalingPolicyUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -275,15 +275,15 @@ func (s *AutoScalingPolicyUpdate) Validate() error {
 	return nil
 }
 
-// Represents the autoscaling settings for a global table or global secondary
+// Represents the auto scaling settings for a global table or global secondary
 // index.
 type AutoScalingSettingsDescription struct {
 	_ struct{} `type:"structure"`
 
-	// Disabled autoscaling for this global table or global secondary index.
+	// Disabled auto scaling for this global table or global secondary index.
 	AutoScalingDisabled *bool `type:"boolean"`
 
-	// Role ARN used for configuring autoScaling policy.
+	// Role ARN used for configuring the auto scaling policy.
 	AutoScalingRoleArn *string `type:"string"`
 
 	// The maximum capacity units that a global table or global secondary index
@@ -303,15 +303,15 @@ func (s AutoScalingSettingsDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Represents the autoscaling settings to be modified for a global table or
+// Represents the auto scaling settings to be modified for a global table or
 // global secondary index.
 type AutoScalingSettingsUpdate struct {
 	_ struct{} `type:"structure"`
 
-	// Disabled autoscaling for this global table or global secondary index.
+	// Disabled auto scaling for this global table or global secondary index.
 	AutoScalingDisabled *bool `type:"boolean"`
 
-	// Role ARN used for configuring autoscaling policy.
+	// Role ARN used for configuring auto scaling policy.
 	AutoScalingRoleArn *string `min:"1" type:"string"`
 
 	// The maximum capacity units that a global table or global secondary index
@@ -372,7 +372,7 @@ type AutoScalingTargetTrackingScalingPolicyConfigurationDescription struct {
 	// subsequent scale in requests until it has expired. You should scale in conservatively
 	// to protect your application's availability. However, if another alarm triggers
 	// a scale out policy during the cooldown period after a scale-in, application
-	// autoscaling scales out your scalable target immediately.
+	// auto scaling scales out your scalable target immediately.
 	ScaleInCooldown *int64 `type:"integer"`
 
 	// The amount of time, in seconds, after a scale out activity completes before
@@ -411,7 +411,7 @@ type AutoScalingTargetTrackingScalingPolicyConfigurationUpdate struct {
 	// subsequent scale in requests until it has expired. You should scale in conservatively
 	// to protect your application's availability. However, if another alarm triggers
 	// a scale out policy during the cooldown period after a scale-in, application
-	// autoscaling scales out your scalable target immediately.
+	// auto scaling scales out your scalable target immediately.
 	ScaleInCooldown *int64 `type:"integer"`
 
 	// The amount of time, in seconds, after a scale out activity completes before
@@ -799,7 +799,7 @@ func (s *Condition) Validate() error {
 }
 
 // Represents a request to perform a check that an item exists or to check the
-// condition of specific attributes of the item..
+// condition of specific attributes of the item.
 type ConditionCheck struct {
 	_ struct{} `type:"structure"`
 
@@ -1000,7 +1000,7 @@ func (s *CreateGlobalSecondaryIndexAction) Validate() error {
 type CreateReplicaAction struct {
 	_ struct{} `type:"structure"`
 
-	// The region of the replica to be added.
+	// The Region of the replica to be added.
 	//
 	// RegionName is a required field
 	RegionName *string `type:"string" required:"true"`
@@ -1117,7 +1117,7 @@ func (s *DeleteGlobalSecondaryIndexAction) Validate() error {
 type DeleteReplicaAction struct {
 	_ struct{} `type:"structure"`
 
-	// The region of the replica to be removed.
+	// The Region of the replica to be removed.
 	//
 	// RegionName is a required field
 	RegionName *string `type:"string" required:"true"`
@@ -1180,7 +1180,7 @@ func (s Endpoint) String() string {
 }
 
 // Represents a condition to be compared with an attribute value. This condition
-// can be used with DeleteItem, PutItem or UpdateItem operations; if the comparison
+// can be used with DeleteItem, PutItem, or UpdateItem operations; if the comparison
 // evaluates to true, the operation succeeds; if not, the operation fails. You
 // can use ExpectedAttributeValue in one of two different ways:
 //
@@ -1442,7 +1442,7 @@ type GlobalSecondaryIndex struct {
 	//    * RANGE - sort key
 	//
 	// The partition key of an item is also known as its hash attribute. The term
-	// "hash attribute" derives from DynamoDB' usage of an internal hash function
+	// "hash attribute" derives from DynamoDB's usage of an internal hash function
 	// to evenly distribute data items across partitions, based on their partition
 	// key values.
 	//
@@ -1530,6 +1530,11 @@ type GlobalSecondaryIndexDescription struct {
 	// DynamoDB will do so. After all items have been processed, the backfilling
 	// operation is complete and Backfilling is false.
 	//
+	// You can delete an index that is being created during the Backfilling phase
+	// when IndexStatus is set to CREATING and Backfilling is true. You can't delete
+	// the index that is being created when IndexStatus is set to CREATING and Backfilling
+	// is false.
+	//
 	// For indexes that were created during a CreateTable operation, the Backfilling
 	// attribute does not appear in the DescribeTable output.
 	Backfilling *bool `type:"boolean"`
@@ -1568,7 +1573,7 @@ type GlobalSecondaryIndexDescription struct {
 	//    * RANGE - sort key
 	//
 	// The partition key of an item is also known as its hash attribute. The term
-	// "hash attribute" derives from DynamoDB' usage of an internal hash function
+	// "hash attribute" derives from DynamoDB's usage of an internal hash function
 	// to evenly distribute data items across partitions, based on their partition
 	// key values.
 	//
@@ -1612,7 +1617,7 @@ type GlobalSecondaryIndexInfo struct {
 	//    * RANGE - sort key
 	//
 	// The partition key of an item is also known as its hash attribute. The term
-	// "hash attribute" derives from DynamoDB' usage of an internal hash function
+	// "hash attribute" derives from DynamoDB's usage of an internal hash function
 	// to evenly distribute data items across partitions, based on their partition
 	// key values.
 	//
@@ -1706,7 +1711,7 @@ type GlobalTable struct {
 	// The global table name.
 	GlobalTableName *string `min:"3" type:"string"`
 
-	// The regions where the global table has replicas.
+	// The Regions where the global table has replicas.
 	ReplicationGroup []Replica `type:"list"`
 }
 
@@ -1739,7 +1744,7 @@ type GlobalTableDescription struct {
 	//    * ACTIVE - The global table is ready for use.
 	GlobalTableStatus GlobalTableStatus `type:"string" enum:"true"`
 
-	// The regions where the global table has replicas.
+	// The Regions where the global table has replicas.
 	ReplicationGroup []ReplicaDescription `type:"list"`
 }
 
@@ -1759,7 +1764,7 @@ type GlobalTableGlobalSecondaryIndexSettingsUpdate struct {
 	// IndexName is a required field
 	IndexName *string `min:"3" type:"string" required:"true"`
 
-	// AutoScaling settings for managing a global secondary index's write capacity
+	// Auto scaling settings for managing a global secondary index's write capacity
 	// units.
 	ProvisionedWriteCapacityAutoScalingSettingsUpdate *AutoScalingSettingsUpdate `type:"structure"`
 
@@ -1865,7 +1870,7 @@ type KeySchemaElement struct {
 	//    * RANGE - sort key
 	//
 	// The partition key of an item is also known as its hash attribute. The term
-	// "hash attribute" derives from DynamoDB' usage of an internal hash function
+	// "hash attribute" derives from DynamoDB's usage of an internal hash function
 	// to evenly distribute data items across partitions, based on their partition
 	// key values.
 	//
@@ -2020,7 +2025,7 @@ type LocalSecondaryIndex struct {
 	//    * RANGE - sort key
 	//
 	// The partition key of an item is also known as its hash attribute. The term
-	// "hash attribute" derives from DynamoDB' usage of an internal hash function
+	// "hash attribute" derives from DynamoDB's usage of an internal hash function
 	// to evenly distribute data items across partitions, based on their partition
 	// key values.
 	//
@@ -2111,7 +2116,7 @@ type LocalSecondaryIndexDescription struct {
 	//    * RANGE - sort key
 	//
 	// The partition key of an item is also known as its hash attribute. The term
-	// "hash attribute" derives from DynamoDB' usage of an internal hash function
+	// "hash attribute" derives from DynamoDB's usage of an internal hash function
 	// to evenly distribute data items across partitions, based on their partition
 	// key values.
 	//
@@ -2147,7 +2152,7 @@ type LocalSecondaryIndexInfo struct {
 	//    * RANGE - sort key
 	//
 	// The partition key of an item is also known as its hash attribute. The term
-	// "hash attribute" derives from DynamoDB' usage of an internal hash function
+	// "hash attribute" derives from DynamoDB's usage of an internal hash function
 	// to evenly distribute data items across partitions, based on their partition
 	// key values.
 	//
@@ -2171,8 +2176,8 @@ func (s LocalSecondaryIndexInfo) String() string {
 type PointInTimeRecoveryDescription struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the earliest point in time you can restore your table to. It You
-	// can restore your table to any point in time during the last 35 days.
+	// Specifies the earliest point in time you can restore your table to. You can
+	// restore your table to any point in time during the last 35 days.
 	EarliestRestorableDateTime *time.Time `type:"timestamp"`
 
 	// LatestRestorableDateTime is typically 5 minutes before the current time.
@@ -2242,7 +2247,7 @@ type Projection struct {
 	//    * KEYS_ONLY - Only the index and primary keys are projected into the index.
 	//
 	//    * INCLUDE - Only the specified table attributes are projected into the
-	//    index. The list of projected attributes are in NonKeyAttributes.
+	//    index. The list of projected attributes is in NonKeyAttributes.
 	//
 	//    * ALL - All of the table attributes are projected into the index.
 	ProjectionType ProjectionType `type:"string" enum:"true"`
@@ -2424,7 +2429,7 @@ type PutRequest struct {
 	// A map of attribute name to attribute values, representing the primary key
 	// of an item to be processed by PutItem. All of the table's primary key attributes
 	// must be specified, and their data types must match those of the table's key
-	// schema. If any attributes are present in the item which are part of an index
+	// schema. If any attributes are present in the item that are part of an index
 	// key schema for the table, their types must match the index key schema.
 	//
 	// Item is a required field
@@ -2440,7 +2445,7 @@ func (s PutRequest) String() string {
 type Replica struct {
 	_ struct{} `type:"structure"`
 
-	// The region where the replica needs to be created.
+	// The Region where the replica needs to be created.
 	RegionName *string `type:"string"`
 }
 
@@ -2453,7 +2458,7 @@ func (s Replica) String() string {
 type ReplicaDescription struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the region.
+	// The name of the Region.
 	RegionName *string `type:"string"`
 }
 
@@ -2483,7 +2488,7 @@ type ReplicaGlobalSecondaryIndexSettingsDescription struct {
 	//    * ACTIVE - The global secondary index is ready for use.
 	IndexStatus IndexStatus `type:"string" enum:"true"`
 
-	// Autoscaling settings for a global secondary index replica's read capacity
+	// Auto scaling settings for a global secondary index replica's read capacity
 	// units.
 	ProvisionedReadCapacityAutoScalingSettings *AutoScalingSettingsDescription `type:"structure"`
 
@@ -2491,7 +2496,7 @@ type ReplicaGlobalSecondaryIndexSettingsDescription struct {
 	// DynamoDB returns a ThrottlingException.
 	ProvisionedReadCapacityUnits *int64 `min:"1" type:"long"`
 
-	// AutoScaling settings for a global secondary index replica's write capacity
+	// Auto scaling settings for a global secondary index replica's write capacity
 	// units.
 	ProvisionedWriteCapacityAutoScalingSettings *AutoScalingSettingsDescription `type:"structure"`
 
@@ -2516,7 +2521,7 @@ type ReplicaGlobalSecondaryIndexSettingsUpdate struct {
 	// IndexName is a required field
 	IndexName *string `min:"3" type:"string" required:"true"`
 
-	// Autoscaling settings for managing a global secondary index replica's read
+	// Auto scaling settings for managing a global secondary index replica's read
 	// capacity units.
 	ProvisionedReadCapacityAutoScalingSettingsUpdate *AutoScalingSettingsUpdate `type:"structure"`
 
@@ -2559,7 +2564,7 @@ func (s *ReplicaGlobalSecondaryIndexSettingsUpdate) Validate() error {
 type ReplicaSettingsDescription struct {
 	_ struct{} `type:"structure"`
 
-	// The region name of the replica.
+	// The Region name of the replica.
 	//
 	// RegionName is a required field
 	RegionName *string `type:"string" required:"true"`
@@ -2570,7 +2575,7 @@ type ReplicaSettingsDescription struct {
 	// Replica global secondary index settings for the global table.
 	ReplicaGlobalSecondaryIndexSettings []ReplicaGlobalSecondaryIndexSettingsDescription `type:"list"`
 
-	// Autoscaling settings for a global table replica's read capacity units.
+	// Auto scaling settings for a global table replica's read capacity units.
 	ReplicaProvisionedReadCapacityAutoScalingSettings *AutoScalingSettingsDescription `type:"structure"`
 
 	// The maximum number of strongly consistent reads consumed per second before
@@ -2579,7 +2584,7 @@ type ReplicaSettingsDescription struct {
 	// in the Amazon DynamoDB Developer Guide.
 	ReplicaProvisionedReadCapacityUnits *int64 `type:"long"`
 
-	// AutoScaling settings for a global table replica's write capacity units.
+	// Auto scaling settings for a global table replica's write capacity units.
 	ReplicaProvisionedWriteCapacityAutoScalingSettings *AutoScalingSettingsDescription `type:"structure"`
 
 	// The maximum number of writes consumed per second before DynamoDB returns
@@ -2588,15 +2593,15 @@ type ReplicaSettingsDescription struct {
 	// in the Amazon DynamoDB Developer Guide.
 	ReplicaProvisionedWriteCapacityUnits *int64 `type:"long"`
 
-	// The current state of the region:
+	// The current state of the Region:
 	//
-	//    * CREATING - The region is being created.
+	//    * CREATING - The Region is being created.
 	//
-	//    * UPDATING - The region is being updated.
+	//    * UPDATING - The Region is being updated.
 	//
-	//    * DELETING - The region is being deleted.
+	//    * DELETING - The Region is being deleted.
 	//
-	//    * ACTIVE - The region is ready for use.
+	//    * ACTIVE - The Region is ready for use.
 	ReplicaStatus ReplicaStatus `type:"string" enum:"true"`
 }
 
@@ -2605,11 +2610,11 @@ func (s ReplicaSettingsDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Represents the settings for a global table in a region that will be modified.
+// Represents the settings for a global table in a Region that will be modified.
 type ReplicaSettingsUpdate struct {
 	_ struct{} `type:"structure"`
 
-	// The region of the replica to be added.
+	// The Region of the replica to be added.
 	//
 	// RegionName is a required field
 	RegionName *string `type:"string" required:"true"`
@@ -2618,7 +2623,7 @@ type ReplicaSettingsUpdate struct {
 	// will be modified.
 	ReplicaGlobalSecondaryIndexSettingsUpdate []ReplicaGlobalSecondaryIndexSettingsUpdate `min:"1" type:"list"`
 
-	// Autoscaling settings for managing a global table replica's read capacity
+	// Auto scaling settings for managing a global table replica's read capacity
 	// units.
 	ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate *AutoScalingSettingsUpdate `type:"structure"`
 
@@ -2722,10 +2727,10 @@ type RestoreSummary struct {
 	// RestoreInProgress is a required field
 	RestoreInProgress *bool `type:"boolean" required:"true"`
 
-	// ARN of the backup from which the table was restored.
+	// The Amazon Resource Name (ARN) of the backup from which the table was restored.
 	SourceBackupArn *string `min:"37" type:"string"`
 
-	// ARN of the source table of the backup that is being restored.
+	// The ARN of the source table of the backup that is being restored.
 	SourceTableArn *string `type:"string"`
 }
 
@@ -2738,13 +2743,14 @@ func (s RestoreSummary) String() string {
 type SSEDescription struct {
 	_ struct{} `type:"structure"`
 
-	// The KMS customer master key (CMK) ARN used for the KMS encryption.
+	// The KMS customer master key (CMK) ARN used for the AWS KMS encryption.
 	KMSMasterKeyArn *string `type:"string"`
 
 	// Server-side encryption type. The only supported value is:
 	//
-	//    * KMS - Server-side encryption which uses AWS Key Management Service.
-	//    Key is stored in your account and is managed by AWS KMS (KMS charges apply).
+	//    * KMS - Server-side encryption that uses AWS Key Management Service. The
+	//    key is stored in your account and is managed by AWS KMS (AWS KMS charges
+	//    apply).
 	SSEType SSEType `type:"string" enum:"true"`
 
 	// Represents the current state of server-side encryption. The only supported
@@ -2771,16 +2777,17 @@ type SSESpecification struct {
 	// (false) or not specified, server-side encryption is set to AWS owned CMK.
 	Enabled *bool `type:"boolean"`
 
-	// The KMS Customer Master Key (CMK) which should be used for the KMS encryption.
+	// The KMS customer master key (CMK) that should be used for the AWS KMS encryption.
 	// To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name,
 	// or alias ARN. Note that you should only provide this parameter if the key
-	// is different from the default DynamoDB Customer Master Key alias/aws/dynamodb.
+	// is different from the default DynamoDB customer master key alias/aws/dynamodb.
 	KMSMasterKeyId *string `type:"string"`
 
 	// Server-side encryption type. The only supported value is:
 	//
-	//    * KMS - Server-side encryption which uses AWS Key Management Service.
-	//    Key is stored in your account and is managed by AWS KMS (KMS charges apply).
+	//    * KMS - Server-side encryption that uses AWS Key Management Service. The
+	//    key is stored in your account and is managed by AWS KMS (AWS KMS charges
+	//    apply).
 	SSEType SSEType `type:"string" enum:"true"`
 }
 
@@ -2803,7 +2810,7 @@ type SourceTableDetails struct {
 	//    We recommend using PAY_PER_REQUEST for unpredictable workloads.
 	BillingMode BillingMode `type:"string" enum:"true"`
 
-	// Number of items in the table. Please note this is an approximate value.
+	// Number of items in the table. Note that this is an approximate value.
 	ItemCount *int64 `type:"long"`
 
 	// Schema of the table.
@@ -2834,7 +2841,7 @@ type SourceTableDetails struct {
 	// TableName is a required field
 	TableName *string `min:"3" type:"string" required:"true"`
 
-	// Size of the table in bytes. Please note this is an approximate value.
+	// Size of the table in bytes. Note that this is an approximate value.
 	TableSizeBytes *int64 `type:"long"`
 }
 
@@ -2849,7 +2856,7 @@ type SourceTableFeatureDetails struct {
 	_ struct{} `type:"structure"`
 
 	// Represents the GSI properties for the table when the backup was created.
-	// It includes the IndexName, KeySchema, Projection and ProvisionedThroughput
+	// It includes the IndexName, KeySchema, Projection, and ProvisionedThroughput
 	// for the GSIs on the table at the time of backup.
 	GlobalSecondaryIndexes []GlobalSecondaryIndexInfo `type:"list"`
 
@@ -2931,9 +2938,14 @@ type TableDescription struct {
 	//
 	//    * Backfilling - If true, then the index is currently in the backfilling
 	//    phase. Backfilling occurs only when a new global secondary index is added
-	//    to the table; it is the process by which DynamoDB populates the new index
+	//    to the table. It is the process by which DynamoDB populates the new index
 	//    with data from the table. (This attribute does not appear for indexes
-	//    that were created during a CreateTable operation.)
+	//    that were created during a CreateTable operation.) You can delete an index
+	//    that is being created during the Backfilling phase when IndexStatus is
+	//    set to CREATING and Backfilling is true. You can't delete the index that
+	//    is being created when IndexStatus is set to CREATING and Backfilling is
+	//    false. (This attribute does not appear for indexes that were created during
+	//    a CreateTable operation.)
 	//
 	//    * IndexName - The name of the global secondary index.
 	//
@@ -2959,7 +2971,7 @@ type TableDescription struct {
 	//    specification is composed of: ProjectionType - One of the following: KEYS_ONLY
 	//    - Only the index and primary keys are projected into the index. INCLUDE
 	//    - Only the specified table attributes are projected into the index. The
-	//    list of projected attributes are in NonKeyAttributes. ALL - All of the
+	//    list of projected attributes is in NonKeyAttributes. ALL - All of the
 	//    table attributes are projected into the index. NonKeyAttributes - A list
 	//    of one or more non-key attribute names that are projected into the secondary
 	//    index. The total count of attributes provided in NonKeyAttributes, summed
@@ -3007,11 +3019,11 @@ type TableDescription struct {
 	// However, the combination of the following three elements is guaranteed to
 	// be unique:
 	//
-	//    * the AWS customer ID.
+	//    * AWS customer ID
 	//
-	//    * the table name.
+	//    * Table name
 	//
-	//    * the StreamLabel.
+	//    * StreamLabel
 	LatestStreamLabel *string `type:"string"`
 
 	// Represents one or more local secondary indexes on the table. Each index is
@@ -3032,7 +3044,7 @@ type TableDescription struct {
 	//    specification is composed of: ProjectionType - One of the following: KEYS_ONLY
 	//    - Only the index and primary keys are projected into the index. INCLUDE
 	//    - Only the specified table attributes are projected into the index. The
-	//    list of projected attributes are in NonKeyAttributes. ALL - All of the
+	//    list of projected attributes is in NonKeyAttributes. ALL - All of the
 	//    table attributes are projected into the index. NonKeyAttributes - A list
 	//    of one or more non-key attribute names that are projected into the secondary
 	//    index. The total count of attributes provided in NonKeyAttributes, summed
@@ -3417,8 +3429,8 @@ func (s *UpdateGlobalSecondaryIndexAction) Validate() error {
 
 // Represents an operation to perform - either DeleteItem or PutItem. You can
 // only request one of these operations, not both, in a single WriteRequest.
-// If you do need to perform both of these operations, you will need to provide
-// two separate WriteRequest objects.
+// If you do need to perform both of these operations, you need to provide two
+// separate WriteRequest objects.
 type WriteRequest struct {
 	_ struct{} `type:"structure"`
 

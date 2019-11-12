@@ -57,6 +57,9 @@ func (s GetSigningProfileInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetSigningProfileOutput struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon Resource Name (ARN) for the signing profile.
+	Arn *string `locationName:"arn" type:"string"`
+
 	// A list of overrides applied by the target signing profile for signing operations.
 	Overrides *SigningPlatformOverrides `locationName:"overrides" type:"structure"`
 
@@ -75,6 +78,9 @@ type GetSigningProfileOutput struct {
 
 	// The status of the target signing profile.
 	Status SigningProfileStatus `locationName:"status" type:"string" enum:"true"`
+
+	// A list of tags associated with the signing profile.
+	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 }
 
 // String returns the string representation
@@ -84,6 +90,12 @@ func (s GetSigningProfileOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetSigningProfileOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.Overrides != nil {
 		v := s.Overrides
 
@@ -125,6 +137,18 @@ func (s GetSigningProfileOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	return nil
 }

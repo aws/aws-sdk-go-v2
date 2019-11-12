@@ -659,6 +659,9 @@ const (
 	NotebookInstanceAcceleratorTypeMlEia1Medium NotebookInstanceAcceleratorType = "ml.eia1.medium"
 	NotebookInstanceAcceleratorTypeMlEia1Large  NotebookInstanceAcceleratorType = "ml.eia1.large"
 	NotebookInstanceAcceleratorTypeMlEia1Xlarge NotebookInstanceAcceleratorType = "ml.eia1.xlarge"
+	NotebookInstanceAcceleratorTypeMlEia2Medium NotebookInstanceAcceleratorType = "ml.eia2.medium"
+	NotebookInstanceAcceleratorTypeMlEia2Large  NotebookInstanceAcceleratorType = "ml.eia2.large"
+	NotebookInstanceAcceleratorTypeMlEia2Xlarge NotebookInstanceAcceleratorType = "ml.eia2.xlarge"
 )
 
 func (enum NotebookInstanceAcceleratorType) MarshalValue() (string, error) {
@@ -845,6 +848,9 @@ const (
 	ProductionVariantAcceleratorTypeMlEia1Medium ProductionVariantAcceleratorType = "ml.eia1.medium"
 	ProductionVariantAcceleratorTypeMlEia1Large  ProductionVariantAcceleratorType = "ml.eia1.large"
 	ProductionVariantAcceleratorTypeMlEia1Xlarge ProductionVariantAcceleratorType = "ml.eia1.xlarge"
+	ProductionVariantAcceleratorTypeMlEia2Medium ProductionVariantAcceleratorType = "ml.eia2.medium"
+	ProductionVariantAcceleratorTypeMlEia2Large  ProductionVariantAcceleratorType = "ml.eia2.large"
+	ProductionVariantAcceleratorTypeMlEia2Xlarge ProductionVariantAcceleratorType = "ml.eia2.xlarge"
 )
 
 func (enum ProductionVariantAcceleratorType) MarshalValue() (string, error) {
@@ -875,6 +881,12 @@ const (
 	ProductionVariantInstanceTypeMlM54xlarge    ProductionVariantInstanceType = "ml.m5.4xlarge"
 	ProductionVariantInstanceTypeMlM512xlarge   ProductionVariantInstanceType = "ml.m5.12xlarge"
 	ProductionVariantInstanceTypeMlM524xlarge   ProductionVariantInstanceType = "ml.m5.24xlarge"
+	ProductionVariantInstanceTypeMlM5dLarge     ProductionVariantInstanceType = "ml.m5d.large"
+	ProductionVariantInstanceTypeMlM5dXlarge    ProductionVariantInstanceType = "ml.m5d.xlarge"
+	ProductionVariantInstanceTypeMlM5d2xlarge   ProductionVariantInstanceType = "ml.m5d.2xlarge"
+	ProductionVariantInstanceTypeMlM5d4xlarge   ProductionVariantInstanceType = "ml.m5d.4xlarge"
+	ProductionVariantInstanceTypeMlM5d12xlarge  ProductionVariantInstanceType = "ml.m5d.12xlarge"
+	ProductionVariantInstanceTypeMlM5d24xlarge  ProductionVariantInstanceType = "ml.m5d.24xlarge"
 	ProductionVariantInstanceTypeMlC4Large      ProductionVariantInstanceType = "ml.c4.large"
 	ProductionVariantInstanceTypeMlC4Xlarge     ProductionVariantInstanceType = "ml.c4.xlarge"
 	ProductionVariantInstanceTypeMlC42xlarge    ProductionVariantInstanceType = "ml.c4.2xlarge"
@@ -892,6 +904,12 @@ const (
 	ProductionVariantInstanceTypeMlC54xlarge    ProductionVariantInstanceType = "ml.c5.4xlarge"
 	ProductionVariantInstanceTypeMlC59xlarge    ProductionVariantInstanceType = "ml.c5.9xlarge"
 	ProductionVariantInstanceTypeMlC518xlarge   ProductionVariantInstanceType = "ml.c5.18xlarge"
+	ProductionVariantInstanceTypeMlC5dLarge     ProductionVariantInstanceType = "ml.c5d.large"
+	ProductionVariantInstanceTypeMlC5dXlarge    ProductionVariantInstanceType = "ml.c5d.xlarge"
+	ProductionVariantInstanceTypeMlC5d2xlarge   ProductionVariantInstanceType = "ml.c5d.2xlarge"
+	ProductionVariantInstanceTypeMlC5d4xlarge   ProductionVariantInstanceType = "ml.c5d.4xlarge"
+	ProductionVariantInstanceTypeMlC5d9xlarge   ProductionVariantInstanceType = "ml.c5d.9xlarge"
+	ProductionVariantInstanceTypeMlC5d18xlarge  ProductionVariantInstanceType = "ml.c5d.18xlarge"
 	ProductionVariantInstanceTypeMlG4dnXlarge   ProductionVariantInstanceType = "ml.g4dn.xlarge"
 	ProductionVariantInstanceTypeMlG4dn2xlarge  ProductionVariantInstanceType = "ml.g4dn.2xlarge"
 	ProductionVariantInstanceTypeMlG4dn4xlarge  ProductionVariantInstanceType = "ml.g4dn.4xlarge"
@@ -904,6 +922,12 @@ const (
 	ProductionVariantInstanceTypeMlR54xlarge    ProductionVariantInstanceType = "ml.r5.4xlarge"
 	ProductionVariantInstanceTypeMlR512xlarge   ProductionVariantInstanceType = "ml.r5.12xlarge"
 	ProductionVariantInstanceTypeMlR524xlarge   ProductionVariantInstanceType = "ml.r5.24xlarge"
+	ProductionVariantInstanceTypeMlR5dLarge     ProductionVariantInstanceType = "ml.r5d.large"
+	ProductionVariantInstanceTypeMlR5dXlarge    ProductionVariantInstanceType = "ml.r5d.xlarge"
+	ProductionVariantInstanceTypeMlR5d2xlarge   ProductionVariantInstanceType = "ml.r5d.2xlarge"
+	ProductionVariantInstanceTypeMlR5d4xlarge   ProductionVariantInstanceType = "ml.r5d.4xlarge"
+	ProductionVariantInstanceTypeMlR5d12xlarge  ProductionVariantInstanceType = "ml.r5d.12xlarge"
+	ProductionVariantInstanceTypeMlR5d24xlarge  ProductionVariantInstanceType = "ml.r5d.24xlarge"
 )
 
 func (enum ProductionVariantInstanceType) MarshalValue() (string, error) {

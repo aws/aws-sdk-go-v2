@@ -42,15 +42,41 @@ type StartTranscriptionJobInput struct {
 	// the bucket. For more information, see Permissions Required for IAM User Roles
 	// (https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user).
 	//
-	// Amazon Transcribe uses the default Amazon S3 key for server-side encryption
-	// of transcripts that are placed in your S3 bucket. You can't specify your
-	// own encryption key.
+	// You can specify an AWS Key Management Service (KMS) key to encrypt the output
+	// of your transcription using the OutputEncryptionKMSKeyId parameter. If you
+	// don't specify a KMS key, Amazon Transcribe uses the default Amazon S3 key
+	// for server-side encryption of transcripts that are placed in your S3 bucket.
 	//
 	// If you don't set the OutputBucketName, Amazon Transcribe generates a pre-signed
 	// URL, a shareable URL that provides secure access to your transcription, and
 	// returns it in the TranscriptFileUri field. Use this URL to download the transcription.
 	OutputBucketName *string `type:"string"`
 
+	// The Amazon Resource Name (ARN) of the AWS Key Management Service (KMS) key
+	// used to encrypt the output of the transcription job. The user calling the
+	// StartTranscriptionJob operation must have permission to use the specified
+	// KMS key.
+	//
+	// You can use either of the following to identify a KMS key in the current
+	// account:
+	//
+	//    * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
+	//    * KMS Key Alias: "alias/ExampleAlias"
+	//
+	// You can use either of the following to identify a KMS key in the current
+	// account or another account:
+	//
+	//    * Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:region:account
+	//    ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
+	//    * ARN of a KMS Key Alias: "arn:aws:kms:region:account ID:alias/ExampleAlias"
+	//
+	// If you don't specify an encryption key, the output of the transcription job
+	// is encrypted with the default Amazon S3 key (SSE-S3).
+	//
+	// If you specify a KMS key to encrypt your output, you must also specify an
+	// output location in the OutputBucketName parameter.
 	OutputEncryptionKMSKeyId *string `min:"1" type:"string"`
 
 	// A Settings object that provides optional settings for a transcription job.

@@ -16,14 +16,14 @@ type DescribeUserInput struct {
 	// assigned.
 	//
 	// ServerId is a required field
-	ServerId *string `type:"string" required:"true"`
+	ServerId *string `min:"19" type:"string" required:"true"`
 
 	// The name of the user assigned to one or more servers. User names are part
 	// of the sign-in credentials to use the AWS Transfer for SFTP service and perform
 	// file transfer tasks.
 	//
 	// UserName is a required field
-	UserName *string `type:"string" required:"true"`
+	UserName *string `min:"3" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -38,9 +38,15 @@ func (s *DescribeUserInput) Validate() error {
 	if s.ServerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServerId"))
 	}
+	if s.ServerId != nil && len(*s.ServerId) < 19 {
+		invalidParams.Add(aws.NewErrParamMinLen("ServerId", 19))
+	}
 
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
+	}
+	if s.UserName != nil && len(*s.UserName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserName", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -56,7 +62,7 @@ type DescribeUserOutput struct {
 	// assigned.
 	//
 	// ServerId is a required field
-	ServerId *string `type:"string" required:"true"`
+	ServerId *string `min:"19" type:"string" required:"true"`
 
 	// An array containing the properties of the user account for the ServerID value
 	// that you specified.

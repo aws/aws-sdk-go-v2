@@ -403,6 +403,32 @@ func (s Invite) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The logging configuration associated with an Amazon Chime Voice Connector.
+// Specifies whether SIP message logs are enabled for sending to Amazon CloudWatch
+// Logs.
+type LoggingConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// When true, enables SIP message logs for sending to Amazon CloudWatch Logs.
+	EnableSIPLogs *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s LoggingConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s LoggingConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.EnableSIPLogs != nil {
+		v := *s.EnableSIPLogs
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "EnableSIPLogs", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
 // A phone number for which an order has been placed.
 type OrderedPhoneNumber struct {
 	_ struct{} `type:"structure"`
@@ -497,11 +523,11 @@ func (s Origination) MarshalFields(e protocol.FieldEncoder) error {
 
 // Origination routes define call distribution properties for your SIP hosts
 // to receive inbound calls using your Amazon Chime Voice Connector. Limit:
-// 10 origination routes per Amazon Chime Voice Connector.
+// Ten origination routes for each Amazon Chime Voice Connector.
 type OriginationRoute struct {
 	_ struct{} `type:"structure"`
 
-	// The FODN or IP address to contact for origination traffic.
+	// The FQDN or IP address to contact for origination traffic.
 	Host *string `type:"string"`
 
 	// The designated origination route port. Defaults to 5060.
@@ -584,6 +610,12 @@ type PhoneNumber struct {
 	// The phone number associations.
 	Associations []PhoneNumberAssociation `type:"list"`
 
+	// The outbound calling name associated with the phone number.
+	CallingName *string `type:"string" sensitive:"true"`
+
+	// The outbound calling name status.
+	CallingNameStatus CallingNameStatus `type:"string" enum:"true"`
+
 	// The phone number capabilities.
 	Capabilities *PhoneNumberCapabilities `type:"structure"`
 
@@ -630,6 +662,18 @@ func (s PhoneNumber) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	if s.CallingName != nil {
+		v := *s.CallingName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CallingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.CallingNameStatus) > 0 {
+		v := s.CallingNameStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CallingNameStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Capabilities != nil {
 		v := s.Capabilities
@@ -692,15 +736,16 @@ func (s PhoneNumber) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The phone number associations, such as Amazon Chime account ID, Amazon Chime
-// user ID, or Amazon Chime Voice Connector ID.
+// user ID, Amazon Chime Voice Connector ID, or Amazon Chime Voice Connector
+// group ID.
 type PhoneNumberAssociation struct {
 	_ struct{} `type:"structure"`
 
 	// The timestamp of the phone number association, in ISO 8601 format.
 	AssociatedTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
-	// Defines the association with an Amazon Chime account ID, user ID, or Amazon
-	// Chime Voice Connector ID.
+	// Defines the association with an Amazon Chime account ID, user ID, Amazon
+	// Chime Voice Connector ID, or Amazon Chime Voice Connector group ID.
 	Name PhoneNumberAssociationName `type:"string" enum:"true"`
 
 	// Contains the ID for the entity specified in Name.
@@ -736,8 +781,8 @@ func (s PhoneNumberAssociation) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The phone number capabilities, such as enabled inbound and outbound calling
-// and text messaging.
+// The phone number capabilities for Amazon Chime Business Calling phone numbers,
+// such as enabled inbound and outbound calling and text messaging.
 type PhoneNumberCapabilities struct {
 	_ struct{} `type:"structure"`
 
@@ -928,6 +973,57 @@ func (s PhoneNumberOrder) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The streaming configuration associated with an Amazon Chime Voice Connector.
+// Specifies whether media streaming is enabled for sending to Amazon Kinesis,
+// and shows the retention period for the Amazon Kinesis data, in hours.
+type StreamingConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The retention period for the Amazon Kinesis data, in hours.
+	//
+	// DataRetentionInHours is a required field
+	DataRetentionInHours *int64 `type:"integer" required:"true"`
+
+	// When true, media streaming to Amazon Kinesis is turned off.
+	Disabled *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s StreamingConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StreamingConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "StreamingConfiguration"}
+
+	if s.DataRetentionInHours == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DataRetentionInHours"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StreamingConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DataRetentionInHours != nil {
+		v := *s.DataRetentionInHours
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DataRetentionInHours", protocol.Int64Value(v), metadata)
+	}
+	if s.Disabled != nil {
+		v := *s.Disabled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Disabled", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
 // Settings that allow management of telephony permissions for an Amazon Chime
 // user, such as inbound and outbound calling and text messaging.
 type TelephonySettings struct {
@@ -1004,10 +1100,10 @@ func (s TelephonySettings) MarshalFields(e protocol.FieldEncoder) error {
 type Termination struct {
 	_ struct{} `type:"structure"`
 
-	// The countries to which calls are allowed.
+	// The countries to which calls are allowed, in ISO 3166-1 alpha-2 format. Required.
 	CallingRegions []string `type:"list"`
 
-	// The IP addresses allowed to make calls, in CIDR format.
+	// The IP addresses allowed to make calls, in CIDR format. Required.
 	CidrAllowedList []string `type:"list"`
 
 	// The limit on calls per second. Max value based on account service limit.
@@ -1121,10 +1217,13 @@ func (s TerminationHealth) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The phone number ID and product type fields to update, used with the BatchUpdatePhoneNumber
-// and UpdatePhoneNumber actions.
+// The phone number ID, product type, or calling name fields to update, used
+// with the BatchUpdatePhoneNumber and UpdatePhoneNumber actions.
 type UpdatePhoneNumberRequestItem struct {
 	_ struct{} `type:"structure"`
+
+	// The outbound calling name to update.
+	CallingName *string `type:"string" sensitive:"true"`
 
 	// The phone number ID to update.
 	//
@@ -1156,6 +1255,12 @@ func (s *UpdatePhoneNumberRequestItem) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdatePhoneNumberRequestItem) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CallingName != nil {
+		v := *s.CallingName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CallingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.PhoneNumberId != nil {
 		v := *s.PhoneNumberId
 
@@ -1434,6 +1539,10 @@ func (s UserSettings) MarshalFields(e protocol.FieldEncoder) error {
 type VoiceConnector struct {
 	_ struct{} `type:"structure"`
 
+	// The AWS Region in which the Amazon Chime Voice Connector is created. Default:
+	// us-east-1.
+	AwsRegion VoiceConnectorAwsRegion `type:"string" enum:"true"`
+
 	// The Amazon Chime Voice Connector creation timestamp, in ISO 8601 format.
 	CreatedTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
@@ -1460,6 +1569,12 @@ func (s VoiceConnector) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s VoiceConnector) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.AwsRegion) > 0 {
+		v := s.AwsRegion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AwsRegion", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.CreatedTimestamp != nil {
 		v := *s.CreatedTimestamp
 
@@ -1491,6 +1606,139 @@ func (s VoiceConnector) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "UpdatedTimestamp",
 			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
+	}
+	if s.VoiceConnectorId != nil {
+		v := *s.VoiceConnectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "VoiceConnectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The Amazon Chime Voice Connector group configuration, including associated
+// Amazon Chime Voice Connectors. You can include Amazon Chime Voice Connectors
+// from different AWS Regions in your group. This creates a fault tolerant mechanism
+// for fallback in case of availability events.
+type VoiceConnectorGroup struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Chime Voice Connector group creation timestamp, in ISO 8601 format.
+	CreatedTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// The name of the Amazon Chime Voice Connector group.
+	Name *string `min:"1" type:"string"`
+
+	// The updated Amazon Chime Voice Connector group timestamp, in ISO 8601 format.
+	UpdatedTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// The Amazon Chime Voice Connector group ID.
+	VoiceConnectorGroupId *string `type:"string"`
+
+	// The Amazon Chime Voice Connectors to which to route inbound calls.
+	VoiceConnectorItems []VoiceConnectorItem `type:"list"`
+}
+
+// String returns the string representation
+func (s VoiceConnectorGroup) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VoiceConnectorGroup) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CreatedTimestamp != nil {
+		v := *s.CreatedTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreatedTimestamp",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UpdatedTimestamp != nil {
+		v := *s.UpdatedTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UpdatedTimestamp",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
+	}
+	if s.VoiceConnectorGroupId != nil {
+		v := *s.VoiceConnectorGroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "VoiceConnectorGroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.VoiceConnectorItems != nil {
+		v := s.VoiceConnectorItems
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "VoiceConnectorItems", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// For Amazon Chime Voice Connector groups, the Amazon Chime Voice Connectors
+// to which to route inbound calls. Includes priority configuration settings.
+// Limit: 3 VoiceConnectorItems per Amazon Chime Voice Connector group.
+type VoiceConnectorItem struct {
+	_ struct{} `type:"structure"`
+
+	// The priority associated with the Amazon Chime Voice Connector, with 1 being
+	// the highest priority. Higher priority Amazon Chime Voice Connectors are attempted
+	// first.
+	//
+	// Priority is a required field
+	Priority *int64 `min:"1" type:"integer" required:"true"`
+
+	// The Amazon Chime Voice Connector ID.
+	//
+	// VoiceConnectorId is a required field
+	VoiceConnectorId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s VoiceConnectorItem) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VoiceConnectorItem) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VoiceConnectorItem"}
+
+	if s.Priority == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Priority"))
+	}
+	if s.Priority != nil && *s.Priority < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Priority", 1))
+	}
+
+	if s.VoiceConnectorId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VoiceConnectorId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VoiceConnectorItem) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Priority != nil {
+		v := *s.Priority
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Priority", protocol.Int64Value(v), metadata)
 	}
 	if s.VoiceConnectorId != nil {
 		v := *s.VoiceConnectorId

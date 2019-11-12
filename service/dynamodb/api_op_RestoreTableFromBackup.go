@@ -4,6 +4,7 @@ package dynamodb
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -16,6 +17,22 @@ type RestoreTableFromBackupInput struct {
 	//
 	// BackupArn is a required field
 	BackupArn *string `min:"37" type:"string" required:"true"`
+
+	// The billing mode of the restored table.
+	BillingModeOverride BillingMode `type:"string" enum:"true"`
+
+	// List of global secondary indexes for the restored table. The indexes provided
+	// should match existing secondary indexes. You can choose to exclude some or
+	// all of the indexes at the time of restore.
+	GlobalSecondaryIndexOverride []GlobalSecondaryIndex `type:"list"`
+
+	// List of local secondary indexes for the restored table. The indexes provided
+	// should match existing secondary indexes. You can choose to exclude some or
+	// all of the indexes at the time of restore.
+	LocalSecondaryIndexOverride []LocalSecondaryIndex `type:"list"`
+
+	// Provisioned throughput settings for the restored table.
+	ProvisionedThroughputOverride *ProvisionedThroughput `type:"structure"`
 
 	// The name of the new table to which the backup must be restored.
 	//
@@ -44,6 +61,25 @@ func (s *RestoreTableFromBackupInput) Validate() error {
 	}
 	if s.TargetTableName != nil && len(*s.TargetTableName) < 3 {
 		invalidParams.Add(aws.NewErrParamMinLen("TargetTableName", 3))
+	}
+	if s.GlobalSecondaryIndexOverride != nil {
+		for i, v := range s.GlobalSecondaryIndexOverride {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "GlobalSecondaryIndexOverride", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.LocalSecondaryIndexOverride != nil {
+		for i, v := range s.LocalSecondaryIndexOverride {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "LocalSecondaryIndexOverride", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.ProvisionedThroughputOverride != nil {
+		if err := s.ProvisionedThroughputOverride.Validate(); err != nil {
+			invalidParams.AddNested("ProvisionedThroughputOverride", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {

@@ -102,6 +102,12 @@ type GetTemplateSummaryOutput struct {
 	// parameter.
 	Parameters []ParameterDeclaration `type:"list"`
 
+	// A list of resource identifier summaries that describe the target resources
+	// of an import operation and the properties you can provide during the import
+	// to identify the target resources. For example, BucketName is a possible identifier
+	// property for an AWS::S3::Bucket resource.
+	ResourceIdentifierSummaries []ResourceIdentifierSummary `type:"list"`
+
 	// A list of all the template resource types that are defined in the template,
 	// such as AWS::EC2::Instance, AWS::Dynamo::Table, and Custom::MyCustomInstance.
 	ResourceTypes []string `type:"list"`

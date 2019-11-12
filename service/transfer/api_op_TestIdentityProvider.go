@@ -16,12 +16,12 @@ type TestIdentityProviderInput struct {
 	// method is tested with a user name and password.
 	//
 	// ServerId is a required field
-	ServerId *string `type:"string" required:"true"`
+	ServerId *string `min:"19" type:"string" required:"true"`
 
 	// This request parameter is the name of the user account to be tested.
 	//
 	// UserName is a required field
-	UserName *string `type:"string" required:"true"`
+	UserName *string `min:"3" type:"string" required:"true"`
 
 	// The password of the user account to be tested.
 	UserPassword *string `type:"string" sensitive:"true"`
@@ -39,9 +39,15 @@ func (s *TestIdentityProviderInput) Validate() error {
 	if s.ServerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServerId"))
 	}
+	if s.ServerId != nil && len(*s.ServerId) < 19 {
+		invalidParams.Add(aws.NewErrParamMinLen("ServerId", 19))
+	}
 
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
+	}
+	if s.UserName != nil && len(*s.UserName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserName", 3))
 	}
 
 	if invalidParams.Len() > 0 {

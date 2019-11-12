@@ -44,6 +44,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline"
 	"github.com/aws/aws-sdk-go-v2/service/codestar"
+	"github.com/aws/aws-sdk-go-v2/service/codestarnotifications"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider"
 	"github.com/aws/aws-sdk-go-v2/service/cognitosync"
@@ -119,6 +120,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning"
 	"github.com/aws/aws-sdk-go-v2/service/macie"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchain"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacemetering"
@@ -166,6 +168,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3control"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakerruntime"
+	"github.com/aws/aws-sdk-go-v2/service/savingsplans"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub"
 	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository"
@@ -182,6 +185,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/sns"
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
 	"github.com/aws/aws-sdk-go-v2/service/ssm"
+	"github.com/aws/aws-sdk-go-v2/service/sso"
+	"github.com/aws/aws-sdk-go-v2/service/ssooidc"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 	"github.com/aws/aws-sdk-go-v2/service/support"
@@ -249,6 +254,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "codedeploy", value: reflect.ValueOf(codedeploy.New(cfg))},
 		{name: "codepipeline", value: reflect.ValueOf(codepipeline.New(cfg))},
 		{name: "codestar", value: reflect.ValueOf(codestar.New(cfg))},
+		{name: "codestarnotifications", value: reflect.ValueOf(codestarnotifications.New(cfg))},
 		{name: "cognitoidentity", value: reflect.ValueOf(cognitoidentity.New(cfg))},
 		{name: "cognitoidentityprovider", value: reflect.ValueOf(cognitoidentityprovider.New(cfg))},
 		{name: "cognitosync", value: reflect.ValueOf(cognitosync.New(cfg))},
@@ -324,6 +330,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "machinelearning", value: reflect.ValueOf(machinelearning.New(cfg))},
 		{name: "macie", value: reflect.ValueOf(macie.New(cfg))},
 		{name: "managedblockchain", value: reflect.ValueOf(managedblockchain.New(cfg))},
+		{name: "marketplacecatalog", value: reflect.ValueOf(marketplacecatalog.New(cfg))},
 		{name: "marketplacecommerceanalytics", value: reflect.ValueOf(marketplacecommerceanalytics.New(cfg))},
 		{name: "marketplaceentitlementservice", value: reflect.ValueOf(marketplaceentitlementservice.New(cfg))},
 		{name: "marketplacemetering", value: reflect.ValueOf(marketplacemetering.New(cfg))},
@@ -371,6 +378,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "s3control", value: reflect.ValueOf(s3control.New(cfg))},
 		{name: "sagemaker", value: reflect.ValueOf(sagemaker.New(cfg))},
 		{name: "sagemakerruntime", value: reflect.ValueOf(sagemakerruntime.New(cfg))},
+		{name: "savingsplans", value: reflect.ValueOf(savingsplans.New(cfg))},
 		{name: "secretsmanager", value: reflect.ValueOf(secretsmanager.New(cfg))},
 		{name: "securityhub", value: reflect.ValueOf(securityhub.New(cfg))},
 		{name: "serverlessapplicationrepository", value: reflect.ValueOf(serverlessapplicationrepository.New(cfg))},
@@ -387,6 +395,8 @@ func createServices(cfg aws.Config) []service {
 		{name: "sns", value: reflect.ValueOf(sns.New(cfg))},
 		{name: "sqs", value: reflect.ValueOf(sqsClient)},
 		{name: "ssm", value: reflect.ValueOf(ssm.New(cfg))},
+		{name: "sso", value: reflect.ValueOf(sso.New(cfg))},
+		{name: "ssooidc", value: reflect.ValueOf(ssooidc.New(cfg))},
 		{name: "storagegateway", value: reflect.ValueOf(storagegateway.New(cfg))},
 		{name: "sts", value: reflect.ValueOf(sts.New(cfg))},
 		{name: "support", value: reflect.ValueOf(support.New(cfg))},

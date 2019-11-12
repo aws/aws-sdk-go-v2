@@ -162,11 +162,18 @@ type Server struct {
 	// Time stamp of server creation. Example 2016-07-29T13:38:47.520Z
 	CreatedAt *time.Time `type:"timestamp"`
 
+	// An optional public endpoint of a server, such as https://aws.my-company.com.
+	// You cannot access the server by using the Endpoint value if the server has
+	// a CustomDomain specified.
+	CustomDomain *string `type:"string"`
+
 	// Disables automated backups. The number of stored backups is dependent on
 	// the value of PreferredBackupCount.
 	DisableAutomatedBackup *bool `type:"boolean"`
 
-	// A DNS name that can be used to access the engine. Example: myserver-asdfghjkl.us-east-1.opsworks.io
+	// A DNS name that can be used to access the engine. Example: myserver-asdfghjkl.us-east-1.opsworks.io.
+	// You cannot access the server by using the Endpoint value if the server has
+	// a CustomDomain specified.
 	Endpoint *string `type:"string"`
 
 	// The engine type of the server. Valid values in this release include ChefAutomate

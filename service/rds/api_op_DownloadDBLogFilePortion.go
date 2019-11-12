@@ -43,8 +43,8 @@ type DownloadDBLogFilePortionInput struct {
 	//    is returned up to a maximum of 10000 lines, starting with the most recent
 	//    log entries first.
 	//
-	//    * If NumberOfLines is specified and Marker is not specified, then the
-	//    most recent lines from the end of the log file are returned.
+	//    * If NumberOfLines is specified and Marker isn't specified, then the most
+	//    recent lines from the end of the log file are returned.
 	//
 	//    * If Marker is specified as "0", then the specified number of lines from
 	//    the beginning of the log file are returned.

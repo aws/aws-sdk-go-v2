@@ -1518,6 +1518,8 @@ const (
 	InstanceTypeU6tb1Metal   InstanceType = "u-6tb1.metal"
 	InstanceTypeU9tb1Metal   InstanceType = "u-9tb1.metal"
 	InstanceTypeU12tb1Metal  InstanceType = "u-12tb1.metal"
+	InstanceTypeU18tb1Metal  InstanceType = "u-18tb1.metal"
+	InstanceTypeU24tb1Metal  InstanceType = "u-24tb1.metal"
 	InstanceTypeA1Medium     InstanceType = "a1.medium"
 	InstanceTypeA1Large      InstanceType = "a1.large"
 	InstanceTypeA1Xlarge     InstanceType = "a1.xlarge"

@@ -78,6 +78,12 @@ func (c *Client) ListPublicKeysRequest(input *ListPublicKeysInput) ListPublicKey
 		Name:       opListPublicKeys,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -110,6 +116,53 @@ func (r ListPublicKeysRequest) Send(ctx context.Context) (*ListPublicKeysRespons
 	}
 
 	return resp, nil
+}
+
+// NewListPublicKeysRequestPaginator returns a paginator for ListPublicKeys.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListPublicKeysRequest(input)
+//   p := cloudtrail.NewListPublicKeysRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListPublicKeysPaginator(req ListPublicKeysRequest) ListPublicKeysPaginator {
+	return ListPublicKeysPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListPublicKeysInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListPublicKeysPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListPublicKeysPaginator struct {
+	aws.Pager
+}
+
+func (p *ListPublicKeysPaginator) CurrentPage() *ListPublicKeysOutput {
+	return p.Pager.CurrentPage().(*ListPublicKeysOutput)
 }
 
 // ListPublicKeysResponse is the response type for the

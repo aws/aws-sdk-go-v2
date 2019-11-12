@@ -27,11 +27,16 @@ type CreateDetectorModelInput struct {
 	// DetectorModelName is a required field
 	DetectorModelName *string `locationName:"detectorModelName" min:"1" type:"string" required:"true"`
 
-	// The input attribute key used to identify a device or system in order to create
-	// a detector (an instance of the detector model) and then to route each input
-	// received to the appropriate detector (instance). This parameter uses a JSON-path
-	// expression to specify the attribute-value pair in the message payload of
-	// each input that is used to identify the device associated with the input.
+	// When set to SERIAL, variables are updated and event conditions evaluated
+	// in the order that the events are defined. When set to BATCH, variables are
+	// updated and events performed only after all event conditions are evaluated.
+	EvaluationMethod EvaluationMethod `locationName:"evaluationMethod" type:"string" enum:"true"`
+
+	// The input attribute key used to identify a device or system to create a detector
+	// (an instance of the detector model) and then to route each input received
+	// to the appropriate detector (instance). This parameter uses a JSON-path expression
+	// to specify the attribute-value pair in the message payload of each input
+	// that is used to identify the device associated with the input.
 	Key *string `locationName:"key" min:"1" type:"string"`
 
 	// The ARN of the role that grants permission to AWS IoT Events to perform its
@@ -113,6 +118,12 @@ func (s CreateDetectorModelInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "detectorModelName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.EvaluationMethod) > 0 {
+		v := s.EvaluationMethod
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "evaluationMethod", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Key != nil {
 		v := *s.Key

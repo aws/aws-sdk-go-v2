@@ -13,7 +13,7 @@ import (
 type DescribeEventSubscriptionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// This parameter is not currently supported.
+	// This parameter isn't currently supported.
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeOrderableDBInstanceOptions

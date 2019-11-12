@@ -81,6 +81,12 @@ func (c *Client) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 		Name:       opListTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -113,6 +119,53 @@ func (r ListTagsRequest) Send(ctx context.Context) (*ListTagsResponse, error) {
 	}
 
 	return resp, nil
+}
+
+// NewListTagsRequestPaginator returns a paginator for ListTags.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListTagsRequest(input)
+//   p := cloudtrail.NewListTagsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListTagsPaginator(req ListTagsRequest) ListTagsPaginator {
+	return ListTagsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListTagsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListTagsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListTagsPaginator struct {
+	aws.Pager
+}
+
+func (p *ListTagsPaginator) CurrentPage() *ListTagsOutput {
+	return p.Pager.CurrentPage().(*ListTagsOutput)
 }
 
 // ListTagsResponse is the response type for the

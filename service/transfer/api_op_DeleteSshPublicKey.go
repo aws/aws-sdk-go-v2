@@ -18,17 +18,17 @@ type DeleteSshPublicKeyInput struct {
 	// server instance that has the user assigned to it.
 	//
 	// ServerId is a required field
-	ServerId *string `type:"string" required:"true"`
+	ServerId *string `min:"19" type:"string" required:"true"`
 
 	// A unique identifier used to reference your user's specific SSH key.
 	//
 	// SshPublicKeyId is a required field
-	SshPublicKeyId *string `type:"string" required:"true"`
+	SshPublicKeyId *string `min:"21" type:"string" required:"true"`
 
 	// A unique string that identifies a user whose public key is being deleted.
 	//
 	// UserName is a required field
-	UserName *string `type:"string" required:"true"`
+	UserName *string `min:"3" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -43,13 +43,22 @@ func (s *DeleteSshPublicKeyInput) Validate() error {
 	if s.ServerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServerId"))
 	}
+	if s.ServerId != nil && len(*s.ServerId) < 19 {
+		invalidParams.Add(aws.NewErrParamMinLen("ServerId", 19))
+	}
 
 	if s.SshPublicKeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SshPublicKeyId"))
 	}
+	if s.SshPublicKeyId != nil && len(*s.SshPublicKeyId) < 21 {
+		invalidParams.Add(aws.NewErrParamMinLen("SshPublicKeyId", 21))
+	}
 
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
+	}
+	if s.UserName != nil && len(*s.UserName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserName", 3))
 	}
 
 	if invalidParams.Len() > 0 {

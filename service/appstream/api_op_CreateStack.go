@@ -28,6 +28,11 @@ type CreateStackInput struct {
 	// The stack name to display.
 	DisplayName *string `type:"string"`
 
+	// The domains where AppStream 2.0 streaming sessions can be embedded in an
+	// iframe. You must approve the domains that you want to host embedded AppStream
+	// 2.0 streaming sessions.
+	EmbedHostDomains []string `min:"1" type:"list"`
+
 	// The URL that users are redirected to after they click the Send Feedback link.
 	// If no URL is specified, no Send Feedback link is displayed.
 	FeedbackURL *string `type:"string"`
@@ -73,6 +78,9 @@ func (s *CreateStackInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateStackInput"}
 	if s.AccessEndpoints != nil && len(s.AccessEndpoints) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AccessEndpoints", 1))
+	}
+	if s.EmbedHostDomains != nil && len(s.EmbedHostDomains) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("EmbedHostDomains", 1))
 	}
 
 	if s.Name == nil {

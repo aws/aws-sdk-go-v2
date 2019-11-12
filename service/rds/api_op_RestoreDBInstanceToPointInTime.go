@@ -42,7 +42,7 @@ type RestoreDBInstanceToPointInTimeInput struct {
 
 	// The database name for the restored DB instance.
 	//
-	// This parameter is not used for the MySQL or MariaDB engines.
+	// This parameter isn't used for the MySQL or MariaDB engines.
 	DBName *string `type:"string"`
 
 	// The name of the DB parameter group to associate with this DB instance.
@@ -148,7 +148,7 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	//
 	// SQL Server
 	//
-	// Setting the IOPS value for the SQL Server database engine is not supported.
+	// Setting the IOPS value for the SQL Server database engine isn't supported.
 	Iops *int64 `type:"integer"`
 
 	// License model information for the restored DB instance.
@@ -185,7 +185,7 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	// A value that indicates whether the DB instance is publicly accessible. When
 	// the DB instance is publicly accessible, it is an Internet-facing instance
 	// with a publicly resolvable DNS name, which resolves to a public IP address.
-	// When the DB instance is not publicly accessible, it is an internal instance
+	// When the DB instance isn't publicly accessible, it is an internal instance
 	// with a DNS name that resolves to a private IP address. For more information,
 	// see CreateDBInstance.
 	PubliclyAccessible *bool `type:"boolean"`
@@ -251,8 +251,8 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	UseDefaultProcessorFeatures *bool `type:"boolean"`
 
 	// A value that indicates whether the DB instance is restored from the latest
-	// backup time. By default, the DB instance is not restored from the latest
-	// backup time.
+	// backup time. By default, the DB instance isn't restored from the latest backup
+	// time.
 	//
 	// Constraints: Can't be specified if the RestoreTime parameter is provided.
 	UseLatestRestorableTime *bool `type:"boolean"`

@@ -16,7 +16,7 @@ type DescribeDBSubnetGroupsInput struct {
 	// The name of the DB subnet group to return details for.
 	DBSubnetGroupName *string `type:"string"`
 
-	// This parameter is not currently supported.
+	// This parameter isn't currently supported.
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeDBSubnetGroups

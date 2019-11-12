@@ -59,6 +59,9 @@ type GetDimensionValuesInput struct {
 	//    * RECORD_TYPE - The different types of charges such as RI fees, usage
 	//    costs, tax refunds, and credits.
 	//
+	//    * RESOURCE_ID - The unique identifier of the resource. ResourceId is an
+	//    opt-in feature only available for last 14 days for EC2-Compute Service.
+	//
 	// If you set the context to RESERVATIONS, you can use the following dimensions
 	// for searching:
 	//
@@ -88,6 +91,24 @@ type GetDimensionValuesInput struct {
 	//    (RI).
 	//
 	//    * TENANCY - The tenancy of a resource. Examples are shared or dedicated.
+	//
+	// If you set the context to SAVINGS_PLANS, you can use the following dimensions
+	// for searching:
+	//
+	//    * SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)
+	//
+	//    * PAYMENT_OPTION - Payment option for the given Savings Plans (for example,
+	//    All Upfront)
+	//
+	//    * REGION - The AWS Region.
+	//
+	//    * INSTANCE_TYPE_FAMILY - The family of instances (For example, m5)
+	//
+	//    * LINKED_ACCOUNT - The description in the attribute map that includes
+	//    the full name of the member account. The value field contains the AWS
+	//    ID of the member account.
+	//
+	//    * SAVINGS_PLAN_ARN - The unique identifier for your Savings Plan
 	Context Context `type:"string" enum:"true"`
 
 	// The name of the dimension. Each Dimension is available for a different Context.
@@ -187,6 +208,9 @@ type GetDimensionValuesOutput struct {
 	//    * RECORD_TYPE - The different types of charges such as RI fees, usage
 	//    costs, tax refunds, and credits.
 	//
+	//    * RESOURCE_ID - The unique identifier of the resource. ResourceId is an
+	//    opt-in feature only available for last 14 days for EC2-Compute Service.
+	//
 	// If you set the context to RESERVATIONS, you can use the following dimensions
 	// for searching:
 	//
@@ -216,6 +240,24 @@ type GetDimensionValuesOutput struct {
 	//    (RI).
 	//
 	//    * TENANCY - The tenancy of a resource. Examples are shared or dedicated.
+	//
+	// If you set the context to SAVINGS_PLANS, you can use the following dimensions
+	// for searching:
+	//
+	//    * SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)
+	//
+	//    * PAYMENT_OPTION - Payment option for the given Savings Plans (for example,
+	//    All Upfront)
+	//
+	//    * REGION - The AWS Region.
+	//
+	//    * INSTANCE_TYPE_FAMILY - The family of instances (For example, m5)
+	//
+	//    * LINKED_ACCOUNT - The description in the attribute map that includes
+	//    the full name of the member account. The value field contains the AWS
+	//    ID of the member account.
+	//
+	//    * SAVINGS_PLAN_ARN - The unique identifier for your Savings Plan
 	//
 	// DimensionValues is a required field
 	DimensionValues []DimensionValuesWithAttributes `type:"list" required:"true"`

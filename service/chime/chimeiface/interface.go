@@ -65,6 +65,8 @@ type ClientAPI interface {
 
 	AssociatePhoneNumbersWithVoiceConnectorRequest(*chime.AssociatePhoneNumbersWithVoiceConnectorInput) chime.AssociatePhoneNumbersWithVoiceConnectorRequest
 
+	AssociatePhoneNumbersWithVoiceConnectorGroupRequest(*chime.AssociatePhoneNumbersWithVoiceConnectorGroupInput) chime.AssociatePhoneNumbersWithVoiceConnectorGroupRequest
+
 	BatchDeletePhoneNumberRequest(*chime.BatchDeletePhoneNumberInput) chime.BatchDeletePhoneNumberRequest
 
 	BatchSuspendUserRequest(*chime.BatchSuspendUserInput) chime.BatchSuspendUserRequest
@@ -83,6 +85,8 @@ type ClientAPI interface {
 
 	CreateVoiceConnectorRequest(*chime.CreateVoiceConnectorInput) chime.CreateVoiceConnectorRequest
 
+	CreateVoiceConnectorGroupRequest(*chime.CreateVoiceConnectorGroupInput) chime.CreateVoiceConnectorGroupRequest
+
 	DeleteAccountRequest(*chime.DeleteAccountInput) chime.DeleteAccountRequest
 
 	DeleteEventsConfigurationRequest(*chime.DeleteEventsConfigurationInput) chime.DeleteEventsConfigurationRequest
@@ -91,7 +95,11 @@ type ClientAPI interface {
 
 	DeleteVoiceConnectorRequest(*chime.DeleteVoiceConnectorInput) chime.DeleteVoiceConnectorRequest
 
+	DeleteVoiceConnectorGroupRequest(*chime.DeleteVoiceConnectorGroupInput) chime.DeleteVoiceConnectorGroupRequest
+
 	DeleteVoiceConnectorOriginationRequest(*chime.DeleteVoiceConnectorOriginationInput) chime.DeleteVoiceConnectorOriginationRequest
+
+	DeleteVoiceConnectorStreamingConfigurationRequest(*chime.DeleteVoiceConnectorStreamingConfigurationInput) chime.DeleteVoiceConnectorStreamingConfigurationRequest
 
 	DeleteVoiceConnectorTerminationRequest(*chime.DeleteVoiceConnectorTerminationInput) chime.DeleteVoiceConnectorTerminationRequest
 
@@ -100,6 +108,8 @@ type ClientAPI interface {
 	DisassociatePhoneNumberFromUserRequest(*chime.DisassociatePhoneNumberFromUserInput) chime.DisassociatePhoneNumberFromUserRequest
 
 	DisassociatePhoneNumbersFromVoiceConnectorRequest(*chime.DisassociatePhoneNumbersFromVoiceConnectorInput) chime.DisassociatePhoneNumbersFromVoiceConnectorRequest
+
+	DisassociatePhoneNumbersFromVoiceConnectorGroupRequest(*chime.DisassociatePhoneNumbersFromVoiceConnectorGroupInput) chime.DisassociatePhoneNumbersFromVoiceConnectorGroupRequest
 
 	GetAccountRequest(*chime.GetAccountInput) chime.GetAccountRequest
 
@@ -115,13 +125,21 @@ type ClientAPI interface {
 
 	GetPhoneNumberOrderRequest(*chime.GetPhoneNumberOrderInput) chime.GetPhoneNumberOrderRequest
 
+	GetPhoneNumberSettingsRequest(*chime.GetPhoneNumberSettingsInput) chime.GetPhoneNumberSettingsRequest
+
 	GetUserRequest(*chime.GetUserInput) chime.GetUserRequest
 
 	GetUserSettingsRequest(*chime.GetUserSettingsInput) chime.GetUserSettingsRequest
 
 	GetVoiceConnectorRequest(*chime.GetVoiceConnectorInput) chime.GetVoiceConnectorRequest
 
+	GetVoiceConnectorGroupRequest(*chime.GetVoiceConnectorGroupInput) chime.GetVoiceConnectorGroupRequest
+
+	GetVoiceConnectorLoggingConfigurationRequest(*chime.GetVoiceConnectorLoggingConfigurationInput) chime.GetVoiceConnectorLoggingConfigurationRequest
+
 	GetVoiceConnectorOriginationRequest(*chime.GetVoiceConnectorOriginationInput) chime.GetVoiceConnectorOriginationRequest
+
+	GetVoiceConnectorStreamingConfigurationRequest(*chime.GetVoiceConnectorStreamingConfigurationInput) chime.GetVoiceConnectorStreamingConfigurationRequest
 
 	GetVoiceConnectorTerminationRequest(*chime.GetVoiceConnectorTerminationInput) chime.GetVoiceConnectorTerminationRequest
 
@@ -139,6 +157,8 @@ type ClientAPI interface {
 
 	ListUsersRequest(*chime.ListUsersInput) chime.ListUsersRequest
 
+	ListVoiceConnectorGroupsRequest(*chime.ListVoiceConnectorGroupsInput) chime.ListVoiceConnectorGroupsRequest
+
 	ListVoiceConnectorTerminationCredentialsRequest(*chime.ListVoiceConnectorTerminationCredentialsInput) chime.ListVoiceConnectorTerminationCredentialsRequest
 
 	ListVoiceConnectorsRequest(*chime.ListVoiceConnectorsInput) chime.ListVoiceConnectorsRequest
@@ -147,7 +167,11 @@ type ClientAPI interface {
 
 	PutEventsConfigurationRequest(*chime.PutEventsConfigurationInput) chime.PutEventsConfigurationRequest
 
+	PutVoiceConnectorLoggingConfigurationRequest(*chime.PutVoiceConnectorLoggingConfigurationInput) chime.PutVoiceConnectorLoggingConfigurationRequest
+
 	PutVoiceConnectorOriginationRequest(*chime.PutVoiceConnectorOriginationInput) chime.PutVoiceConnectorOriginationRequest
+
+	PutVoiceConnectorStreamingConfigurationRequest(*chime.PutVoiceConnectorStreamingConfigurationInput) chime.PutVoiceConnectorStreamingConfigurationRequest
 
 	PutVoiceConnectorTerminationRequest(*chime.PutVoiceConnectorTerminationInput) chime.PutVoiceConnectorTerminationRequest
 
@@ -171,11 +195,15 @@ type ClientAPI interface {
 
 	UpdatePhoneNumberRequest(*chime.UpdatePhoneNumberInput) chime.UpdatePhoneNumberRequest
 
+	UpdatePhoneNumberSettingsRequest(*chime.UpdatePhoneNumberSettingsInput) chime.UpdatePhoneNumberSettingsRequest
+
 	UpdateUserRequest(*chime.UpdateUserInput) chime.UpdateUserRequest
 
 	UpdateUserSettingsRequest(*chime.UpdateUserSettingsInput) chime.UpdateUserSettingsRequest
 
 	UpdateVoiceConnectorRequest(*chime.UpdateVoiceConnectorInput) chime.UpdateVoiceConnectorRequest
+
+	UpdateVoiceConnectorGroupRequest(*chime.UpdateVoiceConnectorGroupInput) chime.UpdateVoiceConnectorGroupRequest
 }
 
 var _ ClientAPI = (*chime.Client)(nil)

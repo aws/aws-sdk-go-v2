@@ -23,7 +23,7 @@ type ModifyCurrentDBClusterCapacityInput struct {
 	Capacity *int64 `type:"integer"`
 
 	// The DB cluster identifier for the cluster being modified. This parameter
-	// is not case-sensitive.
+	// isn't case-sensitive.
 	//
 	// Constraints:
 	//
@@ -45,8 +45,8 @@ type ModifyCurrentDBClusterCapacityInput struct {
 	// ForceApplyCapacityChange, the default, sets the capacity to the specified
 	// value as soon as possible.
 	//
-	// RollbackCapacityChange ignores the capacity change if a scaling point is
-	// not found in the timeout period.
+	// RollbackCapacityChange ignores the capacity change if a scaling point isn't
+	// found in the timeout period.
 	TimeoutAction *string `type:"string"`
 }
 

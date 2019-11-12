@@ -10,7 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Result structure for get branch request.
+// Request structure for get branch request.
 type GetBranchInput struct {
 	_ struct{} `type:"structure"`
 

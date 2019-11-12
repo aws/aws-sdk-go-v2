@@ -944,7 +944,7 @@ type EntityRecognizerMetadataEntityTypesListItem struct {
 	// item on the list of entity types.
 	EvaluationMetrics *EntityTypesEvaluationMetrics `type:"structure"`
 
-	// indicates the number of times the given entity name was seen in the training
+	// Indicates the number of times the given entity type was seen in the training
 	// data.
 	NumberOfTrainMentions *int64 `type:"integer"`
 

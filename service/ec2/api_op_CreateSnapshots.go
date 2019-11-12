@@ -71,7 +71,7 @@ const opCreateSnapshots = "CreateSnapshots"
 // Creates crash-consistent snapshots of multiple EBS volumes and stores the
 // data in S3. Volumes are chosen by specifying an instance. Any attached volumes
 // will produce one snapshot each that is crash-consistent across the instance.
-// Boot volumes can be excluded by changing the paramaters.
+// Boot volumes can be excluded by changing the parameters.
 //
 //    // Example sending a request using CreateSnapshotsRequest.
 //    req := client.CreateSnapshotsRequest(params)

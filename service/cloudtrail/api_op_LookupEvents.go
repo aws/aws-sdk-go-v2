@@ -94,8 +94,8 @@ const opLookupEvents = "LookupEvents"
 // AWS CloudTrail.
 //
 // Looks up management events (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-management-events)
-// captured by CloudTrail. Events for a region can be looked up in that region
-// during the last 90 days. Lookup supports the following attributes:
+// captured by CloudTrail. You can look up events that occurred in a region
+// within the last 90 days. Lookup supports the following attributes:
 //
 //    * AWS access key
 //

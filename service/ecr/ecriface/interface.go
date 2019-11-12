@@ -77,6 +77,8 @@ type ClientAPI interface {
 
 	DeleteRepositoryPolicyRequest(*ecr.DeleteRepositoryPolicyInput) ecr.DeleteRepositoryPolicyRequest
 
+	DescribeImageScanFindingsRequest(*ecr.DescribeImageScanFindingsInput) ecr.DescribeImageScanFindingsRequest
+
 	DescribeImagesRequest(*ecr.DescribeImagesInput) ecr.DescribeImagesRequest
 
 	DescribeRepositoriesRequest(*ecr.DescribeRepositoriesInput) ecr.DescribeRepositoriesRequest
@@ -99,11 +101,15 @@ type ClientAPI interface {
 
 	PutImageRequest(*ecr.PutImageInput) ecr.PutImageRequest
 
+	PutImageScanningConfigurationRequest(*ecr.PutImageScanningConfigurationInput) ecr.PutImageScanningConfigurationRequest
+
 	PutImageTagMutabilityRequest(*ecr.PutImageTagMutabilityInput) ecr.PutImageTagMutabilityRequest
 
 	PutLifecyclePolicyRequest(*ecr.PutLifecyclePolicyInput) ecr.PutLifecyclePolicyRequest
 
 	SetRepositoryPolicyRequest(*ecr.SetRepositoryPolicyInput) ecr.SetRepositoryPolicyRequest
+
+	StartImageScanRequest(*ecr.StartImageScanInput) ecr.StartImageScanRequest
 
 	StartLifecyclePolicyPreviewRequest(*ecr.StartLifecyclePolicyPreviewInput) ecr.StartLifecyclePolicyPreviewRequest
 
