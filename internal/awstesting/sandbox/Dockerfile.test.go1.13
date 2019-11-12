@@ -1,5 +1,5 @@
 FROM ubuntu:18.04
-FROM aws-golang:tip
+FROM golang:1.13
 
 ENV GOPROXY=direct
 
