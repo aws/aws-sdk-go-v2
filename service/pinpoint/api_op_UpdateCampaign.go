@@ -113,7 +113,7 @@ const opUpdateCampaign = "UpdateCampaign"
 // UpdateCampaignRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Updates the settings for a campaign.
+// Updates the configuration and other settings for a campaign.
 //
 //    // Example sending a request using UpdateCampaignRequest.
 //    req := client.UpdateCampaignRequest(params)

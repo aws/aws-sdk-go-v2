@@ -129,16 +129,6 @@ const opTransactWriteItems = "TransactWriteItems"
 // item. The aggregate size of the items in the transaction cannot exceed 4
 // MB.
 //
-// All AWS Regions and AWS GovCloud (US) support up to 25 items per transaction
-// with up to 4 MB of data, except the following AWS Regions:
-//
-//    * China (Beijing)
-//
-//    * China (Ningxia)
-//
-// The China (Beijing) and China (Ningxia) Regions support up to 10 items per
-// transaction with up to 4 MB of data.
-//
 // The actions are completed atomically so that either all of them succeed,
 // or all of them fail. They are defined by the following objects:
 //

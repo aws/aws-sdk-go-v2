@@ -24,6 +24,23 @@ func (enum DetectorModelVersionStatus) MarshalValueBuf(b []byte) ([]byte, error)
 	return append(b, enum...), nil
 }
 
+type EvaluationMethod string
+
+// Enum values for EvaluationMethod
+const (
+	EvaluationMethodBatch  EvaluationMethod = "BATCH"
+	EvaluationMethodSerial EvaluationMethod = "SERIAL"
+)
+
+func (enum EvaluationMethod) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EvaluationMethod) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InputStatus string
 
 // Enum values for InputStatus

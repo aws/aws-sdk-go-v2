@@ -70,10 +70,10 @@ const opUpdateTerminationProtection = "UpdateTerminationProtection"
 // Updates termination protection for the specified stack. If a user attempts
 // to delete a stack with termination protection enabled, the operation fails
 // and the stack remains unchanged. For more information, see Protecting a Stack
-// From Being Deleted (AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html)
+// From Being Deleted (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html)
 // in the AWS CloudFormation User Guide.
 //
-// For nested stacks (AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html),
+// For nested stacks (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html),
 // termination protection is set on the root stack and cannot be changed directly
 // on the nested stack.
 //

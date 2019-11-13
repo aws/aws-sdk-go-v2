@@ -17,7 +17,7 @@ type DescribeOptionGroupsInput struct {
 	// a specific database engine.
 	EngineName *string `type:"string"`
 
-	// This parameter is not currently supported.
+	// This parameter isn't currently supported.
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// Filters the list of option groups to only include groups associated with

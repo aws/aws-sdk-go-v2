@@ -71,6 +71,8 @@ type ClientAPI interface {
 
 	CreateImportJobRequest(*pinpoint.CreateImportJobInput) pinpoint.CreateImportJobRequest
 
+	CreateJourneyRequest(*pinpoint.CreateJourneyInput) pinpoint.CreateJourneyRequest
+
 	CreatePushTemplateRequest(*pinpoint.CreatePushTemplateInput) pinpoint.CreatePushTemplateRequest
 
 	CreateSegmentRequest(*pinpoint.CreateSegmentInput) pinpoint.CreateSegmentRequest
@@ -102,6 +104,8 @@ type ClientAPI interface {
 	DeleteEventStreamRequest(*pinpoint.DeleteEventStreamInput) pinpoint.DeleteEventStreamRequest
 
 	DeleteGcmChannelRequest(*pinpoint.DeleteGcmChannelInput) pinpoint.DeleteGcmChannelRequest
+
+	DeleteJourneyRequest(*pinpoint.DeleteJourneyInput) pinpoint.DeleteJourneyRequest
 
 	DeletePushTemplateRequest(*pinpoint.DeletePushTemplateInput) pinpoint.DeletePushTemplateRequest
 
@@ -167,6 +171,14 @@ type ClientAPI interface {
 
 	GetImportJobsRequest(*pinpoint.GetImportJobsInput) pinpoint.GetImportJobsRequest
 
+	GetJourneyRequest(*pinpoint.GetJourneyInput) pinpoint.GetJourneyRequest
+
+	GetJourneyDateRangeKpiRequest(*pinpoint.GetJourneyDateRangeKpiInput) pinpoint.GetJourneyDateRangeKpiRequest
+
+	GetJourneyExecutionActivityMetricsRequest(*pinpoint.GetJourneyExecutionActivityMetricsInput) pinpoint.GetJourneyExecutionActivityMetricsRequest
+
+	GetJourneyExecutionMetricsRequest(*pinpoint.GetJourneyExecutionMetricsInput) pinpoint.GetJourneyExecutionMetricsRequest
+
 	GetPushTemplateRequest(*pinpoint.GetPushTemplateInput) pinpoint.GetPushTemplateRequest
 
 	GetSegmentRequest(*pinpoint.GetSegmentInput) pinpoint.GetSegmentRequest
@@ -188,6 +200,8 @@ type ClientAPI interface {
 	GetUserEndpointsRequest(*pinpoint.GetUserEndpointsInput) pinpoint.GetUserEndpointsRequest
 
 	GetVoiceChannelRequest(*pinpoint.GetVoiceChannelInput) pinpoint.GetVoiceChannelRequest
+
+	ListJourneysRequest(*pinpoint.ListJourneysInput) pinpoint.ListJourneysRequest
 
 	ListTagsForResourceRequest(*pinpoint.ListTagsForResourceInput) pinpoint.ListTagsForResourceRequest
 
@@ -234,6 +248,10 @@ type ClientAPI interface {
 	UpdateEndpointsBatchRequest(*pinpoint.UpdateEndpointsBatchInput) pinpoint.UpdateEndpointsBatchRequest
 
 	UpdateGcmChannelRequest(*pinpoint.UpdateGcmChannelInput) pinpoint.UpdateGcmChannelRequest
+
+	UpdateJourneyRequest(*pinpoint.UpdateJourneyInput) pinpoint.UpdateJourneyRequest
+
+	UpdateJourneyStateRequest(*pinpoint.UpdateJourneyStateInput) pinpoint.UpdateJourneyStateRequest
 
 	UpdatePushTemplateRequest(*pinpoint.UpdatePushTemplateInput) pinpoint.UpdatePushTemplateRequest
 

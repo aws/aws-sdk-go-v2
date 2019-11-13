@@ -14,7 +14,7 @@ import (
 type CreateChangeSetInput struct {
 	_ struct{} `type:"structure"`
 
-	// In some cases, you must explicity acknowledge that your stack template contains
+	// In some cases, you must explicitly acknowledge that your stack template contains
 	// certain capabilities in order for AWS CloudFormation to create the stack.
 	//
 	//    * CAPABILITY_IAM and CAPABILITY_NAMED_IAM Some stack templates might include
@@ -70,6 +70,7 @@ type CreateChangeSetInput struct {
 
 	// The type of change set operation. To create a change set for a new stack,
 	// specify CREATE. To create a change set for an existing stack, specify UPDATE.
+	// To create a change set for an import operation, specify IMPORT.
 	//
 	// If you create a change set for a new stack, AWS Cloudformation creates a
 	// stack with a unique stack ID, but no template or resources. The stack will
@@ -111,6 +112,9 @@ type CreateChangeSetInput struct {
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html)
 	// in the AWS CloudFormation User Guide.
 	ResourceTypes []string `type:"list"`
+
+	// The resources to import into your stack.
+	ResourcesToImport []ResourceToImport `type:"list"`
 
 	// The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM)
 	// role that AWS CloudFormation assumes when executing the change set. AWS CloudFormation
@@ -199,6 +203,13 @@ func (s *CreateChangeSetInput) Validate() error {
 	if s.TemplateURL != nil && len(*s.TemplateURL) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("TemplateURL", 1))
 	}
+	if s.ResourcesToImport != nil {
+		for i, v := range s.ResourcesToImport {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ResourcesToImport", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 	if s.RollbackConfiguration != nil {
 		if err := s.RollbackConfiguration.Validate(); err != nil {
 			invalidParams.AddNested("RollbackConfiguration", err.(aws.ErrInvalidParams))
@@ -252,10 +263,11 @@ const opCreateChangeSet = "CreateChangeSet"
 //
 // To create a change set for a stack that doesn't exist, for the ChangeSetType
 // parameter, specify CREATE. To create a change set for an existing stack,
-// specify UPDATE for the ChangeSetType parameter. After the CreateChangeSet
-// call successfully completes, AWS CloudFormation starts creating the change
-// set. To check the status of the change set or to review it, use the DescribeChangeSet
-// action.
+// specify UPDATE for the ChangeSetType parameter. To create a change set for
+// an import operation, specify IMPORT for the ChangeSetType parameter. After
+// the CreateChangeSet call successfully completes, AWS CloudFormation starts
+// creating the change set. To check the status of the change set or to review
+// it, use the DescribeChangeSet action.
 //
 // When you are satisfied with the changes the change set will make, execute
 // the change set by using the ExecuteChangeSet action. AWS CloudFormation doesn't

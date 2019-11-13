@@ -108,7 +108,7 @@ const opGetCampaignActivities = "GetCampaignActivities"
 // GetCampaignActivitiesRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Retrieves information about the activity performed by a campaign.
+// Retrieves information about all the activities for a campaign.
 //
 //    // Example sending a request using GetCampaignActivitiesRequest.
 //    req := client.GetCampaignActivitiesRequest(params)

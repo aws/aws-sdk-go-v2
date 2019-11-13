@@ -1,3 +1,10 @@
+Release v0.16.0 (2019-11-12)
+===
+
+Services
+---
+* Synced the V2 SDK with latest AWS service API definitions.
+
 Release v0.15.0 (2019-10-18)
 ===
 

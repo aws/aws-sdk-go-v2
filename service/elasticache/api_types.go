@@ -46,6 +46,9 @@ type CacheCluster struct {
 	// Default: false
 	AuthTokenEnabled *bool `type:"boolean"`
 
+	// The date the auth token was last modified
+	AuthTokenLastModifiedDate *time.Time `type:"timestamp"`
+
 	// This parameter is currently disabled.
 	AutoMinorVersionUpgrade *bool `type:"boolean"`
 
@@ -583,6 +586,22 @@ func (s *ConfigureShard) Validate() error {
 	return nil
 }
 
+// The endpoint from which data should be migrated.
+type CustomerNodeEndpoint struct {
+	_ struct{} `type:"structure"`
+
+	// The address of the node endpoint
+	Address *string `type:"string"`
+
+	// The port of the node endpoint
+	Port *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s CustomerNodeEndpoint) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Provides ownership and status information for an Amazon EC2 security group.
 type EC2SecurityGroup struct {
 	_ struct{} `type:"structure"`
@@ -951,6 +970,9 @@ func (s ParameterNameValue) String() string {
 type PendingModifiedValues struct {
 	_ struct{} `type:"structure"`
 
+	// The auth token status
+	AuthTokenStatus AuthTokenUpdateStatus `type:"string" enum:"true"`
+
 	// A list of cache node IDs that are being removed (or will be removed) from
 	// the cluster. A node ID is a 4-digit numeric identifier (0001, 0002, etc.).
 	CacheNodeIdsToRemove []string `locationNameList:"CacheNodeId" type:"list"`
@@ -1032,6 +1054,9 @@ type ReplicationGroup struct {
 	//
 	// Default: false
 	AuthTokenEnabled *bool `type:"boolean"`
+
+	// The date the auth token was last modified
+	AuthTokenLastModifiedDate *time.Time `type:"timestamp"`
 
 	// Indicates the status of Multi-AZ with automatic failover for this Redis replication
 	// group.
@@ -1132,6 +1157,9 @@ func (s ReplicationGroup) String() string {
 // or during the next maintenance window.
 type ReplicationGroupPendingModifiedValues struct {
 	_ struct{} `type:"structure"`
+
+	// The auth token status
+	AuthTokenStatus AuthTokenUpdateStatus `type:"string" enum:"true"`
 
 	// Indicates the status of Multi-AZ with automatic failover for this Redis replication
 	// group.

@@ -22,7 +22,7 @@ type DescribeDBParametersInput struct {
 	// DBParameterGroupName is a required field
 	DBParameterGroupName *string `type:"string" required:"true"`
 
-	// This parameter is not currently supported.
+	// This parameter isn't currently supported.
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeDBParameters

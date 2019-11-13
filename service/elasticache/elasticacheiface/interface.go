@@ -72,6 +72,8 @@ type ClientAPI interface {
 
 	BatchStopUpdateActionRequest(*elasticache.BatchStopUpdateActionInput) elasticache.BatchStopUpdateActionRequest
 
+	CompleteMigrationRequest(*elasticache.CompleteMigrationInput) elasticache.CompleteMigrationRequest
+
 	CopySnapshotRequest(*elasticache.CopySnapshotInput) elasticache.CopySnapshotRequest
 
 	CreateCacheClusterRequest(*elasticache.CreateCacheClusterInput) elasticache.CreateCacheClusterRequest
@@ -153,6 +155,8 @@ type ClientAPI interface {
 	ResetCacheParameterGroupRequest(*elasticache.ResetCacheParameterGroupInput) elasticache.ResetCacheParameterGroupRequest
 
 	RevokeCacheSecurityGroupIngressRequest(*elasticache.RevokeCacheSecurityGroupIngressInput) elasticache.RevokeCacheSecurityGroupIngressRequest
+
+	StartMigrationRequest(*elasticache.StartMigrationInput) elasticache.StartMigrationRequest
 
 	TestFailoverRequest(*elasticache.TestFailoverInput) elasticache.TestFailoverRequest
 

@@ -174,7 +174,7 @@ type CreateDBInstanceInput struct {
 	// MySQL
 	//
 	// The name of the database to create when the DB instance is created. If this
-	// parameter is not specified, no database is created in the DB instance.
+	// parameter isn't specified, no database is created in the DB instance.
 	//
 	// Constraints:
 	//
@@ -185,7 +185,7 @@ type CreateDBInstanceInput struct {
 	// MariaDB
 	//
 	// The name of the database to create when the DB instance is created. If this
-	// parameter is not specified, no database is created in the DB instance.
+	// parameter isn't specified, no database is created in the DB instance.
 	//
 	// Constraints:
 	//
@@ -196,7 +196,7 @@ type CreateDBInstanceInput struct {
 	// PostgreSQL
 	//
 	// The name of the database to create when the DB instance is created. If this
-	// parameter is not specified, the default "postgres" database is created in
+	// parameter isn't specified, the default "postgres" database is created in
 	// the DB instance.
 	//
 	// Constraints:
@@ -227,7 +227,7 @@ type CreateDBInstanceInput struct {
 	// Amazon Aurora
 	//
 	// The name of the database to create when the primary instance of the DB cluster
-	// is created. If this parameter is not specified, no database is created in
+	// is created. If this parameter isn't specified, no database is created in
 	// the DB instance.
 	//
 	// Constraints:
@@ -238,8 +238,8 @@ type CreateDBInstanceInput struct {
 	DBName *string `type:"string"`
 
 	// The name of the DB parameter group to associate with this DB instance. If
-	// you do not specify a value for DBParameterGroupName, then the default DBParameterGroup
-	// for the specified DB engine is used.
+	// you do not specify a value, then the default DB parameter group for the specified
+	// DB engine and version is used.
 	//
 	// Constraints:
 	//
@@ -687,13 +687,13 @@ type CreateDBInstanceInput struct {
 	// A value that indicates whether the DB instance is publicly accessible. When
 	// the DB instance is publicly accessible, it is an Internet-facing instance
 	// with a publicly resolvable DNS name, which resolves to a public IP address.
-	// When the DB instance is not publicly accessible, it is an internal instance
+	// When the DB instance isn't publicly accessible, it is an internal instance
 	// with a DNS name that resolves to a private IP address.
 	//
 	// Default: The default behavior varies depending on whether DBSubnetGroupName
 	// is specified.
 	//
-	// If DBSubnetGroupName is not specified, and PubliclyAccessible is not specified,
+	// If DBSubnetGroupName isn't specified, and PubliclyAccessible isn't specified,
 	// the following applies:
 	//
 	//    * If the default VPC in the target region doesn’t have an Internet gateway
@@ -702,7 +702,7 @@ type CreateDBInstanceInput struct {
 	//    * If the default VPC in the target region has an Internet gateway attached
 	//    to it, the DB instance is public.
 	//
-	// If DBSubnetGroupName is specified, and PubliclyAccessible is not specified,
+	// If DBSubnetGroupName is specified, and PubliclyAccessible isn't specified,
 	// the following applies:
 	//
 	//    * If the subnets are part of a VPC that doesn’t have an Internet gateway
@@ -713,7 +713,7 @@ type CreateDBInstanceInput struct {
 	PubliclyAccessible *bool `type:"boolean"`
 
 	// A value that indicates whether the DB instance is encrypted. By default,
-	// it is not encrypted.
+	// it isn't encrypted.
 	//
 	// Amazon Aurora
 	//

@@ -26,7 +26,7 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 	// available offerings matching the specified engine version.
 	EngineVersion *string `type:"string"`
 
-	// This parameter is not currently supported.
+	// This parameter isn't currently supported.
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// The license model filter value. Specify this parameter to show only the available

@@ -116,7 +116,7 @@ const opPutEventSelectors = "PutEventSelectors"
 // trail was created; otherwise, an InvalidHomeRegionException is thrown.
 //
 // You can configure up to five event selectors for each trail. For more information,
-// see Logging Data and Management Events for Trails (http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html)
+// see Logging Data and Management Events for Trails (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html)
 // and Limits in AWS CloudTrail (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html)
 // in the AWS CloudTrail User Guide.
 //

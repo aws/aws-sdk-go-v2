@@ -130,11 +130,11 @@ const opListSigningPlatforms = "ListSigningPlatforms"
 // ListSigningPlatformsRequest returns a request value for making API operation for
 // AWS Signer.
 //
-// Lists all signing platforms available in AWS Signer that match the request
-// parameters. If additional jobs remain to be listed, AWS Signer returns a
-// nextToken value. Use this value in subsequent calls to ListSigningJobs to
-// fetch the remaining values. You can continue calling ListSigningJobs with
-// your maxResults parameter and with new values that AWS Signer returns in
+// Lists all signing platforms available in code signing that match the request
+// parameters. If additional jobs remain to be listed, code signing returns
+// a nextToken value. Use this value in subsequent calls to ListSigningJobs
+// to fetch the remaining values. You can continue calling ListSigningJobs with
+// your maxResults parameter and with new values that code signing returns in
 // the nextToken parameter until all of your signing jobs have been returned.
 //
 //    // Example sending a request using ListSigningPlatformsRequest.

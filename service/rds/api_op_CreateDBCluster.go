@@ -62,7 +62,8 @@ type CreateDBClusterInput struct {
 	DBClusterIdentifier *string `type:"string" required:"true"`
 
 	// The name of the DB cluster parameter group to associate with this DB cluster.
-	// If this argument is omitted, default.aurora5.6 is used.
+	// If you do not specify a value, then the default DB cluster parameter group
+	// for the specified DB engine and version is used.
 	//
 	// Constraints:
 	//
@@ -164,14 +165,14 @@ type CreateDBClusterInput struct {
 	// the KMS encryption key used to encrypt the new DB cluster, then you can use
 	// the KMS key alias instead of the ARN for the KMS encryption key.
 	//
-	// If an encryption key is not specified in KmsKeyId:
+	// If an encryption key isn't specified in KmsKeyId:
 	//
 	//    * If ReplicationSourceIdentifier identifies an encrypted source, then
 	//    Amazon RDS will use the encryption key used to encrypt the source. Otherwise,
 	//    Amazon RDS will use your default encryption key.
 	//
 	//    * If the StorageEncrypted parameter is enabled and ReplicationSourceIdentifier
-	//    is not specified, then Amazon RDS will use your default encryption key.
+	//    isn't specified, then Amazon RDS will use your default encryption key.
 	//
 	// AWS KMS creates the default encryption key for your AWS account. Your AWS
 	// account has a different default encryption key for each AWS Region.
@@ -239,6 +240,11 @@ type CreateDBClusterInput struct {
 	// To learn how to generate a Signature Version 4 signed request, see Authenticating
 	// Requests: Using Query Parameters (AWS Signature Version 4) (https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
 	// and Signature Version 4 Signing Process (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+	//
+	// If you are using an AWS SDK tool or the AWS CLI, you can specify SourceRegion
+	// (or --source-region for the AWS CLI) instead of specifying PreSignedUrl manually.
+	// Specifying SourceRegion autogenerates a pre-signed URL that is a valid request
+	// for the operation that can be executed in the source AWS Region.
 	PreSignedUrl *string `type:"string"`
 
 	// The daily time range during which automated backups are created if automated

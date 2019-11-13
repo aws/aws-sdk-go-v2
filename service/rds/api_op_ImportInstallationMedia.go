@@ -20,8 +20,8 @@ type ImportInstallationMediaInput struct {
 
 	// The name of the database engine to be used for this instance.
 	//
-	// The list only includes supported on-premises, bring your own media (BYOM)
-	// DB engines.
+	// The list only includes supported DB engines that require an on-premises customer
+	// provided license.
 	//
 	// Valid Values:
 	//
@@ -36,7 +36,7 @@ type ImportInstallationMediaInput struct {
 	// Engine is a required field
 	Engine *string `type:"string" required:"true"`
 
-	// The path to the installation media for the specified DB engine.
+	// The path to the installation medium for the specified DB engine.
 	//
 	// Example: SQLServerISO/en_sql_server_2016_enterprise_x64_dvd_8701793.iso
 	//
@@ -48,8 +48,8 @@ type ImportInstallationMediaInput struct {
 	// For a list of valid engine versions, call DescribeDBEngineVersions.
 	//
 	// The following are the database engines and links to information about the
-	// major and minor versions. The list only includes supported on-premises, bring
-	// your own media (BYOM) DB engines.
+	// major and minor versions. The list only includes DB engines that require
+	// an on-premises customer provided license.
 	//
 	// Microsoft SQL Server
 	//
@@ -59,7 +59,7 @@ type ImportInstallationMediaInput struct {
 	// EngineVersion is a required field
 	EngineVersion *string `type:"string" required:"true"`
 
-	// The path to the installation media for the operating system associated with
+	// The path to the installation medium for the operating system associated with
 	// the specified DB engine.
 	//
 	// Example: WindowsISO/en_windows_server_2016_x64_dvd_9327751.iso
@@ -103,8 +103,8 @@ func (s *ImportInstallationMediaInput) Validate() error {
 	return nil
 }
 
-// Contains the installation media for on-premises, bring your own media (BYOM)
-// DB engines, such as Microsoft SQL Server.
+// Contains the installation media for a DB engine that requires an on-premises
+// customer provided license, such as Microsoft SQL Server.
 type ImportInstallationMediaOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -114,7 +114,7 @@ type ImportInstallationMediaOutput struct {
 	// The DB engine.
 	Engine *string `type:"string"`
 
-	// The path to the installation media for the DB engine.
+	// The path to the installation medium for the DB engine.
 	EngineInstallationMediaPath *string `type:"string"`
 
 	// The engine version of the DB engine.
@@ -123,14 +123,14 @@ type ImportInstallationMediaOutput struct {
 	// If an installation media failure occurred, the cause of the failure.
 	FailureCause *InstallationMediaFailureCause `type:"structure"`
 
-	// The installation media ID.
+	// The installation medium ID.
 	InstallationMediaId *string `type:"string"`
 
-	// The path to the installation media for the operating system associated with
+	// The path to the installation medium for the operating system associated with
 	// the DB engine.
 	OSInstallationMediaPath *string `type:"string"`
 
-	// The status of the installation media.
+	// The status of the installation medium.
 	Status *string `type:"string"`
 }
 
@@ -144,8 +144,8 @@ const opImportInstallationMedia = "ImportInstallationMedia"
 // ImportInstallationMediaRequest returns a request value for making API operation for
 // Amazon Relational Database Service.
 //
-// Imports the installation media for an on-premises, bring your own media (BYOM)
-// DB engine, such as SQL Server.
+// Imports the installation media for a DB engine that requires an on-premises
+// customer provided license, such as SQL Server.
 //
 //    // Example sending a request using ImportInstallationMediaRequest.
 //    req := client.ImportInstallationMediaRequest(params)

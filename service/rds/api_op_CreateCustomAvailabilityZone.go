@@ -24,13 +24,13 @@ type CreateCustomAvailabilityZoneInput struct {
 	// The name of a new VPN tunnel between the Amazon RDS website and the VMware
 	// vSphere cluster.
 	//
-	// Specify this parameter only if ExistingVpnId is not specified.
+	// Specify this parameter only if ExistingVpnId isn't specified.
 	NewVpnTunnelName *string `type:"string"`
 
 	// The IP address of network traffic from your on-premises data center. A custom
 	// AZ receives the network traffic.
 	//
-	// Specify this parameter only if ExistingVpnId is not specified.
+	// Specify this parameter only if ExistingVpnId isn't specified.
 	VpnTunnelOriginatorIP *string `type:"string"`
 }
 

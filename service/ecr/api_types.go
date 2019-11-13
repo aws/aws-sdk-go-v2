@@ -12,6 +12,24 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// This data type is used in the ImageScanFinding data type.
+type Attribute struct {
+	_ struct{} `type:"structure"`
+
+	// The attribute key.
+	//
+	// Key is a required field
+	Key *string `locationName:"key" min:"1" type:"string" required:"true"`
+
+	// The value assigned to the attribute key.
+	Value *string `locationName:"value" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s Attribute) String() string {
+	return awsutil.Prettify(s)
+}
+
 // An object representing authorization data for an Amazon ECR registry.
 type AuthorizationData struct {
 	_ struct{} `type:"structure"`
@@ -58,7 +76,7 @@ type Image struct {
 	ImageId *ImageIdentifier `locationName:"imageId" type:"structure"`
 
 	// The image manifest associated with the image.
-	ImageManifest *string `locationName:"imageManifest" type:"string"`
+	ImageManifest *string `locationName:"imageManifest" min:"1" type:"string"`
 
 	// The AWS account ID associated with the registry containing the image.
 	RegistryId *string `locationName:"registryId" type:"string"`
@@ -82,6 +100,12 @@ type ImageDetail struct {
 	// The date and time, expressed in standard JavaScript date format, at which
 	// the current image was pushed to the repository.
 	ImagePushedAt *time.Time `locationName:"imagePushedAt" type:"timestamp"`
+
+	// A summary of the last completed image scan.
+	ImageScanFindingsSummary *ImageScanFindingsSummary `locationName:"imageScanFindingsSummary" type:"structure"`
+
+	// The current state of the scan.
+	ImageScanStatus *ImageScanStatus `locationName:"imageScanStatus" type:"structure"`
 
 	// The size, in bytes, of the image in the repository.
 	//
@@ -152,6 +176,105 @@ func (s *ImageIdentifier) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Contains information about an image scan finding.
+type ImageScanFinding struct {
+	_ struct{} `type:"structure"`
+
+	// A collection of attributes of the host from which the finding is generated.
+	Attributes []Attribute `locationName:"attributes" type:"list"`
+
+	// The description of the finding.
+	Description *string `locationName:"description" type:"string"`
+
+	// The name associated with the finding, usually a CVE number.
+	Name *string `locationName:"name" type:"string"`
+
+	// The finding severity.
+	Severity FindingSeverity `locationName:"severity" type:"string" enum:"true"`
+
+	// A link containing additional details about the security vulnerability.
+	Uri *string `locationName:"uri" type:"string"`
+}
+
+// String returns the string representation
+func (s ImageScanFinding) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The details of an image scan.
+type ImageScanFindings struct {
+	_ struct{} `type:"structure"`
+
+	// The image vulnerability counts, sorted by severity.
+	FindingSeverityCounts map[string]int64 `locationName:"findingSeverityCounts" type:"map"`
+
+	// The findings from the image scan.
+	Findings []ImageScanFinding `locationName:"findings" type:"list"`
+
+	// The time of the last completed image scan.
+	ImageScanCompletedAt *time.Time `locationName:"imageScanCompletedAt" type:"timestamp"`
+
+	// The time when the vulnerability data was last scanned.
+	VulnerabilitySourceUpdatedAt *time.Time `locationName:"vulnerabilitySourceUpdatedAt" type:"timestamp"`
+}
+
+// String returns the string representation
+func (s ImageScanFindings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A summary of the last completed image scan.
+type ImageScanFindingsSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The image vulnerability counts, sorted by severity.
+	FindingSeverityCounts map[string]int64 `locationName:"findingSeverityCounts" type:"map"`
+
+	// The time of the last completed image scan.
+	ImageScanCompletedAt *time.Time `locationName:"imageScanCompletedAt" type:"timestamp"`
+
+	// The time when the vulnerability data was last scanned.
+	VulnerabilitySourceUpdatedAt *time.Time `locationName:"vulnerabilitySourceUpdatedAt" type:"timestamp"`
+}
+
+// String returns the string representation
+func (s ImageScanFindingsSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The current status of an image scan.
+type ImageScanStatus struct {
+	_ struct{} `type:"structure"`
+
+	// The description of the image scan status.
+	Description *string `locationName:"description" type:"string"`
+
+	// The current state of an image scan.
+	Status ScanStatus `locationName:"status" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ImageScanStatus) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The image scanning configuration for a repository.
+type ImageScanningConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The setting that determines whether images are scanned after being pushed
+	// to a repository. If set to true, images will be scanned after being pushed.
+	// If this parameter is not specified, it will default to false and images will
+	// not be scanned unless a scan is manually started with the StartImageScan
+	// API.
+	ScanOnPush *bool `locationName:"scanOnPush" type:"boolean"`
+}
+
+// String returns the string representation
+func (s ImageScanningConfiguration) String() string {
+	return awsutil.Prettify(s)
 }
 
 // An object representing an Amazon ECR image layer.
@@ -281,6 +404,9 @@ type Repository struct {
 
 	// The date and time, in JavaScript date format, when the repository was created.
 	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
+
+	// The image scanning configuration for a repository.
+	ImageScanningConfiguration *ImageScanningConfiguration `locationName:"imageScanningConfiguration" type:"structure"`
 
 	// The tag mutability setting for the repository.
 	ImageTagMutability ImageTagMutability `locationName:"imageTagMutability" type:"string" enum:"true"`

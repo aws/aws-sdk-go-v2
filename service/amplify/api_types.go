@@ -330,6 +330,9 @@ type AutoBranchCreationConfig struct {
 	// Framework for the auto created branch.
 	Framework *string `locationName:"framework" type:"string"`
 
+	// The Amplify Environment name for the pull request.
+	PullRequestEnvironmentName *string `locationName:"pullRequestEnvironmentName" type:"string"`
+
 	// Stage for the auto created branch.
 	Stage Stage `locationName:"stage" type:"string" enum:"true"`
 }
@@ -402,6 +405,12 @@ func (s AutoBranchCreationConfig) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "framework", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.PullRequestEnvironmentName != nil {
+		v := *s.PullRequestEnvironmentName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "pullRequestEnvironmentName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if len(s.Stage) > 0 {
 		v := s.Stage
 
@@ -422,6 +431,9 @@ type Branch struct {
 
 	// List of custom resources that are linked to this branch.
 	AssociatedResources []string `locationName:"associatedResources" type:"list"`
+
+	// ARN for a Backend Environment, part of an Amplify App.
+	BackendEnvironmentArn *string `locationName:"backendEnvironmentArn" min:"1" type:"string"`
 
 	// Basic Authorization credentials for a branch, part of an Amplify App.
 	BasicAuthCredentials *string `locationName:"basicAuthCredentials" type:"string"`
@@ -492,6 +504,9 @@ type Branch struct {
 	// Framework is a required field
 	Framework *string `locationName:"framework" type:"string" required:"true"`
 
+	// The Amplify Environment name for the pull request.
+	PullRequestEnvironmentName *string `locationName:"pullRequestEnvironmentName" type:"string"`
+
 	// The source branch if the branch is a pull request branch.
 	SourceBranch *string `locationName:"sourceBranch" min:"1" type:"string"`
 
@@ -546,6 +561,12 @@ func (s Branch) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	if s.BackendEnvironmentArn != nil {
+		v := *s.BackendEnvironmentArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "backendEnvironmentArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.BasicAuthCredentials != nil {
 		v := *s.BasicAuthCredentials
@@ -649,6 +670,12 @@ func (s Branch) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "framework", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PullRequestEnvironmentName != nil {
+		v := *s.PullRequestEnvironmentName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "pullRequestEnvironmentName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SourceBranch != nil {
 		v := *s.SourceBranch
@@ -810,7 +837,7 @@ type DomainAssociation struct {
 	// DomainStatus is a required field
 	DomainStatus DomainStatus `locationName:"domainStatus" type:"string" required:"true" enum:"true"`
 
-	// Enables automated creation of Subdomains for branches.
+	// Enables automated creation of Subdomains for branches. (Currently not supported)
 	//
 	// EnableAutoSubDomain is a required field
 	EnableAutoSubDomain *bool `locationName:"enableAutoSubDomain" type:"boolean" required:"true"`

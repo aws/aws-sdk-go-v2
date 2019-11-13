@@ -71,7 +71,7 @@ func (s DeleteVirtualNodeInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteVirtualNodeOutput struct {
 	_ struct{} `type:"structure" payload:"VirtualNode"`
 
-	// An object representing a virtual node returned by a describe operation.
+	// An object that represents a virtual node returned by a describe operation.
 	//
 	// VirtualNode is a required field
 	VirtualNode *VirtualNodeData `locationName:"virtualNode" type:"structure" required:"true"`

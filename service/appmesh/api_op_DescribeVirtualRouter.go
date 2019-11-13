@@ -71,7 +71,7 @@ func (s DescribeVirtualRouterInput) MarshalFields(e protocol.FieldEncoder) error
 type DescribeVirtualRouterOutput struct {
 	_ struct{} `type:"structure" payload:"VirtualRouter"`
 
-	// An object representing a virtual router returned by a describe operation.
+	// An object that represents a virtual router returned by a describe operation.
 	//
 	// VirtualRouter is a required field
 	VirtualRouter *VirtualRouterData `locationName:"virtualRouter" type:"structure" required:"true"`

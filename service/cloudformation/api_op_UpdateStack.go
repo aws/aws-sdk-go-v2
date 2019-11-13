@@ -14,7 +14,7 @@ import (
 type UpdateStackInput struct {
 	_ struct{} `type:"structure"`
 
-	// In some cases, you must explicity acknowledge that your stack template contains
+	// In some cases, you must explicitly acknowledge that your stack template contains
 	// certain capabilities in order for AWS CloudFormation to update the stack.
 	//
 	//    * CAPABILITY_IAM and CAPABILITY_NAMED_IAM Some stack templates might include

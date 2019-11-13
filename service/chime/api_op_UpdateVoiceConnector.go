@@ -87,7 +87,7 @@ func (s UpdateVoiceConnectorInput) MarshalFields(e protocol.FieldEncoder) error 
 type UpdateVoiceConnectorOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Chime Voice Connector details.
+	// The updated Amazon Chime Voice Connector details.
 	VoiceConnector *VoiceConnector `type:"structure"`
 }
 

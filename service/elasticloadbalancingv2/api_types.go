@@ -30,7 +30,8 @@ type Action struct {
 
 	// The order for the action. This value is required for rules with multiple
 	// actions. The action with the lowest value for order is performed first. The
-	// final action to be performed must be a forward or a fixed-response action.
+	// last action to be performed must be one of the following types of actions:
+	// a forward, fixed-response, or redirect.
 	Order *int64 `min:"1" type:"integer"`
 
 	// [Application Load Balancer] Information for creating a redirect action. Specify
@@ -41,8 +42,7 @@ type Action struct {
 	// is forward.
 	TargetGroupArn *string `type:"string"`
 
-	// The type of action. Each rule must include exactly one of the following types
-	// of actions: forward, fixed-response, or redirect.
+	// The type of action.
 	//
 	// Type is a required field
 	Type ActionTypeEnum `type:"string" required:"true" enum:"true"`
@@ -546,8 +546,8 @@ type LoadBalancer struct {
 	//
 	// The nodes of an internal load balancer have only private IP addresses. The
 	// DNS name of an internal load balancer is publicly resolvable to the private
-	// IP addresses of the nodes. Therefore, internal load balancers can only route
-	// requests from clients with access to the VPC for the load balancer.
+	// IP addresses of the nodes. Therefore, internal load balancers can route requests
+	// only from clients with access to the VPC for the load balancer.
 	Scheme LoadBalancerSchemeEnum `type:"string" enum:"true"`
 
 	// The IDs of the security groups for the load balancer.
@@ -611,6 +611,10 @@ type LoadBalancerAttribute struct {
 	//
 	//    * idle_timeout.timeout_seconds - The idle timeout value, in seconds. The
 	//    valid range is 1-4000 seconds. The default is 60 seconds.
+	//
+	//    * routing.http.drop_invalid_header_fields.enabled - Indicates whether
+	//    HTTP headers with invalid header fields are removed by the load balancer
+	//    (true) or routed to targets (false). The default is true.
 	//
 	//    * routing.http2.enabled - Indicates whether HTTP/2 is enabled. The value
 	//    is true or false. The default is true.
@@ -1093,7 +1097,8 @@ type TargetDescription struct {
 	// Id is a required field
 	Id *string `type:"string" required:"true"`
 
-	// The port on which the target is listening.
+	// The port on which the target is listening. Not used if the target is a Lambda
+	// function.
 	Port *int64 `min:"1" type:"integer"`
 }
 
@@ -1154,7 +1159,8 @@ type TargetGroup struct {
 	// The HTTP codes to use when checking for a successful response from a target.
 	Matcher *Matcher `type:"structure"`
 
-	// The port on which the targets are listening.
+	// The port on which the targets are listening. Not used if the target is a
+	// Lambda function.
 	Port *int64 `min:"1" type:"integer"`
 
 	// The protocol to use for routing traffic to the targets.
@@ -1269,14 +1275,16 @@ type TargetHealth struct {
 	// values:
 	//
 	//    * Target.ResponseCodeMismatch - The health checks did not return an expected
-	//    HTTP code.
+	//    HTTP code. Applies only to Application Load Balancers.
 	//
-	//    * Target.Timeout - The health check requests timed out.
+	//    * Target.Timeout - The health check requests timed out. Applies only to
+	//    Application Load Balancers.
 	//
 	//    * Target.FailedHealthChecks - The load balancer received an error while
 	//    establishing a connection to the target or the target response was malformed.
 	//
 	//    * Elb.InternalError - The health checks failed due to an internal error.
+	//    Applies only to Application Load Balancers.
 	//
 	// If the target state is unused, the reason code can be one of the following
 	// values:
@@ -1288,10 +1296,10 @@ type TargetHealth struct {
 	//    or the target is in an Availability Zone that is not enabled for its load
 	//    balancer.
 	//
+	//    * Target.InvalidState - The target is in the stopped or terminated state.
+	//
 	//    * Target.IpUnusable - The target IP address is reserved for use by a load
 	//    balancer.
-	//
-	//    * Target.InvalidState - The target is in the stopped or terminated state.
 	//
 	// If the target state is draining, the reason code can be the following value:
 	//
@@ -1302,7 +1310,10 @@ type TargetHealth struct {
 	// value:
 	//
 	//    * Target.HealthCheckDisabled - Health checks are disabled for the target
-	//    group.
+	//    group. Applies only to Application Load Balancers.
+	//
+	//    * Elb.InternalError - Target health is unavailable due to an internal
+	//    error. Applies only to Network Load Balancers.
 	Reason TargetHealthReasonEnum `type:"string" enum:"true"`
 
 	// The state of the target.

@@ -37,6 +37,25 @@ func (enum BotType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type CallingNameStatus string
+
+// Enum values for CallingNameStatus
+const (
+	CallingNameStatusUnassigned       CallingNameStatus = "Unassigned"
+	CallingNameStatusUpdateInProgress CallingNameStatus = "UpdateInProgress"
+	CallingNameStatusUpdateSucceeded  CallingNameStatus = "UpdateSucceeded"
+	CallingNameStatusUpdateFailed     CallingNameStatus = "UpdateFailed"
+)
+
+func (enum CallingNameStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CallingNameStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EmailStatus string
 
 // Enum values for EmailStatus
@@ -59,16 +78,20 @@ type ErrorCode string
 
 // Enum values for ErrorCode
 const (
-	ErrorCodeUnauthorized       ErrorCode = "Unauthorized"
-	ErrorCodeForbidden          ErrorCode = "Forbidden"
-	ErrorCodeNotFound           ErrorCode = "NotFound"
-	ErrorCodeBadRequest         ErrorCode = "BadRequest"
-	ErrorCodeConflict           ErrorCode = "Conflict"
-	ErrorCodeServiceFailure     ErrorCode = "ServiceFailure"
-	ErrorCodeServiceUnavailable ErrorCode = "ServiceUnavailable"
-	ErrorCodeUnprocessable      ErrorCode = "Unprocessable"
-	ErrorCodeThrottled          ErrorCode = "Throttled"
-	ErrorCodePreconditionFailed ErrorCode = "PreconditionFailed"
+	ErrorCodeBadRequest                           ErrorCode = "BadRequest"
+	ErrorCodeConflict                             ErrorCode = "Conflict"
+	ErrorCodeForbidden                            ErrorCode = "Forbidden"
+	ErrorCodeNotFound                             ErrorCode = "NotFound"
+	ErrorCodePreconditionFailed                   ErrorCode = "PreconditionFailed"
+	ErrorCodeResourceLimitExceeded                ErrorCode = "ResourceLimitExceeded"
+	ErrorCodeServiceFailure                       ErrorCode = "ServiceFailure"
+	ErrorCodeAccessDenied                         ErrorCode = "AccessDenied"
+	ErrorCodeServiceUnavailable                   ErrorCode = "ServiceUnavailable"
+	ErrorCodeThrottled                            ErrorCode = "Throttled"
+	ErrorCodeUnauthorized                         ErrorCode = "Unauthorized"
+	ErrorCodeUnprocessable                        ErrorCode = "Unprocessable"
+	ErrorCodeVoiceConnectorGroupAssociationsExist ErrorCode = "VoiceConnectorGroupAssociationsExist"
+	ErrorCodePhoneNumberAssociationsExist         ErrorCode = "PhoneNumberAssociationsExist"
 )
 
 func (enum ErrorCode) MarshalValue() (string, error) {
@@ -156,9 +179,10 @@ type PhoneNumberAssociationName string
 
 // Enum values for PhoneNumberAssociationName
 const (
-	PhoneNumberAssociationNameAccountId        PhoneNumberAssociationName = "AccountId"
-	PhoneNumberAssociationNameUserId           PhoneNumberAssociationName = "UserId"
-	PhoneNumberAssociationNameVoiceConnectorId PhoneNumberAssociationName = "VoiceConnectorId"
+	PhoneNumberAssociationNameAccountId             PhoneNumberAssociationName = "AccountId"
+	PhoneNumberAssociationNameUserId                PhoneNumberAssociationName = "UserId"
+	PhoneNumberAssociationNameVoiceConnectorId      PhoneNumberAssociationName = "VoiceConnectorId"
+	PhoneNumberAssociationNameVoiceConnectorGroupId PhoneNumberAssociationName = "VoiceConnectorGroupId"
 )
 
 func (enum PhoneNumberAssociationName) MarshalValue() (string, error) {
@@ -260,6 +284,23 @@ func (enum RegistrationStatus) MarshalValue() (string, error) {
 }
 
 func (enum RegistrationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type VoiceConnectorAwsRegion string
+
+// Enum values for VoiceConnectorAwsRegion
+const (
+	VoiceConnectorAwsRegionUsEast1 VoiceConnectorAwsRegion = "us-east-1"
+	VoiceConnectorAwsRegionUsWest2 VoiceConnectorAwsRegion = "us-west-2"
+)
+
+func (enum VoiceConnectorAwsRegion) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VoiceConnectorAwsRegion) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

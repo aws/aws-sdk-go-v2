@@ -2,6 +2,27 @@
 
 package ecr
 
+type FindingSeverity string
+
+// Enum values for FindingSeverity
+const (
+	FindingSeverityInformational FindingSeverity = "INFORMATIONAL"
+	FindingSeverityLow           FindingSeverity = "LOW"
+	FindingSeverityMedium        FindingSeverity = "MEDIUM"
+	FindingSeverityHigh          FindingSeverity = "HIGH"
+	FindingSeverityCritical      FindingSeverity = "CRITICAL"
+	FindingSeverityUndefined     FindingSeverity = "UNDEFINED"
+)
+
+func (enum FindingSeverity) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FindingSeverity) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ImageActionType string
 
 // Enum values for ImageActionType
@@ -104,6 +125,24 @@ func (enum LifecyclePolicyPreviewStatus) MarshalValue() (string, error) {
 }
 
 func (enum LifecyclePolicyPreviewStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ScanStatus string
+
+// Enum values for ScanStatus
+const (
+	ScanStatusInProgress ScanStatus = "IN_PROGRESS"
+	ScanStatusComplete   ScanStatus = "COMPLETE"
+	ScanStatusFailed     ScanStatus = "FAILED"
+)
+
+func (enum ScanStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ScanStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

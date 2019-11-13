@@ -2648,8 +2648,7 @@ func (s GroupIdentifier) String() string {
 
 // Indicates whether your instance is configured for hibernation. This parameter
 // is valid only if the instance meets the hibernation prerequisites (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites).
-// Hibernation is currently supported only for Amazon Linux. For more information,
-// see Hibernate Your Instance (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html)
+// For more information, see Hibernate Your Instance (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html)
 // in the Amazon Elastic Compute Cloud User Guide.
 type HibernationOptions struct {
 	_ struct{} `type:"structure"`
@@ -2666,8 +2665,7 @@ func (s HibernationOptions) String() string {
 
 // Indicates whether your instance is configured for hibernation. This parameter
 // is valid only if the instance meets the hibernation prerequisites (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites).
-// Hibernation is currently supported only for Amazon Linux. For more information,
-// see Hibernate Your Instance (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html)
+// For more information, see Hibernate Your Instance (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html)
 // in the Amazon Elastic Compute Cloud User Guide.
 type HibernationOptionsRequest struct {
 	_ struct{} `type:"structure"`
@@ -3241,7 +3239,7 @@ type ImportInstanceLaunchSpecification struct {
 	SubnetId *string `locationName:"subnetId" type:"string"`
 
 	// The Base64-encoded user data to make available to the instance.
-	UserData *UserData `locationName:"userData" type:"structure"`
+	UserData *UserData `locationName:"userData" type:"structure" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -4710,7 +4708,6 @@ func (s LaunchTemplateHibernationOptions) String() string {
 
 // Indicates whether the instance is configured for hibernation. This parameter
 // is valid only if the instance meets the hibernation prerequisites (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites).
-// Hibernation is currently supported only for Amazon Linux.
 type LaunchTemplateHibernationOptionsRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -6706,8 +6703,7 @@ type RequestLaunchTemplateData struct {
 
 	// Indicates whether an instance is enabled for hibernation. This parameter
 	// is valid only if the instance meets the hibernation prerequisites (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites).
-	// Hibernation is currently supported only for Amazon Linux. For more information,
-	// see Hibernate Your Instance (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html)
+	// For more information, see Hibernate Your Instance (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	HibernationOptions *LaunchTemplateHibernationOptionsRequest `type:"structure"`
 
@@ -8966,14 +8962,14 @@ type SpotOptions struct {
 	// Indicates how to allocate the target Spot Instance capacity across the Spot
 	// Instance pools specified by the EC2 Fleet.
 	//
-	// If the allocation strategy is lowestPrice, EC2 Fleet launches instances from
-	// the Spot Instance pools with the lowest price. This is the default allocation
+	// If the allocation strategy is lowest-price, EC2 Fleet launches instances
+	// from the Spot Instance pools with the lowest price. This is the default allocation
 	// strategy.
 	//
 	// If the allocation strategy is diversified, EC2 Fleet launches instances from
 	// all the Spot Instance pools that you specify.
 	//
-	// If the allocation strategy is capacityOptimized, EC2 Fleet launches instances
+	// If the allocation strategy is capacity-optimized, EC2 Fleet launches instances
 	// from Spot Instance pools with optimal capacity for the number of instances
 	// that are launching.
 	AllocationStrategy SpotAllocationStrategy `locationName:"allocationStrategy" type:"string" enum:"true"`
@@ -8982,7 +8978,7 @@ type SpotOptions struct {
 	InstanceInterruptionBehavior SpotInstanceInterruptionBehavior `locationName:"instanceInterruptionBehavior" type:"string" enum:"true"`
 
 	// The number of Spot pools across which to allocate your target Spot capacity.
-	// Valid only when AllocationStrategy is set to lowestPrice. EC2 Fleet selects
+	// Valid only when AllocationStrategy is set to lowest-price. EC2 Fleet selects
 	// the cheapest Spot pools and evenly allocates your target Spot capacity across
 	// the number of Spot pools that you specify.
 	InstancePoolsToUseCount *int64 `locationName:"instancePoolsToUseCount" type:"integer"`
@@ -9015,14 +9011,14 @@ type SpotOptionsRequest struct {
 	// Indicates how to allocate the target Spot Instance capacity across the Spot
 	// Instance pools specified by the EC2 Fleet.
 	//
-	// If the allocation strategy is lowestPrice, EC2 Fleet launches instances from
-	// the Spot Instance pools with the lowest price. This is the default allocation
+	// If the allocation strategy is lowest-price, EC2 Fleet launches instances
+	// from the Spot Instance pools with the lowest price. This is the default allocation
 	// strategy.
 	//
 	// If the allocation strategy is diversified, EC2 Fleet launches instances from
 	// all the Spot Instance pools that you specify.
 	//
-	// If the allocation strategy is capacityOptimized, EC2 Fleet launches instances
+	// If the allocation strategy is capacity-optimized, EC2 Fleet launches instances
 	// from Spot Instance pools with optimal capacity for the number of instances
 	// that are launching.
 	AllocationStrategy SpotAllocationStrategy `type:"string" enum:"true"`
@@ -9418,10 +9414,11 @@ type TagSpecification struct {
 
 	// The type of resource to tag. Currently, the resource types that support tagging
 	// on creation are: capacity-reservation | client-vpn-endpoint | dedicated-host
-	// | fleet | instance | launch-template | snapshot | transit-gateway | transit-gateway-attachment
+	// | fleet | fpga-image | instance | launch-template | snapshot | traffic-mirror-filter
+	// | traffic-mirror-session | traffic-mirror-target | transit-gateway | transit-gateway-attachment
 	// | transit-gateway-route-table | volume.
 	//
-	// To tag a resource after it has been created, see CreateTags.
+	// To tag a resource after it has been created, see CreateTags (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).
 	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
 
 	// The tags to apply to the resource.
@@ -10429,7 +10426,7 @@ func (s UserBucketDetails) String() string {
 
 // Describes the user data for an instance.
 type UserData struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" sensitive:"true"`
 
 	// The user data. If you are using an AWS SDK or command line tool, Base64-encoding
 	// is performed for you, and you can load the text from a file. Otherwise, you

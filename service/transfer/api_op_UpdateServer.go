@@ -46,7 +46,7 @@ type UpdateServerInput struct {
 	// user account is assigned to.
 	//
 	// ServerId is a required field
-	ServerId *string `type:"string" required:"true"`
+	ServerId *string `min:"19" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -60,6 +60,19 @@ func (s *UpdateServerInput) Validate() error {
 
 	if s.ServerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServerId"))
+	}
+	if s.ServerId != nil && len(*s.ServerId) < 19 {
+		invalidParams.Add(aws.NewErrParamMinLen("ServerId", 19))
+	}
+	if s.EndpointDetails != nil {
+		if err := s.EndpointDetails.Validate(); err != nil {
+			invalidParams.AddNested("EndpointDetails", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.IdentityProviderDetails != nil {
+		if err := s.IdentityProviderDetails.Validate(); err != nil {
+			invalidParams.AddNested("IdentityProviderDetails", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -75,7 +88,7 @@ type UpdateServerOutput struct {
 	// is assigned to.
 	//
 	// ServerId is a required field
-	ServerId *string `type:"string" required:"true"`
+	ServerId *string `min:"19" type:"string" required:"true"`
 }
 
 // String returns the string representation

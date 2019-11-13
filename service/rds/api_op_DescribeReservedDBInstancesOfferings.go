@@ -23,7 +23,7 @@ type DescribeReservedDBInstancesOfferingsInput struct {
 	// Valid Values: 1 | 3 | 31536000 | 94608000
 	Duration *string `type:"string"`
 
-	// This parameter is not currently supported.
+	// This parameter isn't currently supported.
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -33,7 +33,7 @@ type DescribeReservedDBInstancesOfferingsInput struct {
 
 	// The maximum number of records to include in the response. If more than the
 	// MaxRecords value is available, a pagination token called a marker is included
-	// in the response so that you can retrieve the reamaining results.
+	// in the response so you can retrieve the remaining results.
 	//
 	// Default: 100
 	//

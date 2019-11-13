@@ -25,6 +25,42 @@ type CreateServerInput struct {
 	// exceeded. The default value is 1.
 	BackupRetentionCount *int64 `min:"1" type:"integer"`
 
+	// A PEM-formatted HTTPS certificate. The value can be be a single, self-signed
+	// certificate, or a certificate chain. If you specify a custom certificate,
+	// you must also specify values for CustomDomain and CustomPrivateKey. The following
+	// are requirements for the CustomCertificate value:
+	//
+	//    * You can provide either a self-signed, custom certificate, or the full
+	//    certificate chain.
+	//
+	//    * The certificate must be a valid X509 certificate, or a certificate chain
+	//    in PEM format.
+	//
+	//    * The certificate must be valid at the time of upload. A certificate can't
+	//    be used before its validity period begins (the certificate's NotBefore
+	//    date), or after it expires (the certificate's NotAfter date).
+	//
+	//    * The certificate’s common name or subject alternative names (SANs),
+	//    if present, must match the value of CustomDomain.
+	//
+	//    * The certificate must match the value of CustomPrivateKey.
+	CustomCertificate *string `type:"string"`
+
+	// An optional public endpoint of a server, such as https://aws.my-company.com.
+	// To access the server, create a CNAME DNS record in your preferred DNS service
+	// that points the custom domain to the endpoint that is generated when the
+	// server is created (the value of the CreateServer Endpoint attribute). You
+	// cannot access the server by using the generated Endpoint value if the server
+	// is using a custom domain. If you specify a custom domain, you must also specify
+	// values for CustomCertificate and CustomPrivateKey.
+	CustomDomain *string `type:"string"`
+
+	// A private key in PEM format for connecting to the server by using HTTPS.
+	// The private key must not be encrypted; it cannot be protected by a password
+	// or passphrase. If you specify a custom private key, you must also specify
+	// values for CustomDomain and CustomCertificate.
+	CustomPrivateKey *string `type:"string" sensitive:"true"`
+
 	// Enable or disable scheduled backups. Valid values are true or false. The
 	// default value is true.
 	DisableAutomatedBackup *bool `type:"boolean"`
@@ -239,6 +275,10 @@ const opCreateServer = "CreateServer"
 // you update your security group rules to allow access from known IP addresses
 // and address ranges only. To edit security group rules, open Security Groups
 // in the navigation pane of the EC2 management console.
+//
+// To specify your own domain for a server, and provide your own self-signed
+// or CA-signed certificate and private key, specify values for CustomDomain,
+// CustomCertificate, and CustomPrivateKey.
 //
 //    // Example sending a request using CreateServerRequest.
 //    req := client.CreateServerRequest(params)

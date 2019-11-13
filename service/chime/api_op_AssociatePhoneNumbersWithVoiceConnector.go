@@ -16,6 +16,11 @@ type AssociatePhoneNumbersWithVoiceConnectorInput struct {
 	// List of phone numbers, in E.164 format.
 	E164PhoneNumbers []string `type:"list"`
 
+	// If true, associates the provided phone numbers with the provided Amazon Chime
+	// Voice Connector and removes any previously existing associations. If false,
+	// does not associate any phone numbers that have previously existing associations.
+	ForceAssociate *bool `type:"boolean"`
+
 	// The Amazon Chime Voice Connector ID.
 	//
 	// VoiceConnectorId is a required field
@@ -56,6 +61,12 @@ func (s AssociatePhoneNumbersWithVoiceConnectorInput) MarshalFields(e protocol.F
 		}
 		ls0.End()
 
+	}
+	if s.ForceAssociate != nil {
+		v := *s.ForceAssociate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ForceAssociate", protocol.BoolValue(v), metadata)
 	}
 	if s.VoiceConnectorId != nil {
 		v := *s.VoiceConnectorId
@@ -102,7 +113,7 @@ const opAssociatePhoneNumbersWithVoiceConnector = "AssociatePhoneNumbersWithVoic
 // AssociatePhoneNumbersWithVoiceConnectorRequest returns a request value for making API operation for
 // Amazon Chime.
 //
-// Associates a phone number with the specified Amazon Chime Voice Connector.
+// Associates phone numbers with the specified Amazon Chime Voice Connector.
 //
 //    // Example sending a request using AssociatePhoneNumbersWithVoiceConnectorRequest.
 //    req := client.AssociatePhoneNumbersWithVoiceConnectorRequest(params)

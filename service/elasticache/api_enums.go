@@ -19,6 +19,40 @@ func (enum AZMode) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type AuthTokenUpdateStatus string
+
+// Enum values for AuthTokenUpdateStatus
+const (
+	AuthTokenUpdateStatusSetting  AuthTokenUpdateStatus = "SETTING"
+	AuthTokenUpdateStatusRotating AuthTokenUpdateStatus = "ROTATING"
+)
+
+func (enum AuthTokenUpdateStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AuthTokenUpdateStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type AuthTokenUpdateStrategyType string
+
+// Enum values for AuthTokenUpdateStrategyType
+const (
+	AuthTokenUpdateStrategyTypeSet    AuthTokenUpdateStrategyType = "SET"
+	AuthTokenUpdateStrategyTypeRotate AuthTokenUpdateStrategyType = "ROTATE"
+)
+
+func (enum AuthTokenUpdateStrategyType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AuthTokenUpdateStrategyType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AutomaticFailoverStatus string
 
 // Enum values for AutomaticFailoverStatus

@@ -110,7 +110,7 @@ const opGetCampaignVersions = "GetCampaignVersions"
 // Amazon Pinpoint.
 //
 // Retrieves information about the status, configuration, and other settings
-// for all versions of a specific campaign.
+// for all versions of a campaign.
 //
 //    // Example sending a request using GetCampaignVersionsRequest.
 //    req := client.GetCampaignVersionsRequest(params)

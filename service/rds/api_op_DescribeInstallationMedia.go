@@ -25,7 +25,7 @@ type DescribeInstallationMediaInput struct {
 	//    information about the valid engines for installation media, see ImportInstallationMedia.
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
-	// The installation media ID.
+	// The installation medium ID.
 	InstallationMediaId *string `type:"string"`
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -83,8 +83,8 @@ const opDescribeInstallationMedia = "DescribeInstallationMedia"
 // DescribeInstallationMediaRequest returns a request value for making API operation for
 // Amazon Relational Database Service.
 //
-// Describes the available installation media for on-premises, bring your own
-// media (BYOM) DB engines, such as Microsoft SQL Server.
+// Describes the available installation media for a DB engine that requires
+// an on-premises customer provided license, such as Microsoft SQL Server.
 //
 //    // Example sending a request using DescribeInstallationMediaRequest.
 //    req := client.DescribeInstallationMediaRequest(params)

@@ -18,7 +18,7 @@ type DescribeOptionGroupOptionsInput struct {
 	// EngineName is a required field
 	EngineName *string `type:"string" required:"true"`
 
-	// This parameter is not currently supported.
+	// This parameter isn't currently supported.
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// If specified, filters the results to include only options for the specified

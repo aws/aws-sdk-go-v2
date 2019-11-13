@@ -36,6 +36,26 @@ func (enum EgressFilterType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type GrpcRetryPolicyEvent string
+
+// Enum values for GrpcRetryPolicyEvent
+const (
+	GrpcRetryPolicyEventCancelled         GrpcRetryPolicyEvent = "cancelled"
+	GrpcRetryPolicyEventDeadlineExceeded  GrpcRetryPolicyEvent = "deadline-exceeded"
+	GrpcRetryPolicyEventInternal          GrpcRetryPolicyEvent = "internal"
+	GrpcRetryPolicyEventResourceExhausted GrpcRetryPolicyEvent = "resource-exhausted"
+	GrpcRetryPolicyEventUnavailable       GrpcRetryPolicyEvent = "unavailable"
+)
+
+func (enum GrpcRetryPolicyEvent) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum GrpcRetryPolicyEvent) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type HttpMethod string
 
 // Enum values for HttpMethod
@@ -99,8 +119,10 @@ type PortProtocol string
 
 // Enum values for PortProtocol
 const (
-	PortProtocolHttp PortProtocol = "http"
-	PortProtocolTcp  PortProtocol = "tcp"
+	PortProtocolGrpc  PortProtocol = "grpc"
+	PortProtocolHttp  PortProtocol = "http"
+	PortProtocolHttp2 PortProtocol = "http2"
+	PortProtocolTcp   PortProtocol = "tcp"
 )
 
 func (enum PortProtocol) MarshalValue() (string, error) {

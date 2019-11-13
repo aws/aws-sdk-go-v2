@@ -12,6 +12,11 @@ import (
 type CreateRepositoryInput struct {
 	_ struct{} `type:"structure"`
 
+	// The image scanning configuration for the repository. This setting determines
+	// whether images are scanned for known vulnerabilities after being pushed to
+	// the repository.
+	ImageScanningConfiguration *ImageScanningConfiguration `locationName:"imageScanningConfiguration" type:"structure"`
+
 	// The tag mutability setting for the repository. If this parameter is omitted,
 	// the default setting of MUTABLE will be used which will allow image tags to
 	// be overwritten. If IMMUTABLE is specified, all image tags within the repository
@@ -71,7 +76,10 @@ const opCreateRepository = "CreateRepository"
 // CreateRepositoryRequest returns a request value for making API operation for
 // Amazon EC2 Container Registry.
 //
-// Creates an image repository.
+// Creates an Amazon Elastic Container Registry (Amazon ECR) repository, where
+// users can push and pull Docker images. For more information, see Amazon ECR
+// Repositories (https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html)
+// in the Amazon Elastic Container Registry User Guide.
 //
 //    // Example sending a request using CreateRepositoryRequest.
 //    req := client.CreateRepositoryRequest(params)

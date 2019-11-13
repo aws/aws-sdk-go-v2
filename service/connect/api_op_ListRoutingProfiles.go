@@ -13,16 +13,12 @@ import (
 type ListRoutingProfilesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier for your Amazon Connect instance. To find the ID of your instance,
-	// open the AWS console and select Amazon Connect. Select the alias of the instance
-	// in the Instance alias column. The instance ID is displayed in the Overview
-	// section of your instance settings. For example, the instance ID is the set
-	// of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+	// The identifier of the Amazon Connect instance.
 	//
 	// InstanceId is a required field
 	InstanceId *string `location:"uri" locationName:"InstanceId" min:"1" type:"string" required:"true"`
 
-	// The maximum number of routing profiles to return in the response.
+	// The maximimum number of results to return per page.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -83,13 +79,10 @@ func (s ListRoutingProfilesInput) MarshalFields(e protocol.FieldEncoder) error {
 type ListRoutingProfilesOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A string returned in the response. Use the value returned in the response
-	// as the value of the NextToken in a subsequent request to retrieve the next
-	// set of results.
+	// If there are additional results, this is the token for the next set of results.
 	NextToken *string `type:"string"`
 
-	// An array of RoutingProfileSummary objects that include the ARN, Id, and Name
-	// of the routing profile.
+	// Information about the routing profiles.
 	RoutingProfileSummaryList []RoutingProfileSummary `type:"list"`
 }
 
@@ -126,8 +119,8 @@ const opListRoutingProfiles = "ListRoutingProfiles"
 // ListRoutingProfilesRequest returns a request value for making API operation for
 // Amazon Connect Service.
 //
-// Returns an array of RoutingProfileSummary objects that includes information
-// about the routing profiles in your instance.
+// Provides summary information about the routing profiles for the specified
+// Amazon Connect instance.
 //
 //    // Example sending a request using ListRoutingProfilesRequest.
 //    req := client.ListRoutingProfilesRequest(params)
@@ -142,6 +135,12 @@ func (c *Client) ListRoutingProfilesRequest(input *ListRoutingProfilesInput) Lis
 		Name:       opListRoutingProfiles,
 		HTTPMethod: "GET",
 		HTTPPath:   "/routing-profiles-summary/{InstanceId}",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -174,6 +173,53 @@ func (r ListRoutingProfilesRequest) Send(ctx context.Context) (*ListRoutingProfi
 	}
 
 	return resp, nil
+}
+
+// NewListRoutingProfilesRequestPaginator returns a paginator for ListRoutingProfiles.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListRoutingProfilesRequest(input)
+//   p := connect.NewListRoutingProfilesRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListRoutingProfilesPaginator(req ListRoutingProfilesRequest) ListRoutingProfilesPaginator {
+	return ListRoutingProfilesPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListRoutingProfilesInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListRoutingProfilesPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListRoutingProfilesPaginator struct {
+	aws.Pager
+}
+
+func (p *ListRoutingProfilesPaginator) CurrentPage() *ListRoutingProfilesOutput {
+	return p.Pager.CurrentPage().(*ListRoutingProfilesOutput)
 }
 
 // ListRoutingProfilesResponse is the response type for the

@@ -19,7 +19,9 @@ type UntagResourceInput struct {
 	ResourceArn *string `min:"20" type:"string" required:"true"`
 
 	// The keys of the tags to remove from the user pool.
-	TagKeys []string `type:"list"`
+	//
+	// TagKeys is a required field
+	TagKeys []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -36,6 +38,10 @@ func (s *UntagResourceInput) Validate() error {
 	}
 	if s.ResourceArn != nil && len(*s.ResourceArn) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 20))
+	}
+
+	if s.TagKeys == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
 
 	if invalidParams.Len() > 0 {

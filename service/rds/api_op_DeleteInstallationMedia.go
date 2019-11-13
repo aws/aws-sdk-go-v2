@@ -12,7 +12,7 @@ import (
 type DeleteInstallationMediaInput struct {
 	_ struct{} `type:"structure"`
 
-	// The installation media ID.
+	// The installation medium ID.
 	//
 	// InstallationMediaId is a required field
 	InstallationMediaId *string `type:"string" required:"true"`
@@ -37,8 +37,8 @@ func (s *DeleteInstallationMediaInput) Validate() error {
 	return nil
 }
 
-// Contains the installation media for on-premises, bring your own media (BYOM)
-// DB engines, such as Microsoft SQL Server.
+// Contains the installation media for a DB engine that requires an on-premises
+// customer provided license, such as Microsoft SQL Server.
 type DeleteInstallationMediaOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -48,7 +48,7 @@ type DeleteInstallationMediaOutput struct {
 	// The DB engine.
 	Engine *string `type:"string"`
 
-	// The path to the installation media for the DB engine.
+	// The path to the installation medium for the DB engine.
 	EngineInstallationMediaPath *string `type:"string"`
 
 	// The engine version of the DB engine.
@@ -57,14 +57,14 @@ type DeleteInstallationMediaOutput struct {
 	// If an installation media failure occurred, the cause of the failure.
 	FailureCause *InstallationMediaFailureCause `type:"structure"`
 
-	// The installation media ID.
+	// The installation medium ID.
 	InstallationMediaId *string `type:"string"`
 
-	// The path to the installation media for the operating system associated with
+	// The path to the installation medium for the operating system associated with
 	// the DB engine.
 	OSInstallationMediaPath *string `type:"string"`
 
-	// The status of the installation media.
+	// The status of the installation medium.
 	Status *string `type:"string"`
 }
 
@@ -78,8 +78,8 @@ const opDeleteInstallationMedia = "DeleteInstallationMedia"
 // DeleteInstallationMediaRequest returns a request value for making API operation for
 // Amazon Relational Database Service.
 //
-// Deletes the installation media for an on-premises, bring your own media (BYOM)
-// DB engine, such as Microsoft SQL Server.
+// Deletes the installation medium for a DB engine that requires an on-premises
+// customer provided license, such as Microsoft SQL Server.
 //
 //    // Example sending a request using DeleteInstallationMediaRequest.
 //    req := client.DeleteInstallationMediaRequest(params)

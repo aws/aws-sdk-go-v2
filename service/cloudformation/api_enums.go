@@ -45,6 +45,7 @@ const (
 	ChangeActionAdd    ChangeAction = "Add"
 	ChangeActionModify ChangeAction = "Modify"
 	ChangeActionRemove ChangeAction = "Remove"
+	ChangeActionImport ChangeAction = "Import"
 )
 
 func (enum ChangeAction) MarshalValue() (string, error) {
@@ -82,6 +83,7 @@ type ChangeSetType string
 const (
 	ChangeSetTypeCreate ChangeSetType = "CREATE"
 	ChangeSetTypeUpdate ChangeSetType = "UPDATE"
+	ChangeSetTypeImport ChangeSetType = "IMPORT"
 )
 
 func (enum ChangeSetType) MarshalValue() (string, error) {
@@ -281,16 +283,22 @@ type ResourceStatus string
 
 // Enum values for ResourceStatus
 const (
-	ResourceStatusCreateInProgress ResourceStatus = "CREATE_IN_PROGRESS"
-	ResourceStatusCreateFailed     ResourceStatus = "CREATE_FAILED"
-	ResourceStatusCreateComplete   ResourceStatus = "CREATE_COMPLETE"
-	ResourceStatusDeleteInProgress ResourceStatus = "DELETE_IN_PROGRESS"
-	ResourceStatusDeleteFailed     ResourceStatus = "DELETE_FAILED"
-	ResourceStatusDeleteComplete   ResourceStatus = "DELETE_COMPLETE"
-	ResourceStatusDeleteSkipped    ResourceStatus = "DELETE_SKIPPED"
-	ResourceStatusUpdateInProgress ResourceStatus = "UPDATE_IN_PROGRESS"
-	ResourceStatusUpdateFailed     ResourceStatus = "UPDATE_FAILED"
-	ResourceStatusUpdateComplete   ResourceStatus = "UPDATE_COMPLETE"
+	ResourceStatusCreateInProgress         ResourceStatus = "CREATE_IN_PROGRESS"
+	ResourceStatusCreateFailed             ResourceStatus = "CREATE_FAILED"
+	ResourceStatusCreateComplete           ResourceStatus = "CREATE_COMPLETE"
+	ResourceStatusDeleteInProgress         ResourceStatus = "DELETE_IN_PROGRESS"
+	ResourceStatusDeleteFailed             ResourceStatus = "DELETE_FAILED"
+	ResourceStatusDeleteComplete           ResourceStatus = "DELETE_COMPLETE"
+	ResourceStatusDeleteSkipped            ResourceStatus = "DELETE_SKIPPED"
+	ResourceStatusUpdateInProgress         ResourceStatus = "UPDATE_IN_PROGRESS"
+	ResourceStatusUpdateFailed             ResourceStatus = "UPDATE_FAILED"
+	ResourceStatusUpdateComplete           ResourceStatus = "UPDATE_COMPLETE"
+	ResourceStatusImportFailed             ResourceStatus = "IMPORT_FAILED"
+	ResourceStatusImportComplete           ResourceStatus = "IMPORT_COMPLETE"
+	ResourceStatusImportInProgress         ResourceStatus = "IMPORT_IN_PROGRESS"
+	ResourceStatusImportRollbackInProgress ResourceStatus = "IMPORT_ROLLBACK_IN_PROGRESS"
+	ResourceStatusImportRollbackFailed     ResourceStatus = "IMPORT_ROLLBACK_FAILED"
+	ResourceStatusImportRollbackComplete   ResourceStatus = "IMPORT_ROLLBACK_COMPLETE"
 )
 
 func (enum ResourceStatus) MarshalValue() (string, error) {
@@ -472,6 +480,11 @@ const (
 	StackStatusUpdateRollbackCompleteCleanupInProgress StackStatus = "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS"
 	StackStatusUpdateRollbackComplete                  StackStatus = "UPDATE_ROLLBACK_COMPLETE"
 	StackStatusReviewInProgress                        StackStatus = "REVIEW_IN_PROGRESS"
+	StackStatusImportInProgress                        StackStatus = "IMPORT_IN_PROGRESS"
+	StackStatusImportComplete                          StackStatus = "IMPORT_COMPLETE"
+	StackStatusImportRollbackInProgress                StackStatus = "IMPORT_ROLLBACK_IN_PROGRESS"
+	StackStatusImportRollbackFailed                    StackStatus = "IMPORT_ROLLBACK_FAILED"
+	StackStatusImportRollbackComplete                  StackStatus = "IMPORT_ROLLBACK_COMPLETE"
 )
 
 func (enum StackStatus) MarshalValue() (string, error) {

@@ -162,6 +162,8 @@ type ClientAPI interface {
 
 	WaitUntilStackExists(context.Context, *cloudformation.DescribeStacksInput, ...aws.WaiterOption) error
 
+	WaitUntilStackImportComplete(context.Context, *cloudformation.DescribeStacksInput, ...aws.WaiterOption) error
+
 	WaitUntilStackUpdateComplete(context.Context, *cloudformation.DescribeStacksInput, ...aws.WaiterOption) error
 }
 

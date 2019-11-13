@@ -34,7 +34,7 @@ type DescribeDBLogFilesInput struct {
 	// string.
 	FilenameContains *string `type:"string"`
 
-	// This parameter is not currently supported.
+	// This parameter isn't currently supported.
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// The pagination token provided in the previous request. If this parameter
@@ -44,7 +44,7 @@ type DescribeDBLogFilesInput struct {
 
 	// The maximum number of records to include in the response. If more records
 	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
+	// is included in the response so you can retrieve the remaining results.
 	MaxRecords *int64 `type:"integer"`
 }
 

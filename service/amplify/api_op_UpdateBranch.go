@@ -19,6 +19,9 @@ type UpdateBranchInput struct {
 	// AppId is a required field
 	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
 
+	// ARN for a Backend Environment, part of an Amplify App.
+	BackendEnvironmentArn *string `locationName:"backendEnvironmentArn" min:"1" type:"string"`
+
 	// Basic Authorization credentials for the branch.
 	BasicAuthCredentials *string `locationName:"basicAuthCredentials" type:"string"`
 
@@ -54,6 +57,9 @@ type UpdateBranchInput struct {
 	// Framework for the branch.
 	Framework *string `locationName:"framework" type:"string"`
 
+	// The Amplify Environment name for the pull request.
+	PullRequestEnvironmentName *string `locationName:"pullRequestEnvironmentName" type:"string"`
+
 	// Stage for the branch.
 	Stage Stage `locationName:"stage" type:"string" enum:"true"`
 
@@ -76,6 +82,9 @@ func (s *UpdateBranchInput) Validate() error {
 	if s.AppId != nil && len(*s.AppId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AppId", 1))
 	}
+	if s.BackendEnvironmentArn != nil && len(*s.BackendEnvironmentArn) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("BackendEnvironmentArn", 1))
+	}
 
 	if s.BranchName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BranchName"))
@@ -97,6 +106,12 @@ func (s *UpdateBranchInput) Validate() error {
 func (s UpdateBranchInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
+	if s.BackendEnvironmentArn != nil {
+		v := *s.BackendEnvironmentArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "backendEnvironmentArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.BasicAuthCredentials != nil {
 		v := *s.BasicAuthCredentials
 
@@ -162,6 +177,12 @@ func (s UpdateBranchInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "framework", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PullRequestEnvironmentName != nil {
+		v := *s.PullRequestEnvironmentName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "pullRequestEnvironmentName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Stage) > 0 {
 		v := s.Stage

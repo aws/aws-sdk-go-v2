@@ -40,6 +40,7 @@ const (
 	DeploymentJobErrorCodePreLaunchFileFailure                DeploymentJobErrorCode = "PreLaunchFileFailure"
 	DeploymentJobErrorCodePostLaunchFileFailure               DeploymentJobErrorCode = "PostLaunchFileFailure"
 	DeploymentJobErrorCodeBadPermissionError                  DeploymentJobErrorCode = "BadPermissionError"
+	DeploymentJobErrorCodeDownloadConditionFailed             DeploymentJobErrorCode = "DownloadConditionFailed"
 	DeploymentJobErrorCodeInternalServerError                 DeploymentJobErrorCode = "InternalServerError"
 )
 
@@ -110,12 +111,13 @@ type RobotDeploymentStep string
 
 // Enum values for RobotDeploymentStep
 const (
-	RobotDeploymentStepValidating            RobotDeploymentStep = "Validating"
-	RobotDeploymentStepDownloadingExtracting RobotDeploymentStep = "DownloadingExtracting"
-	RobotDeploymentStepExecutingPreLaunch    RobotDeploymentStep = "ExecutingPreLaunch"
-	RobotDeploymentStepLaunching             RobotDeploymentStep = "Launching"
-	RobotDeploymentStepExecutingPostLaunch   RobotDeploymentStep = "ExecutingPostLaunch"
-	RobotDeploymentStepFinished              RobotDeploymentStep = "Finished"
+	RobotDeploymentStepValidating                 RobotDeploymentStep = "Validating"
+	RobotDeploymentStepDownloadingExtracting      RobotDeploymentStep = "DownloadingExtracting"
+	RobotDeploymentStepExecutingDownloadCondition RobotDeploymentStep = "ExecutingDownloadCondition"
+	RobotDeploymentStepExecutingPreLaunch         RobotDeploymentStep = "ExecutingPreLaunch"
+	RobotDeploymentStepLaunching                  RobotDeploymentStep = "Launching"
+	RobotDeploymentStepExecutingPostLaunch        RobotDeploymentStep = "ExecutingPostLaunch"
+	RobotDeploymentStepFinished                   RobotDeploymentStep = "Finished"
 )
 
 func (enum RobotDeploymentStep) MarshalValue() (string, error) {

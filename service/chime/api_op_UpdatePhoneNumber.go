@@ -13,6 +13,9 @@ import (
 type UpdatePhoneNumberInput struct {
 	_ struct{} `type:"structure"`
 
+	// The outbound calling name associated with the phone number.
+	CallingName *string `type:"string" sensitive:"true"`
+
 	// The phone number ID.
 	//
 	// PhoneNumberId is a required field
@@ -45,6 +48,12 @@ func (s *UpdatePhoneNumberInput) Validate() error {
 func (s UpdatePhoneNumberInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
+	if s.CallingName != nil {
+		v := *s.CallingName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CallingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if len(s.ProductType) > 0 {
 		v := s.ProductType
 
@@ -88,9 +97,17 @@ const opUpdatePhoneNumber = "UpdatePhoneNumber"
 // UpdatePhoneNumberRequest returns a request value for making API operation for
 // Amazon Chime.
 //
-// Updates phone number details, such as product type, for the specified phone
-// number ID. For toll-free numbers, you can use only the Amazon Chime Voice
-// Connector product type.
+// Updates phone number details, such as product type or calling name, for the
+// specified phone number ID. You can update one phone number detail at a time.
+// For example, you can update either the product type or the calling name in
+// one action.
+//
+// For toll-free numbers, you must use the Amazon Chime Voice Connector product
+// type.
+//
+// Updates to outbound calling names can take up to 72 hours to complete. Pending
+// updates to outbound calling names must be complete before you can request
+// another update.
 //
 //    // Example sending a request using UpdatePhoneNumberRequest.
 //    req := client.UpdatePhoneNumberRequest(params)

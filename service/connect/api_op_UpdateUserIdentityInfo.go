@@ -14,21 +14,17 @@ import (
 type UpdateUserIdentityInfoInput struct {
 	_ struct{} `type:"structure"`
 
-	// A UserIdentityInfo object.
+	// The identity information for the user.
 	//
 	// IdentityInfo is a required field
 	IdentityInfo *UserIdentityInfo `type:"structure" required:"true"`
 
-	// The identifier for your Amazon Connect instance. To find the ID of your instance,
-	// open the AWS console and select Amazon Connect. Select the alias of the instance
-	// in the Instance alias column. The instance ID is displayed in the Overview
-	// section of your instance settings. For example, the instance ID is the set
-	// of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+	// The identifier of the Amazon Connect instance.
 	//
 	// InstanceId is a required field
 	InstanceId *string `location:"uri" locationName:"InstanceId" min:"1" type:"string" required:"true"`
 
-	// The identifier for the user account to update identity information for.
+	// The identifier of the user account.
 	//
 	// UserId is a required field
 	UserId *string `location:"uri" locationName:"UserId" type:"string" required:"true"`
@@ -113,8 +109,7 @@ const opUpdateUserIdentityInfo = "UpdateUserIdentityInfo"
 // UpdateUserIdentityInfoRequest returns a request value for making API operation for
 // Amazon Connect Service.
 //
-// Updates the identity information for the specified user in a UserIdentityInfo
-// object, including email, first name, and last name.
+// Updates the identity information for the specified user.
 //
 //    // Example sending a request using UpdateUserIdentityInfoRequest.
 //    req := client.UpdateUserIdentityInfoRequest(params)

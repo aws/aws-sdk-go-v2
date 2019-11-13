@@ -14,7 +14,8 @@ type ModifyRuleInput struct {
 	_ struct{} `type:"structure"`
 
 	// The actions. Each rule must include exactly one of the following types of
-	// actions: forward, fixed-response, or redirect.
+	// actions: forward, fixed-response, or redirect, and it must be the last action
+	// to be performed.
 	//
 	// If the action type is forward, you specify a target group. The protocol of
 	// the target group must be HTTP or HTTPS for an Application Load Balancer.

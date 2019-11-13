@@ -18,7 +18,7 @@ type DescribeEngineDefaultParametersInput struct {
 	// DBParameterGroupFamily is a required field
 	DBParameterGroupFamily *string `type:"string" required:"true"`
 
-	// This parameter is not currently supported.
+	// This parameter isn't currently supported.
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeEngineDefaultParameters
@@ -28,7 +28,7 @@ type DescribeEngineDefaultParametersInput struct {
 
 	// The maximum number of records to include in the response. If more records
 	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
+	// is included in the response so you can retrieve the remaining results.
 	//
 	// Default: 100
 	//

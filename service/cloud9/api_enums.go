@@ -6,7 +6,9 @@ type EnvironmentLifecycleStatus string
 
 // Enum values for EnvironmentLifecycleStatus
 const (
+	EnvironmentLifecycleStatusCreating     EnvironmentLifecycleStatus = "CREATING"
 	EnvironmentLifecycleStatusCreated      EnvironmentLifecycleStatus = "CREATED"
+	EnvironmentLifecycleStatusCreateFailed EnvironmentLifecycleStatus = "CREATE_FAILED"
 	EnvironmentLifecycleStatusDeleting     EnvironmentLifecycleStatus = "DELETING"
 	EnvironmentLifecycleStatusDeleteFailed EnvironmentLifecycleStatus = "DELETE_FAILED"
 )

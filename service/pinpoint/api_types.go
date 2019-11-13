@@ -626,6 +626,37 @@ func (s APNSChannelResponse) MarshalFields(e protocol.FieldEncoder) error {
 type APNSMessage struct {
 	_ struct{} `type:"structure"`
 
+	// The type of push notification to send. Valid values are:
+	//
+	//    * alert - For a standard notification that's displayed on recipients'
+	//    devices and prompts a recipient to interact with the notification.
+	//
+	//    * background - For a silent notification that delivers content in the
+	//    background and isn't displayed on recipients' devices.
+	//
+	//    * complication - For a notification that contains update information for
+	//    an app’s complication timeline.
+	//
+	//    * fileprovider - For a notification that signals changes to a File Provider
+	//    extension.
+	//
+	//    * mdm - For a notification that tells managed devices to contact the MDM
+	//    server.
+	//
+	//    * voip - For a notification that provides information about an incoming
+	//    VoIP call.
+	//
+	// Amazon Pinpoint specifies this value in the apns-push-type request header
+	// when it sends the notification message to APNs. If you don't specify a value
+	// for this property, Amazon Pinpoint sets the value to alert or background
+	// automatically, based on the value that you specify for the SilentPush or
+	// RawContent property of the message.
+	//
+	// For more information about the apns-push-type request header, see Sending
+	// Notification Requests to APNs (https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/sending_notification_requests_to_apns)
+	// on the Apple Developer website.
+	APNSPushType *string `type:"string"`
+
 	// The action to occur if the recipient taps the push notification. Valid values
 	// are:
 	//
@@ -669,7 +700,7 @@ type APNSMessage struct {
 	MediaUrl *string `type:"string"`
 
 	// The authentication method that you want Amazon Pinpoint to use when authenticating
-	// with Apple Push Notification service (APNs), CERTIFICATE or TOKEN.
+	// with APNs, CERTIFICATE or TOKEN.
 	PreferredAuthenticationMethod *string `type:"string"`
 
 	// para>5 - Low priority, the notification might be delayed, delivered as part
@@ -689,7 +720,7 @@ type APNSMessage struct {
 	Priority *string `type:"string"`
 
 	// The raw, JSON-formatted string to use as the payload for the notification
-	// message. This value overrides the message.
+	// message. This value overrides all other content for the message.
 	//
 	// If you specify the raw content of an APNs push notification, the message
 	// payload has to include the content-available key. The value of the content-available
@@ -769,6 +800,12 @@ func (s APNSMessage) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s APNSMessage) MarshalFields(e protocol.FieldEncoder) error {
+	if s.APNSPushType != nil {
+		v := *s.APNSPushType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "APNSPushType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if len(s.Action) > 0 {
 		v := s.Action
 
@@ -891,9 +928,9 @@ func (s APNSMessage) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Specifies the content and settings for a message template that can be used
-// in push notifications that are sent through the APNs (Apple Push Notification
-// service) channel.
+// Specifies channel-specific content and settings for a message template that
+// can be used in push notifications that are sent through the APNs (Apple Push
+// Notification service) channel.
 type APNSPushNotificationTemplate struct {
 	_ struct{} `type:"structure"`
 
@@ -1706,6 +1743,118 @@ func (s ActivitiesResponse) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies the configuration and other settings for an activity in a journey.
+type Activity struct {
+	_ struct{} `type:"structure"`
+
+	// The settings for a yes/no split activity. This type of activity sends participants
+	// down one of two paths in a journey, based on conditions that you specify.
+	ConditionalSplit *ConditionalSplitActivity `type:"structure"`
+
+	// The custom description of the activity.
+	Description *string `type:"string"`
+
+	// The settings for an email activity. This type of activity sends an email
+	// message to participants.
+	EMAIL *EmailMessageActivity `type:"structure"`
+
+	// The settings for a holdout activity. This type of activity stops a journey
+	// for a specified percentage of participants.
+	Holdout *HoldoutActivity `type:"structure"`
+
+	// The settings for a multivariate split activity. This type of activity sends
+	// participants down one of as many as five paths in a journey, based on conditions
+	// that you specify.
+	MultiCondition *MultiConditionalSplitActivity `type:"structure"`
+
+	// The settings for a random split activity. This type of activity randomly
+	// sends specified percentages of participants down one of as many as five paths
+	// in a journey, based on conditions that you specify.
+	RandomSplit *RandomSplitActivity `type:"structure"`
+
+	// The settings for a wait activity. This type of activity waits for a certain
+	// amount of time or until a specific date and time before moving participants
+	// to the next activity in a journey.
+	Wait *WaitActivity `type:"structure"`
+}
+
+// String returns the string representation
+func (s Activity) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Activity) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Activity"}
+	if s.ConditionalSplit != nil {
+		if err := s.ConditionalSplit.Validate(); err != nil {
+			invalidParams.AddNested("ConditionalSplit", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Holdout != nil {
+		if err := s.Holdout.Validate(); err != nil {
+			invalidParams.AddNested("Holdout", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.MultiCondition != nil {
+		if err := s.MultiCondition.Validate(); err != nil {
+			invalidParams.AddNested("MultiCondition", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Activity) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ConditionalSplit != nil {
+		v := s.ConditionalSplit
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ConditionalSplit", v, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.EMAIL != nil {
+		v := s.EMAIL
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "EMAIL", v, metadata)
+	}
+	if s.Holdout != nil {
+		v := s.Holdout
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Holdout", v, metadata)
+	}
+	if s.MultiCondition != nil {
+		v := s.MultiCondition
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "MultiCondition", v, metadata)
+	}
+	if s.RandomSplit != nil {
+		v := s.RandomSplit
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "RandomSplit", v, metadata)
+	}
+	if s.Wait != nil {
+		v := s.Wait
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Wait", v, metadata)
+	}
+	return nil
+}
+
 // Provides information about an activity that was performed by a campaign.
 type ActivityResponse struct {
 	_ struct{} `type:"structure"`
@@ -1739,8 +1888,8 @@ type ActivityResponse struct {
 	// The actual start time, in ISO 8601 format, of the activity.
 	Start *string `type:"string"`
 
-	// The state of the activity. Possible values are: PENDING, INITIALIZING, RUNNING,
-	// PAUSED, CANCELLED, and COMPLETED.
+	// The current status of the activity. Possible values are: PENDING, INITIALIZING,
+	// RUNNING, PAUSED, CANCELLED, and COMPLETED.
 	State *string `type:"string"`
 
 	// The total number of endpoints that the campaign successfully delivered messages
@@ -1946,10 +2095,10 @@ func (s AddressConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Specifies the content and settings for a message template can be used in
-// push notifications that are sent through the ADM (Amazon Device Messaging),
-// GCM (Firebase Cloud Messaging, formerly Google Cloud Messaging), or Baidu
-// (Baidu Cloud Push) channel.
+// Specifies channel-specific content and settings for a message template that
+// can be used in push notifications that are sent through the ADM (Amazon Device
+// Messaging), Baidu (Baidu Cloud Push), or GCM (Firebase Cloud Messaging, formerly
+// Google Cloud Messaging) channel.
 type AndroidPushNotificationTemplate struct {
 	_ struct{} `type:"structure"`
 
@@ -2073,8 +2222,8 @@ type ApplicationDateRangeKpiResponse struct {
 	// The name of the metric, also referred to as a key performance indicator (KPI),
 	// that the data was retrieved for. This value describes the associated metric
 	// and consists of two or more terms, which are comprised of lowercase alphanumeric
-	// characters, separated by a hyphen. For a list of valid values, see the Amazon
-	// Pinpoint Developer Guide (https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html).
+	// characters, separated by a hyphen. For a list of possible values, see the
+	// Amazon Pinpoint Developer Guide (https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html).
 	//
 	// KpiName is a required field
 	KpiName *string `type:"string" required:"true"`
@@ -2086,8 +2235,8 @@ type ApplicationDateRangeKpiResponse struct {
 	KpiResult *BaseKpiResult `type:"structure" required:"true"`
 
 	// The string to use in a subsequent request to get the next page of results
-	// in a paginated response. This value is null for the Application Metrics resource.
-	// The Application Metrics resource returns all results in a single page.
+	// in a paginated response. This value is null for the Application Metrics resource
+	// because the resource returns all results in a single page.
 	NextToken *string `type:"string"`
 
 	// StartTime is a required field
@@ -2231,23 +2380,23 @@ type ApplicationSettingsResource struct {
 	// The default sending limits for campaigns in the application.
 	Limits *CampaignLimits `type:"structure"`
 
-	// The default quiet time for campaigns in the application. Quiet time is a
-	// specific time range when campaigns don't send messages to endpoints, if all
-	// the following conditions are met:
+	// The default quiet time for campaigns and journeys in the application. Quiet
+	// time is a specific time range when messages aren't sent to endpoints, if
+	// all the following conditions are met:
 	//
 	//    * The EndpointDemographic.Timezone property of the endpoint is set to
 	//    a valid value.
 	//
 	//    * The current time in the endpoint's time zone is later than or equal
 	//    to the time specified by the QuietTime.Start property for the application
-	//    (or a campaign that has custom quiet time settings).
+	//    (or a campaign or journey that has custom quiet time settings).
 	//
 	//    * The current time in the endpoint's time zone is earlier than or equal
 	//    to the time specified by the QuietTime.End property for the application
-	//    (or a campaign that has custom quiet time settings).
+	//    (or a campaign or journey that has custom quiet time settings).
 	//
 	// If any of the preceding conditions isn't met, the endpoint will receive messages
-	// from a campaign, even if quiet time is enabled.
+	// from a campaign or journey, even if quiet time is enabled.
 	QuietTime *QuietTime `type:"structure"`
 }
 
@@ -2406,8 +2555,8 @@ type AttributesResource struct {
 	//
 	//    * endpoint-custom-attributes - Custom attributes that describe endpoints.
 	//
-	//    * endpoint-custom-metrics - Custom metrics that your app reports to Amazon
-	//    Pinpoint for endpoints.
+	//    * endpoint-metric-attributes - Custom metrics that your app reports to
+	//    Amazon Pinpoint for endpoints.
 	//
 	//    * endpoint-user-attributes - Custom attributes that describe users.
 	//
@@ -2829,12 +2978,12 @@ func (s BaiduMessage) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Provides the results of a query that retrieved the data for a standard metric
-// that applies to an application or campaign.
+// that applies to an application, campaign, or journey.
 type BaseKpiResult struct {
 	_ struct{} `type:"structure"`
 
 	// An array of objects that provides the results of a query that retrieved the
-	// data for a standard metric that applies to an application or campaign.
+	// data for a standard metric that applies to an application, campaign, or journey.
 	//
 	// Rows is a required field
 	Rows []ResultRow `type:"list" required:"true"`
@@ -2883,8 +3032,8 @@ type CampaignDateRangeKpiResponse struct {
 	// The name of the metric, also referred to as a key performance indicator (KPI),
 	// that the data was retrieved for. This value describes the associated metric
 	// and consists of two or more terms, which are comprised of lowercase alphanumeric
-	// characters, separated by a hyphen. For a list of valid values, see the Amazon
-	// Pinpoint Developer Guide (https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html).
+	// characters, separated by a hyphen. For a list of possible values, see the
+	// Amazon Pinpoint Developer Guide (https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html).
 	//
 	// KpiName is a required field
 	KpiName *string `type:"string" required:"true"`
@@ -2896,8 +3045,8 @@ type CampaignDateRangeKpiResponse struct {
 	KpiResult *BaseKpiResult `type:"structure" required:"true"`
 
 	// The string to use in a subsequent request to get the next page of results
-	// in a paginated response. This value is null for the Campaign Metrics resource.
-	// The Campaign Metrics resource returns all results in a single page.
+	// in a paginated response. This value is null for the Campaign Metrics resource
+	// because the resource returns all results in a single page.
 	NextToken *string `type:"string"`
 
 	// StartTime is a required field
@@ -3497,9 +3646,10 @@ func (s CampaignSmsMessage) MarshalFields(e protocol.FieldEncoder) error {
 type CampaignState struct {
 	_ struct{} `type:"structure"`
 
-	// The status of the campaign, or the status of a treatment that belongs to
-	// an A/B test campaign. If a campaign uses A/B testing, the campaign has a
-	// status of COMPLETED only when all campaign treatments have a status of COMPLETED.
+	// The current status of the campaign, or the current status of a treatment
+	// that belongs to an A/B test campaign. If a campaign uses A/B testing, the
+	// campaign has a status of COMPLETED only if all campaign treatments have a
+	// status of COMPLETED.
 	CampaignStatus CampaignStatus `type:"string" enum:"true"`
 }
 
@@ -3694,6 +3844,137 @@ func (s ChannelsResponse) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies the conditions to evaluate for an activity in a journey, and how
+// to evaluate those conditions.
+type Condition struct {
+	_ struct{} `type:"structure"`
+
+	// The conditions to evaluate for the activity.
+	Conditions []SimpleCondition `type:"list"`
+
+	// Specifies how to handle multiple conditions for the activity. For example,
+	// if you specify two conditions for an activity, whether both or only one of
+	// the conditions must be met for the activity to be performed.
+	Operator Operator `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s Condition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Condition) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Condition"}
+	if s.Conditions != nil {
+		for i, v := range s.Conditions {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Conditions", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Condition) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Conditions != nil {
+		v := s.Conditions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Conditions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if len(s.Operator) > 0 {
+		v := s.Operator
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Operator", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Specifies the settings for a yes/no split activity in a journey. This type
+// of activity sends participants down one of two paths in a journey, based
+// on conditions that you specify.
+type ConditionalSplitActivity struct {
+	_ struct{} `type:"structure"`
+
+	// The conditions that define the paths for the activity, and the relationship
+	// between the conditions.
+	Condition *Condition `type:"structure"`
+
+	// The amount of time to wait before determining whether the conditions are
+	// met, or the date and time when Amazon Pinpoint determines whether the conditions
+	// are met.
+	EvaluationWaitTime *WaitTime `type:"structure"`
+
+	// The unique identifier for the activity to perform if the condition isn't
+	// met.
+	FalseActivity *string `type:"string"`
+
+	// The unique identifier for the activity to perform if the condition is met.
+	TrueActivity *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ConditionalSplitActivity) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ConditionalSplitActivity) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ConditionalSplitActivity"}
+	if s.Condition != nil {
+		if err := s.Condition.Validate(); err != nil {
+			invalidParams.AddNested("Condition", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ConditionalSplitActivity) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Condition != nil {
+		v := s.Condition
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Condition", v, metadata)
+	}
+	if s.EvaluationWaitTime != nil {
+		v := s.EvaluationWaitTime
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "EvaluationWaitTime", v, metadata)
+	}
+	if s.FalseActivity != nil {
+		v := *s.FalseActivity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FalseActivity", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TrueActivity != nil {
+		v := *s.TrueActivity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TrueActivity", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Specifies the display name of an application and the tags to associate with
 // the application.
 type CreateApplicationRequest struct {
@@ -3753,14 +4034,18 @@ func (s CreateApplicationRequest) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Provides information about an API request or response.
+// Provides information about a request to create a message template.
 type CreateTemplateMessageBody struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon Resource Name (ARN) of the message template that was created.
 	Arn *string `type:"string"`
 
+	// The message that's returned from the API for the request to create the message
+	// template.
 	Message *string `type:"string"`
 
+	// The unique identifier for the request to create the message template.
 	RequestID *string `type:"string"`
 }
 
@@ -3953,8 +4238,8 @@ func (s DefaultPushNotificationMessage) MarshalFields(e protocol.FieldEncoder) e
 	return nil
 }
 
-// Specifies the settings and content for the default message template that's
-// used in messages that are sent through a push notification channel.
+// Specifies the default settings and content for a message template that can
+// be used in messages that are sent through a push notification channel.
 type DefaultPushNotificationTemplate struct {
 	_ struct{} `type:"structure"`
 
@@ -4492,6 +4777,50 @@ func (s EmailMessage) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies the settings for an email activity in a journey. This type of activity
+// sends an email message to participants.
+type EmailMessageActivity struct {
+	_ struct{} `type:"structure"`
+
+	// The "From" address to use for the message.
+	MessageConfig *JourneyEmailMessage `type:"structure"`
+
+	// The unique identifier for the next activity to perform, after the message
+	// is sent.
+	NextActivity *string `type:"string"`
+
+	// The name of the email template to use for the message.
+	TemplateName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s EmailMessageActivity) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s EmailMessageActivity) MarshalFields(e protocol.FieldEncoder) error {
+	if s.MessageConfig != nil {
+		v := s.MessageConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "MessageConfig", v, metadata)
+	}
+	if s.NextActivity != nil {
+		v := *s.NextActivity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextActivity", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TemplateName != nil {
+		v := *s.TemplateName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Specifies the content and settings for a message template that can be used
 // in messages that are sent through the email channel.
 type EmailTemplateRequest struct {
@@ -4564,6 +4893,7 @@ func (s EmailTemplateRequest) MarshalFields(e protocol.FieldEncoder) error {
 type EmailTemplateResponse struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon Resource Name (ARN) of the message template.
 	Arn *string `type:"string"`
 
 	// The date when the message template was created.
@@ -5860,22 +6190,81 @@ func (s Event) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies the conditions to evaluate for an event that applies to an activity
+// in a journey.
+type EventCondition struct {
+	_ struct{} `type:"structure"`
+
+	// The dimensions for the event filter to use for the activity.
+	//
+	// Dimensions is a required field
+	Dimensions *EventDimensions `type:"structure" required:"true"`
+
+	// The message identifier (message_id) for the message to use when determining
+	// whether message events meet the condition.
+	MessageActivity *string `type:"string"`
+}
+
+// String returns the string representation
+func (s EventCondition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *EventCondition) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "EventCondition"}
+
+	if s.Dimensions == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Dimensions"))
+	}
+	if s.Dimensions != nil {
+		if err := s.Dimensions.Validate(); err != nil {
+			invalidParams.AddNested("Dimensions", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s EventCondition) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Dimensions != nil {
+		v := s.Dimensions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Dimensions", v, metadata)
+	}
+	if s.MessageActivity != nil {
+		v := *s.MessageActivity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MessageActivity", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Specifies the dimensions for an event filter that determines when a campaign
-// is sent.
+// is sent or a journey activity is performed.
 type EventDimensions struct {
 	_ struct{} `type:"structure"`
 
-	// One or more custom attributes that your app reports to Amazon Pinpoint. You
-	// can use these attributes as selection criteria when you create an event filter.
+	// One or more custom attributes that your application reports to Amazon Pinpoint.
+	// You can use these attributes as selection criteria when you create an event
+	// filter.
 	Attributes map[string]AttributeDimension `type:"map"`
 
-	// The name of the event that causes the campaign to be sent. This can be a
-	// standard type of event that Amazon Pinpoint generates, such as _session.start,
-	// or a custom event that's specific to your app.
+	// The name of the event that causes the campaign to be sent or the journey
+	// activity to be performed. This can be a standard type of event that Amazon
+	// Pinpoint generates, such as _email.delivered, or a custom event that's specific
+	// to your application.
 	EventType *SetDimension `type:"structure"`
 
-	// One or more custom metrics that your app reports to Amazon Pinpoint. You
-	// can use these metrics as selection criteria when you create an event filter.
+	// One or more custom metrics that your application reports to Amazon Pinpoint.
+	// You can use these metrics as selection criteria when you create an event
+	// filter.
 	Metrics map[string]MetricDimension `type:"map"`
 }
 
@@ -7103,6 +7492,57 @@ func (s GPSPointDimension) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies the settings for a holdout activity in a journey. This type of
+// activity stops a journey for a specified percentage of participants.
+type HoldoutActivity struct {
+	_ struct{} `type:"structure"`
+
+	// The unique identifier for the next activity to perform, after performing
+	// the holdout activity.
+	NextActivity *string `type:"string"`
+
+	// The percentage of participants who shouldn't continue the journey.
+	//
+	// Percentage is a required field
+	Percentage *int64 `type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s HoldoutActivity) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HoldoutActivity) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HoldoutActivity"}
+
+	if s.Percentage == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Percentage"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HoldoutActivity) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextActivity != nil {
+		v := *s.NextActivity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextActivity", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Percentage != nil {
+		v := *s.Percentage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Percentage", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // Specifies the settings for a job that imports endpoint definitions from an
 // Amazon Simple Storage Service (Amazon S3) bucket.
 type ImportJobRequest struct {
@@ -7606,6 +8046,691 @@ func (s ItemResponse) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ms0.End()
 
+	}
+	return nil
+}
+
+// Provides the results of a query that retrieved the data for a standard engagement
+// metric that applies to a journey, and provides information about that query.
+type JourneyDateRangeKpiResponse struct {
+	_ struct{} `type:"structure"`
+
+	// The unique identifier for the application that the metric applies to.
+	//
+	// ApplicationId is a required field
+	ApplicationId *string `type:"string" required:"true"`
+
+	// EndTime is a required field
+	EndTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+
+	// The unique identifier for the journey that the metric applies to.
+	//
+	// JourneyId is a required field
+	JourneyId *string `type:"string" required:"true"`
+
+	// The name of the metric, also referred to as a key performance indicator (KPI),
+	// that the data was retrieved for. This value describes the associated metric
+	// and consists of two or more terms, which are comprised of lowercase alphanumeric
+	// characters, separated by a hyphen. For a list of possible values, see the
+	// Amazon Pinpoint Developer Guide (https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html).
+	//
+	// KpiName is a required field
+	KpiName *string `type:"string" required:"true"`
+
+	// An array of objects that contains the results of the query. Each object contains
+	// the value for the metric and metadata about that value.
+	//
+	// KpiResult is a required field
+	KpiResult *BaseKpiResult `type:"structure" required:"true"`
+
+	// The string to use in a subsequent request to get the next page of results
+	// in a paginated response. This value is null for the Journey Engagement Metrics
+	// resource because the resource returns all results in a single page.
+	NextToken *string `type:"string"`
+
+	// StartTime is a required field
+	StartTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+}
+
+// String returns the string representation
+func (s JourneyDateRangeKpiResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JourneyDateRangeKpiResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ApplicationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.EndTime != nil {
+		v := *s.EndTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "EndTime",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
+	}
+	if s.JourneyId != nil {
+		v := *s.JourneyId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "JourneyId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.KpiName != nil {
+		v := *s.KpiName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "KpiName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.KpiResult != nil {
+		v := s.KpiResult
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "KpiResult", v, metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.StartTime != nil {
+		v := *s.StartTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StartTime",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
+	}
+	return nil
+}
+
+// Specifies the "From" address for an email message that's sent to participants
+// in a journey.
+type JourneyEmailMessage struct {
+	_ struct{} `type:"structure"`
+
+	// The verified email address to send the email message from. The default address
+	// is the FromAddress specified for the email channel for the application.
+	FromAddress *string `type:"string"`
+}
+
+// String returns the string representation
+func (s JourneyEmailMessage) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JourneyEmailMessage) MarshalFields(e protocol.FieldEncoder) error {
+	if s.FromAddress != nil {
+		v := *s.FromAddress
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FromAddress", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Provides the results of a query that retrieved the data for a standard execution
+// metric that applies to a journey activity, and provides information about
+// that query.
+type JourneyExecutionActivityMetricsResponse struct {
+	_ struct{} `type:"structure"`
+
+	// The type of activity that the metric applies to. Possible values are:
+	//
+	//    * CONDITIONAL_SPLIT - For a yes/no split activity, which is an activity
+	//    that sends participants down one of two paths in a journey.
+	//
+	//    * HOLDOUT - For a holdout activity, which is an activity that stops a
+	//    journey for a specified percentage of participants.
+	//
+	//    * MESSAGE - For an email activity, which is an activity that sends an
+	//    email message to participants.
+	//
+	//    * MULTI_CONDITIONAL_SPLIT - For a multivariate split activity, which is
+	//    an activity that sends participants down one of as many as five paths
+	//    in a journey.
+	//
+	//    * RANDOM_SPLIT - For a random split activity, which is an activity that
+	//    sends specified percentages of participants down one of as many as five
+	//    paths in a journey.
+	//
+	//    * WAIT - For a wait activity, which is an activity that waits for a certain
+	//    amount of time or until a specific date and time before moving participants
+	//    to the next activity in a journey.
+	//
+	// ActivityType is a required field
+	ActivityType *string `type:"string" required:"true"`
+
+	// The unique identifier for the application that the metric applies to.
+	//
+	// ApplicationId is a required field
+	ApplicationId *string `type:"string" required:"true"`
+
+	// The unique identifier for the activity that the metric applies to.
+	//
+	// JourneyActivityId is a required field
+	JourneyActivityId *string `type:"string" required:"true"`
+
+	// The unique identifier for the journey that the metric applies to.
+	//
+	// JourneyId is a required field
+	JourneyId *string `type:"string" required:"true"`
+
+	// The date and time, in ISO 8601 format, when Amazon Pinpoint last evaluated
+	// the execution status of the activity and updated the data for the metric.
+	//
+	// LastEvaluatedTime is a required field
+	LastEvaluatedTime *string `type:"string" required:"true"`
+
+	// A JSON object that contains the results of the query. The results vary depending
+	// on the type of activity (ActivityType). For information about the structure
+	// and contents of the results, see the Amazon Pinpoint Developer Guide (https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html).
+	//
+	// Metrics is a required field
+	Metrics map[string]string `type:"map" required:"true"`
+}
+
+// String returns the string representation
+func (s JourneyExecutionActivityMetricsResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JourneyExecutionActivityMetricsResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ActivityType != nil {
+		v := *s.ActivityType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ActivityType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ApplicationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.JourneyActivityId != nil {
+		v := *s.JourneyActivityId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "JourneyActivityId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.JourneyId != nil {
+		v := *s.JourneyId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "JourneyId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LastEvaluatedTime != nil {
+		v := *s.LastEvaluatedTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastEvaluatedTime", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Metrics != nil {
+		v := s.Metrics
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Metrics", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	return nil
+}
+
+// Provides the results of a query that retrieved the data for a standard execution
+// metric that applies to a journey.
+type JourneyExecutionMetricsResponse struct {
+	_ struct{} `type:"structure"`
+
+	// The unique identifier for the application that the metric applies to.
+	//
+	// ApplicationId is a required field
+	ApplicationId *string `type:"string" required:"true"`
+
+	// The unique identifier for the journey that the metric applies to.
+	//
+	// JourneyId is a required field
+	JourneyId *string `type:"string" required:"true"`
+
+	// The date and time, in ISO 8601 format, when Amazon Pinpoint last evaluated
+	// the journey and updated the data for the metric.
+	//
+	// LastEvaluatedTime is a required field
+	LastEvaluatedTime *string `type:"string" required:"true"`
+
+	// A JSON object that contains the results of the query. For information about
+	// the structure and contents of the results, see the Amazon Pinpoint Developer
+	// Guide (https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html).
+	//
+	// Metrics is a required field
+	Metrics map[string]string `type:"map" required:"true"`
+}
+
+// String returns the string representation
+func (s JourneyExecutionMetricsResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JourneyExecutionMetricsResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ApplicationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.JourneyId != nil {
+		v := *s.JourneyId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "JourneyId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LastEvaluatedTime != nil {
+		v := *s.LastEvaluatedTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastEvaluatedTime", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Metrics != nil {
+		v := s.Metrics
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Metrics", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	return nil
+}
+
+// Specifies limits on the messages that a journey can send and the number of
+// times participants can enter a journey.
+type JourneyLimits struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of messages that the journey can send to a single participant
+	// during a 24-hour period. The maximum value is 100.
+	DailyCap *int64 `type:"integer"`
+
+	// The maximum number of times that a participant can enter the journey. The
+	// maximum value is 100. To allow participants to enter the journey an unlimited
+	// number of times, set this value to 0.
+	EndpointReentryCap *int64 `type:"integer"`
+
+	// The maximum number of messages that the journey can send each second.
+	MessagesPerSecond *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s JourneyLimits) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JourneyLimits) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DailyCap != nil {
+		v := *s.DailyCap
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DailyCap", protocol.Int64Value(v), metadata)
+	}
+	if s.EndpointReentryCap != nil {
+		v := *s.EndpointReentryCap
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "EndpointReentryCap", protocol.Int64Value(v), metadata)
+	}
+	if s.MessagesPerSecond != nil {
+		v := *s.MessagesPerSecond
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MessagesPerSecond", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Provides information about the status, configuration, and other settings
+// for a journey.
+type JourneyResponse struct {
+	_ struct{} `type:"structure"`
+
+	// The configuration and other settings for the activities that comprise the
+	// journey.
+	Activities map[string]Activity `type:"map"`
+
+	// The unique identifier for the application that the journey applies to.
+	//
+	// ApplicationId is a required field
+	ApplicationId *string `type:"string" required:"true"`
+
+	// The date, in ISO 8601 format, when the journey was created.
+	CreationDate *string `type:"string"`
+
+	// The unique identifier for the journey.
+	//
+	// Id is a required field
+	Id *string `type:"string" required:"true"`
+
+	// The date, in ISO 8601 format, when the journey was last modified.
+	LastModifiedDate *string `type:"string"`
+
+	// The messaging and entry limits for the journey.
+	Limits *JourneyLimits `type:"structure"`
+
+	// Specifies whether the journey's scheduled start and end times use each participant's
+	// local time. If this value is true, the schedule uses each participant's local
+	// time.
+	LocalTime *bool `type:"boolean"`
+
+	// The name of the journey.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+
+	// The quiet time settings for the journey. Quiet time is a specific time range
+	// when a journey doesn't send messages to participants, if all the following
+	// conditions are met:
+	//
+	//    * The EndpointDemographic.Timezone property of the endpoint for the participant
+	//    is set to a valid value.
+	//
+	//    * The current time in the participant's time zone is later than or equal
+	//    to the time specified by the QuietTime.Start property for the journey.
+	//
+	//    * The current time in the participant's time zone is earlier than or equal
+	//    to the time specified by the QuietTime.End property for the journey.
+	//
+	// If any of the preceding conditions isn't met, the participant will receive
+	// messages from the journey, even if quiet time is enabled.
+	QuietTime *QuietTime `type:"structure"`
+
+	// The frequency with which Amazon Pinpoint evaluates segment and event data
+	// for the journey, as a duration in ISO 8601 format.
+	RefreshFrequency *string `type:"string"`
+
+	// The schedule settings for the journey.
+	Schedule *JourneySchedule `type:"structure"`
+
+	// The unique identifier for the first activity in the journey.
+	StartActivity *string `type:"string"`
+
+	// The segment that defines which users are participants in the journey.
+	StartCondition *StartCondition `type:"structure"`
+
+	// The current status of the journey. Possible values are:
+	//
+	//    * DRAFT - The journey is being developed and hasn't been published yet.
+	//
+	//    * ACTIVE - The journey has been developed and published. Depending on
+	//    the journey's schedule, the journey may currently be running or scheduled
+	//    to start running at a later time. If a journey's status is ACTIVE, you
+	//    can't add, change, or remove activities from it.
+	//
+	//    * COMPLETED - The journey has been published and has finished running.
+	//    All participants have entered the journey and no participants are waiting
+	//    to complete the journey or any activities in the journey.
+	//
+	//    * CANCELLED - The journey has been stopped. If a journey's status is CANCELLED,
+	//    you can't add, change, or remove activities or segment settings from the
+	//    journey.
+	//
+	//    * CLOSED - The journey has been published and has started running. It
+	//    may have also passed its scheduled end time, or passed its scheduled start
+	//    time and a refresh frequency hasn't been specified for it. If a journey's
+	//    status is CLOSED, you can't add participants to it, and no existing participants
+	//    can enter the journey for the first time. However, any existing participants
+	//    who are currently waiting to start an activity may resume the journey.
+	State State `type:"string" enum:"true"`
+
+	// A string-to-string map of key-value pairs that identifies the tags that are
+	// associated with the journey. Each tag consists of a required tag key and
+	// an associated tag value.
+	Tags map[string]string `locationName:"tags" type:"map"`
+}
+
+// String returns the string representation
+func (s JourneyResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JourneyResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Activities != nil {
+		v := s.Activities
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Activities", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetFields(k1, v1)
+		}
+		ms0.End()
+
+	}
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ApplicationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationDate != nil {
+		v := *s.CreationDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LastModifiedDate != nil {
+		v := *s.LastModifiedDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastModifiedDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Limits != nil {
+		v := s.Limits
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Limits", v, metadata)
+	}
+	if s.LocalTime != nil {
+		v := *s.LocalTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LocalTime", protocol.BoolValue(v), metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.QuietTime != nil {
+		v := s.QuietTime
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "QuietTime", v, metadata)
+	}
+	if s.RefreshFrequency != nil {
+		v := *s.RefreshFrequency
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RefreshFrequency", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Schedule != nil {
+		v := s.Schedule
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Schedule", v, metadata)
+	}
+	if s.StartActivity != nil {
+		v := *s.StartActivity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StartActivity", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.StartCondition != nil {
+		v := s.StartCondition
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "StartCondition", v, metadata)
+	}
+	if len(s.State) > 0 {
+		v := s.State
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "State", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	return nil
+}
+
+// Specifies the schedule settings for a journey.
+type JourneySchedule struct {
+	_ struct{} `type:"structure"`
+
+	EndTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	StartTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// The starting UTC offset for the journey schedule, if the value of the journey's
+	// LocalTime property is true. Valid values are: UTC, UTC+01, UTC+02, UTC+03,
+	// UTC+03:30, UTC+04, UTC+04:30, UTC+05, UTC+05:30, UTC+05:45, UTC+06, UTC+06:30,
+	// UTC+07, UTC+08, UTC+08:45, UTC+09, UTC+09:30, UTC+10, UTC+10:30, UTC+11,
+	// UTC+12, UTC+12:45, UTC+13, UTC+13:45, UTC-02, UTC-02:30, UTC-03, UTC-03:30,
+	// UTC-04, UTC-05, UTC-06, UTC-07, UTC-08, UTC-09, UTC-09:30, UTC-10, and UTC-11.
+	Timezone *string `type:"string"`
+}
+
+// String returns the string representation
+func (s JourneySchedule) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JourneySchedule) MarshalFields(e protocol.FieldEncoder) error {
+	if s.EndTime != nil {
+		v := *s.EndTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "EndTime",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
+	}
+	if s.StartTime != nil {
+		v := *s.StartTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StartTime",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
+	}
+	if s.Timezone != nil {
+		v := *s.Timezone
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Timezone", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Changes the status of a journey.
+type JourneyStateRequest struct {
+	_ struct{} `type:"structure"`
+
+	// The status of the journey. Currently, the only supported value is CANCELLED.
+	//
+	// If you cancel a journey, Amazon Pinpoint continues to perform activities
+	// that are currently in progress, until those activities are complete. Amazon
+	// Pinpoint also continues to collect and aggregate analytics data for those
+	// activities, until they are complete, and any activities that were complete
+	// when you cancelled the journey.
+	//
+	// After you cancel a journey, you can't add, change, or remove any activities
+	// from the journey. In addition, Amazon Pinpoint stops evaluating the journey
+	// and doesn't perform any activities that haven't started.
+	State State `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s JourneyStateRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JourneyStateRequest) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.State) > 0 {
+		v := s.State
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "State", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Provides information about the status, configuration, and other settings
+// for all the journeys that are associated with an application.
+type JourneysResponse struct {
+	_ struct{} `type:"structure"`
+
+	// An array of responses, one for each journey that's associated with the application.
+	//
+	// Item is a required field
+	Item []JourneyResponse `type:"list" required:"true"`
+
+	// The string to use in a subsequent request to get the next page of results
+	// in a paginated response. This value is null if there are no additional pages.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s JourneysResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JourneysResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Item != nil {
+		v := s.Item
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Item", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -8227,6 +9352,124 @@ func (s MetricDimension) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies a condition to evaluate for an activity path in a journey.
+type MultiConditionalBranch struct {
+	_ struct{} `type:"structure"`
+
+	// The condition to evaluate for the activity path.
+	Condition *SimpleCondition `type:"structure"`
+
+	// The unique identifier for the next activity to perform, after completing
+	// the activity for the path.
+	NextActivity *string `type:"string"`
+}
+
+// String returns the string representation
+func (s MultiConditionalBranch) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MultiConditionalBranch) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MultiConditionalBranch"}
+	if s.Condition != nil {
+		if err := s.Condition.Validate(); err != nil {
+			invalidParams.AddNested("Condition", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MultiConditionalBranch) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Condition != nil {
+		v := s.Condition
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Condition", v, metadata)
+	}
+	if s.NextActivity != nil {
+		v := *s.NextActivity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextActivity", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Specifies the settings for a multivariate split activity in a journey. This
+// type of activity sends participants down one of as many as five paths in
+// a journey, based on conditions that you specify.
+type MultiConditionalSplitActivity struct {
+	_ struct{} `type:"structure"`
+
+	// The paths for the activity, including the conditions for entering each path
+	// and the activity to perform for each path.
+	Branches []MultiConditionalBranch `type:"list"`
+
+	// The activity to perform by default for any path in the activity.
+	DefaultActivity *string `type:"string"`
+
+	// The amount of time to wait or the date and time when Amazon Pinpoint determines
+	// whether the conditions are met.
+	EvaluationWaitTime *WaitTime `type:"structure"`
+}
+
+// String returns the string representation
+func (s MultiConditionalSplitActivity) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MultiConditionalSplitActivity) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MultiConditionalSplitActivity"}
+	if s.Branches != nil {
+		for i, v := range s.Branches {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Branches", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MultiConditionalSplitActivity) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Branches != nil {
+		v := s.Branches
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Branches", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.DefaultActivity != nil {
+		v := *s.DefaultActivity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DefaultActivity", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.EvaluationWaitTime != nil {
+		v := s.EvaluationWaitTime
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "EvaluationWaitTime", v, metadata)
+	}
+	return nil
+}
+
 // Specifies a phone number to validate and retrieve information about.
 type NumberValidateRequest struct {
 	_ struct{} `type:"structure"`
@@ -8665,6 +9908,7 @@ type PushNotificationTemplateResponse struct {
 	// channels (DefaultPushNotificationTemplate).
 	APNS *APNSPushNotificationTemplate `type:"structure"`
 
+	// The Amazon Resource Name (ARN) of the message template.
 	Arn *string `type:"string"`
 
 	// The message template that's used for the Baidu (Baidu Cloud Push) channel.
@@ -8830,6 +10074,73 @@ func (s QuietTime) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies the settings for a random split activity in a journey. This type
+// of activity randomly sends specified percentages of participants down one
+// of as many as five paths in a journey, based on conditions that you specify.
+type RandomSplitActivity struct {
+	_ struct{} `type:"structure"`
+
+	// The paths for the activity, including the percentage of participants to enter
+	// each path and the activity to perform for each path.
+	Branches []RandomSplitEntry `type:"list"`
+}
+
+// String returns the string representation
+func (s RandomSplitActivity) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RandomSplitActivity) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Branches != nil {
+		v := s.Branches
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Branches", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Specifies the settings for a path in a random split activity in a journey.
+type RandomSplitEntry struct {
+	_ struct{} `type:"structure"`
+
+	// The unique identifier for the next activity to perform, after completing
+	// the activity for the path.
+	NextActivity *string `type:"string"`
+
+	// The percentage of participants to send down the activity path.
+	Percentage *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s RandomSplitEntry) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RandomSplitEntry) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextActivity != nil {
+		v := *s.NextActivity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextActivity", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Percentage != nil {
+		v := *s.Percentage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Percentage", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // Specifies the contents of an email message, represented as a raw MIME message.
 type RawEmail struct {
 	_ struct{} `type:"structure"`
@@ -8912,7 +10223,7 @@ func (s RecencyDimension) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Provides the results of a query that retrieved the data for a standard metric
-// that applies to an application or campaign.
+// that applies to an application, campaign, or journey.
 type ResultRow struct {
 	_ struct{} `type:"structure"`
 
@@ -8924,7 +10235,7 @@ type ResultRow struct {
 	GroupedBys []ResultRowValue `type:"list" required:"true"`
 
 	// An array of objects that provides pre-aggregated values for a standard metric
-	// that applies to an application or campaign.
+	// that applies to an application, campaign, or journey.
 	//
 	// Values is a required field
 	Values []ResultRowValue `type:"list" required:"true"`
@@ -8965,13 +10276,12 @@ func (s ResultRow) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Provides a single value and metadata about that value as part of an array
-// of query results for a standard metric that applies to an application or
-// campaign.
+// of query results for a standard metric that applies to an application, campaign,
+// or journey.
 type ResultRowValue struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the field that Amazon Pinpoint uses to store the value specified
-	// by the Value property.
+	// The friendly name of the metric whose value is specified by the Value property.
 	//
 	// Key is a required field
 	Key *string `type:"string" required:"true"`
@@ -9347,6 +10657,7 @@ func (s SMSTemplateRequest) MarshalFields(e protocol.FieldEncoder) error {
 type SMSTemplateResponse struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon Resource Name (ARN) of the message template.
 	Arn *string `type:"string"`
 
 	// The message body that's used in text messages that are based on the message
@@ -9442,7 +10753,7 @@ func (s SMSTemplateResponse) MarshalFields(e protocol.FieldEncoder) error {
 type Schedule struct {
 	_ struct{} `type:"structure"`
 
-	// The scheduled time, in ISO 8601 format, for the campaign to end.
+	// The scheduled time, in ISO 8601 format, when the campaign ended or will end.
 	EndTime *string `type:"string"`
 
 	// The type of event that causes the campaign to be sent, if the value of the
@@ -9475,7 +10786,7 @@ type Schedule struct {
 	// from the campaign, even if quiet time is enabled.
 	QuietTime *QuietTime `type:"structure"`
 
-	// The scheduled time, in ISO 8601 format, for the campaign to begin.
+	// The scheduled time, in ISO 8601 format, when the campaign began or will begin.
 	//
 	// StartTime is a required field
 	StartTime *string `type:"string" required:"true"`
@@ -9595,6 +10906,46 @@ func (s SegmentBehaviors) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Recency", v, metadata)
+	}
+	return nil
+}
+
+// Specifies a segment to associate with an activity in a journey.
+type SegmentCondition struct {
+	_ struct{} `type:"structure"`
+
+	// The unique identifier for the segment to associate with the activity.
+	//
+	// SegmentId is a required field
+	SegmentId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s SegmentCondition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SegmentCondition) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SegmentCondition"}
+
+	if s.SegmentId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SegmentId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SegmentCondition) MarshalFields(e protocol.FieldEncoder) error {
+	if s.SegmentId != nil {
+		v := *s.SegmentId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SegmentId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -10692,6 +12043,73 @@ func (s SetDimension) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies a condition to evaluate for an activity in a journey.
+type SimpleCondition struct {
+	_ struct{} `type:"structure"`
+
+	// The dimension settings for the event that's associated with the activity.
+	EventCondition *EventCondition `type:"structure"`
+
+	// The segment that's associated with the activity.
+	SegmentCondition *SegmentCondition `type:"structure"`
+
+	// The dimension settings for the segment that's associated with the activity.
+	SegmentDimensions *SegmentDimensions `locationName:"segmentDimensions" type:"structure"`
+}
+
+// String returns the string representation
+func (s SimpleCondition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SimpleCondition) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SimpleCondition"}
+	if s.EventCondition != nil {
+		if err := s.EventCondition.Validate(); err != nil {
+			invalidParams.AddNested("EventCondition", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.SegmentCondition != nil {
+		if err := s.SegmentCondition.Validate(); err != nil {
+			invalidParams.AddNested("SegmentCondition", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.SegmentDimensions != nil {
+		if err := s.SegmentDimensions.Validate(); err != nil {
+			invalidParams.AddNested("SegmentDimensions", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SimpleCondition) MarshalFields(e protocol.FieldEncoder) error {
+	if s.EventCondition != nil {
+		v := s.EventCondition
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "EventCondition", v, metadata)
+	}
+	if s.SegmentCondition != nil {
+		v := s.SegmentCondition
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "SegmentCondition", v, metadata)
+	}
+	if s.SegmentDimensions != nil {
+		v := s.SegmentDimensions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "segmentDimensions", v, metadata)
+	}
+	return nil
+}
+
 // Specifies the contents of an email message, composed of a subject, a text
 // part, and an HTML part.
 type SimpleEmail struct {
@@ -10773,14 +12191,64 @@ func (s SimpleEmailPart) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Specifies the tags (keys and values) for an application, campaign, message
-// template, or segment.
+// Specifies the conditions for the first activity in a journey. This activity
+// and its conditions determine which users are participants in a journey.
+type StartCondition struct {
+	_ struct{} `type:"structure"`
+
+	// The custom description of the condition.
+	Description *string `type:"string"`
+
+	// The segment that's associated with the first activity in the journey. This
+	// segment determines which users are participants in the journey.
+	SegmentStartCondition *SegmentCondition `type:"structure"`
+}
+
+// String returns the string representation
+func (s StartCondition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StartCondition) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "StartCondition"}
+	if s.SegmentStartCondition != nil {
+		if err := s.SegmentStartCondition.Validate(); err != nil {
+			invalidParams.AddNested("SegmentStartCondition", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StartCondition) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SegmentStartCondition != nil {
+		v := s.SegmentStartCondition
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "SegmentStartCondition", v, metadata)
+	}
+	return nil
+}
+
+// Specifies the tags (keys and values) for an application, campaign, journey,
+// message template, or segment.
 type TagsModel struct {
 	_ struct{} `type:"structure"`
 
 	// A string-to-string map of key-value pairs that defines the tags for an application,
-	// campaign, message template, or segment. Each project, campaign, message template,
-	// or segment can have a maximum of 50 tags.
+	// campaign, journey, message template, or segment. Each of these resources
+	// can have a maximum of 50 tags.
 	//
 	// Each tag consists of a required tag key and an associated tag value. The
 	// maximum length of a tag key is 128 characters. The maximum length of a tag
@@ -10851,7 +12319,7 @@ func (s Template) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Specifies the message template to use for the message, for each type of channel.
+// Specifies the message template for each type of channel.
 type TemplateConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -11046,10 +12514,10 @@ type TreatmentResource struct {
 	// SizePercent is a required field
 	SizePercent *int64 `type:"integer" required:"true"`
 
-	// The status of the treatment.
+	// The current status of the treatment.
 	State *CampaignState `type:"structure"`
 
-	// The message template that’s used for the treatment.
+	// The message template to use for the treatment.
 	TemplateConfiguration *TemplateConfiguration `type:"structure"`
 
 	// The custom description of the treatment.
@@ -11207,8 +12675,6 @@ type VoiceChannelResponse struct {
 	// The date and time, in ISO 8601 format, when the voice channel was last modified.
 	LastModifiedDate *string `type:"string"`
 
-	OriginationNumber *string `type:"string"`
-
 	// The type of messaging or notification platform for the channel. For the voice
 	// channel, this value is VOICE.
 	//
@@ -11273,12 +12739,6 @@ func (s VoiceChannelResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "LastModifiedDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.OriginationNumber != nil {
-		v := *s.OriginationNumber
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "OriginationNumber", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Platform != nil {
 		v := *s.Platform
@@ -11373,6 +12833,82 @@ func (s VoiceMessage) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies the settings for a wait activity in a journey. This type of activity
+// waits for a certain amount of time or until a specific date and time before
+// moving participants to the next activity in a journey.
+type WaitActivity struct {
+	_ struct{} `type:"structure"`
+
+	// The unique identifier for the next activity to perform, after performing
+	// the wait activity.
+	NextActivity *string `type:"string"`
+
+	// The amount of time to wait or the date and time when the activity moves participants
+	// to the next activity in the journey.
+	WaitTime *WaitTime `type:"structure"`
+}
+
+// String returns the string representation
+func (s WaitActivity) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s WaitActivity) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextActivity != nil {
+		v := *s.NextActivity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextActivity", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.WaitTime != nil {
+		v := s.WaitTime
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "WaitTime", v, metadata)
+	}
+	return nil
+}
+
+// Specifies a duration or a date and time that indicates when Amazon Pinpoint
+// determines whether an activity's conditions have been met or an activity
+// moves participants to the next activity in a journey.
+type WaitTime struct {
+	_ struct{} `type:"structure"`
+
+	// The amount of time, as a duration in ISO 8601 format, to wait before determining
+	// whether the activity's conditions have been met or moving participants to
+	// the next activity in the journey.
+	WaitFor *string `type:"string"`
+
+	// The date and time, in ISO 8601 format, when Amazon Pinpoint determines whether
+	// the activity's conditions have been met or the activity moves participants
+	// to the next activity in the journey.
+	WaitUntil *string `type:"string"`
+}
+
+// String returns the string representation
+func (s WaitTime) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s WaitTime) MarshalFields(e protocol.FieldEncoder) error {
+	if s.WaitFor != nil {
+		v := *s.WaitFor
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "WaitFor", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.WaitUntil != nil {
+		v := *s.WaitUntil
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "WaitUntil", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Specifies the default settings for an application.
 type WriteApplicationSettingsRequest struct {
 	_ struct{} `type:"structure"`
@@ -11391,26 +12927,27 @@ type WriteApplicationSettingsRequest struct {
 	// custom limits for the campaign.
 	Limits *CampaignLimits `type:"structure"`
 
-	// The default quiet time for campaigns in the application. Quiet time is a
-	// specific time range when campaigns don't send messages to endpoints, if all
-	// the following conditions are met:
+	// The default quiet time for campaigns and journeys in the application. Quiet
+	// time is a specific time range when messages aren't sent to endpoints, if
+	// all the following conditions are met:
 	//
 	//    * The EndpointDemographic.Timezone property of the endpoint is set to
 	//    a valid value.
 	//
 	//    * The current time in the endpoint's time zone is later than or equal
 	//    to the time specified by the QuietTime.Start property for the application
-	//    (or a campaign that has custom quiet time settings).
+	//    (or a campaign or journey that has custom quiet time settings).
 	//
 	//    * The current time in the endpoint's time zone is earlier than or equal
 	//    to the time specified by the QuietTime.End property for the application
-	//    (or a campaign that has custom quiet time settings).
+	//    (or a campaign or journey that has custom quiet time settings).
 	//
 	// If any of the preceding conditions isn't met, the endpoint will receive messages
-	// from a campaign, even if quiet time is enabled.
+	// from a campaign or journey, even if quiet time is enabled.
 	//
-	// To override the default quiet time settings for a specific campaign, use
-	// the Campaign resource to define a custom quiet time for the campaign.
+	// To override the default quiet time settings for a specific campaign or journey,
+	// use the Campaign resource or the Journey resource to define a custom quiet
+	// time for the campaign or journey.
 	QuietTime *QuietTime `type:"structure"`
 }
 
@@ -11702,6 +13239,194 @@ func (s WriteEventStream) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "RoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Specifies the configuration and other settings for a journey.
+type WriteJourneyRequest struct {
+	_ struct{} `type:"structure"`
+
+	// The configuration and other settings for the activities that comprise the
+	// journey.
+	Activities map[string]Activity `type:"map"`
+
+	// The date, in ISO 8601 format, when the journey was created.
+	CreationDate *string `type:"string"`
+
+	// The date, in ISO 8601 format, when the journey was last modified.
+	LastModifiedDate *string `type:"string"`
+
+	// The messaging and entry limits for the journey.
+	Limits *JourneyLimits `type:"structure"`
+
+	// Specifies whether the journey's scheduled start and end times use each participant's
+	// local time. To base the schedule on each participant's local time, set this
+	// value to true.
+	LocalTime *bool `type:"boolean"`
+
+	// The name of the journey. A journey name can contain a maximum of 150 characters.
+	// The characters can be alphanumeric characters or symbols, such as underscores
+	// (_) or hyphens (-). A journey name can't contain any spaces.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+
+	// The quiet time settings for the journey. Quiet time is a specific time range
+	// when a journey doesn't send messages to participants, if all the following
+	// conditions are met:
+	//
+	//    * The EndpointDemographic.Timezone property of the endpoint for the participant
+	//    is set to a valid value.
+	//
+	//    * The current time in the participant's time zone is later than or equal
+	//    to the time specified by the QuietTime.Start property for the journey.
+	//
+	//    * The current time in the participant's time zone is earlier than or equal
+	//    to the time specified by the QuietTime.End property for the journey.
+	//
+	// If any of the preceding conditions isn't met, the participant will receive
+	// messages from the journey, even if quiet time is enabled.
+	QuietTime *QuietTime `type:"structure"`
+
+	// The frequency with which Amazon Pinpoint evaluates segment and event data
+	// for the journey, as a duration in ISO 8601 format.
+	RefreshFrequency *string `type:"string"`
+
+	// The schedule settings for the journey.
+	Schedule *JourneySchedule `type:"structure"`
+
+	// The unique identifier for the first activity in the journey.
+	StartActivity *string `type:"string"`
+
+	// The segment that defines which users are participants in the journey.
+	StartCondition *StartCondition `type:"structure"`
+
+	// The status of the journey. Valid values are:
+	//
+	//    * DRAFT - Saves the journey and doesn't publish it.
+	//
+	//    * ACTIVE - Saves and publishes the journey. Depending on the journey's
+	//    schedule, the journey starts running immediately or at the scheduled start
+	//    time. If a journey's status is ACTIVE, you can't add, change, or remove
+	//    activities from it.
+	//
+	// The CANCELLED, COMPLETED, and CLOSED values are not supported in requests
+	// to create or update a journey. To cancel a journey, use the Journey State
+	// resource.
+	State State `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s WriteJourneyRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *WriteJourneyRequest) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "WriteJourneyRequest"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Activities != nil {
+		for i, v := range s.Activities {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Activities", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.StartCondition != nil {
+		if err := s.StartCondition.Validate(); err != nil {
+			invalidParams.AddNested("StartCondition", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s WriteJourneyRequest) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Activities != nil {
+		v := s.Activities
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Activities", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetFields(k1, v1)
+		}
+		ms0.End()
+
+	}
+	if s.CreationDate != nil {
+		v := *s.CreationDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LastModifiedDate != nil {
+		v := *s.LastModifiedDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastModifiedDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Limits != nil {
+		v := s.Limits
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Limits", v, metadata)
+	}
+	if s.LocalTime != nil {
+		v := *s.LocalTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LocalTime", protocol.BoolValue(v), metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.QuietTime != nil {
+		v := s.QuietTime
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "QuietTime", v, metadata)
+	}
+	if s.RefreshFrequency != nil {
+		v := *s.RefreshFrequency
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RefreshFrequency", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Schedule != nil {
+		v := s.Schedule
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Schedule", v, metadata)
+	}
+	if s.StartActivity != nil {
+		v := *s.StartActivity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StartActivity", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.StartCondition != nil {
+		v := s.StartCondition
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "StartCondition", v, metadata)
+	}
+	if len(s.State) > 0 {
+		v := s.State
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "State", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
