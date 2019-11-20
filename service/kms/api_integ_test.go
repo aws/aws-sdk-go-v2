@@ -11,6 +11,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
+	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/kms"
 )
@@ -27,7 +28,7 @@ func TestInteg_00_ListAliases(t *testing.T) {
 	params := &kms.ListAliasesInput{}
 
 	req := svc.ListAliasesRequest(params)
-
+	req.Handlers.Validate.Remove(defaults.ValidateParametersHandler)
 	_, err := req.Send(ctx)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
@@ -45,7 +46,7 @@ func TestInteg_01_GetKeyPolicy(t *testing.T) {
 	}
 
 	req := svc.GetKeyPolicyRequest(params)
-
+	req.Handlers.Validate.Remove(defaults.ValidateParametersHandler)
 	_, err := req.Send(ctx)
 	if err == nil {
 		t.Fatalf("expect request to fail")
