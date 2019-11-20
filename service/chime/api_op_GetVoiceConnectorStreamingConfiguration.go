@@ -81,8 +81,8 @@ const opGetVoiceConnectorStreamingConfiguration = "GetVoiceConnectorStreamingCon
 //
 // Retrieves the streaming configuration details for the specified Amazon Chime
 // Voice Connector. Shows whether media streaming is enabled for sending to
-// Amazon Kinesis, and shows the retention period for the Amazon Kinesis data,
-// in hours.
+// Amazon Kinesis. It also shows the retention period, in hours, for the Amazon
+// Kinesis data.
 //
 //    // Example sending a request using GetVoiceConnectorStreamingConfigurationRequest.
 //    req := client.GetVoiceConnectorStreamingConfigurationRequest(params)

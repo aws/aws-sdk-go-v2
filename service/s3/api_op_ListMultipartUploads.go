@@ -13,10 +13,19 @@ import (
 type ListMultipartUploadsInput struct {
 	_ struct{} `type:"structure"`
 
+	// Name of the bucket to which the multipart upload was initiated.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
 	// Character you use to group keys.
+	//
+	// All keys that contain the same string between the prefix, if specified, and
+	// the first occurrence of the delimiter after the prefix are grouped under
+	// a single result element, CommonPrefixes. If you don't specify the prefix
+	// parameter, then the substring starts at the beginning of the key. The keys
+	// that are grouped under CommonPrefixes result element are not returned elsewhere
+	// in the response.
 	Delimiter *string `location:"querystring" locationName:"delimiter" type:"string"`
 
 	// Requests Amazon S3 to encode the object keys in the response and specifies
@@ -29,6 +38,13 @@ type ListMultipartUploadsInput struct {
 
 	// Together with upload-id-marker, this parameter specifies the multipart upload
 	// after which listing should begin.
+	//
+	// If upload-id-marker is not specified, only the keys lexicographically greater
+	// than the specified key-marker will be included in the list.
+	//
+	// If upload-id-marker is specified, any multipart uploads for a key equal to
+	// the key-marker might also be included, provided those multipart uploads have
+	// upload IDs lexicographically greater than the specified upload-id-marker.
 	KeyMarker *string `location:"querystring" locationName:"key-marker" type:"string"`
 
 	// Sets the maximum number of multipart uploads, from 1 to 1,000, to return
@@ -37,12 +53,16 @@ type ListMultipartUploadsInput struct {
 	MaxUploads *int64 `location:"querystring" locationName:"max-uploads" type:"integer"`
 
 	// Lists in-progress uploads only for those keys that begin with the specified
-	// prefix.
+	// prefix. You can use prefixes to separate a bucket into different grouping
+	// of keys. (You can think of using prefix to make groups in the same way you'd
+	// use a folder in a file system.)
 	Prefix *string `location:"querystring" locationName:"prefix" type:"string"`
 
 	// Together with key-marker, specifies the multipart upload after which listing
 	// should begin. If key-marker is not specified, the upload-id-marker parameter
-	// is ignored.
+	// is ignored. Otherwise, any multipart uploads for a key equal to the key-marker
+	// might be included in the list only if they have an upload ID lexicographically
+	// greater than the specified upload-id-marker.
 	UploadIdMarker *string `location:"querystring" locationName:"upload-id-marker" type:"string"`
 }
 
@@ -126,11 +146,22 @@ type ListMultipartUploadsOutput struct {
 	// Name of the bucket to which the multipart upload was initiated.
 	Bucket *string `type:"string"`
 
+	// If you specify a delimiter in the request, then the result returns each distinct
+	// key prefix containing the delimiter in a CommonPrefixes element. The distinct
+	// key prefixes are returned in the Prefix child element.
 	CommonPrefixes []CommonPrefix `type:"list" flattened:"true"`
 
+	// Contains the delimiter you specified in the request. If you don't specify
+	// a delimiter in your request, this element is absent from the response.
 	Delimiter *string `type:"string"`
 
 	// Encoding type used by Amazon S3 to encode object keys in the response.
+	//
+	// If you specify encoding-type request parameter, Amazon S3 includes this element
+	// in the response, and returns encoded key name values in the following response
+	// elements:
+	//
+	// Delimiter, KeyMarker, Prefix, NextKeyMarker, Key.
 	EncodingType EncodingType `type:"string" enum:"true"`
 
 	// Indicates whether the returned list of multipart uploads is truncated. A
@@ -161,6 +192,8 @@ type ListMultipartUploadsOutput struct {
 	// Upload ID after which listing began.
 	UploadIdMarker *string `type:"string"`
 
+	// Container for elements related to a particular multipart upload. A response
+	// can contain zero or more Upload elements.
 	Uploads []MultipartUpload `locationName:"Upload" type:"list" flattened:"true"`
 }
 
@@ -270,7 +303,40 @@ const opListMultipartUploads = "ListMultipartUploads"
 // ListMultipartUploadsRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// This operation lists in-progress multipart uploads.
+// This operation lists in-progress multipart uploads. An in-progress multipart
+// upload is a multipart upload that has been initiated using the Initiate Multipart
+// Upload request, but has not yet been completed or aborted.
+//
+// This operation returns at most 1,000 multipart uploads in the response. 1,000
+// multipart uploads is the maximum number of uploads a response can include,
+// which is also the default value. You can further limit the number of uploads
+// in a response by specifying the max-uploads parameter in the response. If
+// additional multipart uploads satisfy the list criteria, the response will
+// contain an IsTruncated element with the value true. To list the additional
+// multipart uploads, use the key-marker and upload-id-marker request parameters.
+//
+// In the response, the uploads are sorted by key. If your application has initiated
+// more than one multipart upload using the same object key, then uploads in
+// the response are first sorted by key. Additionally, uploads are sorted in
+// ascending order within each key by the upload initiation time.
+//
+// For more information on multipart uploads, see Uploading Objects Using Multipart
+// Upload (https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html).
+//
+// For information on permissions required to use the multipart upload API,
+// see Multipart Upload API and Permissions (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html).
+//
+// The following operations are related to ListMultipartUploads:
+//
+//    * CreateMultipartUpload
+//
+//    * UploadPart
+//
+//    * CompleteMultipartUpload
+//
+//    * ListParts
+//
+//    * AbortMultipartUpload
 //
 //    // Example sending a request using ListMultipartUploadsRequest.
 //    req := client.ListMultipartUploadsRequest(params)

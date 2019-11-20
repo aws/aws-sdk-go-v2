@@ -13,7 +13,7 @@ import (
 type GetBucketNotificationConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
-	// Name of the bucket to get the notification configuration for.
+	// Name of the bucket for which to get the notification configuration
 	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
@@ -127,6 +127,22 @@ const opGetBucketNotificationConfiguration = "GetBucketNotificationConfiguration
 // Amazon Simple Storage Service.
 //
 // Returns the notification configuration of a bucket.
+//
+// If notifications are not enabled on the bucket, the operation returns an
+// empty NotificationConfiguration element.
+//
+// By default, you must be the bucket owner to read the notification configuration
+// of a bucket. However, the bucket owner can use a bucket policy to grant permission
+// to other users to read this configuration with the s3:GetBucketNotification
+// permission.
+//
+// For more information about setting and reading the notification configuration
+// on a bucket, see Setting Up Notification of Bucket Events (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html).
+// For more information about bucket policies, see Using Bucket Policies (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html).
+//
+// The following operation is related to GetBucketNotification:
+//
+//    * PutBucketNotification
 //
 //    // Example sending a request using GetBucketNotificationConfigurationRequest.
 //    req := client.GetBucketNotificationConfigurationRequest(params)

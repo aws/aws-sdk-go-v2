@@ -129,6 +129,43 @@ func (enum ConfigurationItemStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type ConformancePackComplianceType string
+
+// Enum values for ConformancePackComplianceType
+const (
+	ConformancePackComplianceTypeCompliant    ConformancePackComplianceType = "COMPLIANT"
+	ConformancePackComplianceTypeNonCompliant ConformancePackComplianceType = "NON_COMPLIANT"
+)
+
+func (enum ConformancePackComplianceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConformancePackComplianceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ConformancePackState string
+
+// Enum values for ConformancePackState
+const (
+	ConformancePackStateCreateInProgress ConformancePackState = "CREATE_IN_PROGRESS"
+	ConformancePackStateCreateComplete   ConformancePackState = "CREATE_COMPLETE"
+	ConformancePackStateCreateFailed     ConformancePackState = "CREATE_FAILED"
+	ConformancePackStateDeleteInProgress ConformancePackState = "DELETE_IN_PROGRESS"
+	ConformancePackStateDeleteFailed     ConformancePackState = "DELETE_FAILED"
+)
+
+func (enum ConformancePackState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConformancePackState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeliveryStatus string
 
 // Enum values for DeliveryStatus
@@ -190,12 +227,12 @@ const (
 	MemberAccountRuleStatusCreateSuccessful MemberAccountRuleStatus = "CREATE_SUCCESSFUL"
 	MemberAccountRuleStatusCreateInProgress MemberAccountRuleStatus = "CREATE_IN_PROGRESS"
 	MemberAccountRuleStatusCreateFailed     MemberAccountRuleStatus = "CREATE_FAILED"
-	MemberAccountRuleStatusUpdateSuccessful MemberAccountRuleStatus = "UPDATE_SUCCESSFUL"
-	MemberAccountRuleStatusUpdateFailed     MemberAccountRuleStatus = "UPDATE_FAILED"
-	MemberAccountRuleStatusUpdateInProgress MemberAccountRuleStatus = "UPDATE_IN_PROGRESS"
 	MemberAccountRuleStatusDeleteSuccessful MemberAccountRuleStatus = "DELETE_SUCCESSFUL"
 	MemberAccountRuleStatusDeleteFailed     MemberAccountRuleStatus = "DELETE_FAILED"
 	MemberAccountRuleStatusDeleteInProgress MemberAccountRuleStatus = "DELETE_IN_PROGRESS"
+	MemberAccountRuleStatusUpdateSuccessful MemberAccountRuleStatus = "UPDATE_SUCCESSFUL"
+	MemberAccountRuleStatusUpdateInProgress MemberAccountRuleStatus = "UPDATE_IN_PROGRESS"
+	MemberAccountRuleStatusUpdateFailed     MemberAccountRuleStatus = "UPDATE_FAILED"
 )
 
 func (enum MemberAccountRuleStatus) MarshalValue() (string, error) {
@@ -244,6 +281,54 @@ func (enum OrganizationConfigRuleTriggerType) MarshalValueBuf(b []byte) ([]byte,
 	return append(b, enum...), nil
 }
 
+type OrganizationResourceDetailedStatus string
+
+// Enum values for OrganizationResourceDetailedStatus
+const (
+	OrganizationResourceDetailedStatusCreateSuccessful OrganizationResourceDetailedStatus = "CREATE_SUCCESSFUL"
+	OrganizationResourceDetailedStatusCreateInProgress OrganizationResourceDetailedStatus = "CREATE_IN_PROGRESS"
+	OrganizationResourceDetailedStatusCreateFailed     OrganizationResourceDetailedStatus = "CREATE_FAILED"
+	OrganizationResourceDetailedStatusDeleteSuccessful OrganizationResourceDetailedStatus = "DELETE_SUCCESSFUL"
+	OrganizationResourceDetailedStatusDeleteFailed     OrganizationResourceDetailedStatus = "DELETE_FAILED"
+	OrganizationResourceDetailedStatusDeleteInProgress OrganizationResourceDetailedStatus = "DELETE_IN_PROGRESS"
+	OrganizationResourceDetailedStatusUpdateSuccessful OrganizationResourceDetailedStatus = "UPDATE_SUCCESSFUL"
+	OrganizationResourceDetailedStatusUpdateInProgress OrganizationResourceDetailedStatus = "UPDATE_IN_PROGRESS"
+	OrganizationResourceDetailedStatusUpdateFailed     OrganizationResourceDetailedStatus = "UPDATE_FAILED"
+)
+
+func (enum OrganizationResourceDetailedStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OrganizationResourceDetailedStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type OrganizationResourceStatus string
+
+// Enum values for OrganizationResourceStatus
+const (
+	OrganizationResourceStatusCreateSuccessful OrganizationResourceStatus = "CREATE_SUCCESSFUL"
+	OrganizationResourceStatusCreateInProgress OrganizationResourceStatus = "CREATE_IN_PROGRESS"
+	OrganizationResourceStatusCreateFailed     OrganizationResourceStatus = "CREATE_FAILED"
+	OrganizationResourceStatusDeleteSuccessful OrganizationResourceStatus = "DELETE_SUCCESSFUL"
+	OrganizationResourceStatusDeleteFailed     OrganizationResourceStatus = "DELETE_FAILED"
+	OrganizationResourceStatusDeleteInProgress OrganizationResourceStatus = "DELETE_IN_PROGRESS"
+	OrganizationResourceStatusUpdateSuccessful OrganizationResourceStatus = "UPDATE_SUCCESSFUL"
+	OrganizationResourceStatusUpdateInProgress OrganizationResourceStatus = "UPDATE_IN_PROGRESS"
+	OrganizationResourceStatusUpdateFailed     OrganizationResourceStatus = "UPDATE_FAILED"
+)
+
+func (enum OrganizationResourceStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OrganizationResourceStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type OrganizationRuleStatus string
 
 // Enum values for OrganizationRuleStatus
@@ -251,12 +336,12 @@ const (
 	OrganizationRuleStatusCreateSuccessful OrganizationRuleStatus = "CREATE_SUCCESSFUL"
 	OrganizationRuleStatusCreateInProgress OrganizationRuleStatus = "CREATE_IN_PROGRESS"
 	OrganizationRuleStatusCreateFailed     OrganizationRuleStatus = "CREATE_FAILED"
-	OrganizationRuleStatusUpdateSuccessful OrganizationRuleStatus = "UPDATE_SUCCESSFUL"
-	OrganizationRuleStatusUpdateFailed     OrganizationRuleStatus = "UPDATE_FAILED"
-	OrganizationRuleStatusUpdateInProgress OrganizationRuleStatus = "UPDATE_IN_PROGRESS"
 	OrganizationRuleStatusDeleteSuccessful OrganizationRuleStatus = "DELETE_SUCCESSFUL"
 	OrganizationRuleStatusDeleteFailed     OrganizationRuleStatus = "DELETE_FAILED"
 	OrganizationRuleStatusDeleteInProgress OrganizationRuleStatus = "DELETE_IN_PROGRESS"
+	OrganizationRuleStatusUpdateSuccessful OrganizationRuleStatus = "UPDATE_SUCCESSFUL"
+	OrganizationRuleStatusUpdateInProgress OrganizationRuleStatus = "UPDATE_IN_PROGRESS"
+	OrganizationRuleStatusUpdateFailed     OrganizationRuleStatus = "UPDATE_FAILED"
 )
 
 func (enum OrganizationRuleStatus) MarshalValue() (string, error) {

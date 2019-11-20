@@ -13,6 +13,8 @@ import (
 type GetBucketPolicyInput struct {
 	_ struct{} `type:"structure"`
 
+	// The bucket name for which to get the bucket policy.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 }
@@ -83,7 +85,26 @@ const opGetBucketPolicy = "GetBucketPolicy"
 // GetBucketPolicyRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Returns the policy of a specified bucket.
+// Returns the policy of a specified bucket. If you are using an identity other
+// than the root user of the AWS account that owns the bucket, the calling identity
+// must have the GetBucketPolicy permissions on the specified bucket and belong
+// to the bucket owner's account in order to use this operation.
+//
+// If you don't have GetBucketPolicy permissions, Amazon S3 returns a 403 Access
+// Denied error. If you have the correct permissions, but you're not using an
+// identity that belongs to the bucket owner's account, Amazon S3 returns a
+// 405 Method Not Allowed error.
+//
+// As a security precaution, the root user of the AWS account that owns a bucket
+// can always use this operation, even if the policy explicitly denies the root
+// user the ability to perform this action.
+//
+// For more information about bucket policies, see Using Bucket Policies and
+// User Policies (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html).
+//
+// The following operation is related to GetBucketPolicy:
+//
+//    * GetObject
 //
 //    // Example sending a request using GetBucketPolicyRequest.
 //    req := client.GetBucketPolicyRequest(params)

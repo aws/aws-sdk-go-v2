@@ -53,7 +53,8 @@ func (s *CreatedArtifact) Validate() error {
 type DiscoveredResource struct {
 	_ struct{} `type:"structure"`
 
-	// The configurationId in ADS that uniquely identifies the on-premise resource.
+	// The configurationId in Application Discovery Service that uniquely identifies
+	// the on-premise resource.
 	//
 	// ConfigurationId is a required field
 	ConfigurationId *string `min:"1" type:"string" required:"true"`
@@ -89,12 +90,15 @@ func (s *DiscoveredResource) Validate() error {
 type MigrationTask struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier that references the migration task.
+	// Unique identifier that references the migration task. Do not store personal
+	// data in this field.
 	MigrationTaskName *string `min:"1" type:"string"`
 
 	// A name that identifies the vendor of the migration tool being used.
 	ProgressUpdateStream *string `min:"1" type:"string"`
 
+	// Information about the resource that is being migrated. This data will be
+	// used to map the task to a resource in the Application Discovery Service repository.
 	ResourceAttributeList []ResourceAttribute `type:"list"`
 
 	// Task object encapsulating task information.
@@ -114,9 +118,11 @@ func (s MigrationTask) String() string {
 type MigrationTaskSummary struct {
 	_ struct{} `type:"structure"`
 
-	// Unique identifier that references the migration task.
+	// Unique identifier that references the migration task. Do not store personal
+	// data in this field.
 	MigrationTaskName *string `min:"1" type:"string"`
 
+	// Indication of the percentage completion of the task.
 	ProgressPercent *int64 `type:"integer"`
 
 	// An AWS resource used for access control. It should uniquely identify the
@@ -143,7 +149,8 @@ func (s MigrationTaskSummary) String() string {
 type ProgressUpdateStreamSummary struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the ProgressUpdateStream.
+	// The name of the ProgressUpdateStream. Do not store personal data in this
+	// field.
 	ProgressUpdateStreamName *string `min:"1" type:"string"`
 }
 

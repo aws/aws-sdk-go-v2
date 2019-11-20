@@ -13,12 +13,12 @@ import (
 type DeleteIPSetInput struct {
 	_ struct{} `type:"structure"`
 
-	// The unique ID of the detector the ipSet is associated with.
+	// The unique ID of the detector associated with the IPSet.
 	//
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
-	// The unique ID of the ipSet you want to delete.
+	// The unique ID of the IPSet to delete.
 	//
 	// IpSetId is a required field
 	IpSetId *string `location:"uri" locationName:"ipSetId" type:"string" required:"true"`
@@ -88,7 +88,8 @@ const opDeleteIPSet = "DeleteIPSet"
 // DeleteIPSetRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Deletes the IPSet specified by the IPSet ID.
+// Deletes the IPSet specified by the ipSetId. IPSets are called Trusted IP
+// lists in the console user interface.
 //
 //    // Example sending a request using DeleteIPSetRequest.
 //    req := client.DeleteIPSetRequest(params)

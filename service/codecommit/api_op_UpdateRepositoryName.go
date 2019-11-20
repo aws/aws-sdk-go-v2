@@ -20,7 +20,7 @@ type UpdateRepositoryNameInput struct {
 	// NewName is a required field
 	NewName *string `locationName:"newName" min:"1" type:"string" required:"true"`
 
-	// The existing name of the repository.
+	// The current name of the repository.
 	//
 	// OldName is a required field
 	OldName *string `locationName:"oldName" min:"1" type:"string" required:"true"`
@@ -70,10 +70,10 @@ const opUpdateRepositoryName = "UpdateRepositoryName"
 // AWS CodeCommit.
 //
 // Renames a repository. The repository name must be unique across the calling
-// AWS account. In addition, repository names are limited to 100 alphanumeric,
-// dash, and underscore characters, and cannot include certain characters. The
-// suffix ".git" is prohibited. For a full description of the limits on repository
-// names, see Limits (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html)
+// AWS account. Repository names are limited to 100 alphanumeric, dash, and
+// underscore characters, and cannot include certain characters. The suffix
+// .git is prohibited. For more information about the limits on repository names,
+// see Limits (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html)
 // in the AWS CodeCommit User Guide.
 //
 //    // Example sending a request using UpdateRepositoryNameRequest.

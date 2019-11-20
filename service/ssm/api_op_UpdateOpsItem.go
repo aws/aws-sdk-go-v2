@@ -13,6 +13,9 @@ import (
 type UpdateOpsItemInput struct {
 	_ struct{} `type:"structure"`
 
+	// Specify a new category for an OpsItem.
+	Category *string `min:"1" type:"string"`
+
 	// Update the information about the OpsItem. Provide enough information so that
 	// users reading this OpsItem for the first time understand the issue.
 	Description *string `min:"1" type:"string"`
@@ -63,6 +66,9 @@ type UpdateOpsItemInput struct {
 	// impacted resources, or statuses for the impacted resource.
 	RelatedOpsItems []RelatedOpsItem `type:"list"`
 
+	// Specify a new severity for an OpsItem.
+	Severity *string `min:"1" type:"string"`
+
 	// The OpsItem status. Status can be Open, In Progress, or Resolved. For more
 	// information, see Editing OpsItem Details (http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems-editing-details.html)
 	// in the AWS Systems Manager User Guide.
@@ -81,6 +87,9 @@ func (s UpdateOpsItemInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateOpsItemInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateOpsItemInput"}
+	if s.Category != nil && len(*s.Category) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Category", 1))
+	}
 	if s.Description != nil && len(*s.Description) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
@@ -90,6 +99,9 @@ func (s *UpdateOpsItemInput) Validate() error {
 	}
 	if s.Priority != nil && *s.Priority < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Priority", 1))
+	}
+	if s.Severity != nil && len(*s.Severity) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Severity", 1))
 	}
 	if s.Title != nil && len(*s.Title) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Title", 1))

@@ -12,7 +12,7 @@ import (
 type DescribeExportConfigurationsInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of continuous export ids to search for.
+	// A list of continuous export IDs to search for.
 	ExportIds []string `locationName:"exportIds" type:"list"`
 
 	// A number between 1 and 100 specifying the maximum number of continuous export

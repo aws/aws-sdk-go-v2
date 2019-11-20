@@ -271,8 +271,8 @@ func (s City) MarshalFields(e protocol.FieldEncoder) error {
 type Condition struct {
 	_ struct{} `type:"structure"`
 
-	// Deprecated. Represents the equal condition to be applied to a single field
-	// when querying for findings.
+	// Represents the equal condition to be applied to a single field when querying
+	// for findings.
 	Eq []string `locationName:"eq" deprecated:"true" type:"list"`
 
 	// Represents an equal condition to be applied to a single field when querying
@@ -287,12 +287,12 @@ type Condition struct {
 	// when querying for findings.
 	GreaterThanOrEqual *int64 `locationName:"greaterThanOrEqual" type:"long"`
 
-	// Deprecated. Represents a greater than condition to be applied to a single
-	// field when querying for findings.
+	// Represents a greater than condition to be applied to a single field when
+	// querying for findings.
 	Gt *int64 `locationName:"gt" deprecated:"true" type:"integer"`
 
-	// Deprecated. Represents a greater than equal condition to be applied to a
-	// single field when querying for findings.
+	// Represents a greater than equal condition to be applied to a single field
+	// when querying for findings.
 	Gte *int64 `locationName:"gte" deprecated:"true" type:"integer"`
 
 	// Represents a less than condition to be applied to a single field when querying
@@ -303,16 +303,16 @@ type Condition struct {
 	// querying for findings.
 	LessThanOrEqual *int64 `locationName:"lessThanOrEqual" type:"long"`
 
-	// Deprecated. Represents a less than condition to be applied to a single field
-	// when querying for findings.
+	// Represents a less than condition to be applied to a single field when querying
+	// for findings.
 	Lt *int64 `locationName:"lt" deprecated:"true" type:"integer"`
 
-	// Deprecated. Represents a less than equal condition to be applied to a single
-	// field when querying for findings.
+	// Represents a less than equal condition to be applied to a single field when
+	// querying for findings.
 	Lte *int64 `locationName:"lte" deprecated:"true" type:"integer"`
 
-	// Deprecated. Represents the not equal condition to be applied to a single
-	// field when querying for findings.
+	// Represents the not equal condition to be applied to a single field when querying
+	// for findings.
 	Neq []string `locationName:"neq" deprecated:"true" type:"list"`
 
 	// Represents an not equal condition to be applied to a single field when querying
@@ -426,7 +426,8 @@ func (s Condition) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains information about the country.
+// Contains information about the country in which the remote IP address is
+// located.
 type Country struct {
 	_ struct{} `type:"structure"`
 
@@ -459,11 +460,95 @@ func (s Country) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains information about the DNS request.
+// Contains information about a publishing destination, including the ID, type,
+// and status.
+type Destination struct {
+	_ struct{} `type:"structure"`
+
+	// The unique ID of the publishing destination.
+	//
+	// DestinationId is a required field
+	DestinationId *string `locationName:"destinationId" type:"string" required:"true"`
+
+	// The type of resource used for the publishing destination. Currently, only
+	// S3 is supported.
+	//
+	// DestinationType is a required field
+	DestinationType DestinationType `locationName:"destinationType" min:"1" type:"string" required:"true" enum:"true"`
+
+	// The status of the publishing destination.
+	//
+	// Status is a required field
+	Status PublishingStatus `locationName:"status" min:"1" type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s Destination) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Destination) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DestinationId != nil {
+		v := *s.DestinationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "destinationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.DestinationType) > 0 {
+		v := s.DestinationType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "destinationType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Contains the ARN of the resource to publish to, such as an S3 bucket, and
+// the ARN of the KMS key to use to encrypt published findings.
+type DestinationProperties struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the resource to publish to.
+	DestinationArn *string `locationName:"destinationArn" type:"string"`
+
+	// The ARN of the KMS key to use for encryption.
+	KmsKeyArn *string `locationName:"kmsKeyArn" type:"string"`
+}
+
+// String returns the string representation
+func (s DestinationProperties) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DestinationProperties) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DestinationArn != nil {
+		v := *s.DestinationArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "destinationArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.KmsKeyArn != nil {
+		v := *s.KmsKeyArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "kmsKeyArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Contains information about the DNS_REQUEST action described in this finding.
 type DnsRequestAction struct {
 	_ struct{} `type:"structure"`
 
-	// Domain information for the DNS request.
+	// Domain information for the API request.
 	Domain *string `locationName:"domain" type:"string"`
 }
 
@@ -537,7 +622,8 @@ func (s Evidence) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains information about the finding.
+// Contains information about the finding, which is generated when abnormal
+// or suspicious activity is detected.
 type Finding struct {
 	_ struct{} `type:"structure"`
 
@@ -575,7 +661,8 @@ type Finding struct {
 	// Region is a required field
 	Region *string `locationName:"region" type:"string" required:"true"`
 
-	// Contains information about the resource.
+	// Contains information about the AWS resource associated with the activity
+	// that prompted GuardDuty to generate a finding.
 	//
 	// Resource is a required field
 	Resource *Resource `locationName:"resource" type:"structure" required:"true"`
@@ -585,7 +672,7 @@ type Finding struct {
 	// SchemaVersion is a required field
 	SchemaVersion *string `locationName:"schemaVersion" type:"string" required:"true"`
 
-	// Contains information about the service.
+	// Contains additional information about the generated finding.
 	Service *Service `locationName:"service" type:"structure"`
 
 	// The severity of the finding.
@@ -707,7 +794,7 @@ func (s Finding) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains finding criteria information.
+// Contains information about the criteria used for querying findings.
 type FindingCriteria struct {
 	_ struct{} `type:"structure"`
 
@@ -768,7 +855,7 @@ func (s FindingStatistics) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains information about the
+// Contains information about the location of the remote IP address.
 type GeoLocation struct {
 	_ struct{} `type:"structure"`
 
@@ -801,7 +888,7 @@ func (s GeoLocation) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains information about the instance profile.
+// Contains information about the EC2 instance profile.
 type IamInstanceProfile struct {
 	_ struct{} `type:"structure"`
 
@@ -975,17 +1062,18 @@ func (s InstanceDetails) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains information about the invitation.
+// Contains information about the invitation to become a member account.
 type Invitation struct {
 	_ struct{} `type:"structure"`
 
-	// Inviter account ID
+	// The ID of the account from which the invitations was sent.
 	AccountId *string `locationName:"accountId" min:"12" type:"string"`
 
-	// This value is used to validate the inviter account to the member account.
+	// The ID of the invitation. This value is used to validate the inviter account
+	// to the member account.
 	InvitationId *string `locationName:"invitationId" type:"string"`
 
-	// Timestamp at which the invitation was sent
+	// Timestamp at which the invitation was sent.
 	InvitedAt *string `locationName:"invitedAt" type:"string"`
 
 	// The status of the relationship between the inviter and invitee accounts.
@@ -1198,7 +1286,8 @@ func (s Member) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains information about the network connection.
+// Contains information about the NETWORK_CONNECTION action described in the
+// finding.
 type NetworkConnectionAction struct {
 	_ struct{} `type:"structure"`
 
@@ -1267,7 +1356,7 @@ func (s NetworkConnectionAction) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains information about the network interface.
+// Contains information about the network interface of the Ec2 instance.
 type NetworkInterface struct {
 	_ struct{} `type:"structure"`
 
@@ -1390,7 +1479,7 @@ func (s NetworkInterface) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Continas information about the organization.
+// Continas information about the ISP organization of the remote IP address.
 type Organization struct {
 	_ struct{} `type:"structure"`
 
@@ -1441,7 +1530,7 @@ func (s Organization) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains information about the port probe.
+// Contains information about the PORT_PROBE action described in the finding.
 type PortProbeAction struct {
 	_ struct{} `type:"structure"`
 
@@ -1513,7 +1602,7 @@ func (s PortProbeDetail) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains information about the private IP address.
+// Contains other private IP address information of the EC2 instance.
 type PrivateIpAddressDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -1546,7 +1635,7 @@ func (s PrivateIpAddressDetails) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains information about the product code.
+// Contains information about the product code for the Ec2 instance.
 type ProductCode struct {
 	_ struct{} `type:"structure"`
 
@@ -1579,7 +1668,7 @@ func (s ProductCode) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Continas information about the remote IP address.
+// Continas information about the remote IP address of the connection.
 type RemoteIpDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -1672,7 +1761,8 @@ func (s RemotePortDetails) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains information about the resource.
+// Contains information about the AWS resource associated with the activity
+// that prompted GuardDuty to generate a finding.
 type Resource struct {
 	_ struct{} `type:"structure"`
 
@@ -1716,7 +1806,7 @@ func (s Resource) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains information about the security group.
+// Contains information about the security groups associated with the EC2 instance.
 type SecurityGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -1749,7 +1839,7 @@ func (s SecurityGroup) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains information about the service.
+// Contains additional information about the generated finding.
 type Service struct {
 	_ struct{} `type:"structure"`
 
@@ -1856,7 +1946,7 @@ func (s Service) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains information about the criteria for sorting.
+// Contains information about the criteria used for sorting findings.
 type SortCriteria struct {
 	_ struct{} `type:"structure"`
 
@@ -1890,7 +1980,7 @@ func (s SortCriteria) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains information about the tag associated with the resource.
+// Contains information about a tag associated with the Ec2 instance.
 type Tag struct {
 	_ struct{} `type:"structure"`
 

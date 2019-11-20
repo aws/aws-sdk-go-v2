@@ -12,13 +12,13 @@ import (
 type GetFolderInput struct {
 	_ struct{} `type:"structure"`
 
-	// A fully-qualified reference used to identify a commit that contains the version
-	// of the folder's content to return. A fully-qualified reference can be a commit
+	// A fully qualified reference used to identify a commit that contains the version
+	// of the folder's content to return. A fully qualified reference can be a commit
 	// ID, branch name, tag, or reference such as HEAD. If no specifier is provided,
-	// the folder content will be returned as it exists in the HEAD commit.
+	// the folder content is returned as it exists in the HEAD commit.
 	CommitSpecifier *string `locationName:"commitSpecifier" type:"string"`
 
-	// The fully-qualified path to the folder whose contents will be returned, including
+	// The fully qualified path to the folder whose contents are returned, including
 	// the folder name. For example, /examples is a fully-qualified path to a folder
 	// named examples that was created off of the root directory (/) of a repository.
 	//
@@ -60,28 +60,28 @@ func (s *GetFolderInput) Validate() error {
 type GetFolderOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The full commit ID used as a reference for which version of the folder content
-	// is returned.
+	// The full commit ID used as a reference for the returned version of the folder
+	// content.
 	//
 	// CommitId is a required field
 	CommitId *string `locationName:"commitId" type:"string" required:"true"`
 
-	// The list of files that exist in the specified folder, if any.
+	// The list of files in the specified folder, if any.
 	Files []File `locationName:"files" type:"list"`
 
-	// The fully-qualified path of the folder whose contents are returned.
+	// The fully qualified path of the folder whose contents are returned.
 	//
 	// FolderPath is a required field
 	FolderPath *string `locationName:"folderPath" type:"string" required:"true"`
 
-	// The list of folders that exist beneath the specified folder, if any.
+	// The list of folders that exist under the specified folder, if any.
 	SubFolders []Folder `locationName:"subFolders" type:"list"`
 
-	// The list of submodules that exist in the specified folder, if any.
+	// The list of submodules in the specified folder, if any.
 	SubModules []SubModule `locationName:"subModules" type:"list"`
 
-	// The list of symbolic links to other files and folders that exist in the specified
-	// folder, if any.
+	// The list of symbolic links to other files and folders in the specified folder,
+	// if any.
 	SymbolicLinks []SymbolicLink `locationName:"symbolicLinks" type:"list"`
 
 	// The full SHA-1 pointer of the tree information for the commit that contains

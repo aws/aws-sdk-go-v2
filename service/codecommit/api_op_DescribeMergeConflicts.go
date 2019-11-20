@@ -13,20 +13,19 @@ type DescribeMergeConflictsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The level of conflict detail to use. If unspecified, the default FILE_LEVEL
-	// is used, which will return a not mergeable result if the same file has differences
-	// in both branches. If LINE_LEVEL is specified, a conflict will be considered
-	// not mergeable if the same file in both branches has differences on the same
-	// line.
+	// is used, which returns a not-mergeable result if the same file has differences
+	// in both branches. If LINE_LEVEL is specified, a conflict is considered not
+	// mergeable if the same file in both branches has differences on the same line.
 	ConflictDetailLevel ConflictDetailLevelTypeEnum `locationName:"conflictDetailLevel" type:"string" enum:"true"`
 
 	// Specifies which branch to use when resolving conflicts, or whether to attempt
 	// automatically merging two versions of a file. The default is NONE, which
 	// requires any conflicts to be resolved manually before the merge operation
-	// will be successful.
+	// is successful.
 	ConflictResolutionStrategy ConflictResolutionStrategyTypeEnum `locationName:"conflictResolutionStrategy" type:"string" enum:"true"`
 
 	// The branch, tag, HEAD, or other fully qualified reference used to identify
-	// a commit. For example, a branch name or a full commit ID.
+	// a commit (for example, a branch name or a full commit ID).
 	//
 	// DestinationCommitSpecifier is a required field
 	DestinationCommitSpecifier *string `locationName:"destinationCommitSpecifier" type:"string" required:"true"`
@@ -44,7 +43,7 @@ type DescribeMergeConflictsInput struct {
 	// MergeOption is a required field
 	MergeOption MergeOptionTypeEnum `locationName:"mergeOption" type:"string" required:"true" enum:"true"`
 
-	// An enumeration token that when provided in a request, returns the next batch
+	// An enumeration token that, when provided in a request, returns the next batch
 	// of the results.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
@@ -55,7 +54,7 @@ type DescribeMergeConflictsInput struct {
 	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string" required:"true"`
 
 	// The branch, tag, HEAD, or other fully qualified reference used to identify
-	// a commit. For example, a branch name or a full commit ID.
+	// a commit (for example, a branch name or a full commit ID).
 	//
 	// SourceCommitSpecifier is a required field
 	SourceCommitSpecifier *string `locationName:"sourceCommitSpecifier" type:"string" required:"true"`
@@ -143,7 +142,7 @@ const opDescribeMergeConflicts = "DescribeMergeConflicts"
 // Returns information about one or more merge conflicts in the attempted merge
 // of two commit specifiers using the squash or three-way merge strategy. If
 // the merge option for the attempted merge is specified as FAST_FORWARD_MERGE,
-// an exception will be thrown.
+// an exception is thrown.
 //
 //    // Example sending a request using DescribeMergeConflictsRequest.
 //    req := client.DescribeMergeConflictsRequest(params)

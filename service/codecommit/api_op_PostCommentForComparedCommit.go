@@ -13,22 +13,20 @@ type PostCommentForComparedCommitInput struct {
 	_ struct{} `type:"structure"`
 
 	// To establish the directionality of the comparison, the full commit ID of
-	// the 'after' commit.
+	// the after commit.
 	//
 	// AfterCommitId is a required field
 	AfterCommitId *string `locationName:"afterCommitId" type:"string" required:"true"`
 
 	// To establish the directionality of the comparison, the full commit ID of
-	// the 'before' commit.
-	//
-	// This is required for commenting on any commit unless that commit is the initial
-	// commit.
+	// the before commit. Required for commenting on any commit unless that commit
+	// is the initial commit.
 	BeforeCommitId *string `locationName:"beforeCommitId" type:"string"`
 
-	// A unique, client-generated idempotency token that when provided in a request,
+	// A unique, client-generated idempotency token that, when provided in a request,
 	// ensures the request cannot be repeated with a changed parameter. If a request
 	// is received with the same parameters and a token is included, the request
-	// will return information about the initial request that used that token.
+	// returns information about the initial request that used that token.
 	ClientRequestToken *string `locationName:"clientRequestToken" type:"string" idempotencyToken:"true"`
 
 	// The content of the comment you want to make.
@@ -79,18 +77,16 @@ func (s *PostCommentForComparedCommitInput) Validate() error {
 type PostCommentForComparedCommitOutput struct {
 	_ struct{} `type:"structure"`
 
-	// In the directionality you established, the blob ID of the 'after' blob.
+	// In the directionality you established, the blob ID of the after blob.
 	AfterBlobId *string `locationName:"afterBlobId" type:"string"`
 
-	// In the directionality you established, the full commit ID of the 'after'
-	// commit.
+	// In the directionality you established, the full commit ID of the after commit.
 	AfterCommitId *string `locationName:"afterCommitId" type:"string"`
 
-	// In the directionality you established, the blob ID of the 'before' blob.
+	// In the directionality you established, the blob ID of the before blob.
 	BeforeBlobId *string `locationName:"beforeBlobId" type:"string"`
 
-	// In the directionality you established, the full commit ID of the 'before'
-	// commit.
+	// In the directionality you established, the full commit ID of the before commit.
 	BeforeCommitId *string `locationName:"beforeCommitId" type:"string"`
 
 	// The content of the comment you posted.

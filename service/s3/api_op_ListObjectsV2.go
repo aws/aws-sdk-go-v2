@@ -20,7 +20,7 @@ type ListObjectsV2Input struct {
 
 	// ContinuationToken indicates Amazon S3 that the list is being continued on
 	// this bucket with a token. ContinuationToken is obfuscated and is not a real
-	// key
+	// key.
 	ContinuationToken *string `location:"querystring" locationName:"continuation-token" type:"string"`
 
 	// A delimiter is a character you use to group keys.
@@ -47,7 +47,7 @@ type ListObjectsV2Input struct {
 	RequestPayer RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string" enum:"true"`
 
 	// StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts
-	// listing after this specified key. StartAfter can be any key in the bucket
+	// listing after this specified key. StartAfter can be any key in the bucket.
 	StartAfter *string `location:"querystring" locationName:"start-after" type:"string"`
 }
 
@@ -140,26 +140,48 @@ func (s ListObjectsV2Input) MarshalFields(e protocol.FieldEncoder) error {
 type ListObjectsV2Output struct {
 	_ struct{} `type:"structure"`
 
+	// All of the keys rolled up into a common prefix count as a single return when
+	// calculating the number of returns.
+	//
+	// A response can contain CommonPrefixes only if you specify a delimiter.
+	//
 	// CommonPrefixes contains all (if there are any) keys between Prefix and the
-	// next occurrence of the string specified by delimiter
+	// next occurrence of the string specified by a delimiter.
+	//
+	// CommonPrefixes lists keys that act like subdirectories in the directory specified
+	// by Prefix.
+	//
+	// For example, if the prefix is notes/ and the delimiter is a slash (/) as
+	// in notes/summer/july, the common prefix is notes/summer/. All of the keys
+	// that roll up into a common prefix count as a single return when calculating
+	// the number of returns.
 	CommonPrefixes []CommonPrefix `type:"list" flattened:"true"`
 
 	// Metadata about each object returned.
 	Contents []Object `type:"list" flattened:"true"`
 
-	// ContinuationToken indicates Amazon S3 that the list is being continued on
-	// this bucket with a token. ContinuationToken is obfuscated and is not a real
-	// key
+	// If ContinuationToken was sent with the request, it is included in the response.
 	ContinuationToken *string `type:"string"`
 
-	// A delimiter is a character you use to group keys.
+	// Causes keys that contain the same string between the prefix and the first
+	// occurrence of the delimiter to be rolled up into a single result element
+	// in the CommonPrefixes collection. These rolled-up keys are not returned elsewhere
+	// in the response. Each rolled-up result counts as only one return against
+	// the MaxKeys value.
 	Delimiter *string `type:"string"`
 
-	// Encoding type used by Amazon S3 to encode object keys in the response.
+	// Encoding type used by Amazon S3 to encode object key names in the XML response.
+	//
+	// If you specify the encoding-type request parameter, Amazon S3 includes this
+	// element in the response, and returns encoded key name values in the following
+	// response elements:
+	//
+	// Delimiter, Prefix, Key, and StartAfter.
 	EncodingType EncodingType `type:"string" enum:"true"`
 
-	// A flag that indicates whether or not Amazon S3 returned all of the results
-	// that satisfied the search criteria.
+	// Set to false if all of the results were returned. Set to true if more keys
+	// are available to return. If the number of results exceeds that specified
+	// by MaxKeys, all of the results might not be returned.
 	IsTruncated *bool `type:"boolean"`
 
 	// KeyCount is the number of keys returned with this request. KeyCount will
@@ -171,7 +193,7 @@ type ListObjectsV2Output struct {
 	// contain fewer keys but will never contain more.
 	MaxKeys *int64 `type:"integer"`
 
-	// Name of the bucket to list.
+	// Name of the bucket.
 	Name *string `type:"string"`
 
 	// NextContinuationToken is sent when isTruncated is true which means there
@@ -180,11 +202,10 @@ type ListObjectsV2Output struct {
 	// is obfuscated and is not a real key
 	NextContinuationToken *string `type:"string"`
 
-	// Limits the response to keys that begin with the specified prefix.
+	// Keys that begin with the indicated prefix.
 	Prefix *string `type:"string"`
 
-	// StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts
-	// listing after this specified key. StartAfter can be any key in the bucket
+	// If StartAfter was sent with the request, it is included in the response.
 	StartAfter *string `type:"string"`
 }
 
@@ -287,10 +308,34 @@ const opListObjectsV2 = "ListObjectsV2"
 // ListObjectsV2Request returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Returns some or all (up to 1000) of the objects in a bucket. You can use
+// Returns some or all (up to 1,000) of the objects in a bucket. You can use
 // the request parameters as selection criteria to return a subset of the objects
-// in a bucket. Note: ListObjectsV2 is the revised List Objects API and we recommend
-// you use this revised API for new application development.
+// in a bucket. A 200 OK response can contain valid or invalid XML. Make sure
+// to design your application to parse the contents of the response and handle
+// it appropriately.
+//
+// To use thisoperation, you must have READ access to the bucket.
+//
+// To use this operation in an AWS Identity and Access Management (IAM) policy,
+// you must have permissions to perform the s3:ListBucket action. The bucket
+// owner has this permission by default and can grant this permission to others.
+// For more information about permissions, see Permissions Related to Bucket
+// Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// and Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
+//
+// This section describes the latest revision of the API. We recommend that
+// you use this revised API for application development. For backward compatibility,
+// Amazon S3 continues to support the prior version of this API, ListObjects.
+//
+// To get a list of your buckets, see ListBuckets.
+//
+// The following operations are related to ListObjectsV2:
+//
+//    * GetObject
+//
+//    * PutObject
+//
+//    * CreateBucket
 //
 //    // Example sending a request using ListObjectsV2Request.
 //    req := client.ListObjectsV2Request(params)

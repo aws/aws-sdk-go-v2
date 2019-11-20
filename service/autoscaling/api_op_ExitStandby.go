@@ -62,6 +62,8 @@ const opExitStandby = "ExitStandby"
 //
 // Moves the specified instances out of the standby state.
 //
+// After you put the instances back in service, the desired capacity is incremented.
+//
 // For more information, see Temporarily Removing Instances from Your Auto Scaling
 // Group (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enter-exit-standby.html)
 // in the Amazon EC2 Auto Scaling User Guide.

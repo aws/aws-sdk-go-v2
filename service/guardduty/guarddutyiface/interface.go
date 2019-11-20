@@ -73,6 +73,8 @@ type ClientAPI interface {
 
 	CreateMembersRequest(*guardduty.CreateMembersInput) guardduty.CreateMembersRequest
 
+	CreatePublishingDestinationRequest(*guardduty.CreatePublishingDestinationInput) guardduty.CreatePublishingDestinationRequest
+
 	CreateSampleFindingsRequest(*guardduty.CreateSampleFindingsInput) guardduty.CreateSampleFindingsRequest
 
 	CreateThreatIntelSetRequest(*guardduty.CreateThreatIntelSetInput) guardduty.CreateThreatIntelSetRequest
@@ -89,7 +91,11 @@ type ClientAPI interface {
 
 	DeleteMembersRequest(*guardduty.DeleteMembersInput) guardduty.DeleteMembersRequest
 
+	DeletePublishingDestinationRequest(*guardduty.DeletePublishingDestinationInput) guardduty.DeletePublishingDestinationRequest
+
 	DeleteThreatIntelSetRequest(*guardduty.DeleteThreatIntelSetInput) guardduty.DeleteThreatIntelSetRequest
+
+	DescribePublishingDestinationRequest(*guardduty.DescribePublishingDestinationInput) guardduty.DescribePublishingDestinationRequest
 
 	DisassociateFromMasterAccountRequest(*guardduty.DisassociateFromMasterAccountInput) guardduty.DisassociateFromMasterAccountRequest
 
@@ -127,6 +133,8 @@ type ClientAPI interface {
 
 	ListMembersRequest(*guardduty.ListMembersInput) guardduty.ListMembersRequest
 
+	ListPublishingDestinationsRequest(*guardduty.ListPublishingDestinationsInput) guardduty.ListPublishingDestinationsRequest
+
 	ListTagsForResourceRequest(*guardduty.ListTagsForResourceInput) guardduty.ListTagsForResourceRequest
 
 	ListThreatIntelSetsRequest(*guardduty.ListThreatIntelSetsInput) guardduty.ListThreatIntelSetsRequest
@@ -148,6 +156,8 @@ type ClientAPI interface {
 	UpdateFindingsFeedbackRequest(*guardduty.UpdateFindingsFeedbackInput) guardduty.UpdateFindingsFeedbackRequest
 
 	UpdateIPSetRequest(*guardduty.UpdateIPSetInput) guardduty.UpdateIPSetRequest
+
+	UpdatePublishingDestinationRequest(*guardduty.UpdatePublishingDestinationInput) guardduty.UpdatePublishingDestinationRequest
 
 	UpdateThreatIntelSetRequest(*guardduty.UpdateThreatIntelSetInput) guardduty.UpdateThreatIntelSetRequest
 }

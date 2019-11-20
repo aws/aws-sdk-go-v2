@@ -372,3 +372,47 @@ func (c *Client) WaitUntilStackUpdateComplete(ctx context.Context, input *Descri
 
 	return w.Wait(ctx)
 }
+
+// WaitUntilTypeRegistrationComplete uses the AWS CloudFormation API operation
+// DescribeTypeRegistration to wait for a condition to be met before returning.
+// If the condition is not met within the max attempt window, an error will
+// be returned.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Client) WaitUntilTypeRegistrationComplete(ctx context.Context, input *DescribeTypeRegistrationInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
+		Name:        "WaitUntilTypeRegistrationComplete",
+		MaxAttempts: 120,
+		Delay:       aws.ConstantWaiterDelay(30 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
+			{
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "ProgressStatus",
+				Expected: "COMPLETE",
+			},
+			{
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "ProgressStatus",
+				Expected: "FAILED",
+			},
+		},
+		Logger: c.Config.Logger,
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
+			var inCpy *DescribeTypeRegistrationInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req := c.DescribeTypeRegistrationRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req.Request, nil
+		},
+	}
+	w.ApplyOptions(opts...)
+
+	return w.Wait(ctx)
+}

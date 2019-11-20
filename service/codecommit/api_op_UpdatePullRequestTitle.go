@@ -17,7 +17,7 @@ type UpdatePullRequestTitleInput struct {
 	// PullRequestId is a required field
 	PullRequestId *string `locationName:"pullRequestId" type:"string" required:"true"`
 
-	// The updated title of the pull request. This will replace the existing title.
+	// The updated title of the pull request. This replaces the existing title.
 	//
 	// Title is a required field
 	Title *string `locationName:"title" type:"string" required:"true"`

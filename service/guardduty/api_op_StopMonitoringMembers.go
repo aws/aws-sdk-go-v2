@@ -117,10 +117,8 @@ const opStopMonitoringMembers = "StopMonitoringMembers"
 // StopMonitoringMembersRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Disables GuardDuty from monitoring findings of the member accounts specified
-// by the account IDs. After running this command, a master GuardDuty account
-// can run StartMonitoringMembers to re-enable GuardDuty to monitor these members’
-// findings.
+// Stops GuardDuty monitoring for the specified member accounnts. Use the StartMonitoringMembers
+// to restart monitoring for those accounts.
 //
 //    // Example sending a request using StopMonitoringMembersRequest.
 //    req := client.StopMonitoringMembersRequest(params)

@@ -17,10 +17,10 @@ type ListPullRequestsInput struct {
 	// user.
 	AuthorArn *string `locationName:"authorArn" type:"string"`
 
-	// A non-negative integer used to limit the number of returned results.
+	// A non-zero, non-negative integer used to limit the number of returned results.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
 
-	// An enumeration token that when provided in a request, returns the next batch
+	// An enumeration token that, when provided in a request, returns the next batch
 	// of the results.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
@@ -59,8 +59,8 @@ func (s *ListPullRequestsInput) Validate() error {
 type ListPullRequestsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An enumeration token that when provided in a request, returns the next batch
-	// of the results.
+	// An enumeration token that allows the operation to batch the next results
+	// of the operation.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// The system-generated IDs of the pull requests.

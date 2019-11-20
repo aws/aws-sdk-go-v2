@@ -13,6 +13,8 @@ import (
 type GetBucketAclInput struct {
 	_ struct{} `type:"structure"`
 
+	// Specifies the S3 bucket whose ACL is being requested.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 }
@@ -61,6 +63,7 @@ type GetBucketAclOutput struct {
 	// A list of grants.
 	Grants []Grant `locationName:"AccessControlList" locationNameList:"Grant" type:"list"`
 
+	// Container for the bucket owner's display name and ID.
 	Owner *Owner `type:"structure"`
 }
 
@@ -97,7 +100,15 @@ const opGetBucketAcl = "GetBucketAcl"
 // GetBucketAclRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Gets the access control policy for the bucket.
+// This implementation of the GET operation uses the acl subresource to return
+// the access control list (ACL) of a bucket. To use GET to return the ACL of
+// the bucket, you must have READ_ACP access to the bucket. If READ_ACP permission
+// is granted to the anonymous user, you can return the ACL of the bucket without
+// using an authorization header.
+//
+// Related Resources
+//
+//    *
 //
 //    // Example sending a request using GetBucketAclRequest.
 //    req := client.GetBucketAclRequest(params)

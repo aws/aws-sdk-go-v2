@@ -13,6 +13,8 @@ import (
 type GetBucketLifecycleInput struct {
 	_ struct{} `type:"structure"`
 
+	// The name of the bucket for which to the the lifecycle information.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 }
@@ -58,6 +60,7 @@ func (s GetBucketLifecycleInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetBucketLifecycleOutput struct {
 	_ struct{} `type:"structure"`
 
+	// Container for a lifecycle rule.
 	Rules []Rule `locationName:"Rule" type:"list" flattened:"true"`
 }
 
@@ -88,7 +91,33 @@ const opGetBucketLifecycle = "GetBucketLifecycle"
 // GetBucketLifecycleRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// No longer used, see the GetBucketLifecycleConfiguration operation.
+//
+// For an updated version of this API, see GetBucketLifecycleConfiguration.
+// If you configured a bucket lifecycle using the filter element, you should
+// the updated version of this topic. This topic is provided for backward compatibility.
+//
+// Returns the lifecycle configuration information set on the bucket. For information
+// about lifecycle configuration, see Object Lifecycle Management (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html).
+//
+// To use this operation, you must have permission to perform the s3:GetLifecycleConfiguration
+// action. The bucket owner has this permission by default. The bucket owner
+// can grant this permission to others. For more information about permissions,
+// see Permissions Related to Bucket Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// and Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
+//
+// GetBucketLifecycle has the following special error:
+//
+//    * Error code: NoSuchLifecycleConfiguration Description: The lifecycle
+//    configuration does not exist. HTTP Status Code: 404 Not Found SOAP Fault
+//    Code Prefix: Client
+//
+// The following operations are related to GetBucketLifecycle:
+//
+//    * GetBucketLifecycleConfiguration
+//
+//    * PutBucketLifecycle
+//
+//    * DeleteBucketLifecycle
 //
 //    // Example sending a request using GetBucketLifecycleRequest.
 //    req := client.GetBucketLifecycleRequest(params)

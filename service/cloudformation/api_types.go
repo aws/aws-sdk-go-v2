@@ -178,6 +178,52 @@ func (s Export) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Contains logging configuration information for a type.
+type LoggingConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon CloudWatch log group to which CloudFormation sends error logging
+	// information when invoking the type's handlers.
+	//
+	// LogGroupName is a required field
+	LogGroupName *string `min:"1" type:"string" required:"true"`
+
+	// The ARN of the role that CloudFormation should assume when sending log entries
+	// to CloudWatch logs.
+	//
+	// LogRoleArn is a required field
+	LogRoleArn *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s LoggingConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *LoggingConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "LoggingConfig"}
+
+	if s.LogGroupName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
+	}
+	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
+	}
+
+	if s.LogRoleArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("LogRoleArn"))
+	}
+	if s.LogRoleArn != nil && len(*s.LogRoleArn) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("LogRoleArn", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // The Output data type.
 type Output struct {
 	_ struct{} `type:"structure"`
@@ -936,6 +982,28 @@ type StackInstance struct {
 	// The name of the AWS account that the stack instance is associated with.
 	Account *string `type:"string"`
 
+	// Status of the stack instance's actual configuration compared to the expected
+	// template and parameter configuration of the stack set to which it belongs.
+	//
+	//    * DRIFTED: The stack differs from the expected template and parameter
+	//    configuration of the stack set to which it belongs. A stack instance is
+	//    considered to have drifted if one or more of the resources in the associated
+	//    stack have drifted.
+	//
+	//    * NOT_CHECKED: AWS CloudFormation has not checked if the stack instance
+	//    differs from its expected stack set configuration.
+	//
+	//    * IN_SYNC: The stack instance's actual configuration matches its expected
+	//    stack set configuration.
+	//
+	//    * UNKNOWN: This value is reserved for future use.
+	DriftStatus StackDriftStatus `type:"string" enum:"true"`
+
+	// Most recent time when CloudFormation performed a drift detection operation
+	// on the stack instance. This value will be NULL for any stack instance on
+	// which drift detection has not yet been performed.
+	LastDriftCheckTimestamp *time.Time `type:"timestamp"`
+
 	// A list of parameters from the stack set template whose values have been overridden
 	// in this stack instance.
 	ParameterOverrides []Parameter `type:"list"`
@@ -983,6 +1051,28 @@ type StackInstanceSummary struct {
 
 	// The name of the AWS account that the stack instance is associated with.
 	Account *string `type:"string"`
+
+	// Status of the stack instance's actual configuration compared to the expected
+	// template and parameter configuration of the stack set to which it belongs.
+	//
+	//    * DRIFTED: The stack differs from the expected template and parameter
+	//    configuration of the stack set to which it belongs. A stack instance is
+	//    considered to have drifted if one or more of the resources in the associated
+	//    stack have drifted.
+	//
+	//    * NOT_CHECKED: AWS CloudFormation has not checked if the stack instance
+	//    differs from its expected stack set configuration.
+	//
+	//    * IN_SYNC: The stack instance's actual configuration matches its expected
+	//    stack set configuration.
+	//
+	//    * UNKNOWN: This value is reserved for future use.
+	DriftStatus StackDriftStatus `type:"string" enum:"true"`
+
+	// Most recent time when CloudFormation performed a drift detection operation
+	// on the stack instance. This value will be NULL for any stack instance on
+	// which drift detection has not yet been performed.
+	LastDriftCheckTimestamp *time.Time `type:"timestamp"`
 
 	// The name of the AWS region that the stack instance is associated with.
 	Region *string `type:"string"`
@@ -1374,6 +1464,13 @@ type StackSet struct {
 	// The Amazon Resource Number (ARN) of the stack set.
 	StackSetARN *string `type:"string"`
 
+	// Detailed information about the drift status of the stack set.
+	//
+	// For stack sets, contains information about the last completed drift operation
+	// performed on the stack set. Information about drift operations currently
+	// in progress is not included.
+	StackSetDriftDetectionDetails *StackSetDriftDetectionDetails `type:"structure"`
+
 	// The ID of the stack set.
 	StackSetId *string `type:"string"`
 
@@ -1394,6 +1491,92 @@ type StackSet struct {
 
 // String returns the string representation
 func (s StackSet) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Detailed information about the drift status of the stack set.
+//
+// For stack sets, contains information about the last completed drift operation
+// performed on the stack set. Information about drift operations in-progress
+// is not included.
+//
+// For stack set operations, includes information about drift operations currently
+// being performed on the stack set.
+//
+// For more information, see Detecting Unmanaged Changes in Stack Sets (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html)
+// in the AWS CloudFormation User Guide.
+type StackSetDriftDetectionDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The status of the stack set drift detection operation.
+	//
+	//    * COMPLETED: The drift detection operation completed without failing on
+	//    any stack instances.
+	//
+	//    * FAILED: The drift detection operation exceeded the specified failure
+	//    tolerance.
+	//
+	//    * PARTIAL_SUCCESS: The drift detection operation completed without exceeding
+	//    the failure tolerance for the operation.
+	//
+	//    * IN_PROGRESS: The drift detection operation is currently being performed.
+	//
+	//    * STOPPED: The user has cancelled the drift detection operation.
+	DriftDetectionStatus StackSetDriftDetectionStatus `type:"string" enum:"true"`
+
+	// Status of the stack set's actual configuration compared to its expected template
+	// and parameter configuration. A stack set is considered to have drifted if
+	// one or more of its stack instances have drifted from their expected template
+	// and parameter configuration.
+	//
+	//    * DRIFTED: One or more of the stack instances belonging to the stack set
+	//    stack differs from the expected template and parameter configuration.
+	//    A stack instance is considered to have drifted if one or more of the resources
+	//    in the associated stack have drifted.
+	//
+	//    * NOT_CHECKED: AWS CloudFormation has not checked the stack set for drift.
+	//
+	//    * IN_SYNC: All of the stack instances belonging to the stack set stack
+	//    match from the expected template and parameter configuration.
+	DriftStatus StackSetDriftStatus `type:"string" enum:"true"`
+
+	// The number of stack instances that have drifted from the expected template
+	// and parameter configuration of the stack set. A stack instance is considered
+	// to have drifted if one or more of the resources in the associated stack do
+	// not match their expected configuration.
+	DriftedStackInstancesCount *int64 `type:"integer"`
+
+	// The number of stack instances for which the drift detection operation failed.
+	FailedStackInstancesCount *int64 `type:"integer"`
+
+	// The number of stack instances that are currently being checked for drift.
+	InProgressStackInstancesCount *int64 `type:"integer"`
+
+	// The number of stack instances which match the expected template and parameter
+	// configuration of the stack set.
+	InSyncStackInstancesCount *int64 `type:"integer"`
+
+	// Most recent time when CloudFormation performed a drift detection operation
+	// on the stack set. This value will be NULL for any stack set on which drift
+	// detection has not yet been performed.
+	LastDriftCheckTimestamp *time.Time `type:"timestamp"`
+
+	// The total number of stack instances belonging to this stack set.
+	//
+	// The total number of stack instances is equal to the total of:
+	//
+	//    * Stack instances that match the stack set configuration.
+	//
+	//    * Stack instances that have drifted from the stack set configuration.
+	//
+	//    * Stack instances where the drift detection operation has failed.
+	//
+	//    * Stack instances currently being checked for drift.
+	TotalStackInstancesCount *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s StackSetDriftDetectionDetails) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -1445,6 +1628,17 @@ type StackSetOperation struct {
 	// stacks. You can't reassociate a retained stack, or add an existing, saved
 	// stack to a new stack set.
 	RetainStacks *bool `type:"boolean"`
+
+	// Detailed information about the drift status of the stack set. This includes
+	// information about drift operations currently being performed on the stack
+	// set.
+	//
+	// this information will only be present for stack set operations whose Action
+	// type is DETECT_DRIFT.
+	//
+	// For more information, see Detecting Unmanaged Changes in Stack Sets (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html)
+	// in the AWS CloudFormation User Guide.
+	StackSetDriftDetectionDetails *StackSetDriftDetectionDetails `type:"structure"`
 
 	// The ID of the stack set.
 	StackSetId *string `type:"string"`
@@ -1662,6 +1856,29 @@ type StackSetSummary struct {
 	// or updated.
 	Description *string `min:"1" type:"string"`
 
+	// Status of the stack set's actual configuration compared to its expected template
+	// and parameter configuration. A stack set is considered to have drifted if
+	// one or more of its stack instances have drifted from their expected template
+	// and parameter configuration.
+	//
+	//    * DRIFTED: One or more of the stack instances belonging to the stack set
+	//    stack differs from the expected template and parameter configuration.
+	//    A stack instance is considered to have drifted if one or more of the resources
+	//    in the associated stack have drifted.
+	//
+	//    * NOT_CHECKED: AWS CloudFormation has not checked the stack set for drift.
+	//
+	//    * IN_SYNC: All of the stack instances belonging to the stack set stack
+	//    match from the expected template and parameter configuration.
+	//
+	//    * UNKNOWN: This value is reserved for future use.
+	DriftStatus StackDriftStatus `type:"string" enum:"true"`
+
+	// Most recent time when CloudFormation performed a drift detection operation
+	// on the stack set. This value will be NULL for any stack set on which drift
+	// detection has not yet been performed.
+	LastDriftCheckTimestamp *time.Time `type:"timestamp"`
+
 	// The ID of the stack set.
 	StackSetId *string `type:"string"`
 
@@ -1807,5 +2024,67 @@ type TemplateParameter struct {
 
 // String returns the string representation
 func (s TemplateParameter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Contains summary information about the specified CloudFormation type.
+type TypeSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the default version of the type. The default version is used when
+	// the type version is not specified.
+	//
+	// To set the default version of a type, use SetTypeDefaultVersion .
+	DefaultVersionId *string `min:"1" type:"string"`
+
+	// The description of the type.
+	Description *string `min:"1" type:"string"`
+
+	// When the current default version of the type was registered.
+	LastUpdated *time.Time `type:"timestamp"`
+
+	// The kind of type.
+	Type RegistryType `type:"string" enum:"true"`
+
+	// The Amazon Resource Name (ARN) of the type.
+	TypeArn *string `type:"string"`
+
+	// The name of the type.
+	TypeName *string `min:"10" type:"string"`
+}
+
+// String returns the string representation
+func (s TypeSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Contains summary information about a specific version of a CloudFormation
+// type.
+type TypeVersionSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the type version.
+	Arn *string `type:"string"`
+
+	// The description of the type version.
+	Description *string `min:"1" type:"string"`
+
+	// When the version was registered.
+	TimeCreated *time.Time `type:"timestamp"`
+
+	// The kind of type.
+	Type RegistryType `type:"string" enum:"true"`
+
+	// The name of the type.
+	TypeName *string `min:"10" type:"string"`
+
+	// The ID of a specific version of the type. The version ID is the value at
+	// the end of the Amazon Resource Name (ARN) assigned to the type version when
+	// it is registered.
+	VersionId *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s TypeVersionSummary) String() string {
 	return awsutil.Prettify(s)
 }

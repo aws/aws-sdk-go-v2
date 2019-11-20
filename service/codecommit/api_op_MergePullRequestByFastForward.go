@@ -57,8 +57,7 @@ func (s *MergePullRequestByFastForwardInput) Validate() error {
 type MergePullRequestByFastForwardOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Information about the specified pull request, including information about
-	// the merge.
+	// Information about the specified pull request, including the merge.
 	PullRequest *PullRequest `locationName:"pullRequest" type:"structure"`
 }
 

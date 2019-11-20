@@ -18,9 +18,10 @@ type CreateSnapshotsInput struct {
 	// A description propagated to every snapshot specified by the instance.
 	Description *string `type:"string"`
 
-	// Checks whether you have the required permissions for the action without actually
-	// making the request. Provides an error response. If you have the required
-	// permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have
+	// the required permissions, the error response is DryRunOperation. Otherwise,
+	// it is UnauthorizedOperation.
 	DryRun *bool `type:"boolean"`
 
 	// The instance to specify which volumes should be included in the snapshots.

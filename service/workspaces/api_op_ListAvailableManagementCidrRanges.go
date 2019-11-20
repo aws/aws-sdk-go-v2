@@ -74,8 +74,8 @@ const opListAvailableManagementCidrRanges = "ListAvailableManagementCidrRanges"
 // Amazon WorkSpaces.
 //
 // Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that
-// you can use for the network management interface when you enable bring your
-// own license (BYOL).
+// you can use for the network management interface when you enable Bring Your
+// Own License (BYOL).
 //
 // The management network interface is connected to a secure Amazon WorkSpaces
 // management network. It is used for interactive streaming of the WorkSpace

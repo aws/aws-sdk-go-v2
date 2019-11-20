@@ -68,6 +68,9 @@ type PutAutoScalingPolicyOutput struct {
 	// The automatic scaling policy definition.
 	AutoScalingPolicy *AutoScalingPolicyDescription `type:"structure"`
 
+	// The Amazon Resource Name of the cluster.
+	ClusterArn *string `min:"20" type:"string"`
+
 	// Specifies the ID of a cluster. The instance group to which the automatic
 	// scaling policy is applied is within this cluster.
 	ClusterId *string `type:"string"`

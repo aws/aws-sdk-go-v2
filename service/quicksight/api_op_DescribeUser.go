@@ -131,8 +131,6 @@ const opDescribeUser = "DescribeUser"
 //
 // Returns information about a user, given the user name.
 //
-// The permission resource is arn:aws:quicksight:us-east-1:<aws-account-id>:user/default/<user-name> .
-//
 // The response is a user object that contains the user's Amazon Resource Name
 // (ARN), AWS Identity and Access Management (IAM) role, and email address.
 //

@@ -71,8 +71,8 @@ const opRemoveTagsFromResource = "RemoveTagsFromResource"
 // RemoveTagsFromResourceRequest returns a request value for making API operation for
 // AWS Storage Gateway.
 //
-// Removes one or more tags from the specified resource. This operation is only
-// supported in the cached volume, stored volume and tape gateway types.
+// Removes one or more tags from the specified resource. This operation is supported
+// in storage gateways of all types.
 //
 //    // Example sending a request using RemoveTagsFromResourceRequest.
 //    req := client.RemoveTagsFromResourceRequest(params)

@@ -13,6 +13,8 @@ import (
 type GetBucketTaggingInput struct {
 	_ struct{} `type:"structure"`
 
+	// The name of the bucket for which to get the tagging information.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 }
@@ -58,6 +60,8 @@ func (s GetBucketTaggingInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetBucketTaggingOutput struct {
 	_ struct{} `type:"structure"`
 
+	// Contains the tag set.
+	//
 	// TagSet is a required field
 	TagSet []Tag `locationNameList:"Tag" type:"list" required:"true"`
 }
@@ -90,6 +94,21 @@ const opGetBucketTagging = "GetBucketTagging"
 // Amazon Simple Storage Service.
 //
 // Returns the tag set associated with the bucket.
+//
+// To use this operation, you must have permission to perform the s3:GetBucketTagging
+// action. By default, the bucket owner has this permission and can grant this
+// permission to others.
+//
+// GetBucketTagging has the following special error:
+//
+//    * Error code: NoSuchTagSetError Description: There is no tag set associated
+//    with the bucket.
+//
+// The following operations are related to GetBucketTagging:
+//
+//    * PutBucketTagging
+//
+//    * DeleteBucketTagging
 //
 //    // Example sending a request using GetBucketTaggingRequest.
 //    req := client.GetBucketTaggingRequest(params)

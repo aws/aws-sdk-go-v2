@@ -18,7 +18,8 @@ type ListBotsInput struct {
 	// AccountId is a required field
 	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
 
-	// The maximum number of results to return in a single call. Default is 10.
+	// The maximum number of results to return in a single call. The default is
+	// 10.
 	MaxResults *int64 `location:"querystring" locationName:"max-results" min:"1" type:"integer"`
 
 	// The token to use to retrieve the next page of results.

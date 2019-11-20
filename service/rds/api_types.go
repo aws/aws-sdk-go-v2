@@ -2852,14 +2852,22 @@ type ScalingConfiguration struct {
 
 	// The maximum capacity for an Aurora DB cluster in serverless DB engine mode.
 	//
-	// Valid capacity values are 1, 2, 4, 8, 16, 32, 64, 128, and 256.
+	// For Aurora MySQL, valid capacity values are 1, 2, 4, 8, 16, 32, 64, 128,
+	// and 256.
+	//
+	// For Aurora PostgreSQL, valid capacity values are 2, 4, 8, 16, 32, 64, 192,
+	// and 384.
 	//
 	// The maximum capacity must be greater than or equal to the minimum capacity.
 	MaxCapacity *int64 `type:"integer"`
 
 	// The minimum capacity for an Aurora DB cluster in serverless DB engine mode.
 	//
-	// Valid capacity values are 1, 2, 4, 8, 16, 32, 64, 128, and 256.
+	// For Aurora MySQL, valid capacity values are 1, 2, 4, 8, 16, 32, 64, 128,
+	// and 256.
+	//
+	// For Aurora PostgreSQL, valid capacity values are 2, 4, 8, 16, 32, 64, 192,
+	// and 384.
 	//
 	// The minimum capacity must be less than or equal to the maximum capacity.
 	MinCapacity *int64 `type:"integer"`

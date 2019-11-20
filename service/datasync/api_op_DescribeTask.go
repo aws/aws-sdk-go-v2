@@ -89,6 +89,10 @@ type DescribeTaskOutput struct {
 	// the overriding OverrideOptions value to operation.
 	Options *Options `type:"structure"`
 
+	// The schedule used to periodically transfer files from a source to a destination
+	// location.
+	Schedule *TaskSchedule `type:"structure"`
+
 	// The Amazon Resource Name (ARN) of the source file system's location.
 	SourceLocationArn *string `type:"string"`
 

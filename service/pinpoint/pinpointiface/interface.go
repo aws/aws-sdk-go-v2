@@ -79,6 +79,8 @@ type ClientAPI interface {
 
 	CreateSmsTemplateRequest(*pinpoint.CreateSmsTemplateInput) pinpoint.CreateSmsTemplateRequest
 
+	CreateVoiceTemplateRequest(*pinpoint.CreateVoiceTemplateInput) pinpoint.CreateVoiceTemplateRequest
+
 	DeleteAdmChannelRequest(*pinpoint.DeleteAdmChannelInput) pinpoint.DeleteAdmChannelRequest
 
 	DeleteApnsChannelRequest(*pinpoint.DeleteApnsChannelInput) pinpoint.DeleteApnsChannelRequest
@@ -118,6 +120,8 @@ type ClientAPI interface {
 	DeleteUserEndpointsRequest(*pinpoint.DeleteUserEndpointsInput) pinpoint.DeleteUserEndpointsRequest
 
 	DeleteVoiceChannelRequest(*pinpoint.DeleteVoiceChannelInput) pinpoint.DeleteVoiceChannelRequest
+
+	DeleteVoiceTemplateRequest(*pinpoint.DeleteVoiceTemplateInput) pinpoint.DeleteVoiceTemplateRequest
 
 	GetAdmChannelRequest(*pinpoint.GetAdmChannelInput) pinpoint.GetAdmChannelRequest
 
@@ -201,6 +205,8 @@ type ClientAPI interface {
 
 	GetVoiceChannelRequest(*pinpoint.GetVoiceChannelInput) pinpoint.GetVoiceChannelRequest
 
+	GetVoiceTemplateRequest(*pinpoint.GetVoiceTemplateInput) pinpoint.GetVoiceTemplateRequest
+
 	ListJourneysRequest(*pinpoint.ListJourneysInput) pinpoint.ListJourneysRequest
 
 	ListTagsForResourceRequest(*pinpoint.ListTagsForResourceInput) pinpoint.ListTagsForResourceRequest
@@ -262,6 +268,8 @@ type ClientAPI interface {
 	UpdateSmsTemplateRequest(*pinpoint.UpdateSmsTemplateInput) pinpoint.UpdateSmsTemplateRequest
 
 	UpdateVoiceChannelRequest(*pinpoint.UpdateVoiceChannelInput) pinpoint.UpdateVoiceChannelRequest
+
+	UpdateVoiceTemplateRequest(*pinpoint.UpdateVoiceTemplateInput) pinpoint.UpdateVoiceTemplateRequest
 }
 
 var _ ClientAPI = (*pinpoint.Client)(nil)

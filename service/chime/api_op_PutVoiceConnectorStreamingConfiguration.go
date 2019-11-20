@@ -101,8 +101,8 @@ const opPutVoiceConnectorStreamingConfiguration = "PutVoiceConnectorStreamingCon
 //
 // Adds a streaming configuration for the specified Amazon Chime Voice Connector.
 // The streaming configuration specifies whether media streaming is enabled
-// for sending to Amazon Kinesis, and sets the retention period for the Amazon
-// Kinesis data, in hours.
+// for sending to Amazon Kinesis. It also sets the retention period, in hours,
+// for the Amazon Kinesis data.
 //
 //    // Example sending a request using PutVoiceConnectorStreamingConfigurationRequest.
 //    req := client.PutVoiceConnectorStreamingConfigurationRequest(params)

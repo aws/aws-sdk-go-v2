@@ -59,6 +59,9 @@ func (s *AddInstanceGroupsInput) Validate() error {
 type AddInstanceGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon Resource Name of the cluster.
+	ClusterArn *string `min:"20" type:"string"`
+
 	// Instance group IDs of the newly created instance groups.
 	InstanceGroupIds []string `type:"list"`
 

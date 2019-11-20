@@ -71,6 +71,8 @@ type ClientAPI interface {
 
 	GetEventSelectorsRequest(*cloudtrail.GetEventSelectorsInput) cloudtrail.GetEventSelectorsRequest
 
+	GetInsightSelectorsRequest(*cloudtrail.GetInsightSelectorsInput) cloudtrail.GetInsightSelectorsRequest
+
 	GetTrailRequest(*cloudtrail.GetTrailInput) cloudtrail.GetTrailRequest
 
 	GetTrailStatusRequest(*cloudtrail.GetTrailStatusInput) cloudtrail.GetTrailStatusRequest
@@ -84,6 +86,8 @@ type ClientAPI interface {
 	LookupEventsRequest(*cloudtrail.LookupEventsInput) cloudtrail.LookupEventsRequest
 
 	PutEventSelectorsRequest(*cloudtrail.PutEventSelectorsInput) cloudtrail.PutEventSelectorsRequest
+
+	PutInsightSelectorsRequest(*cloudtrail.PutInsightSelectorsInput) cloudtrail.PutInsightSelectorsRequest
 
 	RemoveTagsRequest(*cloudtrail.RemoveTagsInput) cloudtrail.RemoveTagsRequest
 

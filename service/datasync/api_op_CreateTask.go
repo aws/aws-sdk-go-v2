@@ -49,6 +49,11 @@ type CreateTaskInput struct {
 	// see the operation.
 	Options *Options `type:"structure"`
 
+	// Specifies a schedule used to periodically transfer files from a source to
+	// a destination location. The schedule should be specified in UTC time. For
+	// more information, see task-scheduling.
+	Schedule *TaskSchedule `type:"structure"`
+
 	// The Amazon Resource Name (ARN) of the source location for the task.
 	//
 	// SourceLocationArn is a required field
@@ -81,6 +86,11 @@ func (s *CreateTaskInput) Validate() error {
 	if s.Options != nil {
 		if err := s.Options.Validate(); err != nil {
 			invalidParams.AddNested("Options", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Schedule != nil {
+		if err := s.Schedule.Validate(); err != nil {
+			invalidParams.AddNested("Schedule", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Tags != nil {

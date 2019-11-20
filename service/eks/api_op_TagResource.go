@@ -14,7 +14,7 @@ type TagResourceInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the resource to which to add tags. Currently,
-	// the supported resources are Amazon EKS clusters.
+	// the supported resources are Amazon EKS clusters and managed node groups.
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `location:"uri" locationName:"resourceArn" type:"string" required:"true"`
@@ -98,7 +98,10 @@ const opTagResource = "TagResource"
 // Associates the specified tags to a resource with the specified resourceArn.
 // If existing tags on a resource are not specified in the request parameters,
 // they are not changed. When a resource is deleted, the tags associated with
-// that resource are deleted as well.
+// that resource are deleted as well. Tags that you create for Amazon EKS resources
+// do not propagate to any other resources associated with the cluster. For
+// example, if you tag a cluster with this operation, that tag does not automatically
+// propagate to the subnets and worker nodes associated with the cluster.
 //
 //    // Example sending a request using TagResourceRequest.
 //    req := client.TagResourceRequest(params)

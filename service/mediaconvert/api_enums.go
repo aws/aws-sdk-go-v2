@@ -437,10 +437,12 @@ func (enum AudioDefaultSelection) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Choosing FOLLOW_INPUT will cause the ISO 639 language code of the output
-// to follow the ISO 639 language code of the input. The language specified
-// for languageCode' will be used when USE_CONFIGURED is selected or when FOLLOW_INPUT
-// is selected but there is no ISO 639 language code specified by the input.
+// Specify which source for language code takes precedence for this audio track.
+// When you choose Follow input (FOLLOW_INPUT), the service uses the language
+// code from the input track if it's present. If there's no languge code on
+// the input track, the service uses the code that you specify in the setting
+// Language code (languageCode or customLanguageCode). When you choose Use configured
+// (USE_CONFIGURED), the service uses the language code that you specify.
 type AudioLanguageCodeControl string
 
 // Enum values for AudioLanguageCodeControl
@@ -1394,6 +1396,45 @@ func (enum DescribeEndpointsMode) MarshalValue() (string, error) {
 }
 
 func (enum DescribeEndpointsMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Use Dolby Vision Mode to choose how the service will handle Dolby Vision
+// MaxCLL and MaxFALL properies.
+type DolbyVisionLevel6Mode string
+
+// Enum values for DolbyVisionLevel6Mode
+const (
+	DolbyVisionLevel6ModePassthrough DolbyVisionLevel6Mode = "PASSTHROUGH"
+	DolbyVisionLevel6ModeRecalculate DolbyVisionLevel6Mode = "RECALCULATE"
+	DolbyVisionLevel6ModeSpecify     DolbyVisionLevel6Mode = "SPECIFY"
+)
+
+func (enum DolbyVisionLevel6Mode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DolbyVisionLevel6Mode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// In the current MediaConvert implementation, the Dolby Vision profile is always
+// 5 (PROFILE_5). Therefore, all of your inputs must contain Dolby Vision frame
+// interleaved data.
+type DolbyVisionProfile string
+
+// Enum values for DolbyVisionProfile
+const (
+	DolbyVisionProfileProfile5 DolbyVisionProfile = "PROFILE_5"
+)
+
+func (enum DolbyVisionProfile) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DolbyVisionProfile) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -3099,14 +3140,15 @@ func (enum H265UnregisteredSeiTimecode) MarshalValueBuf(b []byte) ([]byte, error
 }
 
 // If the location of parameter set NAL units doesn't matter in your workflow,
-// ignore this setting. Use this setting in your CMAF, DASH, or file MP4 output.
-// For file MP4 outputs, choosing HVC1 can create video that doesn't work properly
-// with some downstream systems and video players. Choose HVC1 to mark your
-// output as HVC1. This makes your output compliant with the following specification:
-// ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these
-// outputs, the service stores parameter set NAL units in the sample headers
-// but not in the samples directly. The service defaults to marking your output
-// as HEV1. For these outputs, the service writes parameter set NAL units directly
+// ignore this setting. Use this setting only with CMAF or DASH outputs, or
+// with standalone file outputs in an MPEG-4 container (MP4 outputs). Choose
+// HVC1 to mark your output as HVC1. This makes your output compliant with the
+// following specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15
+// 3rd Edition. For these outputs, the service stores parameter set NAL units
+// in the sample headers but not in the samples directly. For MP4 outputs, when
+// you choose HVC1, your output video might not work properly with some downstream
+// systems and video players. The service defaults to marking your output as
+// HEV1. For these outputs, the service writes parameter set NAL units directly
 // into the samples.
 type H265WriteMp4PackagingType string
 
@@ -4454,6 +4496,71 @@ func (enum Mp4MoovPlacement) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// Use this setting only in DASH output groups that include sidecar TTML or
+// IMSC captions. You specify sidecar captions in a separate output from your
+// audio and video. Choose Raw (RAW) for captions in a single XML file in a
+// raw container. Choose Fragmented MPEG-4 (FRAGMENTED_MP4) for captions in
+// XML format contained within fragmented MP4 files. This set of fragmented
+// MP4 files is separate from your video and audio fragmented MP4 files.
+type MpdCaptionContainerType string
+
+// Enum values for MpdCaptionContainerType
+const (
+	MpdCaptionContainerTypeRaw           MpdCaptionContainerType = "RAW"
+	MpdCaptionContainerTypeFragmentedMp4 MpdCaptionContainerType = "FRAGMENTED_MP4"
+)
+
+func (enum MpdCaptionContainerType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MpdCaptionContainerType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Use this setting only when you specify SCTE-35 markers from ESAM. Choose
+// INSERT to put SCTE-35 markers in this output at the insertion points that
+// you specify in an ESAM XML document. Provide the document in the setting
+// SCC XML (sccXml).
+type MpdScte35Esam string
+
+// Enum values for MpdScte35Esam
+const (
+	MpdScte35EsamInsert MpdScte35Esam = "INSERT"
+	MpdScte35EsamNone   MpdScte35Esam = "NONE"
+)
+
+func (enum MpdScte35Esam) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MpdScte35Esam) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Ignore this setting unless you have SCTE-35 markers in your input video file.
+// Choose Passthrough (PASSTHROUGH) if you want SCTE-35 markers that appear
+// in your input to also appear in this output. Choose None (NONE) if you don't
+// want those SCTE-35 markers in this output.
+type MpdScte35Source string
+
+// Enum values for MpdScte35Source
+const (
+	MpdScte35SourcePassthrough MpdScte35Source = "PASSTHROUGH"
+	MpdScte35SourceNone        MpdScte35Source = "NONE"
+)
+
+func (enum MpdScte35Source) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MpdScte35Source) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Adaptive quantization. Allows intra-frame quantizers to vary to improve visual
 // quality.
 type Mpeg2AdaptiveQuantization string
@@ -5270,6 +5377,26 @@ func (enum RespondToAfd) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// Choose an Amazon S3 canned ACL for MediaConvert to apply to this output.
+type S3ObjectCannedAcl string
+
+// Enum values for S3ObjectCannedAcl
+const (
+	S3ObjectCannedAclPublicRead             S3ObjectCannedAcl = "PUBLIC_READ"
+	S3ObjectCannedAclAuthenticatedRead      S3ObjectCannedAcl = "AUTHENTICATED_READ"
+	S3ObjectCannedAclBucketOwnerRead        S3ObjectCannedAcl = "BUCKET_OWNER_READ"
+	S3ObjectCannedAclBucketOwnerFullControl S3ObjectCannedAcl = "BUCKET_OWNER_FULL_CONTROL"
+)
+
+func (enum S3ObjectCannedAcl) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum S3ObjectCannedAcl) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Specify how you want your data keys managed. AWS uses data keys to encrypt
 // your content. AWS also encrypts the data keys themselves, using a customer
 // master key (CMK), and then stores the encrypted data keys alongside your
@@ -5333,6 +5460,7 @@ type SccDestinationFramerate string
 const (
 	SccDestinationFramerateFramerate2397             SccDestinationFramerate = "FRAMERATE_23_97"
 	SccDestinationFramerateFramerate24               SccDestinationFramerate = "FRAMERATE_24"
+	SccDestinationFramerateFramerate25               SccDestinationFramerate = "FRAMERATE_25"
 	SccDestinationFramerateFramerate2997Dropframe    SccDestinationFramerate = "FRAMERATE_29_97_DROPFRAME"
 	SccDestinationFramerateFramerate2997NonDropframe SccDestinationFramerate = "FRAMERATE_29_97_NON_DROPFRAME"
 )

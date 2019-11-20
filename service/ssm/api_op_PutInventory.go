@@ -13,7 +13,7 @@ import (
 type PutInventoryInput struct {
 	_ struct{} `type:"structure"`
 
-	// One or more instance IDs where you want to add or update inventory items.
+	// An instance ID where you want to add or update inventory items.
 	//
 	// InstanceId is a required field
 	InstanceId *string `type:"string" required:"true"`

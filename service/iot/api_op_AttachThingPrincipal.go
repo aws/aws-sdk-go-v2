@@ -14,7 +14,8 @@ import (
 type AttachThingPrincipalInput struct {
 	_ struct{} `type:"structure"`
 
-	// The principal, such as a certificate or other credential.
+	// The principal, which can be a certificate ARN (as returned from the CreateCertificate
+	// operation) or an Amazon Cognito ID.
 	//
 	// Principal is a required field
 	Principal *string `location:"header" locationName:"x-amzn-principal" type:"string" required:"true"`

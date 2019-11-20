@@ -13,7 +13,7 @@ import (
 type AbortMultipartUploadInput struct {
 	_ struct{} `type:"structure"`
 
-	// Name of the bucket to which the multipart upload was initiated.
+	// The bucket to which the upload was taking place.
 	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
@@ -131,11 +131,31 @@ const opAbortMultipartUpload = "AbortMultipartUpload"
 // AbortMultipartUploadRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Aborts a multipart upload.
+// This operation aborts a multipart upload. After a multipart upload is aborted,
+// no additional parts can be uploaded using that upload ID. The storage consumed
+// by any previously uploaded parts will be freed. However, if any part uploads
+// are currently in progress, those part uploads might or might not succeed.
+// As a result, it might be necessary to abort a given multipart upload multiple
+// times in order to completely free all storage consumed by all parts.
 //
 // To verify that all parts have been removed, so you don't get charged for
-// the part storage, you should call the List Parts operation and ensure the
+// the part storage, you should call the ListParts operation and ensure the
 // parts list is empty.
+//
+// For information on permissions required to use the multipart upload API,
+// see Multipart Upload API and Permissions (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html).
+//
+// The following operations are related to AbortMultipartUpload
+//
+//    * CreateMultipartUpload
+//
+//    * UploadPart
+//
+//    * CompleteMultipartUpload
+//
+//    * ListParts
+//
+//    * ListMultipartUploads
 //
 //    // Example sending a request using AbortMultipartUploadRequest.
 //    req := client.AbortMultipartUploadRequest(params)

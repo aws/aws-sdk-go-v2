@@ -13,6 +13,31 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// An AutoScaling group that is associated with an Amazon EKS managed node group.
+type AutoScalingGroup struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the AutoScaling group associated with an Amazon EKS managed node
+	// group.
+	Name *string `locationName:"name" type:"string"`
+}
+
+// String returns the string representation
+func (s AutoScalingGroup) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AutoScalingGroup) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // An object representing the certificate-authority-data for your cluster.
 type Certificate struct {
 	_ struct{} `type:"structure"`
@@ -90,7 +115,8 @@ type Cluster struct {
 
 	// The metadata that you apply to the cluster to assist with categorization
 	// and organization. Each tag consists of a key and an optional value, both
-	// of which you define.
+	// of which you define. Cluster tags do not propagate to any other resources
+	// associated with the cluster.
 	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 
 	// The Kubernetes server version for the cluster.
@@ -290,6 +316,99 @@ func (s Identity) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An object representing an issue with an Amazon EKS resource.
+type Issue struct {
+	_ struct{} `type:"structure"`
+
+	// A brief description of the error.
+	//
+	//    * AutoScalingGroupNotFound: We couldn't find the Auto Scaling group associated
+	//    with the managed node group. You may be able to recreate an Auto Scaling
+	//    group with the same settings to recover.
+	//
+	//    * Ec2SecurityGroupNotFound: We couldn't find the cluster security group
+	//    for the cluster. You must recreate your cluster.
+	//
+	//    * Ec2SecurityGroupDeletionFailure: We could not delete the remote access
+	//    security group for your managed node group. Remove any dependencies from
+	//    the security group.
+	//
+	//    * Ec2LaunchTemplateNotFound: We couldn't find the Amazon EC2 launch template
+	//    for your managed node group. You may be able to recreate a launch template
+	//    with the same settings to recover.
+	//
+	//    * Ec2LaunchTemplateVersionMismatch: The Amazon EC2 launch template version
+	//    for your managed node group does not match the version that Amazon EKS
+	//    created. You may be able to revert to the Amazon EKS-created version to
+	//    recover.
+	//
+	//    * IamInstanceProfileNotFound: We couldn't find the IAM instance profile
+	//    for your managed node group. You may be able to recreate an instance profile
+	//    with the same settings to recover.
+	//
+	//    * IamNodeRoleNotFound: We couldn't find the IAM role for your managed
+	//    node group. You may be able to recreate an IAM role with the same settings
+	//    to recover.
+	//
+	//    * AsgInstanceLaunchFailures: Your Auto Scaling group is experiencing failures
+	//    while attempting to launch instances.
+	//
+	//    * InstanceLimitExceeded: Your AWS account is unable to launch any more
+	//    instances of the specified instance type. You may be able to request an
+	//    Amazon EC2 instance limit increase to recover.
+	//
+	//    * InsufficientFreeAddresses: One or more of the subnets associated with
+	//    your managed node group does not have enough available IP addresses for
+	//    new nodes.
+	//
+	//    * AccessDenied: Amazon EKS and or one or more of your managed nodes is
+	//    unable to communicate with your cluster API server.
+	//
+	//    * InternalFailure: These errors are usually caused by an Amazon EKS server-side
+	//    issue.
+	Code NodegroupIssueCode `locationName:"code" type:"string" enum:"true"`
+
+	// The error message associated with the issue.
+	Message *string `locationName:"message" type:"string"`
+
+	// The AWS resources that are afflicted by this issue.
+	ResourceIds []string `locationName:"resourceIds" type:"list"`
+}
+
+// String returns the string representation
+func (s Issue) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Issue) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Code) > 0 {
+		v := s.Code
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "code", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Message != nil {
+		v := *s.Message
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "message", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceIds != nil {
+		v := s.ResourceIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "resourceIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // An object representing the enabled or disabled Kubernetes control plane logs
 // for your cluster.
 type LogSetup struct {
@@ -363,6 +482,377 @@ func (s Logging) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An object representing an Amazon EKS managed node group.
+type Nodegroup struct {
+	_ struct{} `type:"structure"`
+
+	// The AMI type associated with your node group. GPU instance types should use
+	// the AL2_x86_64_GPU AMI type, which uses the Amazon EKS-optimized Linux AMI
+	// with GPU support; non-GPU instances should use the AL2_x86_64 AMI type, which
+	// uses the Amazon EKS-optimized Linux AMI.
+	AmiType AMITypes `locationName:"amiType" type:"string" enum:"true"`
+
+	// The name of the cluster that the managed node group resides in.
+	ClusterName *string `locationName:"clusterName" type:"string"`
+
+	// The Unix epoch timestamp in seconds for when the managed node group was created.
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
+
+	// The root device disk size (in GiB) for your node group instances. The default
+	// disk size is 20 GiB.
+	DiskSize *int64 `locationName:"diskSize" type:"integer"`
+
+	// The health status of the node group. If there are issues with your node group's
+	// health, they are listed here.
+	Health *NodegroupHealth `locationName:"health" type:"structure"`
+
+	// The instance types associated with your node group.
+	InstanceTypes []string `locationName:"instanceTypes" type:"list"`
+
+	// The Kubernetes labels applied to the nodes in the node group.
+	//
+	// Only labels that are applied with the Amazon EKS API are shown here. There
+	// may be other Kubernetes labels applied to the nodes in this group.
+	Labels map[string]string `locationName:"labels" type:"map"`
+
+	// The Unix epoch timestamp in seconds for when the managed node group was last
+	// modified.
+	ModifiedAt *time.Time `locationName:"modifiedAt" type:"timestamp"`
+
+	// The IAM role associated with your node group. The Amazon EKS worker node
+	// kubelet daemon makes calls to AWS APIs on your behalf. Worker nodes receive
+	// permissions for these API calls through an IAM instance profile and associated
+	// policies. Before you can launch worker nodes and register them into a cluster,
+	// you must create an IAM role for those worker nodes to use when they are launched.
+	// For more information, see Amazon EKS Worker Node IAM Role (https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html)
+	// in the Amazon EKS User Guide .
+	NodeRole *string `locationName:"nodeRole" type:"string"`
+
+	// The Amazon Resource Name (ARN) associated with the managed node group.
+	NodegroupArn *string `locationName:"nodegroupArn" type:"string"`
+
+	// The name associated with an Amazon EKS managed node group.
+	NodegroupName *string `locationName:"nodegroupName" type:"string"`
+
+	// The AMI version of the managed node group. For more information, see Amazon
+	// EKS-Optimized Linux AMI Versions (https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html)
+	// in the Amazon EKS User Guide.
+	ReleaseVersion *string `locationName:"releaseVersion" type:"string"`
+
+	// The remote access (SSH) configuration that is associated with the node group.
+	RemoteAccess *RemoteAccessConfig `locationName:"remoteAccess" type:"structure"`
+
+	// The resources associated with the nodegroup, such as AutoScaling groups and
+	// security groups for remote access.
+	Resources *NodegroupResources `locationName:"resources" type:"structure"`
+
+	// The scaling configuration details for the AutoScaling group that is associated
+	// with your node group.
+	ScalingConfig *NodegroupScalingConfig `locationName:"scalingConfig" type:"structure"`
+
+	// The current status of the managed node group.
+	Status NodegroupStatus `locationName:"status" type:"string" enum:"true"`
+
+	// The subnets allowed for the AutoScaling group that is associated with your
+	// node group. These subnets must have the following tag: kubernetes.io/cluster/CLUSTER_NAME,
+	// where CLUSTER_NAME is replaced with the name of your cluster.
+	Subnets []string `locationName:"subnets" type:"list"`
+
+	// The metadata applied the node group to assist with categorization and organization.
+	// Each tag consists of a key and an optional value, both of which you define.
+	// Node group tags do not propagate to any other resources associated with the
+	// node group, such as the Amazon EC2 instances or subnets.
+	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
+
+	// The Kubernetes version of the managed node group.
+	Version *string `locationName:"version" type:"string"`
+}
+
+// String returns the string representation
+func (s Nodegroup) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Nodegroup) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.AmiType) > 0 {
+		v := s.AmiType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "amiType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.ClusterName != nil {
+		v := *s.ClusterName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "clusterName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreatedAt != nil {
+		v := *s.CreatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.DiskSize != nil {
+		v := *s.DiskSize
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "diskSize", protocol.Int64Value(v), metadata)
+	}
+	if s.Health != nil {
+		v := s.Health
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "health", v, metadata)
+	}
+	if s.InstanceTypes != nil {
+		v := s.InstanceTypes
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "instanceTypes", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Labels != nil {
+		v := s.Labels
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "labels", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.ModifiedAt != nil {
+		v := *s.ModifiedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "modifiedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.NodeRole != nil {
+		v := *s.NodeRole
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nodeRole", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.NodegroupArn != nil {
+		v := *s.NodegroupArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nodegroupArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.NodegroupName != nil {
+		v := *s.NodegroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nodegroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ReleaseVersion != nil {
+		v := *s.ReleaseVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "releaseVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RemoteAccess != nil {
+		v := s.RemoteAccess
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "remoteAccess", v, metadata)
+	}
+	if s.Resources != nil {
+		v := s.Resources
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "resources", v, metadata)
+	}
+	if s.ScalingConfig != nil {
+		v := s.ScalingConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "scalingConfig", v, metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Subnets != nil {
+		v := s.Subnets
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "subnets", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An object representing the health status of the node group.
+type NodegroupHealth struct {
+	_ struct{} `type:"structure"`
+
+	// Any issues that are associated with the node group.
+	Issues []Issue `locationName:"issues" type:"list"`
+}
+
+// String returns the string representation
+func (s NodegroupHealth) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s NodegroupHealth) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Issues != nil {
+		v := s.Issues
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "issues", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// An object representing the resources associated with the nodegroup, such
+// as AutoScaling groups and security groups for remote access.
+type NodegroupResources struct {
+	_ struct{} `type:"structure"`
+
+	// The autoscaling groups associated with the node group.
+	AutoScalingGroups []AutoScalingGroup `locationName:"autoScalingGroups" type:"list"`
+
+	// The remote access security group associated with the node group. This security
+	// group controls SSH access to the worker nodes.
+	RemoteAccessSecurityGroup *string `locationName:"remoteAccessSecurityGroup" type:"string"`
+}
+
+// String returns the string representation
+func (s NodegroupResources) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s NodegroupResources) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AutoScalingGroups != nil {
+		v := s.AutoScalingGroups
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "autoScalingGroups", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.RemoteAccessSecurityGroup != nil {
+		v := *s.RemoteAccessSecurityGroup
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "remoteAccessSecurityGroup", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An object representing the scaling configuration details for the AutoScaling
+// group that is associated with your node group.
+type NodegroupScalingConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The current number of worker nodes that the managed node group should maintain.
+	DesiredSize *int64 `locationName:"desiredSize" min:"1" type:"integer"`
+
+	// The maximum number of worker nodes that the managed node group can scale
+	// out to. Managed node groups can support up to 100 nodes by default.
+	MaxSize *int64 `locationName:"maxSize" min:"1" type:"integer"`
+
+	// The minimum number of worker nodes that the managed node group can scale
+	// in to. This number must be greater than zero.
+	MinSize *int64 `locationName:"minSize" min:"1" type:"integer"`
+}
+
+// String returns the string representation
+func (s NodegroupScalingConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *NodegroupScalingConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "NodegroupScalingConfig"}
+	if s.DesiredSize != nil && *s.DesiredSize < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("DesiredSize", 1))
+	}
+	if s.MaxSize != nil && *s.MaxSize < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxSize", 1))
+	}
+	if s.MinSize != nil && *s.MinSize < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MinSize", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s NodegroupScalingConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DesiredSize != nil {
+		v := *s.DesiredSize
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "desiredSize", protocol.Int64Value(v), metadata)
+	}
+	if s.MaxSize != nil {
+		v := *s.MaxSize
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxSize", protocol.Int64Value(v), metadata)
+	}
+	if s.MinSize != nil {
+		v := *s.MinSize
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "minSize", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // An object representing the OpenID Connect (https://openid.net/connect/) identity
 // provider information for the cluster.
 type OIDC struct {
@@ -384,6 +874,54 @@ func (s OIDC) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "issuer", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An object representing the remote access configuration for the managed node
+// group.
+type RemoteAccessConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon EC2 SSH key that provides access for SSH communication with the
+	// worker nodes in the managed node group. For more information, see Amazon
+	// EC2 Key Pairs (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
+	// in the Amazon Elastic Compute Cloud User Guide for Linux Instances.
+	Ec2SshKey *string `locationName:"ec2SshKey" type:"string"`
+
+	// The security groups to allow SSH access (port 22) from on the worker nodes.
+	// If you specify an Amazon EC2 SSH key, but you do not specify a source security
+	// group when you create a managed node group, port 22 on the worker nodes is
+	// opened to the internet (0.0.0.0/0). For more information, see Security Groups
+	// for Your VPC (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html)
+	// in the Amazon Virtual Private Cloud User Guide.
+	SourceSecurityGroups []string `locationName:"sourceSecurityGroups" type:"list"`
+}
+
+// String returns the string representation
+func (s RemoteAccessConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RemoteAccessConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Ec2SshKey != nil {
+		v := *s.Ec2SshKey
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ec2SshKey", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SourceSecurityGroups != nil {
+		v := s.SourceSecurityGroups
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "sourceSecurityGroups", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	return nil
 }
@@ -466,6 +1004,51 @@ func (s Update) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// An object representing a Kubernetes label change for a managed node group.
+type UpdateLabelsPayload struct {
+	_ struct{} `type:"structure"`
+
+	// Kubernetes labels to be added or updated.
+	AddOrUpdateLabels map[string]string `locationName:"addOrUpdateLabels" type:"map"`
+
+	// Kubernetes labels to be removed.
+	RemoveLabels []string `locationName:"removeLabels" type:"list"`
+}
+
+// String returns the string representation
+func (s UpdateLabelsPayload) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateLabelsPayload) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AddOrUpdateLabels != nil {
+		v := s.AddOrUpdateLabels
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "addOrUpdateLabels", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.RemoveLabels != nil {
+		v := s.RemoveLabels
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "removeLabels", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	return nil
 }
@@ -587,6 +1170,11 @@ func (s VpcConfigRequest) MarshalFields(e protocol.FieldEncoder) error {
 type VpcConfigResponse struct {
 	_ struct{} `type:"structure"`
 
+	// The cluster security group that was created by Amazon EKS for the cluster.
+	// Managed node groups use this security group for control plane to data plane
+	// communication.
+	ClusterSecurityGroupId *string `locationName:"clusterSecurityGroupId" type:"string"`
+
 	// This parameter indicates whether the Amazon EKS private API server endpoint
 	// is enabled. If the Amazon EKS private API server endpoint is enabled, Kubernetes
 	// API requests that originate from within your cluster's VPC use the private
@@ -618,6 +1206,12 @@ func (s VpcConfigResponse) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s VpcConfigResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ClusterSecurityGroupId != nil {
+		v := *s.ClusterSecurityGroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "clusterSecurityGroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.EndpointPrivateAccess != nil {
 		v := *s.EndpointPrivateAccess
 

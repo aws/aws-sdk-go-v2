@@ -55,6 +55,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice"
+	"github.com/aws/aws-sdk-go-v2/service/dataexchange"
 	"github.com/aws/aws-sdk-go-v2/service/datapipeline"
 	"github.com/aws/aws-sdk-go-v2/service/datasync"
 	"github.com/aws/aws-sdk-go-v2/service/dax"
@@ -133,6 +134,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/mediastoredata"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhub"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhubconfig"
 	"github.com/aws/aws-sdk-go-v2/service/mobile"
 	"github.com/aws/aws-sdk-go-v2/service/mobileanalytics"
 	"github.com/aws/aws-sdk-go-v2/service/mq"
@@ -176,6 +178,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/servicediscovery"
 	"github.com/aws/aws-sdk-go-v2/service/servicequotas"
 	"github.com/aws/aws-sdk-go-v2/service/ses"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2"
 	"github.com/aws/aws-sdk-go-v2/service/sfn"
 	"github.com/aws/aws-sdk-go-v2/service/shield"
 	"github.com/aws/aws-sdk-go-v2/service/signer"
@@ -265,6 +268,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "costandusagereportservice", value: reflect.ValueOf(costandusagereportservice.New(cfg))},
 		{name: "costexplorer", value: reflect.ValueOf(costexplorer.New(cfg))},
 		{name: "databasemigrationservice", value: reflect.ValueOf(databasemigrationservice.New(cfg))},
+		{name: "dataexchange", value: reflect.ValueOf(dataexchange.New(cfg))},
 		{name: "datapipeline", value: reflect.ValueOf(datapipeline.New(cfg))},
 		{name: "datasync", value: reflect.ValueOf(datasync.New(cfg))},
 		{name: "dax", value: reflect.ValueOf(dax.New(cfg))},
@@ -343,6 +347,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "mediastoredata", value: reflect.ValueOf(mediastoredata.New(cfg))},
 		{name: "mediatailor", value: reflect.ValueOf(mediatailor.New(cfg))},
 		{name: "migrationhub", value: reflect.ValueOf(migrationhub.New(cfg))},
+		{name: "migrationhubconfig", value: reflect.ValueOf(migrationhubconfig.New(cfg))},
 		{name: "mobile", value: reflect.ValueOf(mobile.New(cfg))},
 		{name: "mobileanalytics", value: reflect.ValueOf(mobileanalytics.New(cfg))},
 		{name: "mq", value: reflect.ValueOf(mq.New(cfg))},
@@ -386,6 +391,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "servicediscovery", value: reflect.ValueOf(servicediscovery.New(cfg))},
 		{name: "servicequotas", value: reflect.ValueOf(servicequotas.New(cfg))},
 		{name: "ses", value: reflect.ValueOf(ses.New(cfg))},
+		{name: "sesv2", value: reflect.ValueOf(sesv2.New(cfg))},
 		{name: "sfn", value: reflect.ValueOf(sfn.New(cfg))},
 		{name: "shield", value: reflect.ValueOf(shield.New(cfg))},
 		{name: "signer", value: reflect.ValueOf(signer.New(cfg))},

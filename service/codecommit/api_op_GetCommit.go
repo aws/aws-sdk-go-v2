@@ -13,7 +13,7 @@ import (
 type GetCommitInput struct {
 	_ struct{} `type:"structure"`
 
-	// The commit ID. Commit IDs are the full SHA of the commit.
+	// The commit ID. Commit IDs are the full SHA ID of the commit.
 	//
 	// CommitId is a required field
 	CommitId *string `locationName:"commitId" type:"string" required:"true"`

@@ -104,6 +104,11 @@ type CreateAutoScalingGroupInput struct {
 	// in the Amazon EC2 Auto Scaling User Guide.
 	LoadBalancerNames []string `type:"list"`
 
+	// The maximum amount of time, in seconds, that an instance can be in service.
+	//
+	// Valid Range: Minimum value of 604800.
+	MaxInstanceLifetime *int64 `type:"integer"`
+
 	// The maximum size of the group.
 	//
 	// MaxSize is a required field

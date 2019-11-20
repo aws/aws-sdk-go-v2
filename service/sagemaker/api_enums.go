@@ -163,6 +163,23 @@ func (enum CompressionType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type ContainerMode string
+
+// Enum values for ContainerMode
+const (
+	ContainerModeSingleModel ContainerMode = "SingleModel"
+	ContainerModeMultiModel  ContainerMode = "MultiModel"
+)
+
+func (enum ContainerMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ContainerMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ContentClassifier string
 
 // Enum values for ContentClassifier

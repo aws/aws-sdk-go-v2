@@ -60,11 +60,11 @@ const opDeleteRepository = "DeleteRepository"
 // AWS CodeCommit.
 //
 // Deletes a repository. If a specified repository was already deleted, a null
-// repository ID will be returned.
+// repository ID is returned.
 //
 // Deleting a repository also deletes all associated objects and metadata. After
 // a repository is deleted, all future push calls to the deleted repository
-// will fail.
+// fail.
 //
 //    // Example sending a request using DeleteRepositoryRequest.
 //    req := client.DeleteRepositoryRequest(params)

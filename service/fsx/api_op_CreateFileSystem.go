@@ -41,18 +41,23 @@ type CreateFileSystemInput struct {
 
 	// The storage capacity of the file system being created.
 	//
-	// For Windows file systems, the storage capacity has a minimum of 300 GiB,
-	// and a maximum of 65,536 GiB.
+	// For Windows file systems, valid values are 32 GiB - 65,536 GiB.
 	//
-	// For Lustre file systems, the storage capacity has a minimum of 3,600 GiB.
-	// Storage capacity is provisioned in increments of 3,600 GiB.
+	// For Lustre file systems, valid values are 1,200, 2,400, 3,600, then continuing
+	// in increments of 3600 GiB.
 	//
 	// StorageCapacity is a required field
 	StorageCapacity *int64 `min:"1" type:"integer" required:"true"`
 
-	// The IDs of the subnets that the file system will be accessible from. File
-	// systems support only one subnet. The file server is also launched in that
-	// subnet's Availability Zone.
+	// Specifies the IDs of the subnets that the file system will be accessible
+	// from. For Windows MULTI_AZ_1 file system deployment types, provide exactly
+	// two subnet IDs, one for the preferred file server and one for the standy
+	// file server. You specify one of these subnets as the preferred subnet using
+	// the WindowsConfiguration > PreferredSubnetID property.
+	//
+	// For Windows SINGLE_AZ_1 file system deployment types and Lustre file systems,
+	// provide exactly one subnet ID. The file server is launched in that subnet's
+	// Availability Zone.
 	//
 	// SubnetIds is a required field
 	SubnetIds []string `type:"list" required:"true"`

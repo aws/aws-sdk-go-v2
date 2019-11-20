@@ -14,6 +14,8 @@ import (
 type DeleteBucketCorsInput struct {
 	_ struct{} `type:"structure"`
 
+	// Specifies the bucket whose cors configuration is being deleted.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 }
@@ -75,7 +77,21 @@ const opDeleteBucketCors = "DeleteBucketCors"
 // DeleteBucketCorsRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Deletes the CORS configuration information set for the bucket.
+// Deletes the cors configuration information set for the bucket.
+//
+// To use this operation, you must have permission to perform the s3:PutBucketCORS
+// action. The bucket owner has this permission by default and can grant this
+// permission to others.
+//
+// For information more about cors, go to Enabling Cross-Origin Resource Sharing
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html) in the Amazon
+// Simple Storage Service Developer Guide.
+//
+// Related Resources:
+//
+//    *
+//
+//    * RESTOPTIONSobject
 //
 //    // Example sending a request using DeleteBucketCorsRequest.
 //    req := client.DeleteBucketCorsRequest(params)

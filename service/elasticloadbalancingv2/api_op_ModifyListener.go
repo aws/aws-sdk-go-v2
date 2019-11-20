@@ -23,10 +23,10 @@ type ModifyListenerInput struct {
 	// The actions for the default rule. The rule must include one forward action
 	// or one or more fixed-response actions.
 	//
-	// If the action type is forward, you specify a target group. The protocol of
-	// the target group must be HTTP or HTTPS for an Application Load Balancer.
-	// The protocol of the target group must be TCP, TLS, UDP, or TCP_UDP for a
-	// Network Load Balancer.
+	// If the action type is forward, you specify one or more target groups. The
+	// protocol of the target group must be HTTP or HTTPS for an Application Load
+	// Balancer. The protocol of the target group must be TCP, TLS, UDP, or TCP_UDP
+	// for a Network Load Balancer.
 	//
 	// [HTTPS listeners] If the action type is authenticate-oidc, you authenticate
 	// users through an identity provider that is OpenID Connect (OIDC) compliant.
@@ -106,13 +106,17 @@ const opModifyListener = "ModifyListener"
 // ModifyListenerRequest returns a request value for making API operation for
 // Elastic Load Balancing.
 //
-// Modifies the specified properties of the specified listener.
+// Replaces the specified properties of the specified listener. Any properties
+// that you do not specify remain unchanged.
 //
-// Any properties that you do not specify retain their current values. However,
-// changing the protocol from HTTPS to HTTP, or from TLS to TCP, removes the
+// Changing the protocol from HTTPS to HTTP, or from TLS to TCP, removes the
 // security policy and default certificate properties. If you change the protocol
 // from HTTP to HTTPS, or from TCP to TLS, you must add the security policy
 // and default certificate properties.
+//
+// To add an item to a list, remove an item from a list, or update an item in
+// a list, you must provide the entire list. For example, to add an action,
+// specify a list with the current actions plus the new action.
 //
 //    // Example sending a request using ModifyListenerRequest.
 //    req := client.ModifyListenerRequest(params)

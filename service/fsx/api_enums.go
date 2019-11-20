@@ -163,3 +163,20 @@ func (enum ServiceLimit) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
+
+type WindowsDeploymentType string
+
+// Enum values for WindowsDeploymentType
+const (
+	WindowsDeploymentTypeMultiAz1  WindowsDeploymentType = "MULTI_AZ_1"
+	WindowsDeploymentTypeSingleAz1 WindowsDeploymentType = "SINGLE_AZ_1"
+)
+
+func (enum WindowsDeploymentType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum WindowsDeploymentType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

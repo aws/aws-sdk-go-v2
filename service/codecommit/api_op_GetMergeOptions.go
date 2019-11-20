@@ -13,20 +13,19 @@ type GetMergeOptionsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The level of conflict detail to use. If unspecified, the default FILE_LEVEL
-	// is used, which will return a not mergeable result if the same file has differences
-	// in both branches. If LINE_LEVEL is specified, a conflict will be considered
-	// not mergeable if the same file in both branches has differences on the same
-	// line.
+	// is used, which returns a not-mergeable result if the same file has differences
+	// in both branches. If LINE_LEVEL is specified, a conflict is considered not
+	// mergeable if the same file in both branches has differences on the same line.
 	ConflictDetailLevel ConflictDetailLevelTypeEnum `locationName:"conflictDetailLevel" type:"string" enum:"true"`
 
 	// Specifies which branch to use when resolving conflicts, or whether to attempt
 	// automatically merging two versions of a file. The default is NONE, which
 	// requires any conflicts to be resolved manually before the merge operation
-	// will be successful.
+	// is successful.
 	ConflictResolutionStrategy ConflictResolutionStrategyTypeEnum `locationName:"conflictResolutionStrategy" type:"string" enum:"true"`
 
 	// The branch, tag, HEAD, or other fully qualified reference used to identify
-	// a commit. For example, a branch name or a full commit ID.
+	// a commit (for example, a branch name or a full commit ID).
 	//
 	// DestinationCommitSpecifier is a required field
 	DestinationCommitSpecifier *string `locationName:"destinationCommitSpecifier" type:"string" required:"true"`
@@ -38,7 +37,7 @@ type GetMergeOptionsInput struct {
 	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string" required:"true"`
 
 	// The branch, tag, HEAD, or other fully qualified reference used to identify
-	// a commit. For example, a branch name or a full commit ID.
+	// a commit (for example, a branch name or a full commit ID).
 	//
 	// SourceCommitSpecifier is a required field
 	SourceCommitSpecifier *string `locationName:"sourceCommitSpecifier" type:"string" required:"true"`
@@ -110,8 +109,8 @@ const opGetMergeOptions = "GetMergeOptions"
 // AWS CodeCommit.
 //
 // Returns information about the merge options available for merging two specified
-// branches. For details about why a particular merge option is not available,
-// use GetMergeConflicts or DescribeMergeConflicts.
+// branches. For details about why a merge option is not available, use GetMergeConflicts
+// or DescribeMergeConflicts.
 //
 //    // Example sending a request using GetMergeOptionsRequest.
 //    req := client.GetMergeOptionsRequest(params)

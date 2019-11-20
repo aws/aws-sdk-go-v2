@@ -14,7 +14,8 @@ type ListTagsForResourceInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) that identifies the resource for which to
-	// list the tags. Currently, the supported resources are Amazon EKS clusters.
+	// list the tags. Currently, the supported resources are Amazon EKS clusters
+	// and managed node groups.
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `location:"uri" locationName:"resourceArn" type:"string" required:"true"`

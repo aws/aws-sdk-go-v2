@@ -13,15 +13,22 @@ import (
 type PutObjectTaggingInput struct {
 	_ struct{} `type:"structure" payload:"Tagging"`
 
+	// The bucket containing the object.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
+	// Name of the tag.
+	//
 	// Key is a required field
 	Key *string `location:"uri" locationName:"Key" min:"1" type:"string" required:"true"`
 
+	// Container for the TagSet and Tag elements
+	//
 	// Tagging is a required field
 	Tagging *Tagging `locationName:"Tagging" type:"structure" required:"true" xmlURI:"http://s3.amazonaws.com/doc/2006-03-01/"`
 
+	// The versionId of the object that the tag-set will be added to.
 	VersionId *string `location:"querystring" locationName:"versionId" type:"string"`
 }
 
@@ -100,6 +107,7 @@ func (s PutObjectTaggingInput) MarshalFields(e protocol.FieldEncoder) error {
 type PutObjectTaggingOutput struct {
 	_ struct{} `type:"structure"`
 
+	// The versionId of the object the tag-set was added to.
 	VersionId *string `location:"header" locationName:"x-amz-version-id" type:"string"`
 }
 
@@ -125,6 +133,43 @@ const opPutObjectTagging = "PutObjectTagging"
 // Amazon Simple Storage Service.
 //
 // Sets the supplied tag-set to an object that already exists in a bucket
+//
+// A tag is a key-value pair. You can associate tags with an object by sending
+// a PUT request against the tagging subresource that is associated with the
+// object. You can retrieve tags by sending a GET request. For more information,
+// see GetObjectTagging.
+//
+// For tagging-related restrictions related to characters and encodings, see
+// Tag Restrictions (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html).
+// Note that Amazon S3 limits the maximum number of tags to 10 tags per object.
+//
+// To use this operation, you must have permission to perform the s3:PutObjectTagging
+// action. By default, the bucket owner has this permission and can grant this
+// permission to others.
+//
+// To put tags of any other version, use the versionId query parameter. You
+// also need permission for the s3:PutObjectVersionTagging action.
+//
+// For information about the Amazon S3 object tagging feature, see Object Tagging
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html).
+//
+// Special Errors
+//
+//    * Code: InvalidTagError Cause: The tag provided was not a valid tag. This
+//    error can occur if the tag did not pass input validation. For more information,
+//    see Object Tagging (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html).
+//
+//    * Code: MalformedXMLError Cause: The XML provided does not match the schema.
+//
+//    * Code: OperationAbortedError Cause: A conflicting conditional operation
+//    is currently in progress against this resource. Please try again.
+//
+//    * Code: InternalError Cause: The service was unable to apply the provided
+//    tag to the object.
+//
+// Related Resources
+//
+//    * GetObjectTagging
 //
 //    // Example sending a request using PutObjectTaggingRequest.
 //    req := client.PutObjectTaggingRequest(params)

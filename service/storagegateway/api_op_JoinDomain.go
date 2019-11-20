@@ -40,8 +40,14 @@ type JoinDomainInput struct {
 	// Password is a required field
 	Password *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
+	// Specifies the time in seconds, in which the JoinDomain operation must complete.
+	// The default is 20 seconds.
+	TimeoutInSeconds *int64 `type:"integer"`
+
 	// Sets the user name of user who has permission to add the gateway to the Active
-	// Directory domain.
+	// Directory domain. The domain user account should be enabled to join computers
+	// to the domain. For example, you can use the domain administrator account
+	// or an account with delegated permissions to join computers to the domain.
 	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`
@@ -96,6 +102,27 @@ func (s *JoinDomainInput) Validate() error {
 // JoinDomainOutput
 type JoinDomainOutput struct {
 	_ struct{} `type:"structure"`
+
+	// Indicates the status of the gateway as a member of the Active Directory domain.
+	//
+	//    * ACCESS_DENIED: Indicates that the JoinDomain operation failed due to
+	//    an authentication error.
+	//
+	//    * DETACHED: Indicates that gateway is not joined to a domain.
+	//
+	//    * JOINED: Indicates that the gateway has successfully joined a domain.
+	//
+	//    * JOINING: Indicates that a JoinDomain operation is in progress.
+	//
+	//    * NETWORK_ERROR: Indicates that JoinDomain operation failed due to a network
+	//    or connectivity error.
+	//
+	//    * TIMEOUT: Indicates that the JoinDomain operation failed because the
+	//    operation didn't complete within the allotted time.
+	//
+	//    * UNKNOWN_ERROR: Indicates that the JoinDomain operation failed due to
+	//    another type of error.
+	ActiveDirectoryStatus ActiveDirectoryStatus `type:"string" enum:"true"`
 
 	// The unique Amazon Resource Name (ARN) of the gateway that joined the domain.
 	GatewayARN *string `min:"50" type:"string"`

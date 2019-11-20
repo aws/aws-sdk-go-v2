@@ -111,6 +111,8 @@ type ClientAPI interface {
 
 	DeleteVolumeRequest(*storagegateway.DeleteVolumeInput) storagegateway.DeleteVolumeRequest
 
+	DescribeAvailabilityMonitorTestRequest(*storagegateway.DescribeAvailabilityMonitorTestInput) storagegateway.DescribeAvailabilityMonitorTestRequest
+
 	DescribeBandwidthRateLimitRequest(*storagegateway.DescribeBandwidthRateLimitInput) storagegateway.DescribeBandwidthRateLimitRequest
 
 	DescribeCacheRequest(*storagegateway.DescribeCacheInput) storagegateway.DescribeCacheRequest
@@ -184,6 +186,8 @@ type ClientAPI interface {
 	SetSMBGuestPasswordRequest(*storagegateway.SetSMBGuestPasswordInput) storagegateway.SetSMBGuestPasswordRequest
 
 	ShutdownGatewayRequest(*storagegateway.ShutdownGatewayInput) storagegateway.ShutdownGatewayRequest
+
+	StartAvailabilityMonitorTestRequest(*storagegateway.StartAvailabilityMonitorTestInput) storagegateway.StartAvailabilityMonitorTestRequest
 
 	StartGatewayRequest(*storagegateway.StartGatewayInput) storagegateway.StartGatewayRequest
 

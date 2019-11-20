@@ -18,7 +18,7 @@ type InviteUsersInput struct {
 	// AccountId is a required field
 	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
 
-	// The user email addresses to which to send the invite.
+	// The user email addresses to which to send the email invitation.
 	//
 	// UserEmailList is a required field
 	UserEmailList []string `type:"list" required:"true"`
@@ -75,7 +75,7 @@ func (s InviteUsersInput) MarshalFields(e protocol.FieldEncoder) error {
 type InviteUsersOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The invite details.
+	// The email invitation details.
 	Invites []Invite `type:"list"`
 }
 
@@ -106,9 +106,9 @@ const opInviteUsers = "InviteUsers"
 // InviteUsersRequest returns a request value for making API operation for
 // Amazon Chime.
 //
-// Sends email invites to as many as 50 users, inviting them to the specified
-// Amazon Chime Team account. Only Team account types are currently supported
-// for this action.
+// Sends email to a maximum of 50 users, inviting them to the specified Amazon
+// Chime Team account. Only Team account types are currently supported for this
+// action.
 //
 //    // Example sending a request using InviteUsersRequest.
 //    req := client.InviteUsersRequest(params)

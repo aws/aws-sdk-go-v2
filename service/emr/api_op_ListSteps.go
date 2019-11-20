@@ -21,7 +21,9 @@ type ListStepsInput struct {
 	// The pagination token that indicates the next set of results to retrieve.
 	Marker *string `type:"string"`
 
-	// The filter to limit the step list based on the identifier of the steps.
+	// The filter to limit the step list based on the identifier of the steps. You
+	// can specify a maximum of ten Step IDs. The character constraint applies to
+	// the overall length of the array.
 	StepIds []string `type:"list"`
 
 	// The filter to limit the step list based on certain states.
@@ -70,7 +72,8 @@ const opListSteps = "ListSteps"
 // Amazon Elastic MapReduce.
 //
 // Provides a list of steps for the cluster in reverse order unless you specify
-// stepIds with the request.
+// stepIds with the request of filter by StepStates. You can specify a maximum
+// of ten stepIDs.
 //
 //    // Example sending a request using ListStepsRequest.
 //    req := client.ListStepsRequest(params)

@@ -370,6 +370,8 @@ type ClientAPI interface {
 
 	DescribeExportTasksRequest(*ec2.DescribeExportTasksInput) ec2.DescribeExportTasksRequest
 
+	DescribeFastSnapshotRestoresRequest(*ec2.DescribeFastSnapshotRestoresInput) ec2.DescribeFastSnapshotRestoresRequest
+
 	DescribeFleetHistoryRequest(*ec2.DescribeFleetHistoryInput) ec2.DescribeFleetHistoryRequest
 
 	DescribeFleetInstancesRequest(*ec2.DescribeFleetInstancesInput) ec2.DescribeFleetInstancesRequest
@@ -540,6 +542,8 @@ type ClientAPI interface {
 
 	DisableEbsEncryptionByDefaultRequest(*ec2.DisableEbsEncryptionByDefaultInput) ec2.DisableEbsEncryptionByDefaultRequest
 
+	DisableFastSnapshotRestoresRequest(*ec2.DisableFastSnapshotRestoresInput) ec2.DisableFastSnapshotRestoresRequest
+
 	DisableTransitGatewayRouteTablePropagationRequest(*ec2.DisableTransitGatewayRouteTablePropagationInput) ec2.DisableTransitGatewayRouteTablePropagationRequest
 
 	DisableVgwRoutePropagationRequest(*ec2.DisableVgwRoutePropagationInput) ec2.DisableVgwRoutePropagationRequest
@@ -563,6 +567,8 @@ type ClientAPI interface {
 	DisassociateVpcCidrBlockRequest(*ec2.DisassociateVpcCidrBlockInput) ec2.DisassociateVpcCidrBlockRequest
 
 	EnableEbsEncryptionByDefaultRequest(*ec2.EnableEbsEncryptionByDefaultInput) ec2.EnableEbsEncryptionByDefaultRequest
+
+	EnableFastSnapshotRestoresRequest(*ec2.EnableFastSnapshotRestoresInput) ec2.EnableFastSnapshotRestoresRequest
 
 	EnableTransitGatewayRouteTablePropagationRequest(*ec2.EnableTransitGatewayRouteTablePropagationInput) ec2.EnableTransitGatewayRouteTablePropagationRequest
 
@@ -643,6 +649,8 @@ type ClientAPI interface {
 	ModifyInstanceCreditSpecificationRequest(*ec2.ModifyInstanceCreditSpecificationInput) ec2.ModifyInstanceCreditSpecificationRequest
 
 	ModifyInstanceEventStartTimeRequest(*ec2.ModifyInstanceEventStartTimeInput) ec2.ModifyInstanceEventStartTimeRequest
+
+	ModifyInstanceMetadataOptionsRequest(*ec2.ModifyInstanceMetadataOptionsInput) ec2.ModifyInstanceMetadataOptionsRequest
 
 	ModifyInstancePlacementRequest(*ec2.ModifyInstancePlacementInput) ec2.ModifyInstancePlacementRequest
 
@@ -817,6 +825,8 @@ type ClientAPI interface {
 	WaitUntilNetworkInterfaceAvailable(context.Context, *ec2.DescribeNetworkInterfacesInput, ...aws.WaiterOption) error
 
 	WaitUntilPasswordDataAvailable(context.Context, *ec2.GetPasswordDataInput, ...aws.WaiterOption) error
+
+	WaitUntilSecurityGroupExists(context.Context, *ec2.DescribeSecurityGroupsInput, ...aws.WaiterOption) error
 
 	WaitUntilSnapshotCompleted(context.Context, *ec2.DescribeSnapshotsInput, ...aws.WaiterOption) error
 

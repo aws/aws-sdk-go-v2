@@ -21,6 +21,7 @@ type StartQueryInput struct {
 
 	// The maximum number of log events to return in the query. If the query string
 	// uses the fields command, only the specified fields and their values are returned.
+	// The default is 1000.
 	Limit *int64 `locationName:"limit" min:"1" type:"integer"`
 
 	// The log group on which to perform the query.

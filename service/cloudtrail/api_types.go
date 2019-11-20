@@ -13,8 +13,8 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // The Amazon S3 buckets or AWS Lambda functions that you specify in your event
-// selectors for your trail to log data events. Data events provide insight
-// into the resource operations performed on or within a resource itself. These
+// selectors for your trail to log data events. Data events provide information
+// about the resource operations performed on or within a resource itself. These
 // are also known as data plane operations. You can specify up to 250 data resources
 // for a trail.
 //
@@ -162,6 +162,14 @@ type EventSelector struct {
 	// in the AWS CloudTrail User Guide.
 	DataResources []DataResource `type:"list"`
 
+	// An optional list of service event sources from which you do not want management
+	// events to be logged on your trail. In this release, the list can be empty
+	// (disables the filter), or it can filter out AWS Key Management Service events
+	// by containing "kms.amazonaws.com". By default, ExcludeManagementEventSources
+	// is empty, and AWS KMS events are included in events that are logged to your
+	// trail.
+	ExcludeManagementEventSources []string `type:"list"`
+
 	// Specify if you want your event selector to include management events for
 	// your trail.
 	//
@@ -181,6 +189,21 @@ type EventSelector struct {
 
 // String returns the string representation
 func (s EventSelector) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A JSON string that contains a list of insight types that are logged on a
+// trail.
+type InsightSelector struct {
+	_ struct{} `type:"structure"`
+
+	// The type of insights to log on a trail. In this release, only ApiCallRateInsight
+	// is supported as an insight type.
+	InsightType InsightType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s InsightSelector) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -332,6 +355,10 @@ type Trail struct {
 
 	// Specifies if the trail has custom event selectors.
 	HasCustomEventSelectors *bool `type:"boolean"`
+
+	// Specifies whether a trail has insight types specified in an InsightSelector
+	// list.
+	HasInsightSelectors *bool `type:"boolean"`
 
 	// The region in which the trail was created.
 	HomeRegion *string `type:"string"`

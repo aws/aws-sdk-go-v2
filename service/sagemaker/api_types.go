@@ -820,6 +820,9 @@ type ContainerDefinition struct {
 	// Using Your Own Algorithms with Amazon SageMaker (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html)
 	Image *string `type:"string"`
 
+	// Specifies whether the container hosts a single model or multiple models.
+	Mode ContainerMode `type:"string" enum:"true"`
+
 	// The S3 path where the model artifacts, which result from model training,
 	// are stored. This path must point to a single gzip compressed tar archive
 	// (.tar.gz suffix). The S3 path is required for Amazon SageMaker built-in algorithms,
@@ -906,7 +909,7 @@ type ContinuousParameterRange struct {
 	//
 	// ReverseLogarithmic
 	//
-	// Hyperparemeter tuning searches the values in the hyperparameter range by
+	// Hyperparameter tuning searches the values in the hyperparameter range by
 	// using a reverse logarithmic scale.
 	//
 	// Reverse logarithmic scaling works only for ranges that are entirely within
@@ -999,8 +1002,8 @@ type DataProcessing struct {
 	InputFilter *string `type:"string"`
 
 	// Specifies the source of the data to join with the transformed data. The valid
-	// values are None and Input The default value is None which specifies not to
-	// join the input with the transformed data. If you want the batch transform
+	// values are None and Input. The default value is None, which specifies not
+	// to join the input with the transformed data. If you want the batch transform
 	// job to join the original input data with the transformed data, set JoinSource
 	// to Input.
 	//
@@ -1282,8 +1285,8 @@ func (s *FileSystemDataSource) Validate() error {
 	return nil
 }
 
-// A conditional statement for a search expression that includes a Boolean operator,
-// a resource property, and a value.
+// A conditional statement for a search expression that includes a resource
+// property, a Boolean operator, and a value.
 //
 // If you don't specify an Operator and a Value, the filter searches for only
 // the specified property. For example, defining a Filter for the FailureReason
@@ -1377,7 +1380,7 @@ type Filter struct {
 	// Contains
 	//
 	// Only supported for text-based properties. The word-list of the property contains
-	// the specified Value.
+	// the specified Value. A SearchExpression can include only one Contains operator.
 	//
 	// If you have specified a filter Value, the default is Equals.
 	Operator Operator `type:"string" enum:"true"`
@@ -2638,7 +2641,7 @@ type IntegerParameterRange struct {
 	//
 	// Logarithmic
 	//
-	// Hyperparemeter tuning searches the values in the hyperparameter range by
+	// Hyperparameter tuning searches the values in the hyperparameter range by
 	// using a logarithmic scale.
 	//
 	// Logarithmic scaling works only for ranges that have only values greater than
@@ -3046,6 +3049,8 @@ func (s *LabelingJobS3DataSource) Validate() error {
 // A set of conditions for stopping a labeling job. If any of the conditions
 // are met, the job is automatically stopped. You can use these conditions to
 // control the cost of data labeling.
+//
+// Labeling jobs fail after 30 days with an appropriate client error message.
 type LabelingJobStoppingConditions struct {
 	_ struct{} `type:"structure"`
 
@@ -4303,10 +4308,21 @@ type ResourceConfig struct {
 	// InstanceType is a required field
 	InstanceType TrainingInstanceType `type:"string" required:"true" enum:"true"`
 
-	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
-	// encrypt data on the storage volume attached to the ML compute instance(s)
-	// that run the training job. The VolumeKmsKeyId can be any of the following
-	// formats:
+	// The AWS KMS key that Amazon SageMaker uses to encrypt data on the storage
+	// volume attached to the ML compute instance(s) that run the training job.
+	//
+	// Certain Nitro-based instances include local storage, dependent on the instance
+	// type. Local storage volumes are encrypted using a hardware module on the
+	// instance. You can't request a VolumeKmsKeyId when using an instance type
+	// with local storage.
+	//
+	// For a list of instance types that support local instance storage, see Instance
+	// Store Volumes (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes).
+	//
+	// For more information about local instance storage encryption, see SSD Instance
+	// Store Volumes (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html).
+	//
+	// The VolumeKmsKeyId can be in any of the following formats:
 	//
 	//    * // KMS Key ID "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
@@ -4324,6 +4340,15 @@ type ResourceConfig struct {
 	//
 	// Amazon SageMaker supports only the General Purpose SSD (gp2) ML storage volume
 	// type.
+	//
+	// Certain Nitro-based instances include local storage with a fixed total size,
+	// dependent on the instance type. When using these instances for training,
+	// Amazon SageMaker mounts the local instance storage instead of Amazon EBS
+	// gp2 storage. You can't request a VolumeSizeInGB greater than the total size
+	// of the local instance storage.
+	//
+	// For a list of instance types that support local instance storage, including
+	// the total size per instance type, see Instance Store Volumes (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes).
 	//
 	// VolumeSizeInGB is a required field
 	VolumeSizeInGB *int64 `min:"1" type:"integer" required:"true"`
@@ -4458,13 +4483,14 @@ type S3DataSource struct {
 	//
 	//    * A manifest might look like this: s3://bucketname/example.manifest The
 	//    manifest is an S3 object which is a JSON file with the following format:
-	//    [ {"prefix": "s3://customer_bucket/some/prefix/"}, "relative/path/to/custdata-1",
-	//    "relative/path/custdata-2", ... ] The preceding JSON matches the following
-	//    s3Uris: s3://customer_bucket/some/prefix/relative/path/to/custdata-1 s3://customer_bucket/some/prefix/relative/path/custdata-2
-	//    ... The complete set of s3uris in this manifest is the input data for
-	//    the channel for this datasource. The object that each s3uris points to
-	//    must be readable by the IAM role that Amazon SageMaker uses to perform
-	//    tasks on your behalf.
+	//    The preceding JSON matches the following s3Uris: [ {"prefix": "s3://customer_bucket/some/prefix/"},
+	//    "relative/path/to/custdata-1", "relative/path/custdata-2", ... "relative/path/custdata-N"
+	//    ] The preceding JSON matches the following s3Uris: s3://customer_bucket/some/prefix/relative/path/to/custdata-1
+	//    s3://customer_bucket/some/prefix/relative/path/custdata-2 ... s3://customer_bucket/some/prefix/relative/path/custdata-N
+	//    The complete set of s3uris in this manifest is the input data for the
+	//    channel for this datasource. The object that each s3uris points to must
+	//    be readable by the IAM role that Amazon SageMaker uses to perform tasks
+	//    on your behalf.
 	//
 	// S3Uri is a required field
 	S3Uri *string `type:"string" required:"true"`
@@ -4500,7 +4526,8 @@ func (s *S3DataSource) Validate() error {
 // A SearchExpression contains the following components:
 //
 //    * A list of Filter objects. Each filter defines a simple Boolean expression
-//    comprised of a resource property name, Boolean operator, and value.
+//    comprised of a resource property name, Boolean operator, and value. A
+//    SearchExpression can include only one Contains operator.
 //
 //    * A list of NestedFilter objects. Each nested filter defines a list of
 //    Boolean expressions using a list of resource properties. A nested filter
@@ -5507,9 +5534,9 @@ type TransformInput struct {
 	// is removed if the value of BatchStrategy is set to SingleRecord. Padding
 	// is not removed if the value of BatchStrategy is set to MultiRecord.
 	//
-	// For more information about the RecordIO, see Data Format (http://mxnet.io/architecture/note_data_loading.html#data-format)
-	// in the MXNet documentation. For more information about the TFRecord, see
-	// Consuming TFRecord data (https://www.tensorflow.org/guide/datasets#consuming_tfrecord_data)
+	// For more information about RecordIO, see Create a Dataset Using RecordIO
+	// (https://mxnet.apache.org/api/faq/recordio) in the MXNet documentation. For
+	// more information about TFRecord, see Consuming TFRecord data (https://www.tensorflow.org/guide/datasets#consuming_tfrecord_data)
 	// in the TensorFlow documentation.
 	SplitType SplitType `type:"string" enum:"true"`
 }
@@ -5697,7 +5724,7 @@ type TransformOutput struct {
 	// in the Amazon Simple Storage Service Developer Guide.
 	//
 	// The KMS key policy must grant permission to the IAM role that you specify
-	// in your CreateTramsformJob request. For more information, see Using Key Policies
+	// in your CreateModel request. For more information, see Using Key Policies
 	// in AWS KMS (http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)
 	// in the AWS Key Management Service Developer Guide.
 	KmsKeyId *string `type:"string"`
@@ -5820,12 +5847,13 @@ type TransformS3DataSource struct {
 	//    * A manifest might look like this: s3://bucketname/example.manifest The
 	//    manifest is an S3 object which is a JSON file with the following format:
 	//    [ {"prefix": "s3://customer_bucket/some/prefix/"}, "relative/path/to/custdata-1",
-	//    "relative/path/custdata-2", ... ] The preceding JSON matches the following
-	//    S3Uris: s3://customer_bucket/some/prefix/relative/path/to/custdata-1 s3://customer_bucket/some/prefix/relative/path/custdata-1
-	//    ... The complete set of S3Uris in this manifest constitutes the input
-	//    data for the channel for this datasource. The object that each S3Uris
-	//    points to must be readable by the IAM role that Amazon SageMaker uses
-	//    to perform tasks on your behalf.
+	//    "relative/path/custdata-2", ... "relative/path/custdata-N" ] The preceding
+	//    JSON matches the following s3Uris: s3://customer_bucket/some/prefix/relative/path/to/custdata-1
+	//    s3://customer_bucket/some/prefix/relative/path/custdata-2 ... s3://customer_bucket/some/prefix/relative/path/custdata-N
+	//    The complete set of S3Uris in this manifest constitutes the input data
+	//    for the channel for this datasource. The object that each S3Uris points
+	//    to must be readable by the IAM role that Amazon SageMaker uses to perform
+	//    tasks on your behalf.
 	//
 	// S3Uri is a required field
 	S3Uri *string `type:"string" required:"true"`

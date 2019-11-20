@@ -2,6 +2,46 @@
 
 package storagegateway
 
+type ActiveDirectoryStatus string
+
+// Enum values for ActiveDirectoryStatus
+const (
+	ActiveDirectoryStatusAccessDenied ActiveDirectoryStatus = "ACCESS_DENIED"
+	ActiveDirectoryStatusDetached     ActiveDirectoryStatus = "DETACHED"
+	ActiveDirectoryStatusJoined       ActiveDirectoryStatus = "JOINED"
+	ActiveDirectoryStatusJoining      ActiveDirectoryStatus = "JOINING"
+	ActiveDirectoryStatusNetworkError ActiveDirectoryStatus = "NETWORK_ERROR"
+	ActiveDirectoryStatusTimeout      ActiveDirectoryStatus = "TIMEOUT"
+	ActiveDirectoryStatusUnknownError ActiveDirectoryStatus = "UNKNOWN_ERROR"
+)
+
+func (enum ActiveDirectoryStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ActiveDirectoryStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type AvailabilityMonitorTestStatus string
+
+// Enum values for AvailabilityMonitorTestStatus
+const (
+	AvailabilityMonitorTestStatusComplete AvailabilityMonitorTestStatus = "COMPLETE"
+	AvailabilityMonitorTestStatusFailed   AvailabilityMonitorTestStatus = "FAILED"
+	AvailabilityMonitorTestStatusPending  AvailabilityMonitorTestStatus = "PENDING"
+)
+
+func (enum AvailabilityMonitorTestStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AvailabilityMonitorTestStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ErrorCode string
 
 // Enum values for ErrorCode
@@ -37,6 +77,7 @@ const (
 	ErrorCodeLocalStorageLimitExceeded         ErrorCode = "LocalStorageLimitExceeded"
 	ErrorCodeLunAlreadyAllocated               ErrorCode = "LunAlreadyAllocated "
 	ErrorCodeLunInvalid                        ErrorCode = "LunInvalid"
+	ErrorCodeJoinDomainInProgress              ErrorCode = "JoinDomainInProgress"
 	ErrorCodeMaximumContentLengthExceeded      ErrorCode = "MaximumContentLengthExceeded"
 	ErrorCodeMaximumTapeCartridgeCountExceeded ErrorCode = "MaximumTapeCartridgeCountExceeded"
 	ErrorCodeMaximumVolumeCountExceeded        ErrorCode = "MaximumVolumeCountExceeded"
@@ -92,6 +133,25 @@ func (enum FileShareType) MarshalValue() (string, error) {
 }
 
 func (enum FileShareType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type HostEnvironment string
+
+// Enum values for HostEnvironment
+const (
+	HostEnvironmentVmware HostEnvironment = "VMWARE"
+	HostEnvironmentHyperV HostEnvironment = "HYPER-V"
+	HostEnvironmentEc2    HostEnvironment = "EC2"
+	HostEnvironmentOther  HostEnvironment = "OTHER"
+)
+
+func (enum HostEnvironment) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HostEnvironment) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

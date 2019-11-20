@@ -101,7 +101,26 @@ const opGetBucketMetricsConfiguration = "GetBucketMetricsConfiguration"
 // Amazon Simple Storage Service.
 //
 // Gets a metrics configuration (specified by the metrics configuration ID)
-// from the bucket.
+// from the bucket. Note that this doesn't include the daily storage metrics.
+//
+// To use this operation, you must have permissions to perform the s3:GetMetricsConfiguration
+// action. The bucket owner has this permission by default. The bucket owner
+// can grant this permission to others. For more information about permissions,
+// see Permissions Related to Bucket Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// and Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
+//
+// For information about CloudWatch request metrics for Amazon S3, see Monitoring
+// Metrics with Amazon CloudWatch (https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html).
+//
+// The following operations are related to GetBucketMetricsConfiguration:
+//
+//    * PutBucketMetricsConfiguration
+//
+//    * DeleteBucketMetricsConfiguration
+//
+//    * ListBucketMetricsConfigurations
+//
+//    * Monitoring Metrics with Amazon CloudWatch (https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html)
 //
 //    // Example sending a request using GetBucketMetricsConfigurationRequest.
 //    req := client.GetBucketMetricsConfigurationRequest(params)

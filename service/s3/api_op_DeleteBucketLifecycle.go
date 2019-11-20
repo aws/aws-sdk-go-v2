@@ -14,6 +14,8 @@ import (
 type DeleteBucketLifecycleInput struct {
 	_ struct{} `type:"structure"`
 
+	// The bucket name of the lifecycle to delete.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 }
@@ -75,7 +77,27 @@ const opDeleteBucketLifecycle = "DeleteBucketLifecycle"
 // DeleteBucketLifecycleRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Deletes the lifecycle configuration from the bucket.
+// Deletes the lifecycle configuration from the specified bucket. Amazon S3
+// removes all the lifecycle configuration rules in the lifecycle subresource
+// associated with the bucket. Your objects never expire, and Amazon S3 no longer
+// automatically deletes any objects on the basis of rules contained in the
+// deleted lifecycle configuration.
+//
+// To use this operation, you must have permission to perform the s3:PutLifecycleConfiguration
+// action. By default, the bucket owner has this permission and the bucket owner
+// can grant this permission to others.
+//
+// There is usually some time lag before lifecycle configuration deletion is
+// fully propagated to all the Amazon S3 systems.
+//
+// For more information about the object expiration, see Elements to Describe
+// Lifecycle Actions (https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#intro-lifecycle-rules-actions).
+//
+// Related actions include:
+//
+//    * PutBucketLifecycleConfiguration
+//
+//    * GetBucketLifecycleConfiguration
 //
 //    // Example sending a request using DeleteBucketLifecycleRequest.
 //    req := client.DeleteBucketLifecycleRequest(params)

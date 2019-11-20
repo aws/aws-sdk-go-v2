@@ -48,7 +48,7 @@ type RegisterUserInput struct {
 	// scenarios, for example when you are registering an IAM user or an Amazon
 	// QuickSight user. You can register multiple users using the same IAM role
 	// if each user has a different session name. For more information on assuming
-	// IAM roles, see assume-role (https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html)
+	// IAM roles, see assume-role (https://docs.aws.example.com/cli/latest/reference/sts/assume-role.html)
 	// in the AWS CLI Reference.
 	SessionName *string `min:"2" type:"string"`
 
@@ -56,15 +56,20 @@ type RegisterUserInput struct {
 	// are registering.
 	UserName *string `min:"1" type:"string"`
 
-	// The Amazon QuickSight role of the user. The user role can be one of the following:
+	// The Amazon QuickSight role for the user. The user role can be one of the
+	// following:
 	//
 	//    * READER: A user who has read-only access to dashboards.
 	//
-	//    * AUTHOR: A user who can create data sources, data sets, analyses, and
+	//    * AUTHOR: A user who can create data sources, datasets, analyses, and
 	//    dashboards.
 	//
 	//    * ADMIN: A user who is an author, who can also manage Amazon QuickSight
 	//    settings.
+	//
+	//    * RESTRICTED_READER: This role isn't currently available for use.
+	//
+	//    * RESTRICTED_AUTHOR: This role isn't currently available for use.
 	//
 	// UserRole is a required field
 	UserRole UserRole `type:"string" required:"true" enum:"true"`
@@ -221,13 +226,6 @@ const opRegisterUser = "RegisterUser"
 // Creates an Amazon QuickSight user, whose identity is associated with the
 // AWS Identity and Access Management (IAM) identity or role specified in the
 // request.
-//
-// The permission resource is arn:aws:quicksight:us-east-1:<aws-account-id>:user/default/<user-name> .
-//
-// The condition resource is the Amazon Resource Name (ARN) for the IAM user
-// or role, and the session name.
-//
-// The condition keys are quicksight:IamArn and quicksight:SessionName.
 //
 // CLI Sample:
 //

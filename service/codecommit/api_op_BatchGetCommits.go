@@ -14,7 +14,8 @@ type BatchGetCommitsInput struct {
 
 	// The full commit IDs of the commits to get information about.
 	//
-	// You must supply the full SHAs of each commit. You cannot use shortened SHAs.
+	// You must supply the full SHA IDs of each commit. You cannot use shortened
+	// SHA IDs.
 	//
 	// CommitIds is a required field
 	CommitIds []string `locationName:"commitIds" type:"list" required:"true"`
@@ -59,9 +60,8 @@ type BatchGetCommitsOutput struct {
 	Commits []Commit `locationName:"commits" type:"list"`
 
 	// Returns any commit IDs for which information could not be found. For example,
-	// if one of the commit IDs was a shortened SHA or that commit was not found
-	// in the specified repository, the ID will return an error object with additional
-	// information.
+	// if one of the commit IDs was a shortened SHA ID or that commit was not found
+	// in the specified repository, the ID returns an error object with more information.
 	Errors []BatchGetCommitsError `locationName:"errors" type:"list"`
 }
 

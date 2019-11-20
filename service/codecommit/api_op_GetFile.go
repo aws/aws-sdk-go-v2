@@ -12,14 +12,14 @@ import (
 type GetFileInput struct {
 	_ struct{} `type:"structure"`
 
-	// The fully-quaified reference that identifies the commit that contains the
-	// file. For example, you could specify a full commit ID, a tag, a branch name,
-	// or a reference such as refs/heads/master. If none is provided, then the head
-	// commit will be used.
+	// The fully quaified reference that identifies the commit that contains the
+	// file. For example, you can specify a full commit ID, a tag, a branch name,
+	// or a reference such as refs/heads/master. If none is provided, the head commit
+	// is used.
 	CommitSpecifier *string `locationName:"commitSpecifier" type:"string"`
 
-	// The fully-qualified path to the file, including the full name and extension
-	// of the file. For example, /examples/file.md is the fully-qualified path to
+	// The fully qualified path to the file, including the full name and extension
+	// of the file. For example, /examples/file.md is the fully qualified path to
 	// a file named file.md in a folder named examples.
 	//
 	// FilePath is a required field
@@ -83,13 +83,13 @@ type GetFileOutput struct {
 	//
 	// The file mode permissions returned by this API are not the standard file
 	// mode permission values, such as 100644, but rather extrapolated values. See
-	// below for a full list of supported return values.
+	// the supported return values.
 	//
 	// FileMode is a required field
 	FileMode FileModeTypeEnum `locationName:"fileMode" type:"string" required:"true" enum:"true"`
 
-	// The fully qualified path to the specified file. This returns the name and
-	// extension of the file.
+	// The fully qualified path to the specified file. Returns the name and extension
+	// of the file.
 	//
 	// FilePath is a required field
 	FilePath *string `locationName:"filePath" type:"string" required:"true"`

@@ -15,7 +15,8 @@ type ListCreatedArtifactsInput struct {
 	// Maximum number of results to be returned per page.
 	MaxResults *int64 `min:"1" type:"integer"`
 
-	// Unique identifier that references the migration task.
+	// Unique identifier that references the migration task. Do not store personal
+	// data in this field.
 	//
 	// MigrationTaskName is a required field
 	MigrationTaskName *string `min:"1" type:"string" required:"true"`
@@ -108,6 +109,12 @@ func (c *Client) ListCreatedArtifactsRequest(input *ListCreatedArtifactsInput) L
 		Name:       opListCreatedArtifacts,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -140,6 +147,53 @@ func (r ListCreatedArtifactsRequest) Send(ctx context.Context) (*ListCreatedArti
 	}
 
 	return resp, nil
+}
+
+// NewListCreatedArtifactsRequestPaginator returns a paginator for ListCreatedArtifacts.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListCreatedArtifactsRequest(input)
+//   p := migrationhub.NewListCreatedArtifactsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListCreatedArtifactsPaginator(req ListCreatedArtifactsRequest) ListCreatedArtifactsPaginator {
+	return ListCreatedArtifactsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListCreatedArtifactsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListCreatedArtifactsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListCreatedArtifactsPaginator struct {
+	aws.Pager
+}
+
+func (p *ListCreatedArtifactsPaginator) CurrentPage() *ListCreatedArtifactsOutput {
+	return p.Pager.CurrentPage().(*ListCreatedArtifactsOutput)
 }
 
 // ListCreatedArtifactsResponse is the response type for the

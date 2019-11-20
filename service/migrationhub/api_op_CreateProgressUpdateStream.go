@@ -16,7 +16,8 @@ type CreateProgressUpdateStreamInput struct {
 	// to test if the caller has permission to make the call.
 	DryRun *bool `type:"boolean"`
 
-	// The name of the ProgressUpdateStream.
+	// The name of the ProgressUpdateStream. Do not store personal data in this
+	// field.
 	//
 	// ProgressUpdateStreamName is a required field
 	ProgressUpdateStreamName *string `min:"1" type:"string" required:"true"`

@@ -68,7 +68,8 @@ const opDetachVolume = "DetachVolume"
 // from the specified gateway. Detaching and attaching a volume enables you
 // to recover your data from one gateway to a different gateway without creating
 // a snapshot. It also makes it easier to move your volumes from an on-premises
-// gateway to a gateway hosted on an Amazon EC2 instance.
+// gateway to a gateway hosted on an Amazon EC2 instance. This operation is
+// only supported in the volume gateway type.
 //
 //    // Example sending a request using DetachVolumeRequest.
 //    req := client.DetachVolumeRequest(params)

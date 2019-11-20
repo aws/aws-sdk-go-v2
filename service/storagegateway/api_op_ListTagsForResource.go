@@ -83,7 +83,7 @@ const opListTagsForResource = "ListTagsForResource"
 // AWS Storage Gateway.
 //
 // Lists the tags that have been added to the specified resource. This operation
-// is only supported in the cached volume, stored volume and tape gateway type.
+// is supported in storage gateways of all types.
 //
 //    // Example sending a request using ListTagsForResourceRequest.
 //    req := client.ListTagsForResourceRequest(params)

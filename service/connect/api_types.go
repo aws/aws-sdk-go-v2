@@ -1033,6 +1033,9 @@ type User struct {
 	// The identifiers of the security profiles for the user.
 	SecurityProfileIds []string `min:"1" type:"list"`
 
+	// The tags.
+	Tags map[string]string `min:"1" type:"map"`
+
 	// The user name assigned to the user account.
 	Username *string `min:"1" type:"string"`
 }
@@ -1096,6 +1099,18 @@ func (s User) MarshalFields(e protocol.FieldEncoder) error {
 			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
+
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
 
 	}
 	if s.Username != nil {

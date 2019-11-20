@@ -91,6 +91,8 @@ type ClientAPI interface {
 
 	ListSecurityProfilesRequest(*connect.ListSecurityProfilesInput) connect.ListSecurityProfilesRequest
 
+	ListTagsForResourceRequest(*connect.ListTagsForResourceInput) connect.ListTagsForResourceRequest
+
 	ListUserHierarchyGroupsRequest(*connect.ListUserHierarchyGroupsInput) connect.ListUserHierarchyGroupsRequest
 
 	ListUsersRequest(*connect.ListUsersInput) connect.ListUsersRequest
@@ -98,6 +100,10 @@ type ClientAPI interface {
 	StartOutboundVoiceContactRequest(*connect.StartOutboundVoiceContactInput) connect.StartOutboundVoiceContactRequest
 
 	StopContactRequest(*connect.StopContactInput) connect.StopContactRequest
+
+	TagResourceRequest(*connect.TagResourceInput) connect.TagResourceRequest
+
+	UntagResourceRequest(*connect.UntagResourceInput) connect.UntagResourceRequest
 
 	UpdateContactAttributesRequest(*connect.UpdateContactAttributesInput) connect.UpdateContactAttributesRequest
 

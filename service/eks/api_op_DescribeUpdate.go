@@ -13,10 +13,13 @@ import (
 type DescribeUpdateInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the Amazon EKS cluster to update.
+	// The name of the Amazon EKS cluster associated with the update.
 	//
 	// Name is a required field
 	Name *string `location:"uri" locationName:"name" type:"string" required:"true"`
+
+	// The name of the Amazon EKS node group associated with the update.
+	NodegroupName *string `location:"querystring" locationName:"nodegroupName" type:"string"`
 
 	// The ID of the update to describe.
 	//
@@ -63,6 +66,12 @@ func (s DescribeUpdateInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.PathTarget, "updateId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.NodegroupName != nil {
+		v := *s.NodegroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nodegroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	return nil
 }
 
@@ -94,7 +103,8 @@ const opDescribeUpdate = "DescribeUpdate"
 // DescribeUpdateRequest returns a request value for making API operation for
 // Amazon Elastic Kubernetes Service.
 //
-// Returns descriptive information about an update against your Amazon EKS cluster.
+// Returns descriptive information about an update against your Amazon EKS cluster
+// or associated managed node group.
 //
 // When the status of the update is Succeeded, the update is complete. If an
 // update fails, the status is Failed, and an error detail explains the reason

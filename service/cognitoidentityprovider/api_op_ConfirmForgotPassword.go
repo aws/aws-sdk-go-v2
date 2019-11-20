@@ -27,13 +27,13 @@ type ConfirmForgotPasswordInput struct {
 	//
 	// You create custom workflows by assigning AWS Lambda functions to user pool
 	// triggers. When you use the ConfirmForgotPassword API action, Amazon Cognito
-	// invokes the functions that are assigned to the post confirmation and pre
-	// mutation triggers. When Amazon Cognito invokes either of these functions,
-	// it passes a JSON payload, which the function receives as input. This payload
-	// contains a clientMetadata attribute, which provides the data that you assigned
-	// to the ClientMetadata parameter in your ConfirmForgotPassword request. In
-	// your function code in AWS Lambda, you can process the clientMetadata value
-	// to enhance your workflow for your specific needs.
+	// invokes the function that is assigned to the post confirmation trigger. When
+	// Amazon Cognito invokes this function, it passes a JSON payload, which the
+	// function receives as input. This payload contains a clientMetadata attribute,
+	// which provides the data that you assigned to the ClientMetadata parameter
+	// in your ConfirmForgotPassword request. In your function code in AWS Lambda,
+	// you can process the clientMetadata value to enhance your workflow for your
+	// specific needs.
 	//
 	// For more information, see Customizing User Pool Workflows with Lambda Triggers
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
