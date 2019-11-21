@@ -113,7 +113,50 @@ const opPutBucketAnalyticsConfiguration = "PutBucketAnalyticsConfiguration"
 // Amazon Simple Storage Service.
 //
 // Sets an analytics configuration for the bucket (specified by the analytics
-// configuration ID).
+// configuration ID). You can have up to 1,000 analytics configurations per
+// bucket.
+//
+// You can choose to have storage class analysis export analysis reports to
+// a comma-separated values (CSV) flat file, see the DataExport request element.
+// Reports are updated daily and are based on the object filters you configure.
+// When selecting data export you specify a destination bucket and optional
+// destination prefix where the file is written. You can export the data to
+// a destination bucket in a different account. However, the destination bucket
+// must be in the same region as the bucket that you are making the PUT analytics
+// configuration to. For more information, see Amazon S3 Analytics – Storage
+// Class Analysis (https://docs.aws.amazon.com/AmazonS3/latest/dev/analytics-storage-class.html).
+//
+// You must create a bucket policy on the destination bucket where the exported
+// file is written to grant permissions to Amazon S3 to write objects to the
+// bucket. For an example policy, see Granting Permissions for Amazon S3 Inventory
+// and Storage Class Analysis (https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html#example-bucket-policies-use-case-9).
+//
+// To use this operation, you must have permissions to perform the s3:PutAnalyticsConfiguration
+// action. The bucket owner has this permission by default. The bucket owner
+// can grant this permission to others. For more information about permissions,
+// see Permissions Related to Bucket Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// and Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
+//
+// Special Errors
+//
+//    * HTTP Error: HTTP 400 Bad Request Code: InvalidArgument Cause: Invalid
+//    argument.
+//
+//    * HTTP Error: HTTP 400 Bad Request Code: TooManyConfigurations Cause:
+//    You are attempting to create a new configuration but have already reached
+//    the 1,000-configuration limit.
+//
+//    * HTTP Error: HTTP 403 Forbidden Code: AccessDenied Cause: You are not
+//    the owner of the specified bucket, or you do not have the s3:PutAnalyticsConfiguration
+//    bucket permission to set the configuration on the bucket.
+//
+// Related Resources
+//
+//    *
+//
+//    *
+//
+//    *
 //
 //    // Example sending a request using PutBucketAnalyticsConfigurationRequest.
 //    req := client.PutBucketAnalyticsConfigurationRequest(params)

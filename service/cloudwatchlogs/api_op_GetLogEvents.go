@@ -34,6 +34,8 @@ type GetLogEventsInput struct {
 
 	// The token for the next set of items to return. (You received this token from
 	// a previous call.)
+	//
+	// Using this token works only when you specify true for startFromHead.
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 
 	// If the value is true, the earliest log events are returned first. If the

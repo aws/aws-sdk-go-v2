@@ -14,6 +14,8 @@ import (
 type DeleteBucketTaggingInput struct {
 	_ struct{} `type:"structure"`
 
+	// The bucket that has the tag set to be removed.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 }
@@ -76,6 +78,16 @@ const opDeleteBucketTagging = "DeleteBucketTagging"
 // Amazon Simple Storage Service.
 //
 // Deletes the tags from the bucket.
+//
+// To use this operation, you must have permission to perform the s3:PutBucketTagging
+// action. By default, the bucket owner has this permission and can grant this
+// permission to others.
+//
+// The following operations are related to DeleteBucketTagging
+//
+//    * GetBucketTagging
+//
+//    * PutBucketTagging
 //
 //    // Example sending a request using DeleteBucketTaggingRequest.
 //    req := client.DeleteBucketTaggingRequest(params)

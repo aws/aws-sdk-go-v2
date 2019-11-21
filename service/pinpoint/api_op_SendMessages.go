@@ -16,8 +16,7 @@ type SendMessagesInput struct {
 	// ApplicationId is a required field
 	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
 
-	// Specifies the objects that define configuration and other settings for a
-	// message.
+	// Specifies the configuration and other settings for a message.
 	//
 	// MessageRequest is a required field
 	MessageRequest *MessageRequest `type:"structure" required:"true"`

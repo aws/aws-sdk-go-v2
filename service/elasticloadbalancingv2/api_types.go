@@ -28,6 +28,13 @@ type Action struct {
 	// a custom HTTP response. Specify only when Type is fixed-response.
 	FixedResponseConfig *FixedResponseActionConfig `type:"structure"`
 
+	// Information for creating an action that distributes requests among one or
+	// more target groups. For Network Load Balancers, you can specify a single
+	// target group. Specify only when Type is forward. If you specify both ForwardConfig
+	// and TargetGroupArn, you can specify only one target group using ForwardConfig
+	// and it must be the same target group specified in TargetGroupArn.
+	ForwardConfig *ForwardActionConfig `type:"structure"`
+
 	// The order for the action. This value is required for rules with multiple
 	// actions. The action with the lowest value for order is performed first. The
 	// last action to be performed must be one of the following types of actions:
@@ -39,7 +46,8 @@ type Action struct {
 	RedirectConfig *RedirectActionConfig `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the target group. Specify only when Type
-	// is forward.
+	// is forward and you want to route to a single target group. To route to one
+	// or more target groups, use ForwardConfig instead.
 	TargetGroupArn *string `type:"string"`
 
 	// The type of action.
@@ -369,6 +377,23 @@ func (s *FixedResponseActionConfig) Validate() error {
 	return nil
 }
 
+// Information about a forward action.
+type ForwardActionConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The target group stickiness for the rule.
+	TargetGroupStickinessConfig *TargetGroupStickinessConfig `type:"structure"`
+
+	// One or more target groups. For Network Load Balancers, you can specify a
+	// single target group.
+	TargetGroups []TargetGroupTuple `type:"list"`
+}
+
+// String returns the string representation
+func (s ForwardActionConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Information about a host header condition.
 type HostHeaderConditionConfig struct {
 	_ struct{} `type:"structure"`
@@ -466,6 +491,12 @@ type Limit struct {
 	//    * rules-per-application-load-balancer
 	//
 	//    * target-groups
+	//
+	//    * target-groups-per-action-on-application-load-balancer
+	//
+	//    * target-groups-per-action-on-network-load-balancer
+	//
+	//    * target-groups-per-application-load-balancer
 	//
 	//    * targets-per-application-load-balancer
 	//
@@ -614,7 +645,7 @@ type LoadBalancerAttribute struct {
 	//
 	//    * routing.http.drop_invalid_header_fields.enabled - Indicates whether
 	//    HTTP headers with invalid header fields are removed by the load balancer
-	//    (true) or routed to targets (false). The default is true.
+	//    (true) or routed to targets (false). The default is false.
 	//
 	//    * routing.http2.enabled - Indicates whether HTTP/2 is enabled. The value
 	//    is true or false. The default is true.
@@ -1247,6 +1278,40 @@ type TargetGroupAttribute struct {
 
 // String returns the string representation
 func (s TargetGroupAttribute) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Information about the target group stickiness for a rule.
+type TargetGroupStickinessConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The time period, in seconds, during which requests from a client should be
+	// routed to the same target group. The range is 1-604800 seconds (7 days).
+	DurationSeconds *int64 `type:"integer"`
+
+	// Indicates whether target group stickiness is enabled.
+	Enabled *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s TargetGroupStickinessConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Information about how traffic will be distributed between multiple target
+// groups in a forward rule.
+type TargetGroupTuple struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the target group.
+	TargetGroupArn *string `type:"string"`
+
+	// The weight. The range is 0 to 999.
+	Weight *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s TargetGroupTuple) String() string {
 	return awsutil.Prettify(s)
 }
 

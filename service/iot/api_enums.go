@@ -456,6 +456,24 @@ func (enum EventType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type FieldType string
+
+// Enum values for FieldType
+const (
+	FieldTypeNumber  FieldType = "Number"
+	FieldTypeString  FieldType = "String"
+	FieldTypeBoolean FieldType = "Boolean"
+)
+
+func (enum FieldType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FieldType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type IndexStatus string
 
 // Enum values for IndexStatus
@@ -768,6 +786,25 @@ func (enum ThingIndexingMode) MarshalValue() (string, error) {
 }
 
 func (enum ThingIndexingMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TopicRuleDestinationStatus string
+
+// Enum values for TopicRuleDestinationStatus
+const (
+	TopicRuleDestinationStatusEnabled    TopicRuleDestinationStatus = "ENABLED"
+	TopicRuleDestinationStatusInProgress TopicRuleDestinationStatus = "IN_PROGRESS"
+	TopicRuleDestinationStatusDisabled   TopicRuleDestinationStatus = "DISABLED"
+	TopicRuleDestinationStatusError      TopicRuleDestinationStatus = "ERROR"
+)
+
+func (enum TopicRuleDestinationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TopicRuleDestinationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

@@ -186,7 +186,8 @@ const opCreateThreatIntelSet = "CreateThreatIntelSet"
 // Amazon GuardDuty.
 //
 // Create a new ThreatIntelSet. ThreatIntelSets consist of known malicious IP
-// addresses. GuardDuty generates findings based on ThreatIntelSets.
+// addresses. GuardDuty generates findings based on ThreatIntelSets. Only users
+// of the master account can use this operation.
 //
 //    // Example sending a request using CreateThreatIntelSetRequest.
 //    req := client.CreateThreatIntelSetRequest(params)

@@ -20,6 +20,12 @@ type LookupEventsInput struct {
 	// error is returned.
 	EndTime *time.Time `type:"timestamp"`
 
+	// Specifies the event category. If you do not specify an event category, events
+	// of the category are not returned in the response. For example, if you do
+	// not specify insight as the value of EventCategory, no Insights events are
+	// returned.
+	EventCategory EventCategory `type:"string" enum:"true"`
+
 	// Contains a list of lookup attributes. Currently the list can contain only
 	// one item.
 	LookupAttributes []LookupAttribute `type:"list"`
@@ -94,8 +100,10 @@ const opLookupEvents = "LookupEvents"
 // AWS CloudTrail.
 //
 // Looks up management events (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-management-events)
-// captured by CloudTrail. You can look up events that occurred in a region
-// within the last 90 days. Lookup supports the following attributes:
+// or CloudTrail Insights events (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-insights-events)
+// that are captured by CloudTrail. You can look up events that occurred in
+// a region within the last 90 days. Lookup supports the following attributes
+// for management events:
 //
 //    * AWS access key
 //
@@ -113,15 +121,20 @@ const opLookupEvents = "LookupEvents"
 //
 //    * User name
 //
+// Lookup supports the following attributes for Insights events:
+//
+//    * Event ID
+//
+//    * Event name
+//
+//    * Event source
+//
 // All attributes are optional. The default number of results returned is 50,
 // with a maximum of 50 possible. The response includes a token that you can
 // use to get the next page of results.
 //
-// The rate of lookup requests is limited to one per second per account. If
+// The rate of lookup requests is limited to two per second per account. If
 // this limit is exceeded, a throttling error occurs.
-//
-// Events that occurred during the selected time range will not be available
-// for lookup if CloudTrail logging was not enabled when the events occurred.
 //
 //    // Example sending a request using LookupEventsRequest.
 //    req := client.LookupEventsRequest(params)

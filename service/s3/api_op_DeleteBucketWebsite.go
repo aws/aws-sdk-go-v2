@@ -14,6 +14,8 @@ import (
 type DeleteBucketWebsiteInput struct {
 	_ struct{} `type:"structure"`
 
+	// The bucket name for which you want to remove the website configuration.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 }
@@ -75,7 +77,26 @@ const opDeleteBucketWebsite = "DeleteBucketWebsite"
 // DeleteBucketWebsiteRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// This operation removes the website configuration from the bucket.
+// This operation removes the website configuration for a bucket. Amazon S3
+// returns a 200 OK response upon successfully deleting a website configuration
+// on the specified bucket. You will get a 200 OK response if the website configuration
+// you are trying to delete does not exist on the bucket. Amazon S3 returns
+// a 404 response if the bucket specified in the request does not exist.
+//
+// This DELETE operation requires the S3:DeleteBucketWebsite permission. By
+// default, only the bucket owner can delete the website configuration attached
+// to a bucket. However, bucket owners can grant other users permission to delete
+// the website configuration by writing a bucket policy granting them the S3:DeleteBucketWebsite
+// permission.
+//
+// For more information about hosting websites, see Hosting Websites on Amazon
+// S3 (https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html).
+//
+// The following operations are related to DeleteBucketWebsite
+//
+//    * GetBucketWebsite
+//
+//    * PutBucketWebsite
 //
 //    // Example sending a request using DeleteBucketWebsiteRequest.
 //    req := client.DeleteBucketWebsiteRequest(params)

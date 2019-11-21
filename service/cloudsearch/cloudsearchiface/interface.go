@@ -87,6 +87,8 @@ type ClientAPI interface {
 
 	DescribeAvailabilityOptionsRequest(*cloudsearch.DescribeAvailabilityOptionsInput) cloudsearch.DescribeAvailabilityOptionsRequest
 
+	DescribeDomainEndpointOptionsRequest(*cloudsearch.DescribeDomainEndpointOptionsInput) cloudsearch.DescribeDomainEndpointOptionsRequest
+
 	DescribeDomainsRequest(*cloudsearch.DescribeDomainsInput) cloudsearch.DescribeDomainsRequest
 
 	DescribeExpressionsRequest(*cloudsearch.DescribeExpressionsInput) cloudsearch.DescribeExpressionsRequest
@@ -104,6 +106,8 @@ type ClientAPI interface {
 	ListDomainNamesRequest(*cloudsearch.ListDomainNamesInput) cloudsearch.ListDomainNamesRequest
 
 	UpdateAvailabilityOptionsRequest(*cloudsearch.UpdateAvailabilityOptionsInput) cloudsearch.UpdateAvailabilityOptionsRequest
+
+	UpdateDomainEndpointOptionsRequest(*cloudsearch.UpdateDomainEndpointOptionsInput) cloudsearch.UpdateDomainEndpointOptionsRequest
 
 	UpdateScalingParametersRequest(*cloudsearch.UpdateScalingParametersInput) cloudsearch.UpdateScalingParametersRequest
 

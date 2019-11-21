@@ -140,6 +140,24 @@ func (enum License) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type MemberType string
+
+// Enum values for MemberType
+const (
+	MemberTypeUser    MemberType = "User"
+	MemberTypeBot     MemberType = "Bot"
+	MemberTypeWebhook MemberType = "Webhook"
+)
+
+func (enum MemberType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MemberType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type OrderedPhoneNumberStatus string
 
 // Enum values for OrderedPhoneNumberStatus
@@ -284,6 +302,23 @@ func (enum RegistrationStatus) MarshalValue() (string, error) {
 }
 
 func (enum RegistrationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type RoomMembershipRole string
+
+// Enum values for RoomMembershipRole
+const (
+	RoomMembershipRoleAdministrator RoomMembershipRole = "Administrator"
+	RoomMembershipRoleMember        RoomMembershipRole = "Member"
+)
+
+func (enum RoomMembershipRole) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RoomMembershipRole) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

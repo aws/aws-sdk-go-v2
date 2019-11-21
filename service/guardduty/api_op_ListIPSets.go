@@ -125,7 +125,9 @@ const opListIPSets = "ListIPSets"
 // ListIPSetsRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Lists the IPSets of the GuardDuty service specified by the detector ID.
+// Lists the IPSets of the GuardDuty service specified by the detector ID. If
+// you use this operation from a member account, the IPSets returned are the
+// IPSets from the associated master account.
 //
 //    // Example sending a request using ListIPSetsRequest.
 //    req := client.ListIPSetsRequest(params)

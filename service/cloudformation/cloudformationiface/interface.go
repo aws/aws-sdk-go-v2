@@ -84,6 +84,8 @@ type ClientAPI interface {
 
 	DeleteStackSetRequest(*cloudformation.DeleteStackSetInput) cloudformation.DeleteStackSetRequest
 
+	DeregisterTypeRequest(*cloudformation.DeregisterTypeInput) cloudformation.DeregisterTypeRequest
+
 	DescribeAccountLimitsRequest(*cloudformation.DescribeAccountLimitsInput) cloudformation.DescribeAccountLimitsRequest
 
 	DescribeChangeSetRequest(*cloudformation.DescribeChangeSetInput) cloudformation.DescribeChangeSetRequest
@@ -106,9 +108,15 @@ type ClientAPI interface {
 
 	DescribeStacksRequest(*cloudformation.DescribeStacksInput) cloudformation.DescribeStacksRequest
 
+	DescribeTypeRequest(*cloudformation.DescribeTypeInput) cloudformation.DescribeTypeRequest
+
+	DescribeTypeRegistrationRequest(*cloudformation.DescribeTypeRegistrationInput) cloudformation.DescribeTypeRegistrationRequest
+
 	DetectStackDriftRequest(*cloudformation.DetectStackDriftInput) cloudformation.DetectStackDriftRequest
 
 	DetectStackResourceDriftRequest(*cloudformation.DetectStackResourceDriftInput) cloudformation.DetectStackResourceDriftRequest
+
+	DetectStackSetDriftRequest(*cloudformation.DetectStackSetDriftInput) cloudformation.DetectStackSetDriftRequest
 
 	EstimateTemplateCostRequest(*cloudformation.EstimateTemplateCostInput) cloudformation.EstimateTemplateCostRequest
 
@@ -138,7 +146,19 @@ type ClientAPI interface {
 
 	ListStacksRequest(*cloudformation.ListStacksInput) cloudformation.ListStacksRequest
 
+	ListTypeRegistrationsRequest(*cloudformation.ListTypeRegistrationsInput) cloudformation.ListTypeRegistrationsRequest
+
+	ListTypeVersionsRequest(*cloudformation.ListTypeVersionsInput) cloudformation.ListTypeVersionsRequest
+
+	ListTypesRequest(*cloudformation.ListTypesInput) cloudformation.ListTypesRequest
+
+	RecordHandlerProgressRequest(*cloudformation.RecordHandlerProgressInput) cloudformation.RecordHandlerProgressRequest
+
+	RegisterTypeRequest(*cloudformation.RegisterTypeInput) cloudformation.RegisterTypeRequest
+
 	SetStackPolicyRequest(*cloudformation.SetStackPolicyInput) cloudformation.SetStackPolicyRequest
+
+	SetTypeDefaultVersionRequest(*cloudformation.SetTypeDefaultVersionInput) cloudformation.SetTypeDefaultVersionRequest
 
 	SignalResourceRequest(*cloudformation.SignalResourceInput) cloudformation.SignalResourceRequest
 
@@ -165,6 +185,8 @@ type ClientAPI interface {
 	WaitUntilStackImportComplete(context.Context, *cloudformation.DescribeStacksInput, ...aws.WaiterOption) error
 
 	WaitUntilStackUpdateComplete(context.Context, *cloudformation.DescribeStacksInput, ...aws.WaiterOption) error
+
+	WaitUntilTypeRegistrationComplete(context.Context, *cloudformation.DescribeTypeRegistrationInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*cloudformation.Client)(nil)

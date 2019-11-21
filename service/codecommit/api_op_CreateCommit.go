@@ -13,40 +13,38 @@ import (
 type CreateCommitInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the author who created the commit. This information will be used
-	// as both the author and committer for the commit.
+	// The name of the author who created the commit. This information is used as
+	// both the author and committer for the commit.
 	AuthorName *string `locationName:"authorName" type:"string"`
 
-	// The name of the branch where you will create the commit.
+	// The name of the branch where you create the commit.
 	//
 	// BranchName is a required field
 	BranchName *string `locationName:"branchName" min:"1" type:"string" required:"true"`
 
-	// The commit message you want to include as part of creating the commit. Commit
-	// messages are limited to 256 KB. If no message is specified, a default message
-	// will be used.
+	// The commit message you want to include in the commit. Commit messages are
+	// limited to 256 KB. If no message is specified, a default message is used.
 	CommitMessage *string `locationName:"commitMessage" type:"string"`
 
-	// The files to delete in this commit. These files will still exist in prior
-	// commits.
+	// The files to delete in this commit. These files still exist in earlier commits.
 	DeleteFiles []DeleteFileEntry `locationName:"deleteFiles" type:"list"`
 
 	// The email address of the person who created the commit.
 	Email *string `locationName:"email" type:"string"`
 
 	// If the commit contains deletions, whether to keep a folder or folder structure
-	// if the changes leave the folders empty. If this is specified as true, a .gitkeep
-	// file will be created for empty folders. The default is false.
+	// if the changes leave the folders empty. If true, a ..gitkeep file is created
+	// for empty folders. The default is false.
 	KeepEmptyFolders *bool `locationName:"keepEmptyFolders" type:"boolean"`
 
-	// The ID of the commit that is the parent of the commit you will create. If
-	// this is an empty repository, this is not required.
+	// The ID of the commit that is the parent of the commit you create. Not required
+	// if this is an empty repository.
 	ParentCommitId *string `locationName:"parentCommitId" type:"string"`
 
 	// The files to add or update in this commit.
 	PutFiles []PutFileEntry `locationName:"putFiles" type:"list"`
 
-	// The name of the repository where you will create the commit.
+	// The name of the repository where you create the commit.
 	//
 	// RepositoryName is a required field
 	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string" required:"true"`

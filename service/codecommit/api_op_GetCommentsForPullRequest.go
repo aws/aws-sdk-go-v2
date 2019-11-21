@@ -20,12 +20,12 @@ type GetCommentsForPullRequestInput struct {
 	// of the branch at the time the pull request was created.
 	BeforeCommitId *string `locationName:"beforeCommitId" type:"string"`
 
-	// A non-negative integer used to limit the number of returned results. The
-	// default is 100 comments. You can return up to 500 comments with a single
+	// A non-zero, non-negative integer used to limit the number of returned results.
+	// The default is 100 comments. You can return up to 500 comments with a single
 	// request.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
 
-	// An enumeration token that when provided in a request, returns the next batch
+	// An enumeration token that, when provided in a request, returns the next batch
 	// of the results.
 	NextToken *string `locationName:"nextToken" type:"string"`
 

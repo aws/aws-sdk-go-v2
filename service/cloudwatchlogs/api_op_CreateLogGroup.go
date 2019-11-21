@@ -69,7 +69,7 @@ const opCreateLogGroup = "CreateLogGroup"
 //
 // Creates a log group with the specified name.
 //
-// You can create up to 5000 log groups per account.
+// You can create up to 20,000 log groups per account.
 //
 // You must use the following guidelines when naming a log group:
 //
@@ -78,7 +78,8 @@ const opCreateLogGroup = "CreateLogGroup"
 //    * Log group names can be between 1 and 512 characters long.
 //
 //    * Log group names consist of the following characters: a-z, A-Z, 0-9,
-//    '_' (underscore), '-' (hyphen), '/' (forward slash), and '.' (period).
+//    '_' (underscore), '-' (hyphen), '/' (forward slash), '.' (period), and
+//    '#' (number sign)
 //
 // If you associate a AWS Key Management Service (AWS KMS) customer master key
 // (CMK) with the log group, ingested data is encrypted using the CMK. This

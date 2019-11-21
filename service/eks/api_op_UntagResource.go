@@ -14,7 +14,8 @@ type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the resource from which to delete tags.
-	// Currently, the supported resources are Amazon EKS clusters.
+	// Currently, the supported resources are Amazon EKS clusters and managed node
+	// groups.
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `location:"uri" locationName:"resourceArn" type:"string" required:"true"`

@@ -1150,6 +1150,11 @@ type SavingsPlansPurchaseRecommendationDetail struct {
 	// Savings Plans, over the length of the lookback period.
 	EstimatedOnDemandCost *string `type:"string"`
 
+	// The estimated On-Demand costs you would expect with no additional commitment,
+	// based on your usage of the selected time period and the Savings Plans you
+	// own.
+	EstimatedOnDemandCostWithCurrentCommitment *string `type:"string"`
+
 	// The estimated return on investment based on the recommended Savings Plans
 	// purchased. This is calculated as estimatedSavingsAmount/ estimatedSPCost*100.
 	EstimatedROI *string `type:"string"`
@@ -1217,6 +1222,11 @@ type SavingsPlansPurchaseRecommendationSummary struct {
 	// The estimated monthly savings amount, based on the recommended Savings Plans
 	// purchase.
 	EstimatedMonthlySavingsAmount *string `type:"string"`
+
+	// The estimated On-Demand costs you would expect with no additional commitment,
+	// based on your usage of the selected time period and the Savings Plans you
+	// own.
+	EstimatedOnDemandCostWithCurrentCommitment *string `type:"string"`
 
 	// The estimated return on investment based on the recommended Savings Plans
 	// and estimated savings.

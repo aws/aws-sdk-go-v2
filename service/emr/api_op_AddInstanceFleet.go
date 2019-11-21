@@ -54,6 +54,9 @@ func (s *AddInstanceFleetInput) Validate() error {
 type AddInstanceFleetOutput struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon Resource Name of the cluster.
+	ClusterArn *string `min:"20" type:"string"`
+
 	// The unique identifier of the cluster.
 	ClusterId *string `type:"string"`
 

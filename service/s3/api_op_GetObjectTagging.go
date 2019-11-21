@@ -13,12 +13,17 @@ import (
 type GetObjectTaggingInput struct {
 	_ struct{} `type:"structure"`
 
+	// The bucket name containing the object for which to get the tagging information.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
+	// Object key for which to get the tagging information.
+	//
 	// Key is a required field
 	Key *string `location:"uri" locationName:"Key" min:"1" type:"string" required:"true"`
 
+	// The versionId of the object for which to get the tagging information.
 	VersionId *string `location:"querystring" locationName:"versionId" type:"string"`
 }
 
@@ -82,9 +87,12 @@ func (s GetObjectTaggingInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetObjectTaggingOutput struct {
 	_ struct{} `type:"structure"`
 
+	// Contains the tag set.
+	//
 	// TagSet is a required field
 	TagSet []Tag `locationNameList:"Tag" type:"list" required:"true"`
 
+	// The versionId of the object for which you got the tagging information.
 	VersionId *string `location:"header" locationName:"x-amz-version-id" type:"string"`
 }
 
@@ -121,7 +129,25 @@ const opGetObjectTagging = "GetObjectTagging"
 // GetObjectTaggingRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Returns the tag-set of an object.
+// Returns the tag-set of an object. You send the GET request against the tagging
+// subresource associated with the object.
+//
+// To use this operation, you must have permission to perform the s3:GetObjectTagging
+// action. By default, the GET operation returns information about current version
+// of an object. For a versioned bucket, you can have multiple versions of an
+// object in your bucket. To retrieve tags of any other version, use the versionId
+// query parameter. You also need permission for the s3:GetObjectVersionTagging
+// action.
+//
+// By default, the bucket owner has this permission and can grant this permission
+// to others.
+//
+// For information about the Amazon S3 object tagging feature, see Object Tagging
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html).
+//
+// The following operation is related to GetObjectTagging:
+//
+//    * PutObjectTagging
 //
 //    // Example sending a request using GetObjectTaggingRequest.
 //    req := client.GetObjectTaggingRequest(params)

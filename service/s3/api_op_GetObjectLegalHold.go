@@ -124,7 +124,8 @@ const opGetObjectLegalHold = "GetObjectLegalHold"
 // GetObjectLegalHoldRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Gets an object's current Legal Hold status.
+// Gets an object's current Legal Hold status. For more information, see Locking
+// Objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html).
 //
 //    // Example sending a request using GetObjectLegalHoldRequest.
 //    req := client.GetObjectLegalHoldRequest(params)

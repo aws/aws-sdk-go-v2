@@ -26,10 +26,10 @@ type ListTaskDefinitionsInput struct {
 	// returns up to 100 results and a nextToken value if applicable.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
 
-	// The nextToken value returned from a previous paginated ListTaskDefinitions
-	// request where maxResults was used and the results exceeded the value of that
-	// parameter. Pagination continues from the end of the previous results that
-	// returned the nextToken value.
+	// The nextToken value returned from a ListTaskDefinitions request indicating
+	// that more results are available to fulfill the request and further calls
+	// will be needed. If maxResults was provided, it is possible the number of
+	// results to be fewer than maxResults.
 	//
 	// This token should be treated as an opaque identifier that is only used to
 	// retrieve the next items in a list and not for other programmatic purposes.

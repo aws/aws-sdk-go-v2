@@ -12,7 +12,8 @@ import (
 type DescribeMigrationTaskInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier given to the MigrationTask.
+	// The identifier given to the MigrationTask. Do not store personal data in
+	// this field.
 	//
 	// MigrationTaskName is a required field
 	MigrationTaskName *string `min:"1" type:"string" required:"true"`

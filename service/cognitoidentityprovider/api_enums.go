@@ -80,12 +80,13 @@ type AuthFlowType string
 
 // Enum values for AuthFlowType
 const (
-	AuthFlowTypeUserSrpAuth      AuthFlowType = "USER_SRP_AUTH"
-	AuthFlowTypeRefreshTokenAuth AuthFlowType = "REFRESH_TOKEN_AUTH"
-	AuthFlowTypeRefreshToken     AuthFlowType = "REFRESH_TOKEN"
-	AuthFlowTypeCustomAuth       AuthFlowType = "CUSTOM_AUTH"
-	AuthFlowTypeAdminNoSrpAuth   AuthFlowType = "ADMIN_NO_SRP_AUTH"
-	AuthFlowTypeUserPasswordAuth AuthFlowType = "USER_PASSWORD_AUTH"
+	AuthFlowTypeUserSrpAuth           AuthFlowType = "USER_SRP_AUTH"
+	AuthFlowTypeRefreshTokenAuth      AuthFlowType = "REFRESH_TOKEN_AUTH"
+	AuthFlowTypeRefreshToken          AuthFlowType = "REFRESH_TOKEN"
+	AuthFlowTypeCustomAuth            AuthFlowType = "CUSTOM_AUTH"
+	AuthFlowTypeAdminNoSrpAuth        AuthFlowType = "ADMIN_NO_SRP_AUTH"
+	AuthFlowTypeUserPasswordAuth      AuthFlowType = "USER_PASSWORD_AUTH"
+	AuthFlowTypeAdminUserPasswordAuth AuthFlowType = "ADMIN_USER_PASSWORD_AUTH"
 )
 
 func (enum AuthFlowType) MarshalValue() (string, error) {
@@ -318,9 +319,14 @@ type ExplicitAuthFlowsType string
 
 // Enum values for ExplicitAuthFlowsType
 const (
-	ExplicitAuthFlowsTypeAdminNoSrpAuth     ExplicitAuthFlowsType = "ADMIN_NO_SRP_AUTH"
-	ExplicitAuthFlowsTypeCustomAuthFlowOnly ExplicitAuthFlowsType = "CUSTOM_AUTH_FLOW_ONLY"
-	ExplicitAuthFlowsTypeUserPasswordAuth   ExplicitAuthFlowsType = "USER_PASSWORD_AUTH"
+	ExplicitAuthFlowsTypeAdminNoSrpAuth             ExplicitAuthFlowsType = "ADMIN_NO_SRP_AUTH"
+	ExplicitAuthFlowsTypeCustomAuthFlowOnly         ExplicitAuthFlowsType = "CUSTOM_AUTH_FLOW_ONLY"
+	ExplicitAuthFlowsTypeUserPasswordAuth           ExplicitAuthFlowsType = "USER_PASSWORD_AUTH"
+	ExplicitAuthFlowsTypeAllowAdminUserPasswordAuth ExplicitAuthFlowsType = "ALLOW_ADMIN_USER_PASSWORD_AUTH"
+	ExplicitAuthFlowsTypeAllowCustomAuth            ExplicitAuthFlowsType = "ALLOW_CUSTOM_AUTH"
+	ExplicitAuthFlowsTypeAllowUserPasswordAuth      ExplicitAuthFlowsType = "ALLOW_USER_PASSWORD_AUTH"
+	ExplicitAuthFlowsTypeAllowUserSrpAuth           ExplicitAuthFlowsType = "ALLOW_USER_SRP_AUTH"
+	ExplicitAuthFlowsTypeAllowRefreshTokenAuth      ExplicitAuthFlowsType = "ALLOW_REFRESH_TOKEN_AUTH"
 )
 
 func (enum ExplicitAuthFlowsType) MarshalValue() (string, error) {
@@ -400,6 +406,23 @@ func (enum OAuthFlowType) MarshalValue() (string, error) {
 }
 
 func (enum OAuthFlowType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type PreventUserExistenceErrorTypes string
+
+// Enum values for PreventUserExistenceErrorTypes
+const (
+	PreventUserExistenceErrorTypesLegacy  PreventUserExistenceErrorTypes = "LEGACY"
+	PreventUserExistenceErrorTypesEnabled PreventUserExistenceErrorTypes = "ENABLED"
+)
+
+func (enum PreventUserExistenceErrorTypes) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PreventUserExistenceErrorTypes) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

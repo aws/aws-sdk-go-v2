@@ -839,6 +839,26 @@ func (enum ExportTaskState) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type FastSnapshotRestoreStateCode string
+
+// Enum values for FastSnapshotRestoreStateCode
+const (
+	FastSnapshotRestoreStateCodeEnabling   FastSnapshotRestoreStateCode = "enabling"
+	FastSnapshotRestoreStateCodeOptimizing FastSnapshotRestoreStateCode = "optimizing"
+	FastSnapshotRestoreStateCodeEnabled    FastSnapshotRestoreStateCode = "enabled"
+	FastSnapshotRestoreStateCodeDisabling  FastSnapshotRestoreStateCode = "disabling"
+	FastSnapshotRestoreStateCodeDisabled   FastSnapshotRestoreStateCode = "disabled"
+)
+
+func (enum FastSnapshotRestoreStateCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FastSnapshotRestoreStateCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type FleetActivityStatus string
 
 // Enum values for FleetActivityStatus
@@ -1056,6 +1076,23 @@ func (enum HostTenancy) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type HttpTokensState string
+
+// Enum values for HttpTokensState
+const (
+	HttpTokensStateOptional HttpTokensState = "optional"
+	HttpTokensStateRequired HttpTokensState = "required"
+)
+
+func (enum HttpTokensState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HttpTokensState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type HypervisorType string
 
 // Enum values for HypervisorType
@@ -1265,6 +1302,40 @@ func (enum InstanceMatchCriteria) MarshalValue() (string, error) {
 }
 
 func (enum InstanceMatchCriteria) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type InstanceMetadataEndpointState string
+
+// Enum values for InstanceMetadataEndpointState
+const (
+	InstanceMetadataEndpointStateDisabled InstanceMetadataEndpointState = "disabled"
+	InstanceMetadataEndpointStateEnabled  InstanceMetadataEndpointState = "enabled"
+)
+
+func (enum InstanceMetadataEndpointState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceMetadataEndpointState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type InstanceMetadataOptionsState string
+
+// Enum values for InstanceMetadataOptionsState
+const (
+	InstanceMetadataOptionsStatePending InstanceMetadataOptionsState = "pending"
+	InstanceMetadataOptionsStateApplied InstanceMetadataOptionsState = "applied"
+)
+
+func (enum InstanceMetadataOptionsState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceMetadataOptionsState) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

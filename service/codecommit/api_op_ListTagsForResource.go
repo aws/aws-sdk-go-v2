@@ -12,7 +12,7 @@ import (
 type ListTagsForResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// An enumeration token that when provided in a request, returns the next batch
+	// An enumeration token that, when provided in a request, returns the next batch
 	// of the results.
 	NextToken *string `locationName:"nextToken" type:"string"`
 

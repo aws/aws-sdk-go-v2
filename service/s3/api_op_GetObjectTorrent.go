@@ -14,9 +14,14 @@ import (
 type GetObjectTorrentInput struct {
 	_ struct{} `type:"structure"`
 
+	// The name of the bucket containing the object for which to get the torrent
+	// files.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
+	// The object key for which to get the information.
+	//
 	// Key is a required field
 	Key *string `location:"uri" locationName:"Key" min:"1" type:"string" required:"true"`
 
@@ -87,6 +92,7 @@ func (s GetObjectTorrentInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetObjectTorrentOutput struct {
 	_ struct{} `type:"structure" payload:"Body"`
 
+	// A Bencoded dictionary as defined by the BitTorrent specification
 	Body io.ReadCloser `type:"blob"`
 
 	// If present, indicates that the requester was successfully charged for the
@@ -116,7 +122,19 @@ const opGetObjectTorrent = "GetObjectTorrent"
 // GetObjectTorrentRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Return torrent files from a bucket.
+// Return torrent files from a bucket. BitTorrent can save you bandwidth when
+// you're distributing large files. For more information about BitTorrent, see
+// Amazon S3 Torrent (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3Torrent.html).
+//
+// You can get torrent only for objects that are less than 5 GB in size and
+// that are not encrypted using server-side encryption with customer-provided
+// encryption key.
+//
+// To use GET, you must have READ access to the object.
+//
+// The following operation is related to GetObjectTorrent:
+//
+//    * GetObject
 //
 //    // Example sending a request using GetObjectTorrentRequest.
 //    req := client.GetObjectTorrentRequest(params)

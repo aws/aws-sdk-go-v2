@@ -56,6 +56,9 @@ type CreateUserInput struct {
 	// SecurityProfileIds is a required field
 	SecurityProfileIds []string `min:"1" type:"list" required:"true"`
 
+	// One or more tags.
+	Tags map[string]string `min:"1" type:"map"`
+
 	// The user name for the account. For instances not using SAML for identity
 	// management, the user name can include up to 20 characters. If you are using
 	// SAML for identity management, the user name can include up to 64 characters
@@ -94,6 +97,9 @@ func (s *CreateUserInput) Validate() error {
 	}
 	if s.SecurityProfileIds != nil && len(s.SecurityProfileIds) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("SecurityProfileIds", 1))
+	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
 	}
 
 	if s.Username == nil {
@@ -169,6 +175,18 @@ func (s CreateUserInput) MarshalFields(e protocol.FieldEncoder) error {
 			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
+
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
 
 	}
 	if s.Username != nil {

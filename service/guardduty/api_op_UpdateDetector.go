@@ -13,16 +13,16 @@ import (
 type UpdateDetectorInput struct {
 	_ struct{} `type:"structure"`
 
-	// The unique ID of the detector that you want to update.
+	// The unique ID of the detector to update.
 	//
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
-	// Updated boolean value for the detector that specifies whether the detector
-	// is enabled.
+	// Specifies whether the detector is enabled or not enabled.
 	Enable *bool `locationName:"enable" type:"boolean"`
 
-	// A enum value that specifies how frequently customer got Finding updates published.
+	// A enum value that specifies how frequently findings are exported, such as
+	// to CloudWatch Events.
 	FindingPublishingFrequency FindingPublishingFrequency `locationName:"findingPublishingFrequency" type:"string" enum:"true"`
 }
 
@@ -92,7 +92,7 @@ const opUpdateDetector = "UpdateDetector"
 // UpdateDetectorRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Updates an Amazon GuardDuty detector specified by the detectorId.
+// Updates the Amazon GuardDuty detector specified by the detectorId.
 //
 //    // Example sending a request using UpdateDetectorRequest.
 //    req := client.UpdateDetectorRequest(params)

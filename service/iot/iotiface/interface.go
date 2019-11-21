@@ -89,6 +89,8 @@ type ClientAPI interface {
 
 	ClearDefaultAuthorizerRequest(*iot.ClearDefaultAuthorizerInput) iot.ClearDefaultAuthorizerRequest
 
+	ConfirmTopicRuleDestinationRequest(*iot.ConfirmTopicRuleDestinationInput) iot.ConfirmTopicRuleDestinationRequest
+
 	CreateAuthorizerRequest(*iot.CreateAuthorizerInput) iot.CreateAuthorizerRequest
 
 	CreateBillingGroupRequest(*iot.CreateBillingGroupInput) iot.CreateBillingGroupRequest
@@ -124,6 +126,8 @@ type ClientAPI interface {
 	CreateThingTypeRequest(*iot.CreateThingTypeInput) iot.CreateThingTypeRequest
 
 	CreateTopicRuleRequest(*iot.CreateTopicRuleInput) iot.CreateTopicRuleRequest
+
+	CreateTopicRuleDestinationRequest(*iot.CreateTopicRuleDestinationInput) iot.CreateTopicRuleDestinationRequest
 
 	DeleteAccountAuditConfigurationRequest(*iot.DeleteAccountAuditConfigurationInput) iot.DeleteAccountAuditConfigurationRequest
 
@@ -166,6 +170,8 @@ type ClientAPI interface {
 	DeleteThingTypeRequest(*iot.DeleteThingTypeInput) iot.DeleteThingTypeRequest
 
 	DeleteTopicRuleRequest(*iot.DeleteTopicRuleInput) iot.DeleteTopicRuleRequest
+
+	DeleteTopicRuleDestinationRequest(*iot.DeleteTopicRuleDestinationInput) iot.DeleteTopicRuleDestinationRequest
 
 	DeleteV2LoggingLevelRequest(*iot.DeleteV2LoggingLevelInput) iot.DeleteV2LoggingLevelRequest
 
@@ -229,6 +235,8 @@ type ClientAPI interface {
 
 	EnableTopicRuleRequest(*iot.EnableTopicRuleInput) iot.EnableTopicRuleRequest
 
+	GetCardinalityRequest(*iot.GetCardinalityInput) iot.GetCardinalityRequest
+
 	GetEffectivePoliciesRequest(*iot.GetEffectivePoliciesInput) iot.GetEffectivePoliciesRequest
 
 	GetIndexingConfigurationRequest(*iot.GetIndexingConfigurationInput) iot.GetIndexingConfigurationRequest
@@ -239,6 +247,8 @@ type ClientAPI interface {
 
 	GetOTAUpdateRequest(*iot.GetOTAUpdateInput) iot.GetOTAUpdateRequest
 
+	GetPercentilesRequest(*iot.GetPercentilesInput) iot.GetPercentilesRequest
+
 	GetPolicyRequest(*iot.GetPolicyInput) iot.GetPolicyRequest
 
 	GetPolicyVersionRequest(*iot.GetPolicyVersionInput) iot.GetPolicyVersionRequest
@@ -248,6 +258,8 @@ type ClientAPI interface {
 	GetStatisticsRequest(*iot.GetStatisticsInput) iot.GetStatisticsRequest
 
 	GetTopicRuleRequest(*iot.GetTopicRuleInput) iot.GetTopicRuleRequest
+
+	GetTopicRuleDestinationRequest(*iot.GetTopicRuleDestinationInput) iot.GetTopicRuleDestinationRequest
 
 	GetV2LoggingOptionsRequest(*iot.GetV2LoggingOptionsInput) iot.GetV2LoggingOptionsRequest
 
@@ -330,6 +342,8 @@ type ClientAPI interface {
 	ListThingsInBillingGroupRequest(*iot.ListThingsInBillingGroupInput) iot.ListThingsInBillingGroupRequest
 
 	ListThingsInThingGroupRequest(*iot.ListThingsInThingGroupInput) iot.ListThingsInThingGroupRequest
+
+	ListTopicRuleDestinationsRequest(*iot.ListTopicRuleDestinationsInput) iot.ListTopicRuleDestinationsRequest
 
 	ListTopicRulesRequest(*iot.ListTopicRulesInput) iot.ListTopicRulesRequest
 
@@ -414,6 +428,8 @@ type ClientAPI interface {
 	UpdateThingGroupRequest(*iot.UpdateThingGroupInput) iot.UpdateThingGroupRequest
 
 	UpdateThingGroupsForThingRequest(*iot.UpdateThingGroupsForThingInput) iot.UpdateThingGroupsForThingRequest
+
+	UpdateTopicRuleDestinationRequest(*iot.UpdateTopicRuleDestinationInput) iot.UpdateTopicRuleDestinationRequest
 
 	ValidateSecurityProfileBehaviorsRequest(*iot.ValidateSecurityProfileBehaviorsInput) iot.ValidateSecurityProfileBehaviorsRequest
 }

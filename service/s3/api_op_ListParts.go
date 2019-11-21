@@ -14,9 +14,13 @@ import (
 type ListPartsInput struct {
 	_ struct{} `type:"structure"`
 
+	// Name of the bucket to which the parts are being uploaded.->
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
+	// Object key for which the multipart upload was initiated.
+	//
 	// Key is a required field
 	Key *string `location:"uri" locationName:"Key" min:"1" type:"string" required:"true"`
 
@@ -121,20 +125,34 @@ func (s ListPartsInput) MarshalFields(e protocol.FieldEncoder) error {
 type ListPartsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Date when multipart upload will become eligible for abort operation by lifecycle.
+	// If the bucket has a lifecycle rule configured with an action to abort incomplete
+	// multipart uploads and the prefix in the lifecycle rule matches the object
+	// name in the request, then the response includes this header indicating when
+	// the initiated multipart upload will become eligible for abort operation.
+	// For more information, see Aborting Incomplete Multipart Uploads Using a Bucket
+	// Lifecycle Policy (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config).
+	//
+	// The response will also include the x-amz-abort-rule-id header that will provide
+	// the ID of the lifecycle configuration rule that defines this action.
 	AbortDate *time.Time `location:"header" locationName:"x-amz-abort-date" type:"timestamp"`
 
-	// Id of the lifecycle rule that makes a multipart upload eligible for abort
-	// operation.
+	// This header is returned along with the x-amz-abort-date header. It identifies
+	// applicable lifecycle configuration rule that defines the action to abort
+	// incomplete multipart uploads.
 	AbortRuleId *string `location:"header" locationName:"x-amz-abort-rule-id" type:"string"`
 
 	// Name of the bucket to which the multipart upload was initiated.
 	Bucket *string `type:"string"`
 
-	// Identifies who initiated the multipart upload.
+	// Container element that identifies who initiated the multipart upload. If
+	// the initiator is an AWS account, this element provides the same information
+	// as the Owner element. If the initiator is an IAM User, then this element
+	// provides the user ARN and display name.
 	Initiator *Initiator `type:"structure"`
 
-	// Indicates whether the returned list of parts is truncated.
+	// Indicates whether the returned list of parts is truncated. A true value indicates
+	// that the list was truncated. A list can be truncated if the number of parts
+	// exceeds the limit returned in the MaxParts element.
 	IsTruncated *bool `type:"boolean"`
 
 	// Object key for which the multipart upload was initiated.
@@ -148,18 +166,26 @@ type ListPartsOutput struct {
 	// in a subsequent request.
 	NextPartNumberMarker *int64 `type:"integer"`
 
+	// Container element that identifies the object owner, after the object is created.
+	// If multipart upload is initiated by an IAM user, this element provides the
+	// parent account ID and display name.
 	Owner *Owner `type:"structure"`
 
-	// Part number after which listing begins.
+	// When a list is truncated, this element specifies the last part in the list,
+	// as well as the value to use for the part-number-marker request parameter
+	// in a subsequent request.
 	PartNumberMarker *int64 `type:"integer"`
 
+	// Container for elements related to a particular part. A response can contain
+	// zero or more Part elements.
 	Parts []Part `locationName:"Part" type:"list" flattened:"true"`
 
 	// If present, indicates that the requester was successfully charged for the
 	// request.
 	RequestCharged RequestCharged `location:"header" locationName:"x-amz-request-charged" type:"string" enum:"true"`
 
-	// The class of storage used to store the object.
+	// Class of storage (STANDARD or REDUCED_REDUNDANCY) used to store the uploaded
+	// object.
 	StorageClass StorageClass `type:"string" enum:"true"`
 
 	// Upload ID identifying the multipart upload whose parts are being listed.
@@ -280,6 +306,33 @@ const opListParts = "ListParts"
 // Amazon Simple Storage Service.
 //
 // Lists the parts that have been uploaded for a specific multipart upload.
+// This operation must include the upload ID, which you obtain by sending the
+// initiate multipart upload request (see CreateMultipartUpload). This request
+// returns a maximum of 1,000 uploaded parts. The default number of parts returned
+// is 1,000 parts. You can restrict the number of parts returned by specifying
+// the max-parts request parameter. If your multipart upload consists of more
+// than 1,000 parts, the response returns an IsTruncated field with the value
+// of true, and a NextPartNumberMarker element. In subsequent ListParts requests
+// you can include the part-number-marker query string parameter and set its
+// value to the NextPartNumberMarker field value from the previous response.
+//
+// For more information on multipart uploads, see Uploading Objects Using Multipart
+// Upload (https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html).
+//
+// For information on permissions required to use the multipart upload API,
+// see Multipart Upload API and Permissions (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html).
+//
+// The following operations are related to ListParts:
+//
+//    * CreateMultipartUpload
+//
+//    * UploadPart
+//
+//    * CompleteMultipartUpload
+//
+//    * AbortMultipartUpload
+//
+//    * ListMultipartUploads
 //
 //    // Example sending a request using ListPartsRequest.
 //    req := client.ListPartsRequest(params)

@@ -227,9 +227,6 @@ func (s AnalyticsAndOperator) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the configuration and any analyses for the analytics filter of
 // an Amazon S3 bucket.
-//
-// For more information, see GET Bucket analytics (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETAnalyticsConfig.html)
-// in the Amazon Simple Storage Service API Reference.
 type AnalyticsConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -351,6 +348,9 @@ func (s AnalyticsExportDestination) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
+// The filter used to describe a set of objects for analyses. A filter must
+// have exactly one prefix, one tag, or one conjunction (AnalyticsAndOperator).
+// If no filter is provided, all objects will be considered in any analysis.
 type AnalyticsFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -413,6 +413,7 @@ func (s AnalyticsFilter) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information about where to publish the analytics results.
 type AnalyticsS3BucketDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -492,6 +493,8 @@ func (s AnalyticsS3BucketDestination) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
+// In terms of implementation, a Bucket is a resource. An Amazon S3 bucket name
+// is globally unique, and the namespace is shared by all AWS accounts.
 type Bucket struct {
 	_ struct{} `type:"structure"`
 
@@ -580,6 +583,7 @@ func (s BucketLifecycleConfiguration) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
+// Container for logging status information.
 type BucketLoggingStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -628,7 +632,8 @@ func (s BucketLoggingStatus) MarshalFields(e protocol.FieldEncoder) error {
 type CORSConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// A set of allowed origins and methods.
+	// A set of origins and methods (cross-origin access that you want to allow).
+	// You can add up to 100 rules to the configuration.
 	//
 	// CORSRules is a required field
 	CORSRules []CORSRule `locationName:"CORSRule" type:"list" flattened:"true" required:"true"`
@@ -790,7 +795,8 @@ func (s CORSRule) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Describes how a CSV-formatted input object is formatted.
+// Describes how a uncompressed comma-separated values (CSV)-formatted input
+// object is formatted.
 type CSVInput struct {
 	_ struct{} `type:"structure"`
 
@@ -799,24 +805,45 @@ type CSVInput struct {
 	// to TRUE may lower performance.
 	AllowQuotedRecordDelimiter *bool `type:"boolean"`
 
-	// The single character used to indicate a row should be ignored when present
-	// at the start of a row.
+	// A single character used to indicate that a row should be ignored when the
+	// character is present at the start of that row. You can specify any character
+	// to indicate a comment line.
 	Comments *string `type:"string"`
 
-	// The value used to separate individual fields in a record.
+	// A single character used to separate individual fields in a record. You can
+	// specify an arbitrary delimiter.
 	FieldDelimiter *string `type:"string"`
 
-	// Describes the first line of input. Valid values: None, Ignore, Use.
+	// Describes the first line of input. Valid values are:
+	//
+	//    * NONE: First line is not a header.
+	//
+	//    * IGNORE: First line is a header, but you can't use the header values
+	//    to indicate the column in an expression. You can use column position (such
+	//    as _1, _2, …) to indicate the column (SELECT s._1 FROM OBJECT s).
+	//
+	//    * Use: First line is a header, and you can use the header value to identify
+	//    a column in an expression (SELECT "name" FROM OBJECT).
 	FileHeaderInfo FileHeaderInfo `type:"string" enum:"true"`
 
-	// Value used for escaping where the field delimiter is part of the value.
+	// A single character used for escaping when the field delimiter is part of
+	// the value. For example, if the value is a, b, Amazon S3 wraps this field
+	// value in quotation marks, as follows: " a , b ".
+	//
+	// Type: String
+	//
+	// Default: "
+	//
+	// Ancestors: CSV
 	QuoteCharacter *string `type:"string"`
 
-	// The single character used for escaping the quote character inside an already
-	// escaped value.
+	// A single character used for escaping the quotation mark character inside
+	// an already escaped value. For example, the value """ a , b """ is parsed
+	// as " a , b ".
 	QuoteEscapeCharacter *string `type:"string"`
 
-	// The value used to separate individual records.
+	// A single character used to separate individual records in the input. Instead
+	// of the default value, you can specify an arbitrary delimiter.
 	RecordDelimiter *string `type:"string"`
 }
 
@@ -872,24 +899,33 @@ func (s CSVInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Describes how CSV-formatted results are formatted.
+// Describes how uncompressed comma-separated values (CSV)-formatted results
+// are formatted.
 type CSVOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The value used to separate individual fields in a record.
+	// The value used to separate individual fields in a record. You can specify
+	// an arbitrary delimiter.
 	FieldDelimiter *string `type:"string"`
 
-	// The value used for escaping where the field delimiter is part of the value.
+	// A single character used for escaping when the field delimiter is part of
+	// the value. For example, if the value is a, b, Amazon S3 wraps this field
+	// value in quotation marks, as follows: " a , b ".
 	QuoteCharacter *string `type:"string"`
 
-	// Th single character used for escaping the quote character inside an already
+	// The single character used for escaping the quote character inside an already
 	// escaped value.
 	QuoteEscapeCharacter *string `type:"string"`
 
-	// Indicates whether or not all output fields should be quoted.
+	// Indicates whether to use quotation marks around output fields.
+	//
+	//    * ALWAYS: Always use quotation marks for output fields.
+	//
+	//    * ASNEEDED: Use quotation marks for output fields when needed.
 	QuoteFields QuoteFields `type:"string" enum:"true"`
 
-	// The value used to separate individual records.
+	// A single character used to separate individual records in the output. Instead
+	// of the default value, you can specify an arbitrary delimiter.
 	RecordDelimiter *string `type:"string"`
 }
 
@@ -933,20 +969,25 @@ func (s CSVOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Container for specifying the AWS Lambda notification configuration.
 type CloudFunctionConfiguration struct {
 	_ struct{} `type:"structure"`
 
+	// Lambda cloud function ARN that Amazon S3 can invoke when it detects events
+	// of the specified type.
 	CloudFunction *string `type:"string"`
 
 	// The bucket event for which to send notifications.
 	Event Event `deprecated:"true" type:"string" enum:"true"`
 
+	// Bucket events for which to send notifications.
 	Events []Event `locationName:"Event" type:"list" flattened:"true"`
 
 	// An optional unique identifier for configurations in a notification configuration.
 	// If you don't provide one, Amazon S3 will assign an ID.
 	Id *string `type:"string"`
 
+	// The role supporting the invocation of the lambda function
 	InvocationRole *string `type:"string"`
 }
 
@@ -996,9 +1037,15 @@ func (s CloudFunctionConfiguration) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
+// Container for all (if there are any) keys between Prefix and the next occurrence
+// of the string specified by a delimiter. CommonPrefixes lists keys that act
+// like subdirectories in the directory specified by Prefix. For example, if
+// the prefix is notes/ and the delimiter is a slash (/) as in notes/summer/july,
+// the common prefix is notes/summer/.
 type CommonPrefix struct {
 	_ struct{} `type:"structure"`
 
+	// Container for the specified common prefix.
 	Prefix *string `type:"string"`
 }
 
@@ -1018,9 +1065,11 @@ func (s CommonPrefix) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The container for the completed multipart upload details.
 type CompletedMultipartUpload struct {
 	_ struct{} `type:"structure"`
 
+	// Array of CompletedPart data types.
 	Parts []CompletedPart `locationName:"Part" type:"list" flattened:"true"`
 }
 
@@ -1046,6 +1095,7 @@ func (s CompletedMultipartUpload) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Details of the parts that were uploaded.
 type CompletedPart struct {
 	_ struct{} `type:"structure"`
 
@@ -1079,7 +1129,10 @@ func (s CompletedPart) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Specifies a condition that must be met for a redirect to apply.
+// A container for describing a condition that must be met for the specified
+// redirect to apply. For example, 1. If request is for pages in the /docs folder,
+// redirect to the /documents folder. 2. If request results in HTTP error 4xx,
+// redirect request to another host where you might process the error.
 type Condition struct {
 	_ struct{} `type:"structure"`
 
@@ -1122,11 +1175,16 @@ func (s Condition) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// >Container for all response elements.
 type CopyObjectResult struct {
 	_ struct{} `type:"structure"`
 
+	// Returns the ETag of the new object. The ETag reflects only changes to the
+	// contents of an object, not its metadata. The source and destination ETag
+	// is identical for a successfully copied object.
 	ETag *string `type:"string"`
 
+	// Returns the date that the object was last modified.
 	LastModified *time.Time `type:"timestamp"`
 }
 
@@ -1153,6 +1211,7 @@ func (s CopyObjectResult) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Container for all response elements.
 type CopyPartResult struct {
 	_ struct{} `type:"structure"`
 
@@ -1186,6 +1245,7 @@ func (s CopyPartResult) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The configuration information for the bucket.
 type CreateBucketConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1210,7 +1270,7 @@ func (s CreateBucketConfiguration) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// The container element for specifying the default object lock retention settings
+// The container element for specifying the default Object Lock retention settings
 // for new objects placed in the specified bucket.
 type DefaultRetention struct {
 	_ struct{} `type:"structure"`
@@ -1218,7 +1278,7 @@ type DefaultRetention struct {
 	// The number of days that you want to specify for the default retention period.
 	Days *int64 `type:"integer"`
 
-	// The default object lock retention mode you want to apply to new objects placed
+	// The default Object Lock retention mode you want to apply to new objects placed
 	// in the specified bucket.
 	Mode ObjectLockRetentionMode `type:"string" enum:"true"`
 
@@ -1254,9 +1314,12 @@ func (s DefaultRetention) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Container for the objects to delete.
 type Delete struct {
 	_ struct{} `type:"structure"`
 
+	// The objects to delete.
+	//
 	// Objects is a required field
 	Objects []ObjectIdentifier `locationName:"Object" type:"list" flattened:"true" required:"true"`
 
@@ -1314,6 +1377,7 @@ func (s Delete) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Information about the delete marker.
 type DeleteMarkerEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -1327,6 +1391,7 @@ type DeleteMarkerEntry struct {
 	// Date and time the object was last modified.
 	LastModified *time.Time `type:"timestamp"`
 
+	// The account that created the delete marker.>
 	Owner *Owner `type:"structure"`
 
 	// Version ID of an object.
@@ -1374,11 +1439,21 @@ func (s DeleteMarkerEntry) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Specifies whether Amazon S3 should replicate delete makers.
+// Specifies whether Amazon S3 replicates the delete markers. If you specify
+// a Filter, you must specify this element. However, in the latest version of
+// replication configuration (when Filter is specified), Amazon S3 doesn't replicate
+// delete markers. Therefore, the DeleteMarkerReplication element can contain
+// only <Status>Disabled</Status>. For an example configuration, see Basic Rule
+// Configuration (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config).
+//
+// If you don't specify the Filter element, Amazon S3 assumes the replication
+// configuration is the earlier version, V1. In the earlier version, Amazon
+// S3 handled replication of delete markers differently. For more information,
+// see Backward Compatibility (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations).
 type DeleteMarkerReplication struct {
 	_ struct{} `type:"structure"`
 
-	// The status of the delete marker replication.
+	// Indicates whether to replicate delete markers.
 	//
 	// In the current implementation, Amazon S3 doesn't replicate the delete markers.
 	// The status must be Disabled.
@@ -1401,15 +1476,24 @@ func (s DeleteMarkerReplication) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Information about the deleted object.
 type DeletedObject struct {
 	_ struct{} `type:"structure"`
 
+	// Specifies whether the versioned object that was permanently deleted was (true)
+	// or was not (false) a delete marker. In a simple DELETE, this header indicates
+	// whether (true) or not (false) a delete marker was created.
 	DeleteMarker *bool `type:"boolean"`
 
+	// The version ID of the delete marker created as a result of the DELETE operation.
+	// If you delete a specific object version, the value returned by this header
+	// is the version ID of the object version deleted.
 	DeleteMarkerVersionId *string `type:"string"`
 
+	// The name of the deleted object.
 	Key *string `min:"1" type:"string"`
 
+	// The version ID of the deleted object.
 	VersionId *string `type:"string"`
 }
 
@@ -1463,17 +1547,12 @@ type Destination struct {
 	// direct Amazon S3 to change replica ownership to the AWS account that owns
 	// the destination bucket by specifying the AccessControlTranslation property,
 	// this is the account ID of the destination bucket owner. For more information,
-	// see Cross-Region Replication Additional Configuration: Change Replica Owner
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/crr-change-owner.html) in
-	// the Amazon Simple Storage Service Developer Guide.
+	// see Replication Additional Configuration: Change Replica Owner (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-change-owner.html)
+	// in the Amazon Simple Storage Service Developer Guide.
 	Account *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the bucket where you want Amazon S3 to
-	// store replicas of the object identified by the rule.
-	//
-	// A replication configuration can replicate objects to only one destination
-	// bucket. If there are multiple rules in your replication configuration, all
-	// rules must specify the same destination bucket.
+	// store the results.
 	//
 	// Bucket is a required field
 	Bucket *string `type:"string" required:"true"`
@@ -1481,6 +1560,16 @@ type Destination struct {
 	// A container that provides information about encryption. If SourceSelectionCriteria
 	// is specified, you must specify this element.
 	EncryptionConfiguration *EncryptionConfiguration `type:"structure"`
+
+	// A container specifying replication metrics-related information, including
+	// whether emitting metrics and Amazon S3 events for replication are enabled.
+	// In addition, contains configurations related to specific metrics or events.
+	// Must be specified together with a ReplicationTime block.
+	Metrics *Metrics `type:"structure"`
+
+	// A container specifying the time when all objects and operations on objects
+	// are replicated. Must be specified together with a Metrics block.
+	ReplicationTime *ReplicationTime `type:"structure"`
 
 	// The storage class to use when replicating objects, such as standard or reduced
 	// redundancy. By default, Amazon S3 uses the storage class of the source object
@@ -1507,6 +1596,16 @@ func (s *Destination) Validate() error {
 	if s.AccessControlTranslation != nil {
 		if err := s.AccessControlTranslation.Validate(); err != nil {
 			invalidParams.AddNested("AccessControlTranslation", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Metrics != nil {
+		if err := s.Metrics.Validate(); err != nil {
+			invalidParams.AddNested("Metrics", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.ReplicationTime != nil {
+		if err := s.ReplicationTime.Validate(); err != nil {
+			invalidParams.AddNested("ReplicationTime", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -1549,6 +1648,18 @@ func (s Destination) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "EncryptionConfiguration", v, metadata)
 	}
+	if s.Metrics != nil {
+		v := s.Metrics
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Metrics", v, metadata)
+	}
+	if s.ReplicationTime != nil {
+		v := s.ReplicationTime
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ReplicationTime", v, metadata)
+	}
 	if len(s.StorageClass) > 0 {
 		v := s.StorageClass
 
@@ -1558,8 +1669,7 @@ func (s Destination) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Describes the server-side encryption that will be applied to the restore
-// results.
+// Contains the type of server-side encryption used.
 type Encryption struct {
 	_ struct{} `type:"structure"`
 
@@ -1645,15 +1755,375 @@ func (s EncryptionConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Container for all error elements.
 type Error struct {
 	_ struct{} `type:"structure"`
 
+	// The error code is a string that uniquely identifies an error condition. It
+	// is meant to be read and understood by programs that detect and handle errors
+	// by type.
+	//
+	// Amazon S3 error codes
+	//
+	//    * Code: AccessDenied Description: Access Denied HTTP Status Code: 403
+	//    Forbidden SOAP Fault Code Prefix: Client
+	//
+	//    * Code: AccountProblem Description: There is a problem with your AWS account
+	//    that prevents the operation from completing successfully. Contact AWS
+	//    Support for further assistance. HTTP Status Code: 403 Forbidden SOAP Fault
+	//    Code Prefix: Client
+	//
+	//    * Code: AllAccessDisabled Description: All access to this Amazon S3 resource
+	//    has been disabled. Contact AWS Support for further assistance. HTTP Status
+	//    Code: 403 Forbidden SOAP Fault Code Prefix: Client
+	//
+	//    * Code: AmbiguousGrantByEmailAddress Description: The email address you
+	//    provided is associated with more than one account. HTTP Status Code: 400
+	//    Bad Request SOAP Fault Code Prefix: Client
+	//
+	//    * Code: AuthorizationHeaderMalformed Description: The authorization header
+	//    you provided is invalid. HTTP Status Code: 400 Bad Request HTTP Status
+	//    Code: N/A
+	//
+	//    * Code: BadDigest Description: The Content-MD5 you specified did not match
+	//    what we received. HTTP Status Code: 400 Bad Request SOAP Fault Code Prefix:
+	//    Client
+	//
+	//    * Code: BucketAlreadyExists Description: The requested bucket name is
+	//    not available. The bucket namespace is shared by all users of the system.
+	//    Please select a different name and try again. HTTP Status Code: 409 Conflict
+	//    SOAP Fault Code Prefix: Client
+	//
+	//    * Code: BucketAlreadyOwnedByYou Description: The bucket you tried to create
+	//    already exists, and you own it. Amazon S3 returns this error in all AWS
+	//    Regions except in the North Virginia region. For legacy compatibility,
+	//    if you re-create an existing bucket that you already own in the North
+	//    Virginia region, Amazon S3 returns 200 OK and resets the bucket access
+	//    control lists (ACLs). Code: 409 Conflict (in all regions except the North
+	//    Virginia region) SOAP Fault Code Prefix: Client
+	//
+	//    * Code: BucketNotEmpty Description: The bucket you tried to delete is
+	//    not empty. HTTP Status Code: 409 Conflict SOAP Fault Code Prefix: Client
+	//
+	//    * Code: CredentialsNotSupported Description: This request does not support
+	//    credentials. HTTP Status Code: 400 Bad Request SOAP Fault Code Prefix:
+	//    Client
+	//
+	//    * Code: CrossLocationLoggingProhibited Description: Cross-location logging
+	//    not allowed. Buckets in one geographic location cannot log information
+	//    to a bucket in another location. HTTP Status Code: 403 Forbidden SOAP
+	//    Fault Code Prefix: Client
+	//
+	//    * Code: EntityTooSmall Description: Your proposed upload is smaller than
+	//    the minimum allowed object size. HTTP Status Code: 400 Bad Request SOAP
+	//    Fault Code Prefix: Client
+	//
+	//    * Code: EntityTooLarge Description: Your proposed upload exceeds the maximum
+	//    allowed object size. HTTP Status Code: 400 Bad Request SOAP Fault Code
+	//    Prefix: Client
+	//
+	//    * Code: ExpiredToken Description: The provided token has expired. HTTP
+	//    Status Code: 400 Bad Request SOAP Fault Code Prefix: Client
+	//
+	//    * Code: IllegalVersioningConfigurationException Description: Indicates
+	//    that the versioning configuration specified in the request is invalid.
+	//    HTTP Status Code: 400 Bad Request SOAP Fault Code Prefix: Client
+	//
+	//    * Code: IncompleteBody Description: You did not provide the number of
+	//    bytes specified by the Content-Length HTTP header HTTP Status Code: 400
+	//    Bad Request SOAP Fault Code Prefix: Client
+	//
+	//    * Code: IncorrectNumberOfFilesInPostRequest Description: POST requires
+	//    exactly one file upload per request. HTTP Status Code: 400 Bad Request
+	//    SOAP Fault Code Prefix: Client
+	//
+	//    * Code: InlineDataTooLarge Description: Inline data exceeds the maximum
+	//    allowed size. HTTP Status Code: 400 Bad Request SOAP Fault Code Prefix:
+	//    Client
+	//
+	//    * Code: InternalError Description: We encountered an internal error. Please
+	//    try again. HTTP Status Code: 500 Internal Server Error SOAP Fault Code
+	//    Prefix: Server
+	//
+	//    * Code: InvalidAccessKeyId Description: The AWS access key ID you provided
+	//    does not exist in our records. HTTP Status Code: 403 Forbidden SOAP Fault
+	//    Code Prefix: Client
+	//
+	//    * Code: InvalidAddressingHeader Description: You must specify the Anonymous
+	//    role. HTTP Status Code: N/A SOAP Fault Code Prefix: Client
+	//
+	//    * Code: InvalidArgument Description: Invalid Argument HTTP Status Code:
+	//    400 Bad Request SOAP Fault Code Prefix: Client
+	//
+	//    * Code: InvalidBucketName Description: The specified bucket is not valid.
+	//    HTTP Status Code: 400 Bad Request SOAP Fault Code Prefix: Client
+	//
+	//    * Code: InvalidBucketState Description: The request is not valid with
+	//    the current state of the bucket. HTTP Status Code: 409 Conflict SOAP Fault
+	//    Code Prefix: Client
+	//
+	//    * Code: InvalidDigest Description: The Content-MD5 you specified is not
+	//    valid. HTTP Status Code: 400 Bad Request SOAP Fault Code Prefix: Client
+	//
+	//    * Code: InvalidEncryptionAlgorithmError Description: The encryption request
+	//    you specified is not valid. The valid value is AES256. HTTP Status Code:
+	//    400 Bad Request SOAP Fault Code Prefix: Client
+	//
+	//    * Code: InvalidLocationConstraint Description: The specified location
+	//    constraint is not valid. For more information about Regions, see How to
+	//    Select a Region for Your Buckets (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro).
+	//    HTTP Status Code: 400 Bad Request SOAP Fault Code Prefix: Client
+	//
+	//    * Code: InvalidObjectState Description: The operation is not valid for
+	//    the current state of the object. HTTP Status Code: 403 Forbidden SOAP
+	//    Fault Code Prefix: Client
+	//
+	//    * Code: InvalidPart Description: One or more of the specified parts could
+	//    not be found. The part might not have been uploaded, or the specified
+	//    entity tag might not have matched the part's entity tag. HTTP Status Code:
+	//    400 Bad Request SOAP Fault Code Prefix: Client
+	//
+	//    * Code: InvalidPartOrder Description: The list of parts was not in ascending
+	//    order. Parts list must be specified in order by part number. HTTP Status
+	//    Code: 400 Bad Request SOAP Fault Code Prefix: Client
+	//
+	//    * Code: InvalidPayer Description: All access to this object has been disabled.
+	//    Please contact AWS Support for further assistance. HTTP Status Code: 403
+	//    Forbidden SOAP Fault Code Prefix: Client
+	//
+	//    * Code: InvalidPolicyDocument Description: The content of the form does
+	//    not meet the conditions specified in the policy document. HTTP Status
+	//    Code: 400 Bad Request SOAP Fault Code Prefix: Client
+	//
+	//    * Code: InvalidRange Description: The requested range cannot be satisfied.
+	//    HTTP Status Code: 416 Requested Range Not Satisfiable SOAP Fault Code
+	//    Prefix: Client
+	//
+	//    * Code: InvalidRequest Description: Please use AWS4-HMAC-SHA256. HTTP
+	//    Status Code: 400 Bad Request Code: N/A
+	//
+	//    * Code: InvalidRequest Description: SOAP requests must be made over an
+	//    HTTPS connection. HTTP Status Code: 400 Bad Request SOAP Fault Code Prefix:
+	//    Client
+	//
+	//    * Code: InvalidRequest Description: Amazon S3 Transfer Acceleration is
+	//    not supported for buckets with non-DNS compliant names. HTTP Status Code:
+	//    400 Bad Request Code: N/A
+	//
+	//    * Code: InvalidRequest Description: Amazon S3 Transfer Acceleration is
+	//    not supported for buckets with periods (.) in their names. HTTP Status
+	//    Code: 400 Bad Request Code: N/A
+	//
+	//    * Code: InvalidRequest Description: Amazon S3 Transfer Accelerate endpoint
+	//    only supports virtual style requests. HTTP Status Code: 400 Bad Request
+	//    Code: N/A
+	//
+	//    * Code: InvalidRequest Description: Amazon S3 Transfer Accelerate is not
+	//    configured on this bucket. HTTP Status Code: 400 Bad Request Code: N/A
+	//
+	//    * Code: InvalidRequest Description: Amazon S3 Transfer Accelerate is disabled
+	//    on this bucket. HTTP Status Code: 400 Bad Request Code: N/A
+	//
+	//    * Code: InvalidRequest Description: Amazon S3 Transfer Acceleration is
+	//    not supported on this bucket. Contact AWS Support for more information.
+	//    HTTP Status Code: 400 Bad Request Code: N/A
+	//
+	//    * Code: InvalidRequest Description: Amazon S3 Transfer Acceleration cannot
+	//    be enabled on this bucket. Contact AWS Support for more information. HTTP
+	//    Status Code: 400 Bad Request Code: N/A
+	//
+	//    * Code: InvalidSecurity Description: The provided security credentials
+	//    are not valid. HTTP Status Code: 403 Forbidden SOAP Fault Code Prefix:
+	//    Client
+	//
+	//    * Code: InvalidSOAPRequest Description: The SOAP request body is invalid.
+	//    HTTP Status Code: 400 Bad Request SOAP Fault Code Prefix: Client
+	//
+	//    * Code: InvalidStorageClass Description: The storage class you specified
+	//    is not valid. HTTP Status Code: 400 Bad Request SOAP Fault Code Prefix:
+	//    Client
+	//
+	//    * Code: InvalidTargetBucketForLogging Description: The target bucket for
+	//    logging does not exist, is not owned by you, or does not have the appropriate
+	//    grants for the log-delivery group. HTTP Status Code: 400 Bad Request SOAP
+	//    Fault Code Prefix: Client
+	//
+	//    * Code: InvalidToken Description: The provided token is malformed or otherwise
+	//    invalid. HTTP Status Code: 400 Bad Request SOAP Fault Code Prefix: Client
+	//
+	//    * Code: InvalidURI Description: Couldn't parse the specified URI. HTTP
+	//    Status Code: 400 Bad Request SOAP Fault Code Prefix: Client
+	//
+	//    * Code: KeyTooLongError Description: Your key is too long. HTTP Status
+	//    Code: 400 Bad Request SOAP Fault Code Prefix: Client
+	//
+	//    * Code: MalformedACLError Description: The XML you provided was not well-formed
+	//    or did not validate against our published schema. HTTP Status Code: 400
+	//    Bad Request SOAP Fault Code Prefix: Client
+	//
+	//    * Code: MalformedPOSTRequest Description: The body of your POST request
+	//    is not well-formed multipart/form-data. HTTP Status Code: 400 Bad Request
+	//    SOAP Fault Code Prefix: Client
+	//
+	//    * Code: MalformedXML Description: This happens when the user sends malformed
+	//    XML (XML that doesn't conform to the published XSD) for the configuration.
+	//    The error message is, "The XML you provided was not well-formed or did
+	//    not validate against our published schema." HTTP Status Code: 400 Bad
+	//    Request SOAP Fault Code Prefix: Client
+	//
+	//    * Code: MaxMessageLengthExceeded Description: Your request was too big.
+	//    HTTP Status Code: 400 Bad Request SOAP Fault Code Prefix: Client
+	//
+	//    * Code: MaxPostPreDataLengthExceededError Description: Your POST request
+	//    fields preceding the upload file were too large. HTTP Status Code: 400
+	//    Bad Request SOAP Fault Code Prefix: Client
+	//
+	//    * Code: MetadataTooLarge Description: Your metadata headers exceed the
+	//    maximum allowed metadata size. HTTP Status Code: 400 Bad Request SOAP
+	//    Fault Code Prefix: Client
+	//
+	//    * Code: MethodNotAllowed Description: The specified method is not allowed
+	//    against this resource. HTTP Status Code: 405 Method Not Allowed SOAP Fault
+	//    Code Prefix: Client
+	//
+	//    * Code: MissingAttachment Description: A SOAP attachment was expected,
+	//    but none were found. HTTP Status Code: N/A SOAP Fault Code Prefix: Client
+	//
+	//    * Code: MissingContentLength Description: You must provide the Content-Length
+	//    HTTP header. HTTP Status Code: 411 Length Required SOAP Fault Code Prefix:
+	//    Client
+	//
+	//    * Code: MissingRequestBodyError Description: This happens when the user
+	//    sends an empty XML document as a request. The error message is, "Request
+	//    body is empty." HTTP Status Code: 400 Bad Request SOAP Fault Code Prefix:
+	//    Client
+	//
+	//    * Code: MissingSecurityElement Description: The SOAP 1.1 request is missing
+	//    a security element. HTTP Status Code: 400 Bad Request SOAP Fault Code
+	//    Prefix: Client
+	//
+	//    * Code: MissingSecurityHeader Description: Your request is missing a required
+	//    header. HTTP Status Code: 400 Bad Request SOAP Fault Code Prefix: Client
+	//
+	//    * Code: NoLoggingStatusForKey Description: There is no such thing as a
+	//    logging status subresource for a key. HTTP Status Code: 400 Bad Request
+	//    SOAP Fault Code Prefix: Client
+	//
+	//    * Code: NoSuchBucket Description: The specified bucket does not exist.
+	//    HTTP Status Code: 404 Not Found SOAP Fault Code Prefix: Client
+	//
+	//    * Code: NoSuchBucketPolicy Description: The specified bucket does not
+	//    have a bucket policy. HTTP Status Code: 404 Not Found SOAP Fault Code
+	//    Prefix: Client
+	//
+	//    * Code: NoSuchKey Description: The specified key does not exist. HTTP
+	//    Status Code: 404 Not Found SOAP Fault Code Prefix: Client
+	//
+	//    * Code: NoSuchLifecycleConfiguration Description: The lifecycle configuration
+	//    does not exist. HTTP Status Code: 404 Not Found SOAP Fault Code Prefix:
+	//    Client
+	//
+	//    * Code: NoSuchUpload Description: The specified multipart upload does
+	//    not exist. The upload ID might be invalid, or the multipart upload might
+	//    have been aborted or completed. HTTP Status Code: 404 Not Found SOAP Fault
+	//    Code Prefix: Client
+	//
+	//    * Code: NoSuchVersion Description: Indicates that the version ID specified
+	//    in the request does not match an existing version. HTTP Status Code: 404
+	//    Not Found SOAP Fault Code Prefix: Client
+	//
+	//    * Code: NotImplemented Description: A header you provided implies functionality
+	//    that is not implemented. HTTP Status Code: 501 Not Implemented SOAP Fault
+	//    Code Prefix: Server
+	//
+	//    * Code: NotSignedUp Description: Your account is not signed up for the
+	//    Amazon S3 service. You must sign up before you can use Amazon S3. You
+	//    can sign up at the following URL: https://aws.amazon.com/s3 HTTP Status
+	//    Code: 403 Forbidden SOAP Fault Code Prefix: Client
+	//
+	//    * Code: OperationAborted Description: A conflicting conditional operation
+	//    is currently in progress against this resource. Try again. HTTP Status
+	//    Code: 409 Conflict SOAP Fault Code Prefix: Client
+	//
+	//    * Code: PermanentRedirect Description: The bucket you are attempting to
+	//    access must be addressed using the specified endpoint. Send all future
+	//    requests to this endpoint. HTTP Status Code: 301 Moved Permanently SOAP
+	//    Fault Code Prefix: Client
+	//
+	//    * Code: PreconditionFailed Description: At least one of the preconditions
+	//    you specified did not hold. HTTP Status Code: 412 Precondition Failed
+	//    SOAP Fault Code Prefix: Client
+	//
+	//    * Code: Redirect Description: Temporary redirect. HTTP Status Code: 307
+	//    Moved Temporarily SOAP Fault Code Prefix: Client
+	//
+	//    * Code: RestoreAlreadyInProgress Description: Object restore is already
+	//    in progress. HTTP Status Code: 409 Conflict SOAP Fault Code Prefix: Client
+	//
+	//    * Code: RequestIsNotMultiPartContent Description: Bucket POST must be
+	//    of the enclosure-type multipart/form-data. HTTP Status Code: 400 Bad Request
+	//    SOAP Fault Code Prefix: Client
+	//
+	//    * Code: RequestTimeout Description: Your socket connection to the server
+	//    was not read from or written to within the timeout period. HTTP Status
+	//    Code: 400 Bad Request SOAP Fault Code Prefix: Client
+	//
+	//    * Code: RequestTimeTooSkewed Description: The difference between the request
+	//    time and the server's time is too large. HTTP Status Code: 403 Forbidden
+	//    SOAP Fault Code Prefix: Client
+	//
+	//    * Code: RequestTorrentOfBucketError Description: Requesting the torrent
+	//    file of a bucket is not permitted. HTTP Status Code: 400 Bad Request SOAP
+	//    Fault Code Prefix: Client
+	//
+	//    * Code: SignatureDoesNotMatch Description: The request signature we calculated
+	//    does not match the signature you provided. Check your AWS secret access
+	//    key and signing method. For more information, see REST Authentication
+	//    (https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html)
+	//    and SOAP Authentication (https://docs.aws.amazon.com/AmazonS3/latest/dev/SOAPAuthentication.html)
+	//    for details. HTTP Status Code: 403 Forbidden SOAP Fault Code Prefix: Client
+	//
+	//    * Code: ServiceUnavailable Description: Reduce your request rate. HTTP
+	//    Status Code: 503 Service Unavailable SOAP Fault Code Prefix: Server
+	//
+	//    * Code: SlowDown Description: Reduce your request rate. HTTP Status Code:
+	//    503 Slow Down SOAP Fault Code Prefix: Server
+	//
+	//    * Code: TemporaryRedirect Description: You are being redirected to the
+	//    bucket while DNS updates. HTTP Status Code: 307 Moved Temporarily SOAP
+	//    Fault Code Prefix: Client
+	//
+	//    * Code: TokenRefreshRequired Description: The provided token must be refreshed.
+	//    HTTP Status Code: 400 Bad Request SOAP Fault Code Prefix: Client
+	//
+	//    * Code: TooManyBuckets Description: You have attempted to create more
+	//    buckets than allowed. HTTP Status Code: 400 Bad Request SOAP Fault Code
+	//    Prefix: Client
+	//
+	//    * Code: UnexpectedContent Description: This request does not support content.
+	//    HTTP Status Code: 400 Bad Request SOAP Fault Code Prefix: Client
+	//
+	//    * Code: UnresolvableGrantByEmailAddress Description: The email address
+	//    you provided does not match any account on record. HTTP Status Code: 400
+	//    Bad Request SOAP Fault Code Prefix: Client
+	//
+	//    * Code: UserKeyMustBeSpecified Description: The bucket POST must contain
+	//    the specified field name. If it is specified, check the order of the fields.
+	//    HTTP Status Code: 400 Bad Request SOAP Fault Code Prefix: Client
 	Code *string `type:"string"`
 
+	// The error key.
 	Key *string `min:"1" type:"string"`
 
+	// The error message contains a generic description of the error condition in
+	// English. It is intended for a human audience. Simple programs display the
+	// message directly to the end user if they encounter an error condition they
+	// don't know how or don't care to handle. Sophisticated programs with more
+	// exhaustive error handling and proper internationalization are more likely
+	// to ignore the error message.
 	Message *string `type:"string"`
 
+	// The version ID of the error.
 	VersionId *string `type:"string"`
 }
 
@@ -1691,6 +2161,7 @@ func (s Error) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The error information.
 type ErrorDocument struct {
 	_ struct{} `type:"structure"`
 
@@ -1733,6 +2204,46 @@ func (s ErrorDocument) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// A container that specifies information about existing object replication.
+// You can choose whether to enable or disable the replication of existing objects.
+type ExistingObjectReplication struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies whether existing object replication is enabled.
+	//
+	// Status is a required field
+	Status ExistingObjectReplicationStatus `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s ExistingObjectReplication) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ExistingObjectReplication) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ExistingObjectReplication"}
+	if len(s.Status) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Status"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ExistingObjectReplication) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", v, metadata)
+	}
+	return nil
+}
+
 // Specifies the Amazon S3 object key name to filter on and whether to filter
 // on the suffix or prefix of the key name.
 type FilterRule struct {
@@ -1771,6 +2282,7 @@ func (s FilterRule) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Container for Glacier job parameters.
 type GlacierJobParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -1809,9 +2321,11 @@ func (s GlacierJobParameters) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Container for grant information.
 type Grant struct {
 	_ struct{} `type:"structure"`
 
+	// The person being granted permissions.
 	Grantee *Grantee `type:"structure" xmlPrefix:"xsi" xmlURI:"http://www.w3.org/2001/XMLSchema-instance"`
 
 	// Specifies the permission given to the grantee.
@@ -1861,6 +2375,7 @@ func (s Grant) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Container for the person being granted permissions.
 type Grantee struct {
 	_ struct{} `type:"structure" xmlPrefix:"xsi" xmlURI:"http://www.w3.org/2001/XMLSchema-instance"`
 
@@ -1930,6 +2445,7 @@ func (s Grantee) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Container for the Suffix element.
 type IndexDocument struct {
 	_ struct{} `type:"structure"`
 
@@ -1972,6 +2488,7 @@ func (s IndexDocument) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Container element that identifies who initiated the ultipart upload.
 type Initiator struct {
 	_ struct{} `type:"structure"`
 
@@ -2202,6 +2719,7 @@ func (s InventoryConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies the inventory configuration for an Amazon S3 bucket.
 type InventoryDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -2296,6 +2814,8 @@ func (s InventoryEncryption) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies an inventory filter. The inventory only includes objects that meet
+// the filter's criteria.
 type InventoryFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -2335,6 +2855,8 @@ func (s InventoryFilter) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains the bucket name, file format, bucket owner (optional), and prefix
+// (optional) where inventory results are published.
 type InventoryS3BucketDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -2429,6 +2951,7 @@ func (s InventoryS3BucketDestination) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
+// Specifies the schedule for generating inventory results.
 type InventorySchedule struct {
 	_ struct{} `type:"structure"`
 
@@ -2467,6 +2990,7 @@ func (s InventorySchedule) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies JSON as object's input serialization format.
 type JSONInput struct {
 	_ struct{} `type:"structure"`
 
@@ -2490,6 +3014,7 @@ func (s JSONInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies JSON as request's output serialization format.
 type JSONOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -2598,9 +3123,12 @@ func (s LambdaFunctionConfiguration) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
+// Container for lifecycle rules. You can add as many as 1000 rules.
 type LifecycleConfiguration struct {
 	_ struct{} `type:"structure"`
 
+	// Specifies lifecycle configuration rules for an Amazon S3 bucket.
+	//
 	// Rules is a required field
 	Rules []Rule `locationName:"Rule" type:"list" flattened:"true" required:"true"`
 }
@@ -2648,6 +3176,7 @@ func (s LifecycleConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Container for the expiration for the lifecycle of the object.
 type LifecycleExpiration struct {
 	_ struct{} `type:"structure"`
 
@@ -2695,6 +3224,7 @@ func (s LifecycleExpiration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// A lifecycle rule for individual objects in an Amazon S3 bucket.
 type LifecycleRule struct {
 	_ struct{} `type:"structure"`
 
@@ -2705,6 +3235,8 @@ type LifecycleRule struct {
 	// in the Amazon Simple Storage Service Developer Guide.
 	AbortIncompleteMultipartUpload *AbortIncompleteMultipartUpload `type:"structure"`
 
+	// Specifies the expiration for the lifecycle of the object in the form of date,
+	// days and, whether the object has a delete marker.
 	Expiration *LifecycleExpiration `type:"structure"`
 
 	// The Filter is used to identify objects that a Lifecycle Rule applies to.
@@ -2721,6 +3253,11 @@ type LifecycleRule struct {
 	// period in the object's lifetime.
 	NoncurrentVersionExpiration *NoncurrentVersionExpiration `type:"structure"`
 
+	// Specifies the transition rule for the lifecycle rule that describes when
+	// noncurrent objects transition to the a specific storage class. If your bucket
+	// is versioning-enabled (or versioning is suspended), you can set this action
+	// to request that Amazon S3 transition noncurrent object versions to the a
+	// specifc storage class at a set period in the object's lifetime.
 	NoncurrentVersionTransitions []NoncurrentVersionTransition `locationName:"NoncurrentVersionTransition" type:"list" flattened:"true"`
 
 	// Prefix identifying one or more objects to which the rule applies. This is
@@ -2733,6 +3270,7 @@ type LifecycleRule struct {
 	// Status is a required field
 	Status ExpirationStatus `type:"string" required:"true" enum:"true"`
 
+	// Specifies when an Amazon S3 object transitions to a specified storage class.
 	Transitions []Transition `locationName:"Transition" type:"list" flattened:"true"`
 }
 
@@ -2836,6 +3374,7 @@ func (s LifecycleRule) MarshalFields(e protocol.FieldEncoder) error {
 type LifecycleRuleAndOperator struct {
 	_ struct{} `type:"structure"`
 
+	// Prefix identifying one or more objects to which the rule applies.
 	Prefix *string `type:"string"`
 
 	// All of these tags must exist in the object's tag set in order for the rule
@@ -2970,6 +3509,7 @@ type LoggingEnabled struct {
 	// TargetBucket is a required field
 	TargetBucket *string `type:"string" required:"true"`
 
+	// Container for granting information.
 	TargetGrants []TargetGrant `locationNameList:"Grant" type:"list"`
 
 	// A prefix for all log object keys. If you store log files from multiple Amazon
@@ -3043,8 +3583,10 @@ func (s LoggingEnabled) MarshalFields(e protocol.FieldEncoder) error {
 type MetadataEntry struct {
 	_ struct{} `type:"structure"`
 
+	// Name of the Object.
 	Name *string `type:"string"`
 
+	// Value of the Object.
 	Value *string `type:"string"`
 }
 
@@ -3070,6 +3612,67 @@ func (s MetadataEntry) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// A container specifying replication metrics-related information, including
+// whether emitting metrics and Amazon S3 events for replication are enabled.
+// In addition, contains configurations related to specific metrics or events.
+// Must be specified together with a ReplicationTime block.
+type Metrics struct {
+	_ struct{} `type:"structure"`
+
+	// A container specifying the time threshold for emitting the s3:Replication:OperationMissedThreshold
+	// event.
+	//
+	// EventThreshold is a required field
+	EventThreshold *ReplicationTimeValue `type:"structure" required:"true"`
+
+	// Specifies whether the replication metrics are enabled.
+	//
+	// Status is a required field
+	Status MetricsStatus `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s Metrics) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Metrics) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Metrics"}
+
+	if s.EventThreshold == nil {
+		invalidParams.Add(aws.NewErrParamRequired("EventThreshold"))
+	}
+	if len(s.Status) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Status"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Metrics) MarshalFields(e protocol.FieldEncoder) error {
+	if s.EventThreshold != nil {
+		v := s.EventThreshold
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "EventThreshold", v, metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", v, metadata)
+	}
+	return nil
+}
+
+// A conjunction (logical AND) of predicates, which is used in evaluating a
+// metrics filter. The operator must have at least two predicates, and an object
+// must match all of the predicates in order for the filter to apply.
 type MetricsAndOperator struct {
 	_ struct{} `type:"structure"`
 
@@ -3187,6 +3790,9 @@ func (s MetricsConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies a metrics configuration filter. The metrics configuration only
+// includes objects that meet the filter's criteria. A filter must be a prefix,
+// a tag, or a conjunction (MetricsAndOperator).
 type MetricsFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -3250,6 +3856,7 @@ func (s MetricsFilter) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Container for the MultipartUpload for the Amazon S3 object.
 type MultipartUpload struct {
 	_ struct{} `type:"structure"`
 
@@ -3262,6 +3869,7 @@ type MultipartUpload struct {
 	// Key of the object for which the multipart upload was initiated.
 	Key *string `min:"1" type:"string"`
 
+	// Specifies the owner of the object that is part of the multipart upload.
 	Owner *Owner `type:"structure"`
 
 	// The class of storage used to store the object.
@@ -3491,10 +4099,17 @@ func (s NotificationConfiguration) MarshalFields(e protocol.FieldEncoder) error 
 type NotificationConfigurationDeprecated struct {
 	_ struct{} `type:"structure"`
 
+	// Container for specifying the AWS Lambda notification configuration.
 	CloudFunctionConfiguration *CloudFunctionConfiguration `type:"structure"`
 
+	// This data type is deprecated. This data type specifies the configuration
+	// for publishing messages to an Amazon Simple Queue Service (Amazon SQS) queue
+	// when Amazon S3 detects specified events.
 	QueueConfiguration *QueueConfigurationDeprecated `type:"structure"`
 
+	// This data type is deperecated. A container for specifying the configuration
+	// for publication of messages to an Amazon Simple Notification Service (Amazon
+	// SNS) topic when Amazon S3 detects specified events.
 	TopicConfiguration *TopicConfigurationDeprecated `type:"structure"`
 }
 
@@ -3552,17 +4167,25 @@ func (s NotificationConfigurationFilter) MarshalFields(e protocol.FieldEncoder) 
 	return nil
 }
 
+// An object consists of data and its descriptive metadata.
 type Object struct {
 	_ struct{} `type:"structure"`
 
+	// The entity tag is an MD5 hash of the object. ETag reflects only changes to
+	// the contents of an object, not its metadata.
 	ETag *string `type:"string"`
 
+	// The name that you assign to an object. You use the object key to retrieve
+	// the object.
 	Key *string `min:"1" type:"string"`
 
+	// The date the Object was Last Modified
 	LastModified *time.Time `type:"timestamp"`
 
+	// The owner of the object
 	Owner *Owner `type:"structure"`
 
+	// Size in bytes of the object
 	Size *int64 `type:"integer"`
 
 	// The class of storage used to store the object.
@@ -3616,6 +4239,7 @@ func (s Object) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Object Identifier is unique value to identify objects.
 type ObjectIdentifier struct {
 	_ struct{} `type:"structure"`
 
@@ -3667,14 +4291,14 @@ func (s ObjectIdentifier) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The container element for object lock configuration parameters.
+// The container element for Object Lock configuration parameters.
 type ObjectLockConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates whether this bucket has an object lock configuration enabled.
+	// Indicates whether this bucket has an Object Lock configuration enabled.
 	ObjectLockEnabled ObjectLockEnabled `type:"string" enum:"true"`
 
-	// The object lock rule in place for the specified object.
+	// The Object Lock rule in place for the specified object.
 	Rule *ObjectLockRule `type:"structure"`
 }
 
@@ -3731,7 +4355,7 @@ type ObjectLockRetention struct {
 	// Indicates the Retention mode for the specified object.
 	Mode ObjectLockRetentionMode `type:"string" enum:"true"`
 
-	// The date on which this object lock retention expires.
+	// The date on which this Object Lock Retention will expire.
 	RetainUntilDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 }
 
@@ -3758,7 +4382,7 @@ func (s ObjectLockRetention) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The container element for an object lock rule.
+// The container element for an Object Lock rule.
 type ObjectLockRule struct {
 	_ struct{} `type:"structure"`
 
@@ -3783,9 +4407,11 @@ func (s ObjectLockRule) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The version of an object.
 type ObjectVersion struct {
 	_ struct{} `type:"structure"`
 
+	// The entity tag is an MD5 hash of that version of the object
 	ETag *string `type:"string"`
 
 	// Specifies whether the object is (true) or is not (false) the latest version
@@ -3798,6 +4424,7 @@ type ObjectVersion struct {
 	// Date and time the object was last modified.
 	LastModified *time.Time `type:"timestamp"`
 
+	// Specifies the Owner of the object.
 	Owner *Owner `type:"structure"`
 
 	// Size in bytes of the object.
@@ -3941,11 +4568,14 @@ func (s OutputSerialization) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Container for the owner's display name and ID
 type Owner struct {
 	_ struct{} `type:"structure"`
 
+	// Container for the display name of the owner
 	DisplayName *string `type:"string"`
 
+	// Container for the ID of the owner
 	ID *string `type:"string"`
 }
 
@@ -3971,6 +4601,7 @@ func (s Owner) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Container for Parquet.
 type ParquetInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -3985,6 +4616,7 @@ func (s ParquetInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Container for elements related to a part.
 type Part struct {
 	_ struct{} `type:"structure"`
 
@@ -4062,7 +4694,11 @@ func (s PolicyStatus) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Specifies the Block Public Access configuration for an Amazon S3 bucket.
+// The PublicAccessBlock configuration that you want to apply to this Amazon
+// S3 bucket. You can enable the configuration options in any combination. For
+// more information about when Amazon S3 considers a bucket or object public,
+// see The Meaning of "Public" (https://docs.aws.amazon.com/AmazonS3/latest/dev//access-control-block-public-access.html#access-control-block-public-access-policy-status)
+// in the Amazon Simple Storage Service Developer Guide.
 type PublicAccessBlockConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -4074,6 +4710,8 @@ type PublicAccessBlockConfiguration struct {
 	//    public.
 	//
 	//    * PUT Object calls fail if the request includes a public ACL.
+	//
+	//    * PUT Bucket calls fail if the request includes a public ACL.
 	//
 	// Enabling this setting doesn't affect existing policies or ACLs.
 	BlockPublicAcls *bool `locationName:"BlockPublicAcls" type:"boolean"`
@@ -4143,6 +4781,8 @@ func (s PublicAccessBlockConfiguration) MarshalFields(e protocol.FieldEncoder) e
 type QueueConfiguration struct {
 	_ struct{} `type:"structure"`
 
+	// A collection of bucket events for which to send notiications
+	//
 	// Events is a required field
 	Events []Event `locationName:"Event" type:"list" flattened:"true" required:"true"`
 
@@ -4220,18 +4860,25 @@ func (s QueueConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// This data type is deprecated. Please use QueueConfiguration for the same
+// purposes. This dat type specifies the configuration for publishing messages
+// to an Amazon Simple Queue Service (Amazon SQS) queue when Amazon S3 detects
+// specified events.
 type QueueConfigurationDeprecated struct {
 	_ struct{} `type:"structure"`
 
 	// The bucket event for which to send notifications.
 	Event Event `deprecated:"true" type:"string" enum:"true"`
 
+	// A collection of bucket events for which to send notiications
 	Events []Event `locationName:"Event" type:"list" flattened:"true"`
 
 	// An optional unique identifier for configurations in a notification configuration.
 	// If you don't provide one, Amazon S3 will assign an ID.
 	Id *string `type:"string"`
 
+	// The Amazon Resource Name (ARN) of the Amazon SQS queue to which Amazon S3
+	// publishes a message when it detects events of the specified type.
 	Queue *string `type:"string"`
 }
 
@@ -4403,7 +5050,7 @@ type ReplicationConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management
 	// (IAM) role that Amazon S3 assumes when replicating objects. For more information,
-	// see How to Set Up Cross-Region Replication (https://docs.aws.amazon.com/AmazonS3/latest/dev/crr-how-setup.html)
+	// see How to Set Up Replication (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-how-setup.html)
 	// in the Amazon Simple Storage Service Developer Guide.
 	//
 	// Role is a required field
@@ -4473,13 +5120,27 @@ func (s ReplicationConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 type ReplicationRule struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies whether Amazon S3 should replicate delete makers.
+	// Specifies whether Amazon S3 replicates the delete markers. If you specify
+	// a Filter, you must specify this element. However, in the latest version of
+	// replication configuration (when Filter is specified), Amazon S3 doesn't replicate
+	// delete markers. Therefore, the DeleteMarkerReplication element can contain
+	// only <Status>Disabled</Status>. For an example configuration, see Basic Rule
+	// Configuration (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config).
+	//
+	// If you don't specify the Filter element, Amazon S3 assumes the replication
+	// configuration is the earlier version, V1. In the earlier version, Amazon
+	// S3 handled replication of delete markers differently. For more information,
+	// see Backward Compatibility (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations).
 	DeleteMarkerReplication *DeleteMarkerReplication `type:"structure"`
 
 	// A container for information about the replication destination.
 	//
 	// Destination is a required field
 	Destination *Destination `type:"structure" required:"true"`
+
+	// A container that specifies information about existing object replication.
+	// You can choose whether to enable or disable the replication of existing objects.
+	ExistingObjectReplication *ExistingObjectReplication `type:"structure"`
 
 	// A filter that identifies the subset of objects to which the replication rule
 	// applies. A Filter must specify exactly one Prefix, Tag, or an And child element.
@@ -4504,7 +5165,7 @@ type ReplicationRule struct {
 	//    * Same object qualify tag based filter criteria specified in multiple
 	//    rules
 	//
-	// For more information, see Cross-Region Replication (CRR) (https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html)
+	// For more information, see Replication (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html)
 	// in the Amazon S3 Developer Guide.
 	Priority *int64 `type:"integer"`
 
@@ -4512,7 +5173,7 @@ type ReplicationRule struct {
 	// objects that you want to replicate. You can choose to enable or disable the
 	// replication of these objects. Currently, Amazon S3 supports only the filter
 	// that you can specify for objects created with server-side encryption using
-	// an AWS KMS-Managed Key (SSE-KMS).
+	// a customer master key (CMK) stored in AWS Key Management Service (SSE-KMS).
 	SourceSelectionCriteria *SourceSelectionCriteria `type:"structure"`
 
 	// Specifies whether the rule is enabled.
@@ -4539,6 +5200,11 @@ func (s *ReplicationRule) Validate() error {
 	if s.Destination != nil {
 		if err := s.Destination.Validate(); err != nil {
 			invalidParams.AddNested("Destination", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.ExistingObjectReplication != nil {
+		if err := s.ExistingObjectReplication.Validate(); err != nil {
+			invalidParams.AddNested("ExistingObjectReplication", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Filter != nil {
@@ -4571,6 +5237,12 @@ func (s ReplicationRule) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Destination", v, metadata)
+	}
+	if s.ExistingObjectReplication != nil {
+		v := s.ExistingObjectReplication
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ExistingObjectReplication", v, metadata)
 	}
 	if s.Filter != nil {
 		v := s.Filter
@@ -4611,11 +5283,25 @@ func (s ReplicationRule) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// A container for specifying rule filters. The filters determine the subset
+// of objects to which the rule applies. This element is required only if you
+// specify more than one filter.
+//
+// For example:
+//
+//    * If you specify both a Prefix and a Tag filter, wrap these filters in
+//    an And tag.
+//
+//    * If you specify a filter based on multiple tags, wrap the Tag elements
+//    in an And tag
 type ReplicationRuleAndOperator struct {
 	_ struct{} `type:"structure"`
 
+	// An object keyname prefix that identifies the subset of objects to which the
+	// rule applies.
 	Prefix *string `type:"string"`
 
+	// An array of tags containing key and value pairs.
 	Tags []Tag `locationName:"Tag" locationNameList:"Tag" type:"list" flattened:"true"`
 }
 
@@ -4738,6 +5424,87 @@ func (s ReplicationRuleFilter) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// A container specifying the time when all objects and operations on objects
+// are replicated. Must be specified together with a Metrics block.
+type ReplicationTime struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies whether the replication time is enabled.
+	//
+	// Status is a required field
+	Status ReplicationTimeStatus `type:"string" required:"true" enum:"true"`
+
+	// A container specifying the time by which replication should complete for
+	// all objects and operations on objects.
+	//
+	// Time is a required field
+	Time *ReplicationTimeValue `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s ReplicationTime) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ReplicationTime) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ReplicationTime"}
+	if len(s.Status) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Status"))
+	}
+
+	if s.Time == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Time"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ReplicationTime) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", v, metadata)
+	}
+	if s.Time != nil {
+		v := s.Time
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Time", v, metadata)
+	}
+	return nil
+}
+
+// A container specifying the time value.
+type ReplicationTimeValue struct {
+	_ struct{} `type:"structure"`
+
+	// Contains an integer specifying time in minutes.
+	Minutes *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s ReplicationTimeValue) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ReplicationTimeValue) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Minutes != nil {
+		v := *s.Minutes
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Minutes", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Container for Payer.
 type RequestPaymentConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -4948,6 +5715,7 @@ type Rule struct {
 	// in the Amazon Simple Storage Service Developer Guide.
 	AbortIncompleteMultipartUpload *AbortIncompleteMultipartUpload `type:"structure"`
 
+	// Specifies the expiration for the lifecycle of the object.
 	Expiration *LifecycleExpiration `type:"structure"`
 
 	// Unique identifier for the rule. The value can't be longer than 255 characters.
@@ -5106,8 +5874,7 @@ type S3Location struct {
 	// The canned ACL to apply to the restore results.
 	CannedACL ObjectCannedACL `type:"string" enum:"true"`
 
-	// Describes the server-side encryption that will be applied to the restore
-	// results.
+	// Contains the type of server-side encryption used.
 	Encryption *Encryption `type:"structure"`
 
 	// The prefix that is prepended to the restore results for this request.
@@ -5234,8 +6001,8 @@ func (s S3Location) MarshalFields(e protocol.FieldEncoder) error {
 type SSEKMS struct {
 	_ struct{} `locationName:"SSE-KMS" type:"structure"`
 
-	// Specifies the ID of the AWS Key Management Service (KMS) master encryption
-	// key to use for encrypting Inventory reports.
+	// Specifies the ID of the AWS Key Management Service (KMS) customer master
+	// key (CMK) to use for encrypting Inventory reports.
 	//
 	// KeyId is a required field
 	KeyId *string `type:"string" required:"true" sensitive:"true"`
@@ -5525,7 +6292,7 @@ func (s ServerSideEncryptionRule) MarshalFields(e protocol.FieldEncoder) error {
 // objects that you want to replicate. You can choose to enable or disable the
 // replication of these objects. Currently, Amazon S3 supports only the filter
 // that you can specify for objects created with server-side encryption using
-// an AWS KMS-Managed Key (SSE-KMS).
+// a customer master key (CMK) stored in AWS Key Management Service (SSE-KMS).
 type SourceSelectionCriteria struct {
 	_ struct{} `type:"structure"`
 
@@ -5572,7 +6339,7 @@ type SseKmsEncryptedObjects struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies whether Amazon S3 replicates objects created with server-side encryption
-	// using an AWS KMS-managed key.
+	// using a customer master key (CMK) stored in AWS Key Management Service.
 	//
 	// Status is a required field
 	Status SseKmsEncryptedObjectsStatus `type:"string" required:"true" enum:"true"`
@@ -5649,6 +6416,8 @@ func (s StorageClassAnalysis) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Container for data related to the storage class analysis for an Amazon S3
+// bucket for export.
 type StorageClassAnalysisDataExport struct {
 	_ struct{} `type:"structure"`
 
@@ -5707,6 +6476,7 @@ func (s StorageClassAnalysisDataExport) MarshalFields(e protocol.FieldEncoder) e
 	return nil
 }
 
+// A container of a key value name pair.
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -5764,9 +6534,12 @@ func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Container for TagSet elements.
 type Tagging struct {
 	_ struct{} `type:"structure"`
 
+	// A collection for a a set of tags
+	//
 	// TagSet is a required field
 	TagSet []Tag `locationNameList:"Tag" type:"list" required:"true"`
 }
@@ -5814,9 +6587,11 @@ func (s Tagging) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Container for granting information.
 type TargetGrant struct {
 	_ struct{} `type:"structure"`
 
+	// Container for the person being granted permissions.
 	Grantee *Grantee `type:"structure" xmlPrefix:"xsi" xmlURI:"http://www.w3.org/2001/XMLSchema-instance"`
 
 	// Logging permissions assigned to the Grantee for the bucket.
@@ -5953,12 +6728,17 @@ func (s TopicConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// A container for specifying the configuration for publication of messages
+// to an Amazon Simple Notification Service (Amazon SNS) topic when Amazon S3
+// detects specified events. This data type is deperecated. Please use TopicConfiguration
+// instead.
 type TopicConfigurationDeprecated struct {
 	_ struct{} `type:"structure"`
 
 	// Bucket event for which to send notifications.
 	Event Event `deprecated:"true" type:"string" enum:"true"`
 
+	// A collection of events related to objects
 	Events []Event `locationName:"Event" type:"list" flattened:"true"`
 
 	// An optional unique identifier for configurations in a notification configuration.

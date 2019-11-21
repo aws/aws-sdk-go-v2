@@ -133,6 +133,9 @@ const opCreateEventSubscription = "CreateEventSubscription"
 // the SourceIdentifier, you are notified of events generated from all RDS sources
 // belonging to your customer account.
 //
+// RDS event notification is only available for unencrypted SNS topics. If you
+// specify an encrypted SNS topic, event notifications aren't sent for the topic.
+//
 //    // Example sending a request using CreateEventSubscriptionRequest.
 //    req := client.CreateEventSubscriptionRequest(params)
 //    resp, err := req.Send(context.TODO())

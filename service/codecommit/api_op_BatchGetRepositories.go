@@ -15,6 +15,9 @@ type BatchGetRepositoriesInput struct {
 
 	// The names of the repositories to get information about.
 	//
+	// The length constraint limit is for each string in the array. The array itself
+	// can be empty.
+	//
 	// RepositoryNames is a required field
 	RepositoryNames []string `locationName:"repositoryNames" type:"list" required:"true"`
 }
@@ -63,9 +66,9 @@ const opBatchGetRepositories = "BatchGetRepositories"
 //
 // The description field for a repository accepts all HTML characters and all
 // valid Unicode characters. Applications that do not HTML-encode the description
-// and display it in a web page could expose users to potentially malicious
-// code. Make sure that you HTML-encode the description field in any application
-// that uses this API to display the repository description on a web page.
+// and display it in a webpage can expose users to potentially malicious code.
+// Make sure that you HTML-encode the description field in any application that
+// uses this API to display the repository description on a webpage.
 //
 //    // Example sending a request using BatchGetRepositoriesRequest.
 //    req := client.BatchGetRepositoriesRequest(params)

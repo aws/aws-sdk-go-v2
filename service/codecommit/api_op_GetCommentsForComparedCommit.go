@@ -13,17 +13,17 @@ type GetCommentsForComparedCommitInput struct {
 	_ struct{} `type:"structure"`
 
 	// To establish the directionality of the comparison, the full commit ID of
-	// the 'after' commit.
+	// the after commit.
 	//
 	// AfterCommitId is a required field
 	AfterCommitId *string `locationName:"afterCommitId" type:"string" required:"true"`
 
 	// To establish the directionality of the comparison, the full commit ID of
-	// the 'before' commit.
+	// the before commit.
 	BeforeCommitId *string `locationName:"beforeCommitId" type:"string"`
 
-	// A non-negative integer used to limit the number of returned results. The
-	// default is 100 comments, and is configurable up to 500.
+	// A non-zero, non-negative integer used to limit the number of returned results.
+	// The default is 100 comments, but you can configure up to 500.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
 
 	// An enumeration token that when provided in a request, returns the next batch

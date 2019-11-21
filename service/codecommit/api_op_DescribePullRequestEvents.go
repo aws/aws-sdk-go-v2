@@ -13,16 +13,16 @@ type DescribePullRequestEventsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the user whose actions resulted in the
-	// event. Examples include updating the pull request with additional commits
-	// or changing the status of a pull request.
+	// event. Examples include updating the pull request with more commits or changing
+	// the status of a pull request.
 	ActorArn *string `locationName:"actorArn" type:"string"`
 
-	// A non-negative integer used to limit the number of returned results. The
-	// default is 100 events, which is also the maximum number of events that can
-	// be returned in a result.
+	// A non-zero, non-negative integer used to limit the number of returned results.
+	// The default is 100 events, which is also the maximum number of events that
+	// can be returned in a result.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
 
-	// An enumeration token that when provided in a request, returns the next batch
+	// An enumeration token that, when provided in a request, returns the next batch
 	// of the results.
 	NextToken *string `locationName:"nextToken" type:"string"`
 

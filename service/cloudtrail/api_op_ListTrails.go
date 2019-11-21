@@ -12,6 +12,11 @@ import (
 type ListTrailsInput struct {
 	_ struct{} `type:"structure"`
 
+	// The token to use to get the next page of results after a previous API call.
+	// This token must be passed in with the same parameters that were specified
+	// in the the original call. For example, if the original call specified an
+	// AttributeKey of 'Username' with a value of 'root', the call with NextToken
+	// should include those same parameters.
 	NextToken *string `type:"string"`
 }
 
@@ -23,6 +28,11 @@ func (s ListTrailsInput) String() string {
 type ListTrailsOutput struct {
 	_ struct{} `type:"structure"`
 
+	// The token to use to get the next page of results after a previous API call.
+	// If the token does not appear, there are no more results to return. The token
+	// must be passed in with the same parameters as the previous call. For example,
+	// if the original call specified an AttributeKey of 'Username' with a value
+	// of 'root', the call with NextToken should include those same parameters.
 	NextToken *string `type:"string"`
 
 	// Returns the name, ARN, and home region of trails in the current account.

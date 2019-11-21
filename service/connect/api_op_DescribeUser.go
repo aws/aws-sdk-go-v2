@@ -97,7 +97,9 @@ const opDescribeUser = "DescribeUser"
 // DescribeUserRequest returns a request value for making API operation for
 // Amazon Connect Service.
 //
-// Describes the specified user account.
+// Describes the specified user account. You can find the instance ID in the
+// console (it’s the final part of the ARN). The console does not display
+// the user IDs. Instead, list the users and note the IDs provided in the output.
 //
 //    // Example sending a request using DescribeUserRequest.
 //    req := client.DescribeUserRequest(params)

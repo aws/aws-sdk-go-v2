@@ -89,6 +89,73 @@ func (s CreateRule) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies when to enable fast snapshot restore.
+type FastRestoreRule struct {
+	_ struct{} `type:"structure"`
+
+	// The Availability Zones in which to enable fast snapshot restore.
+	//
+	// AvailabilityZones is a required field
+	AvailabilityZones []string `min:"1" type:"list" required:"true"`
+
+	// The number of snapshots to be enabled with fast snapshot restore.
+	//
+	// Count is a required field
+	Count *int64 `min:"1" type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s FastRestoreRule) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *FastRestoreRule) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "FastRestoreRule"}
+
+	if s.AvailabilityZones == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AvailabilityZones"))
+	}
+	if s.AvailabilityZones != nil && len(s.AvailabilityZones) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AvailabilityZones", 1))
+	}
+
+	if s.Count == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Count"))
+	}
+	if s.Count != nil && *s.Count < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Count", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s FastRestoreRule) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AvailabilityZones != nil {
+		v := s.AvailabilityZones
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "AvailabilityZones", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Count != nil {
+		v := *s.Count
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Count", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // Detailed information about a lifecycle policy.
 type LifecyclePolicy struct {
 	_ struct{} `type:"structure"`
@@ -106,6 +173,9 @@ type LifecyclePolicy struct {
 	// specified by the lifecycle policy.
 	ExecutionRoleArn *string `type:"string"`
 
+	// The Amazon Resource Name (ARN) of the policy.
+	PolicyArn *string `type:"string"`
+
 	// The configuration of the lifecycle policy
 	PolicyDetails *PolicyDetails `type:"structure"`
 
@@ -114,6 +184,12 @@ type LifecyclePolicy struct {
 
 	// The activation state of the lifecycle policy.
 	State GettablePolicyStateValues `type:"string" enum:"true"`
+
+	// The description of the status.
+	StatusMessage *string `type:"string"`
+
+	// The tags.
+	Tags map[string]string `min:"1" type:"map"`
 }
 
 // String returns the string representation
@@ -149,6 +225,12 @@ func (s LifecyclePolicy) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ExecutionRoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.PolicyArn != nil {
+		v := *s.PolicyArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PolicyArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.PolicyDetails != nil {
 		v := s.PolicyDetails
 
@@ -167,6 +249,24 @@ func (s LifecyclePolicy) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "State", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	if s.StatusMessage != nil {
+		v := *s.StatusMessage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StatusMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
 	return nil
 }
 
@@ -182,6 +282,9 @@ type LifecyclePolicySummary struct {
 
 	// The activation state of the lifecycle policy.
 	State GettablePolicyStateValues `type:"string" enum:"true"`
+
+	// The tags.
+	Tags map[string]string `min:"1" type:"map"`
 }
 
 // String returns the string representation
@@ -208,6 +311,18 @@ func (s LifecyclePolicySummary) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "State", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	return nil
 }
@@ -405,6 +520,9 @@ type Schedule struct {
 	// The create rule.
 	CreateRule *CreateRule `type:"structure"`
 
+	// Enable fast snapshot restore.
+	FastRestoreRule *FastRestoreRule `type:"structure"`
+
 	// The name of the schedule.
 	Name *string `type:"string"`
 
@@ -433,6 +551,11 @@ func (s *Schedule) Validate() error {
 	if s.CreateRule != nil {
 		if err := s.CreateRule.Validate(); err != nil {
 			invalidParams.AddNested("CreateRule", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.FastRestoreRule != nil {
+		if err := s.FastRestoreRule.Validate(); err != nil {
+			invalidParams.AddNested("FastRestoreRule", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.RetainRule != nil {
@@ -474,6 +597,12 @@ func (s Schedule) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "CreateRule", v, metadata)
+	}
+	if s.FastRestoreRule != nil {
+		v := s.FastRestoreRule
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "FastRestoreRule", v, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name

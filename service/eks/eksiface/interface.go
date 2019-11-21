@@ -66,13 +66,21 @@ import (
 type ClientAPI interface {
 	CreateClusterRequest(*eks.CreateClusterInput) eks.CreateClusterRequest
 
+	CreateNodegroupRequest(*eks.CreateNodegroupInput) eks.CreateNodegroupRequest
+
 	DeleteClusterRequest(*eks.DeleteClusterInput) eks.DeleteClusterRequest
 
+	DeleteNodegroupRequest(*eks.DeleteNodegroupInput) eks.DeleteNodegroupRequest
+
 	DescribeClusterRequest(*eks.DescribeClusterInput) eks.DescribeClusterRequest
+
+	DescribeNodegroupRequest(*eks.DescribeNodegroupInput) eks.DescribeNodegroupRequest
 
 	DescribeUpdateRequest(*eks.DescribeUpdateInput) eks.DescribeUpdateRequest
 
 	ListClustersRequest(*eks.ListClustersInput) eks.ListClustersRequest
+
+	ListNodegroupsRequest(*eks.ListNodegroupsInput) eks.ListNodegroupsRequest
 
 	ListTagsForResourceRequest(*eks.ListTagsForResourceInput) eks.ListTagsForResourceRequest
 
@@ -86,9 +94,17 @@ type ClientAPI interface {
 
 	UpdateClusterVersionRequest(*eks.UpdateClusterVersionInput) eks.UpdateClusterVersionRequest
 
+	UpdateNodegroupConfigRequest(*eks.UpdateNodegroupConfigInput) eks.UpdateNodegroupConfigRequest
+
+	UpdateNodegroupVersionRequest(*eks.UpdateNodegroupVersionInput) eks.UpdateNodegroupVersionRequest
+
 	WaitUntilClusterActive(context.Context, *eks.DescribeClusterInput, ...aws.WaiterOption) error
 
 	WaitUntilClusterDeleted(context.Context, *eks.DescribeClusterInput, ...aws.WaiterOption) error
+
+	WaitUntilNodegroupActive(context.Context, *eks.DescribeNodegroupInput, ...aws.WaiterOption) error
+
+	WaitUntilNodegroupDeleted(context.Context, *eks.DescribeNodegroupInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*eks.Client)(nil)

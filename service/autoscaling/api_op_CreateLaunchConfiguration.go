@@ -146,7 +146,7 @@ type CreateLaunchConfigurationInput struct {
 	// For more information, see Instance Placement Tenancy (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-vpc-tenancy)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	//
-	// Valid values: default | dedicated
+	// Valid Values: default | dedicated
 	PlacementTenancy *string `min:"1" type:"string"`
 
 	// The ID of the RAM disk to select.
@@ -166,17 +166,13 @@ type CreateLaunchConfigurationInput struct {
 
 	// The maximum hourly price to be paid for any Spot Instance launched to fulfill
 	// the request. Spot Instances are launched when the price you specify exceeds
-	// the current Spot market price. For more information, see Launching Spot Instances
+	// the current Spot price. For more information, see Launching Spot Instances
 	// in Your Auto Scaling Group (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-launch-spot-instances.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	//
-	// If a Spot price is set, then the Auto Scaling group will only launch instances
-	// when the Spot price has been met, regardless of the setting in the Auto Scaling
-	// group's DesiredCapacity.
-	//
-	// When you change your Spot price by creating a new launch configuration, running
-	// instances will continue to run as long as the Spot price for those running
-	// instances is higher than the current Spot market price.
+	// When you change your maximum price by creating a new launch configuration,
+	// running instances will continue to run as long as the maximum price for those
+	// running instances is higher than the current Spot price.
 	SpotPrice *string `min:"1" type:"string"`
 
 	// The Base64-encoded user data to make available to the launched EC2 instances.

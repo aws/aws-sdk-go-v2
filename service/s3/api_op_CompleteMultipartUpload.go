@@ -13,12 +13,17 @@ import (
 type CompleteMultipartUploadInput struct {
 	_ struct{} `type:"structure" payload:"MultipartUpload"`
 
+	// Name of the bucket to which the multipart upload was initiated.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
+	// Object key for which the multipart upload was initiated.
+	//
 	// Key is a required field
 	Key *string `location:"uri" locationName:"Key" min:"1" type:"string" required:"true"`
 
+	// The container for the multipart upload request information.
 	MultipartUpload *CompletedMultipartUpload `locationName:"CompleteMultipartUpload" type:"structure" xmlURI:"http://s3.amazonaws.com/doc/2006-03-01/"`
 
 	// Confirms that the requester knows that she or he will be charged for the
@@ -27,6 +32,8 @@ type CompleteMultipartUploadInput struct {
 	// at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
 	RequestPayer RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string" enum:"true"`
 
+	// ID for the initiated multipart upload.
+	//
 	// UploadId is a required field
 	UploadId *string `location:"querystring" locationName:"uploadId" type:"string" required:"true"`
 }
@@ -107,32 +114,43 @@ func (s CompleteMultipartUploadInput) MarshalFields(e protocol.FieldEncoder) err
 type CompleteMultipartUploadOutput struct {
 	_ struct{} `type:"structure"`
 
+	// The name of the bucket that contains the newly created object.
 	Bucket *string `type:"string"`
 
-	// Entity tag of the object.
+	// Entity tag that identifies the newly created object's data. Objects with
+	// different object data will have different entity tags. The entity tag is
+	// an opaque string. The entity tag may or may not be an MD5 digest of the object
+	// data. If the entity tag is not an MD5 digest of the object data, it will
+	// contain one or more nonhexadecimal characters and/or will consist of less
+	// than 32 or more than 32 hexadecimal digits.
 	ETag *string `type:"string"`
 
 	// If the object expiration is configured, this will contain the expiration
 	// date (expiry-date) and rule ID (rule-id). The value of rule-id is URL encoded.
 	Expiration *string `location:"header" locationName:"x-amz-expiration" type:"string"`
 
+	// The object key of the newly created object.
 	Key *string `min:"1" type:"string"`
 
+	// The URI that identifies the newly created object.
 	Location *string `type:"string"`
 
 	// If present, indicates that the requester was successfully charged for the
 	// request.
 	RequestCharged RequestCharged `location:"header" locationName:"x-amz-request-charged" type:"string" enum:"true"`
 
-	// If present, specifies the ID of the AWS Key Management Service (KMS) master
-	// encryption key that was used for the object.
+	// If present, specifies the ID of the AWS Key Management Service (KMS) customer
+	// master key (CMK) that was used for the object.
 	SSEKMSKeyId *string `location:"header" locationName:"x-amz-server-side-encryption-aws-kms-key-id" type:"string" sensitive:"true"`
 
-	// The Server-side encryption algorithm used when storing this object in S3
-	// (e.g., AES256, aws:kms).
+	// If you specified server-side encryption either with an Amazon S3-managed
+	// encryption key or an AWS KMS customer master key (CMK) in your initiate multipart
+	// upload request, the response includes this header. It confirms the encryption
+	// algorithm that Amazon S3 used to encrypt the object.
 	ServerSideEncryption ServerSideEncryption `location:"header" locationName:"x-amz-server-side-encryption" type:"string" enum:"true"`
 
-	// Version of the object.
+	// Version ID of the newly created object, in case the bucket has versioning
+	// turned on.
 	VersionId *string `location:"header" locationName:"x-amz-version-id" type:"string"`
 }
 
@@ -213,6 +231,64 @@ const opCompleteMultipartUpload = "CompleteMultipartUpload"
 // Amazon Simple Storage Service.
 //
 // Completes a multipart upload by assembling previously uploaded parts.
+//
+// You first initiate the multipart upload and then upload all parts using the
+// UploadPart operation. After successfully uploading all relevant parts of
+// an upload, you call this operation to complete the upload. Upon receiving
+// this request, Amazon S3 concatenates all the parts in ascending order by
+// part number to create a new object. In the Complete Multipart Upload request,
+// you must provide the parts list. You must ensure the parts list is complete,
+// this operation concatenates the parts you provide in the list. For each part
+// in the list, you must provide the part number and the ETag value, returned
+// after that part was uploaded.
+//
+// Processing of a Complete Multipart Upload request could take several minutes
+// to complete. After Amazon S3 begins processing the request, it sends an HTTP
+// response header that specifies a 200 OK response. While processing is in
+// progress, Amazon S3 periodically sends whitespace characters to keep the
+// connection from timing out. Because a request could fail after the initial
+// 200 OK response has been sent, it is important that you check the response
+// body to determine whether the request succeeded.
+//
+// Note that if CompleteMultipartUpload fails, applications should be prepared
+// to retry the failed requests. For more information, see Amazon S3 Error Best
+// Practices (https://docs.aws.amazon.com/AmazonS3/latest/dev/ErrorBestPractices.html).
+//
+// For more information on multipart uploads, see Uploading Objects Using Multipart
+// Upload (https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html).
+//
+// For information on permissions required to use the multipart upload API,
+// see Multipart Upload API and Permissions (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html).
+//
+// GetBucketLifecycle has the following special errors:
+//
+//    * Error code: EntityTooSmall Description: Your proposed upload is smaller
+//    than the minimum allowed object size. Each part must be at least 5 MB
+//    in size, except the last part. 400 Bad Request
+//
+//    * Error code: InvalidPart Description: One or more of the specified parts
+//    could not be found. The part might not have been uploaded, or the specified
+//    entity tag might not have matched the part's entity tag. 400 Bad Request
+//
+//    * Error code: InvalidPartOrder Description: The list of parts was not
+//    in ascending order. The parts list must be specified in order by part
+//    number. 400 Bad Request
+//
+//    * Error code: NoSuchUpload Description: The specified multipart upload
+//    does not exist. The upload ID might be invalid, or the multipart upload
+//    might have been aborted or completed. 404 Not Found
+//
+// The following operations are related to DeleteBucketMetricsConfiguration:
+//
+//    * CreateMultipartUpload
+//
+//    * UploadPart
+//
+//    * AbortMultipartUpload
+//
+//    * ListParts
+//
+//    * ListMultipartUploads
 //
 //    // Example sending a request using CompleteMultipartUploadRequest.
 //    req := client.CompleteMultipartUploadRequest(params)

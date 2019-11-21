@@ -147,6 +147,56 @@ func (s AccountSettings) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An Amazon Chime SDK meeting attendee. Includes a unique AttendeeId and JoinToken.
+// The JoinToken allows a client to authenticate and join as the specified attendee.
+// The JoinToken expires when the meeting ends or when DeleteAttendee is called.
+// After that, the attendee is unable to join the meeting.
+//
+// We recommend securely transferring each JoinToken from your server application
+// to the client so that no other client has access to the token except for
+// the one authorized to represent the attendee.
+type Attendee struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Chime SDK attendee ID.
+	AttendeeId *string `type:"string"`
+
+	// The Amazon Chime SDK external user ID. Links the attendee to an identity
+	// managed by a builder application.
+	ExternalUserId *string `min:"2" type:"string" sensitive:"true"`
+
+	// The join token used by the Amazon Chime SDK attendee.
+	JoinToken *string `min:"2" type:"string" sensitive:"true"`
+}
+
+// String returns the string representation
+func (s Attendee) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Attendee) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AttendeeId != nil {
+		v := *s.AttendeeId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AttendeeId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ExternalUserId != nil {
+		v := *s.ExternalUserId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ExternalUserId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.JoinToken != nil {
+		v := *s.JoinToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "JoinToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // A resource that allows Enterprise account administrators to configure an
 // interface to receive events from Amazon Chime.
 type Bot struct {
@@ -268,6 +318,96 @@ func (s BusinessCallingSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "CdrBucket", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The list of errors returned when errors are encountered during the BatchCreateAttendee
+// and CreateAttendee actions. This includes external user IDs, error codes,
+// and error messages.
+type CreateAttendeeError struct {
+	_ struct{} `type:"structure"`
+
+	// The error code.
+	ErrorCode *string `type:"string"`
+
+	// The error message.
+	ErrorMessage *string `type:"string"`
+
+	// The Amazon Chime SDK external user ID. Links the attendee to an identity
+	// managed by a builder application.
+	ExternalUserId *string `min:"2" type:"string" sensitive:"true"`
+}
+
+// String returns the string representation
+func (s CreateAttendeeError) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateAttendeeError) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ErrorCode != nil {
+		v := *s.ErrorCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ErrorCode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ErrorMessage != nil {
+		v := *s.ErrorMessage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ErrorMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ExternalUserId != nil {
+		v := *s.ExternalUserId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ExternalUserId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The Amazon Chime SDK attendee fields to create, used with the BatchCreateAttendee
+// action.
+type CreateAttendeeRequestItem struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Chime SDK external user ID. Links the attendee to an identity
+	// managed by a builder application.
+	//
+	// ExternalUserId is a required field
+	ExternalUserId *string `min:"2" type:"string" required:"true" sensitive:"true"`
+}
+
+// String returns the string representation
+func (s CreateAttendeeRequestItem) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateAttendeeRequestItem) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateAttendeeRequestItem"}
+
+	if s.ExternalUserId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ExternalUserId"))
+	}
+	if s.ExternalUserId != nil && len(*s.ExternalUserId) < 2 {
+		invalidParams.Add(aws.NewErrParamMinLen("ExternalUserId", 2))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateAttendeeRequestItem) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ExternalUserId != nil {
+		v := *s.ExternalUserId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ExternalUserId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -425,6 +565,303 @@ func (s LoggingConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "EnableSIPLogs", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+// A set of endpoints used by clients to connect to the media service group
+// for a Amazon Chime SDK meeting.
+type MediaPlacement struct {
+	_ struct{} `type:"structure"`
+
+	// The audio host URL.
+	AudioHostUrl *string `type:"string"`
+
+	// The screen data URL.
+	ScreenDataUrl *string `type:"string"`
+
+	// The screen sharing URL.
+	ScreenSharingUrl *string `type:"string"`
+
+	// The screen viewing URL.
+	ScreenViewingUrl *string `type:"string"`
+
+	// The signaling URL.
+	SignalingUrl *string `type:"string"`
+
+	// The turn control URL.
+	TurnControlUrl *string `type:"string"`
+}
+
+// String returns the string representation
+func (s MediaPlacement) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MediaPlacement) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AudioHostUrl != nil {
+		v := *s.AudioHostUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AudioHostUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ScreenDataUrl != nil {
+		v := *s.ScreenDataUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ScreenDataUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ScreenSharingUrl != nil {
+		v := *s.ScreenSharingUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ScreenSharingUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ScreenViewingUrl != nil {
+		v := *s.ScreenViewingUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ScreenViewingUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SignalingUrl != nil {
+		v := *s.SignalingUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SignalingUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TurnControlUrl != nil {
+		v := *s.TurnControlUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TurnControlUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A meeting created using the Amazon Chime SDK.
+type Meeting struct {
+	_ struct{} `type:"structure"`
+
+	// The media placement for the meeting.
+	MediaPlacement *MediaPlacement `type:"structure"`
+
+	// The Region in which to create the meeting. Available values: us-east-1, us-west-2.
+	MediaRegion *string `type:"string"`
+
+	// The Amazon Chime SDK meeting ID.
+	MeetingId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s Meeting) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Meeting) MarshalFields(e protocol.FieldEncoder) error {
+	if s.MediaPlacement != nil {
+		v := s.MediaPlacement
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "MediaPlacement", v, metadata)
+	}
+	if s.MediaRegion != nil {
+		v := *s.MediaRegion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MediaRegion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MeetingId != nil {
+		v := *s.MeetingId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MeetingId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The configuration for resource targets to receive notifications when Amazon
+// Chime SDK meeting and attendee events occur.
+type MeetingNotificationConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The SNS topic ARN.
+	SnsTopicArn *string `min:"1" type:"string" sensitive:"true"`
+
+	// The SQS queue ARN.
+	SqsQueueArn *string `min:"1" type:"string" sensitive:"true"`
+}
+
+// String returns the string representation
+func (s MeetingNotificationConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MeetingNotificationConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MeetingNotificationConfiguration"}
+	if s.SnsTopicArn != nil && len(*s.SnsTopicArn) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SnsTopicArn", 1))
+	}
+	if s.SqsQueueArn != nil && len(*s.SqsQueueArn) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SqsQueueArn", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MeetingNotificationConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.SnsTopicArn != nil {
+		v := *s.SnsTopicArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SnsTopicArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SqsQueueArn != nil {
+		v := *s.SqsQueueArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SqsQueueArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The member details, such as email address, name, member ID, and member type.
+type Member struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Chime account ID.
+	AccountId *string `type:"string"`
+
+	// The member email address.
+	Email *string `type:"string" sensitive:"true"`
+
+	// The member name.
+	FullName *string `type:"string" sensitive:"true"`
+
+	// The member ID (user ID or bot ID).
+	MemberId *string `type:"string"`
+
+	// The member type.
+	MemberType MemberType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s Member) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Member) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AccountId != nil {
+		v := *s.AccountId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AccountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Email != nil {
+		v := *s.Email
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Email", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.FullName != nil {
+		v := *s.FullName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FullName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MemberId != nil {
+		v := *s.MemberId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MemberId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.MemberType) > 0 {
+		v := s.MemberType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MemberType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// The list of errors returned when a member action results in an error.
+type MemberError struct {
+	_ struct{} `type:"structure"`
+
+	// The error code.
+	ErrorCode ErrorCode `type:"string" enum:"true"`
+
+	// The error message.
+	ErrorMessage *string `type:"string"`
+
+	// The member ID.
+	MemberId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s MemberError) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MemberError) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.ErrorCode) > 0 {
+		v := s.ErrorCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ErrorCode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.ErrorMessage != nil {
+		v := *s.ErrorMessage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ErrorMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MemberId != nil {
+		v := *s.MemberId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MemberId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Membership details, such as member ID and member role.
+type MembershipItem struct {
+	_ struct{} `type:"structure"`
+
+	// The member ID.
+	MemberId *string `type:"string"`
+
+	// The member role.
+	Role RoomMembershipRole `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s MembershipItem) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MembershipItem) MarshalFields(e protocol.FieldEncoder) error {
+	if s.MemberId != nil {
+		v := *s.MemberId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MemberId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Role) > 0 {
+		v := s.Role
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Role", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -973,13 +1410,145 @@ func (s PhoneNumberOrder) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The Amazon Chime chat room details.
+type Room struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Chime account ID.
+	AccountId *string `type:"string"`
+
+	// The identifier of the room creator.
+	CreatedBy *string `type:"string"`
+
+	// The room creation timestamp, in ISO 8601 format.
+	CreatedTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// The room name.
+	Name *string `type:"string" sensitive:"true"`
+
+	// The room ID.
+	RoomId *string `type:"string"`
+
+	// The room update timestamp, in ISO 8601 format.
+	UpdatedTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+}
+
+// String returns the string representation
+func (s Room) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Room) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AccountId != nil {
+		v := *s.AccountId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AccountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreatedBy != nil {
+		v := *s.CreatedBy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreatedBy", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreatedTimestamp != nil {
+		v := *s.CreatedTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreatedTimestamp",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RoomId != nil {
+		v := *s.RoomId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RoomId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UpdatedTimestamp != nil {
+		v := *s.UpdatedTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UpdatedTimestamp",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
+	}
+	return nil
+}
+
+// The room membership details.
+type RoomMembership struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the user that invited the room member.
+	InvitedBy *string `type:"string"`
+
+	// The member details, such as email address, name, member ID, and member type.
+	Member *Member `type:"structure"`
+
+	// The membership role.
+	Role RoomMembershipRole `type:"string" enum:"true"`
+
+	// The room ID.
+	RoomId *string `type:"string"`
+
+	// The room membership update timestamp, in ISO 8601 format.
+	UpdatedTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+}
+
+// String returns the string representation
+func (s RoomMembership) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RoomMembership) MarshalFields(e protocol.FieldEncoder) error {
+	if s.InvitedBy != nil {
+		v := *s.InvitedBy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InvitedBy", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Member != nil {
+		v := s.Member
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Member", v, metadata)
+	}
+	if len(s.Role) > 0 {
+		v := s.Role
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Role", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.RoomId != nil {
+		v := *s.RoomId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RoomId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UpdatedTimestamp != nil {
+		v := *s.UpdatedTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UpdatedTimestamp",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
+	}
+	return nil
+}
+
 // The streaming configuration associated with an Amazon Chime Voice Connector.
 // Specifies whether media streaming is enabled for sending to Amazon Kinesis,
 // and shows the retention period for the Amazon Kinesis data, in hours.
 type StreamingConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// The retention period for the Amazon Kinesis data, in hours.
+	// The retention period, in hours, for the Amazon Kinesis data.
 	//
 	// DataRetentionInHours is a required field
 	DataRetentionInHours *int64 `type:"integer" required:"true"`

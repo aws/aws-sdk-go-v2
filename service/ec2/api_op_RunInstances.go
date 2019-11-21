@@ -163,6 +163,10 @@ type RunInstancesInput struct {
 	// MaxCount is a required field
 	MaxCount *int64 `type:"integer" required:"true"`
 
+	// The metadata options for the instance. For more information, see Instance
+	// Metadata and User Data (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html).
+	MetadataOptions *InstanceMetadataOptionsRequest `type:"structure"`
+
 	// The minimum number of instances to launch. If you specify a minimum that
 	// is more instances than Amazon EC2 can launch in the target Availability Zone,
 	// Amazon EC2 launches no instances.

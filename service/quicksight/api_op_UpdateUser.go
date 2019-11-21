@@ -33,7 +33,7 @@ type UpdateUserInput struct {
 	//
 	//    * READER: A user who has read-only access to dashboards.
 	//
-	//    * AUTHOR: A user who can create data sources, data sets, analyses, and
+	//    * AUTHOR: A user who can create data sources, datasets, analyses, and
 	//    dashboards.
 	//
 	//    * ADMIN: A user who is an author, who can also manage Amazon QuickSight
@@ -168,15 +168,13 @@ const opUpdateUser = "UpdateUser"
 //
 // Updates an Amazon QuickSight user.
 //
-// The permission resource is arn:aws:quicksight:us-east-1:<aws-account-id>:user/default/<user-name> .
-//
 // The response is a user object that contains the user's Amazon QuickSight
 // user name, email address, active or inactive status in Amazon QuickSight,
 // Amazon QuickSight role, and Amazon Resource Name (ARN).
 //
 // CLI Sample:
 //
-// aws quicksight update-user --user-name=Pat --role=ADMIN --email=new_address@amazon.com
+// aws quicksight update-user --user-name=Pat --role=ADMIN --email=new_address@example.com
 // --aws-account-id=111122223333 --namespace=default --region=us-east-1
 //
 //    // Example sending a request using UpdateUserRequest.

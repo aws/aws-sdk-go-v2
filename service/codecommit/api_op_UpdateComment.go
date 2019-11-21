@@ -18,8 +18,7 @@ type UpdateCommentInput struct {
 	// CommentId is a required field
 	CommentId *string `locationName:"commentId" type:"string" required:"true"`
 
-	// The updated content with which you want to replace the existing content of
-	// the comment.
+	// The updated content to replace the existing content of the comment.
 	//
 	// Content is a required field
 	Content *string `locationName:"content" type:"string" required:"true"`

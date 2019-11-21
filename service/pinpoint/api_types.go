@@ -242,7 +242,7 @@ type ADMMessage struct {
 	MD5 *string `type:"string"`
 
 	// The raw, JSON-formatted string to use as the payload for the notification
-	// message. This value overrides the message.
+	// message. If specified, this value overrides all other content for the message.
 	RawContent *string `type:"string"`
 
 	// Specifies whether the notification is a silent push notification, which is
@@ -720,7 +720,7 @@ type APNSMessage struct {
 	Priority *string `type:"string"`
 
 	// The raw, JSON-formatted string to use as the payload for the notification
-	// message. This value overrides all other content for the message.
+	// message. If specified, this value overrides all other content for the message.
 	//
 	// If you specify the raw content of an APNs push notification, the message
 	// payload has to include the content-available key. The value of the content-available
@@ -955,6 +955,11 @@ type APNSPushNotificationTemplate struct {
 	// on the message template.
 	MediaUrl *string `type:"string"`
 
+	// The raw, JSON-formatted string to use as the payload for push notifications
+	// that are based on the message template. If specified, this value overrides
+	// all other content for the message template.
+	RawContent *string `type:"string"`
+
 	// The key for the sound to play when the recipient receives a push notification
 	// that's based on the message template. The value for this key is the name
 	// of a sound file in your app's main bundle or the Library/Sounds folder in
@@ -996,6 +1001,12 @@ func (s APNSPushNotificationTemplate) MarshalFields(e protocol.FieldEncoder) err
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "MediaUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RawContent != nil {
+		v := *s.RawContent
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RawContent", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Sound != nil {
 		v := *s.Sound
@@ -2018,13 +2029,13 @@ type AddressConfiguration struct {
 	// to email/SMS delivery receipt event attributes.
 	Context map[string]string `type:"map"`
 
-	// The raw, JSON-formatted string to use as the payload for the notification
-	// message. This value overrides the message.
+	// The raw, JSON-formatted string to use as the payload for the message. If
+	// specified, this value overrides all other values for the message.
 	RawContent *string `type:"string"`
 
-	// An object that maps variable values for the message. Amazon Pinpoint merges
-	// these values with the variable values specified by properties of the DefaultMessage
-	// object. The substitutions in this map take precedence over all other substitutions.
+	// A map of the message variables to merge with the variables specified by properties
+	// of the DefaultMessage object. The variables specified in this map take precedence
+	// over all other variables.
 	Substitutions map[string][]string `type:"map"`
 
 	// The message title to use instead of the default message title. This value
@@ -2128,6 +2139,11 @@ type AndroidPushNotificationTemplate struct {
 	// message template.
 	ImageUrl *string `type:"string"`
 
+	// The raw, JSON-formatted string to use as the payload for a push notification
+	// that's based on the message template. If specified, this value overrides
+	// all other content for the message template.
+	RawContent *string `type:"string"`
+
 	// The URL of the small icon image to display in the status bar and the content
 	// view of a push notification that's based on the message template.
 	SmallImageIconUrl *string `type:"string"`
@@ -2178,6 +2194,12 @@ func (s AndroidPushNotificationTemplate) MarshalFields(e protocol.FieldEncoder) 
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ImageUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RawContent != nil {
+		v := *s.RawContent
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RawContent", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SmallImageIconUrl != nil {
 		v := *s.SmallImageIconUrl
@@ -2830,7 +2852,7 @@ type BaiduMessage struct {
 	ImageUrl *string `type:"string"`
 
 	// The raw, JSON-formatted string to use as the payload for the notification
-	// message. This value overrides the message.
+	// message. If specified, this value overrides all other content for the message.
 	RawContent *string `type:"string"`
 
 	// Specifies whether the notification is a silent push notification, which is
@@ -3112,7 +3134,7 @@ func (s CampaignDateRangeKpiResponse) MarshalFields(e protocol.FieldEncoder) err
 type CampaignEmailMessage struct {
 	_ struct{} `type:"structure"`
 
-	// The body of the email for recipients whose email clients don't support HTML
+	// The body of the email for recipients whose email clients don't render HTML
 	// content.
 	Body *string `type:"string"`
 
@@ -3121,7 +3143,7 @@ type CampaignEmailMessage struct {
 	FromAddress *string `type:"string"`
 
 	// The body of the email, in HTML format, for recipients whose email clients
-	// support HTML content.
+	// render HTML content.
 	HtmlBody *string `type:"string"`
 
 	// The subject line, or title, of the email.
@@ -4077,16 +4099,15 @@ func (s CreateTemplateMessageBody) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Specifies the default message to use for all channels.
+// Specifies the default message for all channels.
 type DefaultMessage struct {
 	_ struct{} `type:"structure"`
 
-	// The default message body of the push notification, email, or SMS message.
+	// The default body of the message.
 	Body *string `type:"string"`
 
-	// The default message variables to use in the push notification, email, or
-	// SMS message. You can override these default variables with individual address
-	// variables.
+	// The default message variables to use in the message. You can override these
+	// default variables with individual address variables.
 	Substitutions map[string][]string `type:"map"`
 }
 
@@ -4340,7 +4361,7 @@ type DirectMessageConfiguration struct {
 	// This message overrides the default push notification message (DefaultPushNotificationMessage).
 	BaiduMessage *BaiduMessage `type:"structure"`
 
-	// The default message body for all channels.
+	// The default message for all channels.
 	DefaultMessage *DefaultMessage `type:"structure"`
 
 	// The default push notification message for all push notification channels.
@@ -4826,10 +4847,18 @@ func (s EmailMessageActivity) MarshalFields(e protocol.FieldEncoder) error {
 type EmailTemplateRequest struct {
 	_ struct{} `type:"structure"`
 
+	// A JSON object that specifies the default values to use for message variables
+	// in the message template. This object is a set of key-value pairs. Each key
+	// defines a message variable in the template. The corresponding value defines
+	// the default value for that variable. When you create a message that's based
+	// on the template, you can override these defaults with message-specific and
+	// address-specific variables and values.
+	DefaultSubstitutions *string `type:"string"`
+
 	// The message body, in HTML format, to use in email messages that are based
 	// on the message template. We recommend using HTML format for email clients
-	// that support HTML. You can include links, formatted text, and more in an
-	// HTML message.
+	// that render HTML content. You can include links, formatted text, and more
+	// in an HTML message.
 	HtmlPart *string `type:"string"`
 
 	// The subject line, or title, to use in email messages that are based on the
@@ -4841,10 +4870,13 @@ type EmailTemplateRequest struct {
 	// associated tag value.
 	Tags map[string]string `locationName:"tags" type:"map"`
 
-	// The message body, in text format, to use in email messages that are based
-	// on the message template. We recommend using text format for email clients
-	// that don't support HTML and clients that are connected to high-latency networks,
-	// such as mobile devices.
+	// A custom description of the message template.
+	TemplateDescription *string `type:"string"`
+
+	// The message body, in plain text format, to use in email messages that are
+	// based on the message template. We recommend using plain text format for email
+	// clients that don't render HTML content and clients that are connected to
+	// high-latency networks, such as mobile devices.
 	TextPart *string `type:"string"`
 }
 
@@ -4855,6 +4887,12 @@ func (s EmailTemplateRequest) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s EmailTemplateRequest) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DefaultSubstitutions != nil {
+		v := *s.DefaultSubstitutions
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DefaultSubstitutions", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.HtmlPart != nil {
 		v := *s.HtmlPart
 
@@ -4879,6 +4917,12 @@ func (s EmailTemplateRequest) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
+	if s.TemplateDescription != nil {
+		v := *s.TemplateDescription
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateDescription", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.TextPart != nil {
 		v := *s.TextPart
 
@@ -4901,6 +4945,12 @@ type EmailTemplateResponse struct {
 	// CreationDate is a required field
 	CreationDate *string `type:"string" required:"true"`
 
+	// The JSON object that specifies the default values that are used for message
+	// variables in the message template. This object is a set of key-value pairs.
+	// Each key defines a message variable in the template. The corresponding value
+	// defines the default value for that variable.
+	DefaultSubstitutions *string `type:"string"`
+
 	// The message body, in HTML format, that's used in email messages that are
 	// based on the message template.
 	HtmlPart *string `type:"string"`
@@ -4919,6 +4969,9 @@ type EmailTemplateResponse struct {
 	// key and an associated tag value.
 	Tags map[string]string `locationName:"tags" type:"map"`
 
+	// The custom description of the message template.
+	TemplateDescription *string `type:"string"`
+
 	// The name of the message template.
 	//
 	// TemplateName is a required field
@@ -4930,8 +4983,8 @@ type EmailTemplateResponse struct {
 	// TemplateType is a required field
 	TemplateType TemplateType `type:"string" required:"true" enum:"true"`
 
-	// The message body, in text format, that's used in email messages that are
-	// based on the message template.
+	// The message body, in plain text format, that's used in email messages that
+	// are based on the message template.
 	TextPart *string `type:"string"`
 }
 
@@ -4953,6 +5006,12 @@ func (s EmailTemplateResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DefaultSubstitutions != nil {
+		v := *s.DefaultSubstitutions
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DefaultSubstitutions", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.HtmlPart != nil {
 		v := *s.HtmlPart
@@ -4983,6 +5042,12 @@ func (s EmailTemplateResponse) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ms0.End()
 
+	}
+	if s.TemplateDescription != nil {
+		v := *s.TemplateDescription
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateDescription", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.TemplateName != nil {
 		v := *s.TemplateName
@@ -5888,7 +5953,7 @@ type EndpointSendConfiguration struct {
 	Context map[string]string `type:"map"`
 
 	// The raw, JSON-formatted string to use as the payload for the message. If
-	// specified, this value overrides the message.
+	// specified, this value overrides all other values for the message.
 	RawContent *string `type:"string"`
 
 	// A map of the message variables to merge with the variables specified for
@@ -7209,7 +7274,7 @@ type GCMMessage struct {
 	Priority *string `type:"string"`
 
 	// The raw, JSON-formatted string to use as the payload for the notification
-	// message. This value overrides the message.
+	// message. If specified, this value overrides all other content for the message.
 	RawContent *string `type:"string"`
 
 	// The package name of the application where registration tokens must match
@@ -8775,7 +8840,7 @@ type Message struct {
 	MediaUrl *string `type:"string"`
 
 	// The raw, JSON-formatted string to use as the payload for the notification
-	// message. This value overrides other values for the message.
+	// message. If specified, this value overrides all other content for the message.
 	RawContent *string `type:"string"`
 
 	// Specifies whether the notification is a silent push notification, which is
@@ -9019,8 +9084,7 @@ func (s MessageConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Specifies the objects that define configuration and other settings for a
-// message.
+// Specifies the configuration and other settings for a message.
 type MessageRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -9042,7 +9106,8 @@ type MessageRequest struct {
 	// as content overrides and message variables.
 	Endpoints map[string]EndpointSendConfiguration `type:"map"`
 
-	// The set of properties that defines the configuration settings for the message.
+	// The settings and content for the default message and any default messages
+	// that you defined for specific channels.
 	//
 	// MessageConfiguration is a required field
 	MessageConfiguration *DirectMessageConfiguration `type:"structure" required:"true"`
@@ -9829,6 +9894,14 @@ type PushNotificationTemplateRequest struct {
 	// The default message template to use for push notification channels.
 	Default *DefaultPushNotificationTemplate `type:"structure"`
 
+	// A JSON object that specifies the default values to use for message variables
+	// in the message template. This object is a set of key-value pairs. Each key
+	// defines a message variable in the template. The corresponding value defines
+	// the default value for that variable. When you create a message that's based
+	// on the template, you can override these defaults with message-specific and
+	// address-specific variables and values.
+	DefaultSubstitutions *string `type:"string"`
+
 	// The message template to use for the GCM channel, which is used to send notifications
 	// through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging
 	// (GCM), service. This message template overrides the default template for
@@ -9839,6 +9912,9 @@ type PushNotificationTemplateRequest struct {
 	// with the message template. Each tag consists of a required tag key and an
 	// associated tag value.
 	Tags map[string]string `locationName:"tags" type:"map"`
+
+	// A custom description of the message template.
+	TemplateDescription *string `type:"string"`
 }
 
 // String returns the string representation
@@ -9872,6 +9948,12 @@ func (s PushNotificationTemplateRequest) MarshalFields(e protocol.FieldEncoder) 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Default", v, metadata)
 	}
+	if s.DefaultSubstitutions != nil {
+		v := *s.DefaultSubstitutions
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DefaultSubstitutions", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.GCM != nil {
 		v := s.GCM
 
@@ -9889,6 +9971,12 @@ func (s PushNotificationTemplateRequest) MarshalFields(e protocol.FieldEncoder) 
 		}
 		ms0.End()
 
+	}
+	if s.TemplateDescription != nil {
+		v := *s.TemplateDescription
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateDescription", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -9924,6 +10012,12 @@ type PushNotificationTemplateResponse struct {
 	// The default message template that's used for push notification channels.
 	Default *DefaultPushNotificationTemplate `type:"structure"`
 
+	// The JSON object that specifies the default values that are used for message
+	// variables in the message template. This object is a set of key-value pairs.
+	// Each key defines a message variable in the template. The corresponding value
+	// defines the default value for that variable.
+	DefaultSubstitutions *string `type:"string"`
+
 	// The message template that's used for the GCM channel, which is used to send
 	// notifications through the Firebase Cloud Messaging (FCM), formerly Google
 	// Cloud Messaging (GCM), service. This message template overrides the default
@@ -9939,6 +10033,9 @@ type PushNotificationTemplateResponse struct {
 	// associated with the message template. Each tag consists of a required tag
 	// key and an associated tag value.
 	Tags map[string]string `locationName:"tags" type:"map"`
+
+	// The custom description of the message template.
+	TemplateDescription *string `type:"string"`
 
 	// The name of the message template.
 	//
@@ -9995,6 +10092,12 @@ func (s PushNotificationTemplateResponse) MarshalFields(e protocol.FieldEncoder)
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Default", v, metadata)
 	}
+	if s.DefaultSubstitutions != nil {
+		v := *s.DefaultSubstitutions
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DefaultSubstitutions", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.GCM != nil {
 		v := s.GCM
 
@@ -10018,6 +10121,12 @@ func (s PushNotificationTemplateResponse) MarshalFields(e protocol.FieldEncoder)
 		}
 		ms0.End()
 
+	}
+	if s.TemplateDescription != nil {
+		v := *s.TemplateDescription
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateDescription", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.TemplateName != nil {
 		v := *s.TemplateName
@@ -10618,10 +10727,21 @@ type SMSTemplateRequest struct {
 	// The message body to use in text messages that are based on the message template.
 	Body *string `type:"string"`
 
+	// A JSON object that specifies the default values to use for message variables
+	// in the message template. This object is a set of key-value pairs. Each key
+	// defines a message variable in the template. The corresponding value defines
+	// the default value for that variable. When you create a message that's based
+	// on the template, you can override these defaults with message-specific and
+	// address-specific variables and values.
+	DefaultSubstitutions *string `type:"string"`
+
 	// A string-to-string map of key-value pairs that defines the tags to associate
 	// with the message template. Each tag consists of a required tag key and an
 	// associated tag value.
 	Tags map[string]string `locationName:"tags" type:"map"`
+
+	// A custom description of the message template.
+	TemplateDescription *string `type:"string"`
 }
 
 // String returns the string representation
@@ -10637,6 +10757,12 @@ func (s SMSTemplateRequest) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Body", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.DefaultSubstitutions != nil {
+		v := *s.DefaultSubstitutions
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DefaultSubstitutions", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.Tags != nil {
 		v := s.Tags
 
@@ -10648,6 +10774,12 @@ func (s SMSTemplateRequest) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ms0.End()
 
+	}
+	if s.TemplateDescription != nil {
+		v := *s.TemplateDescription
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateDescription", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -10669,6 +10801,12 @@ type SMSTemplateResponse struct {
 	// CreationDate is a required field
 	CreationDate *string `type:"string" required:"true"`
 
+	// The JSON object that specifies the default values that are used for message
+	// variables in the message template. This object is a set of key-value pairs.
+	// Each key defines a message variable in the template. The corresponding value
+	// defines the default value for that variable.
+	DefaultSubstitutions *string `type:"string"`
+
 	// The date when the message template was last modified.
 	//
 	// LastModifiedDate is a required field
@@ -10678,6 +10816,9 @@ type SMSTemplateResponse struct {
 	// associated with the message template. Each tag consists of a required tag
 	// key and an associated tag value.
 	Tags map[string]string `locationName:"tags" type:"map"`
+
+	// The custom description of the message template.
+	TemplateDescription *string `type:"string"`
 
 	// The name of the message template.
 	//
@@ -10716,6 +10857,12 @@ func (s SMSTemplateResponse) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.DefaultSubstitutions != nil {
+		v := *s.DefaultSubstitutions
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DefaultSubstitutions", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.LastModifiedDate != nil {
 		v := *s.LastModifiedDate
 
@@ -10733,6 +10880,12 @@ func (s SMSTemplateResponse) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ms0.End()
 
+	}
+	if s.TemplateDescription != nil {
+		v := *s.TemplateDescription
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateDescription", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.TemplateName != nil {
 		v := *s.TemplateName
@@ -11762,7 +11915,7 @@ type SendUsersMessageRequest struct {
 	// it generates for users-messages deliveries.
 	Context map[string]string `type:"map"`
 
-	// The message definitions for the default message and any default messages
+	// The settings and content for the default message and any default messages
 	// that you defined for specific channels.
 	//
 	// MessageConfiguration is a required field
@@ -12115,17 +12268,17 @@ func (s SimpleCondition) MarshalFields(e protocol.FieldEncoder) error {
 type SimpleEmail struct {
 	_ struct{} `type:"structure"`
 
-	// The body of the email message, in HTML format. We recommend using an HTML
-	// part for email clients that support HTML. You can include links, formatted
+	// The body of the email message, in HTML format. We recommend using HTML format
+	// for email clients that render HTML content. You can include links, formatted
 	// text, and more in an HTML message.
 	HtmlPart *SimpleEmailPart `type:"structure"`
 
 	// The subject line, or title, of the email.
 	Subject *SimpleEmailPart `type:"structure"`
 
-	// The body of the email message, in text format. We recommend using a text
-	// part for email clients that don't support HTML and clients that are connected
-	// to high-latency networks, such as mobile devices.
+	// The body of the email message, in plain text format. We recommend using plain
+	// text format for email clients that don't render HTML content and clients
+	// that are connected to high-latency networks, such as mobile devices.
 	TextPart *SimpleEmailPart `type:"structure"`
 }
 
@@ -12319,7 +12472,7 @@ func (s Template) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Specifies the message template for each type of channel.
+// Specifies the message template to use for the message, for each type of channel.
 type TemplateConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -12331,6 +12484,9 @@ type TemplateConfiguration struct {
 
 	// The SMS template to use for the message.
 	SMSTemplate *Template `type:"structure"`
+
+	// The voice template to use for the message.
+	VoiceTemplate *Template `type:"structure"`
 }
 
 // String returns the string representation
@@ -12358,6 +12514,12 @@ func (s TemplateConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "SMSTemplate", v, metadata)
 	}
+	if s.VoiceTemplate != nil {
+		v := s.VoiceTemplate
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "VoiceTemplate", v, metadata)
+	}
 	return nil
 }
 
@@ -12374,6 +12536,12 @@ type TemplateResponse struct {
 	// CreationDate is a required field
 	CreationDate *string `type:"string" required:"true"`
 
+	// The JSON object that specifies the default values that are used for message
+	// variables in the message template. This object is a set of key-value pairs.
+	// Each key defines a message variable in the template. The corresponding value
+	// defines the default value for that variable.
+	DefaultSubstitutions *string `type:"string"`
+
 	// The date when the message template was last modified.
 	//
 	// LastModifiedDate is a required field
@@ -12383,6 +12551,9 @@ type TemplateResponse struct {
 	// associated with the message template. Each tag consists of a required tag
 	// key and an associated tag value.
 	Tags map[string]string `locationName:"tags" type:"map"`
+
+	// The custom description of the message template.
+	TemplateDescription *string `type:"string"`
 
 	// The name of the message template.
 	//
@@ -12414,6 +12585,12 @@ func (s TemplateResponse) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.DefaultSubstitutions != nil {
+		v := *s.DefaultSubstitutions
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DefaultSubstitutions", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.LastModifiedDate != nil {
 		v := *s.LastModifiedDate
 
@@ -12431,6 +12608,12 @@ func (s TemplateResponse) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ms0.End()
 
+	}
+	if s.TemplateDescription != nil {
+		v := *s.TemplateDescription
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateDescription", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.TemplateName != nil {
 		v := *s.TemplateName
@@ -12760,11 +12943,12 @@ func (s VoiceChannelResponse) MarshalFields(e protocol.FieldEncoder) error {
 type VoiceMessage struct {
 	_ struct{} `type:"structure"`
 
-	// The text script for the voice message.
+	// The text of the script to use for the voice message.
 	Body *string `type:"string"`
 
-	// The language to use when delivering the message. For a list of supported
-	// languages, see the Amazon Polly Developer Guide (AmazonPollyDG.html).
+	// The code for the language to use when synthesizing the text of the message
+	// script. For a list of supported languages and the code for each one, see
+	// the Amazon Polly Developer Guide (https://docs.aws.amazon.com/polly/latest/dg/what-is.html).
 	LanguageCode *string `type:"string"`
 
 	// The long code to send the voice message from. This value should be one of
@@ -12778,7 +12962,7 @@ type VoiceMessage struct {
 	Substitutions map[string][]string `type:"map"`
 
 	// The name of the voice to use when delivering the message. For a list of supported
-	// voices, see the Amazon Polly Developer Guide (AmazonPollyDG.html).
+	// voices, see the Amazon Polly Developer Guide (https://docs.aws.amazon.com/polly/latest/dg/what-is.html).
 	VoiceId *string `type:"string"`
 }
 
@@ -12833,6 +13017,236 @@ func (s VoiceMessage) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies the content and settings for a message template that can be used
+// in messages that are sent through the voice channel.
+type VoiceTemplateRequest struct {
+	_ struct{} `type:"structure"`
+
+	// The text of the script to use in messages that are based on the message template,
+	// in plain text format.
+	Body *string `type:"string"`
+
+	// A JSON object that specifies the default values to use for message variables
+	// in the message template. This object is a set of key-value pairs. Each key
+	// defines a message variable in the template. The corresponding value defines
+	// the default value for that variable. When you create a message that's based
+	// on the template, you can override these defaults with message-specific and
+	// address-specific variables and values.
+	DefaultSubstitutions *string `type:"string"`
+
+	// The code for the language to use when synthesizing the text of the script
+	// in messages that are based on the message template. For a list of supported
+	// languages and the code for each one, see the Amazon Polly Developer Guide
+	// (https://docs.aws.amazon.com/polly/latest/dg/what-is.html).
+	LanguageCode *string `type:"string"`
+
+	// A string-to-string map of key-value pairs that defines the tags to associate
+	// with the message template. Each tag consists of a required tag key and an
+	// associated tag value.
+	Tags map[string]string `locationName:"tags" type:"map"`
+
+	// A custom description of the message template.
+	TemplateDescription *string `type:"string"`
+
+	// The name of the voice to use when delivering messages that are based on the
+	// message template. For a list of supported voices, see the Amazon Polly Developer
+	// Guide (https://docs.aws.amazon.com/polly/latest/dg/what-is.html).
+	VoiceId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s VoiceTemplateRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VoiceTemplateRequest) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Body != nil {
+		v := *s.Body
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Body", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DefaultSubstitutions != nil {
+		v := *s.DefaultSubstitutions
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DefaultSubstitutions", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LanguageCode != nil {
+		v := *s.LanguageCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LanguageCode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.TemplateDescription != nil {
+		v := *s.TemplateDescription
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateDescription", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.VoiceId != nil {
+		v := *s.VoiceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "VoiceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Provides information about the content and settings for a message template
+// that can be used in messages that are sent through the voice channel.
+type VoiceTemplateResponse struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the message template.
+	Arn *string `type:"string"`
+
+	// The text of the script that's used in messages that are based on the message
+	// template, in plain text format.
+	Body *string `type:"string"`
+
+	// The date when the message template was created.
+	//
+	// CreationDate is a required field
+	CreationDate *string `type:"string" required:"true"`
+
+	// The JSON object that specifies the default values that are used for message
+	// variables in the message template. This object is a set of key-value pairs.
+	// Each key defines a message variable in the template. The corresponding value
+	// defines the default value for that variable.
+	DefaultSubstitutions *string `type:"string"`
+
+	// The code for the language that's used when synthesizing the text of the script
+	// in messages that are based on the message template. For a list of supported
+	// languages and the code for each one, see the Amazon Polly Developer Guide
+	// (https://docs.aws.amazon.com/polly/latest/dg/what-is.html).
+	LanguageCode *string `type:"string"`
+
+	// The date when the message template was last modified.
+	//
+	// LastModifiedDate is a required field
+	LastModifiedDate *string `type:"string" required:"true"`
+
+	// A string-to-string map of key-value pairs that identifies the tags that are
+	// associated with the message template. Each tag consists of a required tag
+	// key and an associated tag value.
+	Tags map[string]string `locationName:"tags" type:"map"`
+
+	// The custom description of the message template.
+	TemplateDescription *string `type:"string"`
+
+	// The name of the message template.
+	//
+	// TemplateName is a required field
+	TemplateName *string `type:"string" required:"true"`
+
+	// The type of channel that the message template is designed for. For a voice
+	// template, this value is VOICE.
+	//
+	// TemplateType is a required field
+	TemplateType TemplateType `type:"string" required:"true" enum:"true"`
+
+	// The name of the voice that's used when delivering messages that are based
+	// on the message template. For a list of supported voices, see the Amazon Polly
+	// Developer Guide (https://docs.aws.amazon.com/polly/latest/dg/what-is.html).
+	VoiceId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s VoiceTemplateResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VoiceTemplateResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Body != nil {
+		v := *s.Body
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Body", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationDate != nil {
+		v := *s.CreationDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DefaultSubstitutions != nil {
+		v := *s.DefaultSubstitutions
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DefaultSubstitutions", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LanguageCode != nil {
+		v := *s.LanguageCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LanguageCode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LastModifiedDate != nil {
+		v := *s.LastModifiedDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastModifiedDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.TemplateDescription != nil {
+		v := *s.TemplateDescription
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateDescription", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TemplateName != nil {
+		v := *s.TemplateName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.TemplateType) > 0 {
+		v := s.TemplateType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.VoiceId != nil {
+		v := *s.VoiceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "VoiceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Specifies the settings for a wait activity in a journey. This type of activity
 // waits for a certain amount of time or until a specific date and time before
 // moving participants to the next activity in a journey.
@@ -12876,7 +13290,7 @@ func (s WaitActivity) MarshalFields(e protocol.FieldEncoder) error {
 type WaitTime struct {
 	_ struct{} `type:"structure"`
 
-	// The amount of time, as a duration in ISO 8601 format, to wait before determining
+	// The amount of time to wait, as a duration in ISO 8601 format, before determining
 	// whether the activity's conditions have been met or moving participants to
 	// the next activity in the journey.
 	WaitFor *string `type:"string"`
@@ -12993,7 +13407,7 @@ type WriteCampaignRequest struct {
 	// in addition to the default treatment for the campaign.
 	AdditionalTreatments []WriteTreatmentResource `type:"list"`
 
-	// The custom description of the campaign.
+	// A custom description of the campaign.
 	Description *string `type:"string"`
 
 	// The allocated percentage of users (segment members) who shouldn't receive
@@ -13033,7 +13447,7 @@ type WriteCampaignRequest struct {
 	// The message template to use for the campaign.
 	TemplateConfiguration *TemplateConfiguration `type:"structure"`
 
-	// The custom description of a variation of the campaign to use for A/B testing.
+	// A custom description of a variation of the campaign to use for A/B testing.
 	TreatmentDescription *string `type:"string"`
 
 	// The custom name of a variation of the campaign to use for A/B testing.
@@ -13534,7 +13948,7 @@ type WriteTreatmentResource struct {
 	// The message template to use for the treatment.
 	TemplateConfiguration *TemplateConfiguration `type:"structure"`
 
-	// The custom description of the treatment.
+	// A custom description of the treatment.
 	TreatmentDescription *string `type:"string"`
 
 	// The custom name of the treatment. A treatment is a variation of a campaign

@@ -14,6 +14,8 @@ import (
 type PutBucketVersioningInput struct {
 	_ struct{} `type:"structure" payload:"VersioningConfiguration"`
 
+	// The bucket name.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
@@ -21,9 +23,7 @@ type PutBucketVersioningInput struct {
 	// and the value that is displayed on your authentication device.
 	MFA *string `location:"header" locationName:"x-amz-mfa" type:"string"`
 
-	// Describes the versioning state of an Amazon S3 bucket. For more information,
-	// see PUT Bucket versioning (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html)
-	// in the Amazon Simple Storage Service API Reference.
+	// Container for setting the versioning state.
 	//
 	// VersioningConfiguration is a required field
 	VersioningConfiguration *VersioningConfiguration `locationName:"VersioningConfiguration" type:"structure" required:"true" xmlURI:"http://s3.amazonaws.com/doc/2006-03-01/"`
@@ -104,6 +104,38 @@ const opPutBucketVersioning = "PutBucketVersioning"
 //
 // Sets the versioning state of an existing bucket. To set the versioning state,
 // you must be the bucket owner.
+//
+// You can set the versioning state with one of the following values:
+//
+// Enabled—Enables versioning for the objects in the bucket. All objects added
+// to the bucket receive a unique version ID.
+//
+// Suspended—Disables versioning for the objects in the bucket. All objects
+// added to the bucket receive the version ID null.
+//
+// If the versioning state has never been set on a bucket, it has no versioning
+// state; a GetBucketVersioning request does not return a versioning state value.
+//
+// If the bucket owner enables MFA Delete in the bucket versioning configuration,
+// the bucket owner must include the x-amz-mfa request header and the Status
+// and the MfaDelete request elements in a request to set the versioning state
+// of the bucket.
+//
+// If you have an object expiration lifecycle policy in your non-versioned bucket
+// and you want to maintain the same permanent delete behavior when you enable
+// versioning, you must add a noncurrent expiration policy. The noncurrent expiration
+// lifecycle policy will manage the deletes of the noncurrent object versions
+// in the version-enabled bucket. (A version-enabled bucket maintains one current
+// and zero or more noncurrent object versions.) For more information, see Lifecycle
+// and Versioning (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html#lifecycle-and-other-bucket-config).
+//
+// Related Resources
+//
+//    * CreateBucket
+//
+//    * DeleteBucket
+//
+//    * GetBucketVersioning
 //
 //    // Example sending a request using PutBucketVersioningRequest.
 //    req := client.PutBucketVersioningRequest(params)

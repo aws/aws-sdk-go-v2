@@ -19,6 +19,12 @@ type ListResourceDataSyncInput struct {
 
 	// A token to start the list. Use this token to get the next set of results.
 	NextToken *string `type:"string"`
+
+	// View a list of resource data syncs according to the sync type. Specify SyncToDestination
+	// to view resource data syncs that synchronize data to an Amazon S3 buckets.
+	// Specify SyncFromSource to view resource data syncs from AWS Organizations
+	// or from multiple AWS Regions.
+	SyncType *string `min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -31,6 +37,9 @@ func (s *ListResourceDataSyncInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListResourceDataSyncInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.SyncType != nil && len(*s.SyncType) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SyncType", 1))
 	}
 
 	if invalidParams.Len() > 0 {

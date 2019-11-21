@@ -433,9 +433,8 @@ type ContainerDefinition struct {
 	// AMI (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	//
-	// This parameter is available for tasks using the Fargate launch type in the
-	// Ohio (us-east-2) region only and the task or service requires platform version
-	// 1.3.0 or later.
+	// For tasks using the Fargate launch type, the task or service requires platform
+	// version 1.3.0 or later.
 	DependsOn []ContainerDependency `locationName:"dependsOn" type:"list"`
 
 	// When this parameter is true, networking is disabled within the container.
@@ -801,15 +800,14 @@ type ContainerDefinition struct {
 	// AMI (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	//
-	// This parameter is available for tasks using the Fargate launch type in the
-	// Ohio (us-east-2) region only and the task or service requires platform version
-	// 1.3.0 or later.
+	// For tasks using the Fargate launch type, the task or service requires platform
+	// version 1.3.0 or later.
 	StartTimeout *int64 `locationName:"startTimeout" type:"integer"`
 
 	// Time duration (in seconds) to wait before the container is forcefully killed
-	// if it doesn't exit normally on its own. For tasks using the Fargate launch
-	// type, the max stopTimeout value is 2 minutes. This parameter is available
-	// for tasks using the Fargate launch type in the Ohio (us-east-2) region only
+	// if it doesn't exit normally on its own.
+	//
+	// For tasks using the Fargate launch type, the max stopTimeout value is 2 minutes
 	// and the task or service requires platform version 1.3.0 or later.
 	//
 	// For tasks using the EC2 launch type, the stop timeout value for the container
@@ -1526,6 +1524,9 @@ type Failure struct {
 	// The Amazon Resource Name (ARN) of the failed resource.
 	Arn *string `locationName:"arn" type:"string"`
 
+	// The details of the failure.
+	Detail *string `locationName:"detail" type:"string"`
+
 	// The reason for the failure.
 	Reason *string `locationName:"reason" type:"string"`
 }
@@ -2004,18 +2005,14 @@ type LogConfiguration struct {
 	// parameter are log drivers that the Amazon ECS container agent can communicate
 	// with by default.
 	//
-	// For tasks using the Fargate launch type, the supported log drivers are awslogs,
-	// splunk, and awsfirelens.
+	// For tasks using the Fargate launch type, the supported log drivers are awslogs
+	// and splunk.
 	//
 	// For tasks using the EC2 launch type, the supported log drivers are awslogs,
-	// fluentd, gelf, json-file, journald, logentries, syslog, splunk, and awsfirelens.
+	// fluentd, gelf, json-file, journald, logentries, syslog, and splunk.
 	//
 	// For more information about using the awslogs log driver, see Using the awslogs
 	// Log Driver (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html)
-	// in the Amazon Elastic Container Service Developer Guide.
-	//
-	// For more information about using the awsfirelens log driver, see Custom Log
-	// Routing (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	//
 	// If you have a custom driver that is not listed above that you would like
@@ -2938,6 +2935,12 @@ type Task struct {
 	// awsvpc network mode.
 	Attachments []Attachment `locationName:"attachments" type:"list"`
 
+	// The attributes of the task
+	Attributes []Attribute `locationName:"attributes" type:"list"`
+
+	// The availability zone of the task.
+	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
+
 	// The ARN of the cluster that hosts the task.
 	ClusterArn *string `locationName:"clusterArn" type:"string"`
 
@@ -3189,6 +3192,9 @@ type TaskDefinition struct {
 	// ECS gives sequential revision numbers to each task definition that you add.
 	Family *string `locationName:"family" type:"string"`
 
+	// The Elastic Inference accelerator associated with the task.
+	InferenceAccelerators []InferenceAccelerator `locationName:"inferenceAccelerators" type:"list"`
+
 	// The IPC resource namespace to use for the containers in the task. The valid
 	// values are host, task, or none. If host is specified, then all containers
 	// within the tasks that specified the host IPC mode on the same container instance
@@ -3397,12 +3403,18 @@ type TaskOverride struct {
 	// One or more container overrides sent to a task.
 	ContainerOverrides []ContainerOverride `locationName:"containerOverrides" type:"list"`
 
+	// The cpu override for the task.
+	Cpu *string `locationName:"cpu" type:"string"`
+
 	// The Amazon Resource Name (ARN) of the task execution role that the Amazon
 	// ECS container agent and the Docker daemon can assume.
 	ExecutionRoleArn *string `locationName:"executionRoleArn" type:"string"`
 
 	// The Elastic Inference accelerator override for the task.
 	InferenceAcceleratorOverrides []InferenceAcceleratorOverride `locationName:"inferenceAcceleratorOverrides" type:"list"`
+
+	// The memory override for the task.
+	Memory *string `locationName:"memory" type:"string"`
 
 	// The Amazon Resource Name (ARN) of the IAM role that containers in this task
 	// can assume. All containers in this task are granted the permissions that

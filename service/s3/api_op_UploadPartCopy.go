@@ -14,6 +14,8 @@ import (
 type UploadPartCopyInput struct {
 	_ struct{} `type:"structure"`
 
+	// The bucket name.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
@@ -56,6 +58,8 @@ type UploadPartCopyInput struct {
 	// key was transmitted without error.
 	CopySourceSSECustomerKeyMD5 *string `location:"header" locationName:"x-amz-copy-source-server-side-encryption-customer-key-MD5" type:"string"`
 
+	// Object key for which the multipart upload was initiated.
+	//
 	// Key is a required field
 	Key *string `location:"uri" locationName:"Key" min:"1" type:"string" required:"true"`
 
@@ -265,6 +269,7 @@ func (s UploadPartCopyInput) MarshalFields(e protocol.FieldEncoder) error {
 type UploadPartCopyOutput struct {
 	_ struct{} `type:"structure" payload:"CopyPartResult"`
 
+	// Container for all response elements.
 	CopyPartResult *CopyPartResult `type:"structure"`
 
 	// The version of the source object that was copied, if you have enabled versioning
@@ -285,8 +290,8 @@ type UploadPartCopyOutput struct {
 	// verification of the customer-provided encryption key.
 	SSECustomerKeyMD5 *string `location:"header" locationName:"x-amz-server-side-encryption-customer-key-MD5" type:"string"`
 
-	// If present, specifies the ID of the AWS Key Management Service (KMS) master
-	// encryption key that was used for the object.
+	// If present, specifies the ID of the AWS Key Management Service (KMS) customer
+	// master key (CMK) that was used for the object.
 	SSEKMSKeyId *string `location:"header" locationName:"x-amz-server-side-encryption-aws-kms-key-id" type:"string" sensitive:"true"`
 
 	// The Server-side encryption algorithm used when storing this object in S3
@@ -351,7 +356,93 @@ const opUploadPartCopy = "UploadPartCopy"
 // UploadPartCopyRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Uploads a part by copying data from an existing object as data source.
+// Uploads a part by copying data from an existing object as data source. You
+// specify the data source by adding the request header x-amz-copy-source in
+// your request and a byte range by adding the request header x-amz-copy-source-range
+// in your request.
+//
+// The minimum allowable part size for a multipart upload is 5 MB. For more
+// information about multipart upload limits, go to Quick Facts (https://docs.aws.amazon.com/AmazonS3/latest/dev/qfacts.html)
+// in the Amazon Simple Storage Service Developer Guide.
+//
+// Instead of using an existing object as part data, you might use the UploadPart
+// operation and provide data in your request.
+//
+// You must initiate a multipart upload before you can upload any part. In response
+// to your initiate request. Amazon S3 returns a unique identifier, the upload
+// ID, that you must include in your upload part request.
+//
+// For more information on using the UploadPartCopy operation, see the following
+// topics:
+//
+//    * For conceptual information on multipart uploads, go to Uploading Objects
+//    Using Multipart Upload (https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html)
+//    in the Amazon Simple Storage Service Developer Guide.
+//
+//    * For information on permissions required to use the multipart upload
+//    API, go to Multipart Upload API and Permissions (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html)
+//    in the Amazon Simple Storage Service Developer Guide.
+//
+//    * For information about copying objects using a single atomic operation
+//    vs. the multipart upload, go to Operations on Objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectOperations.html)
+//    in the Amazon Simple Storage Service Developer Guide.
+//
+//    * For information about using server-side encryption with customer-provided
+//    encryption keys with the UploadPartCopy operation, see CopyObject and
+//    UploadPart.
+//
+// Note the following additional considerations about the request headers x-amz-copy-source-if-match,
+// x-amz-copy-source-if-none-match x-amz-copy-source-if-unmodified-since x-amz-copy-source-if-modified-since
+//
+//    * Consideration 1 - If both of the x-amz-copy-source-if-match and x-amz-copy-source-if-unmodified-since
+//    headers are present in the request as follows: x-amz-copy-source-if-match
+//    condition evaluates to true, and; x-amz-copy-source-if-unmodified-since
+//    condition evaluates to false; then, S3 returns 200 OK and copies the data.
+//
+//    * Consideration 2 - If both of the x-amz-copy-source-if-none-match and
+//    x-amz-copy-source-if-modified-since headers are present in the request
+//    as follows: x-amz-copy-source-if-none-match condition evaluates to false,
+//    and; x-amz-copy-source-if-modified-since condition evaluates to true;
+//    then, S3 returns 412 Precondition Failed response code.
+//
+// Versioning
+//
+// If your bucket has versioning enabled, you could have multiple versions of
+// the same object. By default, x-amz-copy-source identifies the current version
+// of the object to copy. If the current version is a delete marker and you
+// don't specify a versionId in the x-amz-copy-source, Amazon S3 returns a 404
+// error, because the object does not exist. If you specify versionId in the
+// x-amz-copy-source and the versionId is a delete marker, Amazon S3 returns
+// an HTTP 400 error, because you are not allowed to specify a delete marker
+// as a version for the x-amz-copy-source.
+//
+// You can optionally specify a specific version of the source object to copy
+// by adding the versionId subresource as shown in the following example:
+//
+// x-amz-copy-source: /bucket/object?versionId=version id
+//
+// Special Errors
+//
+//    * Code: NoSuchUpload Cause: The specified multipart upload does not exist.
+//    The upload ID might be invalid, or the multipart upload might have been
+//    aborted or completed. HTTP Status Code: 404 Not Found
+//
+//    * Code: InvalidRequest Cause: The specified copy source is not supported
+//    as a byte-range copy source. HTTP Status Code: 400 Bad Request
+//
+// Related Resources
+//
+//    * CreateMultipartUpload
+//
+//    * UploadPart
+//
+//    * CompleteMultipartUpload
+//
+//    * AbortMultipartUpload
+//
+//    * ListParts
+//
+//    * ListMultipartUploads
 //
 //    // Example sending a request using UploadPartCopyRequest.
 //    req := client.UploadPartCopyRequest(params)

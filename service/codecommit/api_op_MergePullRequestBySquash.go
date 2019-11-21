@@ -12,37 +12,36 @@ import (
 type MergePullRequestBySquashInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the author who created the commit. This information will be used
-	// as both the author and committer for the commit.
+	// The name of the author who created the commit. This information is used as
+	// both the author and committer for the commit.
 	AuthorName *string `locationName:"authorName" type:"string"`
 
 	// The commit message to include in the commit information for the merge.
 	CommitMessage *string `locationName:"commitMessage" type:"string"`
 
 	// The level of conflict detail to use. If unspecified, the default FILE_LEVEL
-	// is used, which will return a not mergeable result if the same file has differences
-	// in both branches. If LINE_LEVEL is specified, a conflict will be considered
-	// not mergeable if the same file in both branches has differences on the same
-	// line.
+	// is used, which returns a not-mergeable result if the same file has differences
+	// in both branches. If LINE_LEVEL is specified, a conflict is considered not
+	// mergeable if the same file in both branches has differences on the same line.
 	ConflictDetailLevel ConflictDetailLevelTypeEnum `locationName:"conflictDetailLevel" type:"string" enum:"true"`
 
-	// A list of inputs to use when resolving conflicts during a merge if AUTOMERGE
-	// is chosen as the conflict resolution strategy.
+	// If AUTOMERGE is the conflict resolution strategy, a list of inputs to use
+	// when resolving conflicts during a merge.
 	ConflictResolution *ConflictResolution `locationName:"conflictResolution" type:"structure"`
 
 	// Specifies which branch to use when resolving conflicts, or whether to attempt
 	// automatically merging two versions of a file. The default is NONE, which
 	// requires any conflicts to be resolved manually before the merge operation
-	// will be successful.
+	// is successful.
 	ConflictResolutionStrategy ConflictResolutionStrategyTypeEnum `locationName:"conflictResolutionStrategy" type:"string" enum:"true"`
 
-	// The email address of the person merging the branches. This information will
-	// be used in the commit information for the merge.
+	// The email address of the person merging the branches. This information is
+	// used in the commit information for the merge.
 	Email *string `locationName:"email" type:"string"`
 
 	// If the commit contains deletions, whether to keep a folder or folder structure
-	// if the changes leave the folders empty. If this is specified as true, a .gitkeep
-	// file will be created for empty folders. The default is false.
+	// if the changes leave the folders empty. If true, a .gitkeep file is created
+	// for empty folders. The default is false.
 	KeepEmptyFolders *bool `locationName:"keepEmptyFolders" type:"boolean"`
 
 	// The system-generated ID of the pull request. To get this ID, use ListPullRequests.

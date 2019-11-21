@@ -10,7 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Represents the input ofa put repository triggers operation.
+// Represents the input of a put repository triggers operation.
 type PutRepositoryTriggersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -76,8 +76,7 @@ const opPutRepositoryTriggers = "PutRepositoryTriggers"
 // PutRepositoryTriggersRequest returns a request value for making API operation for
 // AWS CodeCommit.
 //
-// Replaces all triggers for a repository. This can be used to create or delete
-// triggers.
+// Replaces all triggers for a repository. Used to create or delete triggers.
 //
 //    // Example sending a request using PutRepositoryTriggersRequest.
 //    req := client.PutRepositoryTriggersRequest(params)

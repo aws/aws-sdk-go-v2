@@ -62,8 +62,8 @@ func (s *TestRepositoryTriggersInput) Validate() error {
 type TestRepositoryTriggersOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The list of triggers that were not able to be tested. This list provides
-	// the names of the triggers that could not be tested, separated by commas.
+	// The list of triggers that were not tested. This list provides the names of
+	// the triggers that could not be tested, separated by commas.
 	FailedExecutions []RepositoryTriggerExecutionFailure `locationName:"failedExecutions" type:"list"`
 
 	// The list of triggers that were successfully tested. This list provides the
@@ -83,8 +83,8 @@ const opTestRepositoryTriggers = "TestRepositoryTriggers"
 //
 // Tests the functionality of repository triggers by sending information to
 // the trigger target. If real data is available in the repository, the test
-// will send data from the last commit. If no data is available, sample data
-// will be generated.
+// sends data from the last commit. If no data is available, sample data is
+// generated.
 //
 //    // Example sending a request using TestRepositoryTriggersRequest.
 //    req := client.TestRepositoryTriggersRequest(params)

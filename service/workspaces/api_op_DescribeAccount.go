@@ -44,7 +44,7 @@ const opDescribeAccount = "DescribeAccount"
 // DescribeAccountRequest returns a request value for making API operation for
 // Amazon WorkSpaces.
 //
-// Retrieves a list that describes the configuration of bring your own license
+// Retrieves a list that describes the configuration of Bring Your Own License
 // (BYOL) for the specified account.
 //
 //    // Example sending a request using DescribeAccountRequest.

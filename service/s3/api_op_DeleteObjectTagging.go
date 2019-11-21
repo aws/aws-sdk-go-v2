@@ -13,9 +13,13 @@ import (
 type DeleteObjectTaggingInput struct {
 	_ struct{} `type:"structure"`
 
+	// The bucket containing the objects from which to remove the tags.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
+	// Name of the tag.
+	//
 	// Key is a required field
 	Key *string `location:"uri" locationName:"Key" min:"1" type:"string" required:"true"`
 
@@ -108,7 +112,21 @@ const opDeleteObjectTagging = "DeleteObjectTagging"
 // DeleteObjectTaggingRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Removes the tag-set from an existing object.
+// Removes the entire tag set from the specified object. For more information
+// about managing object tags, see Object Tagging (https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html#MultiFactorAuthenticationDelete).
+//
+// To use this operation, you must have permission to perform the s3:DeleteObjectTagging
+// action.
+//
+// To delete tags of a specific object version, add the versionId query parameter
+// in the request. You will need permission for the s3:DeleteObjectVersionTagging
+// action.
+//
+// The following operations are related to DeleteBucketMetricsConfiguration
+//
+//    * PutObjectTagging
+//
+//    * GetObjectTagging
 //
 //    // Example sending a request using DeleteObjectTaggingRequest.
 //    req := client.DeleteObjectTaggingRequest(params)

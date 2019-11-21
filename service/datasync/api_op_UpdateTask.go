@@ -36,6 +36,13 @@ type UpdateTaskInput struct {
 	// value to StartTaskExecution.
 	Options *Options `type:"structure"`
 
+	// Specifies a schedule used to periodically transfer files from a source to
+	// a destination location. You can configure your task to execute hourly, daily,
+	// weekly or on specific days of the week. You control when in the day or hour
+	// you want the task to execute. The time you specify is UTC time. For more
+	// information, see task-scheduling.
+	Schedule *TaskSchedule `type:"structure"`
+
 	// The Amazon Resource Name (ARN) of the resource name of the task to update.
 	//
 	// TaskArn is a required field
@@ -60,6 +67,11 @@ func (s *UpdateTaskInput) Validate() error {
 	if s.Options != nil {
 		if err := s.Options.Validate(); err != nil {
 			invalidParams.AddNested("Options", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Schedule != nil {
+		if err := s.Schedule.Validate(); err != nil {
+			invalidParams.AddNested("Schedule", err.(aws.ErrInvalidParams))
 		}
 	}
 

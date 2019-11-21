@@ -25,10 +25,12 @@ type DeliveryStreamEncryptionStatus string
 
 // Enum values for DeliveryStreamEncryptionStatus
 const (
-	DeliveryStreamEncryptionStatusEnabled   DeliveryStreamEncryptionStatus = "ENABLED"
-	DeliveryStreamEncryptionStatusEnabling  DeliveryStreamEncryptionStatus = "ENABLING"
-	DeliveryStreamEncryptionStatusDisabled  DeliveryStreamEncryptionStatus = "DISABLED"
-	DeliveryStreamEncryptionStatusDisabling DeliveryStreamEncryptionStatus = "DISABLING"
+	DeliveryStreamEncryptionStatusEnabled         DeliveryStreamEncryptionStatus = "ENABLED"
+	DeliveryStreamEncryptionStatusEnabling        DeliveryStreamEncryptionStatus = "ENABLING"
+	DeliveryStreamEncryptionStatusEnablingFailed  DeliveryStreamEncryptionStatus = "ENABLING_FAILED"
+	DeliveryStreamEncryptionStatusDisabled        DeliveryStreamEncryptionStatus = "DISABLED"
+	DeliveryStreamEncryptionStatusDisabling       DeliveryStreamEncryptionStatus = "DISABLING"
+	DeliveryStreamEncryptionStatusDisablingFailed DeliveryStreamEncryptionStatus = "DISABLING_FAILED"
 )
 
 func (enum DeliveryStreamEncryptionStatus) MarshalValue() (string, error) {
@@ -40,13 +42,38 @@ func (enum DeliveryStreamEncryptionStatus) MarshalValueBuf(b []byte) ([]byte, er
 	return append(b, enum...), nil
 }
 
+type DeliveryStreamFailureType string
+
+// Enum values for DeliveryStreamFailureType
+const (
+	DeliveryStreamFailureTypeRetireKmsGrantFailed DeliveryStreamFailureType = "RETIRE_KMS_GRANT_FAILED"
+	DeliveryStreamFailureTypeCreateKmsGrantFailed DeliveryStreamFailureType = "CREATE_KMS_GRANT_FAILED"
+	DeliveryStreamFailureTypeKmsAccessDenied      DeliveryStreamFailureType = "KMS_ACCESS_DENIED"
+	DeliveryStreamFailureTypeDisabledKmsKey       DeliveryStreamFailureType = "DISABLED_KMS_KEY"
+	DeliveryStreamFailureTypeInvalidKmsKey        DeliveryStreamFailureType = "INVALID_KMS_KEY"
+	DeliveryStreamFailureTypeKmsKeyNotFound       DeliveryStreamFailureType = "KMS_KEY_NOT_FOUND"
+	DeliveryStreamFailureTypeKmsOptInRequired     DeliveryStreamFailureType = "KMS_OPT_IN_REQUIRED"
+	DeliveryStreamFailureTypeUnknownError         DeliveryStreamFailureType = "UNKNOWN_ERROR"
+)
+
+func (enum DeliveryStreamFailureType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeliveryStreamFailureType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeliveryStreamStatus string
 
 // Enum values for DeliveryStreamStatus
 const (
-	DeliveryStreamStatusCreating DeliveryStreamStatus = "CREATING"
-	DeliveryStreamStatusDeleting DeliveryStreamStatus = "DELETING"
-	DeliveryStreamStatusActive   DeliveryStreamStatus = "ACTIVE"
+	DeliveryStreamStatusCreating       DeliveryStreamStatus = "CREATING"
+	DeliveryStreamStatusCreatingFailed DeliveryStreamStatus = "CREATING_FAILED"
+	DeliveryStreamStatusDeleting       DeliveryStreamStatus = "DELETING"
+	DeliveryStreamStatusDeletingFailed DeliveryStreamStatus = "DELETING_FAILED"
+	DeliveryStreamStatusActive         DeliveryStreamStatus = "ACTIVE"
 )
 
 func (enum DeliveryStreamStatus) MarshalValue() (string, error) {
@@ -125,6 +152,23 @@ func (enum HECEndpointType) MarshalValue() (string, error) {
 }
 
 func (enum HECEndpointType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type KeyType string
+
+// Enum values for KeyType
+const (
+	KeyTypeAwsOwnedCmk        KeyType = "AWS_OWNED_CMK"
+	KeyTypeCustomerManagedCmk KeyType = "CUSTOMER_MANAGED_CMK"
+)
+
+func (enum KeyType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum KeyType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

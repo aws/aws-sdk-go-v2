@@ -13,6 +13,8 @@ import (
 type GetBucketVersioningInput struct {
 	_ struct{} `type:"structure"`
 
+	// The name of the bucket for which to get the versioning information.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 }
@@ -95,6 +97,20 @@ const opGetBucketVersioning = "GetBucketVersioning"
 // Amazon Simple Storage Service.
 //
 // Returns the versioning state of a bucket.
+//
+// To retrieve the versioning state of a bucket, you must be the bucket owner.
+//
+// This implementation also returns the MFA Delete status of the versioning
+// state, i.e., if the MFA Delete status is enabled, the bucket owner must use
+// an authentication device to change the versioning state of the bucket.
+//
+// The following operations are related to GetBucketVersioning:
+//
+//    * GetObject
+//
+//    * PutObject
+//
+//    * DeleteObject
 //
 //    // Example sending a request using GetBucketVersioningRequest.
 //    req := client.GetBucketVersioningRequest(params)

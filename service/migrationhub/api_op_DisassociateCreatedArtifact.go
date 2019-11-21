@@ -23,7 +23,7 @@ type DisassociateCreatedArtifactInput struct {
 	DryRun *bool `type:"boolean"`
 
 	// Unique identifier that references the migration task to be disassociated
-	// with the artifact.
+	// with the artifact. Do not store personal data in this field.
 	//
 	// MigrationTaskName is a required field
 	MigrationTaskName *string `min:"1" type:"string" required:"true"`

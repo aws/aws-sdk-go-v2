@@ -54,6 +54,9 @@ type StartTaskInput struct {
 	// to the task. If no value is specified, the tags are not propagated.
 	PropagateTags PropagateTags `locationName:"propagateTags" type:"string" enum:"true"`
 
+	// The reference ID to use for the task.
+	ReferenceId *string `locationName:"referenceId" type:"string"`
+
 	// An optional tag specified when a task is started. For example, if you automatically
 	// trigger a task to run a batch process job, you could apply a unique identifier
 	// for that job to your task with the startedBy parameter. You can then identify

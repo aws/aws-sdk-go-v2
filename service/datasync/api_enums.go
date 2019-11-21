@@ -42,6 +42,7 @@ type EndpointType string
 const (
 	EndpointTypePublic      EndpointType = "PUBLIC"
 	EndpointTypePrivateLink EndpointType = "PRIVATE_LINK"
+	EndpointTypeFips        EndpointType = "FIPS"
 )
 
 func (enum EndpointType) MarshalValue() (string, error) {
@@ -163,9 +164,8 @@ type PosixPermissions string
 
 // Enum values for PosixPermissions
 const (
-	PosixPermissionsNone       PosixPermissions = "NONE"
-	PosixPermissionsBestEffort PosixPermissions = "BEST_EFFORT"
-	PosixPermissionsPreserve   PosixPermissions = "PRESERVE"
+	PosixPermissionsNone     PosixPermissions = "NONE"
+	PosixPermissionsPreserve PosixPermissions = "PRESERVE"
 )
 
 func (enum PosixPermissions) MarshalValue() (string, error) {

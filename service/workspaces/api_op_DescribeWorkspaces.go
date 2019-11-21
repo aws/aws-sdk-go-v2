@@ -19,7 +19,7 @@ type DescribeWorkspacesInput struct {
 	// The identifier of the directory. In addition, you can optionally specify
 	// a specific directory user (see UserName). You cannot combine this parameter
 	// with any other filter.
-	DirectoryId *string `type:"string"`
+	DirectoryId *string `min:"10" type:"string"`
 
 	// The maximum number of items to return.
 	Limit *int64 `min:"1" type:"integer"`
@@ -48,6 +48,9 @@ func (s DescribeWorkspacesInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeWorkspacesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeWorkspacesInput"}
+	if s.DirectoryId != nil && len(*s.DirectoryId) < 10 {
+		invalidParams.Add(aws.NewErrParamMinLen("DirectoryId", 10))
+	}
 	if s.Limit != nil && *s.Limit < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
