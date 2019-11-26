@@ -21,7 +21,7 @@ func S3ManagerUploadInputGoCode(a *API) string {
 	a.resetImports()
 	a.AddImport("io")
 	a.AddImport("time")
-	a.AddSDKImport("service/s3")
+	a.AddSDKImport("service/s3/enums")
 	var w bytes.Buffer
 	if err := s3managerUploadInputTmpl.Execute(&w, s); err != nil {
 		panic(fmt.Sprintf("failed to execute %s template, %v",

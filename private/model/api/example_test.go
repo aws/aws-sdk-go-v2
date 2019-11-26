@@ -123,10 +123,9 @@ func TestExampleGeneration(t *testing.T) {
 	def.API = a
 
 	def.setup()
-	expected := `
-import (
-	"fmt"
+	expected := `import (
 	"context"
+	"fmt"
 	"strings"
 	"time"
 
@@ -134,7 +133,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/fooservice"
-	
+	"github.com/aws/aws-sdk-go-v2/service/fooservice/types"
 )
 
 var _ time.Duration
@@ -159,7 +158,7 @@ func ExampleClient_FooRequest_shared00() {
 	}
 
 	svc := fooservice.New(cfg)
-	input := &fooservice.FooInput{
+	input := &types.FooInput{
 		BarShape: aws.String("Hello world"),
 	}
 

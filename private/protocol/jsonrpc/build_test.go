@@ -92,6 +92,16 @@ func (c *InputService1ProtocolTest) newRequest(op *aws.Operation, params, data i
 	return req
 }
 
+type InputService1TestShapeInputService1TestCaseOperation1Input struct {
+	_ struct{} `type:"structure"`
+
+	Name *string `type:"string"`
+}
+
+type InputService1TestShapeInputService1TestCaseOperation1Output struct {
+	_ struct{} `type:"structure"`
+}
+
 const opInputService1TestCaseOperation1 = "OperationName"
 
 // InputService1TestCaseOperation1Request returns a request value for making API operation for
@@ -103,7 +113,7 @@ const opInputService1TestCaseOperation1 = "OperationName"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *InputService1ProtocolTest) InputService1TestCaseOperation1Request(input *types.InputService1TestShapeInputService1TestCaseOperation1Input) InputService1TestCaseOperation1Request {
+func (c *InputService1ProtocolTest) InputService1TestCaseOperation1Request(input *InputService1TestShapeInputService1TestCaseOperation1Input) InputService1TestCaseOperation1Request {
 	op := &aws.Operation{
 		Name:       opInputService1TestCaseOperation1,
 		HTTPMethod: "POST",
@@ -111,12 +121,10 @@ func (c *InputService1ProtocolTest) InputService1TestCaseOperation1Request(input
 	}
 
 	if input == nil {
-		input = &types.InputService1TestShapeInputService1TestCaseOperation1Input{}
+		input = &InputService1TestShapeInputService1TestCaseOperation1Input{}
 	}
 
-	req := c.newRequest(op, input, &types.InputService1TestShapeInputService1TestCaseOperation1Output{})
-	req.Handlers.Build.Remove(jsonrpc.BuildHandler)
-	req.Handlers.Build.PushBack(aws_jsonrpc.NewInputService1TestCaseOperation1Marshaler(input).MarshalOperation)
+	req := c.newRequest(op, input, &InputService1TestShapeInputService1TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return InputService1TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService1TestCaseOperation1Request}
@@ -126,8 +134,8 @@ func (c *InputService1ProtocolTest) InputService1TestCaseOperation1Request(input
 // InputService1TestCaseOperation1 API operation.
 type InputService1TestCaseOperation1Request struct {
 	*aws.Request
-	Input *types.InputService1TestShapeInputService1TestCaseOperation1Input
-	Copy  func(*types.InputService1TestShapeInputService1TestCaseOperation1Input) InputService1TestCaseOperation1Request
+	Input *InputService1TestShapeInputService1TestCaseOperation1Input
+	Copy  func(*InputService1TestShapeInputService1TestCaseOperation1Input) InputService1TestCaseOperation1Request
 }
 
 // Send marshals and sends the InputService1TestCaseOperation1 API request.
@@ -139,7 +147,7 @@ func (r InputService1TestCaseOperation1Request) Send(ctx context.Context) (*Inpu
 	}
 
 	resp := &InputService1TestCaseOperation1Response{
-		InputService1TestShapeInputService1TestCaseOperation1Output: r.Request.Data.(*types.InputService1TestShapeInputService1TestCaseOperation1Output),
+		InputService1TestShapeInputService1TestCaseOperation1Output: r.Request.Data.(*InputService1TestShapeInputService1TestCaseOperation1Output),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +157,7 @@ func (r InputService1TestCaseOperation1Request) Send(ctx context.Context) (*Inpu
 // InputService1TestCaseOperation1Response is the response type for the
 // InputService1TestCaseOperation1 API operation.
 type InputService1TestCaseOperation1Response struct {
-	*types.InputService1TestShapeInputService1TestCaseOperation1Output
+	*InputService1TestShapeInputService1TestCaseOperation1Output
 
 	response *aws.Response
 }
@@ -210,6 +218,20 @@ func (c *InputService2ProtocolTest) newRequest(op *aws.Operation, params, data i
 	return req
 }
 
+type InputService2TestShapeInputService2TestCaseOperation1Input struct {
+	_ struct{} `type:"structure"`
+
+	TimeArg *time.Time `type:"timestamp"`
+
+	TimeCustom *time.Time `type:"timestamp" timestampFormat:"rfc822"`
+
+	TimeFormat *time.Time `type:"timestamp" timestampFormat:"rfc822"`
+}
+
+type InputService2TestShapeInputService2TestCaseOperation1Output struct {
+	_ struct{} `type:"structure"`
+}
+
 const opInputService2TestCaseOperation1 = "OperationName"
 
 // InputService2TestCaseOperation1Request returns a request value for making API operation for
@@ -221,7 +243,7 @@ const opInputService2TestCaseOperation1 = "OperationName"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *InputService2ProtocolTest) InputService2TestCaseOperation1Request(input *types.InputService2TestShapeInputService2TestCaseOperation1Input) InputService2TestCaseOperation1Request {
+func (c *InputService2ProtocolTest) InputService2TestCaseOperation1Request(input *InputService2TestShapeInputService2TestCaseOperation1Input) InputService2TestCaseOperation1Request {
 	op := &aws.Operation{
 		Name: opInputService2TestCaseOperation1,
 
@@ -229,12 +251,10 @@ func (c *InputService2ProtocolTest) InputService2TestCaseOperation1Request(input
 	}
 
 	if input == nil {
-		input = &types.InputService2TestShapeInputService2TestCaseOperation1Input{}
+		input = &InputService2TestShapeInputService2TestCaseOperation1Input{}
 	}
 
-	req := c.newRequest(op, input, &types.InputService2TestShapeInputService2TestCaseOperation1Output{})
-	req.Handlers.Build.Remove(jsonrpc.BuildHandler)
-	req.Handlers.Build.PushBack(aws_jsonrpc.NewInputService2TestCaseOperation1Marshaler(input).MarshalOperation)
+	req := c.newRequest(op, input, &InputService2TestShapeInputService2TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return InputService2TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService2TestCaseOperation1Request}
@@ -244,8 +264,8 @@ func (c *InputService2ProtocolTest) InputService2TestCaseOperation1Request(input
 // InputService2TestCaseOperation1 API operation.
 type InputService2TestCaseOperation1Request struct {
 	*aws.Request
-	Input *types.InputService2TestShapeInputService2TestCaseOperation1Input
-	Copy  func(*types.InputService2TestShapeInputService2TestCaseOperation1Input) InputService2TestCaseOperation1Request
+	Input *InputService2TestShapeInputService2TestCaseOperation1Input
+	Copy  func(*InputService2TestShapeInputService2TestCaseOperation1Input) InputService2TestCaseOperation1Request
 }
 
 // Send marshals and sends the InputService2TestCaseOperation1 API request.
@@ -257,7 +277,7 @@ func (r InputService2TestCaseOperation1Request) Send(ctx context.Context) (*Inpu
 	}
 
 	resp := &InputService2TestCaseOperation1Response{
-		InputService2TestShapeInputService2TestCaseOperation1Output: r.Request.Data.(*types.InputService2TestShapeInputService2TestCaseOperation1Output),
+		InputService2TestShapeInputService2TestCaseOperation1Output: r.Request.Data.(*InputService2TestShapeInputService2TestCaseOperation1Output),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -267,7 +287,7 @@ func (r InputService2TestCaseOperation1Request) Send(ctx context.Context) (*Inpu
 // InputService2TestCaseOperation1Response is the response type for the
 // InputService2TestCaseOperation1 API operation.
 type InputService2TestCaseOperation1Response struct {
-	*types.InputService2TestShapeInputService2TestCaseOperation1Output
+	*InputService2TestShapeInputService2TestCaseOperation1Output
 
 	response *aws.Response
 }
@@ -328,6 +348,19 @@ func (c *InputService3ProtocolTest) newRequest(op *aws.Operation, params, data i
 	return req
 }
 
+type InputService3TestShapeInputService3TestCaseOperation1Input struct {
+	_ struct{} `type:"structure"`
+
+	// BlobArg is automatically base64 encoded/decoded by the SDK.
+	BlobArg []byte `type:"blob"`
+
+	BlobMap map[string][]byte `type:"map"`
+}
+
+type InputService3TestShapeInputService3TestCaseOperation1Output struct {
+	_ struct{} `type:"structure"`
+}
+
 const opInputService3TestCaseOperation1 = "OperationName"
 
 // InputService3TestCaseOperation1Request returns a request value for making API operation for
@@ -339,7 +372,7 @@ const opInputService3TestCaseOperation1 = "OperationName"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *InputService3ProtocolTest) InputService3TestCaseOperation1Request(input *types.InputService3TestShapeInputService3TestCaseOperation1Input) InputService3TestCaseOperation1Request {
+func (c *InputService3ProtocolTest) InputService3TestCaseOperation1Request(input *InputService3TestShapeInputService3TestCaseOperation1Input) InputService3TestCaseOperation1Request {
 	op := &aws.Operation{
 		Name: opInputService3TestCaseOperation1,
 
@@ -347,12 +380,10 @@ func (c *InputService3ProtocolTest) InputService3TestCaseOperation1Request(input
 	}
 
 	if input == nil {
-		input = &types.InputService3TestShapeInputService3TestCaseOperation1Input{}
+		input = &InputService3TestShapeInputService3TestCaseOperation1Input{}
 	}
 
-	req := c.newRequest(op, input, &types.InputService3TestShapeInputService3TestCaseOperation1Output{})
-	req.Handlers.Build.Remove(jsonrpc.BuildHandler)
-	req.Handlers.Build.PushBack(aws_jsonrpc.NewInputService3TestCaseOperation1Marshaler(input).MarshalOperation)
+	req := c.newRequest(op, input, &InputService3TestShapeInputService3TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return InputService3TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService3TestCaseOperation1Request}
@@ -362,8 +393,8 @@ func (c *InputService3ProtocolTest) InputService3TestCaseOperation1Request(input
 // InputService3TestCaseOperation1 API operation.
 type InputService3TestCaseOperation1Request struct {
 	*aws.Request
-	Input *types.InputService3TestShapeInputService3TestCaseOperation1Input
-	Copy  func(*types.InputService3TestShapeInputService3TestCaseOperation1Input) InputService3TestCaseOperation1Request
+	Input *InputService3TestShapeInputService3TestCaseOperation1Input
+	Copy  func(*InputService3TestShapeInputService3TestCaseOperation1Input) InputService3TestCaseOperation1Request
 }
 
 // Send marshals and sends the InputService3TestCaseOperation1 API request.
@@ -375,7 +406,7 @@ func (r InputService3TestCaseOperation1Request) Send(ctx context.Context) (*Inpu
 	}
 
 	resp := &InputService3TestCaseOperation1Response{
-		InputService3TestShapeInputService3TestCaseOperation1Output: r.Request.Data.(*types.InputService3TestShapeInputService3TestCaseOperation1Output),
+		InputService3TestShapeInputService3TestCaseOperation1Output: r.Request.Data.(*InputService3TestShapeInputService3TestCaseOperation1Output),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -385,7 +416,7 @@ func (r InputService3TestCaseOperation1Request) Send(ctx context.Context) (*Inpu
 // InputService3TestCaseOperation1Response is the response type for the
 // InputService3TestCaseOperation1 API operation.
 type InputService3TestCaseOperation1Response struct {
-	*types.InputService3TestShapeInputService3TestCaseOperation1Output
+	*InputService3TestShapeInputService3TestCaseOperation1Output
 
 	response *aws.Response
 }
@@ -394,6 +425,19 @@ type InputService3TestCaseOperation1Response struct {
 // InputService3TestCaseOperation1 request.
 func (r *InputService3TestCaseOperation1Response) SDKResponseMetdata() *aws.Response {
 	return r.response
+}
+
+type InputService3TestShapeInputService3TestCaseOperation2Input struct {
+	_ struct{} `type:"structure"`
+
+	// BlobArg is automatically base64 encoded/decoded by the SDK.
+	BlobArg []byte `type:"blob"`
+
+	BlobMap map[string][]byte `type:"map"`
+}
+
+type InputService3TestShapeInputService3TestCaseOperation2Output struct {
+	_ struct{} `type:"structure"`
 }
 
 const opInputService3TestCaseOperation2 = "OperationName"
@@ -407,7 +451,7 @@ const opInputService3TestCaseOperation2 = "OperationName"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *InputService3ProtocolTest) InputService3TestCaseOperation2Request(input *types.InputService3TestShapeInputService3TestCaseOperation2Input) InputService3TestCaseOperation2Request {
+func (c *InputService3ProtocolTest) InputService3TestCaseOperation2Request(input *InputService3TestShapeInputService3TestCaseOperation2Input) InputService3TestCaseOperation2Request {
 	op := &aws.Operation{
 		Name: opInputService3TestCaseOperation2,
 
@@ -415,12 +459,10 @@ func (c *InputService3ProtocolTest) InputService3TestCaseOperation2Request(input
 	}
 
 	if input == nil {
-		input = &types.InputService3TestShapeInputService3TestCaseOperation2Input{}
+		input = &InputService3TestShapeInputService3TestCaseOperation2Input{}
 	}
 
-	req := c.newRequest(op, input, &types.InputService3TestShapeInputService3TestCaseOperation2Output{})
-	req.Handlers.Build.Remove(jsonrpc.BuildHandler)
-	req.Handlers.Build.PushBack(aws_jsonrpc.NewInputService3TestCaseOperation2Marshaler(input).MarshalOperation)
+	req := c.newRequest(op, input, &InputService3TestShapeInputService3TestCaseOperation2Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return InputService3TestCaseOperation2Request{Request: req, Input: input, Copy: c.InputService3TestCaseOperation2Request}
@@ -430,8 +472,8 @@ func (c *InputService3ProtocolTest) InputService3TestCaseOperation2Request(input
 // InputService3TestCaseOperation2 API operation.
 type InputService3TestCaseOperation2Request struct {
 	*aws.Request
-	Input *types.InputService3TestShapeInputService3TestCaseOperation2Input
-	Copy  func(*types.InputService3TestShapeInputService3TestCaseOperation2Input) InputService3TestCaseOperation2Request
+	Input *InputService3TestShapeInputService3TestCaseOperation2Input
+	Copy  func(*InputService3TestShapeInputService3TestCaseOperation2Input) InputService3TestCaseOperation2Request
 }
 
 // Send marshals and sends the InputService3TestCaseOperation2 API request.
@@ -443,7 +485,7 @@ func (r InputService3TestCaseOperation2Request) Send(ctx context.Context) (*Inpu
 	}
 
 	resp := &InputService3TestCaseOperation2Response{
-		InputService3TestShapeInputService3TestCaseOperation2Output: r.Request.Data.(*types.InputService3TestShapeInputService3TestCaseOperation2Output),
+		InputService3TestShapeInputService3TestCaseOperation2Output: r.Request.Data.(*InputService3TestShapeInputService3TestCaseOperation2Output),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -453,7 +495,7 @@ func (r InputService3TestCaseOperation2Request) Send(ctx context.Context) (*Inpu
 // InputService3TestCaseOperation2Response is the response type for the
 // InputService3TestCaseOperation2 API operation.
 type InputService3TestCaseOperation2Response struct {
-	*types.InputService3TestShapeInputService3TestCaseOperation2Output
+	*InputService3TestShapeInputService3TestCaseOperation2Output
 
 	response *aws.Response
 }
@@ -514,6 +556,16 @@ func (c *InputService4ProtocolTest) newRequest(op *aws.Operation, params, data i
 	return req
 }
 
+type InputService4TestShapeInputService4TestCaseOperation1Input struct {
+	_ struct{} `type:"structure"`
+
+	ListParam [][]byte `type:"list"`
+}
+
+type InputService4TestShapeInputService4TestCaseOperation1Output struct {
+	_ struct{} `type:"structure"`
+}
+
 const opInputService4TestCaseOperation1 = "OperationName"
 
 // InputService4TestCaseOperation1Request returns a request value for making API operation for
@@ -525,7 +577,7 @@ const opInputService4TestCaseOperation1 = "OperationName"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *InputService4ProtocolTest) InputService4TestCaseOperation1Request(input *types.InputService4TestShapeInputService4TestCaseOperation1Input) InputService4TestCaseOperation1Request {
+func (c *InputService4ProtocolTest) InputService4TestCaseOperation1Request(input *InputService4TestShapeInputService4TestCaseOperation1Input) InputService4TestCaseOperation1Request {
 	op := &aws.Operation{
 		Name:       opInputService4TestCaseOperation1,
 		HTTPMethod: "POST",
@@ -533,12 +585,10 @@ func (c *InputService4ProtocolTest) InputService4TestCaseOperation1Request(input
 	}
 
 	if input == nil {
-		input = &types.InputService4TestShapeInputService4TestCaseOperation1Input{}
+		input = &InputService4TestShapeInputService4TestCaseOperation1Input{}
 	}
 
-	req := c.newRequest(op, input, &types.InputService4TestShapeInputService4TestCaseOperation1Output{})
-	req.Handlers.Build.Remove(jsonrpc.BuildHandler)
-	req.Handlers.Build.PushBack(aws_jsonrpc.NewInputService4TestCaseOperation1Marshaler(input).MarshalOperation)
+	req := c.newRequest(op, input, &InputService4TestShapeInputService4TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return InputService4TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService4TestCaseOperation1Request}
@@ -548,8 +598,8 @@ func (c *InputService4ProtocolTest) InputService4TestCaseOperation1Request(input
 // InputService4TestCaseOperation1 API operation.
 type InputService4TestCaseOperation1Request struct {
 	*aws.Request
-	Input *types.InputService4TestShapeInputService4TestCaseOperation1Input
-	Copy  func(*types.InputService4TestShapeInputService4TestCaseOperation1Input) InputService4TestCaseOperation1Request
+	Input *InputService4TestShapeInputService4TestCaseOperation1Input
+	Copy  func(*InputService4TestShapeInputService4TestCaseOperation1Input) InputService4TestCaseOperation1Request
 }
 
 // Send marshals and sends the InputService4TestCaseOperation1 API request.
@@ -561,7 +611,7 @@ func (r InputService4TestCaseOperation1Request) Send(ctx context.Context) (*Inpu
 	}
 
 	resp := &InputService4TestCaseOperation1Response{
-		InputService4TestShapeInputService4TestCaseOperation1Output: r.Request.Data.(*types.InputService4TestShapeInputService4TestCaseOperation1Output),
+		InputService4TestShapeInputService4TestCaseOperation1Output: r.Request.Data.(*InputService4TestShapeInputService4TestCaseOperation1Output),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -571,7 +621,7 @@ func (r InputService4TestCaseOperation1Request) Send(ctx context.Context) (*Inpu
 // InputService4TestCaseOperation1Response is the response type for the
 // InputService4TestCaseOperation1 API operation.
 type InputService4TestCaseOperation1Response struct {
-	*types.InputService4TestShapeInputService4TestCaseOperation1Output
+	*InputService4TestShapeInputService4TestCaseOperation1Output
 
 	response *aws.Response
 }
@@ -632,6 +682,16 @@ func (c *InputService5ProtocolTest) newRequest(op *aws.Operation, params, data i
 	return req
 }
 
+type InputService5TestShapeInputService5TestCaseOperation1Input struct {
+	_ struct{} `type:"structure"`
+
+	RecursiveStruct *InputService5TestShapeRecursiveStructType `type:"structure"`
+}
+
+type InputService5TestShapeInputService5TestCaseOperation1Output struct {
+	_ struct{} `type:"structure"`
+}
+
 const opInputService5TestCaseOperation1 = "OperationName"
 
 // InputService5TestCaseOperation1Request returns a request value for making API operation for
@@ -643,7 +703,7 @@ const opInputService5TestCaseOperation1 = "OperationName"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *InputService5ProtocolTest) InputService5TestCaseOperation1Request(input *types.InputService5TestShapeInputService5TestCaseOperation1Input) InputService5TestCaseOperation1Request {
+func (c *InputService5ProtocolTest) InputService5TestCaseOperation1Request(input *InputService5TestShapeInputService5TestCaseOperation1Input) InputService5TestCaseOperation1Request {
 	op := &aws.Operation{
 		Name: opInputService5TestCaseOperation1,
 
@@ -651,12 +711,10 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation1Request(input
 	}
 
 	if input == nil {
-		input = &types.InputService5TestShapeInputService5TestCaseOperation1Input{}
+		input = &InputService5TestShapeInputService5TestCaseOperation1Input{}
 	}
 
-	req := c.newRequest(op, input, &types.InputService5TestShapeInputService5TestCaseOperation1Output{})
-	req.Handlers.Build.Remove(jsonrpc.BuildHandler)
-	req.Handlers.Build.PushBack(aws_jsonrpc.NewInputService5TestCaseOperation1Marshaler(input).MarshalOperation)
+	req := c.newRequest(op, input, &InputService5TestShapeInputService5TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return InputService5TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService5TestCaseOperation1Request}
@@ -666,8 +724,8 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation1Request(input
 // InputService5TestCaseOperation1 API operation.
 type InputService5TestCaseOperation1Request struct {
 	*aws.Request
-	Input *types.InputService5TestShapeInputService5TestCaseOperation1Input
-	Copy  func(*types.InputService5TestShapeInputService5TestCaseOperation1Input) InputService5TestCaseOperation1Request
+	Input *InputService5TestShapeInputService5TestCaseOperation1Input
+	Copy  func(*InputService5TestShapeInputService5TestCaseOperation1Input) InputService5TestCaseOperation1Request
 }
 
 // Send marshals and sends the InputService5TestCaseOperation1 API request.
@@ -679,7 +737,7 @@ func (r InputService5TestCaseOperation1Request) Send(ctx context.Context) (*Inpu
 	}
 
 	resp := &InputService5TestCaseOperation1Response{
-		InputService5TestShapeInputService5TestCaseOperation1Output: r.Request.Data.(*types.InputService5TestShapeInputService5TestCaseOperation1Output),
+		InputService5TestShapeInputService5TestCaseOperation1Output: r.Request.Data.(*InputService5TestShapeInputService5TestCaseOperation1Output),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -689,7 +747,7 @@ func (r InputService5TestCaseOperation1Request) Send(ctx context.Context) (*Inpu
 // InputService5TestCaseOperation1Response is the response type for the
 // InputService5TestCaseOperation1 API operation.
 type InputService5TestCaseOperation1Response struct {
-	*types.InputService5TestShapeInputService5TestCaseOperation1Output
+	*InputService5TestShapeInputService5TestCaseOperation1Output
 
 	response *aws.Response
 }
@@ -698,6 +756,16 @@ type InputService5TestCaseOperation1Response struct {
 // InputService5TestCaseOperation1 request.
 func (r *InputService5TestCaseOperation1Response) SDKResponseMetdata() *aws.Response {
 	return r.response
+}
+
+type InputService5TestShapeInputService5TestCaseOperation2Input struct {
+	_ struct{} `type:"structure"`
+
+	RecursiveStruct *InputService5TestShapeRecursiveStructType `type:"structure"`
+}
+
+type InputService5TestShapeInputService5TestCaseOperation2Output struct {
+	_ struct{} `type:"structure"`
 }
 
 const opInputService5TestCaseOperation2 = "OperationName"
@@ -711,7 +779,7 @@ const opInputService5TestCaseOperation2 = "OperationName"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *InputService5ProtocolTest) InputService5TestCaseOperation2Request(input *types.InputService5TestShapeInputService5TestCaseOperation2Input) InputService5TestCaseOperation2Request {
+func (c *InputService5ProtocolTest) InputService5TestCaseOperation2Request(input *InputService5TestShapeInputService5TestCaseOperation2Input) InputService5TestCaseOperation2Request {
 	op := &aws.Operation{
 		Name: opInputService5TestCaseOperation2,
 
@@ -719,12 +787,10 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation2Request(input
 	}
 
 	if input == nil {
-		input = &types.InputService5TestShapeInputService5TestCaseOperation2Input{}
+		input = &InputService5TestShapeInputService5TestCaseOperation2Input{}
 	}
 
-	req := c.newRequest(op, input, &types.InputService5TestShapeInputService5TestCaseOperation2Output{})
-	req.Handlers.Build.Remove(jsonrpc.BuildHandler)
-	req.Handlers.Build.PushBack(aws_jsonrpc.NewInputService5TestCaseOperation2Marshaler(input).MarshalOperation)
+	req := c.newRequest(op, input, &InputService5TestShapeInputService5TestCaseOperation2Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return InputService5TestCaseOperation2Request{Request: req, Input: input, Copy: c.InputService5TestCaseOperation2Request}
@@ -734,8 +800,8 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation2Request(input
 // InputService5TestCaseOperation2 API operation.
 type InputService5TestCaseOperation2Request struct {
 	*aws.Request
-	Input *types.InputService5TestShapeInputService5TestCaseOperation2Input
-	Copy  func(*types.InputService5TestShapeInputService5TestCaseOperation2Input) InputService5TestCaseOperation2Request
+	Input *InputService5TestShapeInputService5TestCaseOperation2Input
+	Copy  func(*InputService5TestShapeInputService5TestCaseOperation2Input) InputService5TestCaseOperation2Request
 }
 
 // Send marshals and sends the InputService5TestCaseOperation2 API request.
@@ -747,7 +813,7 @@ func (r InputService5TestCaseOperation2Request) Send(ctx context.Context) (*Inpu
 	}
 
 	resp := &InputService5TestCaseOperation2Response{
-		InputService5TestShapeInputService5TestCaseOperation2Output: r.Request.Data.(*types.InputService5TestShapeInputService5TestCaseOperation2Output),
+		InputService5TestShapeInputService5TestCaseOperation2Output: r.Request.Data.(*InputService5TestShapeInputService5TestCaseOperation2Output),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -757,7 +823,7 @@ func (r InputService5TestCaseOperation2Request) Send(ctx context.Context) (*Inpu
 // InputService5TestCaseOperation2Response is the response type for the
 // InputService5TestCaseOperation2 API operation.
 type InputService5TestCaseOperation2Response struct {
-	*types.InputService5TestShapeInputService5TestCaseOperation2Output
+	*InputService5TestShapeInputService5TestCaseOperation2Output
 
 	response *aws.Response
 }
@@ -766,6 +832,16 @@ type InputService5TestCaseOperation2Response struct {
 // InputService5TestCaseOperation2 request.
 func (r *InputService5TestCaseOperation2Response) SDKResponseMetdata() *aws.Response {
 	return r.response
+}
+
+type InputService5TestShapeInputService5TestCaseOperation3Input struct {
+	_ struct{} `type:"structure"`
+
+	RecursiveStruct *InputService5TestShapeRecursiveStructType `type:"structure"`
+}
+
+type InputService5TestShapeInputService5TestCaseOperation3Output struct {
+	_ struct{} `type:"structure"`
 }
 
 const opInputService5TestCaseOperation3 = "OperationName"
@@ -779,7 +855,7 @@ const opInputService5TestCaseOperation3 = "OperationName"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *InputService5ProtocolTest) InputService5TestCaseOperation3Request(input *types.InputService5TestShapeInputService5TestCaseOperation3Input) InputService5TestCaseOperation3Request {
+func (c *InputService5ProtocolTest) InputService5TestCaseOperation3Request(input *InputService5TestShapeInputService5TestCaseOperation3Input) InputService5TestCaseOperation3Request {
 	op := &aws.Operation{
 		Name: opInputService5TestCaseOperation3,
 
@@ -787,12 +863,10 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation3Request(input
 	}
 
 	if input == nil {
-		input = &types.InputService5TestShapeInputService5TestCaseOperation3Input{}
+		input = &InputService5TestShapeInputService5TestCaseOperation3Input{}
 	}
 
-	req := c.newRequest(op, input, &types.InputService5TestShapeInputService5TestCaseOperation3Output{})
-	req.Handlers.Build.Remove(jsonrpc.BuildHandler)
-	req.Handlers.Build.PushBack(aws_jsonrpc.NewInputService5TestCaseOperation3Marshaler(input).MarshalOperation)
+	req := c.newRequest(op, input, &InputService5TestShapeInputService5TestCaseOperation3Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return InputService5TestCaseOperation3Request{Request: req, Input: input, Copy: c.InputService5TestCaseOperation3Request}
@@ -802,8 +876,8 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation3Request(input
 // InputService5TestCaseOperation3 API operation.
 type InputService5TestCaseOperation3Request struct {
 	*aws.Request
-	Input *types.InputService5TestShapeInputService5TestCaseOperation3Input
-	Copy  func(*types.InputService5TestShapeInputService5TestCaseOperation3Input) InputService5TestCaseOperation3Request
+	Input *InputService5TestShapeInputService5TestCaseOperation3Input
+	Copy  func(*InputService5TestShapeInputService5TestCaseOperation3Input) InputService5TestCaseOperation3Request
 }
 
 // Send marshals and sends the InputService5TestCaseOperation3 API request.
@@ -815,7 +889,7 @@ func (r InputService5TestCaseOperation3Request) Send(ctx context.Context) (*Inpu
 	}
 
 	resp := &InputService5TestCaseOperation3Response{
-		InputService5TestShapeInputService5TestCaseOperation3Output: r.Request.Data.(*types.InputService5TestShapeInputService5TestCaseOperation3Output),
+		InputService5TestShapeInputService5TestCaseOperation3Output: r.Request.Data.(*InputService5TestShapeInputService5TestCaseOperation3Output),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -825,7 +899,7 @@ func (r InputService5TestCaseOperation3Request) Send(ctx context.Context) (*Inpu
 // InputService5TestCaseOperation3Response is the response type for the
 // InputService5TestCaseOperation3 API operation.
 type InputService5TestCaseOperation3Response struct {
-	*types.InputService5TestShapeInputService5TestCaseOperation3Output
+	*InputService5TestShapeInputService5TestCaseOperation3Output
 
 	response *aws.Response
 }
@@ -834,6 +908,16 @@ type InputService5TestCaseOperation3Response struct {
 // InputService5TestCaseOperation3 request.
 func (r *InputService5TestCaseOperation3Response) SDKResponseMetdata() *aws.Response {
 	return r.response
+}
+
+type InputService5TestShapeInputService5TestCaseOperation4Input struct {
+	_ struct{} `type:"structure"`
+
+	RecursiveStruct *InputService5TestShapeRecursiveStructType `type:"structure"`
+}
+
+type InputService5TestShapeInputService5TestCaseOperation4Output struct {
+	_ struct{} `type:"structure"`
 }
 
 const opInputService5TestCaseOperation4 = "OperationName"
@@ -847,7 +931,7 @@ const opInputService5TestCaseOperation4 = "OperationName"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *InputService5ProtocolTest) InputService5TestCaseOperation4Request(input *types.InputService5TestShapeInputService5TestCaseOperation4Input) InputService5TestCaseOperation4Request {
+func (c *InputService5ProtocolTest) InputService5TestCaseOperation4Request(input *InputService5TestShapeInputService5TestCaseOperation4Input) InputService5TestCaseOperation4Request {
 	op := &aws.Operation{
 		Name: opInputService5TestCaseOperation4,
 
@@ -855,12 +939,10 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation4Request(input
 	}
 
 	if input == nil {
-		input = &types.InputService5TestShapeInputService5TestCaseOperation4Input{}
+		input = &InputService5TestShapeInputService5TestCaseOperation4Input{}
 	}
 
-	req := c.newRequest(op, input, &types.InputService5TestShapeInputService5TestCaseOperation4Output{})
-	req.Handlers.Build.Remove(jsonrpc.BuildHandler)
-	req.Handlers.Build.PushBack(aws_jsonrpc.NewInputService5TestCaseOperation4Marshaler(input).MarshalOperation)
+	req := c.newRequest(op, input, &InputService5TestShapeInputService5TestCaseOperation4Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return InputService5TestCaseOperation4Request{Request: req, Input: input, Copy: c.InputService5TestCaseOperation4Request}
@@ -870,8 +952,8 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation4Request(input
 // InputService5TestCaseOperation4 API operation.
 type InputService5TestCaseOperation4Request struct {
 	*aws.Request
-	Input *types.InputService5TestShapeInputService5TestCaseOperation4Input
-	Copy  func(*types.InputService5TestShapeInputService5TestCaseOperation4Input) InputService5TestCaseOperation4Request
+	Input *InputService5TestShapeInputService5TestCaseOperation4Input
+	Copy  func(*InputService5TestShapeInputService5TestCaseOperation4Input) InputService5TestCaseOperation4Request
 }
 
 // Send marshals and sends the InputService5TestCaseOperation4 API request.
@@ -883,7 +965,7 @@ func (r InputService5TestCaseOperation4Request) Send(ctx context.Context) (*Inpu
 	}
 
 	resp := &InputService5TestCaseOperation4Response{
-		InputService5TestShapeInputService5TestCaseOperation4Output: r.Request.Data.(*types.InputService5TestShapeInputService5TestCaseOperation4Output),
+		InputService5TestShapeInputService5TestCaseOperation4Output: r.Request.Data.(*InputService5TestShapeInputService5TestCaseOperation4Output),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -893,7 +975,7 @@ func (r InputService5TestCaseOperation4Request) Send(ctx context.Context) (*Inpu
 // InputService5TestCaseOperation4Response is the response type for the
 // InputService5TestCaseOperation4 API operation.
 type InputService5TestCaseOperation4Response struct {
-	*types.InputService5TestShapeInputService5TestCaseOperation4Output
+	*InputService5TestShapeInputService5TestCaseOperation4Output
 
 	response *aws.Response
 }
@@ -902,6 +984,16 @@ type InputService5TestCaseOperation4Response struct {
 // InputService5TestCaseOperation4 request.
 func (r *InputService5TestCaseOperation4Response) SDKResponseMetdata() *aws.Response {
 	return r.response
+}
+
+type InputService5TestShapeInputService5TestCaseOperation5Input struct {
+	_ struct{} `type:"structure"`
+
+	RecursiveStruct *InputService5TestShapeRecursiveStructType `type:"structure"`
+}
+
+type InputService5TestShapeInputService5TestCaseOperation5Output struct {
+	_ struct{} `type:"structure"`
 }
 
 const opInputService5TestCaseOperation5 = "OperationName"
@@ -915,7 +1007,7 @@ const opInputService5TestCaseOperation5 = "OperationName"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *InputService5ProtocolTest) InputService5TestCaseOperation5Request(input *types.InputService5TestShapeInputService5TestCaseOperation5Input) InputService5TestCaseOperation5Request {
+func (c *InputService5ProtocolTest) InputService5TestCaseOperation5Request(input *InputService5TestShapeInputService5TestCaseOperation5Input) InputService5TestCaseOperation5Request {
 	op := &aws.Operation{
 		Name: opInputService5TestCaseOperation5,
 
@@ -923,12 +1015,10 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation5Request(input
 	}
 
 	if input == nil {
-		input = &types.InputService5TestShapeInputService5TestCaseOperation5Input{}
+		input = &InputService5TestShapeInputService5TestCaseOperation5Input{}
 	}
 
-	req := c.newRequest(op, input, &types.InputService5TestShapeInputService5TestCaseOperation5Output{})
-	req.Handlers.Build.Remove(jsonrpc.BuildHandler)
-	req.Handlers.Build.PushBack(aws_jsonrpc.NewInputService5TestCaseOperation5Marshaler(input).MarshalOperation)
+	req := c.newRequest(op, input, &InputService5TestShapeInputService5TestCaseOperation5Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return InputService5TestCaseOperation5Request{Request: req, Input: input, Copy: c.InputService5TestCaseOperation5Request}
@@ -938,8 +1028,8 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation5Request(input
 // InputService5TestCaseOperation5 API operation.
 type InputService5TestCaseOperation5Request struct {
 	*aws.Request
-	Input *types.InputService5TestShapeInputService5TestCaseOperation5Input
-	Copy  func(*types.InputService5TestShapeInputService5TestCaseOperation5Input) InputService5TestCaseOperation5Request
+	Input *InputService5TestShapeInputService5TestCaseOperation5Input
+	Copy  func(*InputService5TestShapeInputService5TestCaseOperation5Input) InputService5TestCaseOperation5Request
 }
 
 // Send marshals and sends the InputService5TestCaseOperation5 API request.
@@ -951,7 +1041,7 @@ func (r InputService5TestCaseOperation5Request) Send(ctx context.Context) (*Inpu
 	}
 
 	resp := &InputService5TestCaseOperation5Response{
-		InputService5TestShapeInputService5TestCaseOperation5Output: r.Request.Data.(*types.InputService5TestShapeInputService5TestCaseOperation5Output),
+		InputService5TestShapeInputService5TestCaseOperation5Output: r.Request.Data.(*InputService5TestShapeInputService5TestCaseOperation5Output),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -961,7 +1051,7 @@ func (r InputService5TestCaseOperation5Request) Send(ctx context.Context) (*Inpu
 // InputService5TestCaseOperation5Response is the response type for the
 // InputService5TestCaseOperation5 API operation.
 type InputService5TestCaseOperation5Response struct {
-	*types.InputService5TestShapeInputService5TestCaseOperation5Output
+	*InputService5TestShapeInputService5TestCaseOperation5Output
 
 	response *aws.Response
 }
@@ -970,6 +1060,16 @@ type InputService5TestCaseOperation5Response struct {
 // InputService5TestCaseOperation5 request.
 func (r *InputService5TestCaseOperation5Response) SDKResponseMetdata() *aws.Response {
 	return r.response
+}
+
+type InputService5TestShapeInputService5TestCaseOperation6Input struct {
+	_ struct{} `type:"structure"`
+
+	RecursiveStruct *InputService5TestShapeRecursiveStructType `type:"structure"`
+}
+
+type InputService5TestShapeInputService5TestCaseOperation6Output struct {
+	_ struct{} `type:"structure"`
 }
 
 const opInputService5TestCaseOperation6 = "OperationName"
@@ -983,7 +1083,7 @@ const opInputService5TestCaseOperation6 = "OperationName"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *InputService5ProtocolTest) InputService5TestCaseOperation6Request(input *types.InputService5TestShapeInputService5TestCaseOperation6Input) InputService5TestCaseOperation6Request {
+func (c *InputService5ProtocolTest) InputService5TestCaseOperation6Request(input *InputService5TestShapeInputService5TestCaseOperation6Input) InputService5TestCaseOperation6Request {
 	op := &aws.Operation{
 		Name: opInputService5TestCaseOperation6,
 
@@ -991,12 +1091,10 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation6Request(input
 	}
 
 	if input == nil {
-		input = &types.InputService5TestShapeInputService5TestCaseOperation6Input{}
+		input = &InputService5TestShapeInputService5TestCaseOperation6Input{}
 	}
 
-	req := c.newRequest(op, input, &types.InputService5TestShapeInputService5TestCaseOperation6Output{})
-	req.Handlers.Build.Remove(jsonrpc.BuildHandler)
-	req.Handlers.Build.PushBack(aws_jsonrpc.NewInputService5TestCaseOperation6Marshaler(input).MarshalOperation)
+	req := c.newRequest(op, input, &InputService5TestShapeInputService5TestCaseOperation6Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return InputService5TestCaseOperation6Request{Request: req, Input: input, Copy: c.InputService5TestCaseOperation6Request}
@@ -1006,8 +1104,8 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation6Request(input
 // InputService5TestCaseOperation6 API operation.
 type InputService5TestCaseOperation6Request struct {
 	*aws.Request
-	Input *types.InputService5TestShapeInputService5TestCaseOperation6Input
-	Copy  func(*types.InputService5TestShapeInputService5TestCaseOperation6Input) InputService5TestCaseOperation6Request
+	Input *InputService5TestShapeInputService5TestCaseOperation6Input
+	Copy  func(*InputService5TestShapeInputService5TestCaseOperation6Input) InputService5TestCaseOperation6Request
 }
 
 // Send marshals and sends the InputService5TestCaseOperation6 API request.
@@ -1019,7 +1117,7 @@ func (r InputService5TestCaseOperation6Request) Send(ctx context.Context) (*Inpu
 	}
 
 	resp := &InputService5TestCaseOperation6Response{
-		InputService5TestShapeInputService5TestCaseOperation6Output: r.Request.Data.(*types.InputService5TestShapeInputService5TestCaseOperation6Output),
+		InputService5TestShapeInputService5TestCaseOperation6Output: r.Request.Data.(*InputService5TestShapeInputService5TestCaseOperation6Output),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -1029,7 +1127,7 @@ func (r InputService5TestCaseOperation6Request) Send(ctx context.Context) (*Inpu
 // InputService5TestCaseOperation6Response is the response type for the
 // InputService5TestCaseOperation6 API operation.
 type InputService5TestCaseOperation6Response struct {
-	*types.InputService5TestShapeInputService5TestCaseOperation6Output
+	*InputService5TestShapeInputService5TestCaseOperation6Output
 
 	response *aws.Response
 }
@@ -1102,6 +1200,16 @@ func (c *InputService6ProtocolTest) newRequest(op *aws.Operation, params, data i
 	return req
 }
 
+type InputService6TestShapeInputService6TestCaseOperation1Input struct {
+	_ struct{} `type:"structure"`
+
+	Map map[string]string `type:"map"`
+}
+
+type InputService6TestShapeInputService6TestCaseOperation1Output struct {
+	_ struct{} `type:"structure"`
+}
+
 const opInputService6TestCaseOperation1 = "OperationName"
 
 // InputService6TestCaseOperation1Request returns a request value for making API operation for
@@ -1113,7 +1221,7 @@ const opInputService6TestCaseOperation1 = "OperationName"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *InputService6ProtocolTest) InputService6TestCaseOperation1Request(input *types.InputService6TestShapeInputService6TestCaseOperation1Input) InputService6TestCaseOperation1Request {
+func (c *InputService6ProtocolTest) InputService6TestCaseOperation1Request(input *InputService6TestShapeInputService6TestCaseOperation1Input) InputService6TestCaseOperation1Request {
 	op := &aws.Operation{
 		Name:       opInputService6TestCaseOperation1,
 		HTTPMethod: "POST",
@@ -1121,12 +1229,10 @@ func (c *InputService6ProtocolTest) InputService6TestCaseOperation1Request(input
 	}
 
 	if input == nil {
-		input = &types.InputService6TestShapeInputService6TestCaseOperation1Input{}
+		input = &InputService6TestShapeInputService6TestCaseOperation1Input{}
 	}
 
-	req := c.newRequest(op, input, &types.InputService6TestShapeInputService6TestCaseOperation1Output{})
-	req.Handlers.Build.Remove(jsonrpc.BuildHandler)
-	req.Handlers.Build.PushBack(aws_jsonrpc.NewInputService6TestCaseOperation1Marshaler(input).MarshalOperation)
+	req := c.newRequest(op, input, &InputService6TestShapeInputService6TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return InputService6TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService6TestCaseOperation1Request}
@@ -1136,8 +1242,8 @@ func (c *InputService6ProtocolTest) InputService6TestCaseOperation1Request(input
 // InputService6TestCaseOperation1 API operation.
 type InputService6TestCaseOperation1Request struct {
 	*aws.Request
-	Input *types.InputService6TestShapeInputService6TestCaseOperation1Input
-	Copy  func(*types.InputService6TestShapeInputService6TestCaseOperation1Input) InputService6TestCaseOperation1Request
+	Input *InputService6TestShapeInputService6TestCaseOperation1Input
+	Copy  func(*InputService6TestShapeInputService6TestCaseOperation1Input) InputService6TestCaseOperation1Request
 }
 
 // Send marshals and sends the InputService6TestCaseOperation1 API request.
@@ -1149,7 +1255,7 @@ func (r InputService6TestCaseOperation1Request) Send(ctx context.Context) (*Inpu
 	}
 
 	resp := &InputService6TestCaseOperation1Response{
-		InputService6TestShapeInputService6TestCaseOperation1Output: r.Request.Data.(*types.InputService6TestShapeInputService6TestCaseOperation1Output),
+		InputService6TestShapeInputService6TestCaseOperation1Output: r.Request.Data.(*InputService6TestShapeInputService6TestCaseOperation1Output),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -1159,7 +1265,7 @@ func (r InputService6TestCaseOperation1Request) Send(ctx context.Context) (*Inpu
 // InputService6TestCaseOperation1Response is the response type for the
 // InputService6TestCaseOperation1 API operation.
 type InputService6TestCaseOperation1Response struct {
-	*types.InputService6TestShapeInputService6TestCaseOperation1Output
+	*InputService6TestShapeInputService6TestCaseOperation1Output
 
 	response *aws.Response
 }
@@ -1218,6 +1324,16 @@ func (c *InputService7ProtocolTest) newRequest(op *aws.Operation, params, data i
 	return req
 }
 
+type InputService7TestShapeInputService7TestCaseOperation1Input struct {
+	_ struct{} `type:"structure"`
+
+	Token *string `type:"string" idempotencyToken:"true"`
+}
+
+type InputService7TestShapeInputService7TestCaseOperation1Output struct {
+	_ struct{} `type:"structure"`
+}
+
 const opInputService7TestCaseOperation1 = "OperationName"
 
 // InputService7TestCaseOperation1Request returns a request value for making API operation for
@@ -1229,7 +1345,7 @@ const opInputService7TestCaseOperation1 = "OperationName"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *InputService7ProtocolTest) InputService7TestCaseOperation1Request(input *types.InputService7TestShapeInputService7TestCaseOperation1Input) InputService7TestCaseOperation1Request {
+func (c *InputService7ProtocolTest) InputService7TestCaseOperation1Request(input *InputService7TestShapeInputService7TestCaseOperation1Input) InputService7TestCaseOperation1Request {
 	op := &aws.Operation{
 		Name:       opInputService7TestCaseOperation1,
 		HTTPMethod: "POST",
@@ -1237,12 +1353,10 @@ func (c *InputService7ProtocolTest) InputService7TestCaseOperation1Request(input
 	}
 
 	if input == nil {
-		input = &types.InputService7TestShapeInputService7TestCaseOperation1Input{}
+		input = &InputService7TestShapeInputService7TestCaseOperation1Input{}
 	}
 
-	req := c.newRequest(op, input, &types.InputService7TestShapeInputService7TestCaseOperation1Output{})
-	req.Handlers.Build.Remove(jsonrpc.BuildHandler)
-	req.Handlers.Build.PushBack(aws_jsonrpc.NewInputService7TestCaseOperation1Marshaler(input).MarshalOperation)
+	req := c.newRequest(op, input, &InputService7TestShapeInputService7TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return InputService7TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService7TestCaseOperation1Request}
@@ -1252,8 +1366,8 @@ func (c *InputService7ProtocolTest) InputService7TestCaseOperation1Request(input
 // InputService7TestCaseOperation1 API operation.
 type InputService7TestCaseOperation1Request struct {
 	*aws.Request
-	Input *types.InputService7TestShapeInputService7TestCaseOperation1Input
-	Copy  func(*types.InputService7TestShapeInputService7TestCaseOperation1Input) InputService7TestCaseOperation1Request
+	Input *InputService7TestShapeInputService7TestCaseOperation1Input
+	Copy  func(*InputService7TestShapeInputService7TestCaseOperation1Input) InputService7TestCaseOperation1Request
 }
 
 // Send marshals and sends the InputService7TestCaseOperation1 API request.
@@ -1265,7 +1379,7 @@ func (r InputService7TestCaseOperation1Request) Send(ctx context.Context) (*Inpu
 	}
 
 	resp := &InputService7TestCaseOperation1Response{
-		InputService7TestShapeInputService7TestCaseOperation1Output: r.Request.Data.(*types.InputService7TestShapeInputService7TestCaseOperation1Output),
+		InputService7TestShapeInputService7TestCaseOperation1Output: r.Request.Data.(*InputService7TestShapeInputService7TestCaseOperation1Output),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -1275,7 +1389,7 @@ func (r InputService7TestCaseOperation1Request) Send(ctx context.Context) (*Inpu
 // InputService7TestCaseOperation1Response is the response type for the
 // InputService7TestCaseOperation1 API operation.
 type InputService7TestCaseOperation1Response struct {
-	*types.InputService7TestShapeInputService7TestCaseOperation1Output
+	*InputService7TestShapeInputService7TestCaseOperation1Output
 
 	response *aws.Response
 }
@@ -1284,6 +1398,16 @@ type InputService7TestCaseOperation1Response struct {
 // InputService7TestCaseOperation1 request.
 func (r *InputService7TestCaseOperation1Response) SDKResponseMetdata() *aws.Response {
 	return r.response
+}
+
+type InputService7TestShapeInputService7TestCaseOperation2Input struct {
+	_ struct{} `type:"structure"`
+
+	Token *string `type:"string" idempotencyToken:"true"`
+}
+
+type InputService7TestShapeInputService7TestCaseOperation2Output struct {
+	_ struct{} `type:"structure"`
 }
 
 const opInputService7TestCaseOperation2 = "OperationName"
@@ -1297,7 +1421,7 @@ const opInputService7TestCaseOperation2 = "OperationName"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *InputService7ProtocolTest) InputService7TestCaseOperation2Request(input *types.InputService7TestShapeInputService7TestCaseOperation2Input) InputService7TestCaseOperation2Request {
+func (c *InputService7ProtocolTest) InputService7TestCaseOperation2Request(input *InputService7TestShapeInputService7TestCaseOperation2Input) InputService7TestCaseOperation2Request {
 	op := &aws.Operation{
 		Name:       opInputService7TestCaseOperation2,
 		HTTPMethod: "POST",
@@ -1305,12 +1429,10 @@ func (c *InputService7ProtocolTest) InputService7TestCaseOperation2Request(input
 	}
 
 	if input == nil {
-		input = &types.InputService7TestShapeInputService7TestCaseOperation2Input{}
+		input = &InputService7TestShapeInputService7TestCaseOperation2Input{}
 	}
 
-	req := c.newRequest(op, input, &types.InputService7TestShapeInputService7TestCaseOperation2Output{})
-	req.Handlers.Build.Remove(jsonrpc.BuildHandler)
-	req.Handlers.Build.PushBack(aws_jsonrpc.NewInputService7TestCaseOperation2Marshaler(input).MarshalOperation)
+	req := c.newRequest(op, input, &InputService7TestShapeInputService7TestCaseOperation2Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return InputService7TestCaseOperation2Request{Request: req, Input: input, Copy: c.InputService7TestCaseOperation2Request}
@@ -1320,8 +1442,8 @@ func (c *InputService7ProtocolTest) InputService7TestCaseOperation2Request(input
 // InputService7TestCaseOperation2 API operation.
 type InputService7TestCaseOperation2Request struct {
 	*aws.Request
-	Input *types.InputService7TestShapeInputService7TestCaseOperation2Input
-	Copy  func(*types.InputService7TestShapeInputService7TestCaseOperation2Input) InputService7TestCaseOperation2Request
+	Input *InputService7TestShapeInputService7TestCaseOperation2Input
+	Copy  func(*InputService7TestShapeInputService7TestCaseOperation2Input) InputService7TestCaseOperation2Request
 }
 
 // Send marshals and sends the InputService7TestCaseOperation2 API request.
@@ -1333,7 +1455,7 @@ func (r InputService7TestCaseOperation2Request) Send(ctx context.Context) (*Inpu
 	}
 
 	resp := &InputService7TestCaseOperation2Response{
-		InputService7TestShapeInputService7TestCaseOperation2Output: r.Request.Data.(*types.InputService7TestShapeInputService7TestCaseOperation2Output),
+		InputService7TestShapeInputService7TestCaseOperation2Output: r.Request.Data.(*InputService7TestShapeInputService7TestCaseOperation2Output),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -1343,7 +1465,7 @@ func (r InputService7TestCaseOperation2Request) Send(ctx context.Context) (*Inpu
 // InputService7TestCaseOperation2Response is the response type for the
 // InputService7TestCaseOperation2 API operation.
 type InputService7TestCaseOperation2Response struct {
-	*types.InputService7TestShapeInputService7TestCaseOperation2Output
+	*InputService7TestShapeInputService7TestCaseOperation2Output
 
 	response *aws.Response
 }
@@ -1402,6 +1524,18 @@ func (c *InputService8ProtocolTest) newRequest(op *aws.Operation, params, data i
 	return req
 }
 
+type InputService8TestShapeInputService8TestCaseOperation1Input struct {
+	_ struct{} `type:"structure"`
+
+	FooEnum InputService8TestShapeEnumType `type:"string" enum:"true"`
+
+	ListEnums []InputService8TestShapeEnumType `type:"list"`
+}
+
+type InputService8TestShapeInputService8TestCaseOperation1Output struct {
+	_ struct{} `type:"structure"`
+}
+
 const opInputService8TestCaseOperation1 = "OperationName"
 
 // InputService8TestCaseOperation1Request returns a request value for making API operation for
@@ -1413,7 +1547,7 @@ const opInputService8TestCaseOperation1 = "OperationName"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *InputService8ProtocolTest) InputService8TestCaseOperation1Request(input *types.InputService8TestShapeInputService8TestCaseOperation1Input) InputService8TestCaseOperation1Request {
+func (c *InputService8ProtocolTest) InputService8TestCaseOperation1Request(input *InputService8TestShapeInputService8TestCaseOperation1Input) InputService8TestCaseOperation1Request {
 	op := &aws.Operation{
 		Name:       opInputService8TestCaseOperation1,
 		HTTPMethod: "POST",
@@ -1421,12 +1555,10 @@ func (c *InputService8ProtocolTest) InputService8TestCaseOperation1Request(input
 	}
 
 	if input == nil {
-		input = &types.InputService8TestShapeInputService8TestCaseOperation1Input{}
+		input = &InputService8TestShapeInputService8TestCaseOperation1Input{}
 	}
 
-	req := c.newRequest(op, input, &types.InputService8TestShapeInputService8TestCaseOperation1Output{})
-	req.Handlers.Build.Remove(jsonrpc.BuildHandler)
-	req.Handlers.Build.PushBack(aws_jsonrpc.NewInputService8TestCaseOperation1Marshaler(input).MarshalOperation)
+	req := c.newRequest(op, input, &InputService8TestShapeInputService8TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return InputService8TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService8TestCaseOperation1Request}
@@ -1436,8 +1568,8 @@ func (c *InputService8ProtocolTest) InputService8TestCaseOperation1Request(input
 // InputService8TestCaseOperation1 API operation.
 type InputService8TestCaseOperation1Request struct {
 	*aws.Request
-	Input *types.InputService8TestShapeInputService8TestCaseOperation1Input
-	Copy  func(*types.InputService8TestShapeInputService8TestCaseOperation1Input) InputService8TestCaseOperation1Request
+	Input *InputService8TestShapeInputService8TestCaseOperation1Input
+	Copy  func(*InputService8TestShapeInputService8TestCaseOperation1Input) InputService8TestCaseOperation1Request
 }
 
 // Send marshals and sends the InputService8TestCaseOperation1 API request.
@@ -1449,7 +1581,7 @@ func (r InputService8TestCaseOperation1Request) Send(ctx context.Context) (*Inpu
 	}
 
 	resp := &InputService8TestCaseOperation1Response{
-		InputService8TestShapeInputService8TestCaseOperation1Output: r.Request.Data.(*types.InputService8TestShapeInputService8TestCaseOperation1Output),
+		InputService8TestShapeInputService8TestCaseOperation1Output: r.Request.Data.(*InputService8TestShapeInputService8TestCaseOperation1Output),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -1459,7 +1591,7 @@ func (r InputService8TestCaseOperation1Request) Send(ctx context.Context) (*Inpu
 // InputService8TestCaseOperation1Response is the response type for the
 // InputService8TestCaseOperation1 API operation.
 type InputService8TestCaseOperation1Response struct {
-	*types.InputService8TestShapeInputService8TestCaseOperation1Output
+	*InputService8TestShapeInputService8TestCaseOperation1Output
 
 	response *aws.Response
 }
@@ -1468,6 +1600,18 @@ type InputService8TestCaseOperation1Response struct {
 // InputService8TestCaseOperation1 request.
 func (r *InputService8TestCaseOperation1Response) SDKResponseMetdata() *aws.Response {
 	return r.response
+}
+
+type InputService8TestShapeInputService8TestCaseOperation2Input struct {
+	_ struct{} `type:"structure"`
+
+	FooEnum InputService8TestShapeEnumType `type:"string" enum:"true"`
+
+	ListEnums []InputService8TestShapeEnumType `type:"list"`
+}
+
+type InputService8TestShapeInputService8TestCaseOperation2Output struct {
+	_ struct{} `type:"structure"`
 }
 
 const opInputService8TestCaseOperation2 = "OperationName"
@@ -1481,7 +1625,7 @@ const opInputService8TestCaseOperation2 = "OperationName"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *InputService8ProtocolTest) InputService8TestCaseOperation2Request(input *types.InputService8TestShapeInputService8TestCaseOperation2Input) InputService8TestCaseOperation2Request {
+func (c *InputService8ProtocolTest) InputService8TestCaseOperation2Request(input *InputService8TestShapeInputService8TestCaseOperation2Input) InputService8TestCaseOperation2Request {
 	op := &aws.Operation{
 		Name:       opInputService8TestCaseOperation2,
 		HTTPMethod: "POST",
@@ -1489,12 +1633,10 @@ func (c *InputService8ProtocolTest) InputService8TestCaseOperation2Request(input
 	}
 
 	if input == nil {
-		input = &types.InputService8TestShapeInputService8TestCaseOperation2Input{}
+		input = &InputService8TestShapeInputService8TestCaseOperation2Input{}
 	}
 
-	req := c.newRequest(op, input, &types.InputService8TestShapeInputService8TestCaseOperation2Output{})
-	req.Handlers.Build.Remove(jsonrpc.BuildHandler)
-	req.Handlers.Build.PushBack(aws_jsonrpc.NewInputService8TestCaseOperation2Marshaler(input).MarshalOperation)
+	req := c.newRequest(op, input, &InputService8TestShapeInputService8TestCaseOperation2Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return InputService8TestCaseOperation2Request{Request: req, Input: input, Copy: c.InputService8TestCaseOperation2Request}
@@ -1504,8 +1646,8 @@ func (c *InputService8ProtocolTest) InputService8TestCaseOperation2Request(input
 // InputService8TestCaseOperation2 API operation.
 type InputService8TestCaseOperation2Request struct {
 	*aws.Request
-	Input *types.InputService8TestShapeInputService8TestCaseOperation2Input
-	Copy  func(*types.InputService8TestShapeInputService8TestCaseOperation2Input) InputService8TestCaseOperation2Request
+	Input *InputService8TestShapeInputService8TestCaseOperation2Input
+	Copy  func(*InputService8TestShapeInputService8TestCaseOperation2Input) InputService8TestCaseOperation2Request
 }
 
 // Send marshals and sends the InputService8TestCaseOperation2 API request.
@@ -1517,7 +1659,7 @@ func (r InputService8TestCaseOperation2Request) Send(ctx context.Context) (*Inpu
 	}
 
 	resp := &InputService8TestCaseOperation2Response{
-		InputService8TestShapeInputService8TestCaseOperation2Output: r.Request.Data.(*types.InputService8TestShapeInputService8TestCaseOperation2Output),
+		InputService8TestShapeInputService8TestCaseOperation2Output: r.Request.Data.(*InputService8TestShapeInputService8TestCaseOperation2Output),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -1527,7 +1669,7 @@ func (r InputService8TestCaseOperation2Request) Send(ctx context.Context) (*Inpu
 // InputService8TestCaseOperation2Response is the response type for the
 // InputService8TestCaseOperation2 API operation.
 type InputService8TestCaseOperation2Response struct {
-	*types.InputService8TestShapeInputService8TestCaseOperation2Output
+	*InputService8TestShapeInputService8TestCaseOperation2Output
 
 	response *aws.Response
 }
@@ -1605,6 +1747,16 @@ func (c *InputService9ProtocolTest) newRequest(op *aws.Operation, params, data i
 	return req
 }
 
+type InputService9TestShapeInputService9TestCaseOperation1Input struct {
+	_ struct{} `type:"structure"`
+
+	Name *string `type:"string"`
+}
+
+type InputService9TestShapeInputService9TestCaseOperation1Output struct {
+	_ struct{} `type:"structure"`
+}
+
 const opInputService9TestCaseOperation1 = "StaticOp"
 
 // InputService9TestCaseOperation1Request returns a request value for making API operation for
@@ -1616,7 +1768,7 @@ const opInputService9TestCaseOperation1 = "StaticOp"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *InputService9ProtocolTest) InputService9TestCaseOperation1Request(input *types.InputService9TestShapeInputService9TestCaseOperation1Input) InputService9TestCaseOperation1Request {
+func (c *InputService9ProtocolTest) InputService9TestCaseOperation1Request(input *InputService9TestShapeInputService9TestCaseOperation1Input) InputService9TestCaseOperation1Request {
 	op := &aws.Operation{
 		Name:       opInputService9TestCaseOperation1,
 		HTTPMethod: "POST",
@@ -1624,12 +1776,10 @@ func (c *InputService9ProtocolTest) InputService9TestCaseOperation1Request(input
 	}
 
 	if input == nil {
-		input = &types.InputService9TestShapeInputService9TestCaseOperation1Input{}
+		input = &InputService9TestShapeInputService9TestCaseOperation1Input{}
 	}
 
-	req := c.newRequest(op, input, &types.InputService9TestShapeInputService9TestCaseOperation1Output{})
-	req.Handlers.Build.Remove(jsonrpc.BuildHandler)
-	req.Handlers.Build.PushBack(aws_jsonrpc.NewInputService9TestCaseOperation1Marshaler(input).MarshalOperation)
+	req := c.newRequest(op, input, &InputService9TestShapeInputService9TestCaseOperation1Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	req.Handlers.Build.PushBackNamed(protocol.NewHostPrefixHandler("data-", nil))
@@ -1641,8 +1791,8 @@ func (c *InputService9ProtocolTest) InputService9TestCaseOperation1Request(input
 // InputService9TestCaseOperation1 API operation.
 type InputService9TestCaseOperation1Request struct {
 	*aws.Request
-	Input *types.InputService9TestShapeInputService9TestCaseOperation1Input
-	Copy  func(*types.InputService9TestShapeInputService9TestCaseOperation1Input) InputService9TestCaseOperation1Request
+	Input *InputService9TestShapeInputService9TestCaseOperation1Input
+	Copy  func(*InputService9TestShapeInputService9TestCaseOperation1Input) InputService9TestCaseOperation1Request
 }
 
 // Send marshals and sends the InputService9TestCaseOperation1 API request.
@@ -1654,7 +1804,7 @@ func (r InputService9TestCaseOperation1Request) Send(ctx context.Context) (*Inpu
 	}
 
 	resp := &InputService9TestCaseOperation1Response{
-		InputService9TestShapeInputService9TestCaseOperation1Output: r.Request.Data.(*types.InputService9TestShapeInputService9TestCaseOperation1Output),
+		InputService9TestShapeInputService9TestCaseOperation1Output: r.Request.Data.(*InputService9TestShapeInputService9TestCaseOperation1Output),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -1664,7 +1814,7 @@ func (r InputService9TestCaseOperation1Request) Send(ctx context.Context) (*Inpu
 // InputService9TestCaseOperation1Response is the response type for the
 // InputService9TestCaseOperation1 API operation.
 type InputService9TestCaseOperation1Response struct {
-	*types.InputService9TestShapeInputService9TestCaseOperation1Output
+	*InputService9TestShapeInputService9TestCaseOperation1Output
 
 	response *aws.Response
 }
@@ -1673,6 +1823,40 @@ type InputService9TestCaseOperation1Response struct {
 // InputService9TestCaseOperation1 request.
 func (r *InputService9TestCaseOperation1Response) SDKResponseMetdata() *aws.Response {
 	return r.response
+}
+
+type InputService9TestShapeInputService9TestCaseOperation2Input struct {
+	_ struct{} `type:"structure"`
+
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *InputService9TestShapeInputService9TestCaseOperation2Input) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "InputService9TestShapeInputService9TestCaseOperation2Input"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+func (s *InputService9TestShapeInputService9TestCaseOperation2Input) hostLabels() map[string]string {
+	return map[string]string{
+		"Name": aws.StringValue(s.Name),
+	}
+}
+
+type InputService9TestShapeInputService9TestCaseOperation2Output struct {
+	_ struct{} `type:"structure"`
 }
 
 const opInputService9TestCaseOperation2 = "MemberRefOp"
@@ -1686,7 +1870,7 @@ const opInputService9TestCaseOperation2 = "MemberRefOp"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *InputService9ProtocolTest) InputService9TestCaseOperation2Request(input *types.InputService9TestShapeInputService9TestCaseOperation2Input) InputService9TestCaseOperation2Request {
+func (c *InputService9ProtocolTest) InputService9TestCaseOperation2Request(input *InputService9TestShapeInputService9TestCaseOperation2Input) InputService9TestCaseOperation2Request {
 	op := &aws.Operation{
 		Name:       opInputService9TestCaseOperation2,
 		HTTPMethod: "POST",
@@ -1694,12 +1878,10 @@ func (c *InputService9ProtocolTest) InputService9TestCaseOperation2Request(input
 	}
 
 	if input == nil {
-		input = &types.InputService9TestShapeInputService9TestCaseOperation2Input{}
+		input = &InputService9TestShapeInputService9TestCaseOperation2Input{}
 	}
 
-	req := c.newRequest(op, input, &types.InputService9TestShapeInputService9TestCaseOperation2Output{})
-	req.Handlers.Build.Remove(jsonrpc.BuildHandler)
-	req.Handlers.Build.PushBack(aws_jsonrpc.NewInputService9TestCaseOperation2Marshaler(input).MarshalOperation)
+	req := c.newRequest(op, input, &InputService9TestShapeInputService9TestCaseOperation2Output{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	req.Handlers.Build.PushBackNamed(protocol.NewHostPrefixHandler("foo-{Name}.", input.hostLabels))
@@ -1711,8 +1893,8 @@ func (c *InputService9ProtocolTest) InputService9TestCaseOperation2Request(input
 // InputService9TestCaseOperation2 API operation.
 type InputService9TestCaseOperation2Request struct {
 	*aws.Request
-	Input *types.InputService9TestShapeInputService9TestCaseOperation2Input
-	Copy  func(*types.InputService9TestShapeInputService9TestCaseOperation2Input) InputService9TestCaseOperation2Request
+	Input *InputService9TestShapeInputService9TestCaseOperation2Input
+	Copy  func(*InputService9TestShapeInputService9TestCaseOperation2Input) InputService9TestCaseOperation2Request
 }
 
 // Send marshals and sends the InputService9TestCaseOperation2 API request.
@@ -1724,7 +1906,7 @@ func (r InputService9TestCaseOperation2Request) Send(ctx context.Context) (*Inpu
 	}
 
 	resp := &InputService9TestCaseOperation2Response{
-		InputService9TestShapeInputService9TestCaseOperation2Output: r.Request.Data.(*types.InputService9TestShapeInputService9TestCaseOperation2Output),
+		InputService9TestShapeInputService9TestCaseOperation2Output: r.Request.Data.(*InputService9TestShapeInputService9TestCaseOperation2Output),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -1734,7 +1916,7 @@ func (r InputService9TestCaseOperation2Request) Send(ctx context.Context) (*Inpu
 // InputService9TestCaseOperation2Response is the response type for the
 // InputService9TestCaseOperation2 API operation.
 type InputService9TestCaseOperation2Response struct {
-	*types.InputService9TestShapeInputService9TestCaseOperation2Output
+	*InputService9TestShapeInputService9TestCaseOperation2Output
 
 	response *aws.Response
 }

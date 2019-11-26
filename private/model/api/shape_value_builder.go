@@ -29,7 +29,7 @@ func (b ShapeValueBuilder) BuildShape(ref *ShapeRef, shapes map[string]interface
 		}
 		shape := shapes[name]
 
-		// If the shape isn't a map, we want to export the value, since every field
+		// If the shapeBuildShape isn't a map, we want to export the value, since every field
 		// defined in our shapes are exported.
 		if len(name) > 0 && !isMap && strings.ToLower(name[0:1]) == name[0:1] {
 			name = strings.Title(name)
@@ -71,22 +71,22 @@ func (b ShapeValueBuilder) BuildList(name, memName string, ref *ShapeRef, v []in
 
 	if ref.Shape.MemberRefs[name] != nil {
 		isEnum = ref.Shape.MemberRefs[name].Shape.MemberRef.Shape.IsEnum()
-		t = b.GoType(&ref.Shape.MemberRefs[name].Shape.MemberRef, true)
+		t = b.GoTypeWithPkgNameForType(&ref.Shape.MemberRefs[name].Shape.MemberRef, true)
 		dataType = ref.Shape.MemberRefs[name].Shape.MemberRef.Shape.Type
 		passRef = ref.Shape.MemberRefs[name]
 		if dataType == "map" {
-			t = fmt.Sprintf("map[string]%s", b.GoType(&ref.Shape.MemberRefs[name].Shape.MemberRef.Shape.ValueRef, true))
+			t = fmt.Sprintf("map[string]%s", b.GoTypeWithPkgNameForType(&ref.Shape.MemberRefs[name].Shape.MemberRef.Shape.ValueRef, true))
 			passRef = &ref.Shape.MemberRefs[name].Shape.MemberRef.Shape.ValueRef
 			isMap = true
 		}
 	} else if ref.Shape.MemberRef.Shape != nil && ref.Shape.MemberRef.Shape.MemberRefs[name] != nil {
 		isEnum = ref.Shape.MemberRef.Shape.MemberRefs[name].Shape.MemberRef.Shape.IsEnum()
-		t = b.GoType(&ref.Shape.MemberRef.Shape.MemberRefs[name].Shape.MemberRef, true)
+		t = b.GoTypeWithPkgNameForType(&ref.Shape.MemberRef.Shape.MemberRefs[name].Shape.MemberRef, true)
 		dataType = ref.Shape.MemberRef.Shape.MemberRefs[name].Shape.MemberRef.Shape.Type
 		passRef = &ref.Shape.MemberRef.Shape.MemberRefs[name].Shape.MemberRef
 	} else {
 		isEnum = ref.Shape.MemberRef.Shape.IsEnum()
-		t = b.GoType(&ref.Shape.MemberRef, true)
+		t = b.GoTypeWithPkgNameForType(&ref.Shape.MemberRef, true)
 		dataType = ref.Shape.MemberRef.Shape.Type
 		passRef = &ref.Shape.MemberRef
 	}
@@ -141,14 +141,14 @@ func (b ShapeValueBuilder) BuildScalar(name, memName string, ref *ShapeRef, shap
 		if ref.Shape.MemberRef.Shape != nil && ref.Shape.MemberRef.Shape.MemberRefs[name] != nil {
 			if ref.Shape.MemberRef.Shape.MemberRefs[name].Shape.IsEnum() {
 				refTemp := ref.Shape.MemberRef.Shape.MemberRefs[name]
-				return fmt.Sprintf("%s: %s, \n", memName, getEnumName(refTemp, b.GoType(refTemp, true), shape.(string)))
+				return fmt.Sprintf("%s: %s, \n", memName, getEnumName(refTemp, b.GoTypeWithPkgNameForType(refTemp, true), shape.(string)))
 			}
 			return correctType(memName, ref.Shape.MemberRef.Shape.MemberRefs[name].Shape.Type, shape, parentCollection)
 		}
 
 		if ref.Shape.Type != "structure" && ref.Shape.Type != "map" {
 			if ref.Shape.IsEnum() {
-				return fmt.Sprintf("%s: %s, \n", memName, getEnumName(ref, b.GoType(ref, true), shape.(string)))
+				return fmt.Sprintf("%s: %s, \n", memName, getEnumName(ref, b.GoTypeWithPkgNameForType(ref, true), shape.(string)))
 			}
 			return correctType(memName, ref.Shape.Type, shape, parentCollection)
 		}
@@ -173,7 +173,7 @@ func (b ShapeValueBuilder) BuildScalar(name, memName string, ref *ShapeRef, shap
 		t := ref.Shape.MemberRefs[name].Shape.Type
 
 		if ref.Shape.MemberRefs[name].Shape.IsEnum() {
-			return fmt.Sprintf("%s: %s,\n", memName, getEnumName(ref.Shape.MemberRefs[name], b.GoType(ref.Shape.MemberRefs[name], false), shape.(string)))
+			return fmt.Sprintf("%s: %s,\n", memName, getEnumName(ref.Shape.MemberRefs[name], b.GoTypeWithPkgNameForType(ref.Shape.MemberRefs[name], false), shape.(string)))
 		}
 
 		switch t {
@@ -227,12 +227,12 @@ func (b ShapeValueBuilder) BuildComplex(name, memName string, ref *ShapeRef, v m
 		return fmt.Sprintf(`%s: %s%s{
 				%s
 			},
-			`, memName, mem, b.GoType(passRef, true), b.BuildShape(passRef, v, false, false))
+			`, memName, mem, b.GoTypeWithPkgNameForType(passRef, true), b.BuildShape(passRef, v, false, false))
 	case "map":
 		return fmt.Sprintf(`%s: %s{
 				%s
 			},
-			`, name, b.GoType(ref.Shape.MemberRefs[name], true), b.BuildShape(&ref.Shape.MemberRefs[name].Shape.ValueRef, v, true, true))
+			`, name, b.GoTypeWithPkgNameForType(ref.Shape.MemberRefs[name], true), b.BuildShape(&ref.Shape.MemberRefs[name].Shape.ValueRef, v, true, true))
 	}
 
 	return ""
@@ -245,19 +245,31 @@ func (b ShapeValueBuilder) GoType(ref *ShapeRef, elem bool) string {
 	}
 
 	if elem {
-		return ref.Shape.GoTypeWithPkgNameElem()
+		return ref.Shape.GoTypeElem()
 	}
 
-	return ref.GoTypeWithPkgName()
+	return ref.GoType()
+}
+
+// GoType returns the string of the shape's Go type identifier.
+func (b ShapeValueBuilder) GoTypeWithPkgNameForType(ref *ShapeRef, elem bool) string {
+	if ref.Shape.Type == "list" {
+		ref = &ref.Shape.MemberRef
+	}
+
+	if elem {
+		return ref.Shape.GoTypeWithPkgNameforTypeElem()
+	}
+
+	return ref.GoTypeWithPkgNameforType()
 }
 
 func getEnumName(ref *ShapeRef, t, name string) string {
-	pkg := getPkgName(ref.Shape)
+	ref.API.AddSDKImport("service", ref.API.PackageName(), "enums")
 	for i, enum := range ref.Shape.Enum {
 		if name == enum {
-			return fmt.Sprintf("%s.%s", pkg, ref.Shape.EnumConsts[i])
+			return fmt.Sprintf("enums.%s", ref.Shape.EnumConsts[i])
 		}
 	}
-
 	return fmt.Sprintf("%s(%q)", t, name)
 }

@@ -173,6 +173,7 @@ func (a *API) Setup() {
 	}
 
 	a.fixStutterNames()
+	a.validateShapeNames()
 	a.renameExportable()
 	a.applyShapeNameAliases()
 	a.createInputOutputShapes()

@@ -9,7 +9,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/xml/xmlutil"
-	"github.com/aws/aws-sdk-go-v2/service/ec2"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
 
 type DataOutput struct {
@@ -166,6 +166,6 @@ func getXMLResponseComplex() *aws.Request {
         </item>
     </reservationSet>
 </DescribeInstancesResponse>`))
-	req := aws.Request{Data: &ec2.DescribeInstancesOutput{}, HTTPResponse: &http.Response{Body: ioutil.NopCloser(buf)}}
+	req := aws.Request{Data: &types.DescribeInstancesOutput{}, HTTPResponse: &http.Response{Body: ioutil.NopCloser(buf)}}
 	return &req
 }

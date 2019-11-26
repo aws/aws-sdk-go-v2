@@ -114,8 +114,8 @@ func main() {
 		// Create the output path for the model.
 		pkgDir := filepath.Join(svcPath, a.PackageName())
 		os.MkdirAll(filepath.Join(pkgDir, a.InterfacePackageName()), 0775)
-		os.MkdirAll(filepath.Join(pkgDir, "types"), 0775)
-		os.Mkdir(filepath.Join(pkgDir, "enums"), 0775)
+		os.MkdirAll(filepath.Join(pkgDir, api.TypesPkgName), 0775)
+		os.Mkdir(filepath.Join(pkgDir, api.EnumsPkgName), 0775)
 
 		if _, ok := servicePaths[pkgDir]; ok {
 			fmt.Fprintf(os.Stderr,
@@ -171,10 +171,8 @@ func writeServiceFiles(g *generateInfo, pkgDir string) {
 	Must(writeWaitersFile(g))
 	Must(writeAPIErrorsFile(g))
 	Must(writeExamplesFile(g))
-	Must(writeAPISerializerFile(g))
 
 	if g.API.PackageName() == "s3" {
-		// Must(writeAPISerializerFile(g))
 		Must(writeS3ManagerUploadInputFile(g))
 	}
 
@@ -283,7 +281,7 @@ func writeAPIFile(g *generateInfo) error {
 
 		// add in input and output to api_op_types.go
 		if err := writeGoFile(
-			filepath.Join(g.PackageDir, "types", "api_op_"+op.ExportedName+".go"),
+			filepath.Join(g.PackageDir, api.TypesPkgName, "api_op_"+op.ExportedName+".go"),
 			codeLayout,
 			"",
 			"types",
@@ -293,7 +291,7 @@ func writeAPIFile(g *generateInfo) error {
 		}
 	}
 
-	if err := writeGoFile(filepath.Join(g.PackageDir, "types", "api_types.go"),
+	if err := writeGoFile(filepath.Join(g.PackageDir, api.TypesPkgName, "api_types.go"),
 		codeLayout,
 		"",
 		"types",
@@ -302,7 +300,7 @@ func writeAPIFile(g *generateInfo) error {
 		return err
 	}
 
-	if err := writeGoFile(filepath.Join(g.PackageDir, "enums", "api_enums.go"),
+	if err := writeGoFile(filepath.Join(g.PackageDir, api.EnumsPkgName, "api_enums.go"),
 		codeLayout,
 		"",
 		"enums",
@@ -339,25 +337,5 @@ func writeAPISmokeTestsFile(g *generateInfo) error {
 		"// +build integration\n",
 		g.API.PackageName()+"_test",
 		g.API.APISmokeTestsGoCode(),
-	)
-}
-
-// 1: Correct the package name
-// 2. Correct pkg imports
-
-func writeAPISerializerFile(g *generateInfo) error {
-	const pkgDoc = `
-	// Package %s service, marshal.go contains the generated operation marshalers and methods on it. 
-`
-	err := os.MkdirAll(filepath.Join(g.PackageDir, "internal", g.API.ProtocolCanonicalPackageName()), 0775)
-	if err != nil {
-		return err
-	}
-
-	return writeGoFile(filepath.Join(g.PackageDir, "internal", g.API.ProtocolCanonicalPackageName(), "marshal.go"),
-		codeLayout,
-		fmt.Sprintf(pkgDoc, g.API.ProtocolCanonicalPackageName()),
-		g.API.ProtocolCanonicalPackageName(),
-		g.API.APIMarshalOperationGoCode(),
 	)
 }

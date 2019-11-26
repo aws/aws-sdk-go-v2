@@ -136,11 +136,9 @@ func (c *{{ .API.StructName }}) {{ $reqType }}(input {{ .InputRef.GoTypeWithPkgN
 	if input == nil {
 		input = &{{ .InputRef.GoTypeWithPkgNameforTypeElem }}{}
 	}
-
+	
+	{{ $operationMarshalerName := printf "%sMarshaler" $.ExportedName -}}
 	req := c.newRequest(op, input, &{{ .OutputRef.GoTypeWithPkgNameforTypeElem }}{})
-	{{ $initMarshalFnName := printf "New%sMarshaler" $.ExportedName -}}
-	req.Handlers.Build.Remove({{ .API.ProtocolPackage }}.BuildHandler)
-	req.Handlers.Build.PushBack({{ .API.ProtocolCanonicalPackageName }}.{{ $initMarshalFnName }}(input).MarshalOperation)
 	{{ if eq .OutputRef.Shape.Placeholder true -}}
 		req.Handlers.Unmarshal.Remove({{ .API.ProtocolPackage }}.UnmarshalHandler)
 		req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
@@ -525,7 +523,8 @@ func (e *example) traverseScalar(s *Shape, required, payload bool) string {
 	return str
 }
 
-// A tplMarshalOperation is the top level template for the API
+// A tplMarshalOperation is the top level template for the API that generates
+// type struct for OperationMarshaler with Operation Input pointer as an exported member Input.
 var tplGenMarshalerStruct = template.Must(template.New("genMarshaler").Parse(`
 {{ range $_, $op := $}}
 
@@ -533,14 +532,7 @@ var tplGenMarshalerStruct = template.Must(template.New("genMarshaler").Parse(`
 	
 	// {{$opMarshalerName}} defines marshaler for {{ $op.ExportedName }} operation 
 	type {{ $opMarshalerName }} struct {
-		input {{$op.InputRef.GoTypeWithPkgNameforType -}}
-	}
-
-	{{ $newOperationMarshalerFnName := printf "New%sMarshaler" $op.ExportedName -}}
-
-	// {{ $newOperationMarshalerFnName }} defines an init function to retrieve a marshaler for {{ $op.ExportedName }} operation 
-	func {{ $newOperationMarshalerFnName -}} (v {{$op.InputRef.GoTypeWithPkgNameforType -}}) *{{ $opMarshalerName -}} {
-		return &{{ $opMarshalerName -}}{input : v}
+		Input {{$op.InputRef.GoTypeWithPkgNameforType -}}
 	}
 
 {{ end }}

@@ -4,9 +4,7 @@ package api
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
-	"path/filepath"
 	"strings"
 )
 
@@ -17,17 +15,17 @@ type service struct {
 	serviceVersion string
 }
 
-var mergeServices = map[string]service{
-	"dynamodbstreams": {
-		dstName: "dynamodb",
-		srcName: "streams.dynamodb",
-	},
-	"wafregional": {
-		dstName:        "waf",
-		srcName:        "waf-regional",
-		serviceVersion: "2015-08-24",
-	},
-}
+// var mergeServices = map[string]service{
+// 	"dynamodbstreams": {
+// 		dstName: "dynamodb",
+// 		srcName: "streams.dynamodb",
+// 	},
+// 	"wafregional": {
+// 		dstName:        "waf",
+// 		srcName:        "waf-regional",
+// 		serviceVersion: "2015-08-24",
+// 	},
+// }
 
 func (a *API) EnableSelectGeneratedMarshalers() {
 	// Selectivily enable generated marshalers as available
@@ -67,9 +65,9 @@ func (a *API) customizationPasses() {
 		),
 	}
 
-	for k := range mergeServices {
-		svcCustomizations[k] = mergeServicesCustomizations
-	}
+	// for k := range mergeServices {
+	// 	svcCustomizations[k] = mergeServicesCustomizations
+	// }
 
 	if fn := svcCustomizations[a.PackageName()]; fn != nil {
 		fn(a)
@@ -171,36 +169,36 @@ func cloudfrontCustomizations(a *API) {
 }
 
 // mergeServicesCustomizations references any duplicate shapes from DynamoDB
-func mergeServicesCustomizations(a *API) {
-	info := mergeServices[a.PackageName()]
-
-	p := strings.Replace(a.path, info.srcName, info.dstName, -1)
-
-	if info.serviceVersion != "" {
-		index := strings.LastIndex(p, "/")
-		files, _ := ioutil.ReadDir(p[:index])
-		if len(files) > 1 {
-			panic("New version was introduced")
-		}
-		p = p[:index] + "/" + info.serviceVersion
-	}
-
-	file := filepath.Join(p, "api-2.json")
-
-	serviceAPI := API{}
-	serviceAPI.Attach(file)
-	serviceAPI.Setup()
-
-	for n := range a.Shapes {
-		if _, ok := serviceAPI.Shapes[n]; ok {
-			// Input and output shapes must remain unique.
-			if s := a.Shapes[n]; s.UsedAsInput || s.UsedAsOutput {
-				continue
-			}
-			a.Shapes[n].resolvePkg = "github.com/aws/aws-sdk-go-v2/service/" + info.dstName
-		}
-	}
-}
+// func mergeServicesCustomizations(a *API) {
+// 	info := mergeServices[a.PackageName()]
+//
+// 	p := strings.Replace(a.path, info.srcName, info.dstName, -1)
+//
+// 	if info.serviceVersion != "" {
+// 		index := strings.LastIndex(p, "/")
+// 		files, _ := ioutil.ReadDir(p[:index])
+// 		if len(files) > 1 {
+// 			panic("New version was introduced")
+// 		}
+// 		p = p[:index] + "/" + info.serviceVersion
+// 	}
+//
+// 	file := filepath.Join(p, "api-2.json")
+//
+// 	serviceAPI := API{}
+// 	serviceAPI.Attach(file)
+// 	serviceAPI.Setup()
+//
+// 	for n := range a.Shapes {
+// 		if _, ok := serviceAPI.Shapes[n]; ok {
+// 			// Input and output shapes must remain unique.
+// 			if s := a.Shapes[n]; s.UsedAsInput || s.UsedAsOutput {
+// 				continue
+// 			}
+// 			a.Shapes[n].resolvePkg = "github.com/aws/aws-sdk-go-v2/service/" + info.dstName
+// 		}
+// 	}
+// }
 
 // rdsCustomizations are customization for the service/rds. This adds non-modeled fields used for presigning.
 func rdsCustomizations(a *API) {

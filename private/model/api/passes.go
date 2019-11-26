@@ -4,8 +4,10 @@ package api
 
 import (
 	"fmt"
+	"log"
 	"regexp"
 	"strings"
+	"unicode"
 )
 
 // updateTopLevelShapeReferences moves resultWrapper, locationName, and
@@ -154,6 +156,42 @@ func (a *API) fixStutterNames() {
 		newName := re.ReplaceAllString(k, "")
 		if newName != s.ShapeName {
 			s.Rename(newName)
+		}
+	}
+}
+
+func (a *API) validateShapeNames() {
+	var renameServiceShapes = map[string][]string{
+		"mediapackage": {
+			"__AdTriggersElement",
+			"__PeriodTriggersElement",
+		},
+	}
+
+	// Remove non alphabetical characters from the start of the shape name
+	for _, s := range a.Shapes {
+		if renameServiceShapes[a.PackageName()] != nil {
+			for _, name := range renameServiceShapes[a.PackageName()] {
+				// name should start with an alphabet, that is ascii character 65 to 90, and 97 to 122;
+				// else skip that character
+				if name == s.ShapeName {
+					for len(name) > 1 {
+						if !unicode.IsLetter(rune(name[0])) {
+							name = name[1:]
+						} else {
+							break
+						}
+					}
+
+					fmt.Printf("Renamed shape %v to %v for package %v \n", s.ShapeName, name, a.PackageName())
+					s.Rename(name)
+				}
+			}
+		}
+
+		// Throw an error if shape is struct or enum and is still starting with non alphabetical characters
+		if (s.Type == "structure" || s.IsEnum()) && !unicode.IsLetter(rune(s.ShapeName[0])) {
+			log.Fatalf("Shape starting with non alphabetical character found: %v", s.ShapeName)
 		}
 	}
 }

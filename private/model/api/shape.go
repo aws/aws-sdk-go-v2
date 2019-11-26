@@ -191,9 +191,9 @@ func (s *Shape) GoTypeWithPkgNameforType() string {
 
 // GoTypeWithPkgNameforEnum returns a shape's type as a string with the "enums" as package name in
 // <packageName>.<type> format. This only applies for enums. This doesn't return a pointer and is value based
-func (s *Shape) GoTypeWithPkgNameforEnum() string {
-	return goType(s, true, false, false)
-}
+// func (s *Shape) GoTypeWithPkgNameforEnum() string {
+// 	return goType(s, true, false, false)
+// }
 
 func (s *Shape) GoTypeWithPkgNameElem() string {
 	t := goType(s, true, true, false)
@@ -302,12 +302,9 @@ func (s *Shape) GoStructType(name string, ref *ShapeRef) string {
 	// check if enum needs to be imported
 	if ref.Shape.IsEnum() || (ref.Shape.MemberRef.Shape != nil && ref.Shape.MemberRef.Shape.IsEnum()) ||
 		(ref.Shape.ValueRef.Shape != nil && ref.Shape.ValueRef.Shape.IsEnum()) {
-		s.API.AddSDKImport("service", s.API.PackageName(), "enums")
-		return ref.GoTypeWithPkgNameforEnum()
+		s.API.AddSDKImport("service", s.API.PackageName(), EnumsPkgName)
+		return ref.GoTypeWithPkgName()
 	}
-
-	// check if it is a list or map is of type Enum
-
 	return ref.GoType()
 }
 
@@ -345,16 +342,6 @@ func (ref *ShapeRef) GoTypeWithPkgNameforType() string {
 	return ref.Shape.GoTypeWithPkgNameforType()
 }
 
-// GoTypeWithPkgNameforEnum returns a shape's type as a string with the "enums" as package name in
-// <packageName>.<type> format.
-func (ref *ShapeRef) GoTypeWithPkgNameforEnum() string {
-	if ref.Shape == nil {
-		panic(fmt.Errorf("missing shape definition on reference for %#v", ref))
-	}
-
-	return ref.Shape.GoTypeWithPkgNameforEnum()
-}
-
 // Get's the package name of the specific shape
 func getPkgName(s *Shape) string {
 	pkg := s.resolvePkg
@@ -371,47 +358,47 @@ func getPkgName(s *Shape) string {
 // Returns a string version of the Shape's type.
 // If withPkgName is true, the package name will be added as a prefix
 func goType(s *Shape, withPkgName, pointer bool, isType bool) string {
-	if s.IsEnum() {
-		name := s.EnumType()
-		if withPkgName {
-			pkg := "enums"
-			name = fmt.Sprintf("%s.%s", pkg, name)
-		}
-		return name
-	}
-
 	prefix := ""
 	if pointer {
 		prefix = "*"
 	}
 
-	switch s.Type {
-	case "structure":
+	switch {
+	case s.IsEnum():
+		s.API.AddSDKImport("service", s.API.PackageName(), EnumsPkgName)
+		if withPkgName {
+			return fmt.Sprintf("enums.%s", s.EnumType())
+		}
+		return s.EnumType()
+	case s.Type == "structure":
 		if withPkgName || s.resolvePkg != "" {
-			if isType {
-				return fmt.Sprintf("%s%s.%s", prefix, "types", s.ShapeName)
+			var pkg string
+			switch isType {
+			case true:
+				pkg = TypesPkgName
+			default:
+				pkg = getPkgName(s)
 			}
-			pkg := getPkgName(s)
 			return fmt.Sprintf("%s%s.%s", prefix, pkg, s.ShapeName)
 		}
 		return prefix + s.ShapeName
-	case "map":
-		return "map[string]" + goType(s.ValueRef.Shape, withPkgName, false, false)
-	case "jsonvalue":
+	case s.Type == "map":
+		return "map[string]" + goType(s.ValueRef.Shape, withPkgName, false, isType)
+	case s.Type == "jsonvalue":
 		return "aws.JSONValue"
-	case "list":
-		return "[]" + goType(s.MemberRef.Shape, withPkgName, false, false)
-	case "boolean":
+	case s.Type == "list":
+		return "[]" + goType(s.MemberRef.Shape, withPkgName, false, isType)
+	case s.Type == "boolean":
 		return prefix + "bool"
-	case "string", "character":
+	case s.Type == "string" || s.Type == "character":
 		return prefix + "string"
-	case "blob":
+	case s.Type == "blob":
 		return "[]byte"
-	case "integer", "long":
+	case s.Type == "integer" || s.Type == "long":
 		return prefix + "int64"
-	case "float", "double":
+	case s.Type == "float" || s.Type == "double":
 		return prefix + "float64"
-	case "timestamp":
+	case s.Type == "timestamp":
 		s.API.imports["time"] = true
 		return prefix + "time.Time"
 	default:
@@ -616,6 +603,10 @@ func (s {{ .ShapeName }}) String() string {
 // GoCodeStringers renders the Stringers for API input/output shapes
 func (s *Shape) GoCodeStringers() string {
 	w := bytes.Buffer{}
+
+	// Add import for awsutil
+	s.API.AddSDKImport("internal/awsutil")
+
 	if err := goCodeStringerTmpl.Execute(&w, s); err != nil {
 		panic(fmt.Sprintln("Unexpected error executing GoCodeStringers template", err))
 	}
@@ -738,7 +729,7 @@ type {{ .ShapeName }} struct {
 	{{ $elem := index $.MemberRefs $name -}}
 
 {{ if $elem.GenerateGetter -}}
-func (s *{{ $builderShapeName }}) get{{ $name }}() (v {{ $.GoStructValueType $name $elem }}) {
+func (s *{{ $builderShapeName }}) Get{{ $name }}() (v {{ $.GoStructValueType $name $elem }}) {
 	{{ if $elem.UseIndirection -}}
 		if s.{{ $name }} == nil {
 			return v
