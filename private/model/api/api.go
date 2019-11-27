@@ -6,6 +6,7 @@ package api
 import (
 	"bytes"
 	"fmt"
+	"log"
 	"path"
 	"regexp"
 	"sort"
@@ -16,6 +17,8 @@ import (
 
 // SDKImportRoot is the root import path of the SDK.
 const SDKImportRoot = "github.com/aws/aws-sdk-go-v2"
+const TypesPkgName = "types"
+const EnumsPkgName = "enums"
 
 // An API defines a service API's definition. and logic to serialize the definition.
 type API struct {
@@ -198,7 +201,7 @@ func (a *API) ShapeList() []*Shape {
 
 // ShapeListErrors returns a list of the errors defined by the API model
 func (a *API) ShapeListErrors() []*Shape {
-	list := []*Shape{}
+	var list []*Shape
 	for _, n := range a.ShapeNames() {
 		// Ignore error shapes in list
 		if s := a.Shapes[n]; s.IsError {
@@ -209,7 +212,7 @@ func (a *API) ShapeListErrors() []*Shape {
 }
 
 func (a *API) ShapeEnumList() []*Shape {
-	list := []*Shape{}
+	var list []*Shape
 	for _, n := range a.ShapeNames() {
 		// Ignore error shapes in list
 		if s := a.Shapes[n]; s.IsEnum() {
@@ -319,9 +322,9 @@ func (a *API) APIGoCode() string {
 // string.
 func (a *API) APIOperationGoCode(op *Operation) string {
 	a.resetImports()
-	a.AddSDKImport("aws")
-	a.AddSDKImport("internal/awsutil")
 	a.AddImport("context")
+	a.AddSDKImport("aws")
+	a.AddSDKImport("service", a.PackageName(), TypesPkgName)
 
 	if op.OutputRef.Shape.Placeholder {
 		a.AddSDKImport("private/protocol", a.ProtocolPackage())
@@ -333,6 +336,16 @@ func (a *API) APIOperationGoCode(op *Operation) string {
 
 	// Need to generate code before imports are generated.
 	code := op.GoCode()
+	return a.importsGoCode() + code
+}
+
+// APIOperationTypesGoCode renders the Operation types in Go code. Returning it as a
+// string.
+func (a *API) APIOperationTypeGoCode(op *Operation) string {
+	a.resetImports()
+	a.AddSDKImport("internal/awsutil")
+
+	code := op.IOGoCode()
 	return a.importsGoCode() + code
 }
 
@@ -365,8 +378,6 @@ var tplAPIShapes = template.Must(template.New("api").Parse(`
 // them as a string.
 func (a *API) APIParamShapesGoCode() string {
 	a.resetImports()
-	a.AddSDKImport("aws")
-	a.AddSDKImport("internal/awsutil")
 
 	if (!a.NoGenMarshalers || !a.NoGenUnmarshalers) && (a.hasNonIOShapes()) {
 		a.AddSDKImport("private/protocol")
@@ -378,13 +389,7 @@ func (a *API) APIParamShapesGoCode() string {
 		panic(err)
 	}
 
-	// TODO this is hacky, imports should only be added when needed.
-	importStubs := `
-	var _ aws.Config
-	var _ = awsutil.Prettify
-	`
-
-	code := a.importsGoCode() + importStubs + strings.TrimSpace(buf.String())
+	code := a.importsGoCode() + strings.TrimSpace(buf.String())
 	return code
 }
 
@@ -494,6 +499,26 @@ func (a *API) ServiceID() string {
 
 	a.serviceID = name
 	return a.serviceID
+}
+
+func (a *API) ProtocolCanonicalPackageName() string {
+	switch a.Metadata.Protocol {
+	case "rest-xml":
+		return "aws_restxml"
+	case "rest-json":
+		return "aws_restjson"
+	case "ec2":
+		return "aws_ec2query"
+	case "query":
+		return "aws_query"
+	case "xml":
+		return "aws_xml"
+	case "json":
+		return "aws_jsonrpc"
+	default:
+		log.Fatalf("unknown protocol name in API Metadata : %v", a.Metadata.Protocol)
+	}
+	return ""
 }
 
 var tplServiceDoc = template.Must(template.New("service docs").Funcs(template.FuncMap{
@@ -706,30 +731,22 @@ func (a *API) ServiceGoCode() string {
 
 // ExampleGoCode renders service example code. Returning it as a string.
 func (a *API) ExampleGoCode() string {
-	exs := []string{}
-	imports := map[string]bool{}
+	var exs []string
 	for _, o := range a.OperationList() {
 		o.imports = map[string]bool{}
 		exs = append(exs, o.Example())
 		for k, v := range o.imports {
-			imports[k] = v
+			if v {
+				a.AddImport(k)
+			}
 		}
 	}
 
-	code := fmt.Sprintf("import (\n%q\n%q\n%q\n\n%q\n%q\n",
-		"bytes",
-		"fmt",
-		"time",
-		SDKImportRoot+"/aws",
-		a.ImportPath(),
-	)
-	for k := range imports {
-		code += fmt.Sprintf("%q\n", k)
-	}
-	code += ")\n\n"
-	code += "var _ time.Duration\nvar _ bytes.Buffer\n\n"
-	code += strings.Join(exs, "\n\n")
-	return code
+	a.AddImport("fmt")
+	a.AddSDKImport()
+	a.AddSDKImport("aws")
+
+	return a.importsGoCode()
 }
 
 // A tplInterface defines the template for the service interface type.
@@ -803,6 +820,7 @@ func (a *API) InterfaceGoCode() string {
 		a.AddSDKImport("aws")
 	}
 	a.AddImport(a.ImportPath())
+	a.AddSDKImport("service", a.PackageName(), TypesPkgName)
 
 	var buf bytes.Buffer
 	err := tplInterface.Execute(&buf, a)
@@ -837,7 +855,7 @@ func resolveShapeValidations(s *Shape, ancestry ...*Shape) {
 		}
 	}
 
-	children := []string{}
+	var children []string
 	for _, name := range s.MemberNames() {
 		ref := s.MemberRefs[name]
 

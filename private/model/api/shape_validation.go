@@ -163,6 +163,9 @@ func (vs ShapeValidations) GoCode(shape *Shape) string {
 		"Shape":       shape,
 		"Validations": vs,
 	})
+
+	// Add sdk import for aws pkg
+	shape.API.AddSDKImport("aws")
 	return buf.String()
 }
 

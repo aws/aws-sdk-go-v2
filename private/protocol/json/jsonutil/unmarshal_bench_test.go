@@ -3,12 +3,13 @@ package jsonutil_test
 import (
 	"bytes"
 	"encoding/json"
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/private/protocol/json/jsonutil"
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"io/ioutil"
 	"net/http"
 	"testing"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/private/protocol/json/jsonutil"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
 var (
@@ -50,7 +51,7 @@ func BenchmarkStdlibJSON_Unmarshal_Simple(b *testing.B) {
 func BenchmarkStdlibJSON_Unmarshal_Complex(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		json.Unmarshal(complexJSON, &dynamodb.DescribeTableOutput{})
+		json.Unmarshal(complexJSON, &types.DescribeTableOutput{})
 	}
 }
 
@@ -62,6 +63,6 @@ func getJSONResponseSimple() *aws.Request {
 
 func getJSONResponseComplex() *aws.Request {
 	buf := bytes.NewReader(complexJSON)
-	req := aws.Request{Data: &dynamodb.DescribeTableOutput{}, HTTPResponse: &http.Response{Body: ioutil.NopCloser(buf)}}
+	req := aws.Request{Data: &types.DescribeTableOutput{}, HTTPResponse: &http.Response{Body: ioutil.NopCloser(buf)}}
 	return &req
 }

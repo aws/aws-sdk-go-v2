@@ -134,7 +134,7 @@ func (ex Example) GoCode() string {
 func generateExampleInput(ex Example) string {
 	if ex.Operation.HasInput() {
 		return fmt.Sprintf("&%s{\n%s\n}\n",
-			ex.Builder.GoType(&ex.Operation.InputRef, true),
+			ex.Operation.InputRef.Shape.GoTypeWithPkgNameElem(),
 			ex.Builder.BuildShape(&ex.Operation.InputRef, ex.Input, false, false),
 		)
 	}
@@ -260,12 +260,8 @@ func (p *ExamplesDefinition) setup() {
 	p.API.Examples = p.Examples
 }
 
-var exampleHeader = template.Must(template.New("exampleHeader").Parse(`
-import (
-	{{ .Builder.Imports .API }}
-)
-
-var _ time.Duration
+var exampleHeader = template.Must(template.New("exampleHeader").
+	Parse(`var _ time.Duration
 var _ strings.Reader
 var _ aws.Config
 
@@ -294,6 +290,18 @@ func (a *API) ExamplesGoCode() string {
 		builder = defaultExamplesBuilder{}
 	}
 
+	a.resetImports()
+	a.AddImport("fmt")
+	a.AddImport("context")
+	a.AddImport("strings")
+	a.AddImport("time")
+
+	a.AddSDKImport("aws")
+	a.AddSDKImport("aws/awserr")
+	a.AddSDKImport("aws/external")
+	a.AddSDKImport("service", a.PackageName())
+	a.AddSDKImport("service", a.PackageName(), "types")
+
 	if err := exampleHeader.ExecuteTemplate(&buf, "exampleHeader", &exHeader{builder, a}); err != nil {
 		panic(err)
 	}
@@ -304,7 +312,7 @@ func (a *API) ExamplesGoCode() string {
 	}
 
 	buf.WriteString(code)
-	return buf.String()
+	return a.importsGoCode() + buf.String()
 }
 
 // TODO: In the operation docuentation where we list errors, this needs to be done

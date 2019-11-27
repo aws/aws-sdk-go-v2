@@ -92,14 +92,6 @@ var operationTmpl = template.Must(template.New("operation").Funcs(template.FuncM
 {{ $respType := printf "%sResponse" .ExportedName -}}
 {{ $pagerType := printf "%sPaginator" .ExportedName -}}
 
-{{ if .HasInput -}}
-	{{ .InputRef.Shape.GoCode }}
-{{- end }}
-
-{{ if .HasOutput -}}
-	{{ .OutputRef.Shape.GoCode }}
-{{- end }}
-
 const op{{ .ExportedName }} = "{{ .Name }}"
 
 // {{ $reqType }} returns a request value for making API operation for
@@ -120,7 +112,7 @@ const op{{ .ExportedName }} = "{{ .Name }}"
 //
 // Please also see {{ $crosslinkURL }}
 {{ end -}}
-func (c *{{ .API.StructName }}) {{ $reqType }}(input {{ .InputRef.GoType }}) ({{ $reqType }}) {
+func (c *{{ .API.StructName }}) {{ $reqType }}(input {{ .InputRef.GoTypeWithPkgName }}) ({{ $reqType }}) {
 	{{ if (or .Deprecated (or .InputRef.Deprecated .OutputRef.Deprecated)) -}}
 		if c.Client.Config.Logger != nil {
 			c.Client.Config.Logger.Log("This operation, {{ .ExportedName }}, has been deprecated")
@@ -142,10 +134,11 @@ func (c *{{ .API.StructName }}) {{ $reqType }}(input {{ .InputRef.GoType }}) ({{
 	}
 
 	if input == nil {
-		input = &{{ .InputRef.GoTypeElem }}{}
+		input = &{{ .InputRef.GoTypeWithPkgNameElem }}{}
 	}
-
-	req := c.newRequest(op, input, &{{ .OutputRef.GoTypeElem }}{})
+	
+	{{ $operationMarshalerName := printf "%sMarshaler" $.ExportedName -}}
+	req := c.newRequest(op, input, &{{ .OutputRef.GoTypeWithPkgNameElem }}{})
 	{{ if eq .OutputRef.Shape.Placeholder true -}}
 		req.Handlers.Unmarshal.Remove({{ .API.ProtocolPackage }}.UnmarshalHandler)
 		req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
@@ -163,8 +156,8 @@ func (c *{{ .API.StructName }}) {{ $reqType }}(input {{ .InputRef.GoType }}) ({{
 // {{ .ExportedName }} API operation.
 type {{ $reqType}} struct {
 	*aws.Request
-	Input {{ .InputRef.GoType }}
-	Copy func({{ .InputRef.GoType }}) {{ $reqType }}
+	Input {{ .InputRef.GoTypeWithPkgName }}
+	Copy func({{ .InputRef.GoTypeWithPkgName }}) {{ $reqType }}
 }
 
 // Send marshals and sends the {{ .ExportedName }} API request.
@@ -177,7 +170,7 @@ func (r {{ $reqType }}) Send(ctx context.Context) (*{{ $respType }}, error) {
 
 	resp := &{{ $respType }}{
 		{{ if .HasOutput -}}
-			{{ .OutputRef.GoTypeElem }}: r.Request.Data.({{ .OutputRef.GoType }}),
+			{{ .OutputRef.GoTypeElem }}: r.Request.Data.({{ .OutputRef.GoTypeWithPkgName }}),
 		{{- end }}
 		response: &aws.Response{Request: r.Request},
 	}
@@ -209,7 +202,7 @@ func (r {{ $reqType }}) Send(ctx context.Context) (*{{ $respType }}, error) {
 		return {{ $pagerType }}{
 			Pager: aws.Pager {
 				NewRequest: func(ctx context.Context) (*aws.Request, error) {
-					var inCpy {{ .InputRef.GoType }}
+					var inCpy {{ .InputRef.GoTypeWithPkgName }}
 					if req.Input != nil  {
 						tmp := *req.Input
 						inCpy = &tmp
@@ -229,8 +222,8 @@ func (r {{ $reqType }}) Send(ctx context.Context) (*{{ $respType }}, error) {
 		aws.Pager
 	}
 
-	func (p *{{ $pagerType}}) CurrentPage() {{ .OutputRef.GoType }} {
-		return p.Pager.CurrentPage().({{ .OutputRef.GoType }})
+	func (p *{{ $pagerType}}) CurrentPage() {{ .OutputRef.GoTypeWithPkgName }} {
+		return p.Pager.CurrentPage().({{ .OutputRef.GoTypeWithPkgName }})
 	}
 {{ end }}
 
@@ -238,7 +231,7 @@ func (r {{ $reqType }}) Send(ctx context.Context) (*{{ $respType }}, error) {
 // {{ .ExportedName }} API operation.
 type {{ $respType }} struct {
 	{{ if .HasOutput -}}
-		{{ .OutputRef.GoType }}
+		{{ .OutputRef.GoTypeWithPkgName }}
 	{{- end }}
 
 	response *aws.Response
@@ -251,6 +244,17 @@ func (r * {{ $respType }}) SDKResponseMetdata() *aws.Response {
 }
 `))
 
+var operationIOTypeTmpl = template.Must(template.New("operationIOType").Parse(
+	`
+{{ if .HasInput -}}
+	{{ .InputRef.Shape.GoCode }}
+{{- end }}
+
+{{ if .HasOutput -}}
+	{{ .OutputRef.Shape.GoCode }}
+{{- end }}
+`))
+
 // GoCode returns a string of rendered GoCode for this Operation
 func (o *Operation) GoCode() string {
 	if o.Endpoint != nil && len(o.Endpoint.HostPrefix) != 0 {
@@ -259,6 +263,18 @@ func (o *Operation) GoCode() string {
 
 	var buf bytes.Buffer
 	err := operationTmpl.Execute(&buf, o)
+	if err != nil {
+		panic(err)
+	}
+
+	return strings.TrimSpace(buf.String())
+}
+
+// IOGoCode returns a string of rendered GoCode for this Operations Input, Output type
+func (o *Operation) IOGoCode() string {
+
+	var buf bytes.Buffer
+	err := operationIOTypeTmpl.Execute(&buf, o)
 	if err != nil {
 		panic(err)
 	}

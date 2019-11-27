@@ -17,28 +17,16 @@ type service struct {
 	serviceVersion string
 }
 
-var mergeServices = map[string]service{
-	"dynamodbstreams": {
-		dstName: "dynamodb",
-		srcName: "streams.dynamodb",
-	},
-	"wafregional": {
-		dstName:        "waf",
-		srcName:        "waf-regional",
-		serviceVersion: "2015-08-24",
-	},
-}
-
 func (a *API) EnableSelectGeneratedMarshalers() {
 	// Selectivily enable generated marshalers as available
 	a.NoGenMarshalers = true
 	a.NoGenUnmarshalers = true
 
 	// Enable generated marshalers
-	switch a.Metadata.Protocol {
-	case "rest-xml", "rest-json":
-		a.NoGenMarshalers = false
-	}
+	// switch a.Metadata.Protocol {
+	// case "rest-xml", "rest-json":
+	// 	a.NoGenMarshalers = false
+	// }
 }
 
 // customizationPasses Executes customization logic for the API by package name.
@@ -65,10 +53,6 @@ func (a *API) customizationPasses() {
 			"AssumeRoleWithSAML",
 			"AssumeRoleWithWebIdentity",
 		),
-	}
-
-	for k := range mergeServices {
-		svcCustomizations[k] = mergeServicesCustomizations
 	}
 
 	if fn := svcCustomizations[a.PackageName()]; fn != nil {
@@ -170,7 +154,10 @@ func cloudfrontCustomizations(a *API) {
 	}
 }
 
-// mergeServicesCustomizations references any duplicate shapes from DynamoDB
+var mergeServices map[string]service
+
+// Todo if not required for future iterations of the SDK
+// mergeServicesCustomizations is an utility to reference any duplicate shapes
 func mergeServicesCustomizations(a *API) {
 	info := mergeServices[a.PackageName()]
 
