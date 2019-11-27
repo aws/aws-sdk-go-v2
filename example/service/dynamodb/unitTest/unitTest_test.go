@@ -11,6 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/dynamodbiface"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
 // A fakeDynamoDB instance. During testing, instatiate ItemGetter, then simply
@@ -22,19 +23,19 @@ type fakeDynamoDB struct {
 }
 
 // Mock GetItem such that the output returned carries values identical to input.
-func (fd *fakeDynamoDB) GetItemRequest(input *dynamodb.GetItemInput) dynamodb.GetItemRequest {
-	output := &dynamodb.GetItemOutput{
-		Item: map[string]dynamodb.AttributeValue{},
+func (fd *fakeDynamoDB) GetItemRequest(input *types.GetItemInput) dynamodb.GetItemRequest {
+	output := &types.GetItemOutput{
+		Item: map[string]types.AttributeValue{},
 	}
 	for key, value := range fd.payload {
-		output.Item[key] = dynamodb.AttributeValue{
+		output.Item[key] = types.AttributeValue{
 			S: aws.String(value),
 		}
 	}
 	req := dynamodb.GetItemRequest{
 		Request: &aws.Request{
-			Data:  output,
-			Error: fd.err,
+			Data:        output,
+			Error:       fd.err,
 			HTTPRequest: &http.Request{},
 		},
 	}

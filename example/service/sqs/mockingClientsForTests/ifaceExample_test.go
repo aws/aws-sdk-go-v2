@@ -10,14 +10,15 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
 	"github.com/aws/aws-sdk-go-v2/service/sqs/sqsiface"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/types"
 )
 
 type mockedReceiveMsgs struct {
 	sqsiface.ClientAPI
-	Resp sqs.ReceiveMessageOutput
+	Resp types.ReceiveMessageOutput
 }
 
-func (m mockedReceiveMsgs) ReceiveMessageRequest(in *sqs.ReceiveMessageInput) sqs.ReceiveMessageRequest {
+func (m mockedReceiveMsgs) ReceiveMessageRequest(in *types.ReceiveMessageInput) sqs.ReceiveMessageRequest {
 	// Only need to return mocked response output
 	return sqs.ReceiveMessageRequest{
 		Request: &aws.Request{
@@ -29,12 +30,12 @@ func (m mockedReceiveMsgs) ReceiveMessageRequest(in *sqs.ReceiveMessageInput) sq
 
 func TestQueueGetMessage(t *testing.T) {
 	cases := []struct {
-		Resp     sqs.ReceiveMessageOutput
+		Resp     types.ReceiveMessageOutput
 		Expected []Message
 	}{
 		{ // Case 1, expect parsed responses
-			Resp: sqs.ReceiveMessageOutput{
-				Messages: []sqs.Message{
+			Resp: types.ReceiveMessageOutput{
+				Messages: []types.Message{
 					{Body: aws.String(`{"from":"user_1","to":"room_1","msg":"Hello!"}`)},
 					{Body: aws.String(`{"from":"user_2","to":"room_1","msg":"Hi user_1 :)"}`)},
 				},
@@ -45,7 +46,7 @@ func TestQueueGetMessage(t *testing.T) {
 			},
 		},
 		{ // Case 2, not messages returned
-			Resp:     sqs.ReceiveMessageOutput{},
+			Resp:     types.ReceiveMessageOutput{},
 			Expected: []Message{},
 		},
 	}

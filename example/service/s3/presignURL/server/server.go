@@ -20,6 +20,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3iface"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3manager"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 // server.go is an example of a service that vends lists for requests for presigned
@@ -132,7 +133,7 @@ func listenAndServe(addr, bucket string, svc s3iface.ClientAPI) error {
 		case "PUT":
 			// For creating PutObject presigned URLs
 			fmt.Println("Received request to presign PutObject for,", key)
-			sdkReq := svc.PutObjectRequest(&s3.PutObjectInput{
+			sdkReq := svc.PutObjectRequest(&types.PutObjectInput{
 				Bucket: aws.String(bucket),
 				Key:    aws.String(key),
 
@@ -143,7 +144,7 @@ func listenAndServe(addr, bucket string, svc s3iface.ClientAPI) error {
 		case "GET":
 			// For creating GetObject presigned URLs
 			fmt.Println("Received request to presign GetObject for,", key)
-			sdkReq := svc.GetObjectRequest(&s3.GetObjectInput{
+			sdkReq := svc.GetObjectRequest(&types.GetObjectInput{
 				Bucket: aws.String(bucket),
 				Key:    aws.String(key),
 			})

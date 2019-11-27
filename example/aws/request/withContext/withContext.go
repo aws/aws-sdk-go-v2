@@ -14,6 +14,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 // Uploads a file to S3 given a bucket and object key. Also takes a duration
@@ -55,7 +56,7 @@ func main() {
 
 	// Uploads the object to S3. The Context will interrupt the request if the
 	// timeout expires.
-	req := svc.PutObjectRequest(&s3.PutObjectInput{
+	req := svc.PutObjectRequest(&types.PutObjectInput{
 		Bucket: aws.String(bucket),
 		Key:    aws.String(key),
 		Body:   os.Stdin,

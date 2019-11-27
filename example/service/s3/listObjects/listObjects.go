@@ -9,6 +9,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 func exitErrorf(msg string, args ...interface{}) {
@@ -32,7 +33,7 @@ func main() {
 
 	svc := s3.New(cfg)
 
-	req := svc.ListObjectsRequest(&s3.ListObjectsInput{Bucket: &os.Args[1]})
+	req := svc.ListObjectsRequest(&types.ListObjectsInput{Bucket: &os.Args[1]})
 	p := s3.NewListObjectsPaginator(req)
 	for p.Next(context.TODO()) {
 		page := p.CurrentPage()

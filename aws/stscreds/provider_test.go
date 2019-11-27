@@ -8,13 +8,14 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
+	"github.com/aws/aws-sdk-go-v2/service/sts/types"
 )
 
 type stubSTS struct {
-	TestInput func(*sts.AssumeRoleInput)
+	TestInput func(*types.AssumeRoleInput)
 }
 
-func (s *stubSTS) AssumeRoleRequest(input *sts.AssumeRoleInput) sts.AssumeRoleRequest {
+func (s *stubSTS) AssumeRoleRequest(input *types.AssumeRoleInput) sts.AssumeRoleRequest {
 	if s.TestInput != nil {
 		s.TestInput(input)
 	}
@@ -32,8 +33,8 @@ func (s *stubSTS) AssumeRoleRequest(input *sts.AssumeRoleInput) sts.AssumeRoleRe
 
 				h.Send.PushBack(func(r *aws.Request) {
 					r.HTTPResponse = &http.Response{StatusCode: 200}
-					r.Data = &sts.AssumeRoleOutput{
-						Credentials: &sts.Credentials{
+					r.Data = &types.AssumeRoleOutput{
+						Credentials: &types.Credentials{
 							// Just reflect the role arn to the provider.
 							AccessKeyId:     input.RoleArn,
 							SecretAccessKey: aws.String("assumedSecretAccessKey"),
@@ -75,7 +76,7 @@ func TestAssumeRoleProvider(t *testing.T) {
 
 func TestAssumeRoleProvider_WithTokenCode(t *testing.T) {
 	stub := &stubSTS{
-		TestInput: func(in *sts.AssumeRoleInput) {
+		TestInput: func(in *types.AssumeRoleInput) {
 			if e, a := "0123456789", *in.SerialNumber; e != a {
 				t.Errorf("expect %v, got %v", e, a)
 			}
@@ -106,7 +107,7 @@ func TestAssumeRoleProvider_WithTokenCode(t *testing.T) {
 
 func TestAssumeRoleProvider_WithTokenProvider(t *testing.T) {
 	stub := &stubSTS{
-		TestInput: func(in *sts.AssumeRoleInput) {
+		TestInput: func(in *types.AssumeRoleInput) {
 			if e, a := "0123456789", *in.SerialNumber; e != a {
 				t.Errorf("expect %v, got %v", e, a)
 			}
@@ -139,7 +140,7 @@ func TestAssumeRoleProvider_WithTokenProvider(t *testing.T) {
 
 func TestAssumeRoleProvider_WithTokenProviderError(t *testing.T) {
 	stub := &stubSTS{
-		TestInput: func(in *sts.AssumeRoleInput) {
+		TestInput: func(in *types.AssumeRoleInput) {
 			t.Fatalf("API request should not of been called")
 		},
 	}
@@ -167,7 +168,7 @@ func TestAssumeRoleProvider_WithTokenProviderError(t *testing.T) {
 
 func TestAssumeRoleProvider_MFAWithNoToken(t *testing.T) {
 	stub := &stubSTS{
-		TestInput: func(in *sts.AssumeRoleInput) {
+		TestInput: func(in *types.AssumeRoleInput) {
 			t.Fatalf("API request should not of been called")
 		},
 	}

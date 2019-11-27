@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/ec2"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
 
 func exitErrorf(msg string, args ...interface{}) {
@@ -52,8 +53,8 @@ func main() {
 		cfg.Region = region
 
 		ec2Svc := ec2.New(cfg)
-		params := &ec2.DescribeInstancesInput{
-			Filters: []ec2.Filter{
+		params := &types.DescribeInstancesInput{
+			Filters: []types.Filter{
 				{
 					Name:   aws.String("instance-state-name"),
 					Values: states,
@@ -90,7 +91,7 @@ func fetchRegion() ([]string, error) {
 	}
 
 	svc := ec2.New(cfg)
-	req := svc.DescribeRegionsRequest(&ec2.DescribeRegionsInput{})
+	req := svc.DescribeRegionsRequest(&types.DescribeRegionsInput{})
 	awsRegions, err := req.Send(context.Background())
 	if err != nil {
 		return nil, err

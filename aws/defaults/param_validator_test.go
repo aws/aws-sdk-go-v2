@@ -10,6 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 )
 
 var testSvc = func() *aws.Client {
@@ -260,11 +261,11 @@ func TestValidateFieldMinParameter(t *testing.T) {
 }
 
 func BenchmarkValidateAny(b *testing.B) {
-	input := &kinesis.PutRecordsInput{
+	input := &types.PutRecordsInput{
 		StreamName: aws.String("stream"),
 	}
 	for i := 0; i < 100; i++ {
-		record := kinesis.PutRecordsRequestEntry{
+		record := types.PutRecordsRequestEntry{
 			Data:         make([]byte, 10000),
 			PartitionKey: aws.String("partition"),
 		}

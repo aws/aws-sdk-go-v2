@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 func exitErrorf(msg string, args ...interface{}) {
@@ -57,7 +58,7 @@ func main() {
 
 	// Receive from the bucket channel printing the information for each bucket to the console
 	// when the bucketCh channel is drained.
-	buckets := []Bucket{}
+	var buckets []Bucket
 	for b := range bucketCh {
 		buckets = append(buckets, b)
 	}
@@ -162,7 +163,7 @@ type Bucket struct {
 }
 
 func (b *Bucket) encryptedObjects() []Object {
-	encObjs := []Object{}
+	var encObjs []Object
 	for _, obj := range b.Objects {
 		if obj.Encrypted {
 			encObjs = append(encObjs, obj)
@@ -172,7 +173,7 @@ func (b *Bucket) encryptedObjects() []Object {
 }
 
 func listBuckets(svc *s3.Client) ([]Bucket, error) {
-	listReq := svc.ListBucketsRequest(&s3.ListBucketsInput{})
+	listReq := svc.ListBucketsRequest(&types.ListBucketsInput{})
 	res, err := listReq.Send(context.Background())
 	if err != nil {
 		return nil, err
@@ -185,7 +186,7 @@ func listBuckets(svc *s3.Client) ([]Bucket, error) {
 			CreationDate: *b.CreationDate,
 		}
 
-		getReq := svc.GetBucketLocationRequest(&s3.GetBucketLocationInput{
+		getReq := svc.GetBucketLocationRequest(&types.GetBucketLocationInput{
 			Bucket: b.Name,
 		})
 		locRes, err := getReq.Send(context.Background())
@@ -205,7 +206,7 @@ func listBuckets(svc *s3.Client) ([]Bucket, error) {
 }
 
 func listBucketObjects(svc *s3.Client, bucket string) ([]Object, []ErrObject, error) {
-	listReq := svc.ListObjectsRequest(&s3.ListObjectsInput{
+	listReq := svc.ListObjectsRequest(&types.ListObjectsInput{
 		Bucket: &bucket,
 	})
 	listRes, err := listReq.Send(context.Background())
@@ -216,7 +217,7 @@ func listBucketObjects(svc *s3.Client, bucket string) ([]Object, []ErrObject, er
 	objs := make([]Object, 0, len(listRes.Contents))
 	errObjs := []ErrObject{}
 	for _, listObj := range listRes.Contents {
-		objReq := svc.HeadObjectRequest(&s3.HeadObjectInput{
+		objReq := svc.HeadObjectRequest(&types.HeadObjectInput{
 			Bucket: &bucket,
 			Key:    listObj.Key,
 		})

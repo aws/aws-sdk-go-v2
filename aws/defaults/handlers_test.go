@@ -19,6 +19,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 func TestValidateEndpointHandler(t *testing.T) {
@@ -350,7 +351,7 @@ func TestBuildContentLength_ZeroBody(t *testing.T) {
 
 	svc := s3.New(cfg)
 	svc.ForcePathStyle = true
-	req := svc.GetObjectRequest(&s3.GetObjectInput{
+	req := svc.GetObjectRequest(&types.GetObjectInput{
 		Bucket: aws.String("bucketname"),
 		Key:    aws.String("keyname"),
 	})
@@ -368,7 +369,7 @@ func TestBuildContentLength_NegativeBody(t *testing.T) {
 
 	svc := s3.New(cfg)
 	svc.ForcePathStyle = true
-	req := svc.GetObjectRequest(&s3.GetObjectInput{
+	req := svc.GetObjectRequest(&types.GetObjectInput{
 		Bucket: aws.String("bucketname"),
 		Key:    aws.String("keyname"),
 	})
@@ -388,7 +389,7 @@ func TestBuildContentLength_WithBody(t *testing.T) {
 
 	svc := s3.New(cfg)
 	svc.ForcePathStyle = true
-	req := svc.PutObjectRequest(&s3.PutObjectInput{
+	req := svc.PutObjectRequest(&types.PutObjectInput{
 		Bucket: aws.String("bucketname"),
 		Key:    aws.String("keyname"),
 		Body:   bytes.NewReader(make([]byte, 1024)),
@@ -411,7 +412,7 @@ func TestSendHandler_HEADNoBody(t *testing.T) {
 	svc := s3.New(cfg)
 	svc.ForcePathStyle = true
 
-	req := svc.HeadObjectRequest(&s3.HeadObjectInput{
+	req := svc.HeadObjectRequest(&types.HeadObjectInput{
 		Bucket: aws.String("bucketname"),
 		Key:    aws.String("keyname"),
 	})

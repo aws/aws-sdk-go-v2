@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/expression"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
 func exitErrorf(msg string, args ...interface{}) {
@@ -49,7 +50,7 @@ func main() {
 	}
 
 	// Build the query input parameters
-	params := &dynamodb.ScanInput{
+	params := &types.ScanInput{
 		ExpressionAttributeNames:  expr.Names(),
 		ExpressionAttributeValues: expr.Values(),
 		FilterExpression:          expr.Filter(),
@@ -84,7 +85,7 @@ func (c *Config) Load() error {
 
 	if len(c.Table) == 0 {
 		flag.PrintDefaults()
-		return fmt.Errorf("table name is required.")
+		return fmt.Errorf("table name is required")
 	}
 
 	return nil

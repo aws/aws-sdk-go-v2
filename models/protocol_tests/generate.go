@@ -592,6 +592,8 @@ func getType(t string) uint {
 func main() {
 	fmt.Println("Generating test suite", os.Args[1:])
 	out := generateTestSuite(os.Args[1])
+
+	// Todo: fix test suites
 	if len(os.Args) == 3 {
 		f, err := os.Create(os.Args[2])
 		defer f.Close()

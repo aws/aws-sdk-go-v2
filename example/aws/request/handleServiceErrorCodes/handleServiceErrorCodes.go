@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 func exitErrorf(msg string, args ...interface{}) {
@@ -39,7 +40,7 @@ func main() {
 	}
 
 	svc := s3.New(cfg)
-	req := svc.GetObjectRequest(&s3.GetObjectInput{
+	req := svc.GetObjectRequest(&types.GetObjectInput{
 		Bucket: aws.String(os.Args[1]),
 		Key:    aws.String(os.Args[2]),
 	})

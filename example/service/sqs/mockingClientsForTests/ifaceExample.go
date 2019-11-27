@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
 	"github.com/aws/aws-sdk-go-v2/service/sqs/sqsiface"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/types"
 )
 
 func exitErrorf(msg string, args ...interface{}) {
@@ -61,7 +62,7 @@ type Message struct {
 // GetMessages returns the parsed messages from SQS if any. If an error
 // occurs that error will be returned.
 func (q *Queue) GetMessages(waitTimeout int64) ([]Message, error) {
-	params := sqs.ReceiveMessageInput{
+	params := types.ReceiveMessageInput{
 		QueueUrl: aws.String(q.URL),
 	}
 	if waitTimeout > 0 {
