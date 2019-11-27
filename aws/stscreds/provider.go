@@ -89,6 +89,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
+	"github.com/aws/aws-sdk-go-v2/service/sts/types"
 )
 
 // StdinTokenProvider will prompt on stdout and read from stdin for a string value.
@@ -115,7 +116,7 @@ const ProviderName = "AssumeRoleProvider"
 
 // AssumeRoler represents the minimal subset of the STS client API used by this provider.
 type AssumeRoler interface {
-	AssumeRoleRequest(input *sts.AssumeRoleInput) sts.AssumeRoleRequest
+	AssumeRoleRequest(input *types.AssumeRoleInput) sts.AssumeRoleRequest
 }
 
 // DefaultDuration is the default amount of time in minutes that the credentials
@@ -220,7 +221,7 @@ func (p *AssumeRoleProvider) retrieveFn() (aws.Credentials, error) {
 		// Expire as often as AWS permits.
 		p.Duration = DefaultDuration
 	}
-	input := &sts.AssumeRoleInput{
+	input := &types.AssumeRoleInput{
 		DurationSeconds: aws.Int64(int64(p.Duration / time.Second)),
 		RoleArn:         aws.String(p.RoleARN),
 		RoleSessionName: aws.String(p.RoleSessionName),

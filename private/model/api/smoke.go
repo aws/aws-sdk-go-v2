@@ -29,8 +29,7 @@ type SmokeTestCase struct {
 func (c SmokeTestCase) BuildInputShape(ref *ShapeRef) string {
 	var b ShapeValueBuilder
 	return fmt.Sprintf("&%s{\n%s\n}",
-		// should this use GoTypeWithPkgNameForType
-		b.GoTypeWithPkgNameForType(ref, true),
+		b.GoTypeWithPkgName(ref, true),
 		b.BuildShape(ref, c.Input, false, false),
 	)
 }
@@ -60,13 +59,12 @@ func (a *API) APISmokeTestsGoCode() string {
 	a.AddImport("context")
 	a.AddImport("testing")
 	a.AddImport("time")
+
 	a.AddSDKImport("aws")
 	a.AddSDKImport("aws/awserr")
 	a.AddSDKImport("internal/awstesting/integration")
-	a.AddImport(a.ImportPath())
-
-	// add sdk import for enums and types
-	a.AddSDKImport("service", a.PackageName(), "types")
+	a.AddSDKImport("service", a.PackageName())
+	a.AddSDKImport("service", a.PackageName(), TypesPkgName)
 
 	smokeTests := struct {
 		API *API

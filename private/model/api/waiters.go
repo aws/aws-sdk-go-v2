@@ -122,7 +122,7 @@ var waiterTmpls = template.Must(template.New("waiterTmpls").Funcs(
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
 func (c *{{ .Operation.API.StructName }}) WaitUntil{{ .Name }}(` +
-	`ctx context.Context, input {{ .Operation.InputRef.GoTypeWithPkgNameforType }}, opts ...aws.WaiterOption) error {
+	`ctx context.Context, input {{ .Operation.InputRef.GoTypeWithPkgName }}, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:    "WaitUntil{{ .Name }}",
 		MaxAttempts: {{ .MaxAttempts }},
@@ -138,7 +138,7 @@ func (c *{{ .Operation.API.StructName }}) WaitUntil{{ .Name }}(` +
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy {{ .Operation.InputRef.GoTypeWithPkgNameforType }}
+			var inCpy {{ .Operation.InputRef.GoTypeWithPkgName }}
 			if input != nil  {
 				tmp := *input
 				inCpy = &tmp
@@ -156,7 +156,7 @@ func (c *{{ .Operation.API.StructName }}) WaitUntil{{ .Name }}(` +
 {{- end }}
 
 {{ define "waiter interface" }}
-WaitUntil{{ .Name }}(context.Context, {{ .Operation.InputRef.GoTypeWithPkgNameforType }}, ...aws.WaiterOption) error
+WaitUntil{{ .Name }}(context.Context, {{ .Operation.InputRef.GoTypeWithPkgName }}, ...aws.WaiterOption) error
 {{- end }}
 `))
 

@@ -112,7 +112,7 @@ const op{{ .ExportedName }} = "{{ .Name }}"
 //
 // Please also see {{ $crosslinkURL }}
 {{ end -}}
-func (c *{{ .API.StructName }}) {{ $reqType }}(input {{ .InputRef.GoTypeWithPkgNameforType }}) ({{ $reqType }}) {
+func (c *{{ .API.StructName }}) {{ $reqType }}(input {{ .InputRef.GoTypeWithPkgName }}) ({{ $reqType }}) {
 	{{ if (or .Deprecated (or .InputRef.Deprecated .OutputRef.Deprecated)) -}}
 		if c.Client.Config.Logger != nil {
 			c.Client.Config.Logger.Log("This operation, {{ .ExportedName }}, has been deprecated")
@@ -134,11 +134,11 @@ func (c *{{ .API.StructName }}) {{ $reqType }}(input {{ .InputRef.GoTypeWithPkgN
 	}
 
 	if input == nil {
-		input = &{{ .InputRef.GoTypeWithPkgNameforTypeElem }}{}
+		input = &{{ .InputRef.GoTypeWithPkgNameElem }}{}
 	}
 	
 	{{ $operationMarshalerName := printf "%sMarshaler" $.ExportedName -}}
-	req := c.newRequest(op, input, &{{ .OutputRef.GoTypeWithPkgNameforTypeElem }}{})
+	req := c.newRequest(op, input, &{{ .OutputRef.GoTypeWithPkgNameElem }}{})
 	{{ if eq .OutputRef.Shape.Placeholder true -}}
 		req.Handlers.Unmarshal.Remove({{ .API.ProtocolPackage }}.UnmarshalHandler)
 		req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
@@ -156,8 +156,8 @@ func (c *{{ .API.StructName }}) {{ $reqType }}(input {{ .InputRef.GoTypeWithPkgN
 // {{ .ExportedName }} API operation.
 type {{ $reqType}} struct {
 	*aws.Request
-	Input {{ .InputRef.GoTypeWithPkgNameforType }}
-	Copy func({{ .InputRef.GoTypeWithPkgNameforType }}) {{ $reqType }}
+	Input {{ .InputRef.GoTypeWithPkgName }}
+	Copy func({{ .InputRef.GoTypeWithPkgName }}) {{ $reqType }}
 }
 
 // Send marshals and sends the {{ .ExportedName }} API request.
@@ -170,7 +170,7 @@ func (r {{ $reqType }}) Send(ctx context.Context) (*{{ $respType }}, error) {
 
 	resp := &{{ $respType }}{
 		{{ if .HasOutput -}}
-			{{ .OutputRef.GoTypeElem }}: r.Request.Data.({{ .OutputRef.GoTypeWithPkgNameforType }}),
+			{{ .OutputRef.GoTypeElem }}: r.Request.Data.({{ .OutputRef.GoTypeWithPkgName }}),
 		{{- end }}
 		response: &aws.Response{Request: r.Request},
 	}
@@ -202,7 +202,7 @@ func (r {{ $reqType }}) Send(ctx context.Context) (*{{ $respType }}, error) {
 		return {{ $pagerType }}{
 			Pager: aws.Pager {
 				NewRequest: func(ctx context.Context) (*aws.Request, error) {
-					var inCpy {{ .InputRef.GoTypeWithPkgNameforType }}
+					var inCpy {{ .InputRef.GoTypeWithPkgName }}
 					if req.Input != nil  {
 						tmp := *req.Input
 						inCpy = &tmp
@@ -222,8 +222,8 @@ func (r {{ $reqType }}) Send(ctx context.Context) (*{{ $respType }}, error) {
 		aws.Pager
 	}
 
-	func (p *{{ $pagerType}}) CurrentPage() {{ .OutputRef.GoTypeWithPkgNameforType }} {
-		return p.Pager.CurrentPage().({{ .OutputRef.GoTypeWithPkgNameforType }})
+	func (p *{{ $pagerType}}) CurrentPage() {{ .OutputRef.GoTypeWithPkgName }} {
+		return p.Pager.CurrentPage().({{ .OutputRef.GoTypeWithPkgName }})
 	}
 {{ end }}
 
@@ -231,7 +231,7 @@ func (r {{ $reqType }}) Send(ctx context.Context) (*{{ $respType }}, error) {
 // {{ .ExportedName }} API operation.
 type {{ $respType }} struct {
 	{{ if .HasOutput -}}
-		{{ .OutputRef.GoTypeWithPkgNameforType }}
+		{{ .OutputRef.GoTypeWithPkgName }}
 	{{- end }}
 
 	response *aws.Response
@@ -283,7 +283,7 @@ func (o *Operation) IOGoCode() string {
 }
 
 // tplInfSig defines the template for rendering an Operation's signature within an Interface definition.
-var tplInfSig = template.Must(template.New("opsig").Parse(`{{ .ExportedName }}Request({{ .InputRef.GoTypeWithPkgNameforType }}) {{ .API.PackageName }}.{{ .ExportedName }}Request
+var tplInfSig = template.Must(template.New("opsig").Parse(`{{ .ExportedName }}Request({{ .InputRef.GoTypeWithPkgName }}) {{ .API.PackageName }}.{{ .ExportedName }}Request
 `))
 
 // InterfaceSignature returns a string representing the Operation's interface{}
@@ -522,18 +522,3 @@ func (e *example) traverseScalar(s *Shape, required, payload bool) string {
 
 	return str
 }
-
-// A tplMarshalOperation is the top level template for the API that generates
-// type struct for OperationMarshaler with Operation Input pointer as an exported member Input.
-var tplGenMarshalerStruct = template.Must(template.New("genMarshaler").Parse(`
-{{ range $_, $op := $}}
-
-	{{ $opMarshalerName := printf "%sMarshaler" $op.ExportedName -}}
-	
-	// {{$opMarshalerName}} defines marshaler for {{ $op.ExportedName }} operation 
-	type {{ $opMarshalerName }} struct {
-		Input {{$op.InputRef.GoTypeWithPkgNameforType -}}
-	}
-
-{{ end }}
-`))

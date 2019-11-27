@@ -17,6 +17,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/internal/sdkio"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3manager"
 )
 
@@ -41,7 +42,7 @@ func main() {
 
 	log.Println("starting download...")
 	start := time.Now()
-	_, err = downloader.Download(&awstesting.DiscardAt{}, &s3.GetObjectInput{
+	_, err = downloader.Download(&awstesting.DiscardAt{}, &types.GetObjectInput{
 		Bucket: &config.Bucket,
 		Key:    &key,
 	})
@@ -120,7 +121,7 @@ func teardownDownloadTest(bucket, key string) error {
 	}
 	svc := s3.New(cfg)
 
-	resp := svc.DeleteObjectRequest(&s3.DeleteObjectInput{Bucket: &bucket, Key: &key})
+	resp := svc.DeleteObjectRequest(&types.DeleteObjectInput{Bucket: &bucket, Key: &key})
 	_, err = resp.Send(context.Background())
 	return err
 }
@@ -182,7 +183,7 @@ func printAttempts(op string, trace *RequestTrace, verbose bool) {
 func downloadRequestTracer(traces chan<- *RequestTrace) aws.Option {
 	tracerOption := func(r *aws.Request) {
 		id := "op"
-		if v, ok := r.Params.(*s3.GetObjectInput); ok {
+		if v, ok := r.Params.(*types.GetObjectInput); ok {
 			if v.Range != nil {
 				id = *v.Range
 			}

@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/dynamodbattribute"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
 func exitErrorf(msg string, args ...interface{}) {
@@ -41,7 +42,7 @@ func main() {
 	svc := dynamodb.New(awscfg)
 
 	// Build the query input parameters
-	params := &dynamodb.ScanInput{
+	params := &types.ScanInput{
 		TableName: aws.String(cfg.Table),
 	}
 	if cfg.Limit > 0 {
@@ -55,7 +56,7 @@ func main() {
 		exitErrorf("failed to make Query API call, %v", err)
 	}
 
-	items := []Item{}
+	var items []Item
 
 	// Unmarshal the Items field in the result value to the Item Go type.
 	err = dynamodbattribute.UnmarshalListOfMaps(result.Items, &items)
@@ -94,7 +95,7 @@ func (c *Config) Load() error {
 
 	if len(c.Table) == 0 {
 		flag.PrintDefaults()
-		return fmt.Errorf("table name is required.")
+		return fmt.Errorf("table name is required")
 	}
 
 	return nil

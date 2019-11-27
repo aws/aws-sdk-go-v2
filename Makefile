@@ -26,9 +26,9 @@ all: generate unit
 ###################
 # Code Generation #
 ###################
-generate: cleanup-models gen-test gen-endpoints gen-services gen-tools
+generate: cleanup-models gen-endpoints gen-services gen-tools
 
-gen-test: gen-protocol-test
+#gen-test: gen-protocol-test
 #gen-test: gen-protocol-test gen-codegen-test
 
 #gen-codegen-test:

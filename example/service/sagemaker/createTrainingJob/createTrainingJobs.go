@@ -9,6 +9,8 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/enums"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
 
 func exitErrorf(msg string, args ...interface{}) {
@@ -33,13 +35,13 @@ func main() {
 	S3OutputPath := "s3://<bucket where your model artifact will be saved"
 	InstanceCount := int64(2)
 	VolumeSizeInGB := int64(75)
-	TrainingInstanceType := sagemaker.TrainingInstanceType("ml.c4.8xlarge")
+	TrainingInstanceType := enums.TrainingInstanceType("ml.c4.8xlarge")
 	TrainingImage := "174872318107.dkr.ecr.us-west-2.amazonaws.com/kmeans:1"
-	TrainingInputMode := sagemaker.TrainingInputMode("File")
+	TrainingInputMode := enums.TrainingInputMode("File")
 
 	ChannelName := "train"
-	S3DataDistributionType := sagemaker.S3DataDistribution("FullyReplicated")
-	S3DataType := sagemaker.S3DataType("S3Prefix")
+	S3DataDistributionType := enums.S3DataDistribution("FullyReplicated")
+	S3DataType := enums.S3DataType("S3Prefix")
 	S3Uri := "s3://<bucket where the input data is available>"
 
 	HyperParameters := map[string]string{
@@ -48,34 +50,34 @@ func main() {
 		"mini_batch_size": "500",
 	}
 
-	params := &sagemaker.CreateTrainingJobInput{
+	params := &types.CreateTrainingJobInput{
 		RoleArn:         &role,
 		TrainingJobName: &name,
 
-		StoppingCondition: &sagemaker.StoppingCondition{
+		StoppingCondition: &types.StoppingCondition{
 			MaxRuntimeInSeconds: &MaxRuntimeInSeconds,
 		},
 
-		OutputDataConfig: &sagemaker.OutputDataConfig{
+		OutputDataConfig: &types.OutputDataConfig{
 			S3OutputPath: &S3OutputPath,
 		},
 
-		ResourceConfig: &sagemaker.ResourceConfig{
+		ResourceConfig: &types.ResourceConfig{
 			InstanceCount:  &InstanceCount,
 			VolumeSizeInGB: &VolumeSizeInGB,
 			InstanceType:   TrainingInstanceType,
 		},
 
-		AlgorithmSpecification: &sagemaker.AlgorithmSpecification{
+		AlgorithmSpecification: &types.AlgorithmSpecification{
 			TrainingImage:     &TrainingImage,
 			TrainingInputMode: TrainingInputMode,
 		},
 
-		InputDataConfig: []sagemaker.Channel{
+		InputDataConfig: []types.Channel{
 			{
 				ChannelName: &ChannelName,
-				DataSource: &sagemaker.DataSource{
-					S3DataSource: &sagemaker.S3DataSource{
+				DataSource: &types.DataSource{
+					S3DataSource: &types.S3DataSource{
 						S3DataDistributionType: S3DataDistributionType,
 						S3DataType:             S3DataType,
 						S3Uri:                  &S3Uri,

@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 type client struct {
@@ -22,7 +23,7 @@ type client struct {
 // concatenate will contenate key1's object to key2's object under the key testKey
 func (c *client) concatenate(key1, key2, key3 string, uploadID *string) (*string, *string, error) {
 	// The first part to be uploaded which is represented as part number 1
-	req := c.s3Client.UploadPartCopyRequest(&s3.UploadPartCopyInput{
+	req := c.s3Client.UploadPartCopyRequest(&types.UploadPartCopyInput{
 		Bucket:     c.bucket,
 		CopySource: aws.String(url.QueryEscape(*c.bucket + "/" + key1)),
 		PartNumber: aws.Int64(1),
@@ -36,7 +37,7 @@ func (c *client) concatenate(key1, key2, key3 string, uploadID *string) (*string
 
 	// The second part that is going to be appended to the newly created testKey
 	// object.
-	req = c.s3Client.UploadPartCopyRequest(&s3.UploadPartCopyInput{
+	req = c.s3Client.UploadPartCopyRequest(&types.UploadPartCopyInput{
 		Bucket:     c.bucket,
 		CopySource: aws.String(url.QueryEscape(*c.bucket + "/" + key2)),
 		PartNumber: aws.Int64(2),
@@ -76,7 +77,7 @@ func main() {
 	c := client{svc, &bucket}
 
 	// We let the service know that we want to do a multipart upload
-	createReq := c.s3Client.CreateMultipartUploadRequest(&s3.CreateMultipartUploadInput{
+	createReq := c.s3Client.CreateMultipartUploadRequest(&types.CreateMultipartUploadInput{
 		Bucket: &bucket,
 		Key:    &key3,
 	})
@@ -92,12 +93,12 @@ func main() {
 	}
 
 	// We finally complete the multipart upload.
-	compReq := c.s3Client.CompleteMultipartUploadRequest(&s3.CompleteMultipartUploadInput{
+	compReq := c.s3Client.CompleteMultipartUploadRequest(&types.CompleteMultipartUploadInput{
 		Bucket:   &bucket,
 		Key:      &key3,
 		UploadId: output.UploadId,
-		MultipartUpload: &s3.CompletedMultipartUpload{
-			Parts: []s3.CompletedPart{
+		MultipartUpload: &types.CompletedMultipartUpload{
+			Parts: []types.CompletedPart{
 				{
 					ETag:       foo,
 					PartNumber: aws.Int64(1),

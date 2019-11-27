@@ -8,17 +8,18 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 type mockS3Client struct {
 	*s3.Client
 	index   int
-	objects []s3.ListObjectsOutput
+	objects []types.ListObjectsOutput
 }
 
-func (c *mockS3Client) ListObjectsRequest(input *s3.ListObjectsInput) s3.ListObjectsRequest {
+func (c *mockS3Client) ListObjectsRequest(input *types.ListObjectsInput) s3.ListObjectsRequest {
 	req := c.Client.ListObjectsRequest(input)
-	req.Copy = func(v *s3.ListObjectsInput) s3.ListObjectsRequest {
+	req.Copy = func(v *types.ListObjectsInput) s3.ListObjectsRequest {
 		r := c.Client.ListObjectsRequest(v)
 		r.Handlers.Clear()
 		r.Handlers.Send.PushBack(func(r *aws.Request) {
@@ -34,9 +35,9 @@ func (c *mockS3Client) ListObjectsRequest(input *s3.ListObjectsInput) s3.ListObj
 
 func TestListObjectsPagination(t *testing.T) {
 	svc := &mockS3Client{}
-	objects := []s3.ListObjectsOutput{
+	objects := []types.ListObjectsOutput{
 		{
-			Contents: []s3.Object{
+			Contents: []types.Object{
 				{
 					Key: aws.String("1"),
 				},
@@ -45,7 +46,7 @@ func TestListObjectsPagination(t *testing.T) {
 			IsTruncated: aws.Bool(true),
 		},
 		{
-			Contents: []s3.Object{
+			Contents: []types.Object{
 				{
 					Key: aws.String("2"),
 				},
@@ -54,7 +55,7 @@ func TestListObjectsPagination(t *testing.T) {
 			IsTruncated: aws.Bool(true),
 		},
 		{
-			Contents: []s3.Object{
+			Contents: []types.Object{
 				{
 					Key: aws.String("3"),
 				},
@@ -62,7 +63,7 @@ func TestListObjectsPagination(t *testing.T) {
 			IsTruncated: aws.Bool(false),
 		},
 		{
-			Contents: []s3.Object{
+			Contents: []types.Object{
 				{
 					Key: aws.String("2"),
 				},

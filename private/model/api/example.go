@@ -134,7 +134,7 @@ func (ex Example) GoCode() string {
 func generateExampleInput(ex Example) string {
 	if ex.Operation.HasInput() {
 		return fmt.Sprintf("&%s{\n%s\n}\n",
-			ex.Operation.InputRef.Shape.GoTypeWithPkgNameforTypeElem(),
+			ex.Operation.InputRef.Shape.GoTypeWithPkgNameElem(),
 			ex.Builder.BuildShape(&ex.Operation.InputRef, ex.Input, false, false),
 		)
 	}

@@ -12,7 +12,9 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/mediastore"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/types"
 	"github.com/aws/aws-sdk-go-v2/service/mediastoredata"
+	mediastoredata_types "github.com/aws/aws-sdk-go-v2/service/mediastoredata/types"
 )
 
 func main() {
@@ -37,7 +39,7 @@ func main() {
 
 	// Make the PutObject API call with the nonseekable reader, causing the SDK
 	// to send the request body payload a chunked transfer encoding.
-	dataSvc.PutObjectRequest(&mediastoredata.PutObjectInput{
+	dataSvc.PutObjectRequest(&mediastoredata_types.PutObjectInput{
 		Path: &objectPath,
 		Body: body,
 	})
@@ -66,7 +68,7 @@ func getMediaStoreDataClient(containerName string, config aws.Config) (*mediasto
 func containerEndpoint(name string, config aws.Config) (*string, error) {
 	for i := 0; i < 3; i++ {
 		ctrlSvc := mediastore.New(config)
-		descContainerRequest := ctrlSvc.DescribeContainerRequest(&mediastore.DescribeContainerInput{
+		descContainerRequest := ctrlSvc.DescribeContainerRequest(&types.DescribeContainerInput{
 			ContainerName: &name,
 		})
 

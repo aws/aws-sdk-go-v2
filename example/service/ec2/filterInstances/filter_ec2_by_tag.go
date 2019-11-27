@@ -11,6 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/ec2"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
 
 // This example will list instances with a filter
@@ -30,8 +31,8 @@ func main() {
 	svc := ec2.New(cfg)
 
 	fmt.Printf("listing instances with tag %v in: %v\n", nameFilter, awsRegion)
-	params := &ec2.DescribeInstancesInput{
-		Filters: []ec2.Filter{
+	params := &types.DescribeInstancesInput{
+		Filters: []types.Filter{
 			{
 				Name: aws.String("tag:Name"),
 				Values: []string{

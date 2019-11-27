@@ -11,9 +11,11 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/enums"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 var standaloneSignCases = []struct {
@@ -37,11 +39,11 @@ func TestPresignHandler(t *testing.T) {
 	cfg.EndpointResolver = endpoints.NewDefaultResolver()
 
 	svc := s3.New(cfg)
-	req := svc.PutObjectRequest(&s3.PutObjectInput{
+	req := svc.PutObjectRequest(&types.PutObjectInput{
 		Bucket:             aws.String("bucket"),
 		Key:                aws.String("key"),
 		ContentDisposition: aws.String("a+b c$d"),
-		ACL:                s3.ObjectCannedACLPublicRead,
+		ACL:                enums.ObjectCannedACLPublicRead,
 	})
 	req.Time = time.Unix(0, 0)
 	urlstr, err := req.Presign(5 * time.Minute)
@@ -90,11 +92,11 @@ func TestPresignRequest(t *testing.T) {
 	cfg.EndpointResolver = endpoints.NewDefaultResolver()
 
 	svc := s3.New(cfg)
-	req := svc.PutObjectRequest(&s3.PutObjectInput{
+	req := svc.PutObjectRequest(&types.PutObjectInput{
 		Bucket:             aws.String("bucket"),
 		Key:                aws.String("key"),
 		ContentDisposition: aws.String("a+b c$d"),
-		ACL:                s3.ObjectCannedACLPublicRead,
+		ACL:                enums.ObjectCannedACLPublicRead,
 	})
 	req.Time = time.Unix(0, 0)
 	urlstr, headers, err := req.PresignRequest(5 * time.Minute)

@@ -10,6 +10,8 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/enums"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 // Put an ACL on an S3 object
@@ -39,8 +41,8 @@ func main() {
 	flag.Parse()
 
 	// Based off the type, fields must be excluded.
-	switch s3.Type(*granteeTypePtr) {
-	case s3.TypeCanonicalUser:
+	switch enums.Type(*granteeTypePtr) {
+	case enums.TypeCanonicalUser:
 		emailPtr, uriPtr = nil, nil
 		if *displayNamePtr == "" {
 			displayNamePtr = nil
@@ -49,9 +51,9 @@ func main() {
 		if *userPtr == "" {
 			userPtr = nil
 		}
-	case s3.TypeAmazonCustomerByEmail:
+	case enums.TypeAmazonCustomerByEmail:
 		uriPtr, userPtr = nil, nil
-	case s3.TypeGroup:
+	case enums.TypeGroup:
 		emailPtr, userPtr = nil, nil
 	}
 
@@ -65,24 +67,24 @@ func main() {
 
 	svc := s3.New(cfg)
 
-	req := svc.PutObjectAclRequest(&s3.PutObjectAclInput{
+	req := svc.PutObjectAclRequest(&types.PutObjectAclInput{
 		Bucket: bucketPtr,
 		Key:    keyPtr,
-		AccessControlPolicy: &s3.AccessControlPolicy{
-			Owner: &s3.Owner{
+		AccessControlPolicy: &types.AccessControlPolicy{
+			Owner: &types.Owner{
 				DisplayName: ownerNamePtr,
 				ID:          ownerIDPtr,
 			},
-			Grants: []s3.Grant{
+			Grants: []types.Grant{
 				{
-					Grantee: &s3.Grantee{
-						Type:         s3.Type(*granteeTypePtr),
+					Grantee: &types.Grantee{
+						Type:         enums.Type(*granteeTypePtr),
 						DisplayName:  displayNamePtr,
 						URI:          uriPtr,
 						EmailAddress: emailPtr,
 						ID:           userPtr,
 					},
-					Permission: s3.PermissionFullControl,
+					Permission: enums.PermissionFullControl,
 				},
 			},
 		},

@@ -180,23 +180,11 @@ func (s *Shape) MemberNames() []string {
 // GoTypeWithPkgName returns a shape's type as a string with the package name in
 // <packageName>.<type> format. Package naming only applies to structures.
 func (s *Shape) GoTypeWithPkgName() string {
-	return goType(s, true, true, false)
+	return goType(s, true, true)
 }
-
-// GoTypeWithPkgNameforType returns a shape's type as a string with the "types" as package name in
-// <packageName>.<type> format. types package naming only applies to structures.
-func (s *Shape) GoTypeWithPkgNameforType() string {
-	return goType(s, true, true, true)
-}
-
-// GoTypeWithPkgNameforEnum returns a shape's type as a string with the "enums" as package name in
-// <packageName>.<type> format. This only applies for enums. This doesn't return a pointer and is value based
-// func (s *Shape) GoTypeWithPkgNameforEnum() string {
-// 	return goType(s, true, false, false)
-// }
 
 func (s *Shape) GoTypeWithPkgNameElem() string {
-	t := goType(s, true, true, false)
+	t := goType(s, true, true)
 	if strings.HasPrefix(t, "*") {
 		return t[1:]
 	}
@@ -310,7 +298,7 @@ func (s *Shape) GoStructType(name string, ref *ShapeRef) string {
 
 // GoType returns a shape's Go type
 func (s *Shape) GoType() string {
-	return goType(s, false, true, false)
+	return goType(s, false, true)
 }
 
 // GoType returns a shape ref's Go type.
@@ -323,7 +311,7 @@ func (ref *ShapeRef) GoType() string {
 }
 
 // GoTypeWithPkgName returns a shape's type as a string with the package name in
-// <packageName>.<type> format. Package naming only applies to structures.
+// <packageName>.<type> format.
 func (ref *ShapeRef) GoTypeWithPkgName() string {
 	if ref.Shape == nil {
 		panic(fmt.Errorf("missing shape definition on reference for %#v", ref))
@@ -332,14 +320,13 @@ func (ref *ShapeRef) GoTypeWithPkgName() string {
 	return ref.Shape.GoTypeWithPkgName()
 }
 
-// GoTypeWithPkgNameforType returns a shape's type as a string with the "types" as package name in
-// <packageName>.<type> format. types as package naming only applies to structures.
-func (ref *ShapeRef) GoTypeWithPkgNameforType() string {
+// GoTypeWithPkgNameElem returns a value based shape's type with package name .
+func (ref *ShapeRef) GoTypeWithPkgNameElem() string {
 	if ref.Shape == nil {
 		panic(fmt.Errorf("missing shape definition on reference for %#v", ref))
 	}
 
-	return ref.Shape.GoTypeWithPkgNameforType()
+	return ref.Shape.GoTypeWithPkgNameElem()
 }
 
 // Get's the package name of the specific shape
@@ -348,8 +335,12 @@ func getPkgName(s *Shape) string {
 	if pkg != "" {
 		s.API.imports[pkg] = true
 		pkg = path.Base(pkg)
-	} else {
+	} else if s.IsError {
 		pkg = s.API.PackageName()
+	} else if s.IsEnum() {
+		pkg = EnumsPkgName
+	} else {
+		pkg = TypesPkgName
 	}
 
 	return pkg
@@ -357,37 +348,33 @@ func getPkgName(s *Shape) string {
 
 // Returns a string version of the Shape's type.
 // If withPkgName is true, the package name will be added as a prefix
-func goType(s *Shape, withPkgName, pointer bool, isType bool) string {
+func goType(s *Shape, withPkgName, pointer bool) string {
 	prefix := ""
 	if pointer {
 		prefix = "*"
 	}
 
+	var pkgName string
+	pkgName = getPkgName(s)
+
 	switch {
 	case s.IsEnum():
 		s.API.AddSDKImport("service", s.API.PackageName(), EnumsPkgName)
 		if withPkgName {
-			return fmt.Sprintf("enums.%s", s.EnumType())
+			return fmt.Sprintf("%s.%s", pkgName, s.EnumType())
 		}
 		return s.EnumType()
 	case s.Type == "structure":
 		if withPkgName || s.resolvePkg != "" {
-			var pkg string
-			switch isType {
-			case true:
-				pkg = TypesPkgName
-			default:
-				pkg = getPkgName(s)
-			}
-			return fmt.Sprintf("%s%s.%s", prefix, pkg, s.ShapeName)
+			return fmt.Sprintf("%s%s.%s", prefix, pkgName, s.ShapeName)
 		}
 		return prefix + s.ShapeName
 	case s.Type == "map":
-		return "map[string]" + goType(s.ValueRef.Shape, withPkgName, false, isType)
+		return "map[string]" + goType(s.ValueRef.Shape, withPkgName, false)
 	case s.Type == "jsonvalue":
 		return "aws.JSONValue"
 	case s.Type == "list":
-		return "[]" + goType(s.MemberRef.Shape, withPkgName, false, isType)
+		return "[]" + goType(s.MemberRef.Shape, withPkgName, false)
 	case s.Type == "boolean":
 		return prefix + "bool"
 	case s.Type == "string" || s.Type == "character":
@@ -416,16 +403,6 @@ func (s *Shape) GoTypeElem() string {
 	return t
 }
 
-// GoTypeforTypeElem returns the Go type for the Shape. If the shape type is a pointer just
-// the type will be returned minus the pointer *.
-func (s *Shape) GoTypeWithPkgNameforTypeElem() string {
-	t := s.GoTypeWithPkgNameforType()
-	if strings.HasPrefix(t, "*") {
-		return t[1:]
-	}
-	return t
-}
-
 // GoTypeElem returns the Go type for the Shape. If the shape type is a pointer just
 // the type will be returned minus the pointer *.
 func (ref *ShapeRef) GoTypeElem() string {
@@ -434,16 +411,6 @@ func (ref *ShapeRef) GoTypeElem() string {
 	}
 
 	return ref.Shape.GoTypeElem()
-}
-
-// GoTypeforTypeElem returns the Go type for the Shape. If the shape type is a pointer just
-// the type will be returned minus the pointer *.
-func (ref *ShapeRef) GoTypeWithPkgNameforTypeElem() string {
-	if ref.Shape == nil {
-		panic(fmt.Errorf("missing shape definition on reference for %#v", ref))
-	}
-
-	return ref.Shape.GoTypeWithPkgNameforTypeElem()
 }
 
 // ShapeTag is a struct tag that will be applied to a shape's generated code

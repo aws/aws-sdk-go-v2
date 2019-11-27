@@ -11,6 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 // Searches the buckets of an account that match the prefix, and deletes
@@ -26,7 +27,7 @@ func main() {
 	}
 
 	svc := s3.New(cfg)
-	req := svc.ListBucketsRequest(&s3.ListBucketsInput{})
+	req := svc.ListBucketsRequest(&types.ListBucketsInput{})
 	buckets, err := req.Send(context.Background())
 	if err != nil {
 		panic(fmt.Sprintf("failed to list buckets, %v", err))
@@ -68,25 +69,25 @@ func main() {
 func deleteBucket(svc *s3.Client, bucket string) error {
 	bucketName := &bucket
 
-	listReq := svc.ListObjectsRequest(&s3.ListObjectsInput{Bucket: bucketName})
+	listReq := svc.ListObjectsRequest(&types.ListObjectsInput{Bucket: bucketName})
 	objs, err := listReq.Send(context.Background())
 	if err != nil {
 		return fmt.Errorf("failed to list bucket %q objects, %v", *bucketName, err)
 	}
 
 	for _, o := range objs.Contents {
-		delReq := svc.DeleteObjectRequest(&s3.DeleteObjectInput{Bucket: bucketName, Key: o.Key})
+		delReq := svc.DeleteObjectRequest(&types.DeleteObjectInput{Bucket: bucketName, Key: o.Key})
 		delReq.Send(context.Background())
 	}
 
-	listMulReq := svc.ListMultipartUploadsRequest(&s3.ListMultipartUploadsInput{Bucket: bucketName})
+	listMulReq := svc.ListMultipartUploadsRequest(&types.ListMultipartUploadsInput{Bucket: bucketName})
 	uploads, err := listMulReq.Send(context.Background())
 	if err != nil {
 		return fmt.Errorf("failed to list bucket %q multipart objects, %v", *bucketName, err)
 	}
 
 	for _, u := range uploads.Uploads {
-		abortReq := svc.AbortMultipartUploadRequest(&s3.AbortMultipartUploadInput{
+		abortReq := svc.AbortMultipartUploadRequest(&types.AbortMultipartUploadInput{
 			Bucket:   bucketName,
 			Key:      u.Key,
 			UploadId: u.UploadId,
@@ -94,7 +95,7 @@ func deleteBucket(svc *s3.Client, bucket string) error {
 		abortReq.Send(context.Background())
 	}
 
-	_, err = svc.DeleteBucketRequest(&s3.DeleteBucketInput{Bucket: bucketName}).Send(context.Background())
+	_, err = svc.DeleteBucketRequest(&types.DeleteBucketInput{Bucket: bucketName}).Send(context.Background())
 	if err != nil {
 		return fmt.Errorf("failed to delete bucket %q, %v", *bucketName, err)
 	}

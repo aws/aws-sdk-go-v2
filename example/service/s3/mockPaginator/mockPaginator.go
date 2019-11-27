@@ -10,6 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3iface"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 func main() {
@@ -30,11 +31,11 @@ func main() {
 }
 
 func getKeys(svc s3iface.ClientAPI, bucket string) []string {
-	req := svc.ListObjectsRequest(&s3.ListObjectsInput{
+	req := svc.ListObjectsRequest(&types.ListObjectsInput{
 		Bucket: &bucket,
 	})
 	p := s3.NewListObjectsPaginator(req)
-	keys := []string{}
+	var keys []string
 	for p.Next(context.Background()) {
 		page := p.CurrentPage()
 		for _, obj := range page.Contents {

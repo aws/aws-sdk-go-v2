@@ -6,6 +6,7 @@ package api
 import (
 	"bytes"
 	"fmt"
+	"log"
 	"path"
 	"regexp"
 	"sort"
@@ -98,10 +99,6 @@ func (a *API) ImportPath() string {
 // InterfacePackageName returns the package name for the interface.
 func (a *API) InterfacePackageName() string {
 	return a.PackageName() + "iface"
-}
-
-func (a *API) InternalPackageName() string {
-	return a.PackageName() + "_internal"
 }
 
 var stripServiceNamePrefixes = []string{
@@ -204,7 +201,7 @@ func (a *API) ShapeList() []*Shape {
 
 // ShapeListErrors returns a list of the errors defined by the API model
 func (a *API) ShapeListErrors() []*Shape {
-	list := []*Shape{}
+	var list []*Shape
 	for _, n := range a.ShapeNames() {
 		// Ignore error shapes in list
 		if s := a.Shapes[n]; s.IsError {
@@ -327,7 +324,7 @@ func (a *API) APIOperationGoCode(op *Operation) string {
 	a.resetImports()
 	a.AddImport("context")
 	a.AddSDKImport("aws")
-	a.AddSDKImport("service", a.PackageName(), "types")
+	a.AddSDKImport("service", a.PackageName(), TypesPkgName)
 
 	if op.OutputRef.Shape.Placeholder {
 		a.AddSDKImport("private/protocol", a.ProtocolPackage())
@@ -519,8 +516,9 @@ func (a *API) ProtocolCanonicalPackageName() string {
 	case "json":
 		return "aws_jsonrpc"
 	default:
-		return a.Metadata.Protocol
+		log.Fatalf("unknown protocol name in API Metadata : %v", a.Metadata.Protocol)
 	}
+	return ""
 }
 
 var tplServiceDoc = template.Must(template.New("service docs").Funcs(template.FuncMap{

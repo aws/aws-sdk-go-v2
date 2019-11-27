@@ -8,7 +8,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
+	types2 "github.com/aws/aws-sdk-go-v2/service/sqs/types"
 )
 
 func ExampleEndpointResolverFunc() {
@@ -33,7 +35,7 @@ func ExampleEndpointResolverFunc() {
 	// endpoint resolver wrapping the default endpoint resolver.
 	s3Svc := s3.New(cfg)
 	// Operation calls will be made to the custom endpoint.
-	objReq := s3Svc.GetObjectRequest(&s3.GetObjectInput{
+	objReq := s3Svc.GetObjectRequest(&types.GetObjectInput{
 		Bucket: aws.String("myBucket"),
 		Key:    aws.String("myObjectKey"),
 	})
@@ -49,7 +51,7 @@ func ExampleEndpointResolverFunc() {
 	sqsSvc := sqs.New(cfg)
 	// Operation calls will be made to the default endpoint for SQS for the
 	// region configured.
-	msgReq := sqsSvc.ReceiveMessageRequest(&sqs.ReceiveMessageInput{
+	msgReq := sqsSvc.ReceiveMessageRequest(&types2.ReceiveMessageInput{
 		QueueUrl: aws.String("my-queue-url"),
 	})
 	msgResp, err := msgReq.Send(context.Background())

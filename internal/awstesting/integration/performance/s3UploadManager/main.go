@@ -4,7 +4,6 @@ package main
 
 import (
 	"flag"
-	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"log"
 	"os"
 	"path/filepath"
@@ -12,9 +11,11 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3manager"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 var config Config
@@ -138,7 +139,7 @@ func printAttempts(op string, trace *RequestTrace, verbose bool) {
 func uploadRequestTracer(traces chan<- *RequestTrace) aws.Option {
 	tracerOption := func(r *aws.Request) {
 		id := "op"
-		if v, ok := r.Params.(*s3.UploadPartInput); ok {
+		if v, ok := r.Params.(*types.UploadPartInput); ok {
 			id = strconv.FormatInt(*v.PartNumber, 10)
 		}
 		tracer := NewRequestTrace(r.Context(), r.Operation.Name, id)

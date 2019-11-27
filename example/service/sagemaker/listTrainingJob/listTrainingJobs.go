@@ -10,6 +10,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
 
 func exitErrorf(msg string, args ...interface{}) {
@@ -39,7 +40,7 @@ func main() {
 
 	sagemakerSvc := sagemaker.New(cfg)
 
-	req := sagemakerSvc.ListTrainingJobsRequest(&sagemaker.ListTrainingJobsInput{MaxResults: &x})
+	req := sagemakerSvc.ListTrainingJobsRequest(&types.ListTrainingJobsInput{MaxResults: &x})
 	resp, err := req.Send(context.TODO())
 	if err != nil {
 		exitErrorf("failed to list training jobs, %v", err)

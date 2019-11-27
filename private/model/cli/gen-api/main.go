@@ -284,7 +284,7 @@ func writeAPIFile(g *generateInfo) error {
 			filepath.Join(g.PackageDir, api.TypesPkgName, "api_op_"+op.ExportedName+".go"),
 			codeLayout,
 			"",
-			"types",
+			api.TypesPkgName,
 			g.API.APIOperationTypeGoCode(op),
 		); err != nil {
 			return fmt.Errorf("failed to write %s operation types file, %v", opName, err)
@@ -294,7 +294,7 @@ func writeAPIFile(g *generateInfo) error {
 	if err := writeGoFile(filepath.Join(g.PackageDir, api.TypesPkgName, "api_types.go"),
 		codeLayout,
 		"",
-		"types",
+		api.TypesPkgName,
 		g.API.APIParamShapesGoCode(),
 	); err != nil {
 		return err
@@ -303,7 +303,7 @@ func writeAPIFile(g *generateInfo) error {
 	if err := writeGoFile(filepath.Join(g.PackageDir, api.EnumsPkgName, "api_enums.go"),
 		codeLayout,
 		"",
-		"enums",
+		api.EnumsPkgName,
 		g.API.APIEnumsGoCode(),
 	); err != nil {
 		return err
