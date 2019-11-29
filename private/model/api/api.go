@@ -319,12 +319,13 @@ func (a *API) APIGoCode() string {
 // string.
 func (a *API) APIOperationGoCode(op *Operation) string {
 	a.resetImports()
-	a.AddSDKImport("aws")
-	a.AddSDKImport("internal/awsutil")
 	a.AddImport("context")
+	a.AddSDKImport("aws")
+	a.AddSDKImport("service", a.PackageName(), TypesPkgName)
+	a.AddSDKImport("private/protocol", a.ProtocolPackage())
+	a.AddSDKImport("service", a.PackageName(), "internal", a.ProtocolCanonicalPackageName())
 
 	if op.OutputRef.Shape.Placeholder {
-		a.AddSDKImport("private/protocol", a.ProtocolPackage())
 		a.AddSDKImport("private/protocol")
 	}
 	if !a.NoGenMarshalers || !a.NoGenUnmarshalers {
@@ -983,3 +984,227 @@ func (a *API) hasNonIOShapes() bool {
 	}
 	return false
 }
+
+func (a *API) APIMarshalOperationGoCode() string {
+
+	a.resetImports()
+	a.AddImport("bytes")
+	a.AddSDKImport("aws")
+	a.AddSDKImport("aws/awserr")
+	a.AddSDKImport(path.Join("service", a.PackageName(), "types"))
+
+	importStubs := `
+	var _ bytes.Buffer
+	var _ awserr.Error
+	`
+
+	var genMarshalerBuf bytes.Buffer
+	err := tplGenMarshalerStruct.Execute(&genMarshalerBuf, a.Operations)
+	if err != nil {
+		panic(err)
+	}
+
+	var marshalOpBuf bytes.Buffer
+	err = tplMarshalOperation.Execute(&marshalOpBuf, a)
+
+	var marshalInputShapeBuf bytes.Buffer
+
+	switch a.ProtocolCanonicalPackageName() {
+	case "aws_restxml":
+		a.AddImport("encoding/xml")
+		a.AddSDKImport("private/protocol/rest")
+		a.AddSDKImport("private/protocol/xml/xmlutil")
+		err = tplMarshalInputShapeAWSRESTXML.Execute(&marshalInputShapeBuf, a)
+	case "aws_ec2query":
+		a.AddSDKImport("private/protocol/ec2query")
+		err = tplMarshalInputShapeAWSEC2Query.Execute(&marshalInputShapeBuf, a)
+	case "aws_restjson":
+		a.AddSDKImport("private/protocol/rest")
+		a.AddSDKImport("private/protocol/jsonrpc")
+		err = tplMarshalInputShapeAWSRESTJSON.Execute(&marshalInputShapeBuf, a)
+	case "aws_jsonrpc":
+		a.AddSDKImport("private/protocol/jsonrpc")
+		err = tplMarshalInputShapeAWSJSON.Execute(&marshalInputShapeBuf, a)
+	case "aws_query":
+		a.AddSDKImport("private/protocol/query")
+		err = tplMarshalInputShapeAWSQuery.Execute(&marshalInputShapeBuf, a)
+	case "aws_xml":
+		a.AddImport("encoding/xml")
+		a.AddSDKImport("private/protocol/xml/xmlutil")
+		err = tplMarshalInputShapeAWSXML.Execute(&marshalInputShapeBuf, a)
+	}
+
+	return a.importsGoCode() + importStubs + strings.TrimSpace(genMarshalerBuf.String()) + "\n" +
+		strings.TrimSpace(marshalInputShapeBuf.String()) + "\n" + strings.TrimSpace(marshalOpBuf.String())
+}
+
+func getMarshalFuncName(protocolName string, marshalShapeFuncName string) []string {
+	switch protocolName {
+	case "aws_restxml":
+		return []string{marshalShapeFuncName + "REST", marshalShapeFuncName + "XML"}
+	case "aws_restjson":
+		return []string{marshalShapeFuncName + "REST", marshalShapeFuncName + "JSON"}
+	case "aws_jsonrpc":
+		return []string{marshalShapeFuncName + "JSON"}
+	case "aws_xml":
+		return []string{marshalShapeFuncName + "XML"}
+	case "aws_ec2query":
+		return []string{marshalShapeFuncName + "EC2Query"}
+	case "aws_query":
+		return []string{marshalShapeFuncName + "Query"}
+	}
+	return []string{}
+}
+
+// tplMarshalOperation is a top level template of API. The template is used to generate
+// The MarshalOperation method on the operation marshaler.
+// It also generates a GetNamedHandler method on the operation marshaler, which returns a Named Handler
+var tplMarshalOperation = template.Must(template.New("marshalOperation").Funcs(template.FuncMap{
+	"GetMarshalFuncName": getMarshalFuncName,
+}).Parse(
+	`
+{{ $protocolName := printf "%s" .ProtocolPackage -}}
+{{ range $_, $op := $.Operations}}
+	{{ $opMarshalerName := printf "%sMarshaler" $op.ExportedName -}}
+	{{ $marshalShapeFuncName := printf "Marshal%sInputShapeAWS" $op.ExportedName -}}
+	
+	func (m {{$opMarshalerName}}) MarshalOperation (r *aws.Request) {
+        var err error
+		{{ range $_, $fnName := GetMarshalFuncName $.ProtocolCanonicalPackageName $marshalShapeFuncName}}
+			err = {{ $fnName -}}(m.Input, r)
+			if err != nil {
+				r.Error = err
+			}
+		{{ end }}
+	}
+	// GetNamedBuildHandler returns a Named Build Handler for an operation marshal function
+	func (m {{$opMarshalerName}}) GetNamedBuildHandler() aws.NamedHandler{
+	{{ $buildHandlerName := printf "%s.BuildHandler" $op.ExportedName -}}
+		const BuildHandler = "{{ $buildHandlerName}}"
+		return aws.NamedHandler{
+			Name: BuildHandler,
+			Fn:   m.MarshalOperation,
+		}
+	}
+{{ end }}
+`))
+
+var tplMarshalInputShapeAWSRESTXML = template.Must(template.New("marshalInputShapeAWSRESTXML").Parse(
+	`
+{{ range $_, $op := $.Operations}}
+	{{ $opMarshalerName := printf "%sMarshaler" $op.ExportedName -}}
+	{{ $fnName := printf "Marshal%sInputShapeAWSREST" $op.ExportedName -}}
+	func {{$fnName}} (v {{ $op.InputRef.GoTypeWithPkgName }}, r *aws.Request) error {
+		// delegate to reflection based marshaling	
+		rest.Build(r)
+		return nil		
+	}
+	{{ $fnName = printf "Marshal%sInputShapeAWSXML" $op.ExportedName -}}
+	func {{$fnName}} (v {{ $op.InputRef.GoTypeWithPkgName }}, r *aws.Request) error {
+		// delegate to reflection based marshaling	
+		if t := rest.PayloadType(r.Params); t == "structure" || t == "" {
+			var buf bytes.Buffer
+			err := xmlutil.BuildXML(r.Params, xml.NewEncoder(&buf))
+			if err != nil {
+				r.Error = awserr.New("SerializationError", "failed to encode rest XML request", err)
+				return err
+			}
+			r.SetBufferBody(buf.Bytes())
+		}
+		return nil
+	}
+{{ end }}	
+`))
+
+var tplMarshalInputShapeAWSRESTJSON = template.Must(template.New("marshalInputShapeAWSRESTJSON").Parse(
+	`
+{{ range $_, $op := $.Operations}}
+	{{ $opMarshalerName := printf "%sMarshaler" $op.ExportedName -}}
+	{{ $fnName := printf "Marshal%sInputShapeAWSREST" $op.ExportedName -}}
+	func {{$fnName}} (v {{ $op.InputRef.GoTypeWithPkgName }}, r *aws.Request) error {
+		// delegate to reflection based marshaling	
+		rest.Build(r)
+		return nil		
+	}
+	{{ $fnName = printf "Marshal%sInputShapeAWSJSON" $op.ExportedName -}}
+	func {{$fnName}} (v {{ $op.InputRef.GoTypeWithPkgName }}, r *aws.Request) error {
+		// delegate to reflection based marshaling	
+		if t := rest.PayloadType(r.Params); t == "structure" || t == "" {
+			jsonrpc.Build(r)
+		}	
+		return nil
+	}
+{{ end }}	
+`))
+
+// TODO: Remove this Rest shape marshal function
+var tplMarshalInputShapeAWSREST = template.Must(template.New("marshalInputShapeAWSREST").Parse(
+	`
+{{ range $_, $op := $.Operations}}
+	{{ $opMarshalerName := printf "%sMarshaler" $op.ExportedName -}}
+	{{ $fnName := printf "Marshal%sInputShapeAWSREST" $op.ExportedName -}}
+	func {{$fnName}} (v {{ $op.InputRef.GoTypeWithPkgName }}, r *aws.Request) error {
+		// delegate to reflection based marshaling	
+		rest.Build(r)
+		return nil		
+	}
+{{ end }}	
+`))
+
+var tplMarshalInputShapeAWSJSON = template.Must(template.New("marshalInputShapeAWSJSON").Parse(
+	`
+{{ range $_, $op := $.Operations}}
+	{{ $opMarshalerName := printf "%sMarshaler" $op.ExportedName -}}
+	{{ $fnName := printf "Marshal%sInputShapeAWSJSON" $op.ExportedName -}}
+	func {{$fnName}} (v {{ $op.InputRef.GoTypeWithPkgName }}, r *aws.Request) error {
+		// delegate to reflection based marshaling	
+		jsonrpc.Build(r)
+		return nil
+	}
+{{ end }}	
+`))
+
+var tplMarshalInputShapeAWSXML = template.Must(template.New("marshalInputShapeAWSXML").Parse(
+	`
+{{ range $_, $op := $.Operations}}
+	{{ $opMarshalerName := printf "%sMarshaler" $op.ExportedName -}}
+	{{ $fnName := printf "Marshal%sInputShapeAWSXML" $op.ExportedName -}}
+	func {{$fnName}} (v {{ $op.InputRef.GoTypeWithPkgName }}, r *aws.Request) error {
+		// delegate to reflection based marshaling	
+		var buf bytes.Buffer
+		err := xmlutil.BuildXML(r.Params, xml.NewEncoder(&buf))
+		if err != nil {
+			r.Error = awserr.New("SerializationError", "failed to encode rest XML request", err)
+			return err
+		}
+		r.SetBufferBody(buf.Bytes())
+		return nil
+	}
+{{ end }}	
+`))
+
+var tplMarshalInputShapeAWSEC2Query = template.Must(template.New("marshalInputShapeAWSEC2Query").Parse(
+	`
+{{ range $_, $op := $.Operations}}
+	{{ $opMarshalerName := printf "%sMarshaler" $op.ExportedName -}}
+	{{ $fnName := printf "Marshal%sInputShapeAWSEC2Query" $op.ExportedName -}}
+	func {{$fnName}} (v {{ $op.InputRef.GoTypeWithPkgName }}, r *aws.Request) error {
+		// delegate to reflection based marshaling	
+		ec2query.Build(r)	
+		return nil
+	}
+{{ end }}	
+`))
+
+var tplMarshalInputShapeAWSQuery = template.Must(template.New("marshalInputShapeAWSQuery").Parse(
+	`
+{{ range $_, $op := $.Operations}}
+	{{ $opMarshalerName := printf "%sMarshaler" $op.ExportedName -}}
+	{{ $fnName := printf "Marshal%sInputShapeAWSQuery" $op.ExportedName -}}
+	func {{$fnName}} (v {{ $op.InputRef.GoTypeWithPkgName }}, r *aws.Request) error {
+		// delegate to reflection based marshaling	
+		query.Build(r)	
+		return nil
+	}
+{{ end }}	
+`))
