@@ -139,6 +139,10 @@ func (c *{{ .API.StructName }}) {{ $reqType }}(input {{ .InputRef.GoTypeWithPkgN
 	
 	{{ $operationMarshalerName := printf "%sMarshaler" $.ExportedName -}}
 	req := c.newRequest(op, input, &{{ .OutputRef.GoTypeWithPkgNameElem }}{})
+
+	// swap existing build handler on svc, with a new named build handler
+	req.Handlers.Build.Swap({{ .API.ProtocolPackage }}.BuildHandler.Name, {{ .API.ProtocolCanonicalPackageName }}.{{ $operationMarshalerName }}{ Input : input }.GetNamedBuildHandler())
+
 	{{ if eq .OutputRef.Shape.Placeholder true -}}
 		req.Handlers.Unmarshal.Remove({{ .API.ProtocolPackage }}.UnmarshalHandler)
 		req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
@@ -522,3 +526,16 @@ func (e *example) traverseScalar(s *Shape, required, payload bool) string {
 
 	return str
 }
+
+// A tplMarshalOperation is the top level template for the API that generates
+// type struct for OperationMarshaler with Operation Input pointer as an exported member Input.
+var tplGenMarshalerStruct = template.Must(template.New("genMarshaler").Parse(`
+{{ range $_, $op := $}}
+	{{ $opMarshalerName := printf "%sMarshaler" $op.ExportedName -}}
+	
+	// {{$opMarshalerName}} defines marshaler for {{ $op.ExportedName }} operation 
+	type {{ $opMarshalerName }} struct {
+		Input {{$op.InputRef.GoTypeWithPkgName -}}
+	}
+{{ end }}
+`))

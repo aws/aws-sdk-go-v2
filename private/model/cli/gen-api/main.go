@@ -171,6 +171,7 @@ func writeServiceFiles(g *generateInfo, pkgDir string) {
 	Must(writeWaitersFile(g))
 	Must(writeAPIErrorsFile(g))
 	Must(writeExamplesFile(g))
+	Must(writeAPISerializerFile(g))
 
 	if g.API.PackageName() == "s3" {
 		Must(writeS3ManagerUploadInputFile(g))
@@ -337,5 +338,22 @@ func writeAPISmokeTestsFile(g *generateInfo) error {
 		"// +build integration\n",
 		g.API.PackageName()+"_test",
 		g.API.APISmokeTestsGoCode(),
+	)
+}
+
+func writeAPISerializerFile(g *generateInfo) error {
+	const pkgDoc = `
+	// Package %s service, marshal.go contains the generated operation marshalers and methods on it. 
+`
+	err := os.MkdirAll(filepath.Join(g.PackageDir, "internal", g.API.ProtocolCanonicalPackageName()), 0775)
+	if err != nil {
+		return err
+	}
+
+	return writeGoFile(filepath.Join(g.PackageDir, "internal", g.API.ProtocolCanonicalPackageName(), "marshal.go"),
+		codeLayout,
+		fmt.Sprintf(pkgDoc, g.API.ProtocolCanonicalPackageName()),
+		g.API.ProtocolCanonicalPackageName(),
+		g.API.APIMarshalOperationGoCode(),
 	)
 }
