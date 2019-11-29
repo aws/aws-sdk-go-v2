@@ -18,15 +18,15 @@ type service struct {
 }
 
 func (a *API) EnableSelectGeneratedMarshalers() {
-	// Selectivily enable generated marshalers as available
+	// Selectively enable generated marshalers as available
 	a.NoGenMarshalers = true
 	a.NoGenUnmarshalers = true
 
 	// Enable generated marshalers
-	// switch a.Metadata.Protocol {
-	// case "rest-xml", "rest-json":
-	// 	a.NoGenMarshalers = false
-	// }
+	switch a.Metadata.Protocol {
+	case "rest-xml", "rest-json":
+		a.NoGenMarshalers = false
+	}
 }
 
 // customizationPasses Executes customization logic for the API by package name.

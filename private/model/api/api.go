@@ -305,7 +305,7 @@ func (a *API) APIGoCode() string {
 		a.AddSDKImport("private/protocol")
 	}
 	if !a.NoGenMarshalers || !a.NoGenUnmarshalers {
-		a.AddSDKImport("private/protocol")
+		a.imports[path.Join(SDKImportRoot, "private/protocol")] = true
 	}
 
 	var buf bytes.Buffer
@@ -330,9 +330,6 @@ func (a *API) APIOperationGoCode(op *Operation) string {
 		a.AddSDKImport("private/protocol", a.ProtocolPackage())
 		a.AddSDKImport("private/protocol")
 	}
-	if !a.NoGenMarshalers || !a.NoGenUnmarshalers {
-		a.AddSDKImport("private/protocol")
-	}
 
 	// Need to generate code before imports are generated.
 	code := op.GoCode()
@@ -345,6 +342,9 @@ func (a *API) APIOperationTypeGoCode(op *Operation) string {
 	a.resetImports()
 	a.AddSDKImport("internal/awsutil")
 
+	if !a.NoGenMarshalers || !a.NoGenUnmarshalers {
+		a.AddSDKImport("private/protocol")
+	}
 	code := op.IOGoCode()
 	return a.importsGoCode() + code
 }
