@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/types"
 )
 
 var (
@@ -29,8 +30,8 @@ func setupChecksumValidation(r *request.Request) {
 
 func verifySendMessage(r *request.Request) {
 	if r.ParamsFilled() {
-		in := r.Params.(*SendMessageInput)
-		out := r.Data.(*SendMessageOutput)
+		in := r.Params.(*types.SendMessageInput)
+		out := r.Data.(*types.SendMessageOutput)
 		err := checksumsMatch(in.MessageBody, out.MD5OfMessageBody)
 		if err != nil {
 			setChecksumError(r, err.Error())
@@ -40,15 +41,15 @@ func verifySendMessage(r *request.Request) {
 
 func verifySendMessageBatch(r *request.Request) {
 	if r.ParamsFilled() {
-		entries := map[string]SendMessageBatchResultEntry{}
+		entries := map[string]types.SendMessageBatchResultEntry{}
 		ids := []string{}
 
-		out := r.Data.(*SendMessageBatchOutput)
+		out := r.Data.(*types.SendMessageBatchOutput)
 		for _, entry := range out.Successful {
 			entries[*entry.Id] = entry
 		}
 
-		in := r.Params.(*SendMessageBatchInput)
+		in := r.Params.(*types.SendMessageBatchInput)
 		for _, entry := range in.Entries {
 			if e, ok := entries[*entry.Id]; ok {
 				if err := checksumsMatch(entry.MessageBody, e.MD5OfMessageBody); err != nil {
@@ -65,7 +66,7 @@ func verifySendMessageBatch(r *request.Request) {
 func verifyReceiveMessage(r *request.Request) {
 	if r.ParamsFilled() {
 		ids := []string{}
-		out := r.Data.(*ReceiveMessageOutput)
+		out := r.Data.(*types.ReceiveMessageOutput)
 		for i, msg := range out.Messages {
 			err := checksumsMatch(msg.Body, msg.MD5OfBody)
 			if err != nil {

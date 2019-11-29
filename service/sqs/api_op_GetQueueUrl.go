@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/types"
 )
-
-type GetQueueUrlInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the queue whose URL must be fetched. Maximum 80 characters. Valid
-	// values: alphanumeric characters, hyphens (-), and underscores (_).
-	//
-	// Queue URLs and names are case-sensitive.
-	//
-	// QueueName is a required field
-	QueueName *string `type:"string" required:"true"`
-
-	// The AWS account ID of the account that created the queue.
-	QueueOwnerAWSAccountId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetQueueUrlInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetQueueUrlInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetQueueUrlInput"}
-
-	if s.QueueName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QueueName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// For more information, see Interpreting Responses (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-api-responses.html)
-// in the Amazon Simple Queue Service Developer Guide.
-type GetQueueUrlOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The URL of the queue.
-	QueueUrl *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetQueueUrlOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetQueueUrl = "GetQueueUrl"
 
@@ -79,7 +31,7 @@ const opGetQueueUrl = "GetQueueUrl"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/GetQueueUrl
-func (c *Client) GetQueueUrlRequest(input *GetQueueUrlInput) GetQueueUrlRequest {
+func (c *Client) GetQueueUrlRequest(input *types.GetQueueUrlInput) GetQueueUrlRequest {
 	op := &aws.Operation{
 		Name:       opGetQueueUrl,
 		HTTPMethod: "POST",
@@ -87,10 +39,10 @@ func (c *Client) GetQueueUrlRequest(input *GetQueueUrlInput) GetQueueUrlRequest 
 	}
 
 	if input == nil {
-		input = &GetQueueUrlInput{}
+		input = &types.GetQueueUrlInput{}
 	}
 
-	req := c.newRequest(op, input, &GetQueueUrlOutput{})
+	req := c.newRequest(op, input, &types.GetQueueUrlOutput{})
 	return GetQueueUrlRequest{Request: req, Input: input, Copy: c.GetQueueUrlRequest}
 }
 
@@ -98,8 +50,8 @@ func (c *Client) GetQueueUrlRequest(input *GetQueueUrlInput) GetQueueUrlRequest 
 // GetQueueUrl API operation.
 type GetQueueUrlRequest struct {
 	*aws.Request
-	Input *GetQueueUrlInput
-	Copy  func(*GetQueueUrlInput) GetQueueUrlRequest
+	Input *types.GetQueueUrlInput
+	Copy  func(*types.GetQueueUrlInput) GetQueueUrlRequest
 }
 
 // Send marshals and sends the GetQueueUrl API request.
@@ -111,7 +63,7 @@ func (r GetQueueUrlRequest) Send(ctx context.Context) (*GetQueueUrlResponse, err
 	}
 
 	resp := &GetQueueUrlResponse{
-		GetQueueUrlOutput: r.Request.Data.(*GetQueueUrlOutput),
+		GetQueueUrlOutput: r.Request.Data.(*types.GetQueueUrlOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +73,7 @@ func (r GetQueueUrlRequest) Send(ctx context.Context) (*GetQueueUrlResponse, err
 // GetQueueUrlResponse is the response type for the
 // GetQueueUrl API operation.
 type GetQueueUrlResponse struct {
-	*GetQueueUrlOutput
+	*types.GetQueueUrlOutput
 
 	response *aws.Response
 }

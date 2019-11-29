@@ -6,58 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/types"
 )
-
-type DeleteMessageInput struct {
-	_ struct{} `type:"structure"`
-
-	// The URL of the Amazon SQS queue from which messages are deleted.
-	//
-	// Queue URLs and names are case-sensitive.
-	//
-	// QueueUrl is a required field
-	QueueUrl *string `type:"string" required:"true"`
-
-	// The receipt handle associated with the message to delete.
-	//
-	// ReceiptHandle is a required field
-	ReceiptHandle *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteMessageInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteMessageInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteMessageInput"}
-
-	if s.QueueUrl == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
-	}
-
-	if s.ReceiptHandle == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReceiptHandle"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteMessageOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteMessageOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteMessage = "DeleteMessage"
 
@@ -93,7 +45,7 @@ const opDeleteMessage = "DeleteMessage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessage
-func (c *Client) DeleteMessageRequest(input *DeleteMessageInput) DeleteMessageRequest {
+func (c *Client) DeleteMessageRequest(input *types.DeleteMessageInput) DeleteMessageRequest {
 	op := &aws.Operation{
 		Name:       opDeleteMessage,
 		HTTPMethod: "POST",
@@ -101,10 +53,10 @@ func (c *Client) DeleteMessageRequest(input *DeleteMessageInput) DeleteMessageRe
 	}
 
 	if input == nil {
-		input = &DeleteMessageInput{}
+		input = &types.DeleteMessageInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteMessageOutput{})
+	req := c.newRequest(op, input, &types.DeleteMessageOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteMessageRequest{Request: req, Input: input, Copy: c.DeleteMessageRequest}
@@ -114,8 +66,8 @@ func (c *Client) DeleteMessageRequest(input *DeleteMessageInput) DeleteMessageRe
 // DeleteMessage API operation.
 type DeleteMessageRequest struct {
 	*aws.Request
-	Input *DeleteMessageInput
-	Copy  func(*DeleteMessageInput) DeleteMessageRequest
+	Input *types.DeleteMessageInput
+	Copy  func(*types.DeleteMessageInput) DeleteMessageRequest
 }
 
 // Send marshals and sends the DeleteMessage API request.
@@ -127,7 +79,7 @@ func (r DeleteMessageRequest) Send(ctx context.Context) (*DeleteMessageResponse,
 	}
 
 	resp := &DeleteMessageResponse{
-		DeleteMessageOutput: r.Request.Data.(*DeleteMessageOutput),
+		DeleteMessageOutput: r.Request.Data.(*types.DeleteMessageOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +89,7 @@ func (r DeleteMessageRequest) Send(ctx context.Context) (*DeleteMessageResponse,
 // DeleteMessageResponse is the response type for the
 // DeleteMessage API operation.
 type DeleteMessageResponse struct {
-	*DeleteMessageOutput
+	*types.DeleteMessageOutput
 
 	response *aws.Response
 }

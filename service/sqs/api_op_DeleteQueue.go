@@ -6,49 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/types"
 )
-
-type DeleteQueueInput struct {
-	_ struct{} `type:"structure"`
-
-	// The URL of the Amazon SQS queue to delete.
-	//
-	// Queue URLs and names are case-sensitive.
-	//
-	// QueueUrl is a required field
-	QueueUrl *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteQueueInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteQueueInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteQueueInput"}
-
-	if s.QueueUrl == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteQueueOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteQueueOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteQueue = "DeleteQueue"
 
@@ -81,7 +42,7 @@ const opDeleteQueue = "DeleteQueue"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteQueue
-func (c *Client) DeleteQueueRequest(input *DeleteQueueInput) DeleteQueueRequest {
+func (c *Client) DeleteQueueRequest(input *types.DeleteQueueInput) DeleteQueueRequest {
 	op := &aws.Operation{
 		Name:       opDeleteQueue,
 		HTTPMethod: "POST",
@@ -89,10 +50,10 @@ func (c *Client) DeleteQueueRequest(input *DeleteQueueInput) DeleteQueueRequest 
 	}
 
 	if input == nil {
-		input = &DeleteQueueInput{}
+		input = &types.DeleteQueueInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteQueueOutput{})
+	req := c.newRequest(op, input, &types.DeleteQueueOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteQueueRequest{Request: req, Input: input, Copy: c.DeleteQueueRequest}
@@ -102,8 +63,8 @@ func (c *Client) DeleteQueueRequest(input *DeleteQueueInput) DeleteQueueRequest 
 // DeleteQueue API operation.
 type DeleteQueueRequest struct {
 	*aws.Request
-	Input *DeleteQueueInput
-	Copy  func(*DeleteQueueInput) DeleteQueueRequest
+	Input *types.DeleteQueueInput
+	Copy  func(*types.DeleteQueueInput) DeleteQueueRequest
 }
 
 // Send marshals and sends the DeleteQueue API request.
@@ -115,7 +76,7 @@ func (r DeleteQueueRequest) Send(ctx context.Context) (*DeleteQueueResponse, err
 	}
 
 	resp := &DeleteQueueResponse{
-		DeleteQueueOutput: r.Request.Data.(*DeleteQueueOutput),
+		DeleteQueueOutput: r.Request.Data.(*types.DeleteQueueOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +86,7 @@ func (r DeleteQueueRequest) Send(ctx context.Context) (*DeleteQueueResponse, err
 // DeleteQueueResponse is the response type for the
 // DeleteQueue API operation.
 type DeleteQueueResponse struct {
-	*DeleteQueueOutput
+	*types.DeleteQueueOutput
 
 	response *aws.Response
 }

@@ -10,6 +10,7 @@ package sqsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        sqsiface.ClientPI
 //    }
-//    func (m *mockClientClient) AddPermission(input *sqs.AddPermissionInput) (*sqs.AddPermissionOutput, error) {
+//    func (m *mockClientClient) AddPermission(input *types.AddPermissionInput) (*types.AddPermissionOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,45 +62,45 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AddPermissionRequest(*sqs.AddPermissionInput) sqs.AddPermissionRequest
+	AddPermissionRequest(*types.AddPermissionInput) sqs.AddPermissionRequest
 
-	ChangeMessageVisibilityRequest(*sqs.ChangeMessageVisibilityInput) sqs.ChangeMessageVisibilityRequest
+	ChangeMessageVisibilityRequest(*types.ChangeMessageVisibilityInput) sqs.ChangeMessageVisibilityRequest
 
-	ChangeMessageVisibilityBatchRequest(*sqs.ChangeMessageVisibilityBatchInput) sqs.ChangeMessageVisibilityBatchRequest
+	ChangeMessageVisibilityBatchRequest(*types.ChangeMessageVisibilityBatchInput) sqs.ChangeMessageVisibilityBatchRequest
 
-	CreateQueueRequest(*sqs.CreateQueueInput) sqs.CreateQueueRequest
+	CreateQueueRequest(*types.CreateQueueInput) sqs.CreateQueueRequest
 
-	DeleteMessageRequest(*sqs.DeleteMessageInput) sqs.DeleteMessageRequest
+	DeleteMessageRequest(*types.DeleteMessageInput) sqs.DeleteMessageRequest
 
-	DeleteMessageBatchRequest(*sqs.DeleteMessageBatchInput) sqs.DeleteMessageBatchRequest
+	DeleteMessageBatchRequest(*types.DeleteMessageBatchInput) sqs.DeleteMessageBatchRequest
 
-	DeleteQueueRequest(*sqs.DeleteQueueInput) sqs.DeleteQueueRequest
+	DeleteQueueRequest(*types.DeleteQueueInput) sqs.DeleteQueueRequest
 
-	GetQueueAttributesRequest(*sqs.GetQueueAttributesInput) sqs.GetQueueAttributesRequest
+	GetQueueAttributesRequest(*types.GetQueueAttributesInput) sqs.GetQueueAttributesRequest
 
-	GetQueueUrlRequest(*sqs.GetQueueUrlInput) sqs.GetQueueUrlRequest
+	GetQueueUrlRequest(*types.GetQueueUrlInput) sqs.GetQueueUrlRequest
 
-	ListDeadLetterSourceQueuesRequest(*sqs.ListDeadLetterSourceQueuesInput) sqs.ListDeadLetterSourceQueuesRequest
+	ListDeadLetterSourceQueuesRequest(*types.ListDeadLetterSourceQueuesInput) sqs.ListDeadLetterSourceQueuesRequest
 
-	ListQueueTagsRequest(*sqs.ListQueueTagsInput) sqs.ListQueueTagsRequest
+	ListQueueTagsRequest(*types.ListQueueTagsInput) sqs.ListQueueTagsRequest
 
-	ListQueuesRequest(*sqs.ListQueuesInput) sqs.ListQueuesRequest
+	ListQueuesRequest(*types.ListQueuesInput) sqs.ListQueuesRequest
 
-	PurgeQueueRequest(*sqs.PurgeQueueInput) sqs.PurgeQueueRequest
+	PurgeQueueRequest(*types.PurgeQueueInput) sqs.PurgeQueueRequest
 
-	ReceiveMessageRequest(*sqs.ReceiveMessageInput) sqs.ReceiveMessageRequest
+	ReceiveMessageRequest(*types.ReceiveMessageInput) sqs.ReceiveMessageRequest
 
-	RemovePermissionRequest(*sqs.RemovePermissionInput) sqs.RemovePermissionRequest
+	RemovePermissionRequest(*types.RemovePermissionInput) sqs.RemovePermissionRequest
 
-	SendMessageRequest(*sqs.SendMessageInput) sqs.SendMessageRequest
+	SendMessageRequest(*types.SendMessageInput) sqs.SendMessageRequest
 
-	SendMessageBatchRequest(*sqs.SendMessageBatchInput) sqs.SendMessageBatchRequest
+	SendMessageBatchRequest(*types.SendMessageBatchInput) sqs.SendMessageBatchRequest
 
-	SetQueueAttributesRequest(*sqs.SetQueueAttributesInput) sqs.SetQueueAttributesRequest
+	SetQueueAttributesRequest(*types.SetQueueAttributesInput) sqs.SetQueueAttributesRequest
 
-	TagQueueRequest(*sqs.TagQueueInput) sqs.TagQueueRequest
+	TagQueueRequest(*types.TagQueueInput) sqs.TagQueueRequest
 
-	UntagQueueRequest(*sqs.UntagQueueInput) sqs.UntagQueueRequest
+	UntagQueueRequest(*types.UntagQueueInput) sqs.UntagQueueRequest
 }
 
 var _ ClientAPI = (*sqs.Client)(nil)

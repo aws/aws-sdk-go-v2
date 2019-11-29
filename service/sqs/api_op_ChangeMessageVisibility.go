@@ -6,69 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/types"
 )
-
-type ChangeMessageVisibilityInput struct {
-	_ struct{} `type:"structure"`
-
-	// The URL of the Amazon SQS queue whose message's visibility is changed.
-	//
-	// Queue URLs and names are case-sensitive.
-	//
-	// QueueUrl is a required field
-	QueueUrl *string `type:"string" required:"true"`
-
-	// The receipt handle associated with the message whose visibility timeout is
-	// changed. This parameter is returned by the ReceiveMessage action.
-	//
-	// ReceiptHandle is a required field
-	ReceiptHandle *string `type:"string" required:"true"`
-
-	// The new value for the message's visibility timeout (in seconds). Values values:
-	// 0 to 43200. Maximum: 12 hours.
-	//
-	// VisibilityTimeout is a required field
-	VisibilityTimeout *int64 `type:"integer" required:"true"`
-}
-
-// String returns the string representation
-func (s ChangeMessageVisibilityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ChangeMessageVisibilityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ChangeMessageVisibilityInput"}
-
-	if s.QueueUrl == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
-	}
-
-	if s.ReceiptHandle == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReceiptHandle"))
-	}
-
-	if s.VisibilityTimeout == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VisibilityTimeout"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ChangeMessageVisibilityOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ChangeMessageVisibilityOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opChangeMessageVisibility = "ChangeMessageVisibility"
 
@@ -136,7 +77,7 @@ const opChangeMessageVisibility = "ChangeMessageVisibility"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ChangeMessageVisibility
-func (c *Client) ChangeMessageVisibilityRequest(input *ChangeMessageVisibilityInput) ChangeMessageVisibilityRequest {
+func (c *Client) ChangeMessageVisibilityRequest(input *types.ChangeMessageVisibilityInput) ChangeMessageVisibilityRequest {
 	op := &aws.Operation{
 		Name:       opChangeMessageVisibility,
 		HTTPMethod: "POST",
@@ -144,10 +85,10 @@ func (c *Client) ChangeMessageVisibilityRequest(input *ChangeMessageVisibilityIn
 	}
 
 	if input == nil {
-		input = &ChangeMessageVisibilityInput{}
+		input = &types.ChangeMessageVisibilityInput{}
 	}
 
-	req := c.newRequest(op, input, &ChangeMessageVisibilityOutput{})
+	req := c.newRequest(op, input, &types.ChangeMessageVisibilityOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return ChangeMessageVisibilityRequest{Request: req, Input: input, Copy: c.ChangeMessageVisibilityRequest}
@@ -157,8 +98,8 @@ func (c *Client) ChangeMessageVisibilityRequest(input *ChangeMessageVisibilityIn
 // ChangeMessageVisibility API operation.
 type ChangeMessageVisibilityRequest struct {
 	*aws.Request
-	Input *ChangeMessageVisibilityInput
-	Copy  func(*ChangeMessageVisibilityInput) ChangeMessageVisibilityRequest
+	Input *types.ChangeMessageVisibilityInput
+	Copy  func(*types.ChangeMessageVisibilityInput) ChangeMessageVisibilityRequest
 }
 
 // Send marshals and sends the ChangeMessageVisibility API request.
@@ -170,7 +111,7 @@ func (r ChangeMessageVisibilityRequest) Send(ctx context.Context) (*ChangeMessag
 	}
 
 	resp := &ChangeMessageVisibilityResponse{
-		ChangeMessageVisibilityOutput: r.Request.Data.(*ChangeMessageVisibilityOutput),
+		ChangeMessageVisibilityOutput: r.Request.Data.(*types.ChangeMessageVisibilityOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -180,7 +121,7 @@ func (r ChangeMessageVisibilityRequest) Send(ctx context.Context) (*ChangeMessag
 // ChangeMessageVisibilityResponse is the response type for the
 // ChangeMessageVisibility API operation.
 type ChangeMessageVisibilityResponse struct {
-	*ChangeMessageVisibilityOutput
+	*types.ChangeMessageVisibilityOutput
 
 	response *aws.Response
 }

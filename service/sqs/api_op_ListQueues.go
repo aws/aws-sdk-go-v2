@@ -6,36 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/types"
 )
-
-type ListQueuesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A string to use for filtering the list results. Only those queues whose name
-	// begins with the specified string are returned.
-	//
-	// Queue URLs and names are case-sensitive.
-	QueueNamePrefix *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListQueuesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// A list of your queues.
-type ListQueuesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of queue URLs, up to 1,000 entries.
-	QueueUrls []string `locationNameList:"QueueUrl" type:"list" flattened:"true"`
-}
-
-// String returns the string representation
-func (s ListQueuesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListQueues = "ListQueues"
 
@@ -58,7 +30,7 @@ const opListQueues = "ListQueues"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListQueues
-func (c *Client) ListQueuesRequest(input *ListQueuesInput) ListQueuesRequest {
+func (c *Client) ListQueuesRequest(input *types.ListQueuesInput) ListQueuesRequest {
 	op := &aws.Operation{
 		Name:       opListQueues,
 		HTTPMethod: "POST",
@@ -66,10 +38,10 @@ func (c *Client) ListQueuesRequest(input *ListQueuesInput) ListQueuesRequest {
 	}
 
 	if input == nil {
-		input = &ListQueuesInput{}
+		input = &types.ListQueuesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListQueuesOutput{})
+	req := c.newRequest(op, input, &types.ListQueuesOutput{})
 	return ListQueuesRequest{Request: req, Input: input, Copy: c.ListQueuesRequest}
 }
 
@@ -77,8 +49,8 @@ func (c *Client) ListQueuesRequest(input *ListQueuesInput) ListQueuesRequest {
 // ListQueues API operation.
 type ListQueuesRequest struct {
 	*aws.Request
-	Input *ListQueuesInput
-	Copy  func(*ListQueuesInput) ListQueuesRequest
+	Input *types.ListQueuesInput
+	Copy  func(*types.ListQueuesInput) ListQueuesRequest
 }
 
 // Send marshals and sends the ListQueues API request.
@@ -90,7 +62,7 @@ func (r ListQueuesRequest) Send(ctx context.Context) (*ListQueuesResponse, error
 	}
 
 	resp := &ListQueuesResponse{
-		ListQueuesOutput: r.Request.Data.(*ListQueuesOutput),
+		ListQueuesOutput: r.Request.Data.(*types.ListQueuesOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -100,7 +72,7 @@ func (r ListQueuesRequest) Send(ctx context.Context) (*ListQueuesResponse, error
 // ListQueuesResponse is the response type for the
 // ListQueues API operation.
 type ListQueuesResponse struct {
-	*ListQueuesOutput
+	*types.ListQueuesOutput
 
 	response *aws.Response
 }

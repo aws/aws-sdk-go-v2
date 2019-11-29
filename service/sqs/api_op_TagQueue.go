@@ -6,56 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/types"
 )
-
-type TagQueueInput struct {
-	_ struct{} `type:"structure"`
-
-	// The URL of the queue.
-	//
-	// QueueUrl is a required field
-	QueueUrl *string `type:"string" required:"true"`
-
-	// The list of tags to be added to the specified queue.
-	//
-	// Tags is a required field
-	Tags map[string]string `locationName:"Tag" locationNameKey:"Key" locationNameValue:"Value" type:"map" flattened:"true" required:"true"`
-}
-
-// String returns the string representation
-func (s TagQueueInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TagQueueInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TagQueueInput"}
-
-	if s.QueueUrl == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
-	}
-
-	if s.Tags == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tags"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type TagQueueOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s TagQueueOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opTagQueue = "TagQueue"
 
@@ -93,7 +47,7 @@ const opTagQueue = "TagQueue"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/TagQueue
-func (c *Client) TagQueueRequest(input *TagQueueInput) TagQueueRequest {
+func (c *Client) TagQueueRequest(input *types.TagQueueInput) TagQueueRequest {
 	op := &aws.Operation{
 		Name:       opTagQueue,
 		HTTPMethod: "POST",
@@ -101,10 +55,10 @@ func (c *Client) TagQueueRequest(input *TagQueueInput) TagQueueRequest {
 	}
 
 	if input == nil {
-		input = &TagQueueInput{}
+		input = &types.TagQueueInput{}
 	}
 
-	req := c.newRequest(op, input, &TagQueueOutput{})
+	req := c.newRequest(op, input, &types.TagQueueOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return TagQueueRequest{Request: req, Input: input, Copy: c.TagQueueRequest}
@@ -114,8 +68,8 @@ func (c *Client) TagQueueRequest(input *TagQueueInput) TagQueueRequest {
 // TagQueue API operation.
 type TagQueueRequest struct {
 	*aws.Request
-	Input *TagQueueInput
-	Copy  func(*TagQueueInput) TagQueueRequest
+	Input *types.TagQueueInput
+	Copy  func(*types.TagQueueInput) TagQueueRequest
 }
 
 // Send marshals and sends the TagQueue API request.
@@ -127,7 +81,7 @@ func (r TagQueueRequest) Send(ctx context.Context) (*TagQueueResponse, error) {
 	}
 
 	resp := &TagQueueResponse{
-		TagQueueOutput: r.Request.Data.(*TagQueueOutput),
+		TagQueueOutput: r.Request.Data.(*types.TagQueueOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +91,7 @@ func (r TagQueueRequest) Send(ctx context.Context) (*TagQueueResponse, error) {
 // TagQueueResponse is the response type for the
 // TagQueue API operation.
 type TagQueueResponse struct {
-	*TagQueueOutput
+	*types.TagQueueOutput
 
 	response *aws.Response
 }

@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/types"
 )
-
-type ListQueueTagsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The URL of the queue.
-	//
-	// QueueUrl is a required field
-	QueueUrl *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListQueueTagsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListQueueTagsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListQueueTagsInput"}
-
-	if s.QueueUrl == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListQueueTagsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of all tags added to the specified queue.
-	Tags map[string]string `locationName:"Tag" locationNameKey:"Key" locationNameValue:"Value" type:"map" flattened:"true"`
-}
-
-// String returns the string representation
-func (s ListQueueTagsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListQueueTags = "ListQueueTags"
 
@@ -70,7 +30,7 @@ const opListQueueTags = "ListQueueTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListQueueTags
-func (c *Client) ListQueueTagsRequest(input *ListQueueTagsInput) ListQueueTagsRequest {
+func (c *Client) ListQueueTagsRequest(input *types.ListQueueTagsInput) ListQueueTagsRequest {
 	op := &aws.Operation{
 		Name:       opListQueueTags,
 		HTTPMethod: "POST",
@@ -78,10 +38,10 @@ func (c *Client) ListQueueTagsRequest(input *ListQueueTagsInput) ListQueueTagsRe
 	}
 
 	if input == nil {
-		input = &ListQueueTagsInput{}
+		input = &types.ListQueueTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListQueueTagsOutput{})
+	req := c.newRequest(op, input, &types.ListQueueTagsOutput{})
 	return ListQueueTagsRequest{Request: req, Input: input, Copy: c.ListQueueTagsRequest}
 }
 
@@ -89,8 +49,8 @@ func (c *Client) ListQueueTagsRequest(input *ListQueueTagsInput) ListQueueTagsRe
 // ListQueueTags API operation.
 type ListQueueTagsRequest struct {
 	*aws.Request
-	Input *ListQueueTagsInput
-	Copy  func(*ListQueueTagsInput) ListQueueTagsRequest
+	Input *types.ListQueueTagsInput
+	Copy  func(*types.ListQueueTagsInput) ListQueueTagsRequest
 }
 
 // Send marshals and sends the ListQueueTags API request.
@@ -102,7 +62,7 @@ func (r ListQueueTagsRequest) Send(ctx context.Context) (*ListQueueTagsResponse,
 	}
 
 	resp := &ListQueueTagsResponse{
-		ListQueueTagsOutput: r.Request.Data.(*ListQueueTagsOutput),
+		ListQueueTagsOutput: r.Request.Data.(*types.ListQueueTagsOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +72,7 @@ func (r ListQueueTagsRequest) Send(ctx context.Context) (*ListQueueTagsResponse,
 // ListQueueTagsResponse is the response type for the
 // ListQueueTags API operation.
 type ListQueueTagsResponse struct {
-	*ListQueueTagsOutput
+	*types.ListQueueTagsOutput
 
 	response *aws.Response
 }

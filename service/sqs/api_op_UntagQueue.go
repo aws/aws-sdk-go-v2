@@ -6,56 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/types"
 )
-
-type UntagQueueInput struct {
-	_ struct{} `type:"structure"`
-
-	// The URL of the queue.
-	//
-	// QueueUrl is a required field
-	QueueUrl *string `type:"string" required:"true"`
-
-	// The list of tags to be removed from the specified queue.
-	//
-	// TagKeys is a required field
-	TagKeys []string `locationNameList:"TagKey" type:"list" flattened:"true" required:"true"`
-}
-
-// String returns the string representation
-func (s UntagQueueInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UntagQueueInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UntagQueueInput"}
-
-	if s.QueueUrl == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
-	}
-
-	if s.TagKeys == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UntagQueueOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UntagQueueOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUntagQueue = "UntagQueue"
 
@@ -78,7 +32,7 @@ const opUntagQueue = "UntagQueue"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/UntagQueue
-func (c *Client) UntagQueueRequest(input *UntagQueueInput) UntagQueueRequest {
+func (c *Client) UntagQueueRequest(input *types.UntagQueueInput) UntagQueueRequest {
 	op := &aws.Operation{
 		Name:       opUntagQueue,
 		HTTPMethod: "POST",
@@ -86,10 +40,10 @@ func (c *Client) UntagQueueRequest(input *UntagQueueInput) UntagQueueRequest {
 	}
 
 	if input == nil {
-		input = &UntagQueueInput{}
+		input = &types.UntagQueueInput{}
 	}
 
-	req := c.newRequest(op, input, &UntagQueueOutput{})
+	req := c.newRequest(op, input, &types.UntagQueueOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UntagQueueRequest{Request: req, Input: input, Copy: c.UntagQueueRequest}
@@ -99,8 +53,8 @@ func (c *Client) UntagQueueRequest(input *UntagQueueInput) UntagQueueRequest {
 // UntagQueue API operation.
 type UntagQueueRequest struct {
 	*aws.Request
-	Input *UntagQueueInput
-	Copy  func(*UntagQueueInput) UntagQueueRequest
+	Input *types.UntagQueueInput
+	Copy  func(*types.UntagQueueInput) UntagQueueRequest
 }
 
 // Send marshals and sends the UntagQueue API request.
@@ -112,7 +66,7 @@ func (r UntagQueueRequest) Send(ctx context.Context) (*UntagQueueResponse, error
 	}
 
 	resp := &UntagQueueResponse{
-		UntagQueueOutput: r.Request.Data.(*UntagQueueOutput),
+		UntagQueueOutput: r.Request.Data.(*types.UntagQueueOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +76,7 @@ func (r UntagQueueRequest) Send(ctx context.Context) (*UntagQueueResponse, error
 // UntagQueueResponse is the response type for the
 // UntagQueue API operation.
 type UntagQueueResponse struct {
-	*UntagQueueOutput
+	*types.UntagQueueOutput
 
 	response *aws.Response
 }

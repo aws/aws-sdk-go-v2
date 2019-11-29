@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListQueues(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := sqs.New(cfg)
-	params := &sqs.ListQueuesInput{}
+	params := &types.ListQueuesInput{}
 
 	req := svc.ListQueuesRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_GetQueueUrl(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := sqs.New(cfg)
-	params := &sqs.GetQueueUrlInput{
+	params := &types.GetQueueUrlInput{
 		QueueName: aws.String("fake_queue"),
 	}
 

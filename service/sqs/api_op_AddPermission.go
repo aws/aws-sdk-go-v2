@@ -6,91 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/types"
 )
-
-type AddPermissionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AWS account number of the principal (https://docs.aws.amazon.com/general/latest/gr/glos-chap.html#P)
-	// who is given permission. The principal must have an AWS account, but does
-	// not need to be signed up for Amazon SQS. For information about locating the
-	// AWS account identification, see Your AWS Identifiers (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-making-api-requests.html#sqs-api-request-authentication)
-	// in the Amazon Simple Queue Service Developer Guide.
-	//
-	// AWSAccountIds is a required field
-	AWSAccountIds []string `locationNameList:"AWSAccountId" type:"list" flattened:"true" required:"true"`
-
-	// The action the client wants to allow for the specified principal. Valid values:
-	// the name of any action or *.
-	//
-	// For more information about these actions, see Overview of Managing Access
-	// Permissions to Your Amazon Simple Queue Service Resource (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-overview-of-managing-access.html)
-	// in the Amazon Simple Queue Service Developer Guide.
-	//
-	// Specifying SendMessage, DeleteMessage, or ChangeMessageVisibility for ActionName.n
-	// also grants permissions for the corresponding batch versions of those actions:
-	// SendMessageBatch, DeleteMessageBatch, and ChangeMessageVisibilityBatch.
-	//
-	// Actions is a required field
-	Actions []string `locationNameList:"ActionName" type:"list" flattened:"true" required:"true"`
-
-	// The unique identification of the permission you're setting (for example,
-	// AliceSendMessage). Maximum 80 characters. Allowed characters include alphanumeric
-	// characters, hyphens (-), and underscores (_).
-	//
-	// Label is a required field
-	Label *string `type:"string" required:"true"`
-
-	// The URL of the Amazon SQS queue to which permissions are added.
-	//
-	// Queue URLs and names are case-sensitive.
-	//
-	// QueueUrl is a required field
-	QueueUrl *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AddPermissionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AddPermissionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AddPermissionInput"}
-
-	if s.AWSAccountIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AWSAccountIds"))
-	}
-
-	if s.Actions == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Actions"))
-	}
-
-	if s.Label == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Label"))
-	}
-
-	if s.QueueUrl == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AddPermissionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AddPermissionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAddPermission = "AddPermission"
 
@@ -137,7 +56,7 @@ const opAddPermission = "AddPermission"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/AddPermission
-func (c *Client) AddPermissionRequest(input *AddPermissionInput) AddPermissionRequest {
+func (c *Client) AddPermissionRequest(input *types.AddPermissionInput) AddPermissionRequest {
 	op := &aws.Operation{
 		Name:       opAddPermission,
 		HTTPMethod: "POST",
@@ -145,10 +64,10 @@ func (c *Client) AddPermissionRequest(input *AddPermissionInput) AddPermissionRe
 	}
 
 	if input == nil {
-		input = &AddPermissionInput{}
+		input = &types.AddPermissionInput{}
 	}
 
-	req := c.newRequest(op, input, &AddPermissionOutput{})
+	req := c.newRequest(op, input, &types.AddPermissionOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AddPermissionRequest{Request: req, Input: input, Copy: c.AddPermissionRequest}
@@ -158,8 +77,8 @@ func (c *Client) AddPermissionRequest(input *AddPermissionInput) AddPermissionRe
 // AddPermission API operation.
 type AddPermissionRequest struct {
 	*aws.Request
-	Input *AddPermissionInput
-	Copy  func(*AddPermissionInput) AddPermissionRequest
+	Input *types.AddPermissionInput
+	Copy  func(*types.AddPermissionInput) AddPermissionRequest
 }
 
 // Send marshals and sends the AddPermission API request.
@@ -171,7 +90,7 @@ func (r AddPermissionRequest) Send(ctx context.Context) (*AddPermissionResponse,
 	}
 
 	resp := &AddPermissionResponse{
-		AddPermissionOutput: r.Request.Data.(*AddPermissionOutput),
+		AddPermissionOutput: r.Request.Data.(*types.AddPermissionOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -181,7 +100,7 @@ func (r AddPermissionRequest) Send(ctx context.Context) (*AddPermissionResponse,
 // AddPermissionResponse is the response type for the
 // AddPermission API operation.
 type AddPermissionResponse struct {
-	*AddPermissionOutput
+	*types.AddPermissionOutput
 
 	response *aws.Response
 }

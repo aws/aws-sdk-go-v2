@@ -4,80 +4,10 @@ package sqs
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/types"
 )
-
-type SendMessageBatchInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of SendMessageBatchRequestEntry items.
-	//
-	// Entries is a required field
-	Entries []SendMessageBatchRequestEntry `locationNameList:"SendMessageBatchRequestEntry" type:"list" flattened:"true" required:"true"`
-
-	// The URL of the Amazon SQS queue to which batched messages are sent.
-	//
-	// Queue URLs and names are case-sensitive.
-	//
-	// QueueUrl is a required field
-	QueueUrl *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SendMessageBatchInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SendMessageBatchInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SendMessageBatchInput"}
-
-	if s.Entries == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Entries"))
-	}
-
-	if s.QueueUrl == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
-	}
-	if s.Entries != nil {
-		for i, v := range s.Entries {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Entries", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// For each message in the batch, the response contains a SendMessageBatchResultEntry
-// tag if the message succeeds or a BatchResultErrorEntry tag if the message
-// fails.
-type SendMessageBatchOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of BatchResultErrorEntry items with error details about each message
-	// that can't be enqueued.
-	//
-	// Failed is a required field
-	Failed []BatchResultErrorEntry `locationNameList:"BatchResultErrorEntry" type:"list" flattened:"true" required:"true"`
-
-	// A list of SendMessageBatchResultEntry items.
-	//
-	// Successful is a required field
-	Successful []SendMessageBatchResultEntry `locationNameList:"SendMessageBatchResultEntry" type:"list" flattened:"true" required:"true"`
-}
-
-// String returns the string representation
-func (s SendMessageBatchOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSendMessageBatch = "SendMessageBatch"
 
@@ -124,7 +54,7 @@ const opSendMessageBatch = "SendMessageBatch"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessageBatch
-func (c *Client) SendMessageBatchRequest(input *SendMessageBatchInput) SendMessageBatchRequest {
+func (c *Client) SendMessageBatchRequest(input *types.SendMessageBatchInput) SendMessageBatchRequest {
 	op := &aws.Operation{
 		Name:       opSendMessageBatch,
 		HTTPMethod: "POST",
@@ -132,10 +62,10 @@ func (c *Client) SendMessageBatchRequest(input *SendMessageBatchInput) SendMessa
 	}
 
 	if input == nil {
-		input = &SendMessageBatchInput{}
+		input = &types.SendMessageBatchInput{}
 	}
 
-	req := c.newRequest(op, input, &SendMessageBatchOutput{})
+	req := c.newRequest(op, input, &types.SendMessageBatchOutput{})
 	return SendMessageBatchRequest{Request: req, Input: input, Copy: c.SendMessageBatchRequest}
 }
 
@@ -143,8 +73,8 @@ func (c *Client) SendMessageBatchRequest(input *SendMessageBatchInput) SendMessa
 // SendMessageBatch API operation.
 type SendMessageBatchRequest struct {
 	*aws.Request
-	Input *SendMessageBatchInput
-	Copy  func(*SendMessageBatchInput) SendMessageBatchRequest
+	Input *types.SendMessageBatchInput
+	Copy  func(*types.SendMessageBatchInput) SendMessageBatchRequest
 }
 
 // Send marshals and sends the SendMessageBatch API request.
@@ -156,7 +86,7 @@ func (r SendMessageBatchRequest) Send(ctx context.Context) (*SendMessageBatchRes
 	}
 
 	resp := &SendMessageBatchResponse{
-		SendMessageBatchOutput: r.Request.Data.(*SendMessageBatchOutput),
+		SendMessageBatchOutput: r.Request.Data.(*types.SendMessageBatchOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -166,7 +96,7 @@ func (r SendMessageBatchRequest) Send(ctx context.Context) (*SendMessageBatchRes
 // SendMessageBatchResponse is the response type for the
 // SendMessageBatch API operation.
 type SendMessageBatchResponse struct {
-	*SendMessageBatchOutput
+	*types.SendMessageBatchOutput
 
 	response *aws.Response
 }

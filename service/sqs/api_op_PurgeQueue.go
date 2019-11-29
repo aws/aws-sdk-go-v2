@@ -6,49 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/types"
 )
-
-type PurgeQueueInput struct {
-	_ struct{} `type:"structure"`
-
-	// The URL of the queue from which the PurgeQueue action deletes messages.
-	//
-	// Queue URLs and names are case-sensitive.
-	//
-	// QueueUrl is a required field
-	QueueUrl *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PurgeQueueInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PurgeQueueInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PurgeQueueInput"}
-
-	if s.QueueUrl == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PurgeQueueOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PurgeQueueOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPurgeQueue = "PurgeQueue"
 
@@ -77,7 +38,7 @@ const opPurgeQueue = "PurgeQueue"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/PurgeQueue
-func (c *Client) PurgeQueueRequest(input *PurgeQueueInput) PurgeQueueRequest {
+func (c *Client) PurgeQueueRequest(input *types.PurgeQueueInput) PurgeQueueRequest {
 	op := &aws.Operation{
 		Name:       opPurgeQueue,
 		HTTPMethod: "POST",
@@ -85,10 +46,10 @@ func (c *Client) PurgeQueueRequest(input *PurgeQueueInput) PurgeQueueRequest {
 	}
 
 	if input == nil {
-		input = &PurgeQueueInput{}
+		input = &types.PurgeQueueInput{}
 	}
 
-	req := c.newRequest(op, input, &PurgeQueueOutput{})
+	req := c.newRequest(op, input, &types.PurgeQueueOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return PurgeQueueRequest{Request: req, Input: input, Copy: c.PurgeQueueRequest}
@@ -98,8 +59,8 @@ func (c *Client) PurgeQueueRequest(input *PurgeQueueInput) PurgeQueueRequest {
 // PurgeQueue API operation.
 type PurgeQueueRequest struct {
 	*aws.Request
-	Input *PurgeQueueInput
-	Copy  func(*PurgeQueueInput) PurgeQueueRequest
+	Input *types.PurgeQueueInput
+	Copy  func(*types.PurgeQueueInput) PurgeQueueRequest
 }
 
 // Send marshals and sends the PurgeQueue API request.
@@ -111,7 +72,7 @@ func (r PurgeQueueRequest) Send(ctx context.Context) (*PurgeQueueResponse, error
 	}
 
 	resp := &PurgeQueueResponse{
-		PurgeQueueOutput: r.Request.Data.(*PurgeQueueOutput),
+		PurgeQueueOutput: r.Request.Data.(*types.PurgeQueueOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +82,7 @@ func (r PurgeQueueRequest) Send(ctx context.Context) (*PurgeQueueResponse, error
 // PurgeQueueResponse is the response type for the
 // PurgeQueue API operation.
 type PurgeQueueResponse struct {
-	*PurgeQueueOutput
+	*types.PurgeQueueOutput
 
 	response *aws.Response
 }

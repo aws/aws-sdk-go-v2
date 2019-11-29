@@ -4,79 +4,10 @@ package sqs
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/types"
 )
-
-type DeleteMessageBatchInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of receipt handles for the messages to be deleted.
-	//
-	// Entries is a required field
-	Entries []DeleteMessageBatchRequestEntry `locationNameList:"DeleteMessageBatchRequestEntry" type:"list" flattened:"true" required:"true"`
-
-	// The URL of the Amazon SQS queue from which messages are deleted.
-	//
-	// Queue URLs and names are case-sensitive.
-	//
-	// QueueUrl is a required field
-	QueueUrl *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteMessageBatchInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteMessageBatchInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteMessageBatchInput"}
-
-	if s.Entries == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Entries"))
-	}
-
-	if s.QueueUrl == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
-	}
-	if s.Entries != nil {
-		for i, v := range s.Entries {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Entries", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// For each message in the batch, the response contains a DeleteMessageBatchResultEntry
-// tag if the message is deleted or a BatchResultErrorEntry tag if the message
-// can't be deleted.
-type DeleteMessageBatchOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of BatchResultErrorEntry items.
-	//
-	// Failed is a required field
-	Failed []BatchResultErrorEntry `locationNameList:"BatchResultErrorEntry" type:"list" flattened:"true" required:"true"`
-
-	// A list of DeleteMessageBatchResultEntry items.
-	//
-	// Successful is a required field
-	Successful []DeleteMessageBatchResultEntry `locationNameList:"DeleteMessageBatchResultEntry" type:"list" flattened:"true" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteMessageBatchOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteMessageBatch = "DeleteMessageBatch"
 
@@ -107,7 +38,7 @@ const opDeleteMessageBatch = "DeleteMessageBatch"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessageBatch
-func (c *Client) DeleteMessageBatchRequest(input *DeleteMessageBatchInput) DeleteMessageBatchRequest {
+func (c *Client) DeleteMessageBatchRequest(input *types.DeleteMessageBatchInput) DeleteMessageBatchRequest {
 	op := &aws.Operation{
 		Name:       opDeleteMessageBatch,
 		HTTPMethod: "POST",
@@ -115,10 +46,10 @@ func (c *Client) DeleteMessageBatchRequest(input *DeleteMessageBatchInput) Delet
 	}
 
 	if input == nil {
-		input = &DeleteMessageBatchInput{}
+		input = &types.DeleteMessageBatchInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteMessageBatchOutput{})
+	req := c.newRequest(op, input, &types.DeleteMessageBatchOutput{})
 	return DeleteMessageBatchRequest{Request: req, Input: input, Copy: c.DeleteMessageBatchRequest}
 }
 
@@ -126,8 +57,8 @@ func (c *Client) DeleteMessageBatchRequest(input *DeleteMessageBatchInput) Delet
 // DeleteMessageBatch API operation.
 type DeleteMessageBatchRequest struct {
 	*aws.Request
-	Input *DeleteMessageBatchInput
-	Copy  func(*DeleteMessageBatchInput) DeleteMessageBatchRequest
+	Input *types.DeleteMessageBatchInput
+	Copy  func(*types.DeleteMessageBatchInput) DeleteMessageBatchRequest
 }
 
 // Send marshals and sends the DeleteMessageBatch API request.
@@ -139,7 +70,7 @@ func (r DeleteMessageBatchRequest) Send(ctx context.Context) (*DeleteMessageBatc
 	}
 
 	resp := &DeleteMessageBatchResponse{
-		DeleteMessageBatchOutput: r.Request.Data.(*DeleteMessageBatchOutput),
+		DeleteMessageBatchOutput: r.Request.Data.(*types.DeleteMessageBatchOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +80,7 @@ func (r DeleteMessageBatchRequest) Send(ctx context.Context) (*DeleteMessageBatc
 // DeleteMessageBatchResponse is the response type for the
 // DeleteMessageBatch API operation.
 type DeleteMessageBatchResponse struct {
-	*DeleteMessageBatchOutput
+	*types.DeleteMessageBatchOutput
 
 	response *aws.Response
 }

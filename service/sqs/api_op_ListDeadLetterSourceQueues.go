@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/types"
 )
-
-type ListDeadLetterSourceQueuesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The URL of a dead-letter queue.
-	//
-	// Queue URLs and names are case-sensitive.
-	//
-	// QueueUrl is a required field
-	QueueUrl *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListDeadLetterSourceQueuesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListDeadLetterSourceQueuesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListDeadLetterSourceQueuesInput"}
-
-	if s.QueueUrl == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// A list of your dead letter source queues.
-type ListDeadLetterSourceQueuesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of source queue URLs that have the RedrivePolicy queue attribute configured
-	// with a dead-letter queue.
-	//
-	// QueueUrls is a required field
-	QueueUrls []string `locationName:"queueUrls" locationNameList:"QueueUrl" type:"list" flattened:"true" required:"true"`
-}
-
-// String returns the string representation
-func (s ListDeadLetterSourceQueuesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListDeadLetterSourceQueues = "ListDeadLetterSourceQueues"
 
@@ -75,7 +29,7 @@ const opListDeadLetterSourceQueues = "ListDeadLetterSourceQueues"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListDeadLetterSourceQueues
-func (c *Client) ListDeadLetterSourceQueuesRequest(input *ListDeadLetterSourceQueuesInput) ListDeadLetterSourceQueuesRequest {
+func (c *Client) ListDeadLetterSourceQueuesRequest(input *types.ListDeadLetterSourceQueuesInput) ListDeadLetterSourceQueuesRequest {
 	op := &aws.Operation{
 		Name:       opListDeadLetterSourceQueues,
 		HTTPMethod: "POST",
@@ -83,10 +37,10 @@ func (c *Client) ListDeadLetterSourceQueuesRequest(input *ListDeadLetterSourceQu
 	}
 
 	if input == nil {
-		input = &ListDeadLetterSourceQueuesInput{}
+		input = &types.ListDeadLetterSourceQueuesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDeadLetterSourceQueuesOutput{})
+	req := c.newRequest(op, input, &types.ListDeadLetterSourceQueuesOutput{})
 	return ListDeadLetterSourceQueuesRequest{Request: req, Input: input, Copy: c.ListDeadLetterSourceQueuesRequest}
 }
 
@@ -94,8 +48,8 @@ func (c *Client) ListDeadLetterSourceQueuesRequest(input *ListDeadLetterSourceQu
 // ListDeadLetterSourceQueues API operation.
 type ListDeadLetterSourceQueuesRequest struct {
 	*aws.Request
-	Input *ListDeadLetterSourceQueuesInput
-	Copy  func(*ListDeadLetterSourceQueuesInput) ListDeadLetterSourceQueuesRequest
+	Input *types.ListDeadLetterSourceQueuesInput
+	Copy  func(*types.ListDeadLetterSourceQueuesInput) ListDeadLetterSourceQueuesRequest
 }
 
 // Send marshals and sends the ListDeadLetterSourceQueues API request.
@@ -107,7 +61,7 @@ func (r ListDeadLetterSourceQueuesRequest) Send(ctx context.Context) (*ListDeadL
 	}
 
 	resp := &ListDeadLetterSourceQueuesResponse{
-		ListDeadLetterSourceQueuesOutput: r.Request.Data.(*ListDeadLetterSourceQueuesOutput),
+		ListDeadLetterSourceQueuesOutput: r.Request.Data.(*types.ListDeadLetterSourceQueuesOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +71,7 @@ func (r ListDeadLetterSourceQueuesRequest) Send(ctx context.Context) (*ListDeadL
 // ListDeadLetterSourceQueuesResponse is the response type for the
 // ListDeadLetterSourceQueues API operation.
 type ListDeadLetterSourceQueuesResponse struct {
-	*ListDeadLetterSourceQueuesOutput
+	*types.ListDeadLetterSourceQueuesOutput
 
 	response *aws.Response
 }
